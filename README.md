@@ -183,3 +183,19 @@ Atualizado de 6.5.0 para 6.7.0 (setup do Claude Code + skill; `rea update` não 
 
 ## Lote 5 — especificação de avatares, matriz de engenharia reversa e contratos estáticos (23/10/2026)
 `PIPPIT_AVATAR_SPEC.md`, `PIPPIT_REVERSE_MATRIX.md` (gerada por `notes/build_reverse_matrix.mjs`), `notes/dynamic_questionnaire.schema.json`. REA: 9 incertezas registradas (`notes/rea_unknowns.json`, bundles `captures/current_670/rea_session_bundle_lote5*.json`). O agente local passou a emitir `questionnaire` (contrato recuperado do bundle). Contrato do agente (`submit_run`, Skills × agentes × modelos, exemplos JSON): `PIPPIT_AGENT_CONTRACT.md`; mensagens do agente local ganham o campo informativo `wire` (`app/lib/agent_contract.mjs`). Execução real: filtros de avatar funcionam; estilos só selecionáveis (não aplicados); Foto falante = prévia local sem animação; avatar selecionado não gera vídeo.
+
+## Retomada PiperLine — SSE e cancelamento local (09/11/2026)
+
+A revisão do passo inicial conferiu o servidor com o contrato que as capturas realmente documentam: replay de `subscribe_thread` = `message/message/ping`; replay de `sse_asset` = `ping: connected`, `AssetJsonUpdate` com JSON de patches e `ping` final. **O fluxo incremental ao vivo de `subscribe_run` continua sem evidência do Pippit**; a rota local usa um fallback que reemite o snapshot do thread e não deve ser tratado como formato original.
+
+Ajustes locais: o fechamento dos streams é ligado à resposta (evita listener órfão); estados Working/Generating também notificam SSE; ffmpeg local agora roda sem bloquear o servidor e aceita abort ao cancelar. Testes cobrem as atualizações ao vivo locais, cancelamento antes do processamento e cancelamento com renderer injetado, verificando que o resultado cancelado não é publicado. O caminho HTTP de cancelamento durante ffmpeg é executado apenas quando ffmpeg está disponível. Nenhuma geração foi enviada ao Pippit, nenhum crédito foi gasto e nenhuma autorização externa foi usada.
+
+**Limite de prova:** testes locais validam a implementação local, não o formato ao vivo do Pippit nem os contratos remotos de `cancel_run` e run↔tarefa; equivalência não foi demonstrada. O usuário não tem acesso à conta Pippit disponível ao agente: observações de custo/exportação/respostas reais do Avatar ficam **PENDENTE DE OBSERVAÇÃO HUMANA**; não tentar acesso nem solicitar autorização.
+
+## Retomada local — telas e roteador gratuito (09/11/2026)
+
+Implementado o seletor local de Produto/Personagem no Marketing (cadastros locais, busca, ordenação, seleção e criação a partir de um ativo de imagem); catálogo recomendado não capturado permanece indisponível. Canvas: diálogo `Chat history` com histórico por projeto local e `No history yet` quando vazio; os dados não são compartilhados com o Pippit. Os detalhes dos 10 templates continuam incompletos: só oito nomes foram preservados, dois são desconhecidos e nenhum texto pré-preenchido ausente foi inventado. As telas de criação/detalhes de Skills já existiam.
+
+Adicionado `local_reconstruction/src/free_router.mjs`: configuração sem segredo persistido, catálogo limitado a adaptadores locais/possíveis cotas gratuitas, roteamento por capacidades e preferência de tarefa, bloqueio do fallback pago e adaptadores OpenAI-compatible/Gemini com testes de fetch falso. Free tiers cloud são condicionais e exigem confirmação de disponibilidade/quota; nenhuma chamada real de provedor foi feita.
+
+Suíte completa: `PIPPIT_LLM=off` com caminhos `PIPPIT_FFMPEG`/`PIPPIT_FFPROBE` temporários → **33 passaram, 16 SKIP explícitos, 0 falharam (49)**. Dois skips por evidência REA ausente, 14 por Chromium não executável neste sandbox. Ver classificação detalhada em `ARENA_STATUS.md`.
