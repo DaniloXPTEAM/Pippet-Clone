@@ -4,9 +4,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('fidelity3_ui')) process.exit(0);
 const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')); const CAT = JSON.parse(fs.readFileSync(path.join(here, '../app/lib/avatar_catalog.json'), 'utf8'));
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-f3-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const { server } = await import('../app/server.mjs'); const PORT = 5248; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
@@ -24,7 +23,7 @@ const indisp = CAT.filtros.flatMap((f) => f.opcoes.filter((o) => !o.disponivel).
 let r = await j('/api/avatar-drawer'); assert.equal(r.body.catalogo.total, CAT.total); assert.equal((await j('/api/avatar-favorites')).body.favorites.length, 0);
 
 // ---- UI do drawer: filtragem real
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [], ext = [];
+const browser = await launchChromium(); const errors = [], ext = [];
 const ctx = await browser.newContext({ viewport: { width: 1600, height: 950 } }); const page = await ctx.newPage(); page.on('pageerror', (e) => errors.push(String(e))); page.on('request', (q) => { if (!q.url().startsWith(base) && !q.url().startsWith('data:') && !q.url().startsWith('blob:')) ext.push(q.url()); });
 const extra = A.some((a) => a.name === 'Victor in the kitchen') ? 0 : 1; const countTxt = async () => Number((await page.locator('#avdcount').innerText()).match(/(\d+)/)[1]);
 await page.goto(`${base}/#/home`); await page.waitForSelector('.skill[data-s=video-de-avatar]'); await page.click('.skill[data-s=video-de-avatar]'); await page.waitForSelector('#avdrawer #avdgrid');

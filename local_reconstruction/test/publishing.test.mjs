@@ -7,9 +7,8 @@ import path from 'node:path';
 import http from 'node:http';
 import https from 'node:https';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('publishing')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-pub-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const PORT = 5246; const base = `http://127.0.0.1:${PORT}`; const outbound = [];
 const realFetch = globalThis.fetch; globalThis.fetch = (u, o) => { const s = String(u?.url || u); if (!s.startsWith(base)) outbound.push('fetch ' + s); return realFetch(u, o); };
@@ -51,7 +50,7 @@ ls = (await post('/api/biz/v1/publish/list_schedule_task', { start_time: 0, end_
 assert.equal(JSON.parse(fs.readFileSync(path.join(tmp, 'db.json'), 'utf8')).social.drafts.length, 1); assert.deepEqual((await j('/api/state')).body.social.accounts, {});
 
 // ---- UI: Publicador no menu Mais, sem Editor (estrutura atual), rascunho local pela página
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [];
+const browser = await launchChromium(); const errors = [];
 const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); page.on('pageerror', (e) => errors.push(String(e)));
 await page.goto(base + '/#/schedule'); await page.waitForSelector('#pubdrafts'); assert.match(await page.locator('#main h1').innerText(), /Gerencie suas publicações/); await page.click('#pubdrafts summary');
 const side = await page.locator('.sub').allInnerTexts(); assert.deepEqual(side.map((s) => s.trim()), ['Gerador de vídeos', 'Avatares e vozes', 'Análise', 'Publicador']);

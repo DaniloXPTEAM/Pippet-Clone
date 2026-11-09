@@ -5,9 +5,8 @@ import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('providers_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-pui-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp; process.env.PIPPIT_JOB_POLL_MS = '0'; process.env.PIPPIT_JOB_TICK_MS = '500';
 const { server } = await import('../app/server.mjs');
 const seen = []; const mock = http.createServer((req, res) => { const ch = []; req.on('data', (d) => ch.push(d)); req.on('end', () => { seen.push(`${req.method} ${req.url}`); res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(req.method === 'POST' ? { id: 'video_x' + seen.length, status: 'queued' } : { status: 'in_progress', progress: 30 })); }); });
@@ -17,7 +16,7 @@ const post = (p, b) => fetch(base + p, { method: 'POST', headers: { 'content-typ
 // tarefas vindas do agente (sem provedor): pedido -> tema -> confirmação
 const proj = await post('/api/projects', { type: 'canvas' }); const chat = await post(`/api/projects/${proj.id}/chats`); const M = `/api/projects/${proj.id}/chats/${chat.id}/messages`;
 let m = await post(M, { text: 'Crie um vídeo de 20 segundos sobre uma maçã vermelha' }); m = await post(M, { answer: m.chat.messages.at(-1).form.options[0] }); m = await post(M, { confirmation: { mode: 'sequencial', creditOk: true } });
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
+const browser = await launchChromium(); const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
 const shot = (n) => page.screenshot({ path: path.join(SHOTS, n + '.png') });
 // 1) Tarefas: duas tarefas bloqueadas com o motivo exato
 await page.goto(base + '/#/tasks'); await page.waitForSelector('.job-task'); assert.equal(await page.locator('.job-task').count(), 2);

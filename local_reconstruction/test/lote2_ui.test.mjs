@@ -5,9 +5,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('lote2_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-l2-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const media = await import('../app/lib/media.mjs'); const { server } = await import('../app/server.mjs'); const PORT = 5202; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
 const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
@@ -16,7 +15,7 @@ const mk = (args, out) => { const r = spawnSync(media.FFMPEG, ['-y', ...args, ou
 const up = async (buf, name, type) => (await j('/api/assets', { method: 'POST', headers: { 'x-file-name': encodeURIComponent(name), 'content-type': type, 'x-cat': 'upload' }, body: buf })).body;
 const img1 = await up(mk(['-f', 'lavfi', '-i', 'color=c=red:s=320x320:d=1', '-frames:v', '1'], path.join(tmp, 'a.png')), 'Gabi.png', 'image/png'); const img2 = await up(mk(['-f', 'lavfi', '-i', 'color=c=blue:s=320x320:d=1', '-frames:v', '1'], path.join(tmp, 'b.png')), 'Copo.png', 'image/png');
 const vid = await up(mk(['-f', 'lavfi', '-i', 'testsrc=size=640x360:rate=25:duration=2', '-pix_fmt', 'yuv420p', '-c:v', 'libx264'], path.join(tmp, 'v.mp4')), 'clipe.mp4', 'video/mp4');
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
+const browser = await launchChromium(); const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
 const shot = (n) => page.screenshot({ path: path.join(SHOTS, n + '.png') }); const menuLabels = async () => (await page.locator('.menu a').allInnerTexts()).map((x) => x.trim());
 
 // ---- ativos

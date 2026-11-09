@@ -1,0 +1,4 @@
+# Installed dependencies are reproducible from package manifests and are not source files.
+node_modules/
+notes/node_modules/
+local_reconstruction/node_modules/

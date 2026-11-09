@@ -6,9 +6,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('fidelity2_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-f2-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const media = await import('../app/lib/media.mjs'); const { server } = await import('../app/server.mjs'); const PORT = 5247; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; }; const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
@@ -17,7 +16,7 @@ const big = png('grande.png', '400x400'), small = png('pequena.png', '200x200');
 // dados observados do drawer (arquivo gerado a partir das capturas)
 let r = await j('/api/avatar-drawer'); assert.equal(r.body.avatares.length, 51); assert.equal(r.body.idiomas.length, 31); assert.deepEqual(Object.keys(r.body.filtros), ['Gender', 'Age', 'Figure', 'Name', 'Industry', 'Scene', 'Pose', 'Outfit style']); assert.equal(r.body.custo.tooltip, '5.88 second = 11 credits');
 const balance0 = (await j('/api/state')).body.balance; const proj = (await post('/api/projects', { type: 'story', title: 'Untitled' })).body; const cproj = (await post('/api/projects', { type: 'canvas', title: 'Tela' })).body;
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [], ext = [];
+const browser = await launchChromium(); const errors = [], ext = [];
 const ctx = await browser.newContext({ viewport: { width: 1600, height: 950 } }); const page = await ctx.newPage(); page.on('pageerror', (e) => errors.push(String(e))); page.on('request', (q) => { if (!q.url().startsWith(base) && !q.url().includes('larkoffice') && !q.url().startsWith('data:') && !q.url().startsWith('blob:')) ext.push(q.url()); });
 await ctx.route('https://bytedance.larkoffice.com/**', (rt) => rt.fulfill({ status: 200, body: 'tutorial' }));
 
