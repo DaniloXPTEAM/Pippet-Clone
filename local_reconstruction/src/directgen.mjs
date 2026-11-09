@@ -19,7 +19,7 @@ export const AUTO_ROUTE = {
 const SERVER_ERR = { code: 99999, message: 'Message provided by the server.', starling_key: 'server_passthrough_content_key' };
 
 export const creditsFor = (seconds) => AUTO_ROUTE.creditsBySeconds[seconds] ?? Math.round(AUTO_ROUTE.estimatePerSecond * seconds);
-export const newDirectState = () => ({ projects: {}, assets: {}, threads: {}, runs: {}, tries: { auto: AUTO_ROUTE.freeTries }, seq: 0 });
+export const newDirectState = () => ({ projects: {}, assets: {}, threads: {}, runs: {}, localTaskLinks: {}, tries: { auto: AUTO_ROUTE.freeTries }, seq: 0 });
 
 // ---------- ativos JSON versionados com patches (canvas e nos) ----------
 const unesc = (s) => s.replace(/~1/g, '/').replace(/~0/g, '~');
@@ -32,7 +32,7 @@ export function applyPatch(root, p) {
 
 export class DirectGen {
   // deps: { state, credits:{balance(), debit(label, n)}, plan: () => 'free'|..., now?, render?: async (run, ctx) => {assetId, name, durationMs, width, height}, mediaInfo?: (assetId) => ({...}) }
-  constructor(deps) { this.s = deps.state; this.credits = deps.credits; this.plan = deps.plan || (() => 'free'); this.now = deps.now || (() => new Date()); this.render = deps.render || null; this.mediaInfo = deps.mediaInfo || (() => null); this.listeners = deps.listeners || new Set(); this.charge = deps.charge !== false; }
+  constructor(deps) { this.s = deps.state; this.credits = deps.credits; this.plan = deps.plan || (() => 'free'); this.now = deps.now || (() => new Date()); this.render = deps.render || null; this.mediaInfo = deps.mediaInfo || (() => null); this.listeners = deps.listeners || new Set(); this.charge = deps.charge !== false; this.abortControllers = new Map(); }
   id() { this.s.seq = Math.max(this.s.seq + 1, Date.now() * 1000); return String(this.s.seq); } // < 2^53: seguro como numero JSON (project_id vai como numero)
   uuid() { return crypto.randomUUID(); }
   env(data = null, ret = '0', errmsg = '') { return { ret, errmsg, svr_time: Math.floor(this.now().getTime() / 1000), log_id: this.now().toISOString().replace(/\D/g, '') + crypto.randomBytes(8).toString('hex').toUpperCase(), data }; }
@@ -86,6 +86,8 @@ export class DirectGen {
     const userEntry = { type: 1, message: { message_id: msg.message_id || this.uuid(), role: 'user', thread_id: threadId, run_id, content: [{ type: 'data', data: JSON.stringify(tool), sub_type: c.sub_type, hidden: false, is_thought: false, is_mention: false }], created_at: Math.floor(t / 1000), context_data: { locale: '', llm_output_cache: null, avatar_param: null, is_pay_for_best: null }, user_action: { like_action: 0 }, client_tool_calls: [], client_tool_resp: [], sub_agent_info: null }, artifact: null, score: null };
     const run = { run_id, thread_id: threadId, state: RUN_STATE.submitted, entry_list: [userEntry], created_at: Math.floor(t / 1000), updated_at: Math.floor(t / 1000), completed_at: null, fail_reason: null, execute_task_id: Number(this.id()), user_id: body.user_info?.consumer_uid || null, agent_name: body.agent_name, run_number: 1, extra: JSON.stringify(extra), _project: String(body.project_id), _param: param, _node: body.concurrency_control?.conflict_key ? String(body.concurrency_control.conflict_key) : null, _submittedAt: this.now().toISOString() };
     this.s.runs[run_id] = run;
+    // Mapeamento PiperLine LOCAL para exibir cada run como tarefa; não representa a ligação run↔task do Pippit (UNOBSERVED).
+    this.s.localTaskLinks ||= {}; this.s.localTaskLinks[run_id] = { local_task_id: `local_run_task_${run_id}`, run_id, created_at: run.created_at };
     const th = (this.s.threads[threadId] ||= { thread_id: threadId, title: '', run_ids: [], project: String(body.project_id), canvasId: pr.canvasId });
     th.run_ids.push(run_id); pr.current_thread_id = threadId;
     this.prepareNode(run, th);
@@ -100,7 +102,7 @@ export class DirectGen {
   }
   // processamento do servidor: validacao -> debito -> renderizacao (async). Chamado pelo servidor depois de responder o submit_run.
   async process(run_id) {
-    const run = this.s.runs[run_id]; if (!run || run.state !== RUN_STATE.submitted) return run; run.state = RUN_STATE.working; // UNOBSERVED: valor usado durante validacao/debito
+    const run = this.s.runs[run_id]; if (!run || run.state !== RUN_STATE.submitted) return run; run.state = RUN_STATE.working; this.emit({ type: 'run', run_id: run.run_id, thread_id: run.thread_id }); // UNOBSERVED: valor usado durante validacao/debito
     const p = run._param; const fail = (detail, extra = {}) => this.finish(run, { failed: true, detail, ...extra });
     if (String(p.prompt || '').trim().length < MIN_PROMPT) return fail('Your prompt must contain at least 15 characters. Please provide a more detailed description.');
     const chk = this.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_type: 'aigc', resource_id: AUTO_ROUTE.resourceId, benefit_type: AUTO_ROUTE.benefitType, amount: 1, high_precision_amount: p.duration_sec }] });
@@ -110,8 +112,9 @@ export class DirectGen {
     const d = this.charge ? this.credits.debit(`Geração de vídeo (${AUTO_ROUTE.modelKey}) ${p.duration_sec}s`, cost) : { ok: true };
     if (d && d.ok === false) return fail('Insufficient credits.');
     this.s.tries.auto = Math.max(0, this.s.tries.auto - 1);
-    run.state = RUN_STATE.generating; // UNOBSERVED: valor usado durante a renderizacao
-    try { const out = await this.render(run, { param: p }); if (run.state !== RUN_STATE.generating) return run; /* cancelado durante a renderizacao */ return this.finish(run, { out }); } catch (e) { return fail(`Local renderer error: ${String(e.message || e).slice(0, 120)}`, { refund: cost }); }
+    run.state = RUN_STATE.generating; this.emit({ type: 'run', run_id: run.run_id, thread_id: run.thread_id }); // UNOBSERVED: valor usado durante a renderizacao
+    const controller = new AbortController(); this.abortControllers.set(run_id, controller);
+    try { const out = await this.render(run, { param: p, signal: controller.signal }); if (run.state !== RUN_STATE.generating) return run; /* cancelado durante a renderizacao */ return this.finish(run, { out }); } catch (e) { if (run.state !== RUN_STATE.generating) return run; return fail(`Local renderer error: ${String(e.message || e).slice(0, 120)}`, { refund: cost }); } finally { this.abortControllers.delete(run_id); }
   }
   finish(run, { failed, detail, out, refund }) {
     const t = this.now(); const iso = t.toISOString(); const th = this.s.threads[run.thread_id]; run.updated_at = Math.floor(t.getTime() / 1000); run.completed_at = run.updated_at;
@@ -141,13 +144,15 @@ export class DirectGen {
   cancelRun(body = {}) {
     const run = this.s.runs[body.run_id]; if (!run) return this.env(null, '8', 'Something went wrong. Try again.');
     if (![RUN_STATE.submitted, RUN_STATE.working, RUN_STATE.generating].includes(run.state)) return this.env({ run: this.publicRun(run) });
-    const t = this.now(); run.state = RUN_STATE.canceled; run.updated_at = run.completed_at = Math.floor(t.getTime() / 1000);
+    const t = this.now(); run.state = RUN_STATE.canceled; this.abortControllers.get(run.run_id)?.abort(); run.updated_at = run.completed_at = Math.floor(t.getTime() / 1000);
     const gp = run._node && this.s.assets[run._node]?.root.content.generation;
     if (gp) this.patch(run._node, [{ assetId: run._node, baseAssetVersion: 1, op: 'add', path: '/content/generation/state', value: { runId: run.run_id, status: 'cancelled' /* UNOBSERVED */, submittedAt: gp.state.submittedAt, target: 'video', threadId: run.thread_id, updatedAt: t.toISOString() } }]);
     this.emit({ type: 'run', run_id: run.run_id, thread_id: run.thread_id }); return this.env({ run: this.publicRun(run) });
   }
   // resumo local dos runs (tarefas) para a pagina de tarefas; NAO e um endpoint do Pippit
   listRuns() { return Object.values(this.s.runs).map((r) => ({ run_id: r.run_id, project_id: r._project, thread_id: r.thread_id, canvas_id: this.s.threads[r.thread_id]?.canvasId || null, prompt: r._param?.prompt || '', model: r._param?.model || '', duration_sec: r._param?.duration_sec, state: r.state, created_at: r.created_at, completed_at: r.completed_at, detail: r.fail_reason?.detail || null, title: this.s.threads[r.thread_id]?.title || '' })).sort((a, b) => b.created_at - a.created_at); }
+  // Ligacao explicitamente LOCAL; `generation_task_list` remoto continua vazio enquanto o contrato run↔task do Pippit for desconhecido.
+  listLocalTasks() { const links = (this.s.localTaskLinks ||= {}); for (const run of Object.values(this.s.runs)) links[run.run_id] ||= { local_task_id: `local_run_task_${run.run_id}`, run_id: run.run_id, created_at: run.created_at }; return Object.values(links).map((link) => { const run = this.s.runs[link.run_id]; return run ? { ...link, run_state: run.state, updated_at: run.updated_at, completed_at: run.completed_at, project_id: run._project, thread_id: run.thread_id } : null; }).filter(Boolean).sort((a, b) => b.created_at - a.created_at); }
   // agent/get_run
   getRun(body = {}) { const r = this.s.runs[body.run_id]; if (!r) return this.env(null, '8', 'Something went wrong. Try again.'); return this.env({ run: this.publicRun(r, body.scopes) }); }
   threadView(threadId, withEntries = false) { const th = this.s.threads[threadId]; if (!th) return null; return { thread_id: th.thread_id, title: th.title, run_list: th.run_ids.map((id) => this.publicRun(this.s.runs[id], withEntries ? ['entry_list'] : [])), extra: JSON.stringify({ thread_message_version: 'V3' }) }; }

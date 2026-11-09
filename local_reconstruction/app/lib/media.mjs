@@ -1,5 +1,5 @@
 // Operacoes reais de midia via ffmpeg/ffprobe: sonda, geracao local (NAO e IA), ultimo quadro, concatenacao e exportacao de timeline.
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 const WINGET = 'C:/Users/Dannilo/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin';
@@ -11,6 +11,7 @@ function find(bin) {
 export const FFMPEG = find('ffmpeg'), FFPROBE = find('ffprobe');
 export const available = () => !!(FFMPEG && FFPROBE);
 function run(bin, args) { const r = spawnSync(bin, args, { encoding: 'utf8', maxBuffer: 1 << 28 }); if (r.status !== 0) throw new Error((r.stderr || r.stdout || 'ffmpeg falhou').split('\n').slice(-6).join('\n')); return r.stdout; }
+function runAsync(bin, args, { signal } = {}) { return new Promise((resolve, reject) => { if (signal?.aborted) return reject(Object.assign(new Error('Operação cancelada'), { name: 'AbortError' })); const child = spawn(bin, args, { stdio: ['ignore', 'ignore', 'pipe'] }); let stderr = ''; const abort = () => child.kill('SIGTERM'); child.stderr.setEncoding('utf8'); child.stderr.on('data', (s) => { stderr = (stderr + s).slice(-12000); }); child.once('error', reject); child.once('close', (code, sig) => { signal?.removeEventListener('abort', abort); if (signal?.aborted) return reject(Object.assign(new Error('Operação cancelada'), { name: 'AbortError' })); if (code !== 0) return reject(new Error((stderr || `ffmpeg terminou (${sig || code})`).split('\n').slice(-6).join('\n'))); resolve(); }); signal?.addEventListener('abort', abort, { once: true }); }); }
 export function probe(file) {
   const j = JSON.parse(run(FFPROBE, ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', file]));
   const v = j.streams.find((s) => s.codec_type === 'video'), a = j.streams.find((s) => s.codec_type === 'audio');
@@ -58,6 +59,14 @@ export function generateLocalVideo(out, { seconds = 5, ratio = '9:16', image = n
     run(FFMPEG, ['-y', '-f', 'lavfi', '-i', `color=c=0x${color}:s=${w}x${h}:r=${fps}:d=${seconds}`, ...(cap ? ['-vf', cap] : []), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', out]);
   }
   return probe(out);
+}
+export async function generateLocalVideoAsync(out, { seconds = 5, ratio = '9:16', image = null, color = '1b1b2f', caption = null, signal } = {}) {
+  const [w, h] = sizeFor(ratio); const fps = 25; const frames = Math.max(1, Math.round(seconds * fps));
+  const cap = caption ? wrapCaption(caption, ratio).map((ln, i, a) => `drawtext=fontfile='${FONT}':text='${esc(ln)}':x=(w-text_w)/2:y=h*0.5+${(i - (a.length - 1) / 2) * 52}:fontsize=38:fontcolor=white:box=1:boxcolor=black@0.45`).join(',') : '';
+  const args = image
+    ? ['-y', '-loop', '1', '-i', image, '-vf', `scale=${w * 2}:${h * 2}:force_original_aspect_ratio=increase,crop=${w * 2}:${h * 2},zoompan=z='min(zoom+0.0008,1.2)':d=${frames}:s=${w}x${h}:fps=${fps}${cap ? ',' + cap : ''}`, '-t', String(seconds), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', out]
+    : ['-y', '-f', 'lavfi', '-i', `color=c=0x${color}:s=${w}x${h}:r=${fps}:d=${seconds}`, ...(cap ? ['-vf', cap] : []), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', out];
+  await runAsync(FFMPEG, args, { signal }); return probe(out);
 }
 // quebra a legenda do storyboard em linhas curtas (ate 5) para caber no cartao
 function wrapCaption(text, ratio) {

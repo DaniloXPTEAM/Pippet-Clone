@@ -553,7 +553,7 @@ function direct() {
     state: (db().direct ||= newDirectState()), listeners: DIRECT_LISTENERS, plan: () => db().user.plan, charge: !local, // renderizador local nao-IA: sem debito (igual a /nodes/:id/generate)
     credits: { balance: () => S.balance(), balances: () => S.balances(), debit: (l, n) => S.debit(l, n) },
     mediaInfo: (id) => { const a = db().assets.find((x) => x.id === id); return a ? { asset_id: a.id, md5: '', format: a.kind, size: fs.existsSync(S.pubFile(a.stored)) ? fs.statSync(S.pubFile(a.stored)).size : 0, width: a.width, height: a.height, download_url: `/files/${a.stored}`, mime: a.kind === 'video' ? 'video/mp4' : '', duration_ms: a.duration ? Math.round(a.duration * 1000) : null, cover_url: null } : null; },
-    render: local ? async (run, { param }) => { const out = path.join(S.FILES_DIR, `direct_${run.run_id}.mp4`); media.generateLocalVideo(out, { seconds: Number(param.duration_sec) || 4, ratio: param.ratio }); const a = addAsset(`direct_${run.run_id.slice(0, 8)}.mp4`, out, 'video', 'works'); return { assetId: a.id, name: a.name, durationMs: Math.round((a.duration || param.duration_sec) * 1000), width: a.width, height: a.height }; } : null,
+    render: local ? async (run, { param, signal }) => { const out = path.join(S.FILES_DIR, `direct_${run.run_id}.mp4`); try { await media.generateLocalVideoAsync(out, { seconds: Number(param.duration_sec) || 4, ratio: param.ratio, signal }); } catch (e) { try { fs.unlinkSync(out); } catch {} throw e; } const a = addAsset(`direct_${run.run_id.slice(0, 8)}.mp4`, out, 'video', 'works'); return { assetId: a.id, name: a.name, durationMs: Math.round((a.duration || param.duration_sec) * 1000), width: a.width, height: a.height }; } : null,
   });
 }
 const dEnv = (path_, fn) => route('POST', new RegExp('^' + path_ + '$'), async (q, r) => { const b = await readJson(q); const out = fn(direct(), b); S.save(); send(r, 200, out); });
@@ -562,6 +562,7 @@ dEnv('/commerce/v1/benefits/user_credit', (d) => d.userCredit());
 dEnv('/api/biz/v1/agent/create_creative_project', (d, b) => { const out = d.createCreativeProject(b); const id = String(out.data.project_id); const now = new Date().toISOString(); db().projects.unshift({ id, type: 'direct', title: 'Untitled', createdAt: now, updatedAt: now, canvas: { nodes: [], edges: [] }, chats: [], ratio: '9:16' }); return out; });
 dEnv('/api/biz/v1/agent/cancel_run', (d, b) => d.cancelRun(b));
 route('GET', /^\/api\/direct\/runs$/, async (q, r) => send(r, 200, direct().listRuns()));
+route('GET', /^\/api\/direct\/tasks$/, async (q, r) => send(r, 200, { scope: 'local-only; not the Pippit generation_task_list contract', tasks: direct().listLocalTasks() }));
 dEnv('/api/biz/v1/agent/get_thread', (d, b) => d.getThread(b));
 dEnv('/api/biz/v1/agent/get_run', (d, b) => d.getRun(b));
 dEnv('/api/biz/v1/agent/list_project_file', (d, b) => d.listProjectFile(b));
@@ -580,18 +581,25 @@ route('POST', /^\/api\/biz\/v1\/agent\/submit_run$/, async (q, r) => {
   S.save(); send(r, 200, out);
   if (out.ret === '0') setTimeout(() => { direct().process(out.data.run.run_id).then((run) => { if (run && [3, 4, 5].includes(run.state)) { const ok = run.state === 3; const th = direct().s.threads[run.thread_id]; notify(ok ? 'Geração concluída' : run.state === 5 ? 'Geração cancelada' : 'Falha na geração', `${th?.title || 'Vídeo'}${run.fail_reason?.detail ? ' — ' + run.fail_reason.detail : ''}`, ok ? 'success' : 'error'); } S.save(); }).catch(() => {}); }, 300); // validacao/debito/render acontecem depois da resposta (como no original)
 });
-const sse = (res) => { res.writeHead(200, { 'content-type': 'text/event-stream; charset=utf-8', 'cache-control': 'no-cache', connection: 'keep-alive' }); return (e) => res.write(`event:${e.event}\ndata:${typeof e.data === 'string' ? e.data : JSON.stringify(e.data)}\n\n`); };
+const sse = (res) => { res.writeHead(200, { 'content-type': 'text/event-stream; charset=utf-8', 'cache-control': 'no-cache', connection: 'keep-alive' }); res.flushHeaders?.(); return (e) => { if (res.destroyed || res.writableEnded) return false; return res.write(`event:${e.event}\ndata:${typeof e.data === 'string' ? e.data : JSON.stringify(e.data)}\n\n`); }; };
+const detachSse = (res, listener) => {
+  const cleanup = () => DIRECT_LISTENERS.delete(listener);
+  res.once('close', cleanup); res.once('error', cleanup);
+  DIRECT_LISTENERS.add(listener);
+};
 route('POST', /^\/api\/biz\/v1\/agent\/subscribe_(thread|run)$/, async (q, r, m) => {
   const b = await readJson(q); const d = direct(); const write = sse(r); const threadId = b.thread_id || d.s.runs[b.run_id]?.thread_id;
   for (const e of d.threadEvents(threadId)) write(e);
-  const on = (ev) => { if (ev.type === 'run' && ev.thread_id === threadId) { const v = direct().threadEvents(threadId)[0]; if (v) write(v); } }; // subscribe_run: formato UNOBSERVED (reusa o de subscribe_thread)
-  DIRECT_LISTENERS.add(on); q.on('close', () => DIRECT_LISTENERS.delete(on));
+  // O replay de subscribe_thread observado contém message/message/ping. O payload incremental de subscribe_run
+  // não foi capturado: o alias local abaixo é apenas um fallback de reconstrução, não contrato comprovado.
+  const on = (ev) => { if (ev.type === 'run' && ev.thread_id === threadId) { const v = direct().threadEvents(threadId)[0]; if (v) write(v); } };
+  detachSse(r, on);
 });
 route('POST', /^\/api\/biz\/v1\/asset\/sse_asset$/, async (q, r) => {
-  const b = await readJson(q); const d = direct(); const ids = b.asset_ids || b.pippit_asset_ids || Object.keys(d.s.assets); const write = sse(r);
+  const b = await readJson(q); const d = direct(); const ids = (b.asset_ids || b.pippit_asset_ids || Object.keys(d.s.assets)).map(String); const write = sse(r);
   for (const e of d.assetEvents(ids)) write(e);
-  const on = (ev) => { if (ev.type === 'asset' && (!b.asset_ids || ids.includes(ev.id))) write({ event: 'AssetJsonUpdate', data: { pippit_asset_id: ev.id, version: ev.version, content: JSON.stringify({ patches: ev.patches }), start_version: ev.version - 1, extra: { asset_content_version: String(ev.version) } } }); };
-  DIRECT_LISTENERS.add(on); q.on('close', () => DIRECT_LISTENERS.delete(on));
+  const on = (ev) => { if (ev.type === 'asset' && ids.includes(String(ev.id))) write({ event: 'AssetJsonUpdate', data: { pippit_asset_id: String(ev.id), version: ev.version, content: JSON.stringify({ patches: ev.patches }), start_version: ev.version - 1, extra: { asset_content_version: String(ev.version) } } }); };
+  detachSse(r, on);
 });
 
 const server = http.createServer(async (req, res) => {
