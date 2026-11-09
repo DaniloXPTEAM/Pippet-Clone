@@ -1,0 +1,13 @@
+{
+ "task": "t_avatar_page",
+ "steps": [
+  {
+   "goto": "avatar-and-voice",
+   "wait": 9000
+  },
+  {
+   "snap": "avatar_pagina",
+   "tag": "shot"
+  }
+ ]
+}

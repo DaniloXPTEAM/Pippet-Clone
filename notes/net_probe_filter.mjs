@@ -1,0 +1,9 @@
+// Lista TODAS as chamadas POST feitas pelo app ao aplicar um filtro no drawer Avatar video (somente leitura), para descobrir como ids viram nomes. Uso: node net_probe_filter.mjs <saida.json>
+import fs from 'node:fs'; import { createRequire } from 'node:module';
+const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json'); const { chromium } = require('playwright-core');
+const b = await chromium.connectOverCDP('http://127.0.0.1:9222'); const page = b.contexts()[0].pages().find((p) => p.url().includes('pippit.ai/home')) || b.contexts()[0].pages()[0]; const calls = [];
+page.on('request', (r) => { const u = r.url(); if (r.method() === 'POST' && !/report|monitor|log|slardar|mon-sg|bing|clarity|google/.test(u)) calls.push({ t: Date.now(), u: u.replace(/\?.*/, '').slice(0, 160), body: (r.postData() || '').slice(0, 600) }); });
+await page.goto('https://www.pippit.ai/home', { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(15000); await page.getByText('Avatar video', { exact: true }).locator('visible=true').first().click();
+await page.waitForFunction(() => !document.querySelector('[class*=drawer-skeleton]') && /Choose avatar/.test(document.body.innerText), null, { timeout: 240000 }); await page.waitForTimeout(4000); const mark = calls.length;
+const D = page.locator('.lv-drawer-content'); await D.getByText('Gender', { exact: true }).locator('visible=true').first().click(); await page.waitForTimeout(800); await D.locator('label.lv-checkbox').getByText('Male', { exact: true }).first().click(); await page.waitForTimeout(6000);
+fs.writeFileSync(process.argv[2], JSON.stringify({ todas: calls.slice(0, mark).map((c) => c.u), aposFiltro: calls.slice(mark) }, null, 1)); console.log(JSON.stringify(calls.slice(mark).map((c) => c.u + ' ' + c.body.slice(0, 120)), null, 1)); await b.close().catch(() => {}); process.exit(0);

@@ -1,0 +1,55 @@
+{
+ "task": "t_settings_lang",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 6000
+  },
+  {
+   "tag": "menu_conta",
+   "click": {
+    "role": "button",
+    "name": "Open account menu"
+   },
+   "opts": {
+    "expect": {
+     "text": "Settings"
+    }
+   }
+  },
+  {
+   "tag": "settings",
+   "click": {
+    "role": "menuitem",
+    "name": "Settings",
+    "exact": false
+   },
+   "opts": {
+    "expect": {
+     "text": "Language"
+    }
+   }
+  },
+  {
+   "tag": "lang",
+   "click": {
+    "role": "menuitem",
+    "name": "Language",
+    "exact": false
+   },
+   "opts": {
+    "hover": true
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "lang",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

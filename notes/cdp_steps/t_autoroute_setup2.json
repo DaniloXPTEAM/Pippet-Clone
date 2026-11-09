@@ -1,0 +1,1 @@
+{"task": "t_autoroute_setup2", "steps": [{"goto": "home", "wait": 7000}, {"tag": "foco", "click": {"css": ".ProseMirror", "nth": 1}, "opts": {}}, {"press": "r"}, {"press": "e"}, {"press": "d"}, {"press": "Space"}, {"press": "a"}, {"press": "p"}, {"press": "p"}, {"press": "l"}, {"press": "e"}, {"wait": 800}, {"snap": "pronto", "tag": "shot"}]}

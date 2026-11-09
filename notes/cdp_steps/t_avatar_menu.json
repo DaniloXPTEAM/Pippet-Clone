@@ -1,0 +1,5 @@
+{"task":"t_avatar_menu","steps":[
+{"goto":"avatar-and-voice","wait":9000},
+{"hover":{"text":"Malcolm","exact":true},"wait":1200},
+{"snap":"hover_malcolm","tag":"shot_h"}
+]}

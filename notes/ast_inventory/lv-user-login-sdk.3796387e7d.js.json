@@ -1,0 +1,31 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\async\\lv-user-login-sdk.3796387e7d.js",
+ "bytes": 2712,
+ "parse": "script",
+ "nos": 716,
+ "strings_total": 54,
+ "segredo_like_ignoradas": 0,
+ "urls": [],
+ "dominios": [],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [],
+ "globais_window": [
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

@@ -1,0 +1,192 @@
+{
+ "landing_lib-polyfill": {
+  "inteiro": {
+   "nos": {
+    "javascript-module": 660,
+    "endpoint": 5,
+    "javascript-asset": 13,
+    "unknown": 13,
+    "javascript-chunk": 1,
+    "artifact": 1
+   },
+   "arestas": {
+    "imports": 2677,
+    "contains": 687,
+    "calls": 9
+   },
+   "modulos": 659,
+   "sem_nos": 13,
+   "sem_rel": 0
+  },
+  "pecas": {
+   "nos": {
+    "unknown": 16,
+    "javascript-asset": 16,
+    "artifact": 8,
+    "endpoint": 7,
+    "javascript-module": 4,
+    "javascript-chunk": 1
+   },
+   "arestas": {
+    "contains": 41,
+    "calls": 9
+   },
+   "modulos": 0,
+   "sem_nos": 73055,
+   "sem_rel": 68503
+  }
+ },
+ "kep_lib-polyfill": {
+  "inteiro": {
+   "nos": {
+    "unknown": 12,
+    "javascript-asset": 12,
+    "endpoint": 5,
+    "artifact": 1,
+    "javascript-module": 1
+   },
+   "arestas": {
+    "contains": 25,
+    "calls": 9
+   },
+   "modulos": 0,
+   "sem_nos": 12,
+   "sem_rel": 0
+  },
+  "pecas": {
+   "nos": {
+    "javascript-asset": 25,
+    "unknown": 25,
+    "javascript-module": 5,
+    "artifact": 10,
+    "endpoint": 7
+   },
+   "arestas": {
+    "contains": 60,
+    "calls": 9
+   },
+   "modulos": 0,
+   "sem_nos": 73600,
+   "sem_rel": 68436
+  }
+ },
+ "uifid-fingerprint-init": {
+  "inteiro": {
+   "nos": {
+    "javascript-module": 220,
+    "javascript-chunk": 1,
+    "endpoint": 1,
+    "artifact": 1,
+    "javascript-asset": 1,
+    "unknown": 1
+   },
+   "arestas": {
+    "imports": 749,
+    "contains": 222,
+    "exposes": 1
+   },
+   "modulos": 218,
+   "sem_nos": 1,
+   "sem_rel": 0
+  },
+  "pecas": {
+   "nos": {
+    "javascript-asset": 36,
+    "unknown": 36,
+    "artifact": 12,
+    "javascript-module": 6,
+    "endpoint": 1
+   },
+   "arestas": {
+    "contains": 84,
+    "exposes": 1
+   },
+   "modulos": 0,
+   "sem_nos": 72931,
+   "sem_rel": 94529
+  }
+ },
+ "landing_771": {
+  "inteiro": {
+   "nos": {
+    "javascript-module": 185,
+    "endpoint": 62,
+    "storage": 16,
+    "javascript-asset": 13,
+    "javascript-chunk": 4,
+    "unknown": 13,
+    "artifact": 1
+   },
+   "arestas": {
+    "calls": 73,
+    "imports": 394,
+    "exposes": 74,
+    "contains": 191,
+    "persists_to": 47
+   },
+   "modulos": 163,
+   "sem_nos": 13,
+   "sem_rel": 0
+  },
+  "pecas": {
+   "nos": {
+    "javascript-asset": 64,
+    "endpoint": 94,
+    "unknown": 64,
+    "artifact": 16,
+    "javascript-module": 8,
+    "storage": 17,
+    "javascript-chunk": 1
+   },
+   "arestas": {
+    "exposes": 74,
+    "contains": 145,
+    "persists_to": 47,
+    "calls": 73
+   },
+   "modulos": 0,
+   "sem_nos": 135472,
+   "sem_rel": 156357
+  }
+ },
+ "kep_69": {
+  "inteiro": {
+   "nos": {
+    "unknown": 12,
+    "storage": 15,
+    "endpoint": 20,
+    "javascript-asset": 12,
+    "artifact": 1,
+    "javascript-module": 1
+   },
+   "arestas": {
+    "contains": 25,
+    "calls": 48,
+    "persists_to": 46,
+    "exposes": 7
+   },
+   "modulos": 0,
+   "sem_nos": 12,
+   "sem_rel": 0
+  },
+  "pecas": {
+   "nos": {
+    "unknown": 252,
+    "javascript-asset": 168,
+    "artifact": 66,
+    "javascript-module": 6,
+    "storage": 15,
+    "endpoint": 21
+   },
+   "arestas": {
+    "contains": 516,
+    "persists_to": 46,
+    "calls": 48,
+    "exposes": 7
+   },
+   "modulos": 0,
+   "sem_nos": 110043,
+   "sem_rel": 138464
+  }
+ }
+}

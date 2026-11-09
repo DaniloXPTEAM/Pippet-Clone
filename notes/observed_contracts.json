@@ -1,0 +1,162 @@
+{
+ "/api/biz/v1/benefit/notice/list": {
+  "method": "POST",
+  "status": [
+   200
+  ],
+  "request_shape": {
+   "notice_type_list": [
+    "num",
+    "len=1"
+   ],
+   "limit": "num"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/commerce/v1/benefits/credit_receive": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "source": "str:web",
+   "time_zone": "str:America/Sao_Paulo"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/jsonp/commerce/v1/subscription/user_info": {
+  "method": "GET",
+  "status": [
+   200
+  ],
+  "request_shape": null,
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/api/account/v1/settings": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "app_id": "num"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/commerce/v1/benefits/user_credit": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {},
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/lv/v1/common_task/list": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "status": [
+    "num",
+    "len=1"
+   ],
+   "cursor": "num",
+   "count": "num"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/api/biz/v1/user/bui": {
+  "method": "GET",
+  "status": [
+   null
+  ],
+  "request_shape": null,
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/api/biz/v1/product/list": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "keyword": "str:",
+   "page": "num",
+   "size": "num",
+   "sort_field": "num",
+   "is_asc": "bool"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/lv/v1/notice/get_unread_count": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "notice_type": [
+    "num",
+    "len=1"
+   ]
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/api/biz/v1/user/profile": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "console_lan": "str:en"
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ },
+ "/commerce/v1/resource_position": {
+  "method": "POST",
+  "status": [
+   null
+  ],
+  "request_shape": {
+   "resource_keys": [
+    "str:new_features_popup",
+    "len=3"
+   ],
+   "resource_key_extra_map": {},
+   "ap_transaction_list": [],
+   "abtest_group_ids": []
+  },
+  "response_shape": null,
+  "sources": [
+   "net_home"
+  ]
+ }
+}

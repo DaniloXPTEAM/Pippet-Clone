@@ -1,0 +1,40 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\lib-axios.29bed537.js",
+ "bytes": 70895,
+ "parse": "script",
+ "nos": 22402,
+ "strings_total": 800,
+ "segredo_like_ignoradas": 8,
+ "urls": [
+  "http://localhost"
+ ],
+ "dominios": [
+  "localhost"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "abort",
+  "loadend",
+  "message",
+  "progress"
+ ],
+ "globais_window": [
+  "__LOADABLE_LOADED_CHUNKS__"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 6,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 63
+}

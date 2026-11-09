@@ -1,0 +1,32 @@
+{
+ "task": "t_canvas_hist",
+ "steps": [
+  {
+   "goto": "nest-agent-project?projectId=1206033530372&entranceFrom=history&page_from=home&canvasId=1207806464260",
+   "wait": 12000
+  },
+  {
+   "tag": "chat_history",
+   "click": {
+    "role": "button",
+    "name": "Chat history"
+   },
+   "opts": {
+    "full": true,
+    "expect": {
+     "text": "canvas title"
+    }
+   }
+  },
+  {
+   "wait": 3000
+  },
+  {
+   "snap": "canvas_chat_history",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

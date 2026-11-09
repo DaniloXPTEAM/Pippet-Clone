@@ -1,0 +1,46 @@
+{
+ "task": "t_visual",
+ "steps": [
+  {
+   "goto": "marketing-agent",
+   "wait": 8000
+  },
+  {
+   "tag": "abre_visual",
+   "click": {
+    "role": "button",
+    "name": "Visual style"
+   },
+   "opts": {
+    "expect": {
+     "text": "Search style"
+    }
+   }
+  },
+  {
+   "wait": 4500
+  },
+  {
+   "tag": "cat_youth",
+   "click": {
+    "role": "button",
+    "name": "Youth Trends"
+   },
+   "opts": {
+    "expect": {
+     "text": "Youth Trends\" [pressed]"
+    }
+   }
+  },
+  {
+   "wait": 3000
+  },
+  {
+   "snap": "visual_youth",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "task": "t_marketing_inputs",
+ "steps": [
+  {
+   "goto": "marketing-agent",
+   "wait": 8000
+  },
+  {
+   "tag": "product",
+   "click": {
+    "role": "button",
+    "name": "Product"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2500
+  },
+  {
+   "snap": "product",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "tag": "character",
+   "click": {
+    "role": "button",
+    "name": "Character"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2500
+  },
+  {
+   "snap": "character",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

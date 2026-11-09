@@ -1,0 +1,118 @@
+[
+ {
+  "name": "CanvasShare.a643396c1b.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/CanvasShare.a643396c1b.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "8276",
+  "last_modified": "Wed, 28 Oct 2026 04:32:52 GMT",
+  "bytes_descomprimidos": 24443,
+  "sha256": "b37d895efc752c84c3bd178bd8f62b5da3ab40d24890bf8e9b1cb7f3f8691771"
+ },
+ {
+  "name": "asset-library-sdk-picker.caf169df93.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/asset-library-sdk-picker.caf169df93.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "11662",
+  "last_modified": "Fri, 23 Oct 2026 06:31:09 GMT",
+  "bytes_descomprimidos": 41308,
+  "sha256": "94f1e41b9d7590cb7f08554518680502e854e817ea5db667cb03c26d2f31b961"
+ },
+ {
+  "name": "activity-detail/(slug$)/page.b1ff2caf1e.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/activity-detail/(slug$)/page.b1ff2caf1e.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "469",
+  "last_modified": "Wed, 28 Oct 2026 04:33:01 GMT",
+  "bytes_descomprimidos": 914,
+  "sha256": "d71cb8f56e0d88b56decbc14f3a592f6c742d4a028ec608851172b9f76b88344"
+ },
+ {
+  "name": "home-page/page.149c12e5ad.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/home-page/page.149c12e5ad.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "1218",
+  "last_modified": "Wed, 28 Oct 2026 04:33:01 GMT",
+  "bytes_descomprimidos": 2046,
+  "sha256": "53a4d0f619ed0038233923f40b7359cae1dc7c38f1690d275d3b0f9389bb5bc1"
+ },
+ {
+  "name": "364997.338928e099.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/364997.338928e099.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "6848",
+  "last_modified": "Wed, 28 Oct 2026 04:29:16 GMT",
+  "bytes_descomprimidos": 21544,
+  "sha256": "e452ef2400a40eded69b75f666f895934daf3c49f87f49119880b9ee95626e6b"
+ },
+ {
+  "name": "home/page.5d9cc09adb.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/home/page.5d9cc09adb.js",
+  "pulado": "ja existe localmente"
+ },
+ {
+  "name": "565447.73fa5f1.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/565447.73fa5f1.js",
+  "status": 404,
+  "content_type": "application/json",
+  "content_encoding": null,
+  "content_length": "173",
+  "last_modified": null,
+  "bytes_descomprimidos": 173,
+  "sha256": "6678d7dc9f075fb83462303b4ec53b7d08d9e8a13515a3c4865ca908516ae229",
+  "limitacao": "nao disponivel publicamente sem credenciais: nao contornado"
+ },
+ {
+  "name": "$.a4174b421f.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/$.a4174b421f.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "323",
+  "last_modified": "Wed, 28 Oct 2026 04:27:49 GMT",
+  "bytes_descomprimidos": 469,
+  "sha256": "e7984f77fdb6ec33eece0302b41bae8ed23d9a35ec9462c142ee551a3dfa726c"
+ },
+ {
+  "name": "replay/page.0510768dea.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/replay/page.0510768dea.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "642",
+  "last_modified": "Wed, 28 Oct 2026 04:33:01 GMT",
+  "bytes_descomprimidos": 1293,
+  "sha256": "ee64d3a24d797bf4f9e800279148140bed965a638c2684bfb3cb1cf53c7701d9"
+ },
+ {
+  "name": "Replay.ad0d3d4575.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/Replay.ad0d3d4575.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "404",
+  "last_modified": "Wed, 28 Oct 2026 04:32:53 GMT",
+  "bytes_descomprimidos": 695,
+  "sha256": "b98fd4e68edefbadc6c220087f3cdb1a080a9e1a713715104573ebf3950af1c4"
+ },
+ {
+  "name": "ActivityDetail.630c23dfd9.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/ActivityDetail.630c23dfd9.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "24908",
+  "last_modified": "Wed, 28 Oct 2026 04:32:46 GMT",
+  "bytes_descomprimidos": 92982,
+  "sha256": "d364bd901989501017dd9ca7fd67d321aa03a991c306c1bb2d9965b10192c709"
+ }
+]

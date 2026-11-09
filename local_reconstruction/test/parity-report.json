@@ -1,0 +1,25 @@
+{
+ "generatedAt": "2026-10-27T18:44:08.719Z",
+ "total": 25,
+ "missing": 0,
+ "report": [
+  {
+   "route": "/home",
+   "source": "oauth_redirect/2_pagina_0.txt (sidebar)",
+   "checked": 9,
+   "missing": []
+  },
+  {
+   "route": "/analytics",
+   "source": "oauth_redirect/2_pagina_0.txt",
+   "checked": 7,
+   "missing": []
+  },
+  {
+   "route": "/editor",
+   "source": "editor_right_panel/5_1_Básico.txt",
+   "checked": 9,
+   "missing": []
+  }
+ ]
+}

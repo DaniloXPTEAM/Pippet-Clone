@@ -1,0 +1,32 @@
+{
+ "task": "t_skill",
+ "steps": [
+  {
+   "goto": "skill",
+   "wait": 9000
+  },
+  {
+   "tag": "detalhes",
+   "click": {
+    "role": "button",
+    "name": "Details",
+    "nth": 1
+   },
+   "opts": {
+    "expect": {
+     "text": "dialog"
+    }
+   }
+  },
+  {
+   "wait": 2500
+  },
+  {
+   "snap": "skill_details",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

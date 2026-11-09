@@ -1,0 +1,195 @@
+{
+ "publicPath": "//sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/",
+ "entries": {
+  "avatar-based-generator": {
+   "chunk_ids": [
+    866493,
+    589965,
+    276776,
+    857015,
+    255932,
+    76588,
+    682247,
+    384667,
+    827585,
+    307064,
+    664784,
+    668795,
+    321089,
+    240450,
+    195351,
+    280000,
+    895865,
+    815009,
+    544988,
+    234556,
+    32306,
+    802702,
+    988390,
+    892877,
+    545639,
+    537017,
+    828557,
+    650725,
+    989157,
+    907969,
+    300527
+   ],
+   "missing": [
+    {
+     "id": 76588,
+     "name": null,
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/76588.undefined.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 827585,
+     "name": null,
+     "hash": "67228d32b2",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/827585.67228d32b2.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 668795,
+     "name": null,
+     "hash": "00a94e3cbf",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/668795.00a94e3cbf.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 321089,
+     "name": null,
+     "hash": "a78c3d94d9",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/321089.a78c3d94d9.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 815009,
+     "name": null,
+     "hash": "615e76d780",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/815009.615e76d780.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 32306,
+     "name": null,
+     "hash": "db26445510",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/32306.db26445510.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 802702,
+     "name": null,
+     "hash": "66a1fa3257",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/802702.66a1fa3257.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 988390,
+     "name": null,
+     "hash": "b2e3f39879",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/988390.b2e3f39879.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 892877,
+     "name": null,
+     "hash": "612b19584d",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/892877.612b19584d.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 545639,
+     "name": null,
+     "hash": "62761070e0",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/545639.62761070e0.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 828557,
+     "name": null,
+     "hash": "fc7ea3772e",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/828557.fc7ea3772e.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 650725,
+     "name": null,
+     "hash": "784d4f7220",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/650725.784d4f7220.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 989157,
+     "name": null,
+     "hash": "f320e0cb24",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/989157.f320e0cb24.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 907969,
+     "name": null,
+     "hash": "65b04ec890",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/907969.65b04ec890.js",
+     "local": null,
+     "bytes_local": null
+    },
+    {
+     "id": 300527,
+     "name": "avatar-based-generator",
+     "hash": "d1db384db7",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/avatar-based-generator.d1db384db7.js",
+     "local": null,
+     "bytes_local": null
+    }
+   ],
+   "present": 16
+  },
+  "digital-human-managers": {
+   "chunk_ids": [
+    280000,
+    711343
+   ],
+   "missing": [
+    {
+     "id": 711343,
+     "name": "digital-human-managers",
+     "hash": "e6d5c9f2cb",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/digital-human-managers.e6d5c9f2cb.js",
+     "local": null,
+     "bytes_local": null
+    }
+   ],
+   "present": 1
+  },
+  "bundle_avatar-editor-service": {
+   "chunk_ids": [
+    283684
+   ],
+   "missing": [
+    {
+     "id": 283684,
+     "name": "bundle_avatar-editor-service",
+     "hash": "76367e03ff",
+     "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/bundle_avatar-editor-service.76367e03ff.js",
+     "local": null,
+     "bytes_local": null
+    }
+   ],
+   "present": 0
+  }
+ }
+}

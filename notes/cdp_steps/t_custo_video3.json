@@ -1,0 +1,83 @@
+{
+ "task": "t_custo_video3",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "modo",
+   "click": {
+    "role": "button",
+    "name": "Creation mode"
+   },
+   "opts": {
+    "expect": {
+     "text": "Video"
+    }
+   }
+  },
+  {
+   "tag": "vid",
+   "click": {
+    "role": "menuitemradio",
+    "name": "Video Choose",
+    "exact": false
+   },
+   "opts": {
+    "allowRisky": true
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "mini",
+   "click": {
+    "css": "[role=dialog] button:has-text('Mini (Trial)')"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1000
+  },
+  {
+   "tag": "foco_slider",
+   "click": {
+    "role": "slider"
+   },
+   "opts": {}
+  },
+  {
+   "press": "Home"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "read": "[role=slider]",
+   "tag": "v"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "snap": "video4s",
+   "tag": "shot_c"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+{"task":"t_autoroute_send","steps":[
+{"tag":"enviar","click":{"css":"button[class*=black]","nth":1},"opts":{"allowRisky":true}},
+{"wait":6000},
+{"snap":"apos_envio","tag":"shot_envio"}
+]}

@@ -1,0 +1,106 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\async\\lv-cookie-consent.8b26699e.js",
+ "bytes": 234037,
+ "parse": "script",
+ "nos": 65385,
+ "strings_total": 2434,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "https://",
+  "https://edit-api-sg.capcut.com/luckycat/i18n/capcut/campaign/v1/web/report_event",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/ab.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/autotrack.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/retry.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/route.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/stay.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/tracer.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-sg/log-sdk/collect/5/plugin/visual.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/ab.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/autotrack.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/retry.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/route.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/stay.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/tracer.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/5/plugin/visual.js",
+  "https://lf-global-static.iapplogcdn.com/obj/applog-sdk-static-us/log-sdk/collect/heatmap-core.js",
+  "https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/log-sdk/collect/devtool/debug-web.v2.0.0.js",
+  "https://www.countain.com",
+  "https://www.tiktok.com"
+ ],
+ "dominios": [
+  "edit-api-sg.capcut.com",
+  "lf-global-static.iapplogcdn.com",
+  "sf16-website-login.neutral.ttwstatic.com",
+  "www.countain.com",
+  "www.tiktok.com"
+ ],
+ "caminhos_api": [
+  "/service/2/abtest_config/",
+  "/service/2/web_sdk_settings/",
+  "/v1/list",
+  "/v1/list_test",
+  "/v1/user/webid"
+ ],
+ "rotas_path": [
+  "/"
+ ],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [
+  "(dinâmico)"
+ ],
+ "websocket": [],
+ "storage": [
+  "getItem:_applogtest-test-key",
+  "getItem:_ranger-test-key",
+  "removeItem:_applogtest-test-key",
+  "removeItem:_localforage_support_test",
+  "removeItem:_ranger-test-key",
+  "setItem:_applogtest-test-key",
+  "setItem:_localforage_support_test",
+  "setItem:_ranger-test-key"
+ ],
+ "eventos": [
+  "bannerEvents",
+  "beforeunload",
+  "blur",
+  "change",
+  "click",
+  "customBannerEvents",
+  "focus",
+  "getConsent",
+  "hashchange",
+  "load",
+  "message",
+  "mousedown",
+  "mousemove",
+  "mouseup",
+  "pagehide",
+  "popstate",
+  "scroll",
+  "submit",
+  "touchend",
+  "touchmove",
+  "touchstart",
+  "unload",
+  "visibilitychange"
+ ],
+ "globais_window": [
+  "LogPluginObject",
+  "TEAVisualEditor",
+  "__LOADABLE_LOADED_CHUNKS__",
+  "ccWebCookieConsentSingleton"
+ ],
+ "postMessage": 6,
+ "cookie_refs": 5,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 2,
+ "modulos_webpack": 10
+}

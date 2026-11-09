@@ -1,0 +1,16 @@
+// Abre o drawer "Avatar video" (Home > Skills recomendadas), espera carregar e sonda controles por TEXTO (nunca Export/Edit more/Add/Delete/Create). Registra texto novo, camadas (menus) e screenshot por passo.
+// Uso: node drawer_probe.mjs <saida-dir> "<texto1>|<texto2>|..."   (prefixo ~ = só passar o mouse)
+import fs from 'node:fs'; import { createRequire } from 'node:module';
+const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json'); const { chromium } = require('playwright-core');
+const [OUT, labels] = process.argv.slice(2); fs.mkdirSync(OUT, { recursive: true }); const FORBID = /export|edit more|delete|remove|create|new |upload|buy|subscribe|publish|send|confirm/i;
+const b = await chromium.connectOverCDP('http://127.0.0.1:9222'); const page = b.contexts()[0].pages().find((p) => p.url().includes('pippit.ai/home')) || b.contexts()[0].pages()[0];
+await page.goto('https://www.pippit.ai/home', { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(15000); await page.getByText('Avatar video', { exact: true }).locator('visible=true').first().click();
+await page.waitForFunction(() => !document.querySelector('[class*=drawer-skeleton]') && /Choose avatar/.test(document.body.innerText), null, { timeout: 90000 }); await page.waitForTimeout(2500);
+const dr = () => page.evaluate(() => { const d = document.querySelector('.lv-drawer-content') || document.body; return { text: d.innerText.split('\n').map((x) => x.trim()).filter(Boolean), layers: [...document.querySelectorAll('[role=menu],[role=listbox],[role=tooltip],[class*=lv-select-popup],[class*=lv-dropdown-popup],[class*=lv-trigger-popup],[class*=popover]')].filter((e) => e.getBoundingClientRect().width > 30).map((e) => ({ cls: (e.getAttribute('class') || '').slice(0, 50), text: e.innerText.split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 100) })) }; });
+const base = await dr(); const baseSet = new Set(base.text); const res = [{ passo: 'base', texto: base.text }];
+for (let label of labels.split('|')) { const hov = label.startsWith('~'); if (hov) label = label.slice(1); if (FORBID.test(label)) { res.push({ label, bloqueado: true }); continue; }
+  const loc = page.locator('.lv-drawer-content').getByText(label, { exact: true }).first(); if (!(await loc.count())) { res.push({ label, achou: false }); continue; }
+  await loc.hover({ timeout: 4000 }).catch(() => {}); await page.waitForTimeout(600); if (hov) { const h = await dr(); res.push({ label, hover: true, novo: h.text.filter((t) => !baseSet.has(t)), camadas: h.layers.slice(0, 4) }); continue; }
+  await loc.click({ timeout: 5000 }).catch((e) => res.push({ label, erro: String(e).slice(0, 100) })); await page.waitForTimeout(1800); const g = await dr(); await page.screenshot({ path: `${OUT}/${label.replace(/[^A-Za-z0-9]+/g, '_')}.png` }).catch(() => {});
+  res.push({ label, novo: g.text.filter((t) => !baseSet.has(t)).slice(0, 120), camadas: g.layers.slice(0, 4) }); await page.keyboard.press('Escape').catch(() => {}); await page.waitForTimeout(400); }
+fs.writeFileSync(`${OUT}/probe.json`, JSON.stringify({ observadoEm: new Date().toISOString(), resultados: res }, null, 1)); for (const r of res) console.log(JSON.stringify(r).slice(0, 1100)); await b.close().catch(() => {}); process.exit(0);

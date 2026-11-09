@@ -1,0 +1,4 @@
+{"task":"t_autoroute_ok","netlog":{"file":"C:/w/PiperLine/captures/auth/autoroute/ok_canvas.har","after_ms":20000},"steps":[
+{"goto":"https://www.pippit.ai/nest-agent-project?projectId=1216695876100&canvasId=1219118336772","wait":9000},
+{"snap":"canvas_ok","tag":"shot"}
+]}

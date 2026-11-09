@@ -1,0 +1,8 @@
+// Abre a Style library da Story canvas (somente leitura), alterna as abas All/Live-action/2D/3D e a busca (sem selecionar estilo) e registra os nomes por aba. Uso: node style_tabs.mjs <saida.json>
+import fs from 'node:fs'; import { createRequire } from 'node:module';
+const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json'); const { chromium } = require('playwright-core');
+const b = await chromium.connectOverCDP('http://127.0.0.1:9222'); const page = b.contexts()[0].pages().find((p) => p.url().includes('story-studio/detail')); const NL = String.fromCharCode(10);
+const body = () => page.evaluate((nl) => document.body.innerText.split(nl).map((x) => x.trim()).filter(Boolean), NL); if ((await body()).includes('Customize')) { await page.mouse.click(200, 400); await page.waitForTimeout(1000); } const base = new Set(await body()); await page.getByText('Style library', { exact: true }).first().click(); await page.waitForTimeout(1500); const out = {};
+const panel = async () => (await body()).filter((x) => !base.has(x));
+for (const t of ['All', 'Live-action', '2D', '3D']) { const el = page.getByText(t, { exact: true }).locator('visible=true').last(); await el.click({ timeout: 4000 }).catch(() => {}); await page.waitForTimeout(1500); const l = await panel(); out[t] = l; console.log(t, l.length); }
+await page.screenshot({ path: process.argv[2].replace('.json', '.png') }); fs.writeFileSync(process.argv[2], JSON.stringify(out, null, 1)); await page.keyboard.press('Escape'); await b.close().catch(() => {}); process.exit(0);

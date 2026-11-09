@@ -1,0 +1,972 @@
+[
+ {
+  "probe": "front_tool",
+  "ocorrencias": 3,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "ai_agent",
+  "ocorrencias": 5,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "video_gen",
+  "ocorrencias": 182,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   }
+  ]
+ },
+ {
+  "probe": "image_gen",
+  "ocorrencias": 171,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   }
+  ]
+ },
+ {
+  "probe": "audio_gen",
+  "ocorrencias": 25,
+  "classe": "parcialmente alterado",
+  "detalhe": [
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__484886.deb1795c80.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__643916.4be081c651.js"
+   },
+   {
+    "arquivo": "async__484886.deb1795c80.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__643916.4be081c651.js"
+   },
+   {
+    "arquivo": "async__562045.88268997a2.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__616044.82a3c713c4.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__616044.97e91c7056.js"
+   },
+   {
+    "arquivo": "async__616044.82a3c713c4.js",
+    "resultado": "CONTEXTO DIFERENTE/NAO ENCONTRADO",
+    "janela": "am.TF,Q={nodeId:e,nodeType:eI.jv2,modelKind:at.l7j.Audio,prompt:I,selection:{modelId:M},extra:{durationSec:at.gM5}},X=(0,f.MT)(Q),G=(0,f.d1)(Q,X.result,\"canvas_audio_generation\"),ee=(0,f.U$)(Q,X.result,\"audio\"),et=e=>{(async()=>{await ee(e)||i.o.error(e instanceof Error&&e.message?e.message:m.b.t(\"P"
+   },
+   {
+    "arquivo": "async__643916.4be081c651.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "pre_activate_skills",
+  "ocorrencias": 32,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__143136.4167321aba.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__143136.fb0215e790.js"
+   },
+   {
+    "arquivo": "async__148472.1deaf815b3.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__53019.0f91dddfd6.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__53019.1721d12225.js"
+   }
+  ]
+ },
+ {
+  "probe": "pre_activate_skills_type",
+  "ocorrencias": 5,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__53019.0f91dddfd6.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__53019.1721d12225.js"
+   },
+   {
+    "arquivo": "async__787640.3487a3fc06.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__787640.3d54633110.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__428740.be0f71da8d.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__975399.206ceff65e.js"
+   }
+  ]
+ },
+ {
+  "probe": "biz/preload_skill",
+  "ocorrencias": 6,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__889795.32938b46b8.js"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__889795.32938b46b8.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__428740.be0f71da8d.js"
+   }
+  ]
+ },
+ {
+  "probe": "biz/addon_skill",
+  "ocorrencias": 4,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__428740.be0f71da8d.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__428740.be0f71da8d.js"
+   }
+  ]
+ },
+ {
+  "probe": "biz/x_data_direct_tool_call_req",
+  "ocorrencias": 7,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__312094.03b09b1fd9.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "biz/x_tool_name_video_part",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "pippit_video_part_agent",
+  "ocorrencias": 5,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__889795.32938b46b8.js"
+   }
+  ]
+ },
+ {
+  "probe": "pippit_image_part_agent",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "pippit_audio_part_agent",
+  "ocorrencias": 2,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   },
+   {
+    "arquivo": "async__975399.2c638cab52.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__975399.206ceff65e.js"
+   }
+  ]
+ },
+ {
+  "probe": "pippit_nest_agent",
+  "ocorrencias": 35,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__357752.c35f03632c.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__357752.c35f03632c.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__399551.4bf2c59afb.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__home-submit-lifecycle.2e86c876d2.js"
+   },
+   {
+    "arquivo": "async__489548.fc1b8819d1.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__489548.ad1b791b2c.js"
+   },
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__519649.6c00b4a860.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "web_video_direct",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__850206.048c255c3f.js"
+   }
+  ]
+ },
+ {
+  "probe": "dynamic_questionnaire",
+  "ocorrencias": 9,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__114754.f424e83213.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__298315.bdbcae67d4.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__553635.f7824cfd1d.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__627000.ffd75e22aa.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__627000.c6f4450f99.js"
+   },
+   {
+    "arquivo": "async__848618.ed9d19710d.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__889795.32938b46b8.js"
+   }
+  ]
+ },
+ {
+  "probe": "marketing_agent",
+  "ocorrencias": 56,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__114928.58060f10a7.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__159201.ae1eeb6a6f.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__24986.9786909180.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__24986.9786909180.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__357752.c35f03632c.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__399551.4bf2c59afb.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__home-submit-lifecycle.2e86c876d2.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "integrated_agent_canvas",
+  "ocorrencias": 2,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__114928.58060f10a7.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__616044.82a3c713c4.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__616044.97e91c7056.js"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/agent/submit_run",
+  "ocorrencias": 4,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/videogen/script_segment",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__828557.fc7ea3772e.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/videogen/text_to_speech",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__973395.f4cda13762.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "/commerce/v3/benefits/batch_check_withhold_deduct",
+  "ocorrencias": 3,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__691333.a6f2d6cec4.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__649969.36bed94288.js"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/omni/create_task_web",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "/lv/v1/render_task/create",
+  "ocorrencias": 2,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "ai_talking_photo/pre_process_image",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "ai_talking_photo/pre_process_audio",
+  "ocorrencias": 1,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/videogen/recommend_digital_human_by_tag",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__973395.f4cda13762.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/videogen/search_platform_material",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__973395.f4cda13762.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "digital_human_filter_config",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__973395.f4cda13762.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "cc_biz_talking_photo",
+  "ocorrencias": 2,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   }
+  ]
+ },
+ {
+  "probe": "/api/biz/v1/editor/create_tts_avatar_task",
+  "ocorrencias": 2,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__599038.863e145e5b.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   },
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__599038.0ff5dc661b.js"
+   }
+  ]
+ },
+ {
+  "probe": "smart_tool_type:20007",
+  "ocorrencias": 1,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__907969.65b04ec890.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "88320131",
+  "ocorrencias": 3,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__AvatarAndVoice.8f542b9f5a.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__avatar-based-generator.d1db384db7.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__bundle_avatar-editor-service.76367e03ff.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "1043788868",
+  "ocorrencias": 3,
+  "classe": "inalterado (chunk identico)",
+  "detalhe": [
+   {
+    "arquivo": "async__AvatarAndVoice.8f542b9f5a.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__avatar-based-generator.d1db384db7.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__bundle_avatar-editor-service.76367e03ff.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "573081",
+  "ocorrencias": 89,
+  "classe": "parcialmente alterado",
+  "detalhe": [
+   {
+    "arquivo": "async__229704.2761c8b51a.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__602545.c502898cb7.js"
+   },
+   {
+    "arquivo": "async__280000.f57b818571.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__280000.f57b818571.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__280000.f57b818571.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__280000.f57b818571.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__280000.f57b818571.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   }
+  ]
+ },
+ {
+  "probe": "348188",
+  "ocorrencias": 30,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__229704.2761c8b51a.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__602545.c502898cb7.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__297147.ff7dafe8ef.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__394338.77fe7aad4e.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__709170.fa8524ed21.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__895865.97355aba18.js",
+    "resultado": "chunk identico"
+   },
+   {
+    "arquivo": "async__973395.f4cda13762.js",
+    "resultado": "chunk identico"
+   }
+  ]
+ },
+ {
+  "probe": "x-commerce-v2",
+  "ocorrencias": 18,
+  "classe": "inalterado (re-empacotado/renomeado)",
+  "detalhe": [
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   },
+   {
+    "arquivo": "async__450621.76fe1df8ae.js",
+    "resultado": "contexto identico apos normalizar",
+    "agora_em": "async__745290.fef2c40418.js"
+   }
+  ]
+ },
+ {
+  "probe": "MiniMax-H3-trial",
+  "ocorrencias": 0,
+  "classe": "nao localizado",
+  "detalhe": []
+ }
+]

@@ -1,0 +1,35 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\builder-runtime.183c44a8.js",
+ "bytes": 5806,
+ "parse": "script",
+ "nos": 1971,
+ "strings_total": 111,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "//sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/"
+ ],
+ "dominios": [
+  "sf16-web-login-neutral.capcutstatic.com"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [],
+ "globais_window": [
+  "__LOADABLE_LOADED_CHUNKS__"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

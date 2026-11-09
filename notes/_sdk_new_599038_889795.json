@@ -1,0 +1,6012 @@
+{
+ "/api/biz/v1/user/info": {
+  "sdk_method": [
+   "GetUserInfo"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/recommend_by_tag": {
+  "sdk_method": [
+   "RecommendDigitalHumanByTag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor",
+   "dsl_filter_query",
+   "ratio_list",
+   "region",
+   "req_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/get_fixed_position": {
+  "sdk_method": [
+   "GetFixedPositionDigitalHuman"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/filter_config": {
+  "sdk_method": [
+   "DigitalHumanFilterConfig"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/material/batch_get": {
+  "sdk_method": [
+   "BatchGetMaterial"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "material_ids",
+   "material_type",
+   "source_platform"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/get_upload_sign": {
+  "sdk_method": [
+   "GetUploadSign"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "biz"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/security/check": {
+  "sdk_method": [
+   "SecurityCheck",
+   "SecurityCheckWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "audio_list",
+   "file_list",
+   "image_list",
+   "pippit_asset_id",
+   "scene",
+   "skip_face_detection",
+   "text_list",
+   "video_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/sync_asset_to_everphoto": {
+  "sdk_method": [
+   "SyncAssetToEverPhoto"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "asset_type",
+   "invisible",
+   "need_transcode",
+   "no_occupy",
+   "source_type",
+   "uid",
+   "url",
+   "vid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/message": {
+  "sdk_method": [
+   "GetContextHistoryMessage",
+   "GetContextHistoryMessageWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "generate_version",
+   "sequence_end",
+   "sequence_start",
+   "uid",
+   "with_latest"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/history": {
+  "sdk_method": [
+   "GetContextHistory",
+   "GetContextHistoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "page",
+   "page_size",
+   "uid",
+   "with_latest"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/history_update": {
+  "sdk_method": [
+   "UpdateContextHistoryBusinessInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "business_info",
+   "generate_id",
+   "generate_version",
+   "if_notify_meta",
+   "not_notify",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/history_delete": {
+  "sdk_method": [
+   "DelContextHistory",
+   "DeleteContextHistoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "delete_all",
+   "generate_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/material/create_task": {
+  "sdk_method": [
+   "CreateTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "action_list",
+   "material_list",
+   "scene",
+   "user_info",
+   "user_input"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/mget_asset_info": {
+  "sdk_method": [
+   "MGetAssetInfo",
+   "MGetAssetInfoWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "asset_ids",
+   "need_transcode",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/preset/get_prompt_sug": {
+  "sdk_method": [
+   "GetPromptSug"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "gen_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/preset/video_example": {
+  "sdk_method": [
+   "GetVideoExample"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "planning",
+   "prompt_sug_id",
+   "task_name",
+   "video_creative_context",
+   "video_generate_context",
+   "video_intent_context"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/preset/image_example": {
+  "sdk_method": [
+   "GetImageExample"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "image_creative_context",
+   "image_generate_context",
+   "image_intent_context",
+   "planning",
+   "prompt_sug_id",
+   "task_name"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_infos": {
+  "sdk_method": [
+   "GetContextGenerateInfos"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id_list",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_ids": {
+  "sdk_method": [
+   "GetContextGenerateIDs"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "page",
+   "page_size",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/videogen/batch_get_render_task": {
+  "sdk_method": [
+   "BatchGetRenderTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "render_task_ids",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/mget_video_info": {
+  "sdk_method": [
+   "MGetVideoInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "biz",
+   "vids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/check_user_beta_access": {
+  "sdk_method": [
+   "CheckUserBetaAccess"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "device_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/videogen/create_video": {
+  "sdk_method": [
+   "CreateVideo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "device_id",
+   "payload",
+   "product_id",
+   "service",
+   "user_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/videogen/regenerate_video": {
+  "sdk_method": [
+   "RegenerateVideo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "device_id",
+   "payload",
+   "product_id",
+   "service",
+   "user_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/report": {
+  "sdk_method": [
+   "Report"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "description",
+   "item_id",
+   "scene",
+   "tag_list",
+   "task_detail",
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_light_infos": {
+  "sdk_method": [
+   "ListGenerateLightInfos",
+   "ListGenerateLightInfosWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_ids",
+   "generate_type",
+   "generate_type_list",
+   "offset",
+   "size",
+   "title",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_tone_list": {
+  "sdk_method": [
+   "GetToneList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/batch_delete_digital": {
+  "sdk_method": [
+   "DeleteDigital"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "img_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_hot_audio_list": {
+  "sdk_method": [
+   "GetOmniAudioList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/before_create_limit_check": {
+  "sdk_method": [
+   "CheckOmniTaskLimit"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "commercial_config"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_img_category_list": {
+  "sdk_method": [
+   "GetOmniHotImgCategoryList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_img_list": {
+  "sdk_method": [
+   "GetOmniHotImgList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor",
+   "id",
+   "image_list",
+   "recommend"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/audio_to_text": {
+  "sdk_method": [
+   "AudioToText"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "audio_url",
+   "duration",
+   "md5",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/details": {
+  "sdk_method": [
+   "GetDetailInspirations"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "cursor",
+   "direction",
+   "inspiration_pool_id",
+   "num",
+   "req_version",
+   "tab",
+   "with_image_watermark_info",
+   "with_video_watermark_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactions": {
+  "sdk_method": [
+   "GetInspirationInteractions"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/feed": {
+  "sdk_method": [
+   "GetInspirations"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "cursor",
+   "direction",
+   "inspiration_pool_id",
+   "num",
+   "req_version",
+   "tab"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/mylikes": {
+  "sdk_method": [
+   "GetMyLikeInspirations"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "cursor",
+   "direction",
+   "max_time_seconds",
+   "num"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/like": {
+  "sdk_method": [
+   "InspirationLike"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "action",
+   "inspiration_id",
+   "tab"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/try_task": {
+  "sdk_method": [
+   "TryOmniTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "all_mask_image_list",
+   "all_object_image_list",
+   "audio_info",
+   "commercial_config",
+   "event_info",
+   "generate_id",
+   "generate_pipeline",
+   "img_info",
+   "inspiration_id",
+   "is_retry",
+   "uid",
+   "use_wrap",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_fixed_position": {
+  "sdk_method": [
+   "GetFixedPositionOmniImgList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_user_img_list": {
+  "sdk_method": [
+   "GetUserOmniImgList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration": {
+  "sdk_method": [
+   "CreateInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "inspiration_id",
+   "material_list",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/update_inspiration": {
+  "sdk_method": [
+   "UpdateInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "auth_key",
+   "changed_field_name",
+   "changed_field_value",
+   "inspiration_id",
+   "manual_upload_resource_info",
+   "operate_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/detail_list": {
+  "sdk_method": [
+   "GetDetailInspirationList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_ids",
+   "req_type",
+   "req_version",
+   "with_image_watermark_info",
+   "with_video_watermark_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/retry_task": {
+  "sdk_method": [
+   "RetryOmniTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "commercial_config",
+   "generate_id",
+   "task_input",
+   "task_output"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/feature_tab": {
+  "sdk_method": [
+   "GetInspirationFeatureTab"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "tab"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_for_image": {
+  "sdk_method": [
+   "CreateInspirationForImage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "inspiration_id",
+   "material_list",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/transfer/batch_get_video_url": {
+  "sdk_method": [
+   "BatchGetVideoURL"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "task_ids",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/transfer/batch_get_image": {
+  "sdk_method": [
+   "BatchGetImageByURI"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "task_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_for_omni": {
+  "sdk_method": [
+   "CreateInspirationForOmni"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "inspiration_id",
+   "material_list",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_automatically": {
+  "sdk_method": [
+   "CreateInspirationAutomatically"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "auth_key",
+   "extension",
+   "generate_id",
+   "inspiration_id",
+   "inspiration_type",
+   "material_list",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/sug_words": {
+  "sdk_method": [
+   "GetInspirationSugs"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/create_inspiration": {
+  "sdk_method": [
+   "CreateInspirationForI18n"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "auth_key",
+   "image",
+   "prompt",
+   "type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_package_info": {
+  "sdk_method": [
+   "GetPackageInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "draft_key",
+   "entrance_from",
+   "novel_extra",
+   "package_id",
+   "render_task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/update_inspiration": {
+  "sdk_method": [
+   "UpdateInspirationForI18n"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "auth_key",
+   "changed_field_name",
+   "changed_field_value",
+   "inspiration_id",
+   "manual_upload_resource_info",
+   "operate_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/list_platform_material": {
+  "sdk_method": [
+   "ListPlatformMaterial"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "ConditionList",
+   "Count",
+   "Cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_generate_videos": {
+  "sdk_method": [
+   "CreateGenerateVideos"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Option",
+   "PostbackArgs",
+   "RenderTaskId",
+   "Scene",
+   "StoryboardNumber",
+   "UserInfo",
+   "UserPromptInfos",
+   "storyboardID"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_tts_avatar_task": {
+  "sdk_method": [
+   "CreateTtsAvatarTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "digital_human_id",
+   "digital_human_type",
+   "draft_sub_type",
+   "is_lip_sync",
+   "lip_sync_video",
+   "no_digital_human",
+   "render_task_id",
+   "storyboard_id",
+   "storyboard_number",
+   "time_range",
+   "tts_avatar_info_list",
+   "tts_avatar_type",
+   "tts_global_options",
+   "user_info",
+   "vimo_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/query_tts_avatar_task": {
+  "sdk_method": [
+   "QueryTtsAvatarTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/search_platform_material": {
+  "sdk_method": [
+   "SearchPlatformMaterial"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "condition_list",
+   "count",
+   "cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_platform_material_detail": {
+  "sdk_method": [
+   "GetPlatformMaterialDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "material_ids",
+   "material_type",
+   "source_platform"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/query_generate_videos": {
+  "sdk_method": [
+   "QueryGenerateVideos"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/text_to_speech": {
+  "sdk_method": [
+   "TextToSpeech"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "timbre_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_t2v_task_count": {
+  "sdk_method": [
+   "GetT2vTaskCount"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "user_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_user_history": {
+  "sdk_method": [
+   "ListUserHistory"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "end_time",
+   "generate_types",
+   "page_size",
+   "page_token",
+   "scopes",
+   "start_time",
+   "user"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_run_artifact": {
+  "sdk_method": [
+   "UpdateRunArtifact"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact",
+   "run_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/submit_run": {
+  "sdk_method": [
+   "SubmitRun"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "client_supported_tools",
+   "entrance_from",
+   "message",
+   "prepend_messages",
+   "project_id",
+   "request_id",
+   "run_extra",
+   "thread_extra",
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread": {
+  "sdk_method": [
+   "GetThread"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "is_need_fail_reason_detail",
+   "limit",
+   "run_id",
+   "scopes",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_generate_videos_deduct": {
+  "sdk_method": [
+   "CreateGenerateVideosDeduct"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Option",
+   "PostbackArgs",
+   "RenderTaskId",
+   "Scene",
+   "StoryboardNumber",
+   "UserInfo",
+   "UserPromptInfos",
+   "storyboardID"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/transfer_material": {
+  "sdk_method": [
+   "TransferMaterial"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "asset_id",
+   "id",
+   "scene",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/commerce/grant_user_credits": {
+  "sdk_method": [
+   "GrantUserCredits"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/share/info": {
+  "sdk_method": [
+   "GetShareInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "for_app",
+   "share_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/cancel_run": {
+  "sdk_method": [
+   "CancelRun"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "run_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/subscribe_run": {
+  "sdk_method": [
+   "SubscribeRun"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "enable_chunk_stream",
+   "run_id",
+   "start_message_id",
+   "stream_cursor",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_run": {
+  "sdk_method": [
+   "GetRun"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "is_need_fail_reason_detail",
+   "run_id",
+   "scopes",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/subscribe_thread": {
+  "sdk_method": [
+   "SubscribeThread"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "start_run_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/debug/update_debug_task": {
+  "sdk_method": [
+   "UpdateDebugTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_version",
+   "content",
+   "env",
+   "extra",
+   "generate_id",
+   "is_new_task",
+   "is_web",
+   "scene",
+   "stage",
+   "user_config"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/workspace/get_user_workspace": {
+  "sdk_method": [
+   "GetUserWorkspaceWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_state": {
+  "sdk_method": [
+   "GetAgentStateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "conversation_id",
+   "mode",
+   "stage"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/debug/create_tts_task": {
+  "sdk_method": [
+   "CreateTTSTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "script",
+   "tone_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/debug/create_debug_task": {
+  "sdk_method": [
+   "CreateDebugTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_config",
+   "agent_version",
+   "debug_config",
+   "env",
+   "generate_count",
+   "generate_id",
+   "inspiration_id",
+   "is_web",
+   "prompt_sug_id",
+   "req_extra",
+   "scene",
+   "sug_words",
+   "task_config",
+   "user_config"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_state": {
+  "sdk_method": [
+   "UpdateAgentStateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "conversation_id",
+   "mode",
+   "stage",
+   "state"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/auth/check_web_platform_auth": {
+  "sdk_method": [
+   "CheckWebPlatformAuthWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_ugc_inspiration": {
+  "sdk_method": [
+   "CreateUgcInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "activity_id_list",
+   "challenge_topic",
+   "inspiration_type",
+   "is_public_material",
+   "report_event_info",
+   "source_task_info",
+   "special_setting",
+   "specified_result_id",
+   "specified_result_platform",
+   "title",
+   "version",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/upload_file": {
+  "sdk_method": [
+   "UploadFileWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "asset_type",
+   "file"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/montage/get_montage_sug": {
+  "sdk_method": [
+   "GetMontageSug"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "assets"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_for_fission": {
+  "sdk_method": [
+   "ListInspirationForFission"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/material/preprocess": {
+  "sdk_method": [
+   "PreprocessMaterial"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "material_list",
+   "scene",
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/notice/unread_count": {
+  "sdk_method": [
+   "GetNoticeUnreadCount"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "notice_type_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/notice/list": {
+  "sdk_method": [
+   "GetNoticeList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor",
+   "notice_type_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_web_agent_sug": {
+  "sdk_method": [
+   "ListWebAgentSugWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_published_inspiration": {
+  "sdk_method": [
+   "ListPublishedInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "offset",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_feed_inspiration": {
+  "sdk_method": [
+   "ListFeedInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "inspiration_pool_id",
+   "stream_type",
+   "tab"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_published_inspiration_detail": {
+  "sdk_method": [
+   "GetPublishedInspirationDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_id_list",
+   "with_image_watermark_info",
+   "with_video_watermark_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_inspiration_activity": {
+  "sdk_method": [
+   "ListInspirationActivity"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "page_num",
+   "page_size"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_inspiration_detail": {
+  "sdk_method": [
+   "GetInspirationDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_id_list",
+   "with_image_watermark_info",
+   "with_video_watermark_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/list_platform_category": {
+  "sdk_method": [
+   "ListPlatformCategory"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "source_platform"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/memory/get_user_memory": {
+  "sdk_method": [
+   "GetUserMemoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scene",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/batch_get_interaction_status": {
+  "sdk_method": [
+   "BatchGetInspirationInteractionStatus"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "action",
+   "inspiration_id_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/get_odin_user_info": {
+  "sdk_method": [
+   "GetOdinUserInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/delete_ugc_inspiration": {
+  "sdk_method": [
+   "DeleteUgcInspiration"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/cold_start_activate": {
+  "sdk_method": [
+   "UserColdStartActivate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread_share": {
+  "sdk_method": [
+   "GetThreadShareWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scopes",
+   "share_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread_share_id": {
+  "sdk_method": [
+   "GetThreadShareIDWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "expire_after_sec",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/create_agent_inspiration": {
+  "sdk_method": [
+   "CreateAgentInspirationForI18n"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "auth_key",
+   "image",
+   "input_url_list",
+   "prompt",
+   "type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/delete_thread": {
+  "sdk_method": [
+   "DeleteThread"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_thread": {
+  "sdk_method": [
+   "UpdateThread"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "thread",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/user_action": {
+  "sdk_method": [
+   "UserAction"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_list",
+   "like_action",
+   "message_id",
+   "run_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_modify": {
+  "sdk_method": [
+   "StoryBoardModifyWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "operations",
+   "pippit_asset_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/debug/search_music": {
+  "sdk_method": [
+   "SearchMusic"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "offset",
+   "scene",
+   "user_input"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_supported_templates": {
+  "sdk_method": [
+   "ListSupportedTemplates"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "ref_tpl_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_run_artifact": {
+  "sdk_method": [
+   "GetRunArtifact"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "user_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/ref_image_generate": {
+  "sdk_method": [
+   "RefImageGenerateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scene_type",
+   "tasks",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_image_agent_setting": {
+  "sdk_method": [
+   "GetImageAgentSetting"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_related_remix": {
+  "sdk_method": [
+   "ListRelatedRemix"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "challenge_group_id",
+   "count",
+   "direction",
+   "enter_from",
+   "inspiration_pool_id",
+   "offset"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_feed_challenge": {
+  "sdk_method": [
+   "ListFeedChallenge"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "inspiration_pool_id",
+   "offset"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_save": {
+  "sdk_method": [
+   "StoryBoardSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "audio_material_extra_data",
+   "storyboard",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_challenge_tools": {
+  "sdk_method": [
+   "ListChallengeTools"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template_creative/batch_get_usage_count": {
+  "sdk_method": [
+   "BatchGetTemplateUsageCount"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "tpl_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/image_object_detect": {
+  "sdk_method": [
+   "ImageObjectDetect"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "img_info",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/locate_challenge_position": {
+  "sdk_method": [
+   "LocateChallengePosition"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "challenge_group_id",
+   "inspiration_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/list": {
+  "sdk_method": [
+   "ListSupportedTools"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "context"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/preset_prompts/save": {
+  "sdk_method": [
+   "SaveUserPresetPromptsWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "preset_prompts",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/user/preset_prompts/get": {
+  "sdk_method": [
+   "GetUserPresetPromptsWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/parse/check_input_valid": {
+  "sdk_method": [
+   "CheckUserInputParse"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "need_caption",
+   "type",
+   "uid",
+   "user_input",
+   "user_prompt"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/announcement/list": {
+  "sdk_method": [
+   "ListAnnouncementsWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/list": {
+  "sdk_method": [
+   "CharacterEntityList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "biz_type",
+   "character_name",
+   "create_type",
+   "cursor",
+   "is_test",
+   "page_size",
+   "scope"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/delete": {
+  "sdk_method": [
+   "CharacterEntityDelete"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "CharacterID",
+   "snaked_character_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/detail": {
+  "sdk_method": [
+   "CharacterEntityDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "EntityID",
+   "snaked_entity_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/list": {
+  "sdk_method": [
+   "AssetList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "PageNum",
+   "PageSize",
+   "asset_type",
+   "category",
+   "tag"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/create": {
+  "sdk_method": [
+   "CharacterEntityCreate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "Character",
+   "biz_type",
+   "extra",
+   "is_public",
+   "snaked_character"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/update": {
+  "sdk_method": [
+   "CharacterEntityUpdate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "CharacterEntity",
+   "snaked_character_entity"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/detail": {
+  "sdk_method": [
+   "AssetDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "AssetSourceID",
+   "AssetSourceType",
+   "Base",
+   "ConsumerUID",
+   "PippitAssetID"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/tcc/get_config": {
+  "sdk_method": [
+   "GetTCCConfig"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "config_names"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/speed_up_run_task": {
+  "sdk_method": [
+   "SpeedUpRunTask"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "run_extra",
+   "run_id",
+   "task_id",
+   "thread_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/user_subscribe_callback": {
+  "sdk_method": [
+   "UserSubscribeCallback"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_user_queue_info": {
+  "sdk_method": [
+   "GetUserQueueInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "need_earliest_submitted_working_run",
+   "run_id",
+   "thread_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/create": {
+  "sdk_method": [
+   "AssetCreate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "asset_source_id",
+   "asset_source_type",
+   "asset_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/get_prompt_intent": {
+  "sdk_method": [
+   "GetUserPromptIntent"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "prompt"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/omni/preprocess_submit_request": {
+  "sdk_method": [
+   "PreprocessSubmitRequest"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "preprocess_material_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/material/ark_generate_callback": {
+  "sdk_method": [
+   "ArkCallback"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "content",
+   "created_at",
+   "duration",
+   "error",
+   "execution_expires_after",
+   "frames",
+   "frames_per_second",
+   "id",
+   "model",
+   "ratio",
+   "resolution",
+   "revised_prompt",
+   "seed",
+   "service_tier",
+   "status",
+   "updated_at"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/usage/get_web_daily_quota": {
+  "sdk_method": [
+   "GetWebDailyQuotaWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "consumer_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_inspiration_tab_config": {
+  "sdk_method": [
+   "GetInspirationTabConfig"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/common/download_with_pay": {
+  "sdk_method": [
+   "DownloadWithPay"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "picture_id",
+   "render_task_id",
+   "run_id",
+   "task_id",
+   "thread_id",
+   "type",
+   "uri",
+   "with_watermark"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/update": {
+  "sdk_method": [
+   "AssetUpdate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "asset"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/common/get_tos_source_by_path": {
+  "sdk_method": [
+   "GetTosSourceByPath"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "file_id",
+   "path"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/thread_mark_visible": {
+  "sdk_method": [
+   "ThreadMarkVisible"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "mark_visible",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/remix/characters/get": {
+  "sdk_method": [
+   "GetRemixCharactersList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "cursor",
+   "inspiration_id",
+   "is_test",
+   "page_size",
+   "search_name",
+   "settings"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/remix/get_build_info": {
+  "sdk_method": [
+   "GetRemixBuildInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/crop_image": {
+  "sdk_method": [
+   "CropImage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "image_url",
+   "target_ratio"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_v2": {
+  "sdk_method": [
+   "AssetCreateV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "asset_source_id",
+   "asset_source_type",
+   "asset_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_app_agent_setting": {
+  "sdk_method": [
+   "GetAppAgentSetting"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/change_thread_business_info": {
+  "sdk_method": [
+   "ChangeThreadBusinessInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "business_info",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/mget_user_setting": {
+  "sdk_method": [
+   "MGetUserSettings"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/update_user_setting": {
+  "sdk_method": [
+   "UpdateUserSettings"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "user_settings"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_user_business_extra_info": {
+  "sdk_method": [
+   "GetUserBusinessExtraInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/batch_mark_badge_show_status": {
+  "sdk_method": [
+   "BatchMarkBadgeShowStatus"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "badge_id_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/send_client_event": {
+  "sdk_method": [
+   "SendClientEvent"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "branch_select_info",
+   "event_type",
+   "inspiration_id_list",
+   "session_id",
+   "tab"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/novel_agent/novel_script_save": {
+  "sdk_method": [
+   "NovelScriptSave"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "modify",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/novel_script_save": {
+  "sdk_method": [
+   "NovelScriptSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "modify",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/video_state_save": {
+  "sdk_method": [
+   "VideoStateSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "save_mode",
+   "uid",
+   "video_state",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/video_state_21_save": {
+  "sdk_method": [
+   "VideoState21SaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "save_mode",
+   "uid",
+   "video_state",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_21_modify": {
+  "sdk_method": [
+   "StoryBoard21ModifyWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "operations",
+   "pippit_asset_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_21_save": {
+  "sdk_method": [
+   "StoryBoardSave21Web"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "overview_pippit_asset_id",
+   "pippit_asset_id",
+   "save_mode",
+   "storyboard",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/asset/update_artifact": {
+  "sdk_method": [
+   "UpdateArtifact"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "artifact",
+   "consumer_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/query_artifact": {
+  "sdk_method": [
+   "QueryArtifact"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "artifact_id",
+   "consumer_uid",
+   "run_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_thread_file": {
+  "sdk_method": [
+   "ListThreadFile"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "PageNum",
+   "PageSize",
+   "path",
+   "thread_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/update": {
+  "sdk_method": [
+   "UpdateRealPersonCharacter"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_desc",
+   "character_id",
+   "character_name",
+   "extra",
+   "is_public",
+   "portrait_video_url"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/get_me": {
+  "sdk_method": [
+   "GetMyRealPersonCharacter"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/create": {
+  "sdk_method": [
+   "CreateRealPersonCharacter"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "biz_type",
+   "character_desc",
+   "character_name",
+   "extra",
+   "is_public",
+   "portrait_video_url"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_thread_file": {
+  "sdk_method": [
+   "UpdateThreadFile"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "content",
+   "file_path",
+   "pippit_asset_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/lv/v1/event/report": {
+  "sdk_method": [
+   "EventReport",
+   "EventReportMethodGet",
+   "EventReportMethodOptions"
+  ],
+  "http": [
+   "GET",
+   "OPTIONS",
+   "POST"
+  ],
+  "request_keys": [
+   "custom_info",
+   "event_name",
+   "params"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/pull_sandbox_session": {
+  "sdk_method": [
+   "PullSandboxSession"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "base",
+   "must_start",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/query_sandbox_session_status": {
+  "sdk_method": [
+   "QuerySandboxSessionStatus"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "base",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/history": {
+  "sdk_method": [
+   "AssetHistory"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "pippit_asset_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/mget_showcase_asset_info": {
+  "sdk_method": [
+   "MGetShowcaseAssetInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "asset_ids",
+   "need_transcode",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_showcase_run_artifact": {
+  "sdk_method": [
+   "GetShowcaseRunArtifact"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "user_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_showcase": {
+  "sdk_method": [
+   "ListShowcase"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "end_time",
+   "generate_types",
+   "page_size",
+   "page_token",
+   "scopes",
+   "start_time",
+   "user"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/showcase_detail": {
+  "sdk_method": [
+   "ShowcaseAssetDetail"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "AssetSourceID",
+   "AssetSourceType",
+   "Base",
+   "ConsumerUID",
+   "PippitAssetID"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/query": {
+  "sdk_method": [
+   "AssetQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "namespace_alias",
+   "pippit_asset_ids",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/update_text": {
+  "sdk_method": [
+   "UpdateTextAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "content",
+   "extra",
+   "extra_update_mode",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_text": {
+  "sdk_method": [
+   "CreateTextAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "category",
+   "content",
+   "file_name",
+   "team_name",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/rewrite_prompt": {
+  "sdk_method": [
+   "RewritePrompt"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "params",
+   "prompt",
+   "scene",
+   "user_materials"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/query_op": {
+  "sdk_method": [
+   "QueryRealPersonOperation"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/create_op": {
+  "sdk_method": [
+   "AsyncDoRealPersonOperate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "biz_type",
+   "character_desc",
+   "character_id",
+   "character_name",
+   "is_public",
+   "portrait_video_url"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/generate_images": {
+  "sdk_method": [
+   "ImagesGenerate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "asset_namespace",
+   "generate_type",
+   "node_id",
+   "overview_pippit_asset_id",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/asset/showcase_query": {
+  "sdk_method": [
+   "ShowcaseAssetQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "namespace_alias",
+   "pippit_asset_ids",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/get_user_contract": {
+  "sdk_method": [
+   "GetUserContract"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "consumer_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/set_user_contract": {
+  "sdk_method": [
+   "SetUserContract"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "consumer_uid",
+   "user_contract"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_tag": {
+  "sdk_method": [
+   "CreateTag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "tag"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/list_tag": {
+  "sdk_method": [
+   "ListTag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/add_tag": {
+  "sdk_method": [
+   "AddTag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "pippit_asset_id",
+   "tag"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/delete_tag": {
+  "sdk_method": [
+   "DeleteTag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "pippit_asset_id",
+   "tag"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/delete": {
+  "sdk_method": [
+   "AgentAssetDelete"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "GenerateID",
+   "PippitAssetIDS",
+   "ThreadID"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js",
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_available_model_list": {
+  "sdk_method": [
+   "GetAvailableModelList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "client_info",
+   "scene",
+   "source_model_key",
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__599038.0ff5dc661b.js"
+  ]
+ },
+ "/api/web/v1/debug/update_debug_task": {
+  "sdk_method": [
+   "UpdateDebugTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_version",
+   "content",
+   "env",
+   "extra",
+   "generate_id",
+   "is_new_task",
+   "is_web",
+   "scene",
+   "stage",
+   "user_config"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/common/mget_asset_info": {
+  "sdk_method": [
+   "MGetAssetInfoWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "asset_ids",
+   "need_transcode",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/workspace/get_user_workspace": {
+  "sdk_method": [
+   "GetUserWorkspaceWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/get_state": {
+  "sdk_method": [
+   "GetAgentStateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "conversation_id",
+   "mode",
+   "stage"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/debug/create_tts_task": {
+  "sdk_method": [
+   "CreateTTSTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "script",
+   "tone_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/context/message": {
+  "sdk_method": [
+   "GetContextHistoryMessageWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "generate_version",
+   "sequence_end",
+   "sequence_start",
+   "uid",
+   "with_latest"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/debug/create_debug_task": {
+  "sdk_method": [
+   "CreateDebugTaskWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_config",
+   "agent_version",
+   "debug_config",
+   "env",
+   "generate_count",
+   "generate_id",
+   "inspiration_id",
+   "is_web",
+   "prompt_sug_id",
+   "req_extra",
+   "scene",
+   "sug_words",
+   "task_config",
+   "user_config"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/update_state": {
+  "sdk_method": [
+   "UpdateAgentStateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "conversation_id",
+   "mode",
+   "stage",
+   "state"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/context/history": {
+  "sdk_method": [
+   "GetContextHistoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_id",
+   "page",
+   "page_size",
+   "uid",
+   "with_latest"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/context/generate_light_infos": {
+  "sdk_method": [
+   "ListGenerateLightInfosWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generate_ids",
+   "generate_type",
+   "generate_type_list",
+   "offset",
+   "size",
+   "title",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/auth/check_web_platform_auth": {
+  "sdk_method": [
+   "CheckWebPlatformAuthWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/security/check": {
+  "sdk_method": [
+   "SecurityCheckWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "audio_list",
+   "file_list",
+   "image_list",
+   "pippit_asset_id",
+   "scene",
+   "skip_face_detection",
+   "text_list",
+   "video_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/common/upload_file": {
+  "sdk_method": [
+   "UploadFileWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "asset_type",
+   "file",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/list_web_agent_sug": {
+  "sdk_method": [
+   "ListWebAgentSugWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "prompt"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/memory/get_user_memory": {
+  "sdk_method": [
+   "GetUserMemoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scene",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/context/history_delete": {
+  "sdk_method": [
+   "DeleteContextHistoryWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "delete_all",
+   "generate_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/get_thread_share": {
+  "sdk_method": [
+   "GetThreadShareWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scopes",
+   "share_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/get_thread_share_id": {
+  "sdk_method": [
+   "GetThreadShareIDWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "expire_after_sec",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_modify": {
+  "sdk_method": [
+   "StoryBoardModifyWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "operations",
+   "pippit_asset_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/debug/search_music": {
+  "sdk_method": [
+   "SearchMusic"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "offset",
+   "scene",
+   "user_input"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/ref_image_generate": {
+  "sdk_method": [
+   "RefImageGenerateWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "scene_type",
+   "style_snapshot",
+   "tasks",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_save": {
+  "sdk_method": [
+   "StoryBoardSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "audio_material_extra_data",
+   "storyboard",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/user/preset_prompts/save": {
+  "sdk_method": [
+   "SaveUserPresetPromptsWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "preset_prompts",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/user/preset_prompts/get": {
+  "sdk_method": [
+   "GetUserPresetPromptsWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/announcement/list": {
+  "sdk_method": [
+   "ListAnnouncementsWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/tcc/get_config": {
+  "sdk_method": [
+   "GetTCCConfig"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "config_names"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/usage/get_web_daily_quota": {
+  "sdk_method": [
+   "GetWebDailyQuotaWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "consumer_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/novel_script_save": {
+  "sdk_method": [
+   "NovelScriptSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "modify",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/video_state_save": {
+  "sdk_method": [
+   "VideoStateSaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "save_mode",
+   "uid",
+   "video_state",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/video_state_21_save": {
+  "sdk_method": [
+   "VideoState21SaveWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "save_mode",
+   "uid",
+   "video_state",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_21_modify": {
+  "sdk_method": [
+   "StoryBoard21ModifyWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "operations",
+   "pippit_asset_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_21_save": {
+  "sdk_method": [
+   "StoryBoardSave21Web"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "artifact_id",
+   "overview_pippit_asset_id",
+   "pippit_asset_id",
+   "save_mode",
+   "storyboard",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_feature_tab_config": {
+  "sdk_method": [
+   "GetInspirationFeatureTabConfigOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/update_inspiration_like_status": {
+  "sdk_method": [
+   "UpdateInspirationLikeStatusOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "action_type",
+   "inspiration_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_liked_list": {
+  "sdk_method": [
+   "GetInspirationLikedListOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_detail": {
+  "sdk_method": [
+   "GetInspirationDetailOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "inspiration_id_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_feed_list": {
+  "sdk_method": [
+   "GetInspirationFeedListOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "cursor",
+   "inspiration_pool_id",
+   "stream_type",
+   "tab_type"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_tab_config": {
+  "sdk_method": [
+   "GetInspirationTabConfigOversea"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/common/mget_showcase_asset_info": {
+  "sdk_method": [
+   "MGetShowcaseAssetInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "app_id",
+   "asset_ids",
+   "need_transcode",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_images": {
+  "sdk_method": [
+   "ImagesGenerate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "appearance_asset_id",
+   "appearance_pippit_asset_ids",
+   "asset_namespace",
+   "force_generate",
+   "generate_scope",
+   "generate_type",
+   "node_id",
+   "overview_pippit_asset_id",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/query_share_asset": {
+  "sdk_method": [
+   "QueryPippitShareAssetInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "ArtifactID",
+   "Base"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/get_user_contract": {
+  "sdk_method": [
+   "GetUserContract"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "consumer_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_random_story_outline_template": {
+  "sdk_method": [
+   "GetRandomStoryOutlineTemplate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "count",
+   "with_cover"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/mget_device_setting": {
+  "sdk_method": [
+   "MGetDeviceSettings"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "device_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/update_device_setting": {
+  "sdk_method": [
+   "UpdateDeviceSettings"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "device_settings"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_web_agent_setting": {
+  "sdk_method": [
+   "GetWebAgentSetting"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/skill/list": {
+  "sdk_method": [
+   "ListPresetSkillsWeb"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/skill/get_thread": {
+  "sdk_method": [
+   "GetThreadForSkill"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "after_seq",
+   "limit",
+   "run_id",
+   "scopes",
+   "thread_id",
+   "version"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/skill/submit_run": {
+  "sdk_method": [
+   "SubmitRunForSkill"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "asset_ids",
+   "message",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/auth/exchange_cli_login_grant": {
+  "sdk_method": [
+   "ExchangeCliLoginGrantWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "grant",
+   "random_secret_key"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/auth/create_cli_login_grant": {
+  "sdk_method": [
+   "CreateCliLoginGrantWeb"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "callback_url",
+   "random_secret_key",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/query_ak": {
+  "sdk_method": [
+   "QueryAk"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/delete_ak": {
+  "sdk_method": [
+   "DeleteAk"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "ak_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/update_ak": {
+  "sdk_method": [
+   "UpdateAk"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "access_token_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/generate_ak": {
+  "sdk_method": [
+   "GenerateAk"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "expired_at",
+   "token_desc",
+   "token_name"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_novel_settings": {
+  "sdk_method": [
+   "UpdateNovelSettings"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "novel_settings",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/commerce/get_commerce_auth_info": {
+  "sdk_method": [
+   "GetCommerceAuthInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "agent_name",
+   "asset_type",
+   "commerce_key",
+   "duration",
+   "has_refer_image",
+   "has_refer_video",
+   "immition_videos_durations",
+   "model_name",
+   "resolution",
+   "scene",
+   "used_quota_count",
+   "video_durations"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template/category/list": {
+  "sdk_method": [
+   "ListPromptTemplateDomesticCategoryExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "language"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/task/query": {
+  "sdk_method": [
+   "GetTaskQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "run_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/security/async/batch_query": {
+  "sdk_method": [
+   "SecurityCheckAsyncBatchQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "query_list"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/get_drama_sug_info": {
+  "sdk_method": [
+   "GetDramaSugInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "drama_ending_hook_id",
+   "drama_sug_link_id",
+   "drama_summary_link_id",
+   "inspiration_id",
+   "is_end"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/user/get_user_app_setting": {
+  "sdk_method": [
+   "GetUserAppSetting"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_drama_hot_topic": {
+  "sdk_method": [
+   "GetDramaHotTopic"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template/creative_works/list": {
+  "sdk_method": [
+   "ListCreativeWorksExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template/homepage/creative_works/list": {
+  "sdk_method": [
+   "ListHomepageCreativeWorks"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/upload_file": {
+  "sdk_method": [
+   "UploadFile"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "file_content",
+   "file_name"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/clone_thread": {
+  "sdk_method": [
+   "CloneThread"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "deep_clone_assets",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent_sug/list": {
+  "sdk_method": [
+   "ListAgentSug"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "page",
+   "page_size",
+   "platform"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent_sug/fork": {
+  "sdk_method": [
+   "ForkAgentSug"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "sug_id",
+   "thread_id",
+   "uuid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/speech/asr_access_config": {
+  "sdk_method": [
+   "GetSpeechASRAccessConfig"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "base",
+   "client_version",
+   "device_platform",
+   "entry_id",
+   "extra",
+   "language",
+   "region",
+   "scene",
+   "task_type",
+   "user_info"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/batch_patch_asset": {
+  "sdk_method": [
+   "BatchPatchAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "batch_id",
+   "client_id",
+   "transactions"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/subscribe_asset": {
+  "sdk_method": [
+   "SubscribeAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "action_type",
+   "pippit_asset_id",
+   "pippit_asset_ids",
+   "session_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/sse_asset": {
+  "sdk_method": [
+   "SSEAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "session_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/batch_generate_asset_id": {
+  "sdk_method": [
+   "BatchGenerateAssetID"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "count"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/namespace_create": {
+  "sdk_method": [
+   "AssetNamespaceCreate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "namespace_data"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/tcc/get_config_without_login": {
+  "sdk_method": [
+   "GetTCCConfigWithoutLogin"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "config_names"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_ai_script_asset": {
+  "sdk_method": [
+   "UpdateAIScriptAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "ai_script_asset_id",
+   "overview_pippit_asset_id",
+   "patch_operations"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/v1/asset/namespace_query": {
+  "sdk_method": [
+   "AssetNamespaceQueryV1"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "file_name",
+   "first_directory",
+   "page_num",
+   "page_size",
+   "pippit_asset_id",
+   "second_directory",
+   "team",
+   "uid",
+   "update_time"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/erase_video_subtitle_for_novel_agent": {
+  "sdk_method": [
+   "EraseVideoSubtitleForNovelAgent"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "pippit_asset_id",
+   "shot_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/unbind_user_for_jianying": {
+  "sdk_method": [
+   "UnBindUserForJianying"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "jianying_uid",
+   "pippit_uid",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_bind_jianying_accounts": {
+  "sdk_method": [
+   "GetBindJianyingAccounts"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/unbind_user": {
+  "sdk_method": [
+   "UnBindUser"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "jianying_uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_pippit_user_info": {
+  "sdk_method": [
+   "GetPippitUserInfo"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "jianying_uid",
+   "pippit_uid",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_bind_pippit_accounts": {
+  "sdk_method": [
+   "GetBindPippitAccounts"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "jianying_uid",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/re_transfer": {
+  "sdk_method": [
+   "ReTransfer"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "data",
+   "jianying_uid",
+   "pippit_uid",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/novel_style_list": {
+  "sdk_method": [
+   "WebNovelStyleList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "page",
+   "page_size",
+   "status"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_drama_sug_item": {
+  "sdk_method": [
+   "GetDramaSugItem"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/creativity/exposure/write": {
+  "sdk_method": [
+   "WriteCreativeExposure"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "items"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/creativity/query": {
+  "sdk_method": [
+   "QueryCreatives"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "homepage_sub_scene",
+   "is_new_user",
+   "page",
+   "query_conditions",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/creativity/strategy/detail": {
+  "sdk_method": [
+   "GetCreativeStrategies"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "extra",
+   "strategy_names"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_script_content": {
+  "sdk_method": [
+   "UpdateScriptContent"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "only_read",
+   "overview_pippit_asset_id",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template/list": {
+  "sdk_method": [
+   "ListPromptTemplateDomesticExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "category_id",
+   "generation_mode",
+   "page_num",
+   "page_size",
+   "status"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/template/get": {
+  "sdk_method": [
+   "GetPromptTemplateDomesticExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "language",
+   "template_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/work/search": {
+  "sdk_method": [
+   "WorkSearch"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "agent_names",
+   "begin_time",
+   "count",
+   "cursor",
+   "end_time",
+   "query",
+   "work_types"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/delete": {
+  "sdk_method": [
+   "CharacterDeleteV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/favorite": {
+  "sdk_method": [
+   "CharacterFavoriteV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_id",
+   "favorite",
+   "is_favorite"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/detail": {
+  "sdk_method": [
+   "CharacterDetailV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_id",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/update": {
+  "sdk_method": [
+   "CharacterUpdateV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character",
+   "character_id",
+   "image_url",
+   "material_asset_id",
+   "name",
+   "portrait_asset_id",
+   "prompt",
+   "replace_subjects",
+   "visibility"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/app/create/bootstrap": {
+  "sdk_method": [
+   "CharacterCreateBootstrap"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "Base",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/app/tab/page": {
+  "sdk_method": [
+   "AppCharacterTabPage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "count",
+   "cursor",
+   "query",
+   "scene",
+   "tab_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/submit": {
+  "sdk_method": [
+   "CharacterGenerateSubmit"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "commerce_key",
+   "idempotent_key",
+   "prompt",
+   "ref_asset_id",
+   "ref_asset_id_type",
+   "ref_pippit_asset_id",
+   "ref_source_asset_id",
+   "reference_image_url",
+   "scene",
+   "style_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/query": {
+  "sdk_method": [
+   "CharacterGenerateQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/work/search": {
+  "sdk_method": [
+   "WebWorkSearch"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "agent_names",
+   "begin_time",
+   "count",
+   "cursor",
+   "end_time",
+   "query",
+   "work_types"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/create": {
+  "sdk_method": [
+   "CharacterCreateV2"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character",
+   "create_method",
+   "idempotent_key",
+   "image_url",
+   "material_asset_id",
+   "name",
+   "portrait_asset_id",
+   "prompt",
+   "style_id",
+   "visibility"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/app/mine/page": {
+  "sdk_method": [
+   "AppCharacterMinePage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "count",
+   "cursor",
+   "need_real_person",
+   "query"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/search": {
+  "sdk_method": [
+   "AssetSearch"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "asset_types",
+   "begin_time",
+   "categories",
+   "count",
+   "cursor",
+   "end_time",
+   "query",
+   "recent_only",
+   "source_types"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/use/resolve": {
+  "sdk_method": [
+   "CharacterUseResolve"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_id",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/asset/search": {
+  "sdk_method": [
+   "WebAssetSearch"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "asset_types",
+   "begin_time",
+   "categories",
+   "count",
+   "cursor",
+   "end_time",
+   "query",
+   "recent_only",
+   "source_types"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/confirm": {
+  "sdk_method": [
+   "CharacterGenerateConfirm"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "candidate_id",
+   "character_name",
+   "idempotent_key",
+   "task_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/canvas_list": {
+  "sdk_method": [
+   "CanvasList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "PageNum",
+   "PageSize"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/character/app/recommended-prompt/list": {
+  "sdk_method": [
+   "CharacterRecommendedPromptList"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "client_type",
+   "count",
+   "locale",
+   "scene",
+   "style_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/agent/speed_up_run_task_to_vip_channel": {
+  "sdk_method": [
+   "SpeedUpRunTaskToVipChannel"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "run_extra",
+   "run_id",
+   "task_id",
+   "thread_id",
+   "uid"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/bind_canvas_root_asset": {
+  "sdk_method": [
+   "BindCanvasRootAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/asset/unbind_canvas_root_asset": {
+  "sdk_method": [
+   "UnbindCanvasRootAsset"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/delete_episode": {
+  "sdk_method": [
+   "DeleteEpisode"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode_id",
+   "overview_pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_new_episode": {
+  "sdk_method": [
+   "GenerateEpisode"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode_name",
+   "episode_title",
+   "overview_pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_package_info_lite": {
+  "sdk_method": [
+   "GetPackageInfoLite"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "draft_key",
+   "entrance_from",
+   "novel_extra",
+   "package_id",
+   "render_task_id",
+   "uid",
+   "workspace_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/background/list": {
+  "sdk_method": [
+   "ListWebHomepageBackgroundExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/display_content/list": {
+  "sdk_method": [
+   "ListWebHomepageDisplayContentExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generation_mode",
+   "page",
+   "page_size"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/scan": {
+  "sdk_method": [
+   "WebRealPersonQRScan"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "session_id",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/query": {
+  "sdk_method": [
+   "WebRealPersonQRQuery"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "session_id",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/confirm": {
+  "sdk_method": [
+   "WebRealPersonQRConfirm"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "confirmed",
+   "portrait_video_url",
+   "session_id",
+   "token"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/create": {
+  "sdk_method": [
+   "WebRealPersonQRCreate"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "character_desc",
+   "character_id",
+   "character_name",
+   "is_public"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/promo_slot/list": {
+  "sdk_method": [
+   "ListWebHomepagePromoSlotExternal"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/homepage/display_content/list": {
+  "sdk_method": [
+   "ListHomepageDisplayContent"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "generation_mode",
+   "page",
+   "page_size"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/skill/list_thread_file": {
+  "sdk_method": [
+   "ListThreadFileForSkill"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "base",
+   "page_num",
+   "page_size",
+   "thread_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/skill/get_skill_install_command": {
+  "sdk_method": [
+   "GetSkillInstallCommand"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "base"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/create/bootstrap": {
+  "sdk_method": [
+   "WebCharacterCreateBootstrap"
+  ],
+  "http": [
+   "GET"
+  ],
+  "request_keys": [
+   "Base",
+   "scene"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/manage/page": {
+  "sdk_method": [
+   "WebCharacterManagePage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "client_type",
+   "count",
+   "create_methods",
+   "cursor",
+   "query",
+   "scene",
+   "scope",
+   "selected_character_id",
+   "tab_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/character/picker/page": {
+  "sdk_method": [
+   "WebCharacterPickerPage"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "Base",
+   "client_type",
+   "count",
+   "create_methods",
+   "cursor",
+   "query",
+   "scene",
+   "scope",
+   "selected_character_id",
+   "tab_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/skill/report_telemetry": {
+  "sdk_method": [
+   "ReportSkillTelemetry"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "arch",
+   "base",
+   "cli_version",
+   "event",
+   "platform",
+   "skill_name",
+   "source"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/3d_director_platform/upload_file": {
+  "sdk_method": [
+   "Upload3DDirectorFile"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "extra_map",
+   "file",
+   "file_name"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_new_story_board": {
+  "sdk_method": [
+   "GenerateStoryBoard"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode_name",
+   "episode_title",
+   "overview_pippit_asset_id"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/videogen/upload_audio_pre_check": {
+  "sdk_method": [
+   "UploadAudioPreCheck"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "audio_url"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/update_episode": {
+  "sdk_method": [
+   "UpdateInteractDramaEpisode"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/add_episode": {
+  "sdk_method": [
+   "AddInteractDramaEpisode"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode",
+   "parent"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/get_story_dag": {
+  "sdk_method": [
+   "GetInteractDramaStoryDag"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "story_id",
+   "story_namespace"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/delete_episodes": {
+  "sdk_method": [
+   "DeleteInteractDramaEpisodes"
+  ],
+  "http": [
+   "POST"
+  ],
+  "request_keys": [
+   "episode_ids"
+  ],
+  "query_keys": [],
+  "files": [
+   "async__889795.32938b46b8.js"
+  ]
+ }
+}

@@ -1,0 +1,323 @@
+{
+ "_fonte": {
+  "evidencia_670": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a",
+  "resposta_sha256": "f8529411b3d0622ce6cd5bf6c9ea8719a412ed90d322c6915cb75b0d2591711e",
+  "observacao": "Campos observados no payload list_skill_store. guideWords/materialGuide são textos do servidor entregues ao usuário (não as instruções privadas)."
+ },
+ "criar-habilidades": {
+  "skillName": "skill-creator",
+  "skillId": "sk_official_0262a8335ad3b832",
+  "displayName": "Create skills",
+  "categories": [],
+  "tools": null,
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "Please enter the Skill Ideas that need to be precipitated:",
+  "guideKind": "guide_words",
+  "materialGuide": "",
+  "contentVersion": 2,
+  "outputGenre": 4,
+  "skillType": "normal",
+  "favorites": 30
+ },
+ "anuncios-de-drama": {
+  "skillName": "storyline-advertisement",
+  "skillId": "sk_official_2a12c090f4a408a4",
+  "displayName": "Drama Ads",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": [
+   "sandbox_generate_image",
+   "render_video",
+   "sandbox_generate_video",
+   "sandbox_process_video"
+  ],
+  "defaultModels": {
+   "video": "Seedance_2.5",
+   "imagem": "gpt_image_2"
+  },
+  "guideWords": "📦 Give the essentials - product name + key selling points, a product image, your chosen drama genre, and the video ratio. Miss any, and it'll ask before building.\n🎭 Pick a genre - CEO romance, second-chance glow-up, revenge, love triangle, family drama, workplace power play, twist reveal, fake dating, enemies-to-lovers, and more.\n🖼️ Upload a person reference to lock a face - bound characters keep their real looks (ethnicity, features, skin tone, hair)\n⚡ Trust the formula - a hook in the first 2 seconds, fast escalation, one clean twist, and a payoff where the product is why things turn around.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for any other language.",
+  "guideKind": "guide_words",
+  "materialGuide": "Please upload the product image.",
+  "contentVersion": 6,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 34
+ },
+ "shorts-de-historia": {
+  "skillName": "story_short_film",
+  "skillId": "sk_official_5d662d3f6b6bb9d5",
+  "displayName": "Story Shorts",
+  "categories": [
+   "Short Drama",
+   "Professional film and television"
+  ],
+  "tools": [
+   "sandbox_generate_image",
+   "sandbox_generate_video",
+   "sandbox_generate_audio",
+   "render_video"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "🎬 Let's bring your story to life! Share a few things and I'll film it for you:\n📖 Your story - a full script, or just a one-line idea (premise, main characters, the ending or feeling you want) ⚙️ The format - length, aspect ratio, language, and who it's for 🔒 Your must-keeps - any exact lines to keep, or notes like \"no subtitles, no music\" \"🖼️ Character photos - I'll preserve their real look across every shot 🏠 Location & prop images - keeps your scenes consistent Throughout 🎙️ A voice sample - for any speaking character or narrator\n✨ The more you share, the closer it gets to the story in your head. ✅ Heads-up: I'll pause for your OK at each key step, so nothing's built before you're happy with it.",
+  "guideKind": "guide_words",
+  "materialGuide": "",
+  "contentVersion": 7,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 56
+ },
+ "gerador-de-vlog": {
+  "skillName": "seedance-vlog-maker-v2",
+  "skillId": "sk_official_07e5b267beb6e667",
+  "displayName": "Vlog Generator",
+  "categories": [
+   "Professional film and television"
+  ],
+  "tools": [
+   "render_video",
+   "sandbox_generate_video",
+   "sandbox_process_video"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "Vlog Maker turns your photos, clips, and audio into a story-driven vlog - not just a slideshow.\nFor the best result, share: 📷 Photos, 🎬 short clips, 🎵 any music or real sound ✨ Include your best moment - a reaction, a result, a before/after, a surprise. That becomes your hook.\nOptional, but helps a lot: tell me the theme, platform (YouTube 16:9/Reels 9:16), length, and the one moment you want to stand out.\nTip: fewer strong shots beat 30 lookalike photos. Moments with action and emotion make the best vlogs.",
+  "guideKind": "guide_words",
+  "materialGuide": "Please upload portrait/landscape or other material images.",
+  "contentVersion": 9,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 24
+ },
+ "creator-commerce": {
+  "skillName": "expert-product-promotion",
+  "skillId": "sk_official_455aeefb40a3f65d",
+  "displayName": "Creator Commerce",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": [
+   "render_video",
+   "sandbox_generate_video",
+   "sandbox_process_video"
+  ],
+  "defaultModels": {
+   "video": "Seedance_2.5",
+   "imagem": "gpt_image_2"
+  },
+  "guideWords": "🎬 Creator Product Promo - let's make your product video!\n✅ Required (need these to start): 📦 Product name 📸 At least one clear product photo (multiple angles help a lot!)\n⭐ Optional but recommended (makes it way better): 💡 Key selling points 🎯 Target audience & market 🎭 Creator style - try-on/unboxing/demo/review/friend rec ⏱️ Length & aspect ratio 🔗 Your call to action\nℹ️ Good to know: 🔒 I keep your product true to the photo and won't invent any claims 🌎 Creators default to a Western/Latin American look - unless you upload a specific person 💬 Scripts are in conversational English by default - just tell me if you'd like another language",
+  "guideKind": "guide_words",
+  "materialGuide": "Please upload the product image.",
+  "contentVersion": 12,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 35
+ },
+ "renderizacao-3-visualizacoes": {
+  "skillName": "character-reference-sheet",
+  "skillId": "sk_official_fa50769c17c9c8cb",
+  "displayName": "3-View Rendering",
+  "categories": [
+   "Professional film and television"
+  ],
+  "tools": [
+   "sandbox_generate_image"
+  ],
+  "defaultModels": {
+   "video": "Seedance_2.5",
+   "imagem": "gpt_image_2"
+  },
+  "guideWords": "📸 Upload a character image\nA clear front-facing or full-body image is enough. Add side or back references if the hairstyle, outfit, or accessories are complex.\n✍️ Or describe your character\nInclude their appearance, hairstyle, outfit, body type, accessories, and visual style.\n↔️ Call out asymmetrical details\nTell us which side each detail belongs on, such as a mechanical right arm, a bag on the left shoulder, or a one-sided hairstyle.\n🔍 Need an exact likeness?\nIf you upload a real person, specify whether their face, body type, skin tone, and other visible traits should be preserved.\n✨ What you'll get\nOne clean 16:9 character sheet with a large face close-up on the left and matching front, true side, and back full-body views on the right.\nUsage example: Generate a close-up of the character's face and full-body three-view drawings.",
+  "guideKind": "guide_words",
+  "materialGuide": "",
+  "contentVersion": 8,
+  "outputGenre": 2,
+  "skillType": "normal",
+  "favorites": 21
+ },
+ "replicacao-viral": {
+  "skillName": "imitation_video",
+  "skillId": "sk_official_0ee6791bc6c069a5",
+  "displayName": "Viral Replication",
+  "categories": [
+   "Short Drama",
+   "Marketing Advertising",
+   "Professional film and television"
+  ],
+  "tools": [
+   "pippit_video_tool_share_url_parser_sandbox",
+   "pippit_video_tool_imitation_reverse_analyze_sandbox",
+   "dynamic_questionnaire",
+   "pippit_video_tool_imitation_plan_sandbox",
+   "sandbox_generate_video",
+   "render_video"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "🎥 Provide one reference - upload a video, use an in-task asset, or paste a full shared link/URL (local paths and broken links won't parse). If you give several, name the main one.\n🎯 State your direction - \"imitate\" or \"remix\" alone isn't enough. Say whether to keep the core for a same-style remake, keep the hook but swap person/scene/theme, or diverge freely.\n🖼️ Upload assets to swap - to replace a specific person, product, or shot, upload that asset first and say what it replaces. Text-only changes (e.g. \"make the background a night beach\") need no upload.\n🧑‍🤝‍🧑 Bound identities are kept - uploaded people keep their real looks; text-generated casts default to natural North American/European/Latin American faces.\n🔍 Want analysis only? - say so, and it'll break down the hook and remixable points without generating.\n🇺🇸 Output is English by default; ask explicitly for any other language.\n⏳ Be patient - multi-segment videos generated in order, then merged into one final cut.",
+  "guideKind": "guide_words",
+  "materialGuide": "Upload the image/video you want to replicate.",
+  "contentVersion": 5,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 27
+ },
+ "geracao-em-lote": {
+  "skillName": "batch-marketing-video-generator-r1",
+  "skillId": "sk_official_3df75762b83fa30c",
+  "displayName": "Batch Generation",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": [
+   "todo_write",
+   "dynamic_questionnaire",
+   "present_sandbox_file",
+   "sandbox_generate_image",
+   "sandbox_generate_audio",
+   "sandbox_generate_video",
+   "sandbox_bash",
+   "sandbox_read",
+   "sandbox_write",
+   "sandbox_edit",
+   "sandbox_process_video",
+   "render_video",
+   "pippit_omni_search",
+   "pippit_tool_ask_echo_search",
+   "async_task_create",
+   "async_task_poll",
+   "async_task_resume",
+   "async_task_kill",
+   "load_skill"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "Please generate 3 different ad scripts and video variations for my product.",
+  "guideKind": "prefill",
+  "materialGuide": "",
+  "contentVersion": 6,
+  "outputGenre": 1,
+  "skillType": "normal"
+ },
+ "url-do-video": {
+  "skillName": "url2video",
+  "skillId": "sk_official_cdba2456af6cda4b",
+  "displayName": "URL to Video",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": [
+   "pippit_tool_url_parse",
+   "sandbox_read"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "Please generate a fast-paced, engaging promotional video suitable for TikTok Shorts. Highlight the main features and make it high-converting.\nHere is my product/website link: [Paste URL]",
+  "guideKind": "prefill",
+  "materialGuide": "",
+  "contentVersion": 13,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 6
+ },
+ "traducao-de-video": {
+  "skillName": "video-language-localization",
+  "skillId": "sk_official_9ba4f9e7692ead76",
+  "displayName": "Video Translation",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": [
+   "marketing_video_analysis",
+   "sandbox_generate_video",
+   "dynamic_questionnaire",
+   "sandbox_generate_audio",
+   "sandbox_generate_image"
+  ],
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "Translate this video and replace the actor with a local AI avatar. Keep the original hooks and pacing completely intact. Target market/language:",
+  "guideKind": "prefill",
+  "materialGuide": "",
+  "contentVersion": 7,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 7
+ },
+ "video-de-marketing": {
+  "skillName": "nest_skills_marketing_video_v2",
+  "skillId": "sk_official_79de493e9f147462",
+  "displayName": "Marketing Video",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": null,
+  "defaultModels": {
+   "video": null,
+   "imagem": "gpt_image_2"
+  },
+  "guideWords": "📦 Give product facts + a Hook - product name, selling points, and any Hook/Style/Play prompts. It builds a real ad script (hook → bridge → product-led body → CTA), not a neutral shot summary.\n🎯 One spine, not a feature dump - it ranks your selling points into one memorable promise + proof path, so the video sells instead of listing everything evenly.\n✅ Approve before it generates - it discloses the full storyboard and exact prompts and waits for your go; any material change re-triggers approval.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for another language.",
+  "guideKind": "guide_words",
+  "materialGuide": "Please upload the product image.",
+  "contentVersion": 9,
+  "outputGenre": 1,
+  "skillType": "normal",
+  "favorites": 20
+ },
+ "foto-falante-de-ia": {
+  "skillName": "ai_talking_photo",
+  "skillId": "sk_official_52871f154122fe43",
+  "displayName": "AI talking photo",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": null,
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "",
+  "guideKind": null,
+  "materialGuide": "",
+  "contentVersion": 10,
+  "outputGenre": 1,
+  "skillType": "ai_talking_photo",
+  "favorites": 12
+ },
+ "video-de-avatar": {
+  "skillName": "avatar_video_skill",
+  "skillId": "sk_official_1ebbd2c4efb79e46",
+  "displayName": "Avatar Video",
+  "categories": [
+   "Marketing Advertising"
+  ],
+  "tools": null,
+  "defaultModels": {
+   "video": null,
+   "imagem": null
+  },
+  "guideWords": "",
+  "guideKind": null,
+  "materialGuide": "",
+  "contentVersion": 7,
+  "outputGenre": 1,
+  "skillType": "avatar_video",
+  "favorites": 17
+ }
+}

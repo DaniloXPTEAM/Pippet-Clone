@@ -1,0 +1,27 @@
+{
+ "task": "t_skill_create",
+ "steps": [
+  {
+   "goto": "skill",
+   "wait": 9000
+  },
+  {
+   "tag": "create_skill",
+   "click": {
+    "role": "button",
+    "name": "Create skill"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2500
+  },
+  {
+   "snap": "create_skill",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

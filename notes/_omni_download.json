@@ -1,0 +1,38 @@
+[
+ {
+  "file": "Omni.22227907e5.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/Omni.22227907e5.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "48188",
+  "last_modified": "Wed, 30 Sep 2026 08:01:31 GMT",
+  "bytes_transferidos_aprox": 48188,
+  "bytes_descomprimidos": 202780,
+  "sha256": "ae973dbf6065f3225cf39973c4595f0b1864694608b8fd3ad17a8907b080f18a"
+ },
+ {
+  "file": "30538.9543fa0369.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/30538.9543fa0369.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "8294",
+  "last_modified": "Mon, 14 Sep 2026 12:23:11 GMT",
+  "bytes_transferidos_aprox": 8294,
+  "bytes_descomprimidos": 56359,
+  "sha256": "6952c7d06c6664c9aa192a0914e3a5d4abb70c36deee9892c2c10b4555fa1b2a"
+ },
+ {
+  "file": "549630.cc8177d2bb.js",
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/549630.cc8177d2bb.js",
+  "status": 200,
+  "content_type": "application/javascript",
+  "content_encoding": "br",
+  "content_length": "1473",
+  "last_modified": "Wed, 30 Sep 2026 07:58:55 GMT",
+  "bytes_transferidos_aprox": 1473,
+  "bytes_descomprimidos": 2950,
+  "sha256": "41f1f8b74a6c66625dcb326457ae6be3a2c8612883dca1dad26ed362e65b83df"
+ }
+]

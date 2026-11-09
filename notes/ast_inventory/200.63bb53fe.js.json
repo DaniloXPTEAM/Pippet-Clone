@@ -1,0 +1,93 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\200.63bb53fe.js",
+ "bytes": 147487,
+ "parse": "script",
+ "nos": 35237,
+ "strings_total": 1794,
+ "segredo_like_ignoradas": 3,
+ "urls": [
+  "//sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep",
+  "http://www.w3.org/1999/xlink",
+  "http://www.w3.org/2000/svg",
+  "https://discord.com/invite/X88w8b8NRP",
+  "https://sf16-short-sg.bytedapm.com/slardar/fe/sdk-web/plugins",
+  "https://test.com",
+  "https://www.instagram.com/pippitofficial/",
+  "https://www.pippit.ai",
+  "https://www.producthunt.com/products/pippit-ai",
+  "https://www.tiktok.com/@pippitofficial",
+  "https://www.youtube.com/@PippitOfficial",
+  "https://x.com/pippitofficial"
+ ],
+ "dominios": [
+  "discord.com",
+  "sf16-short-sg.bytedapm.com",
+  "sf16-web-login-neutral.capcutstatic.com",
+  "test.com",
+  "www.instagram.com",
+  "www.pippit.ai",
+  "www.producthunt.com",
+  "www.tiktok.com",
+  "www.w3.org",
+  "www.youtube.com",
+  "x.com"
+ ],
+ "caminhos_api": [
+  "/login",
+  "/lv/v1/cc_web/ad_maker/ecom/seo_get_collection_templates",
+  "/lv/v1/cc_web/ad_maker/ecom/seo_search_templates",
+  "/lv/v1/event/report",
+  "/upload/locales/"
+ ],
+ "rotas_path": [
+  "",
+  "/",
+  "de-de",
+  "es-es",
+  "fr-fr",
+  "id-id",
+  "it-it",
+  "ja-jp",
+  "ko-kr",
+  "ms-my",
+  "pl-pl",
+  "pt-br",
+  "ru-by",
+  "th-th",
+  "tl-ph",
+  "tr-tr",
+  "vi-vn",
+  "zh-cn",
+  "zh-tw"
+ ],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "load",
+  "resize",
+  "scroll"
+ ],
+ "globais_window": [
+  "BUILD_BRANCH",
+  "BUILD_VERSION",
+  "__LOADABLE_LOADED_CHUNKS__",
+  "__assetPrefix__",
+  "cancelIdleCallback",
+  "requestIdleCallback"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 1,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 9,
+ "modulos_webpack": 63
+}

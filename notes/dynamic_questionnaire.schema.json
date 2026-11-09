@@ -1,0 +1,156 @@
+{
+ "type": "object",
+ "properties": {
+  "title": {
+   "type": "string",
+   "description": "The title of the form, used to describe the theme or purpose of the entire form, no more than 20 words.",
+   "minLength": 0
+  },
+  "questions": {
+   "type": "array",
+   "description": "A list of questions, containing all the question items in the form that the user needs to answer.",
+   "items": {
+    "type": "object",
+    "description": "A question item in the form, defining all the attributes and behaviors of a single question.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "The unique identifier of the question, used to distinguish different questions in the form.",
+      "minLength": 1
+     },
+     "title": {
+      "type": "string",
+      "description": "The description of the question, the text of the question displayed to the user.",
+      "minLength": 1
+     },
+     "type": {
+      "type": "string",
+      "description": "The type of question, which determines the interaction mode and data collection mode of the question.",
+      "enum": [
+       "radio",
+       "checkbox",
+       "text",
+       "media"
+      ]
+     },
+     "options": {
+      "type": "array",
+      "description": "A list of options, used only when the type is radio (single choice) or checkbox (multiple choice), and is a required field.",
+      "items": {
+       "type": "object",
+       "description": "Option item configuration, defining the specific options in a single-choice or multiple-choice question.",
+       "properties": {
+        "id": {
+         "type": "string",
+         "description": "The unique identifier of the option, used to distinguish different options in the option list.",
+         "minLength": 1
+        },
+        "label": {
+         "type": "string",
+         "description": "The display text of the option, the content of the option displayed to the user.",
+         "minLength": 1
+        },
+        "value": {
+         "type": "string",
+         "description": "The value of the option, the actual value used for data processing and storage."
+        },
+        "selected": {
+         "type": "boolean",
+         "description": "Whether it is the default selected item, which controls the initial selected state of the option.",
+         "default": false
+        },
+        "description": {
+         "type": "string",
+         "description": "Option description information, providing detailed instructions or supplementary information for the option.",
+         "minLength": 0
+        }
+       },
+       "required": [
+        "id",
+        "label",
+        "value"
+       ],
+       "additionalProperties": false
+      },
+      "minItems": 1
+     },
+     "assets": {
+      "type": "array",
+      "description": "A list of media resources, used only when the type is media (media selection), and is a required field.",
+      "items": {
+       "type": "object",
+       "description": "Media resource configuration, defining the attributes and metadata of media files.",
+       "properties": {
+        "id": {
+         "type": "string",
+         "description": "The unique identifier of the resource, used to distinguish different media files in the resource list.",
+         "minLength": 1
+        },
+        "name": {
+         "type": "string",
+         "description": "The name of the resource, the display name of the media file."
+        },
+        "type": {
+         "type": "string",
+         "description": "The type of resource, specifying the category of the media file.",
+         "enum": [
+          "image",
+          "video",
+          "audio"
+         ]
+        },
+        "url": {
+         "type": "string",
+         "description": "The URL of the resource, the access address of the media file."
+        },
+        "size": {
+         "type": "integer",
+         "description": "The size of the file, the file size in bytes.",
+         "minimum": 0
+        },
+        "mimeType": {
+         "type": "string",
+         "description": "MIME type, the standard media type identifier."
+        },
+        "thumbnailUrl": {
+         "type": "string",
+         "description": "The URL of the thumbnail, the address of the small-sized picture for preview (applicable to pictures and videos)."
+        },
+        "description": {
+         "type": "string",
+         "description": "Resource description, detailed instructions or remarks for the media file."
+        }
+       },
+       "required": [
+        "id",
+        "type",
+        "url"
+       ],
+       "additionalProperties": false
+      },
+      "minItems": 1
+     },
+     "textValue": {
+      "type": "string",
+      "description": "The default text value, available only when the type is text (text input), and is an optional field."
+     },
+     "placeholder": {
+      "type": "string",
+      "description": "Input prompt text, available only when the type is text (text input), and is an optional field."
+     }
+    },
+    "required": [
+     "id",
+     "title",
+     "type"
+    ],
+    "additionalProperties": false
+   },
+   "minItems": 1
+  }
+ },
+ "required": [
+  "questions"
+ ],
+ "additionalProperties": false
+}

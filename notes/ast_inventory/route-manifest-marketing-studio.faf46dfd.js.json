@@ -1,0 +1,31 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\route-manifest-marketing-studio.faf46dfd.js",
+ "bytes": 583,
+ "parse": "script",
+ "nos": 47,
+ "strings_total": 25,
+ "segredo_like_ignoradas": 0,
+ "urls": [],
+ "dominios": [],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [],
+ "globais_window": [
+  "_MODERNJS_ROUTE_MANIFEST"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

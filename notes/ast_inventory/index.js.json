@@ -1,0 +1,48 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\tiktok_privacy_protection_framework\\loader\\atsx\\index.js",
+ "bytes": 146030,
+ "parse": "script",
+ "nos": 39896,
+ "strings_total": 1233,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "https://www.tiktok.com/tiktok/pns/privacy_headers"
+ ],
+ "dominios": [
+  "www.tiktok.com"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "DOMContentLoaded",
+  "click",
+  "load",
+  "message",
+  "navigate",
+  "popstate",
+  "securitypolicyviolation",
+  "statechange",
+  "updatefound"
+ ],
+ "globais_window": [
+  "XMLHttpRequest",
+  "fetch"
+ ],
+ "postMessage": 4,
+ "cookie_refs": 4,
+ "indexeddb": 0,
+ "serviceworker": 5,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 8
+}

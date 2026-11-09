@@ -1,0 +1,49 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\lib-polyfill.086083a9.js",
+ "bytes": 236922,
+ "parse": "script",
+ "nos": 92173,
+ "strings_total": 2226,
+ "segredo_like_ignoradas": 3,
+ "urls": [
+  "https://a",
+  "https://a#б",
+  "https://a/c%20d",
+  "https://a@b",
+  "https://github.com/zloirock/core-js",
+  "https://github.com/zloirock/core-js/blob/v3.47.0/LICENSE",
+  "https://x",
+  "https://тест"
+ ],
+ "dominios": [
+  "a",
+  "a#б",
+  "a@b",
+  "github.com",
+  "x",
+  "тест"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "message"
+ ],
+ "globais_window": [
+  "__LOADABLE_LOADED_CHUNKS__"
+ ],
+ "postMessage": 3,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 680
+}

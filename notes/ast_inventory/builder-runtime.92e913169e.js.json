@@ -1,0 +1,35 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\builder-runtime.92e913169e.js",
+ "bytes": 8694,
+ "parse": "script",
+ "nos": 2733,
+ "strings_total": 107,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "//sf16-ug-neutral.capcutstatic.com/obj/seeyou-us/growth/pippit/landing_page/"
+ ],
+ "dominios": [
+  "sf16-ug-neutral.capcutstatic.com"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [],
+ "globais_window": [
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

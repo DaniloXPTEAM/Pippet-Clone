@@ -1,0 +1,4378 @@
+{
+ "catalogo": "PIPPIT_SKILLS_PROMPTS_CATALOG",
+ "versao": 1,
+ "gerado_em": "2026-10-22T11:58:31.157Z",
+ "rea": {
+  "mcp_usado": "6.7.0 (binary_session: server rea 6.7.0, pacote rea-agents 6.7.0)",
+  "observacao": "Evidências 6.7.0 e evidências históricas 6.5.0 ficam separadas; IDs antigos NÃO foram substituídos e não são reproduzidos pela 6.7.0 (ver CLAUDE.md)."
+ },
+ "evidencias_670": {
+  "scenario_list_skill_store": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a",
+  "inspect_pagina_skill": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc",
+  "lista_alvos_cdp": "ev_959294fba3de1aa58ce0ec6e2ce25e013bbb159b22defd6f4f4e1f03de9c096f",
+  "analise_js_bundle_Skill_pai": "ev_3aa762df1a0d17c04ba64285f04904204a79748706dc92950e5f1f6c06fbcc4a",
+  "analise_js_bundle_Skill_resumo": "ev_6f9e7abc38a68aef9de1db1535e150c24b776f985aeb90131f71b40dc56f08d5",
+  "visao_javascript_facts": "ev_3873f917daef7172267b081251921373ea3e4533094633d18a242f3fd97fc701"
+ },
+ "evidencias_historicas_650": {
+  "bundles_analisados": [
+   {
+    "arquivo": "async__889795.256f74ebdf.js",
+    "evidence_id_650": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+   },
+   {
+    "arquivo": "async__53019.0f91dddfd6.js",
+    "evidence_id_650": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+   },
+   {
+    "arquivo": "async__520277.b368648da4.js",
+    "evidence_id_650": "ev_7c36445d96c5309d6edef6fd55829494ac55c4d586317e6e6033c4405b3df000"
+   },
+   {
+    "arquivo": "async__616044.82a3c713c4.js",
+    "evidence_id_650": "ev_4b1b1eeedb65033b813a150e33e3fb132cbc5fa52d58dec028897abff368e4ff"
+   },
+   {
+    "arquivo": "async__627000.ffd75e22aa.js",
+    "evidence_id_650": "ev_80b284d5642b9058c5f584ec1c9e12e07c91f34630b98a1d29d43d6049afcc3b"
+   },
+   {
+    "arquivo": "async__850206.e38ec15e55.js",
+    "evidence_id_650": "ev_3bf298cc1be024921ba597d631114289a08bdad15be46e831d05a769b0f9f9e6"
+   }
+  ],
+  "indice": "evidence_cli/auth_bundles/INDEX.md"
+ },
+ "arquivos_derivados": {
+  "skills_store_extract_670": {
+   "caminho": "captures/skills_670/skills_store_extract_670.json",
+   "sha256": "f8e571f43e80bb3a56a2f59c3df2930d9b21156ee0839be1114f38df97dfcbaa"
+  },
+  "resposta_servidor": {
+   "caminho": "captures/skills_670/api/list_skill_store_request-201_response.json",
+   "sha256": "f8529411b3d0622ce6cd5bf6c9ea8719a412ed90d322c6915cb75b0d2591711e"
+  },
+  "dialogos_ui": {
+   "caminho": "captures/skills_670/skills_observed.json",
+   "sha256": "9a7078b1ec68b7a0830cc28baffd1c903eb77e6a25e49ab77c02c800a3e9b26d"
+  },
+  "varredura_bundles": {
+   "caminho": "notes/skill_strings_scan.json",
+   "sha256": "2f016305d5a31fc522fa73c6deec5df954b413b69d163bb9cbee405153fef62a"
+  },
+  "bundle_exportado_rea": {
+   "caminho": "captures/skills_670/session_bundle_670_a.json",
+   "sha256": "bb0599c7530204220335480a177c95dfd8426d884ce2e07c60bbf6d81c2ec7d0"
+  }
+ },
+ "classes": {
+  "guide_words": "TEXTO INTEGRAL do servidor (campo guide_words): orientação de uso mostrada ao usuário/composer. NÃO é a instrução privada (SKILL.md) da skill.",
+  "prefill": "TEMPLATE PARAMETRIZADO: texto que o servidor entrega como pedido pré-preenchido (inclui marcador a completar).",
+  "tools": "WORKFLOW COMPROVADO (parcial): lista de ferramentas do agente declarada em metadata.tools. A ORDEM de execução NÃO está comprovada.",
+  "inferido": "COMPORTAMENTO INFERIDO a partir de guide_words/tools/descrição (não é instrução original).",
+  "privado": "INSTRUÇÃO PRIVADA NÃO ACESSÍVEL: o corpo da skill fica no servidor (md_type tos, hash/versão e fornax_key visíveis, conteúdo não).",
+  "descricao": "DESCRIÇÃO COMERCIAL (texto de vitrine), não prompt.",
+  "i18n": "STRING DE INTERFACE embutida no bundle (texto padrão da chave i18n); pode ser rótulo, mensagem ou modelo de pedido."
+ },
+ "categorias_da_loja": [
+  {
+   "nome": "Short Drama",
+   "id": "tag_9274d6aa0115b433"
+  },
+  {
+   "nome": "Marketing Advertising",
+   "id": "tag_7bd0932bcf16379e"
+  },
+  {
+   "nome": "Professional film and television",
+   "id": "tag_f4a4186216673946"
+  }
+ ],
+ "loja": {
+  "total": 13,
+  "has_more": false,
+  "observacao": "A lista completa tem 13 skills oficiais (has_more=false). \"GPT Image 2\"/\"SD 2.5\" são modelos padrão, não skills."
+ },
+ "skills": [
+  {
+   "skill_id": "sk_official_0262a8335ad3b832",
+   "skill_name": "skill-creator",
+   "display_name": "Create skills",
+   "categorias": [],
+   "tipo": "normal",
+   "genero_saida": 4,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 2,
+   "hash_conteudo_sha256": "9c8ea194df87e6f53a0926ee2e4789935c22dfbe631b418ea9a252e3f369b983",
+   "fornax_key": "pippit.nest.skill_creator",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 30,
+   "fixada": true,
+   "prioridade": 1,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": null,
+    "nota": "metadata.tools = null no payload"
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Develop reusable skills to complete specific tasks more stably."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "Please enter the Skill Ideas that need to be precipitated:"
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Meta-skill de criação: o guia pede \"Skill Ideas\" a serem consolidadas; liga-se ao fluxo \"Create with AI\" (chat de criação separado) vistos nos bundles."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=2; content_hash=9c8ea194df87e6f5…; fornax_key=pippit.nest.skill_creator"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "30",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "não declarado",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "Please enter the Skill Ideas that need to be precipitated:",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/home/recommend_video",
+     "POST /api/biz/v1/smart_creation/list_offline_recommend",
+     "POST /api/biz/v2/videogen/check",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/product/list",
+     "POST /api/biz/v1/web_homepage/display_content/list"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_00_Create_skills.png",
+     "screenshot_sha256": "894cd6289882f2c4810872331d3232959b6eb4305d4cb155296f1a32cc3a90fe"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_2a12c090f4a408a4",
+   "skill_name": "storyline-advertisement",
+   "display_name": "Drama Ads",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 6,
+   "hash_conteudo_sha256": "0406083772a967472828c8726f5810a7893bb19b0d2f5de0b27cf4af5290e788",
+   "fornax_key": "nest.skill.qingjie_guanggao_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 34,
+   "fixada": true,
+   "prioridade": 2,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "sandbox_generate_image",
+     "render_video",
+     "sandbox_generate_video",
+     "sandbox_process_video"
+    ]
+   },
+   "modelos_padrao": {
+    "video": "Seedance_2.5",
+    "imagem": "gpt_image_2"
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Drops your product inside a high-tension mini-drama so viewers stay for the plot and leave wanting the product."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "📦 Give the essentials - product name + key selling points, a product image, your chosen drama genre, and the video ratio. Miss any, and it'll ask before building.\n🎭 Pick a genre - CEO romance, second-chance glow-up, revenge, love triangle, family drama, workplace power play, twist reveal, fake dating, enemies-to-lovers, and more.\n🖼️ Upload a person reference to lock a face - bound characters keep their real looks (ethnicity, features, skin tone, hair)\n⚡ Trust the formula - a hook in the first 2 seconds, fast escalation, one clean twist, and a payoff where the product is why things turn around.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for any other language."
+   },
+   "material_guide_words": {
+    "classe": "guide_words",
+    "texto": "Please upload the product image."
+   },
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entradas exigidas: nome do produto + pontos fortes, imagem do produto, gênero de drama e proporção (sem algum deles, a skill pergunta antes de produzir).",
+     "Opcional: referência de pessoa para fixar o rosto.",
+     "Fórmula declarada: gancho nos 2 primeiros segundos, escalada rápida, uma virada limpa, desfecho em que o produto é a razão da virada.",
+     "Saída em inglês americano por padrão."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=6; content_hash=0406083772a96747…; fornax_key=nest.skill.qingjie_guanggao_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "34",
+    "modelos_padrao_ui": [
+     "Dreamina Seedance 2.5",
+     "GPT Image 2"
+    ],
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "📦 Give the essentials - product name + key selling points, a product image, your chosen drama genre, and the video ratio. Miss any, and it'll ask before building.\n🎭 Pick a genre - CEO romance, second-chance glow-up, revenge, love triangle, family drama, workplace power play, twist reveal, fake dating, enemies-to-lovers, and more.\n🖼️ Upload a person reference to lock a face - bound characters keep their real looks (ethnicity, features, skin tone, hair)\n⚡ Trust the formula - a hook in the first 2 seconds, fast escalation, one clean twist, and a payoff where the product is why things turn around.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for any other language.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": {
+     "texto": "Please upload the product image.",
+     "igual_ao_material_guide_words": true
+    },
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/common/im_access",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/home/recommend_video",
+     "POST /api/biz/v1/smart_creation/list_offline_recommend",
+     "POST /api/biz/v2/videogen/check",
+     "POST /api/biz/v1/product/list"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_01_Drama_Ads.png",
+     "screenshot_sha256": "3d38025be3e37359a4376dec34a5e353ea147a75857a3a461a87611c2b44bae5"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_5d662d3f6b6bb9d5",
+   "skill_name": "story_short_film",
+   "display_name": "Story Shorts",
+   "categorias": [
+    "Short Drama",
+    "Professional film and television"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 7,
+   "hash_conteudo_sha256": "0c41aebd4808a6f9eb1a9399d2267f29420d6ab1161950f2c5ed7e266d7153b2",
+   "fornax_key": "nest.skill.duanju_shengcheng_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_nest_novel_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 56,
+   "fixada": true,
+   "prioridade": 3,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "sandbox_generate_image",
+     "sandbox_generate_video",
+     "sandbox_generate_audio",
+     "render_video"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Turn a script or a simple idea into a complete, cinematic short film - with consistent characters, faithful dialogue, and studio-style storytelling from start to finish."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "🎬 Let's bring your story to life! Share a few things and I'll film it for you:\n📖 Your story - a full script, or just a one-line idea (premise, main characters, the ending or feeling you want) ⚙️ The format - length, aspect ratio, language, and who it's for 🔒 Your must-keeps - any exact lines to keep, or notes like \"no subtitles, no music\" \"🖼️ Character photos - I'll preserve their real look across every shot 🏠 Location & prop images - keeps your scenes consistent Throughout 🎙️ A voice sample - for any speaking character or narrator\n✨ The more you share, the closer it gets to the story in your head. ✅ Heads-up: I'll pause for your OK at each key step, so nothing's built before you're happy with it."
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entradas: história (roteiro completo ou ideia de uma linha), formato (duração, proporção, idioma, público), itens a preservar, fotos de personagens, imagens de locais/objetos, amostra de voz.",
+     "Pausa para aprovação em cada etapa-chave antes de construir."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=7; content_hash=0c41aebd4808a6f9…; fornax_key=nest.skill.duanju_shengcheng_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "56",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "🎬 Let's bring your story to life! Share a few things and I'll film it for you:\n📖 Your story - a full script, or just a one-line idea (premise, main characters, the ending or feeling you want) ⚙️ The format - length, aspect ratio, language, and who it's for 🔒 Your must-keeps - any exact lines to keep, or notes like \"no subtitles, no music\" \"🖼️ Character photos - I'll preserve their real look across every shot 🏠 Location & prop images - keeps your scenes consistent Throughout 🎙️ A voice sample - for any speaking character or narrator\n✨ The more you share, the closer it gets to the story in your head. ✅ Heads-up: I'll pause for your OK at each key step, so nothing's built before you're happy with it.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/common/im_access"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_02_Story_Shorts.png",
+     "screenshot_sha256": "4c0d04c0c9eaa9ed43bc926dfc29e6a0e678ec10e4b064275970674d770c8a08"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_07e5b267beb6e667",
+   "skill_name": "seedance-vlog-maker-v2",
+   "display_name": "Vlog Generator",
+   "categorias": [
+    "Professional film and television"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 9,
+   "hash_conteudo_sha256": "8c6daa2aa8444e93deb2dfd183eae6449a8e40a82e6513178ce9ba8a294b1677",
+   "fornax_key": "nest.skill.vlog_shengcheng_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 24,
+   "fixada": true,
+   "prioridade": 4,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "render_video",
+     "sandbox_generate_video",
+     "sandbox_process_video"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Turn your photos, clips, and audio into a story-driven vlog - with a real hook, natural pacing, and a satisfying ending, not just a slideshow."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "Vlog Maker turns your photos, clips, and audio into a story-driven vlog - not just a slideshow.\nFor the best result, share: 📷 Photos, 🎬 short clips, 🎵 any music or real sound ✨ Include your best moment - a reaction, a result, a before/after, a surprise. That becomes your hook.\nOptional, but helps a lot: tell me the theme, platform (YouTube 16:9/Reels 9:16), length, and the one moment you want to stand out.\nTip: fewer strong shots beat 30 lookalike photos. Moments with action and emotion make the best vlogs."
+   },
+   "material_guide_words": {
+    "classe": "guide_words",
+    "texto": "Please upload portrait/landscape or other material images."
+   },
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entradas: fotos, clipes curtos, música/som real; melhor momento vira o gancho; opcional tema, plataforma (16:9/9:16), duração.",
+     "Dica declarada: poucos planos fortes valem mais que 30 fotos parecidas."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=9; content_hash=8c6daa2aa8444e93…; fornax_key=nest.skill.vlog_shengcheng_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "24",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "Vlog Maker turns your photos, clips, and audio into a story-driven vlog - not just a slideshow.\nFor the best result, share: 📷 Photos, 🎬 short clips, 🎵 any music or real sound ✨ Include your best moment - a reaction, a result, a before/after, a surprise. That becomes your hook.\nOptional, but helps a lot: tell me the theme, platform (YouTube 16:9/Reels 9:16), length, and the one moment you want to stand out.\nTip: fewer strong shots beat 30 lookalike photos. Moments with action and emotion make the best vlogs.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": {
+     "texto": "Please upload portrait/landscape or other material images.",
+     "igual_ao_material_guide_words": true
+    },
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/common/im_access"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_03_Vlog_Generator.png",
+     "screenshot_sha256": "50f2c133e12f0e6cb5af8d11c28945458f80feaf0a1decd9400bef0c3a2c2bed"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_455aeefb40a3f65d",
+   "skill_name": "expert-product-promotion",
+   "display_name": "Creator Commerce",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 12,
+   "hash_conteudo_sha256": "806f673aa437f60235222b4dfb1efa7add6ed72adb5f987510a4a311a7ac4a4d",
+   "fornax_key": "nest.skill.daihuo_daren_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 35,
+   "fixada": true,
+   "prioridade": 5,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "render_video",
+     "sandbox_generate_video",
+     "sandbox_process_video"
+    ]
+   },
+   "modelos_padrao": {
+    "video": "Seedance_2.5",
+    "imagem": "gpt_image_2"
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Turn one product photo into an authentic creator-style video - unboxing, try-on, demo, or review - that looks like a real influencer filmed it and is ready to sell."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "🎬 Creator Product Promo - let's make your product video!\n✅ Required (need these to start): 📦 Product name 📸 At least one clear product photo (multiple angles help a lot!)\n⭐ Optional but recommended (makes it way better): 💡 Key selling points 🎯 Target audience & market 🎭 Creator style - try-on/unboxing/demo/review/friend rec ⏱️ Length & aspect ratio 🔗 Your call to action\nℹ️ Good to know: 🔒 I keep your product true to the photo and won't invent any claims 🌎 Creators default to a Western/Latin American look - unless you upload a specific person 💬 Scripts are in conversational English by default - just tell me if you'd like another language"
+   },
+   "material_guide_words": {
+    "classe": "guide_words",
+    "texto": "Please upload the product image."
+   },
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Obrigatório: nome do produto e ao menos uma foto clara. Opcional: pontos fortes, público/mercado, estilo do criador (experimentar/unboxing/demo/review/indicação), duração/proporção, CTA.",
+     "Mantém o produto fiel à foto e não inventa alegações; criadores ocidentais/latino-americanos por padrão; roteiro em inglês coloquial."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=12; content_hash=806f673aa437f602…; fornax_key=nest.skill.daihuo_daren_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "35",
+    "modelos_padrao_ui": [
+     "Dreamina Seedance 2.5",
+     "GPT Image 2"
+    ],
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "🎬 Creator Product Promo - let's make your product video!\n✅ Required (need these to start): 📦 Product name 📸 At least one clear product photo (multiple angles help a lot!)\n⭐ Optional but recommended (makes it way better): 💡 Key selling points 🎯 Target audience & market 🎭 Creator style - try-on/unboxing/demo/review/friend rec ⏱️ Length & aspect ratio 🔗 Your call to action\nℹ️ Good to know: 🔒 I keep your product true to the photo and won't invent any claims 🌎 Creators default to a Western/Latin American look - unless you upload a specific person 💬 Scripts are in conversational English by default - just tell me if you'd like another language",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": {
+     "texto": "Please upload the product image.",
+     "igual_ao_material_guide_words": true
+    },
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /commerce/v1/benefits/credit_receive",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_04_Creator_Commerce.png",
+     "screenshot_sha256": "dd3a189c4ce8e1f9c58f7101a4e3caaf6a93a0ac051bd61cff66c8dc4d2bfffc"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_fa50769c17c9c8cb",
+   "skill_name": "character-reference-sheet",
+   "display_name": "3-View Rendering",
+   "categorias": [
+    "Professional film and television"
+   ],
+   "tipo": "normal",
+   "genero_saida": 2,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 8,
+   "hash_conteudo_sha256": "07462714d81106ae1fa248f57de695cbcee07c8b48032b8275a790b6405e2d04",
+   "fornax_key": "nest.skill.san_shitu_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 21,
+   "fixada": true,
+   "prioridade": 6,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "sandbox_generate_image"
+    ]
+   },
+   "modelos_padrao": {
+    "video": "Seedance_2.5",
+    "imagem": "gpt_image_2"
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Turn a character image or description into a polished 16:9 reference sheet with a face close-up and consistent front, side, and back views."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "📸 Upload a character image\nA clear front-facing or full-body image is enough. Add side or back references if the hairstyle, outfit, or accessories are complex.\n✍️ Or describe your character\nInclude their appearance, hairstyle, outfit, body type, accessories, and visual style.\n↔️ Call out asymmetrical details\nTell us which side each detail belongs on, such as a mechanical right arm, a bag on the left shoulder, or a one-sided hairstyle.\n🔍 Need an exact likeness?\nIf you upload a real person, specify whether their face, body type, skin tone, and other visible traits should be preserved.\n✨ What you'll get\nOne clean 16:9 character sheet with a large face close-up on the left and matching front, true side, and back full-body views on the right.\nUsage example: Generate a close-up of the character's face and full-body three-view drawings."
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entrada: imagem do personagem (frontal/corpo inteiro; laterais ajudam) ou descrição; detalhes assimétricos com o lado; preservação de traços se for pessoa real.",
+     "Saída declarada: uma folha 16:9 com close do rosto à esquerda e frente, lateral e costas à direita. Só usa geração de imagem."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=8; content_hash=07462714d81106ae…; fornax_key=nest.skill.san_shitu_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "21",
+    "modelos_padrao_ui": [
+     "Dreamina Seedance 2.5",
+     "GPT Image 2"
+    ],
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "📸 Upload a character image\nA clear front-facing or full-body image is enough. Add side or back references if the hairstyle, outfit, or accessories are complex.\n✍️ Or describe your character\nInclude their appearance, hairstyle, outfit, body type, accessories, and visual style.\n↔️ Call out asymmetrical details\nTell us which side each detail belongs on, such as a mechanical right arm, a bag on the left shoulder, or a one-sided hairstyle.\n🔍 Need an exact likeness?\nIf you upload a real person, specify whether their face, body type, skin tone, and other visible traits should be preserved.\n✨ What you'll get\nOne clean 16:9 character sheet with a large face close-up on the left and matching front, true side, and back full-body views on the right.\nUsage example: Generate a close-up of the character's face and full-body three-view drawings.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/common/im_access",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_05_3_View_Rendering.png",
+     "screenshot_sha256": "269517f17406567a433de43b5ae6e731629067bad77975af21feac71ac201185"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_0ee6791bc6c069a5",
+   "skill_name": "imitation_video",
+   "display_name": "Viral Replication",
+   "categorias": [
+    "Short Drama",
+    "Marketing Advertising",
+    "Professional film and television"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 5,
+   "hash_conteudo_sha256": "baa812b8dbb53ac7b513f12a8894fbd6e3782ba771cbbdc16dd7521b4370f695",
+   "fornax_key": "nest.skill.fuke_baokuan_",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 27,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "pippit_video_tool_share_url_parser_sandbox",
+     "pippit_video_tool_imitation_reverse_analyze_sandbox",
+     "dynamic_questionnaire",
+     "pippit_video_tool_imitation_plan_sandbox",
+     "sandbox_generate_video",
+     "render_video"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Give it one reference video, and it reverse-engineers the hook, then builds a brand-new sample-style or remixed video from your requests and assets."
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "🎥 Provide one reference - upload a video, use an in-task asset, or paste a full shared link/URL (local paths and broken links won't parse). If you give several, name the main one.\n🎯 State your direction - \"imitate\" or \"remix\" alone isn't enough. Say whether to keep the core for a same-style remake, keep the hook but swap person/scene/theme, or diverge freely.\n🖼️ Upload assets to swap - to replace a specific person, product, or shot, upload that asset first and say what it replaces. Text-only changes (e.g. \"make the background a night beach\") need no upload.\n🧑‍🤝‍🧑 Bound identities are kept - uploaded people keep their real looks; text-generated casts default to natural North American/European/Latin American faces.\n🔍 Want analysis only? - say so, and it'll break down the hook and remixable points without generating.\n🇺🇸 Output is English by default; ask explicitly for any other language.\n⏳ Be patient - multi-segment videos generated in order, then merged into one final cut."
+   },
+   "material_guide_words": {
+    "classe": "guide_words",
+    "texto": "Upload the image/video you want to replicate."
+   },
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entradas: um vídeo de referência (upload, ativo da tarefa ou link completo) e a direção (refazer no mesmo estilo / manter o gancho trocando pessoa-cena-tema / divergir livremente); ativos a substituir; modo só-análise sem gerar.",
+     "Pipeline sugerido pela lista de ferramentas: analisar link → engenharia reversa do vídeo → questionário → plano → gerar vídeo → renderizar; vídeos multi-segmento são gerados em ordem e unidos num corte final (guide_words)."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=5; content_hash=baa812b8dbb53ac7…; fornax_key=nest.skill.fuke_baokuan_"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "27",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "🎥 Provide one reference - upload a video, use an in-task asset, or paste a full shared link/URL (local paths and broken links won't parse). If you give several, name the main one.\n🎯 State your direction - \"imitate\" or \"remix\" alone isn't enough. Say whether to keep the core for a same-style remake, keep the hook but swap person/scene/theme, or diverge freely.\n🖼️ Upload assets to swap - to replace a specific person, product, or shot, upload that asset first and say what it replaces. Text-only changes (e.g. \"make the background a night beach\") need no upload.\n🧑‍🤝‍🧑 Bound identities are kept - uploaded people keep their real looks; text-generated casts default to natural North American/European/Latin American faces.\n🔍 Want analysis only? - say so, and it'll break down the hook and remixable points without generating.\n🇺🇸 Output is English by default; ask explicitly for any other language.\n⏳ Be patient - multi-segment videos generated in order, then merged into one final cut.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": {
+     "texto": "Upload the image/video you want to replicate.",
+     "igual_ao_material_guide_words": true
+    },
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/common/im_access",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_06_Viral_Replication.png",
+     "screenshot_sha256": "e050b5aeec6f81b4ed48ac08ef7c1abe765350b1cdd907f0551d9afdcd34aab5"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_3df75762b83fa30c",
+   "skill_name": "batch-marketing-video-generator-r1",
+   "display_name": "Batch Generation",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 6,
+   "hash_conteudo_sha256": "4e87652523b7ae4e4c2fdf52878c9cca9acc0a7c73e5461d0847156d046a960a",
+   "fornax_key": "nest.skills.batch_mkt_video_gen_r1",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "todo_write",
+     "dynamic_questionnaire",
+     "present_sandbox_file",
+     "sandbox_generate_image",
+     "sandbox_generate_audio",
+     "sandbox_generate_video",
+     "sandbox_bash",
+     "sandbox_read",
+     "sandbox_write",
+     "sandbox_edit",
+     "sandbox_process_video",
+     "render_video",
+     "pippit_omni_search",
+     "pippit_tool_ask_echo_search",
+     "async_task_create",
+     "async_task_poll",
+     "async_task_resume",
+     "async_task_kill",
+     "load_skill"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Turn one product into multiple video variations instantly. Built for rapid A/B testing to find your winning ads."
+   },
+   "guide_words": {
+    "classe": "prefill",
+    "texto": "Please generate 3 different ad scripts and video variations for my product."
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Pedido pré-preenchido pede 3 roteiros de anúncio e variações de vídeo do produto.",
+     "Conjunto de ferramentas agente amplo (todo_write, tarefas assíncronas async_task_*, load_skill, sandbox bash/read/write/edit, busca omni): execução em lote com tarefas assíncronas e outras skills."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=6; content_hash=4e87652523b7ae4e…; fornax_key=nest.skills.batch_mkt_video_gen_r1"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": null,
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": true,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "Please generate 3 different ad scripts and video variations for my product.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/common/im_access"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_07_Batch_Generation.png",
+     "screenshot_sha256": "09525b0ae447530dbfb9760e945faf3f8e6420d14b1de7f4a64baa3d84857974"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_cdba2456af6cda4b",
+   "skill_name": "url2video",
+   "display_name": "URL to Video",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 13,
+   "hash_conteudo_sha256": "36f02ce62bf12c58e6066b7403701c8645317cbcb39a63a68e9aa239b32b93cd",
+   "fornax_key": "nest.skills.url2video",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 6,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "pippit_tool_url_parse",
+     "sandbox_read"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Just drop your product URL or website, and we'll auto-extract your product images and text to generate ready-to-post videos."
+   },
+   "guide_words": {
+    "classe": "prefill",
+    "texto": "Please generate a fast-paced, engaging promotional video suitable for TikTok Shorts. Highlight the main features and make it high-converting.\nHere is my product/website link: [Paste URL]"
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Pedido pré-preenchido com marcador [Paste URL]; extrai imagens e textos do produto a partir do link (ferramentas pippit_tool_url_parse e sandbox_read)."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=13; content_hash=36f02ce62bf12c58…; fornax_key=nest.skills.url2video"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "6",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": true,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "Please generate a fast-paced, engaging promotional video suitable for TikTok Shorts. Highlight the main features and make it high-converting.\nHere is my product/website link: [Paste URL]",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/common/im_access",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_08_URL_to_Video.png",
+     "screenshot_sha256": "cb11476648d7dbed3d680942f4f8f560b69cb337a8a2229ffe15daee68d7230d"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_9ba4f9e7692ead76",
+   "skill_name": "video-language-localization",
+   "display_name": "Video Translation",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 7,
+   "hash_conteudo_sha256": "395671d772615ea453a2e6e9ce05d6adc18c1df5d3a381e93eb5a9cb7344663a",
+   "fornax_key": "nest.skills.video_language_localization",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 7,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": [
+     "marketing_video_analysis",
+     "sandbox_generate_video",
+     "dynamic_questionnaire",
+     "sandbox_generate_audio",
+     "sandbox_generate_image"
+    ]
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Take your viral videos global in a click. Upload your original footage and auto-translate into multiple languages while perfectly preserving your original hooks and pacing. Unlock global traffic with a single asset and explode your cross-border sales at zero extra cost."
+   },
+   "guide_words": {
+    "classe": "prefill",
+    "texto": "Translate this video and replace the actor with a local AI avatar. Keep the original hooks and pacing completely intact. Target market/language:"
+   },
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Pedido pré-preenchido: traduzir o vídeo e trocar o ator por avatar de IA local mantendo ganchos e ritmo; termina em \"Target market/language:\" a completar.",
+     "Ferramentas: análise de vídeo de marketing, geração de vídeo/áudio/imagem, questionário dinâmico."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=7; content_hash=395671d772615ea4…; fornax_key=nest.skills.video_language_localization"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "7",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": true,
+    "workflow_comprovado": "lista de ferramentas (ordem não comprovada)",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "Translate this video and replace the actor with a local AI avatar. Keep the original hooks and pacing completely intact. Target market/language:",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": false,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/benefit/notice/list",
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /commerce/v1/resource_position",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_09_Video_Translation.png",
+     "screenshot_sha256": "5e8c3dedbf5532b7482bff42d8fea3dffd2f52174a8310e027137cd33e4364bb"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_79de493e9f147462",
+   "skill_name": "nest_skills_marketing_video_v2",
+   "display_name": "Marketing Video",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "normal",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 9,
+   "hash_conteudo_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "fornax_key": "nest.skills.marketing_video_v2",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 20,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": null,
+    "nota": "metadata.tools = null no payload"
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": "gpt_image_2"
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "The core marketing-video engine that turns your product info plus a Hook/Style /Play brief into a commercial-ready video, from script and storyboard all the way to the final cut"
+   },
+   "guide_words": {
+    "classe": "guide_words",
+    "texto": "📦 Give product facts + a Hook - product name, selling points, and any Hook/Style/Play prompts. It builds a real ad script (hook → bridge → product-led body → CTA), not a neutral shot summary.\n🎯 One spine, not a feature dump - it ranks your selling points into one memorable promise + proof path, so the video sells instead of listing everything evenly.\n✅ Approve before it generates - it discloses the full storyboard and exact prompts and waits for your go; any material change re-triggers approval.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for another language."
+   },
+   "material_guide_words": {
+    "classe": "guide_words",
+    "texto": "Please upload the product image."
+   },
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Entradas: fatos do produto + prompts de Hook/Style/Play; constrói roteiro de anúncio (gancho → ponte → corpo centrado no produto → CTA).",
+     "Ranqueia pontos fortes numa promessa + prova; mostra o storyboard completo e os prompts exatos e ESPERA aprovação antes de gerar (mudança material reabre a aprovação).",
+     "metadata.tools = null: ferramentas não declaradas no payload."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=9; content_hash=e3b0c44298fc1c14…; fornax_key=nest.skills.marketing_video_v2"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "20",
+    "modelos_padrao_ui": [
+     "GPT Image 2",
+     "The core marketing-video engine that turns your product info plus a Hook/Style /Play brief into a commercial-ready video, from script and storyboard all the way to the final cut",
+     "Marketing Advertising"
+    ],
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": true,
+    "template_parametrizado": false,
+    "workflow_comprovado": "não declarado",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": true,
+    "botao_remover_skill": true,
+    "placeholder_do_campo": {
+     "texto": "📦 Give product facts + a Hook - product name, selling points, and any Hook/Style/Play prompts. It builds a real ad script (hook → bridge → product-led body → CTA), not a neutral shot summary.\n🎯 One spine, not a feature dump - it ranks your selling points into one memorable promise + proof path, so the video sells instead of listing everything evenly.\n✅ Approve before it generates - it discloses the full storyboard and exact prompts and waits for your go; any material change re-triggers approval.\n🇺🇸 Output is English by default (spoken American English); ask explicitly for another language.",
+     "igual_ao_guide_words": true,
+     "observacao": "o guide_words aparece como placeholder esmaecido; o campo fica vazio"
+    },
+    "bloco_de_upload": {
+     "texto": "Please upload the product image.",
+     "igual_ao_material_guide_words": true
+    },
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/common/im_access"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_10_Marketing_Video.png",
+     "screenshot_sha256": "16bb0ffaa0565ccc65c733e091093e4c56f8f13cfef1522bf92bbcd10ebe0a01"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_52871f154122fe43",
+   "skill_name": "ai_talking_photo",
+   "display_name": "AI talking photo",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "ai_talking_photo",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 10,
+   "hash_conteudo_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "fornax_key": "ai_talking_photo",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 12,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": null,
+    "nota": "metadata.tools = null no payload"
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Make pictures move with AI."
+   },
+   "guide_words": null,
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Skill de tipo especial (skill_type ai_talking_photo): sem guia nem ferramentas no payload; fluxo próprio de foto falante."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=10; content_hash=e3b0c44298fc1c14…; fornax_key=ai_talking_photo"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "12",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": false,
+    "template_parametrizado": false,
+    "workflow_comprovado": "não declarado",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "compositor da Home (/home)",
+    "chip_da_skill": false,
+    "botao_remover_skill": false,
+    "placeholder_do_campo": {
+     "texto": "Describe your ideas, Pippit will create with you.",
+     "igual_ao_guide_words": false,
+     "observacao": "sem guide_words: placeholder padrão do compositor"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": true,
+    "controles_do_compositor": [
+     "Agent",
+     "Skills",
+     "Custom models",
+     "Canvas",
+     "Credit rules",
+     "Submit"
+    ],
+    "custo_exibido": "37 /s",
+    "chamadas_ao_clicar": [
+     "GET /api/biz/v1/user/fetch_email_status",
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list",
+     "POST /api/biz/v1/home/recommend_video",
+     "POST /api/biz/v1/smart_creation/list_offline_recommend",
+     "POST /api/biz/v2/videogen/check",
+     "POST /api/biz/v1/product/list"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_11_AI_talking_photo.png",
+     "screenshot_sha256": "8d3577b9b0b18cf9c331741e5df446d1c30406aaad85ba250dfccb0bab93ca7c"
+    }
+   }
+  },
+  {
+   "skill_id": "sk_official_1ebbd2c4efb79e46",
+   "skill_name": "avatar_video_skill",
+   "display_name": "Avatar Video",
+   "categorias": [
+    "Marketing Advertising"
+   ],
+   "tipo": "avatar_video",
+   "genero_saida": 1,
+   "origem": "platform_recommend",
+   "status": "online",
+   "publica": true,
+   "versao_conteudo": 7,
+   "hash_conteudo_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "fornax_key": "avatar_video_skill",
+   "md_type": "tos",
+   "visibilidade": {
+    "agentes": [
+     "pippit_nest_agent",
+     "pippit_marketing_agent"
+    ],
+    "cenas": [
+     "store",
+     "suggest",
+     "runtime"
+    ],
+    "regioes": [
+     "SG"
+    ]
+   },
+   "favoritos": 17,
+   "fixada": false,
+   "prioridade": 0,
+   "ferramentas": {
+    "classe": "tools",
+    "lista": null,
+    "nota": "metadata.tools = null no payload"
+   },
+   "modelos_padrao": {
+    "video": null,
+    "imagem": null
+   },
+   "descricao_comercial": {
+    "classe": "descricao",
+    "texto": "Digital Human Video"
+   },
+   "guide_words": null,
+   "material_guide_words": null,
+   "comportamento_inferido": {
+    "classe": "inferido",
+    "itens": [
+     "Skill de tipo especial (skill_type avatar_video): sem guia nem ferramentas no payload; fluxo próprio de vídeo com avatar."
+    ]
+   },
+   "instrucoes_privadas": {
+    "classe": "privado",
+    "detalhe": "md_type=tos; content_version=7; content_hash=e3b0c44298fc1c14…; fornax_key=avatar_video_skill"
+   },
+   "dialogo_ui": {
+    "autor": "Pippit official",
+    "favoritos_ui": "17",
+    "modelos_padrao_ui": null,
+    "tem_exemplo_em_video": true,
+    "tem_conteudo_completo_da_skill": false
+   },
+   "classificacao_resumo": {
+    "prompt_integral_privado": false,
+    "guide_words_integral": false,
+    "template_parametrizado": false,
+    "workflow_comprovado": "não declarado",
+    "instrucoes_privadas_acessiveis": false
+   },
+   "evidencia_670": {
+    "servidor": "ev_ea421de9207ed0d11f7f73535d25dfd4aa8041762c10264892d55b55c92f052a (transação request-201, POST /api/biz/v1/agent/list_skill_store)",
+    "dialogo_ui": "skills_observed.json (controlador CDP, sem Evidence REA)",
+    "pagina": "ev_2bd23653952ae050858d0158ebc25592f126095b9c6823ab9cc969b4b03988bc"
+   },
+   "uso_botao_use": {
+    "classe": "comportamento observado ao clicar em Use (não é prompt privado)",
+    "destino": "modal de criação do fluxo Avatar video (carrega com skeleton; conteúdo não renderizou na captura)",
+    "chip_da_skill": false,
+    "botao_remover_skill": false,
+    "placeholder_do_campo": {
+     "texto": "Describe your ideas, Pippit will create with you.",
+     "igual_ao_guide_words": false,
+     "observacao": "sem guide_words: placeholder padrão do compositor"
+    },
+    "bloco_de_upload": null,
+    "botao_upload_referencia": false,
+    "controles_do_compositor": [
+     "Skills",
+     "Canvas",
+     "Submit"
+    ],
+    "custo_exibido": null,
+    "chamadas_ao_clicar": [
+     "POST /api/biz/v1/benefit/notice/list",
+     "POST /commerce/v1/resource_position",
+     "POST /api/biz/v1/agent/get_available_model_list",
+     "POST /api/biz/v1/videogen/digital_human_filter_config",
+     "POST /commerce/v1/benefits/credit_receive",
+     "POST /api/biz/v1/agent/list_homepage_recommended_skill",
+     "POST /api/biz/v2/common/generation_task_list",
+     "POST /commerce/v3/benefits/batch_get_user_benefit",
+     "POST /commerce/v1/benefits/user_credit",
+     "POST /api/biz/v1/digital_human/get_item_list",
+     "POST /api/biz/v1/commerce/get_commerce_auth_info",
+     "POST /api/biz/v1/videogen/recommend_digital_human_by_tag",
+     "POST /api/biz/v1/home/recommend_video",
+     "POST /api/biz/v1/smart_creation/list_offline_recommend",
+     "POST /api/biz/v2/videogen/check",
+     "POST /api/biz/v1/product/list",
+     "POST /api/biz/v1/web_homepage/showcase_tab/list",
+     "POST /api/biz/v1/web_homepage/promo_slot/list",
+     "POST /api/biz/v1/web_homepage/display_content/list"
+    ],
+    "evidencia": {
+     "captura_json": "captures/skills_670/use/skills_use_capture.json",
+     "screenshot": "captures/skills_670/use/use_12_Avatar_video.png",
+     "screenshot_sha256": "120866c049b70d681850c61d9adad1aaf5d4c2587bdf31c01a2123780502ca7f",
+     "captura_avatar": "captures/skills_670/use_avatar12/skills_use_capture.json"
+    }
+   }
+  }
+ ],
+ "bundles": {
+  "esquema_skill_do_usuario": {
+   "descricao": "Campos e regras do formulário de criação/edição de skill (bundle Skill/AgentSkill).",
+   "itens": [
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_createskill",
+     "texto": "Create Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 741840,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_close",
+     "texto": "Close",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 741929,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_deleteskill",
+     "texto": "Delete Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 742005,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_title_fullcontent",
+     "texto": "Full skill content",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 742223,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_favoriteskill",
+     "texto": "Favorite Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 742845,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_openskills",
+     "texto": "Skills",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743206,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_retry",
+     "texto": "Retry",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743388,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_selected",
+     "texto": "Selected",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743571,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_label_suggestions",
+     "texto": "Skill suggestions",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743653,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_label_skilllist",
+     "texto": "Skill list",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743749,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_removefavorite",
+     "texto": "Remove from favorites",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743836,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_useskill",
+     "texto": "Use now",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 743937,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_viewdetails",
+     "texto": "View details",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 746958,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_label_categories",
+     "texto": "Categories",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 748472,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_addfile",
+     "texto": "新建文件",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 755981,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_addfolder",
+     "texto": "新建文件夹",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756061,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_checkbox_allowpublic",
+     "texto": "允许官方公开我的技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756151,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_tooltip_allowpublic",
+     "texto": "你的技能保存后将有机会被小云雀官方推荐给其他用户使用。我们将推出更多技能公开奖励机制！",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756285,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_empty_binarypreview",
+     "texto": "暂不支持预览此文件",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756611,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_casemedia",
+     "texto": "更多成果示意图或视频（建议比例16:9）",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756729,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_createfailed",
+     "texto": "技能保存失败",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 756948,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_createsuccess",
+     "texto": "技能已保存",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757051,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_description",
+     "texto": "一句话介绍",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757205,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_description",
+     "texto": "简短描述技能能做什么",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757310,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_cover",
+     "texto": "技能封面（建议比例16:9）",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757434,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_directory",
+     "texto": "目录",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757554,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_filename",
+     "texto": "请输入名称",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757636,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_guidewords",
+     "texto": "提示词指引",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757732,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_desc_guidewords",
+     "texto": "启用此技能后，提示词指引将显示在输入框内作为输入提示",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 757828,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_guidewords",
+     "texto": "简要描述填写什么提示词可以让你的技能发挥得更好",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 758056,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_materialguide",
+     "texto": "素材上传指引",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 758265,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_desc_materialguide",
+     "texto": "如果技能有素材上传要求，请填写建议上传什么素材，素材上传指引将在启用此技能后显示",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 758373,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_materialguide",
+     "texto": "使用这个技能时建议上传的素材",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 758691,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_markdownonly",
+     "texto": "仅支持创建 .md 文件",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 758951,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_medialimit",
+     "texto": "最多只能上传 6 个媒体",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759062,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_imagesize",
+     "texto": "当前最多只支持上传 10MB 以内的图片",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759185,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_videosize",
+     "texto": "当前最多只支持上传 50MB 以内的视频",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759340,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_mpegunsupported",
+     "texto": "暂不支持 MPG 和 MPEG 格式视频",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759501,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_missingcover",
+     "texto": "请上传技能封面",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759635,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_missingnameanddescription",
+     "texto": "请输入技能名称和一句话介绍后再保存",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759756,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_missingskillmd",
+     "texto": "Skill 包必须包含 SKILL.md",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 759939,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_missingtag",
+     "texto": "请选择符合这个技能的类型标签",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760050,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_name",
+     "texto": "技能名称",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760190,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_error_nameemptyslug",
+     "texto": "技能名称需要包含中文、英文字母或数字",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760273,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_name",
+     "texto": "给你的技能起个名字",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760451,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_error_nameruntimetoolong",
+     "texto": "技能名称转换后的标识过长，请缩短名称",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760575,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_error_nametoolong",
+     "texto": "技能名称不能超过 20 个字符",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760754,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_error_nameunsupported",
+     "texto": "技能名称包含暂不支持的字符，请调整后重试",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 760892,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_status_parsing",
+     "texto": "正在解析你的技能包",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761076,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_playvideo",
+     "texto": "播放视频",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761189,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_previewimage",
+     "texto": "预览图片",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761274,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_removemedia",
+     "texto": "移除媒体",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761361,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_saveanduse",
+     "texto": "保存并使用",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761504,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_status_saving",
+     "texto": "保存中",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761590,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_skillcontent",
+     "texto": "技能内容",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761771,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_placeholder_skillcontent",
+     "texto": "\\u{5728}\\u{6B64}\\u{8F93}\\u{5165}Skill\\u{5185}\\u{5BB9}\n\n## \\u{505A}\\u{4EC0}\\u{4E48}\n(\\u{4E00}\\u{53E5}\\u{8BDD}\\u{8BF4}\\u{660E}\\u{7528}\\u{9014})\\u{4F8B}:\\u{628A}\\u{4E00}\\u{53E5}\\u{8BDD}\\u{6545}\\u{4E8B}\\u{60F3}\\u{6CD5}\\u{505A}\\u{6210}\\u{4E00}\\u{6761}\\u{77ED}\\u{6F2B}\\u{5267}\\u{6210}\\u{8BB2}\n\n##\\u{9700}\\u{8981}\\u{4EC0}\\u{4E48}\\u{8F93}\\u{5165}\n(\\u{6700}\\u{5C11}\\u{63D0}\\u{4F9B}\\u{4EC0}\\u{4E48})\\u{4F8B}:\\u{4E00}\\u{53E5}\\u{8BDD}\\u{60F3}\\u{6CD5},\\u{53EF}\\u{9009}\\u{753B}\\u{98CE}\\u{3001}\\u{65F6}\\u{957F}\\u{3001}\\u{4E3B}\\u{89D2}\\u{8BBE}\\u{5B9A}\n\n##\\u{600E}\\u{4E48}\\u{505A}\n(\\u{5199}\\u{4F60}\\u{5728}\\u{610F}\\u{7684}\\u{73AF}\\u{8282}\\u{548C}\\u{8981}\\u{6C42},\\u{4E0D}\\u{7528}\\u{5199}\\u{5168})\\u{4F8B}:\\u{811A}\\u{672C}\\u{8981}\\u{53CD}\\u{8F6C}\\u{591A},\\u{753B}\\u{98CE}\\u{56FA}\\u{5B9A}\\u{6210}\\u{97E9}\\u{6F2B}\n\n##\\u{4EA7}\\u{51FA}\\u{4EC0}\\u{4E48}\n(\\u{6700}\\u{7EC8}\\u{4EA4}\\u{4ED8}\\u{4EC0}\\u{4E48})\\u{4F8B}:\\u{6210}\\u{7247},\\u{9644}\\u{811A}\\u{672C}\\u{548C}\\u{5206}\\u{955C}\n\n##\\u{4EC0}\\u{4E48}\\u{65F6}\\u{5019}\\u{95EE}\\u{4F60}\n(\\u{4EC0}\\u{4E48}\\u{60C5}\\u{51B5}\\u{4E0B}\\u{505C}\\u{4E0B}\\u{6765}\\u{95EE}\\u{4F60})\\u{4F8B}:\\u{62FF}\\u{4E0D}\\u{51C6}\\u{9898}\\u{6750}\\u{6216}\\u{98CE}\\u{683C}\\u{65F6}\\u{95EE}\\u{4E00}\\u{6B21},\\u{5176}\\u{4F59}\\u{81EA}\\u{5DF1}\\u{5B9A}",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 761872,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_label_tag",
+     "texto": "选择符合这个技能的类型标签",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763170,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_title",
+     "texto": "创建技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763298,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_createfailed",
+     "texto": "当前环境暂不支持创建技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763374,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_uploadcasemedia",
+     "texto": "上传更多成果示意图或视频",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763601,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_btn_uploadcover",
+     "texto": "上传技能封面",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763739,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_skill_create_toast_uploadfailed",
+     "texto": "媒体上传失败",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 763838,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_addcaseassets",
+     "texto": "Add example assets",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766133,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_addcover",
+     "texto": "Add cover",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766237,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_availabletools",
+     "texto": "Available tools",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766327,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_cancel",
+     "texto": "Cancel",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766431,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_close",
+     "texto": "Close",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766516,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_title_manual",
+     "texto": "Create manually",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766599,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_title_choose",
+     "texto": "Create a Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766702,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_title_notsaved",
+     "texto": "Skill not saved",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766804,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_title_package",
+     "texto": "Import Skill package",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 766908,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_empty_desc_unavailable",
+     "texto": "Skill creation isn't available in this workspace.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 767017,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_remove",
+     "texto": "Remove",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 767157,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_status_saving",
+     "texto": "Saving Skill…",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 767242,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_title_smart",
+     "texto": "Create with AI",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 767342,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_desc_choose",
+     "texto": "Choose how to create your Skill.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 768486,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_smart",
+     "texto": "The creation chat couldn't be started. Your current chat wasn't affected.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 768772,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_desc_smart",
+     "texto": "Describe your goal in a separate creation chat.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 769115,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_desc_manual",
+     "texto": "Configure the instructions, metadata, assets, and tools yourself.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 769734,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_method_desc_package",
+     "texto": "Review a local .skill or .zip package before uploading it.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 770185,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_field_review",
+     "texto": "Review this field and try again.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 830877,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_name",
+     "texto": "Skill name",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 831433,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_name",
+     "texto": "Enter a Skill name",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 831643,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_description",
+     "texto": "Description",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 831909,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_description",
+     "texto": "Explain what this Skill helps users do",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 832148,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_instructions",
+     "texto": "Skill instructions",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 832457,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_instructions",
+     "texto": "Describe the steps and behavior this Skill should follow",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 832707,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_guide",
+     "texto": "Usage guide",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 833023,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_guide",
+     "texto": "Explain how to use this Skill and what it produces",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 833238,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_materialguide",
+     "texto": "Asset guide",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 833544,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_materialguide",
+     "texto": "Explain which files or references users should provide",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 833792,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_tags",
+     "texto": "Tags",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 834127,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_placeholder_tags",
+     "texto": "Separate tags with commas",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 834407,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_visibility",
+     "texto": "Visibility",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 834705,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_option_public",
+     "texto": "Public",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 835100,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_option_workspace",
+     "texto": "Workspace",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 835197,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_option_private",
+     "texto": "Only me",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 835284,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_desc_toolsunavailable",
+     "texto": "No tools are available in this workspace.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 835609,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_coveradded",
+     "texto": "Cover added",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 836369,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_caseassets",
+     "texto": "Example assets",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 836913,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_label_caseassetadded",
+     "texto": "Example asset {index} added",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 837201,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_close_title_unsaved",
+     "texto": "Discard this draft?",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 838070,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_close_desc_unsaved",
+     "texto": "Your unsaved changes will be cleared.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 838197,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_discard",
+     "texto": "Discard changes",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 838435,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_signin",
+     "texto": "Log in before saving this Skill.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 838928,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_permission",
+     "texto": "You don't have permission to save Skills in this workspace.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 839085,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_conflict",
+     "texto": "This Skill changed elsewhere. Review your draft and try again.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 839242,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_validation",
+     "texto": "Review the highlighted fields and try again.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 839402,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_retry",
+     "texto": "Your draft was preserved. Check your connection and try again.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 839529,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_error_desc_assetupload",
+     "texto": "The asset wasn't uploaded. Your draft was preserved. Try again.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 839787,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_edit_desc_fields",
+     "texto": "Update this Skill's instructions and settings.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 840331,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_manual_desc_fields",
+     "texto": "Add the instructions and settings required to use this Skill.",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 840448,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_btn_save",
+     "texto": "Save Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 840824,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_edit_title_skill",
+     "texto": "Edit Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 840930,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_create_manual_title",
+     "texto": "Create a Skill manually",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 841011,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_more",
+     "texto": "More",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 846494,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_uninstallskill",
+     "texto": "Uninstall Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 846883,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_installskill",
+     "texto": "Install Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 846971,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_disableskill",
+     "texto": "Disable Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 847199,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_enableskill",
+     "texto": "Enable Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 847283,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_editskill",
+     "texto": "Edit Skill",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 847475,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_downloadpackage",
+     "texto": "Download Skill package",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 848749,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_aria_previousshowcase",
+     "texto": "Previous skill example",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 853073,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_aria_nextshowcase",
+     "texto": "Next skill example",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 853639,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_label_author",
+     "texto": "Author",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 854713,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_label_usagecount",
+     "texto": "Uses",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 854820,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_label_favoritecount",
+     "texto": "Favorites",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 854933,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_detail_title_materialguide",
+     "texto": "Asset guide",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 858002,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_canceldelete",
+     "texto": "Cancel",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 862651,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_businesscomponents_agentskill_btn_loadmore",
+     "texto": "Load more",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 868069,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    }
+   ]
+  },
+  "skill_de_fluxo_do_estudio_de_historias": {
+   "descricao": "Configuração de skill por ETAPA do workflow do Estúdio de histórias: Roteiro (剧本生成), Storyboard (分镜设计), Ativos (资产设计); campos: nome, uma frase, \"规则与生成策略\" (como planejar um conjunto de storyboards) e \"单分镜提示词格式\" (estrutura de campos do prompt de cada storyboard).",
+   "itens": [
+    {
+     "chave": "Pippit_shortdrama_workflowskill_badge_active",
+     "texto": "当前生效",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470399,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_stage_asset",
+     "texto": "资产设计",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470498,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_cancel",
+     "texto": "取消",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470592,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_clear",
+     "texto": "清空当前配置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470675,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_close",
+     "texto": "关闭",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470781,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_status_comingsoon",
+     "texto": "即将上线",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470868,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_copy",
+     "texto": "复制",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 470966,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_name_copy",
+     "texto": "{text} 副本",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471049,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_create",
+     "texto": "新建配置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471142,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_delete",
+     "texto": "删除",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471238,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_desc_deleteactive",
+     "texto": "请先启用其他配置或清空当前配置，再删除此技能。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471339,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_dialog_description",
+     "texto": "为工作流的不同阶段配置技能规则与输出格式。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471558,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_error_detail_description",
+     "texto": "当前配置详情加载失败，请重试。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471777,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_error_detail_title",
+     "texto": "无法加载配置详情",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 471960,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_discard",
+     "texto": "放弃更改",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472086,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_dialog_discard_description",
+     "texto": "未保存的技能更改将会丢失。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472195,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_dialog_discard_title",
+     "texto": "放弃未保存的更改？",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472364,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_empty_description",
+     "texto": "新建配置，为当前工作流阶段设置技能规则与输出格式。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472507,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_empty_title",
+     "texto": "暂无工作流技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472737,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_entry",
+     "texto": "技能设置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472848,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_error_description",
+     "texto": "无法加载技能配置，当前配置未更改。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 472946,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_error_title",
+     "texto": "无法加载技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473128,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_label_editing",
+     "texto": "正在编辑",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473235,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_label_skillcontent",
+     "texto": "技能内容",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473337,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_description",
+     "texto": "一句话介绍",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473448,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_instructions_description",
+     "texto": "定义技能如何规划一组分镜。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473576,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_instructions",
+     "texto": "规则与生成策略",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473754,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_materialguide_description",
+     "texto": "定义每个分镜最终输出的字段结构。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 473896,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_materialguide",
+     "texto": "单分镜提示词格式",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474094,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_field_name",
+     "texto": "名称",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474223,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_keepediting",
+     "texto": "继续编辑",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474393,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_empty_selection_description",
+     "texto": "从列表中选择技能进行查看或编辑。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474510,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_empty_selection_title",
+     "texto": "选择技能",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474702,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_error_operation",
+     "texto": "无法完成更改，草稿已保留。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474814,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_retry",
+     "texto": "重试",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 474965,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_save",
+     "texto": "保存更改",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475046,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_savealternative",
+     "texto": "保存为备选",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475149,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_desc_savebeforeapply",
+     "texto": "请先保存更改，再设为当前配置。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475269,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_stage_script",
+     "texto": "剧本生成",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475443,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_button_setcurrent",
+     "texto": "设为当前配置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475542,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_stage_storyboard",
+     "texto": "分镜设计",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475663,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_stage_configurationcount",
+     "texto": "配置方案：{number}",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475778,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_dialog_title",
+     "texto": "技能配置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 475906,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_title_configurations",
+     "texto": "配置方案",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 476009,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_title_newconfiguration",
+     "texto": "新配置",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 476119,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_shortdrama_workflowskill_desc_bindingnotice",
+     "texto": "选择配置只会切换编辑对象；设为当前配置后才会应用到工作流。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__889795.256f74ebdf.js",
+       "sha256": "885425b42775b4d84239003f5b3c7a511fff4181bfc9306f7736f6cc80ad0f1f",
+       "deslocamento": 476225,
+       "evidencia_650_historica": "ev_9d77c1418463391df8772aa43ea1ec1904639d572c6f878fa25e05049139fa84"
+      }
+     ]
+    }
+   ]
+  },
+  "prompts_de_hook_do_estudio_de_marketing": {
+   "descricao": "Textos de prompt dos Hooks (botão \"Ver prompt\"); idioma original zh.",
+   "itens": [
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_conflictopening",
+     "texto": "开头 3 秒用强冲突制造悬念，快速呈现用户痛点。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 297379,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_resultfirst",
+     "texto": "开头 3 秒先展示使用结果，再回到产品如何解决问题。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 297600,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_questionopening",
+     "texto": "开头 3 秒用一个与目标人群高度相关的问题吸引注意。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 297833,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_producthit",
+     "texto": "让商品突然飞入画面，用人物反应立刻拉住注意力。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 298065,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_closeup",
+     "texto": "用超近景细节开场，再慢慢揭示完整商品。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 298286,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_hook_prompt_interview",
+     "texto": "以真实问答切入用户痛点，顺势带出商品卖点。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 298481,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    }
+   ]
+  },
+  "prompts_de_vitrine_do_estudio_de_marketing": {
+   "descricao": "Pedidos de exemplo da vitrine do Estúdio de marketing; idioma original zh.",
+   "itens": [
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_industrytrend",
+     "texto": "结合我的行业和商品，分析近期营销趋势并生成一条有传播潜力的视频。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 454563,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_viralremake",
+     "texto": "参考当前热门内容结构，为我的商品复刻一条原创营销视频。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 454849,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_storyad",
+     "texto": "围绕我的商品写一支剧情广告：开头制造冲突，中段自然植入卖点，结尾给出转化动作。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 455099,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_talentsales",
+     "texto": "让选中的达人用真实体验和场景化表达介绍商品，并给出明确购买理由。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 455421,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_brandfilm",
+     "texto": "为我的品牌生成一支强调质感、价值观和产品核心利益点的品牌短片。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 455703,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_marketingagent_showcase_prompt_festival",
+     "texto": "结合近期节日氛围和商品卖点，策划一条具备活动感和转化力的营销视频。",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__53019.0f91dddfd6.js",
+       "sha256": "6af0bb98085b2ac5219375818f5a76bb3cf2d7ee9cffdfd7c66e33bbf737db12",
+       "deslocamento": 455975,
+       "evidencia_650_historica": "ev_88f65b57312759063942d6abaeee5fe5660b0323195bb3880d6a528e0173472d"
+      }
+     ]
+    }
+   ]
+  },
+  "modelos_de_prompt_de_ferramentas": {
+   "descricao": "Strings com marcador {…} ou prompts fixos de ferramentas de tela/imagem/vídeo.",
+   "itens": [
+    {
+     "chave": "Pippit_seedream50pro_prompt_inpaintnumber",
+     "texto": "Inpaint {number}",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__520277.b368648da4.js",
+       "sha256": "56d57000a7590dcce26847bc76741c64d6c58b21270553d6b2e2fc33d019b279",
+       "deslocamento": 13921,
+       "evidencia_650_historica": "ev_7c36445d96c5309d6edef6fd55829494ac55c4d586317e6e6033c4405b3df000"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_seedream50pro_prompt_inpaintnumber",
+     "texto": "局部{number}",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__616044.82a3c713c4.js",
+       "sha256": "5e46849fb93201d1d4bf90fa7500330763a58f8326202b97bb49474f6dd6876e",
+       "deslocamento": 1723992,
+       "evidencia_650_historica": "ev_4b1b1eeedb65033b813a150e33e3fb132cbc5fa52d58dec028897abff368e4ff"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_seedream50pro_prompt_isolatelayers",
+     "texto": "Isolate the layers of the image",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__627000.ffd75e22aa.js",
+       "sha256": "7e6f8a5588f1b00f81690fa91e770b0c95e6b66bc7d46a0def19cbe9fd4d1d44",
+       "deslocamento": 147805,
+       "evidencia_650_historica": "ev_80b284d5642b9058c5f584ec1c9e12e07c91f34630b98a1d29d43d6049afcc3b"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_xyqcanvas_videominitool_prompt_refinevideocopy",
+     "texto": "帮我提炼这条视频的创作文案",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__850206.e38ec15e55.js",
+       "sha256": "b664655c3c2f266ae64d4ecf5ab7f5cd35dd9cac776f6edc396420a189f46618",
+       "deslocamento": 758473,
+       "evidencia_650_historica": "ev_3bf298cc1be024921ba597d631114289a08bdad15be46e831d05a769b0f9f9e6"
+      }
+     ]
+    },
+    {
+     "chave": "Pippit_xyqcanvas_legacy_prompt_extend_video_backward",
+     "texto": "将 {asset} 向后延长",
+     "classe": "i18n",
+     "arquivos": [
+      {
+       "arquivo": "async__850206.e38ec15e55.js",
+       "sha256": "b664655c3c2f266ae64d4ecf5ab7f5cd35dd9cac776f6edc396420a189f46618",
+       "deslocamento": 760353,
+       "evidencia_650_historica": "ev_3bf298cc1be024921ba597d631114289a08bdad15be46e831d05a769b0f9f9e6"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "lacunas": [
+  "O corpo (SKILL.md) das skills oficiais NÃO é entregue ao cliente: md_type=tos com content_hash/content_version e fornax_key (plataforma de prompts). Nenhum prompt de sistema integral foi encontrado.",
+  "O diálogo Details das skills oficiais não mostra \"Full skill content\"; só descrição, modelos padrão, autor, favoritos, exemplo em vídeo e categoria.",
+  "A ordem de execução das ferramentas de cada skill e as regras de aprovação não estão comprovadas além dos textos de guide_words.",
+  "Marketing Video, AI talking photo e Avatar Video não declaram ferramentas no payload (tools=null).",
+  "Observar uma execução real de skill (load_skill, tool calls, SSE) exigiria gerar com créditos: não feito.",
+  "Os views javascript/javascript-facts do REA 6.7.0 retornam estrutura (módulos, exports, referências), não literais de texto: as strings i18n vêm de varredura offline do código dos bundles (sha256 registrados). Só o chunk Skill (24 KB) foi reanalisado na 6.7.0.",
+  "Conteúdo servido do Estúdio de marketing (listas de Hook/Style/Play completas) e das skills de fluxo do Estúdio de histórias por etapa não foi lido da API."
+ ]
+}

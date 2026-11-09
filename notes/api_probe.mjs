@@ -1,0 +1,9 @@
+// Chama (SOMENTE LEITURA) endpoints de consulta do catálogo de avatares usando o fetch da própria página logada (mesmo fluxo do app). Nada é criado/alterado.
+import fs from 'node:fs'; import { createRequire } from 'node:module';
+const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json'); const { chromium } = require('playwright-core');
+const b = await chromium.connectOverCDP('http://127.0.0.1:9222'); const page = b.contexts()[0].pages().find((p) => p.url().includes('pippit.ai/home')) || b.contexts()[0].pages()[0];
+await page.goto('https://www.pippit.ai/home', { waitUntil: 'domcontentloaded' }); await page.waitForTimeout(15000);
+const r = await page.evaluate(async () => { const post = async (u, body) => { const res = await fetch(u, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), credentials: 'include' }); const t = await res.text(); return { status: res.status, len: t.length, text: t.slice(0, 1500) }; };
+  const rec = await post('/api/biz/v1/videogen/recommend_digital_human_by_tag', { cursor: 0, count: 50, region: 'BR', req_id: '' }); let ids = []; try { ids = JSON.parse((await (await fetch('/api/biz/v1/videogen/recommend_digital_human_by_tag', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ cursor: 0, count: 5, region: 'BR', req_id: '' }), credentials: 'include' })).text())).data.material_list.map((m) => m.resource_id); } catch {}
+  const mg = ids.length ? await post('/artist/v1/effect/mget_artist_item', { id_list: ids }) : null; return { rec: { status: rec.status, len: rec.len, head: rec.text.slice(0, 300) }, ids, mg }; });
+console.log(JSON.stringify(r).slice(0, 2500)); await b.close().catch(() => {}); process.exit(0);

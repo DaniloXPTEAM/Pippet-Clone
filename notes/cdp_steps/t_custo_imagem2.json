@@ -1,0 +1,96 @@
+{
+ "task": "t_custo_imagem2",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {
+    "expect": {
+     "text": "Smart match"
+    }
+   }
+  },
+  {
+   "tag": "aba_imagem",
+   "click": {
+    "role": "radio",
+    "name": "Image"
+   },
+   "opts": {
+    "expect": {
+     "text": "GPT Image 2.5"
+    }
+   }
+  },
+  {
+   "tag": "seedream_pro",
+   "click": {
+    "role": "button",
+    "name": "Seedream 5.0 Pro",
+    "exact": false
+   },
+   "opts": {
+    "expect": {
+     "text": "[pressed]"
+    }
+   }
+  },
+  {
+   "tag": "res1k",
+   "click": {
+    "role": "radio",
+    "name": "1K"
+   },
+   "opts": {}
+  },
+  {
+   "tag": "esforco_low",
+   "click": {
+    "role": "radio",
+    "name": "Low"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 800
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "tag": "prompt",
+   "fill": {
+    "role": "textbox",
+    "name": "Please enter your message...",
+    "exact": false
+   },
+   "value": "a single red apple on a white table, simple, test",
+   "allowFill": true
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "le_custo",
+   "read": "[role=tabpanel] button, [role=tabpanel] [role=switch]"
+  },
+  {
+   "read": "[class*=credit], [class*=cost], [class*=price]",
+   "tag": "le_custo2"
+  },
+  {
+   "snap": "composer_pronto",
+   "tag": "shot"
+  }
+ ]
+}

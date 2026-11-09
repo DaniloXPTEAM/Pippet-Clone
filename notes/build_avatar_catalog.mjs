@@ -1,0 +1,14 @@
+// Gera local_reconstruction/app/lib/avatar_catalog.json a partir da varredura REAL de filtros (captures/current_670/avatar_filters2/sweep2.json).
+// Cada avatar recebe as TAGS das opções cujo resultado (paginado até o fim) o contém: nada é deduzido pelo nome. Opções sem resultado completo ficam marcadas como "indisponível".
+// Uso: node build_avatar_catalog.mjs [sweep2.json]
+import fs from 'node:fs';
+const INS = process.argv.length > 2 ? process.argv.slice(2) : ['C:/w/PiperLine/captures/current_670/avatar_filters2/sweep2.json']; const OUT = 'C:/w/PiperLine/local_reconstruction/app/lib/avatar_catalog.json';
+const sws = INS.map((f) => JSON.parse(fs.readFileSync(f, 'utf8'))); const sw = JSON.parse(JSON.stringify(sws[0])); sw.nomes = {}; for (const x of sws) Object.assign(sw.nomes, x.nomes || {});
+for (const x of sws.slice(1)) for (const [F, ops] of Object.entries(x.filtros || {})) { sw.filtros[F] ||= {}; for (const [o, v] of Object.entries(ops)) { if (o === '_opcoes') { sw.filtros[F]._opcoes ||= v; continue; } if (v && !v.erro && v.complete) sw.filtros[F][o] = v; } }
+const nomes = sw.nomes; const tagOf = (dsl) => { try { const j = JSON.parse(dsl); return j.conds.flatMap((c) => c.conds).join('|'); } catch { return null; } };
+const g = sw.filtros.Gender || {}; const baseIds = g.Female?.complete && g.Male?.complete ? [...new Set([...g.Female.ids, ...g.Male.ids])] : sw.base.ids;
+const av = baseIds.map((id) => ({ id, name: nomes[id] || null, tags: [] })); const byId = new Map(av.map((a) => [a.id, a])); const filtros = [];
+for (const [F, ops] of Object.entries(sw.filtros)) { const f = { campo: F, opcoes: [] }; for (const o of ops._opcoes || []) { const r = ops[o]; if (!r || r.erro || !r.complete) { f.opcoes.push({ label: o, tag: r?.dsl ? tagOf(r.dsl) : null, disponivel: false, motivo: r?.erro || 'paginação incompleta' }); continue; } const tag = tagOf(r.dsl); let n = 0; for (const id of r.ids) { const a = byId.get(id); if (a) { a.tags.push(tag); n++; } } f.opcoes.push({ label: o, tag, disponivel: true, total: r.ids.length, noCatalogo: n }); } filtros.push(f); }
+const semantica = {}; for (const [k, c] of Object.entries(sw.combos || {})) semantica[k] = { total: c.ids.length, completo: c.complete, dsl: c.dsl };
+const out = { fonte: { observadoEm: sw.observadoEm, arquivo: 'captures/current_670/avatar_filters2/sweep2.json', metodo: 'respostas de rede recommend_digital_human_by_tag (ids paginados) + mget_artist_item (nomes), UI do drawer Avatar video, somente leitura' }, total: av.length, semNome: av.filter((a) => !a.name).length, filtros, semantica, avatares: av.filter((a) => a.name) };
+fs.writeFileSync(OUT, JSON.stringify(out, null, 1)); console.log('avatares', out.avatares.length, 'semNome', out.semNome, 'campos', filtros.map((f) => f.campo + ':' + f.opcoes.filter((o) => o.disponivel).length + '/' + f.opcoes.length).join(' '));

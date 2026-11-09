@@ -1,0 +1,52 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\pricing.ec3e7ac7.js",
+ "bytes": 132622,
+ "parse": "script",
+ "nos": 31739,
+ "strings_total": 1883,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "http://www.w3.org/2000/svg",
+  "https://www.pippit.ai/"
+ ],
+ "dominios": [
+  "www.pippit.ai",
+  "www.w3.org"
+ ],
+ "caminhos_api": [
+  "/commerce/v1/subscription/cc_price_list",
+  "/lv/v1/commerce/get_entrances",
+  "/template/api/subscribe/cc-price-list",
+  "/template/api/subscribe/detail",
+  "/template/api/subscribe/location",
+  "/template/api/subscribe/region"
+ ],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "pointerdown"
+ ],
+ "globais_window": [
+  "__LOADABLE_LOADED_CHUNKS__",
+  "__is_kep",
+  "__locationCountryCode",
+  "__locationInfo",
+  "__request__"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 163,
+ "modulos_webpack": 42
+}

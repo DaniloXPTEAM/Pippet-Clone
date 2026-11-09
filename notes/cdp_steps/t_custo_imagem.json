@@ -1,0 +1,56 @@
+{
+ "task": "t_custo_imagem",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {
+    "expect": {
+     "text": "Smart match"
+    }
+   }
+  },
+  {
+   "tag": "aba_imagem",
+   "click": {
+    "role": "radio",
+    "name": "Image"
+   },
+   "opts": {
+    "expect": {
+     "text": "GPT Image 2.5"
+    }
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "imagem_modelos",
+   "tag": "shot"
+  },
+  {
+   "tag": "seedream_pro",
+   "click": {
+    "role": "button",
+    "name": "Seedream 5.0 Pro",
+    "exact": false
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "imagem_seedream",
+   "tag": "shot2"
+  }
+ ]
+}

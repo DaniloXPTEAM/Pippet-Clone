@@ -1,0 +1,157 @@
+{
+ "registrado_em": "2026-10-21",
+ "sessao": "REA MCP (registro em memória da sessão; este arquivo é a cópia durável)",
+ "unknowns": [
+  {
+   "id": "unk_8ae9a06ddc9c17f66e6b16cb76ff02627279404ff2d1dcbb4e11dbb85d75b154",
+   "dominio": "protocol",
+   "severidade": "high",
+   "pergunta": "SSE ao vivo de subscribe_run/subscribe_thread/sse_asset"
+  },
+  {
+   "id": "unk_84a24f831644b90cb3eebc0310174b0d537fd129bca31d6b2da870059a39e172",
+   "dominio": "protocol",
+   "severidade": "high",
+   "pergunta": "estados de run além de 1 e 4; cancel_run; get_run bem-sucedido"
+  },
+  {
+   "id": "unk_f6680bd13cef0477c6c8db434c6f7f81f1e7324b6d12a3608d5aa668e1ab6b74",
+   "dominio": "protocol",
+   "severidade": "medium",
+   "pergunta": "ligação run <-> generation_task_list; códigos de erro/fila"
+  },
+  {
+   "id": "unk_08489505ab6118ed951df400c4bb0279e5e671df6eada56484a3eba4f6edc645",
+   "dominio": "credits",
+   "severidade": "medium",
+   "pergunta": "estorno, expiração, consume_types, preços de outros modelos"
+  },
+  {
+   "id": "unk_484470d7e49a557e65c4de5ff06335fda7c5648482dafe16f427ca0534c238c4",
+   "dominio": "agent-planning",
+   "severidade": "medium",
+   "pergunta": "roteamento do Auto Route e planejamento do Agent mode no servidor"
+  },
+  {
+   "id": "unk_e386aeb698f69bdc6fdcd9610a10f0dc1fe76a982e1f09fc4601dc1846cbb0d2",
+   "dominio": "server-content",
+   "severidade": "low",
+   "pergunta": "conteúdo servido (Hook/Visual style/Ad formats/templates/skills da loja) e Settings internos"
+  },
+  {
+   "id": "unk_c170f02f09cd13dbdfc9975510aae8b5989787e2e8625932454b5a3e75739c96",
+   "dominio": "credits",
+   "severidade": "medium",
+   "pergunta": "ordem de débito e expiração entre as três bolsas (vip/gift/purchase); local usa o lote que vence primeiro (não comprovado)"
+  },
+  {
+   "id": "unk_c38a9d2abef204119649db784e4d24cc4341b3776825d31071fe79f74eba45ee",
+   "dominio": "account-settings",
+   "severidade": "low",
+   "pergunta": "'Salvar sem marca d'água' e opções internas de Idioma/Aparência (exige autorização: pode alterar a conta)"
+  },
+  {
+   "id": "unk_6ffe6ae2523d946441c68ca5088960bd32ec4929501738bc71feddde173acfcf",
+   "dominio": "editor-panels",
+   "severidade": "medium",
+   "pergunta": "aba Básico com clipe, aba Curvo e resultado visual dos efeitos de Animação"
+  },
+  {
+   "id": "unk_5e655d7be83938a883497beab9a3d50069eefde2dbb18595ed5d8c1e22977d9e",
+   "dominio": "server-content",
+   "severidade": "low",
+   "pergunta": "Biblioteca de estilos do Canvas e passo 2/2 do tour do editor"
+  },
+  {
+   "id": "unk_65bda27917a672f8a50023c1984ef1f85b2aa6dcddd22f82f576ce0b2f568d64",
+   "dominio": "skills",
+   "severidade": "high",
+   "pergunta": "corpo (SKILL.md/instruções) das skills oficiais: só metadados e guide_words são entregues; exige execução real"
+  },
+  {
+   "id": "unk_7e014880e57748a0f8f1d5a418d2eac8d696a2413e844f2ac2c03887903a7478",
+   "dominio": "skills",
+   "severidade": "medium",
+   "pergunta": "ordem de execução das ferramentas por skill e regras de aprovação por etapa"
+  },
+  {
+   "id": "unk_1f9e433f63e10a8dc47f1e6c4def2118331e7508099a4476fdba63e225c7d742",
+   "dominio": "publishing",
+   "severidade": "high",
+   "pergunta": "esquema de create/batchcreate/update/delete_schedule_task e list_task_by_asset, formato de tarefa e significado de status_list [1,2,3,4,6] (REA 6.7.0, 22/10/2026)"
+  },
+  {
+   "id": "unk_c7fb5cffb3b8b3c9e75b7249dec3144fba8e4ae3a32508c9ac32dd16a570c683",
+   "dominio": "publishing",
+   "severidade": "high",
+   "pergunta": "fluxo OAuth de vinculação, formato de conta vinculada e mapa dos códigos de plataforma 1,301,311,3,101,201,401 (REA 6.7.0, 22/10/2026)"
+  },
+  {
+   "id": "unk_22c8f5afbb4af210e8fa1a5d77d9e4171d4ebb2df8cf3f344a0a91c1bf8b27ff",
+   "dominio": "avatars",
+   "severidade": "medium",
+   "pergunta": "Foto falante de IA: etapas 2 (Add voiceover) e 3 (Export) não observadas (exigem foto real)"
+  },
+  {
+   "id": "unk_7414df5ed3712ed9a83ccf4bef0026fba55f5182faa67c411c57f279c73a90b5",
+   "dominio": "avatars",
+   "severidade": "medium",
+   "pergunta": "Drawer Avatar video: Edit more, Change caption style, favoritar, classificação dos filtros, fórmula de custo"
+  },
+  {
+   "id": "unk_78af01bc399ab5a2b8898af9cda9cf3b04311a0b2cbbe9bff41e910bc58ca036",
+   "dominio": "canvas",
+   "severidade": "low",
+   "pergunta": "Story/Canvas: Style library, efeitos de Organize/Hide variations/minimap, tutorial externo, hover card das skills"
+  },
+  {
+   "id": "unk_2463e9cb27f3d7fa9efebe6bd8c9ff9cb22a02dc26062a4316723bd5ce33a9f8",
+   "dominio": "avatars",
+   "severidade": "high",
+   "pergunta": "Avatar video: contrato de exportação (create_tts_avatar_task/query_tts_avatar_task); chunks do drawer não recuperados",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5.json"
+  },
+  {
+   "id": "unk_791e5054b6a07c7690d0f42deb641e160ef6118b0eb8984b2d02658435e8e5e1",
+   "dominio": "avatars",
+   "severidade": "high",
+   "pergunta": "Foto falante: corpos de pre_process_image/pre_process_audio/omni try_task; chunk da página Omni não recuperado",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5.json"
+  },
+  {
+   "id": "unk_fdd6a509e9d10731293f751ee1270d7e9fe35e9a3702ae72e83c04c4315f6a70",
+   "dominio": "credits",
+   "severidade": "medium",
+   "pergunta": "Avatar video: regra de cobrança (só 5,88 s = 11 créditos observado)",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5.json"
+  },
+  {
+   "id": "unk_46c7855f9def2eb053fdb2ba73030f56db490684f23e89a28093352975510aa1",
+   "dominio": "avatars",
+   "severidade": "medium",
+   "pergunta": "Catálogo de avatares: ranking/ordem do recommend, campos de mget_artist_item, atribuição de tags (origem Playwright)",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5.json"
+  },
+  {
+   "id": "unk_9b0f000196eb690cbf5af0d0d1e282b018fceda146bb5d139b7d6b4088f67db0",
+   "dominio": "canvas",
+   "severidade": "medium",
+   "pergunta": "Style library: como o estilo entra na geração (nada selecionado no Pippit)",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5.json"
+  },
+  {
+   "id": "unk_994e846cc485a2f173820fe3aff7950fc0eebc16a11b84c5c519e43d283eb01d",
+   "dominio": "agent-protocol",
+   "severidade": "high",
+   "pergunta": "Agente: client_extra por ferramenta, scene_lv2, threadExtra/prepend_messages, formato da resposta ao dynamic_questionnaire, payload type 18 (origem estática)",
+   "registrado_em": "2026-10-23",
+   "bundle": "captures/current_670/rea_session_bundle_lote5b.json"
+  }
+ ],
+ "nota_lote5": "Bundle lote5 contém as 9 Evidence do lote 3 (importadas) + 8 incertezas. O Evidence ev_e85600c0… (Style library) existe só como resposta salva (captures/current_670/style_library/rea_inspect_web_page.json): não está em nenhum bundle. O bundle lote5b inclui também a incerteza do agente (9 incertezas no total na sessão REA atual)."
+}

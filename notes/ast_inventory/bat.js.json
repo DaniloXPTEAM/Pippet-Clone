@@ -1,0 +1,47 @@
+{
+ "arquivo": "bat.bing.com\\bat.js",
+ "bytes": 58485,
+ "parse": "script",
+ "nos": 15476,
+ "strings_total": 788,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "https://clarity.microsoft.com/js/",
+  "https://ui.ads.microsoft.com"
+ ],
+ "dominios": [
+  "clarity.microsoft.com",
+  "ui.ads.microsoft.com"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [
+  "(dinâmico)"
+ ],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "pagehide",
+  "pageshow",
+  "popstate"
+ ],
+ "globais_window": [
+  "UET",
+  "UET_init",
+  "UET_push"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 2,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

@@ -1,0 +1,338 @@
+[
+ {
+  "id": "39281",
+  "name": "Settings",
+  "antigo": "b6ba0340ee",
+  "novo": "82b161dbd1",
+  "no_cache": false,
+  "analisado": true
+ },
+ {
+  "id": "40279",
+  "name": null,
+  "antigo": "95b8e22982",
+  "novo": "a6d6787a21",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "53019",
+  "name": null,
+  "antigo": "0f91dddfd6",
+  "novo": "1721d12225",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "82317",
+  "name": "HomePageV5",
+  "antigo": "3acb88ca96",
+  "novo": "2ac9fffde5",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "87517",
+  "name": "CanvasShare",
+  "antigo": "afcf0e1b91",
+  "novo": "a643396c1b",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "134576",
+  "name": "asset-library-sdk-picker",
+  "antigo": "b97f3213a0",
+  "novo": "caf169df93",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "143136",
+  "name": null,
+  "antigo": "4167321aba",
+  "novo": "fb0215e790",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "162657",
+  "name": null,
+  "antigo": "2c46ed04a8",
+  "novo": "05c0c055ed",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "172333",
+  "name": null,
+  "antigo": "771a8c4201",
+  "novo": "d04e9f07f2",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "175922",
+  "name": null,
+  "antigo": "c8d3b93894",
+  "novo": "20aa6212b3",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "192268",
+  "name": "activity-detail/(slug$)/page",
+  "antigo": "e65fa3979a",
+  "novo": "b1ff2caf1e",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "213341",
+  "name": "home-page/page",
+  "antigo": "0da22e312d",
+  "novo": "149c12e5ad",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "236538",
+  "name": null,
+  "antigo": "8abc684b50",
+  "novo": "906b5b5a3b",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "279148",
+  "name": "AssetManagementMaterialV2",
+  "antigo": "896b2fd0ea",
+  "novo": "cea078addf",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "300996",
+  "name": null,
+  "antigo": "b7f8a665f7",
+  "novo": "b6f6435eb8",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "364997",
+  "name": null,
+  "antigo": "5edbbd1fb4",
+  "novo": "338928e099",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "398897",
+  "name": null,
+  "antigo": "120c71def9",
+  "novo": "0d297c53cb",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "399551",
+  "name": null,
+  "antigo": "4bf2c59afb",
+  "novo": "bd4a606ad3",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "460049",
+  "name": "home/page",
+  "antigo": "e6f7b93173",
+  "novo": "5d9cc09adb",
+  "no_cache": true,
+  "analisado": false
+ },
+ {
+  "id": "484886",
+  "name": null,
+  "antigo": "deb1795c80",
+  "novo": "2a2a198243",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "489548",
+  "name": null,
+  "antigo": "fc1b8819d1",
+  "novo": "ad1b791b2c",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "492105",
+  "name": null,
+  "antigo": "0c7cec9d09",
+  "novo": "a4acf0531c",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "526853",
+  "name": null,
+  "antigo": "cd52640fc7",
+  "novo": "6faa030af1",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "565306",
+  "name": null,
+  "antigo": "4029e093eb",
+  "novo": "ddc6361090",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "565447",
+  "name": null,
+  "antigo": "b46f92231f",
+  "novo": "73d43fa5f1",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "599038",
+  "name": null,
+  "antigo": "863e145e5b",
+  "novo": "0ff5dc661b",
+  "no_cache": false,
+  "analisado": true
+ },
+ {
+  "id": "603234",
+  "name": "$",
+  "antigo": "e8604fb8c6",
+  "novo": "a4174b421f",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "616044",
+  "name": null,
+  "antigo": "82a3c713c4",
+  "novo": "97e91c7056",
+  "no_cache": false,
+  "analisado": true
+ },
+ {
+  "id": "627000",
+  "name": null,
+  "antigo": "ffd75e22aa",
+  "novo": "c6f4450f99",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "672341",
+  "name": "replay/page",
+  "antigo": "5b1b26cff1",
+  "novo": "0510768dea",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "674439",
+  "name": null,
+  "antigo": "04b916eeba",
+  "novo": "2d5c1989a6",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "720683",
+  "name": "Replay",
+  "antigo": "60010ed9fd",
+  "novo": "ad0d3d4575",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "745643",
+  "name": "lazy-creative-works-component",
+  "antigo": "581de85280",
+  "novo": "cf25bb4373",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "748861",
+  "name": null,
+  "antigo": "163a67c3f7",
+  "novo": "7f8db5ce8b",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "787640",
+  "name": null,
+  "antigo": "3487a3fc06",
+  "novo": "3d54633110",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "793868",
+  "name": "Novel",
+  "antigo": "1d545af56c",
+  "novo": "9f650b0f20",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "850206",
+  "name": null,
+  "antigo": "e38ec15e55",
+  "novo": "048c255c3f",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "889795",
+  "name": null,
+  "antigo": "256f74ebdf",
+  "novo": "32938b46b8",
+  "no_cache": false,
+  "analisado": true
+ },
+ {
+  "id": "942671",
+  "name": "Skill",
+  "antigo": "0d135cd20c",
+  "novo": "2edf69cba3",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "963708",
+  "name": "ActivityDetail",
+  "antigo": "ef88cf9a68",
+  "novo": "630c23dfd9",
+  "no_cache": false,
+  "analisado": false
+ },
+ {
+  "id": "965310",
+  "name": null,
+  "antigo": "4d5e15c203",
+  "novo": "7ab2768398",
+  "no_cache": true,
+  "analisado": true
+ },
+ {
+  "id": "975399",
+  "name": null,
+  "antigo": "2c638cab52",
+  "novo": "206ceff65e",
+  "no_cache": true,
+  "analisado": true
+ }
+]

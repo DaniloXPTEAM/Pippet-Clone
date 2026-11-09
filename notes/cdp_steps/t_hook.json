@@ -1,0 +1,46 @@
+{
+ "task": "t_hook",
+ "steps": [
+  {
+   "goto": "marketing-agent",
+   "wait": 8000
+  },
+  {
+   "tag": "abre_hook",
+   "click": {
+    "role": "button",
+    "name": "Hook"
+   },
+   "opts": {
+    "expect": {
+     "text": "Search hook"
+    }
+   }
+  },
+  {
+   "wait": 4500
+  },
+  {
+   "tag": "cat_persuasive",
+   "click": {
+    "role": "button",
+    "name": "Persuasive Messaging"
+   },
+   "opts": {
+    "expect": {
+     "text": "Persuasive Messaging\" [pressed]"
+    }
+   }
+  },
+  {
+   "wait": 4500
+  },
+  {
+   "snap": "hook_persuasive",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

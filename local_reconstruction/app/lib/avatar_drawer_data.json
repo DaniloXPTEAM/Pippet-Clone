@@ -1,0 +1,196 @@
+{
+ "fonte": {
+  "observadoEm": "2026-10-22",
+  "evidencias": {
+   "rea_inspect_web_page": "ev_26b3398dc27420bcd8152ce67cd2327ae118d46ba0473e6ae19bd897d6148889",
+   "arquivos": [
+    "captures/current_670/avatar_drawer",
+    "avatar_drawer_script",
+    "avatar_drawer_full",
+    "avatar_modal"
+   ]
+  },
+  "nota": "Drawer aberto pelo card Avatar video (Skills recomendadas da Home). Carrega por chunks lazy (~25-50 s)."
+ },
+ "titulo": "Quickly create avatar video",
+ "aviso": "Accurate lip-sync will be available after export.",
+ "abas": [
+  "Choose avatar",
+  "Edit script"
+ ],
+ "subabas": [
+  "Recommended avatars",
+  "Favorites",
+  "My avatars"
+ ],
+ "filtros": {
+  "Gender": [
+   "Female",
+   "Male"
+  ],
+  "Age": [
+   "Young",
+   "Mature",
+   "Elderly"
+  ],
+  "Figure": [
+   "Average",
+   "Large"
+  ],
+  "Name": [
+   "Thandi",
+   "Ahmed",
+   "Henry",
+   "Alex",
+   "Lelia",
+   "Fatima",
+   "Grace",
+   "Amina",
+   "Riley",
+   "Carmen",
+   "Brian",
+   "Omar",
+   "Asha",
+   "Charlotte",
+   "Max"
+  ],
+  "Industry": [
+   "E-commerce",
+   "Gaming",
+   "Finance",
+   "Education"
+  ],
+  "Scene": [
+   "Living room",
+   "Bedroom",
+   "Bathroom",
+   "Outdoors",
+   "Kitchen",
+   "Inside car",
+   "Esports room",
+   "Makeup table",
+   "Cloakroom",
+   "No background",
+   "Office",
+   "Solid color background"
+  ],
+  "Pose": [
+   "Sit upright",
+   "Stand facing forward",
+   "Take selfies while sitting",
+   "Sit sideways",
+   "Take selfies while talking",
+   "Stand sideways"
+  ],
+  "Outfit style": [
+   "Casual",
+   "Sporty",
+   "Formal",
+   "Traditional"
+  ]
+ },
+ "avatares": [
+  "Victor in the kitchen",
+  "Amelia-Beauty-Makeup Room",
+  "Lily-Lifestyle-Bathroom-Standing",
+  "Stella-Beauty-Makeup Room-Standing",
+  "Charlotte-Lifestyle",
+  "Aurora-Beauty-Standing",
+  "Eliza-Fashion-Indoor",
+  "Kara-Fashion-Bathroom-Selfie",
+  "Abigail-Fashion",
+  "Freya-Lifestyle-In the car-Sitting-Selfie",
+  "Luna-Fashion-Bedroom-Selfie",
+  "Maria-Fashion-Bedroom-Sitting",
+  "Nora-Lifestyle-Sitting",
+  "Emily-Fashion-Bedroom-Sitting",
+  "Aiko-Marketing-Office-Standing",
+  "Elias-Lifestyle-Living Room-Sitting",
+  "Emma-Beauty-bathroom-selfie",
+  "Agnes-Home-Selfie",
+  "Rahul-Education-classroom",
+  "Lauren-Fashion",
+  "Xiao-Lifestyle-Park-Standing",
+  "Steven-Podcast-Sitting",
+  "Brooks-Game-Gaming Room-Sitting",
+  "Jack-Game-Gaming Room",
+  "Laura-Fashion-Selfie",
+  "Jasmine-Lifestyle-Bedroom",
+  "Victor-Podcast-Sitting",
+  "James-Game-Gaming Room-Sitting",
+  "George-Podcast-Sitting",
+  "Robert-Podcast-Sitting-arms crossed",
+  "Ella-Lifestyle-Selfie",
+  "Christopher-Podcast-Sitting",
+  "Gary-Podcast-Sitting",
+  "John-Podcast-Sitting",
+  "Arthur-Podcast-Sitting",
+  "Evelyn-Fashion-Bedroom-Selfie",
+  "Simon-Podcast-Sitting-Laptop",
+  "Thomas-Podcast-Sitting-arms crossed",
+  "Eri-Marketing-Office-Standing",
+  "Akiko-Lifestyle-Park-Sitting-Selfie",
+  "Emiko-Lifestyle-Lobby-Standing",
+  "Elizabeth-Marketing-Office-Sitting",
+  "Akira-Marketing-Office-Sitting-Laptop",
+  "Lucy-Lifestyle-Living room-Selfie",
+  "Julian-Sports-Gym-Standing",
+  "Joseph-Marketing-Office-Sitting-Laptop",
+  "Ken-Marketing-Office-Standing",
+  "Kavi-Marketing-Office-Standing",
+  "Amara-Lifestyle-Park-Sitting",
+  "Leon-Marketing-Indoor-Sitting",
+  "Vincent-Marketing-Lobby-Standing"
+ ],
+ "roteiroPadrao": "Hello, I'm your avatar. You can choose your favorite avatar on your right and click on the script in the video to edit it.",
+ "idiomas": [
+  "English",
+  "Simplified Chinese",
+  "Bulgarian",
+  "Croatian",
+  "Czech",
+  "Danish",
+  "Dutch",
+  "Filipino",
+  "Finnish",
+  "French",
+  "Japanese",
+  "German",
+  "Greek",
+  "Hindi",
+  "Indonesian",
+  "Italian",
+  "Malay",
+  "Polish",
+  "Portuguese",
+  "Romanian",
+  "Russian",
+  "Slovak",
+  "Spanish",
+  "Swedish",
+  "Ukrainian",
+  "Tamil",
+  "Vietnamese",
+  "Thai",
+  "Turkish",
+  "Traditional Chinese",
+  "Korean"
+ ],
+ "custo": {
+  "exemplo": {
+   "segundos": 5.88,
+   "creditos": 11,
+   "riscado": 23
+  },
+  "tooltip": "5.88 second = 11 credits"
+ },
+ "favoritosVazio": [
+  "No favorite avatar yet",
+  "Bookmark your favorite avatars to see them here."
+ ],
+ "meusAvatares": [
+  "Create your own avatars with photos or videos",
+  "Create now",
+  "AI talking photo"
+ ]
+}

@@ -1,0 +1,5 @@
+{"task":"t_autoroute_send3","netlog":{"file":"C:/w/PiperLine/captures/auth/autoroute/send3.har","after_ms":170000},"steps":[
+{"tag":"enviar","click":{"css":"button[class*=black]","nth":1},"opts":{"allowRisky":true}},
+{"wait":8000},
+{"snap":"apos_envio","tag":"shot_envio"}
+]}

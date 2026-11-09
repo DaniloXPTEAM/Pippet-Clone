@@ -1,0 +1,96 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\main.f77ba7085c.js",
+ "bytes": 500660,
+ "parse": "script",
+ "nos": 86607,
+ "strings_total": 8548,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "//sf16-ug-neutral.capcutstatic.com/obj/seeyou-us/growth/pippit/landing_page",
+  "http://www.w3.org/1999/xlink",
+  "http://www.w3.org/2000/svg",
+  "https://",
+  "https://capcut-yt.onelink.me/W3Oy",
+  "https://discord.com/invite/X88w8b8NRP",
+  "https://mon-sg.capcutapi.com/monitor_browser/collect/batch/security/",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/Dreamina.png~tplv-hk1xnajzr6-webp.webp",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/Model3x.png~tplv-hk1xnajzr6-webp.webp",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/box.svg~tplv-hk1xnajzr6-image.image",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/bytedance3x.png~tplv-hk1xnajzr6-webp.webp",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/open_ai.svg~tplv-hk1xnajzr6-image.image",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/ppt3x.png~tplv-hk1xnajzr6-webp.webp",
+  "https://p16-capcut-sg.capcut.com/tos-alisg-i-hk1xnajzr6-sg/veo3x.png~tplv-hk1xnajzr6-webp.webp",
+  "https://pippit.onelink.me/Otiv/8jobk093",
+  "https://schema.org",
+  "https://www.facebook.com/profile.php",
+  "https://www.instagram.com/pippitofficial/",
+  "https://www.pippit.ai",
+  "https://www.producthunt.com/products/pippit-ai",
+  "https://www.tiktok.com/@pippitofficial",
+  "https://www.youtube.com/@PippitOfficial",
+  "https://x.com/pippitofficial"
+ ],
+ "dominios": [
+  "capcut-yt.onelink.me",
+  "discord.com",
+  "mon-sg.capcutapi.com",
+  "p16-capcut-sg.capcut.com",
+  "pippit.onelink.me",
+  "schema.org",
+  "sf16-ug-neutral.capcutstatic.com",
+  "www.facebook.com",
+  "www.instagram.com",
+  "www.pippit.ai",
+  "www.producthunt.com",
+  "www.tiktok.com",
+  "www.w3.org",
+  "www.youtube.com",
+  "x.com"
+ ],
+ "caminhos_api": [
+  "/api/biz/v1/agent/get_available_model_list",
+  "/api/biz/v1/user/click_id",
+  "/login"
+ ],
+ "rotas_path": [
+  "/",
+  "/pricing"
+ ],
+ "chamadas_http": [],
+ "fetch": [
+  "(dinâmico)"
+ ],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [
+  "setItem:auto_fill_info"
+ ],
+ "eventos": [
+  "change",
+  "click",
+  "ended",
+  "keydown",
+  "mousedown",
+  "play",
+  "resize",
+  "scroll",
+  "touchmove",
+  "touchstart",
+  "transitionend",
+  "wheel"
+ ],
+ "globais_window": [
+  "__assetPrefix__",
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 1,
+ "chaves_i18n_usadas": 242,
+ "modulos_webpack": 25
+}

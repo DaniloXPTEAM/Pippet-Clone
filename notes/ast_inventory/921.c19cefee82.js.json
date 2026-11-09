@@ -1,0 +1,39 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\async\\921.c19cefee82.js",
+ "bytes": 10696,
+ "parse": "script",
+ "nos": 3415,
+ "strings_total": 157,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "https://www.pippit.ai/login"
+ ],
+ "dominios": [
+  "www.pippit.ai"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "resize",
+  "scroll"
+ ],
+ "globais_window": [
+  "classNames",
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 0
+}

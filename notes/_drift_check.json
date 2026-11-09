@@ -1,0 +1,736 @@
+{
+ "gerado_em": "2026-10-29",
+ "chunks_comparados": 31,
+ "sem_versao_nova_local": [],
+ "modulos_alterados_total": 759,
+ "modulos_adicionados_total": 14,
+ "modulos_removidos_total": 12,
+ "por_chunk": [
+  {
+   "chunk": "Settings",
+   "antigo": "async__Settings.b6ba0340ee.js",
+   "novo": "async__Settings.82b161dbd1.js",
+   "modulos_antigos": 20,
+   "modulos_novos": 20,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "443206"
+   ]
+  },
+  {
+   "chunk": "40279",
+   "antigo": "async__40279.95b8e22982.js",
+   "novo": "async__40279.a6d6787a21.js",
+   "modulos_antigos": 19,
+   "modulos_novos": 19,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "479185"
+   ]
+  },
+  {
+   "chunk": "53019",
+   "antigo": "async__53019.0f91dddfd6.js",
+   "novo": "async__53019.1721d12225.js",
+   "modulos_antigos": 29,
+   "modulos_novos": 29,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "93813"
+   ]
+  },
+  {
+   "chunk": "HomePageV5",
+   "antigo": "async__HomePageV5.3acb88ca96.js",
+   "novo": "async__HomePageV5.2ac9fffde5.js",
+   "modulos_antigos": 22,
+   "modulos_novos": 22,
+   "alterados": 2,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "269094",
+    "450364"
+   ]
+  },
+  {
+   "chunk": "143136",
+   "antigo": "async__143136.4167321aba.js",
+   "novo": "async__143136.fb0215e790.js",
+   "modulos_antigos": 227,
+   "modulos_novos": 227,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "481010"
+   ]
+  },
+  {
+   "chunk": "162657",
+   "antigo": "async__162657.2c46ed04a8.js",
+   "novo": "async__162657.05c0c055ed.js",
+   "modulos_antigos": 6,
+   "modulos_novos": 6,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "962304"
+   ]
+  },
+  {
+   "chunk": "172333",
+   "antigo": "async__172333.771a8c4201.js",
+   "novo": "async__172333.d04e9f07f2.js",
+   "modulos_antigos": 9,
+   "modulos_novos": 9,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "155075"
+   ]
+  },
+  {
+   "chunk": "175922",
+   "antigo": "async__175922.c8d3b93894.js",
+   "novo": "async__175922.20aa6212b3.js",
+   "modulos_antigos": 12,
+   "modulos_novos": 12,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "397129"
+   ]
+  },
+  {
+   "chunk": "236538",
+   "antigo": "async__236538.8abc684b50.js",
+   "novo": "async__236538.906b5b5a3b.js",
+   "modulos_antigos": 5,
+   "modulos_novos": 5,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "775873"
+   ]
+  },
+  {
+   "chunk": "AssetManagementMaterialV2",
+   "antigo": "async__AssetManagementMaterialV2.896b2fd0ea.js",
+   "novo": "async__AssetManagementMaterialV2.cea078addf.js",
+   "modulos_antigos": 48,
+   "modulos_novos": 46,
+   "alterados": 4,
+   "adicionados": 0,
+   "removidos": 2,
+   "ids_alterados": [
+    "210047",
+    "78979",
+    "482725",
+    "748009"
+   ]
+  },
+  {
+   "chunk": "300996",
+   "antigo": "async__300996.b7f8a665f7.js",
+   "novo": "async__300996.b6f6435eb8.js",
+   "modulos_antigos": 1,
+   "modulos_novos": 1,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "459567"
+   ]
+  },
+  {
+   "chunk": "398897",
+   "antigo": "async__398897.120c71def9.js",
+   "novo": "async__398897.0d297c53cb.js",
+   "modulos_antigos": 9,
+   "modulos_novos": 9,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "76037"
+   ]
+  },
+  {
+   "chunk": "399551",
+   "antigo": "async__399551.4bf2c59afb.js",
+   "novo": "async__399551.bd4a606ad3.js",
+   "modulos_antigos": 33,
+   "modulos_novos": 33,
+   "alterados": 2,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "769656",
+    "479185"
+   ]
+  },
+  {
+   "chunk": "484886",
+   "antigo": "async__484886.deb1795c80.js",
+   "novo": "async__484886.2a2a198243.js",
+   "modulos_antigos": 5,
+   "modulos_novos": 5,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "664629"
+   ]
+  },
+  {
+   "chunk": "489548",
+   "antigo": "async__489548.fc1b8819d1.js",
+   "novo": "async__489548.ad1b791b2c.js",
+   "modulos_antigos": 5,
+   "modulos_novos": 5,
+   "alterados": 5,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "496903",
+    "891884",
+    "666999",
+    "271085",
+    "822398"
+   ]
+  },
+  {
+   "chunk": "492105",
+   "antigo": "async__492105.0c7cec9d09.js",
+   "novo": "async__492105.a4acf0531c.js",
+   "modulos_antigos": 24,
+   "modulos_novos": 24,
+   "alterados": 24,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "509846",
+    "914124",
+    "519873",
+    "656774",
+    "722420",
+    "442368",
+    "642088",
+    "533792",
+    "189009",
+    "752967",
+    "150605",
+    "846583"
+   ]
+  },
+  {
+   "chunk": "526853",
+   "antigo": "async__526853.cd52640fc7.js",
+   "novo": "async__526853.6faa030af1.js",
+   "modulos_antigos": 1,
+   "modulos_novos": 1,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "121252"
+   ]
+  },
+  {
+   "chunk": "565306",
+   "antigo": "async__565306.4029e093eb.js",
+   "novo": "async__565306.ddc6361090.js",
+   "modulos_antigos": 27,
+   "modulos_novos": 27,
+   "alterados": 16,
+   "adicionados": 1,
+   "removidos": 1,
+   "ids_alterados": [
+    "133776",
+    "585292",
+    "462923",
+    "393947",
+    "921005",
+    "943950",
+    "218043",
+    "158075",
+    "416735",
+    "607469",
+    "574969",
+    "183251"
+   ]
+  },
+  {
+   "chunk": "599038",
+   "antigo": "async__599038.863e145e5b.js",
+   "novo": "async__599038.0ff5dc661b.js",
+   "modulos_antigos": 139,
+   "modulos_novos": 139,
+   "alterados": 4,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "902516",
+    "461009",
+    "691403",
+    "995684"
+   ]
+  },
+  {
+   "chunk": "616044",
+   "antigo": "async__616044.82a3c713c4.js",
+   "novo": "async__616044.97e91c7056.js",
+   "modulos_antigos": 457,
+   "modulos_novos": 462,
+   "alterados": 11,
+   "adicionados": 5,
+   "removidos": 0,
+   "ids_alterados": [
+    "450364",
+    "273979",
+    "190867",
+    "489654",
+    "784159",
+    "432324",
+    "875151",
+    "43958",
+    "12480",
+    "281850",
+    "279706"
+   ]
+  },
+  {
+   "chunk": "627000",
+   "antigo": "async__627000.ffd75e22aa.js",
+   "novo": "async__627000.c6f4450f99.js",
+   "modulos_antigos": 24,
+   "modulos_novos": 24,
+   "alterados": 1,
+   "adicionados": 1,
+   "removidos": 1,
+   "ids_alterados": [
+    "289397"
+   ]
+  },
+  {
+   "chunk": "674439",
+   "antigo": "async__674439.04b916eeba.js",
+   "novo": "async__674439.2d5c1989a6.js",
+   "modulos_antigos": 23,
+   "modulos_novos": 22,
+   "alterados": 22,
+   "adicionados": 0,
+   "removidos": 1,
+   "ids_alterados": [
+    "462864",
+    "46906",
+    "733433",
+    "521430",
+    "784159",
+    "642088",
+    "817170",
+    "8496",
+    "831268",
+    "95025",
+    "29741",
+    "420150"
+   ]
+  },
+  {
+   "chunk": "lazy-creative-works-component",
+   "antigo": "async__lazy-creative-works-component.581de85280.js",
+   "novo": "async__lazy-creative-works-component.cf25bb4373.js",
+   "modulos_antigos": 2,
+   "modulos_novos": 3,
+   "alterados": 1,
+   "adicionados": 2,
+   "removidos": 1,
+   "ids_alterados": [
+    "144035"
+   ]
+  },
+  {
+   "chunk": "748861",
+   "antigo": "async__748861.163a67c3f7.js",
+   "novo": "async__748861.7f8db5ce8b.js",
+   "modulos_antigos": 93,
+   "modulos_novos": 95,
+   "alterados": 4,
+   "adicionados": 3,
+   "removidos": 1,
+   "ids_alterados": [
+    "409034",
+    "543394",
+    "22777",
+    "877775"
+   ]
+  },
+  {
+   "chunk": "787640",
+   "antigo": "async__787640.3487a3fc06.js",
+   "novo": "async__787640.3d54633110.js",
+   "modulos_antigos": 34,
+   "modulos_novos": 34,
+   "alterados": 2,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "765864",
+    "864442"
+   ]
+  },
+  {
+   "chunk": "Novel",
+   "antigo": "async__Novel.1d545af56c.js",
+   "novo": "async__Novel.9f650b0f20.js",
+   "modulos_antigos": 8,
+   "modulos_novos": 8,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "44032"
+   ]
+  },
+  {
+   "chunk": "850206",
+   "antigo": "async__850206.e38ec15e55.js",
+   "novo": "async__850206.048c255c3f.js",
+   "modulos_antigos": 251,
+   "modulos_novos": 252,
+   "alterados": 5,
+   "adicionados": 1,
+   "removidos": 0,
+   "ids_alterados": [
+    "458969",
+    "784267",
+    "516009",
+    "692761",
+    "196955"
+   ]
+  },
+  {
+   "chunk": "889795",
+   "antigo": "async__889795.256f74ebdf.js",
+   "novo": "async__889795.32938b46b8.js",
+   "modulos_antigos": 612,
+   "modulos_novos": 612,
+   "alterados": 612,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "905916",
+    "152410",
+    "915067",
+    "229739",
+    "869722",
+    "743790",
+    "170696",
+    "352065",
+    "817759",
+    "58942",
+    "894763",
+    "175772"
+   ]
+  },
+  {
+   "chunk": "Skill",
+   "antigo": "async__Skill.0d135cd20c.js",
+   "novo": "async__Skill.2edf69cba3.js",
+   "modulos_antigos": 32,
+   "modulos_novos": 27,
+   "alterados": 27,
+   "adicionados": 0,
+   "removidos": 5,
+   "ids_alterados": [
+    "170833",
+    "637463",
+    "205248",
+    "159288",
+    "342266",
+    "146636",
+    "405050",
+    "508075",
+    "806366",
+    "924052",
+    "964961",
+    "648297"
+   ]
+  },
+  {
+   "chunk": "965310",
+   "antigo": "async__965310.4d5e15c203.js",
+   "novo": "async__965310.7ab2768398.js",
+   "modulos_antigos": 2,
+   "modulos_novos": 2,
+   "alterados": 1,
+   "adicionados": 0,
+   "removidos": 0,
+   "ids_alterados": [
+    "44032"
+   ]
+  },
+  {
+   "chunk": "975399",
+   "antigo": "async__975399.2c638cab52.js",
+   "novo": "async__975399.206ceff65e.js",
+   "modulos_antigos": 18,
+   "modulos_novos": 19,
+   "alterados": 3,
+   "adicionados": 1,
+   "removidos": 0,
+   "ids_alterados": [
+    "852187",
+    "724114",
+    "348988"
+   ]
+  }
+ ],
+ "sondas": [
+  {
+   "probe": "front_tool",
+   "antigo": 3,
+   "novo": 4,
+   "situacao": "presente"
+  },
+  {
+   "probe": "ai_agent",
+   "antigo": 4,
+   "novo": 5,
+   "situacao": "presente"
+  },
+  {
+   "probe": "video_gen",
+   "antigo": 24,
+   "novo": 26,
+   "situacao": "presente"
+  },
+  {
+   "probe": "image_gen",
+   "antigo": 15,
+   "novo": 16,
+   "situacao": "presente"
+  },
+  {
+   "probe": "audio_gen",
+   "antigo": 10,
+   "novo": 11,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pre_activate_skills",
+   "antigo": 11,
+   "novo": 12,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pre_activate_skills_type",
+   "antigo": 4,
+   "novo": 5,
+   "situacao": "presente"
+  },
+  {
+   "probe": "biz/preload_skill",
+   "antigo": 4,
+   "novo": 5,
+   "situacao": "presente"
+  },
+  {
+   "probe": "biz/addon_skill",
+   "antigo": 3,
+   "novo": 4,
+   "situacao": "presente"
+  },
+  {
+   "probe": "biz/x_data_direct_tool_call_req",
+   "antigo": 3,
+   "novo": 3,
+   "situacao": "presente"
+  },
+  {
+   "probe": "biz/x_tool_name_video_part",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pippit_video_part_agent",
+   "antigo": 3,
+   "novo": 4,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pippit_image_part_agent",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pippit_audio_part_agent",
+   "antigo": 2,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "pippit_nest_agent",
+   "antigo": 16,
+   "novo": 16,
+   "situacao": "presente"
+  },
+  {
+   "probe": "web_video_direct",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "dynamic_questionnaire",
+   "antigo": 8,
+   "novo": 8,
+   "situacao": "presente"
+  },
+  {
+   "probe": "marketing_agent",
+   "antigo": 19,
+   "novo": 20,
+   "situacao": "presente"
+  },
+  {
+   "probe": "integrated_agent_canvas",
+   "antigo": 2,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/agent/submit_run",
+   "antigo": 4,
+   "novo": 6,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/videogen/script_segment",
+   "antigo": 0,
+   "novo": 0,
+   "situacao": "nunca presente nos chunks"
+  },
+  {
+   "probe": "/api/biz/v1/videogen/text_to_speech",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/commerce/v3/benefits/batch_check_withhold_deduct",
+   "antigo": 2,
+   "novo": 4,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/omni/create_task_web",
+   "antigo": 1,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/lv/v1/render_task/create",
+   "antigo": 1,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "ai_talking_photo/pre_process_image",
+   "antigo": 1,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "ai_talking_photo/pre_process_audio",
+   "antigo": 1,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/videogen/recommend_digital_human_by_tag",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/videogen/search_platform_material",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "digital_human_filter_config",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "cc_biz_talking_photo",
+   "antigo": 1,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "/api/biz/v1/editor/create_tts_avatar_task",
+   "antigo": 2,
+   "novo": 2,
+   "situacao": "presente"
+  },
+  {
+   "probe": "smart_tool_type:20007",
+   "antigo": 0,
+   "novo": 0,
+   "situacao": "nunca presente nos chunks"
+  },
+  {
+   "probe": "88320131",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "1043788868",
+   "antigo": 1,
+   "novo": 1,
+   "situacao": "presente"
+  },
+  {
+   "probe": "573081",
+   "antigo": 17,
+   "novo": 21,
+   "situacao": "presente"
+  },
+  {
+   "probe": "348188",
+   "antigo": 6,
+   "novo": 9,
+   "situacao": "presente"
+  },
+  {
+   "probe": "x-commerce-v2",
+   "antigo": 2,
+   "novo": 3,
+   "situacao": "presente"
+  },
+  {
+   "probe": "MiniMax-H3-trial",
+   "antigo": 0,
+   "novo": 0,
+   "situacao": "nunca presente nos chunks"
+  }
+ ]
+}

@@ -1,0 +1,209 @@
+
+===== dominios (43) =====
+  ${}   <- 771
+  a   <- lib-polyfill
+  a#б   <- lib-polyfill
+  a@b   <- lib-polyfill
+  accounts.google.com   <- 771
+  capcut-yt.onelink.me   <- main
+  clarity.microsoft.com   <- bat
+  discord.com   <- 200, main
+  edit-api-sg.capcut.com   <- 69, 771, lv-cookie-consent
+  github.com   <- lib-polyfill, uifid-fingerprint-
+  invalid_url   <- core
+  lf-global-static.iapplogcdn.com   <- 69, 771, lv-cookie-consent
+  localhost   <- lib-axios, lib-router
+  m1.openfpcdn.io   <- uifid-fingerprint-
+  mcs-normal-sg.capcutapi.com   <- 69, 771
+  mon-sg.capcutapi.com   <- 69, 771, main
+  p16-capcut-sg.capcut.com   <- main
+  pippit.onelink.me   <- main
+  react.dev   <- lib-react
+  reactjs.org   <- lib-react
+  schema.org   <- main
+  sf16-sg.tiktokcdn.com   <- 69, 771
+  sf16-short-sg.bytedapm.com   <- 200
+  sf16-ug-neutral.capcutstatic.com   <- builder-runtime, main
+  sf16-web-login-neutral.capcutstatic.com   <- 200, 69, 771, builder-runtime
+  sf16-web-tos-buz.capcutstatic.com   <- 69
+  sf16-website-login.neutral.ttwstatic.com   <- 69, 771, lv-cookie-consent
+  starling-normal-sg.capcutapi.com   <- 69, 771
+  test.com   <- 200
+  ttwid-normal-sg.capcutapi.com   <- 69, 771
+  ui.ads.microsoft.com   <- bat
+  vmweb-normal-sg.capcutapi.com   <- 771
+  www.countain.com   <- lv-cookie-consent
+  www.facebook.com   <- main
+  www.instagram.com   <- 200, main
+  www.pippit.ai   <- 200, 921, main, pricing
+  www.producthunt.com   <- 200, main
+  www.tiktok.com   <- 200, index, lv-cookie-consent, main
+  www.w3.org   <- 200, lib-react, main, pricing
+  www.youtube.com   <- 200, main
+  x   <- lib-polyfill
+  x.com   <- 200, main
+  тест   <- lib-polyfill
+
+===== fetch (2) =====
+  ${}${}/${}${}/list   <- 69, 771
+  (dinâmico)   <- 200, 69, 771, argus-builder-stra, bat, core, index, lv-cookie-consent,
+
+===== xhr_open (0) =====
+
+===== chamadas_http (0) =====
+
+===== beacon (1) =====
+  (dinâmico)   <- 69, 771, bat, lv-cookie-consent
+
+===== websocket (0) =====
+
+===== caminhos_api (22) =====
+  /api/biz/v1/agent/get_available_model_list   <- main
+  /api/biz/v1/user/click_id   <- main
+  /commerce/v1/subscription/cc_price_list   <- pricing
+  /event   <- 69, 771
+  /login   <- 200, 771, main
+  /login-embed   <- 771
+  /lv/v1/cc_web/ad_maker/ecom/seo_get_collection_templates   <- 200
+  /lv/v1/cc_web/ad_maker/ecom/seo_search_templates   <- 200
+  /lv/v1/commerce/get_entrances   <- pricing
+  /lv/v1/event/report   <- 200
+  /monitor_browser/collect/batch/   <- core
+  /npm-monitoring   <- uifid-fingerprint-
+  /service/2/abtest_config/   <- 69, 771, lv-cookie-consent
+  /service/2/web_sdk_settings/   <- 69, 771, lv-cookie-consent
+  /template/api/subscribe/cc-price-list   <- pricing
+  /template/api/subscribe/detail   <- pricing
+  /template/api/subscribe/location   <- pricing
+  /template/api/subscribe/region   <- pricing
+  /upload/locales/   <- 200
+  /v1/list   <- 69, 771, lv-cookie-consent
+  /v1/list_test   <- 69, 771, lv-cookie-consent
+  /v1/user/webid   <- 69, 771, lv-cookie-consent
+
+===== rotas_path (32) =====
+     <- 200, 771, core
+  *   <- 69, 771
+  /   <- 200, 386, 69, 771, lv-cookie-consent, main, uifid-fingerprint-
+  /pricing   <- main
+  ar-eg   <- 771
+  cs-cz   <- 771
+  de-de   <- 200, 771
+  el-gr   <- 771
+  es-es   <- 200, 771
+  es-la   <- 771
+  fi-fi   <- 771
+  fr-fr   <- 200, 771
+  he-il   <- 771
+  hu-hu   <- 771
+  id-id   <- 200, 771
+  it-it   <- 200, 771
+  ja-jp   <- 200, 771
+  ko-kr   <- 200, 771
+  ms-my   <- 200, 771
+  nl-nl   <- 771
+  pl-pl   <- 200, 771
+  pt-br   <- 200, 771
+  ro-ro   <- 771
+  ru-by   <- 200, 771
+  sv-se   <- 771
+  th-th   <- 200, 771
+  tl-ph   <- 200, 771
+  tr-tr   <- 200, 771
+  uk-ua   <- 771
+  vi-vn   <- 200, 771
+  zh-cn   <- 200, 771
+  zh-tw   <- 200, 771
+
+===== storage (10) =====
+  getItem:__GPC_AND_PRIVACY_UNIQUE_KEY__   <- 69
+  getItem:_applogtest-test-key   <- 69, 771, lv-cookie-consent
+  getItem:_ranger-test-key   <- 69, 771, lv-cookie-consent
+  removeItem:_applogtest-test-key   <- 69, 771, lv-cookie-consent
+  removeItem:_localforage_support_test   <- 69, 771, lv-cookie-consent
+  removeItem:_ranger-test-key   <- 69, 771, lv-cookie-consent
+  setItem:_applogtest-test-key   <- 69, 771, lv-cookie-consent
+  setItem:_localforage_support_test   <- 69, 771, lv-cookie-consent
+  setItem:_ranger-test-key   <- 69, 771, lv-cookie-consent
+  setItem:auto_fill_info   <- main
+
+===== eventos (44) =====
+  DOMContentLoaded   <- 69, 771, index, lib-react
+  abort   <- 69, 771, lib-axios, lib-router
+  bannerEvents   <- lv-cookie-consent
+  beforeunload   <- 69, 771, lv-cookie-consent
+  blur   <- 69, 771, lv-cookie-consent
+  change   <- 69, 771, lv-cookie-consent, main
+  click   <- 69, 771, index, lv-cookie-consent, main
+  customBannerEvents   <- lv-cookie-consent
+  ended   <- main
+  error   <- 771, lib-react
+  focus   <- 69, 771, lv-cookie-consent
+  getConsent   <- lv-cookie-consent
+  hashchange   <- 69, 771, lv-cookie-consent
+  keydown   <- main
+  load   <- 200, 69, 771, index, lib-react, lv-cookie-consent
+  loadend   <- lib-axios
+  message   <- 69, 771, index, lib-axios, lib-polyfill, lv-cookie-consent, uifid-fing
+  mousedown   <- 69, 771, lv-cookie-consent, main
+  mousemove   <- 69, 771, lv-cookie-consent
+  mouseup   <- 69, 771, lv-cookie-consent
+  navigate   <- core, index, lib-react
+  navigateerror   <- lib-react
+  navigatesuccess   <- lib-react
+  pagehide   <- 69, 771, bat, lib-router, lv-cookie-consent
+  pageshow   <- bat
+  play   <- main
+  pointerdown   <- pricing
+  popstate   <- 69, 771, bat, core, index, lv-cookie-consent
+  progress   <- lib-axios
+  resize   <- 200, 921, main
+  scroll   <- 200, 69, 771, 921, lv-cookie-consent, main
+  securitypolicyviolation   <- core, index
+  statechange   <- index
+  submit   <- 69, 771, lv-cookie-consent
+  test   <- lib-react
+  touchend   <- 69, 771, lv-cookie-consent
+  touchmove   <- 69, 771, lv-cookie-consent, main
+  touchstart   <- 69, 771, lv-cookie-consent, main
+  transitionend   <- main
+  unload   <- 69, 771, lv-cookie-consent
+  updatefound   <- index
+  visibilitychange   <- 69, 771, core, lv-cookie-consent
+  webglCreateContextError   <- uifid-fingerprint-
+  wheel   <- main
+
+===== globais_window (33) =====
+  BUILD_BRANCH   <- 200
+  BUILD_VERSION   <- 200
+  LogPluginObject   <- 69, 771, lv-cookie-consent
+  TEAVisualEditor   <- 69, 771, lv-cookie-consent
+  UET   <- bat
+  UET_init   <- bat
+  UET_push   <- bat
+  XMLHttpRequest   <- index
+  _MODERNJS_ROUTE_MANIFEST   <- route-manifest-mai, route-manifest-mar
+  _ROUTER_DATA   <- 69, 771
+  _SSR_DATA   <- 69, 771
+  __LOADABLE_LOADED_CHUNKS__   <- 171, 200, 386, 69, builder-runtime, lib-axios, lib-polyfill, lib-react
+  __STARLING_DEVTOOLS_I18N   <- 69, 771
+  __STARLING_INCONTEXT_GLOBAL_I18N__   <- 69, 771
+  __STARLING_INCONTEXT_GLOBAL__HOOK__   <- 69, 771
+  __UIFID_FINGERPRINT_INITED__   <- uifid-fingerprint-
+  __assetPrefix__   <- 200, main
+  __is_kep   <- pricing
+  __locationCountryCode   <- pricing
+  __locationInfo   <- pricing
+  __reactRouterVersion   <- lib-router
+  __request__   <- pricing
+  _routeModules   <- 386, 771
+  assetsRetry   <- 771
+  assetsRetryStatistics   <- 771
+  cancelIdleCallback   <- 200
+  ccWebCookieConsentSingleton   <- lv-cookie-consent
+  classNames   <- 69, 771, 921
+  dataLayer   <- 69
+  fetch   <- 69, 771, index
+  gtag   <- 69
+  requestIdleCallback   <- 200
+  rspackChunkpippit_landing_page   <- 771, 921, argus-builder-stra, builder-runtime, lib-polyfill, lib-react

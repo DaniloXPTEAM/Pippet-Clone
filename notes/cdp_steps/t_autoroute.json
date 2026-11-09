@@ -1,0 +1,70 @@
+{
+ "task": "t_autoroute",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "modo",
+   "click": {
+    "role": "button",
+    "name": "Creation mode"
+   },
+   "opts": {
+    "expect": {
+     "text": "Video"
+    }
+   }
+  },
+  {
+   "tag": "vid",
+   "click": {
+    "role": "menuitemradio",
+    "name": "Video Choose",
+    "exact": false
+   },
+   "opts": {
+    "allowRisky": true
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "autoroute",
+   "click": {
+    "css": "[role=dialog] button:has-text('Auto Route')"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "autoroute_painel",
+   "tag": "shot_p"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "snap": "autoroute_composer",
+   "tag": "shot_c"
+  }
+ ]
+}

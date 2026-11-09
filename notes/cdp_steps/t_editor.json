@@ -1,0 +1,26 @@
+{
+ "task": "t_editor",
+ "steps": [
+  {
+   "goto": "editor",
+   "wait": 9000
+  },
+  {
+   "tag": "ratio",
+   "click": {
+    "text": "Ratio"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2000
+  },
+  {
+   "snap": "editor_ratio",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

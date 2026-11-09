@@ -1,0 +1,4 @@
+{"task":"t_sse_erro","netlog":{"file":"C:/w/PiperLine/captures/auth/autoroute/sse_erro.har","after_ms":20000},"steps":[
+{"goto":"https://www.pippit.ai/nest-agent-project?projectId=1217274923268&canvasId=1219047169540","wait":9000},
+{"snap":"canvas_sse","tag":"shot"}
+]}

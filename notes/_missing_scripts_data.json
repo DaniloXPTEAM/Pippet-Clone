@@ -1,0 +1,1680 @@
+[
+ {
+  "url": "https://sf16-ug-neutral.capcutstatic.com/obj/seeyou-us/growth/seeyou_bedrock/pre_sdk/presets/seo-oversea.full.cc8fe2f22e.js",
+  "host": "sf16-ug-neutral.capcutstatic.com",
+  "path": "/obj/seeyou-us/growth/seeyou_bedrock/pre_sdk/presets/seo-oversea.full.cc8fe2f22e.js",
+  "base": "seo-oversea.full.cc8fe2f22e.js",
+  "stem": "seo-oversea.full",
+  "hash": "cc8fe2f22e",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 8,
+    "rank": 2,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/26.cef62c1a.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/26.cef62c1a.js",
+  "base": "26.cef62c1a.js",
+  "stem": "26",
+  "hash": "cef62c1a",
+  "chunk_id": "26",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 30,
+    "rank": 11,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/541.b838f573.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/541.b838f573.js",
+  "base": "541.b838f573.js",
+  "stem": "541",
+  "hash": "b838f573",
+  "chunk_id": "541",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 31,
+    "rank": 12,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/109.8fa9ff86.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/109.8fa9ff86.js",
+  "base": "109.8fa9ff86.js",
+  "stem": "109",
+  "hash": "8fa9ff86",
+  "chunk_id": "109",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 133,
+    "rank": 21,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/244.66de7869.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/244.66de7869.js",
+  "base": "244.66de7869.js",
+  "stem": "244",
+  "hash": "66de7869",
+  "chunk_id": "244",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 214,
+    "rank": 37,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/475.6400f53e.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/475.6400f53e.js",
+  "base": "475.6400f53e.js",
+  "stem": "475",
+  "hash": "6400f53e",
+  "chunk_id": "475",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 178,
+    "rank": 33,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/846.e177016b.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/846.e177016b.js",
+  "base": "846.e177016b.js",
+  "stem": "846",
+  "hash": "e177016b",
+  "chunk_id": "846",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 134,
+    "rank": 22,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/components-CopyrightModal.8004a52c.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/components-CopyrightModal.8004a52c.js",
+  "base": "components-CopyrightModal.8004a52c.js",
+  "stem": "components-CopyrightModal",
+  "hash": "8004a52c",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 151,
+    "rank": 28,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    2
+   ],
+   [
+    "pricing.ec3e7ac7.js",
+    1
+   ]
+  ],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/components-LanguageSelectorModal.1b56e8fb.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/components-LanguageSelectorModal.1b56e8fb.js",
+  "base": "components-LanguageSelectorModal.1b56e8fb.js",
+  "stem": "components-LanguageSelectorModal",
+  "hash": "1b56e8fb",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 149,
+    "rank": 27,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    2
+   ],
+   [
+    "pricing.ec3e7ac7.js",
+    1
+   ]
+  ],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/fetch_starling_text.c0865958.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/fetch_starling_text.c0865958.js",
+  "base": "fetch_starling_text.c0865958.js",
+  "stem": "fetch_starling_text",
+  "hash": "c0865958",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 145,
+    "rank": 25,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/lv-user-login-sdk.c12d9a4a.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/async/lv-user-login-sdk.c12d9a4a.js",
+  "base": "lv-user-login-sdk.c12d9a4a.js",
+  "stem": "lv-user-login-sdk",
+  "hash": "c12d9a4a",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 180,
+    "rank": 34,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.92e913169e.js",
+    2
+   ],
+   [
+    "route-manifest-main.d19e5232.js",
+    1
+   ],
+   [
+    "builder-runtime.183c44a8.js",
+    2
+   ]
+  ],
+  "refs_hash": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ]
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/marketing-studio.4edccd46.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/marketing-studio.4edccd46.js",
+  "base": "marketing-studio.4edccd46.js",
+  "stem": "marketing-studio",
+  "hash": "4edccd46",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 33,
+    "rank": 14,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/pippit/kep/static/js/route-manifest-templates.23ae9915.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/pippit/kep/static/js/route-manifest-templates.23ae9915.js",
+  "base": "route-manifest-templates.23ae9915.js",
+  "stem": "route-manifest-templates",
+  "hash": "23ae9915",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio",
+  "caps": "scenario_template-studio",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 7,
+    "rank": 3,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/4017.b895d9bb.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/4017.b895d9bb.js",
+  "base": "4017.b895d9bb.js",
+  "stem": "4017",
+  "hash": "b895d9bb",
+  "chunk_id": "4017",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 95,
+    "rank": 11,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/argus-builder-strategy.b0e1875f.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/argus-builder-strategy.b0e1875f.js",
+  "base": "argus-builder-strategy.b0e1875f.js",
+  "stem": "argus-builder-strategy",
+  "hash": "b0e1875f",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 94,
+    "rank": 10,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "argus-builder-strategy.da0ba176b5.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/$.1928e4ea.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/$.1928e4ea.js",
+  "base": "$.1928e4ea.js",
+  "stem": "$",
+  "hash": "1928e4ea",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 97,
+    "rank": 13,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/139.f2f4e2f9.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/139.f2f4e2f9.js",
+  "base": "139.f2f4e2f9.js",
+  "stem": "139",
+  "hash": "f2f4e2f9",
+  "chunk_id": "139",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 105,
+    "rank": 21,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/1564.83d1e4b0.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/1564.83d1e4b0.js",
+  "base": "1564.83d1e4b0.js",
+  "stem": "1564",
+  "hash": "83d1e4b0",
+  "chunk_id": "1564",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 100,
+    "rank": 16,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2109.3ff5f5c4.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2109.3ff5f5c4.js",
+  "base": "2109.3ff5f5c4.js",
+  "stem": "2109",
+  "hash": "3ff5f5c4",
+  "chunk_id": "2109",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 410,
+    "rank": 51,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2475.21d5c217.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2475.21d5c217.js",
+  "base": "2475.21d5c217.js",
+  "stem": "2475",
+  "hash": "21d5c217",
+  "chunk_id": "2475",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 392,
+    "rank": 47,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2522.6df3c817.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/2522.6df3c817.js",
+  "base": "2522.6df3c817.js",
+  "stem": "2522",
+  "hash": "6df3c817",
+  "chunk_id": "2522",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 388,
+    "rank": 44,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3755.a00d8459.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3755.a00d8459.js",
+  "base": "3755.a00d8459.js",
+  "stem": "3755",
+  "hash": "a00d8459",
+  "chunk_id": "3755",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 318,
+    "rank": 38,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3804.399b2c92.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3804.399b2c92.js",
+  "base": "3804.399b2c92.js",
+  "stem": "3804",
+  "hash": "399b2c92",
+  "chunk_id": "3804",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 103,
+    "rank": 19,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3862.7b08cb78.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/3862.7b08cb78.js",
+  "base": "3862.7b08cb78.js",
+  "stem": "3862",
+  "hash": "7b08cb78",
+  "chunk_id": "3862",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 99,
+    "rank": 15,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/4084.f449e613.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/4084.f449e613.js",
+  "base": "4084.f449e613.js",
+  "stem": "4084",
+  "hash": "f449e613",
+  "chunk_id": "4084",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 118,
+    "rank": 34,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/428.b813be5e.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/428.b813be5e.js",
+  "base": "428.b813be5e.js",
+  "stem": "428",
+  "hash": "b813be5e",
+  "chunk_id": "428",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 109,
+    "rank": 25,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/5238.06d32cea.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/5238.06d32cea.js",
+  "base": "5238.06d32cea.js",
+  "stem": "5238",
+  "hash": "06d32cea",
+  "chunk_id": "5238",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 389,
+    "rank": 45,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/5836.b0985715.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/5836.b0985715.js",
+  "base": "5836.b0985715.js",
+  "stem": "5836",
+  "hash": "b0985715",
+  "chunk_id": "5836",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 104,
+    "rank": 20,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/6619.8273d42e.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/6619.8273d42e.js",
+  "base": "6619.8273d42e.js",
+  "stem": "6619",
+  "hash": "8273d42e",
+  "chunk_id": "6619",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 101,
+    "rank": 17,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/6846.ece7300d.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/6846.ece7300d.js",
+  "base": "6846.ece7300d.js",
+  "stem": "6846",
+  "hash": "ece7300d",
+  "chunk_id": "6846",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 411,
+    "rank": 52,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/7171.f4cc91c4.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/7171.f4cc91c4.js",
+  "base": "7171.f4cc91c4.js",
+  "stem": "7171",
+  "hash": "f4cc91c4",
+  "chunk_id": "7171",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 376,
+    "rank": 42,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/7601.7a7874ac.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/7601.7a7874ac.js",
+  "base": "7601.7a7874ac.js",
+  "stem": "7601",
+  "hash": "7a7874ac",
+  "chunk_id": "7601",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 106,
+    "rank": 22,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/8852.f015141d.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/8852.f015141d.js",
+  "base": "8852.f015141d.js",
+  "stem": "8852",
+  "hash": "f015141d",
+  "chunk_id": "8852",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 391,
+    "rank": 46,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/business-components-pippit-PippitFooter.6cc77dac.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/business-components-pippit-PippitFooter.6cc77dac.js",
+  "base": "business-components-pippit-PippitFooter.6cc77dac.js",
+  "stem": "business-components-pippit-PippitFooter",
+  "hash": "6cc77dac",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 119,
+    "rank": 35,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/business-components-pippit-PippitHeader.89f38357.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/business-components-pippit-PippitHeader.89f38357.js",
+  "base": "business-components-pippit-PippitHeader.89f38357.js",
+  "stem": "business-components-pippit-PippitHeader",
+  "hash": "89f38357",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 102,
+    "rank": 18,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-CTABlock.37181ca4.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-CTABlock.37181ca4.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-CTABlock.37181ca4.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-CTABlock",
+  "hash": "37181ca4",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 117,
+    "rank": 33,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-Faqs.0f789a7f.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-Faqs.0f789a7f.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-Faqs.0f789a7f.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-Faqs",
+  "hash": "0f789a7f",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 114,
+    "rank": 30,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-FeatureCases.729be3b5.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-FeatureCases.729be3b5.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-FeatureCases.729be3b5.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-FeatureCases",
+  "hash": "729be3b5",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 112,
+    "rank": 28,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-FeatureHighlights.4b29fe84.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-FeatureHighlights.4b29fe84.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-FeatureHighlights.4b29fe84.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-FeatureHighlights",
+  "hash": "4b29fe84",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 110,
+    "rank": 26,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-HowToGuide.f0c9caad.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-HowToGuide.f0c9caad.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-HowToGuide.f0c9caad.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-HowToGuide",
+  "hash": "f0c9caad",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 111,
+    "rank": 27,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-PageRecommend.8cd2e9e3.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-PageRecommend.8cd2e9e3.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-PageRecommend.8cd2e9e3.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-PageRecommend",
+  "hash": "8cd2e9e3",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 116,
+    "rank": 32,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-RelatedTags.d2908622.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-RelatedTags.d2908622.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-RelatedTags.d2908622.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-RelatedTags",
+  "hash": "d2908622",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 115,
+    "rank": 31,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-ToolsList.2670ba80.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Default-ToolsList.2670ba80.js",
+  "base": "byted-image-seeyou-cms-components-components-Default-ToolsList.2670ba80.js",
+  "stem": "byted-image-seeyou-cms-components-components-Default-ToolsList",
+  "hash": "2670ba80",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 113,
+    "rank": 29,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Pippit-AnyInput.e6734657.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/byted-image-seeyou-cms-components-components-Pippit-AnyInput.e6734657.js",
+  "base": "byted-image-seeyou-cms-components-components-Pippit-AnyInput.e6734657.js",
+  "stem": "byted-image-seeyou-cms-components-components-Pippit-AnyInput",
+  "hash": "e6734657",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 108,
+    "rank": 24,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/components-GoogleOneTapPrompt.b4831ec2.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/components-GoogleOneTapPrompt.b4831ec2.js",
+  "base": "components-GoogleOneTapPrompt.b4831ec2.js",
+  "stem": "components-GoogleOneTapPrompt",
+  "hash": "b4831ec2",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 401,
+    "rank": 48,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/fetch_starling_text.df7e08db.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/fetch_starling_text.df7e08db.js",
+  "base": "fetch_starling_text.df7e08db.js",
+  "stem": "fetch_starling_text",
+  "hash": "df7e08db",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 377,
+    "rank": 43,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/lib-axios.c8aa8b6b.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/lib-axios.c8aa8b6b.js",
+  "base": "lib-axios.c8aa8b6b.js",
+  "stem": "lib-axios",
+  "hash": "c8aa8b6b",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 316,
+    "rank": 36,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/lv-cookie-consent.e697910f.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/lv-cookie-consent.e697910f.js",
+  "base": "lv-cookie-consent.e697910f.js",
+  "stem": "lv-cookie-consent",
+  "hash": "e697910f",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 317,
+    "rank": 37,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.183c44a8.js",
+    1
+   ],
+   [
+    "lv-cookie-consent.8b26699e.js",
+    2
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/templates-landing-page.fb42b692.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/templates-landing-page.fb42b692.js",
+  "base": "templates-landing-page.fb42b692.js",
+  "stem": "templates-landing-page",
+  "hash": "fb42b692",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 107,
+    "rank": 23,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/wrappers-Pippit.e34d2f20.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/async/wrappers-Pippit.e34d2f20.js",
+  "base": "wrappers-Pippit.e34d2f20.js",
+  "stem": "wrappers-Pippit",
+  "hash": "e34d2f20",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 98,
+    "rank": 14,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/builder-runtime.a49fc417.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/builder-runtime.a49fc417.js",
+  "base": "builder-runtime.a49fc417.js",
+  "stem": "builder-runtime",
+  "hash": "a49fc417",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 90,
+    "rank": 6,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "builder-runtime.92e913169e.js",
+    1
+   ],
+   [
+    "route-manifest-marketing-studio.faf46dfd.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-polyfill.ac9fc4ec.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-polyfill.ac9fc4ec.js",
+  "base": "lib-polyfill.ac9fc4ec.js",
+  "stem": "lib-polyfill",
+  "hash": "ac9fc4ec",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 93,
+    "rank": 9,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "lib-polyfill.28d1c202ec.js",
+    1
+   ],
+   [
+    "route-manifest-marketing-studio.faf46dfd.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-react.a8f639c3.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-react.a8f639c3.js",
+  "base": "lib-react.a8f639c3.js",
+  "stem": "lib-react",
+  "hash": "a8f639c3",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 91,
+    "rank": 7,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "lib-react.ac0c27841f.js",
+    1
+   ],
+   [
+    "lib-react.48190763.js",
+    1
+   ],
+   [
+    "route-manifest-marketing-studio.faf46dfd.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-router.865bc695.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/lib-router.865bc695.js",
+  "base": "lib-router.865bc695.js",
+  "stem": "lib-router",
+  "hash": "865bc695",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 92,
+    "rank": 8,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "lib-router.e2ea4c581e.js",
+    1
+   ],
+   [
+    "lib-router.6dad4cc6.js",
+    1
+   ],
+   [
+    "route-manifest-marketing-studio.faf46dfd.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/main.e32a6083.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/main.e32a6083.js",
+  "base": "main.e32a6083.js",
+  "stem": "main",
+  "hash": "e32a6083",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 96,
+    "rank": 12,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "bat.js",
+    25
+   ],
+   [
+    "771.5a26a240f4.js",
+    104
+   ],
+   [
+    "argus-builder-strategy.da0ba176b5.js",
+    1
+   ],
+   [
+    "builder-runtime.92e913169e.js",
+    1
+   ],
+   [
+    "lib-polyfill.28d1c202ec.js",
+    16
+   ],
+   [
+    "lib-react.ac0c27841f.js",
+    1
+   ],
+   [
+    "lib-router.e2ea4c581e.js",
+    3
+   ],
+   [
+    "main.f77ba7085c.js",
+    18
+   ],
+   [
+    "route-manifest-main.d19e5232.js",
+    1
+   ],
+   [
+    "200.63bb53fe.js",
+    9
+   ],
+   [
+    "69.885e370e.js",
+    76
+   ],
+   [
+    "lib-axios.29bed537.js",
+    3
+   ],
+   [
+    "lib-polyfill.086083a9.js",
+    15
+   ],
+   [
+    "pricing.ec3e7ac7.js",
+    3
+   ],
+   [
+    "lv-cookie-consent.8b26699e.js",
+    63
+   ],
+   [
+    "uifid-fingerprint-init.6709749a.js",
+    11
+   ],
+   [
+    "index.js",
+    7
+   ],
+   [
+    "core.js",
+    17
+   ],
+   [
+    "devtools.js",
+    2
+   ],
+   [
+    "pt-BR.89180.json",
+    4
+   ],
+   [
+    "pt-BR.89180.json",
+    4
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/route-manifest-main.a8e8c072.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/growth/seeyou/cms_consumer/static/js/route-manifest-main.a8e8c072.js",
+  "base": "route-manifest-main.a8e8c072.js",
+  "stem": "route-manifest-main",
+  "hash": "a8e8c072",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_video-agent",
+    "seq": 89,
+    "rank": 5,
+    "step": "scenario_start",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/browser.1.14.1.sg.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/browser.1.14.1.sg.js",
+  "base": "browser.1.14.1.sg.js",
+  "stem": "browser.1.14.1.sg",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 146,
+    "rank": 26,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 373,
+    "rank": 41,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [
+   [
+    "771.5a26a240f4.js",
+    1
+   ],
+   [
+    "69.885e370e.js",
+    1
+   ]
+  ],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/action.1.14.1.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/action.1.14.1.js",
+  "base": "action.1.14.1.js",
+  "stem": "action.1.14.1",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 177,
+    "rank": 32,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 439,
+    "rank": 55,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/blank-screen.1.14.1.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/blank-screen.1.14.1.js",
+  "base": "blank-screen.1.14.1.js",
+  "stem": "blank-screen.1.14.1",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 176,
+    "rank": 31,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 438,
+    "rank": 54,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/common-monitors.1.14.1.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/ies/ccweb/scm_storage/sdk/slardar-sdk-web/plugins/common-monitors.1.14.1.js",
+  "base": "common-monitors.1.14.1.js",
+  "stem": "common-monitors.1.14.1",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 175,
+    "rank": 30,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 437,
+    "rank": 53,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/pippit/scm_storage/sdk/slardar-sdk-web/plugins/common-monitors.1.14.5.js",
+  "host": "sf16-web-login-neutral.capcutstatic.com",
+  "path": "/obj/capcut-web-login-static/ies/pippit/scm_storage/sdk/slardar-sdk-web/plugins/common-monitors.1.14.5.js",
+  "base": "common-monitors.1.14.5.js",
+  "stem": "common-monitors.1.14.5",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 130,
+    "rank": 19,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 404,
+    "rank": 49,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/pns/tiktok-cookie-banner/1.0.0.285/default.no-tea.esm.js",
+  "host": "sf16-website-login.neutral.ttwstatic.com",
+  "path": "/obj/tiktok_web_login_static/pns/tiktok-cookie-banner/1.0.0.285/default.no-tea.esm.js",
+  "base": "default.no-tea.esm.js",
+  "stem": "default.no-tea.esm",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 125,
+    "rank": 18,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 368,
+    "rank": 40,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ },
+ {
+  "url": "https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/slardar/fe/sdk-web/plugins/common-monitors.1.14.5.js",
+  "host": "sf16-website-login.neutral.ttwstatic.com",
+  "path": "/obj/tiktok_web_login_static/slardar/fe/sdk-web/plugins/common-monitors.1.14.5.js",
+  "base": "common-monitors.1.14.5.js",
+  "stem": "common-monitors.1.14.5",
+  "hash": "",
+  "chunk_id": "",
+  "pages": "https://www.pippit.ai/pt-br/template-studio | https://www.pippit.ai/pt-br/tools/video-agent",
+  "caps": "scenario_template-studio,scenario_video-agent",
+  "first": [
+   {
+    "cap": "scenario_template-studio",
+    "seq": 132,
+    "rank": 20,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/template-studio"
+   },
+   {
+    "cap": "scenario_video-agent",
+    "seq": 407,
+    "rank": 50,
+    "step": "settle",
+    "page": "https://www.pippit.ai/pt-br/tools/video-agent"
+   }
+  ],
+  "refs_stem": [],
+  "refs_hash": []
+ }
+]

@@ -1,0 +1,1 @@
+{"task":"t_home_ref","steps":[{"goto":"home","wait":9000},{"snap":"home_ref","tag":"shot"}]}

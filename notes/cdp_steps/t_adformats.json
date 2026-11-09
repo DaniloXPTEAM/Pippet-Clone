@@ -1,0 +1,43 @@
+{
+ "task": "t_adformats",
+ "steps": [
+  {
+   "goto": "marketing-agent",
+   "wait": 8000
+  },
+  {
+   "tag": "abre_formats",
+   "click": {
+    "role": "button",
+    "name": "Ad formats"
+   },
+   "opts": {
+    "expect": {
+     "text": "Search ad format"
+    }
+   }
+  },
+  {
+   "wait": 4500
+  },
+  {
+   "tag": "expand",
+   "click": {
+    "role": "button",
+    "name": "Expand Shot-and-Drop Reveal"
+   },
+   "opts": {
+    "expect": {
+     "text": "Collapse Shot-and-Drop Reveal"
+    }
+   }
+  },
+  {
+   "snap": "adformats_expand",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

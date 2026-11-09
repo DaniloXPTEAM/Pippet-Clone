@@ -1,0 +1,98 @@
+[
+ {
+  "n": "CanvasShare",
+  "antigo": null,
+  "tamanho_novo": 24443,
+  "probes_no_novo": [
+   "573081"
+  ],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "asset-library-sdk-picker",
+  "antigo": null,
+  "tamanho_novo": 41308,
+  "probes_no_novo": [
+   "video_gen",
+   "pre_activate_skills",
+   "pre_activate_skills_type",
+   "biz/preload_skill",
+   "biz/addon_skill",
+   "marketing_agent"
+  ],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "activity-detail/(slug$)/page",
+  "antigo": null,
+  "tamanho_novo": 914,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "home-page/page",
+  "antigo": null,
+  "tamanho_novo": 2046,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "364997",
+  "antigo": null,
+  "tamanho_novo": 21544,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "home/page",
+  "antigo": "e6f7b93173",
+  "novo": "5d9cc09adb",
+  "tam": [
+   2031,
+   2031
+  ],
+  "literais_removidos": [],
+  "literais_adicionados": [],
+  "probes_no_antigo": [],
+  "probes_no_novo": []
+ },
+ {
+  "n": "565447",
+  "antigo": null,
+  "tamanho_novo": 40994,
+  "probes_no_novo": [
+   "audio_gen",
+   "pippit_nest_agent",
+   "573081"
+  ],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "$",
+  "antigo": null,
+  "tamanho_novo": 469,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "replay/page",
+  "antigo": null,
+  "tamanho_novo": 1293,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "Replay",
+  "antigo": null,
+  "tamanho_novo": 695,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ },
+ {
+  "n": "ActivityDetail",
+  "antigo": null,
+  "tamanho_novo": 92982,
+  "probes_no_novo": [],
+  "obs": "versao antiga nao esta nos 246 bundles locais"
+ }
+]

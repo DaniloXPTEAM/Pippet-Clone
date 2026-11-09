@@ -1,0 +1,43 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\growth\\pippit\\kep\\static\\js\\lib-react.48190763.js",
+ "bytes": 139836,
+ "parse": "script",
+ "nos": 46553,
+ "strings_total": 1103,
+ "segredo_like_ignoradas": 1,
+ "urls": [
+  "http://www.w3.org/1998/Math/MathML",
+  "http://www.w3.org/1999/xhtml",
+  "http://www.w3.org/1999/xlink",
+  "http://www.w3.org/2000/svg",
+  "http://www.w3.org/XML/1998/namespace",
+  "https://reactjs.org/docs/error-decoder.html"
+ ],
+ "dominios": [
+  "reactjs.org",
+  "www.w3.org"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "test"
+ ],
+ "globais_window": [
+  "__LOADABLE_LOADED_CHUNKS__"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 12
+}

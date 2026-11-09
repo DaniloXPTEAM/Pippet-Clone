@@ -1,0 +1,9 @@
+// Lista as chamadas de rede de um scenario exportado (bundle de evidência REA) com método, caminho, status e tamanho do corpo; opcionalmente salva corpos JSON de caminhos que casem um filtro.
+import fs from 'node:fs';
+const [file, filter, outDir] = process.argv.slice(2); const b = JSON.parse(fs.readFileSync(file, 'utf8')); const rec = b.records.find((r) => r.operation === 'capture_browser_scenario'); const it = rec.normalized_result.events.items;
+const tx = {}; for (const e of it) { const t = (tx[e.transaction_id] ||= {}); if (e.kind === 'request') { t.m = e.method; t.url = e.url; t.type = e.resource_type; } if (e.kind === 'response') t.s = e.status; if (e.kind === 'network-content') (t.content ||= []).push(e); }
+const pathOf = (u) => { try { const x = new URL(u.url); return x.origin + x.pathname; } catch { return ''; } };
+const rows = Object.entries(tx).map(([id, t]) => ({ id, m: t.m, p: pathOf(t.url), s: t.s, bytes: (t.content || []).map((c) => c.body?.bytes).filter((x) => x != null) })); const api = rows.filter((r) => /pippit\.ai\/(api|commerce|jsonp)/.test(r.p));
+const uniq = {}; for (const r of api) { const k = `${r.m} ${r.p.replace(/^https:\/\/[^/]+/, '')}`; (uniq[k] ||= []).push(r); }
+for (const [k, v] of Object.entries(uniq).sort()) console.log(`${v.length}x ${k} [${v.map((x) => x.s).join(',')}] corpo:${v.map((x) => x.bytes.join('/') || '-').join(',')}`);
+if (filter) { fs.mkdirSync(outDir, { recursive: true }); let n = 0; for (const r of api.filter((x) => new RegExp(filter).test(x.p))) { for (const c of tx[r.id].content || []) { if (!c.body?.content) continue; const txt = Buffer.from(c.body.content, c.body.encoding === 'base64' || /^[A-Za-z0-9+/=]+$/.test(c.body.content.slice(0, 40)) ? 'base64' : 'utf8').toString('utf8'); fs.writeFileSync(`${outDir}/${r.p.split('/').pop()}_${r.id}_${c.phase || 'x'}.json`, txt); n++; } } console.log('corpos salvos:', n); }

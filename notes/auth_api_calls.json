@@ -1,0 +1,7529 @@
+{
+ "/api/biz": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "t"
+  ],
+  "files": [
+   "async__114928.58060f10a7.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/web/v1/asset/search": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v3/asset/search\"",
+   "materialUpdate:\"/api/biz/v1/asset/update\",materialDelete:\"/api/biz/v1/asset/delete\",materialQuery:\"/api/biz/v1/asset/query\",canvasList:\"/api"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v3/asset/search": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/web/v1/entity/manage/page": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "i._.productManagePage",
+   "productPickerPage:\"/api/web/v1/entity/picker/page\",productMentionPage:\"/api/web/v1/entity/mention/page\",productCreate:\"/api/biz/v1/entity/cr",
+   "{entity_type:\"voice\",scope:\"mine\",query:e,cursor:t,count:30,sort:\"created_at_desc\"},n"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__850206.e38ec15e55.js",
+   "async__948162.8eb53cf747.js",
+   "async__AssetManagementMaterialV2.896b2fd0ea.js"
+  ]
+ },
+ "/api/biz/v1/entity/create": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "i._.productCreate",
+   "productUpdate:\"/api/biz/v1/entity/update\",productDelete:\"/api/biz/v1/entity/delete\",securityCheck:\"/api/web/v1/security/check\",realPersonQrC",
+   "{Base:{Client:\"web\"},entity_type:\"voice\",name:e.name.trim(),description:e.description.trim(),assets:[{asset:{PippitAssetID:e.audioAssetId}}]"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__850206.e38ec15e55.js",
+   "async__948162.8eb53cf747.js",
+   "async__AssetManagementMaterialV2.896b2fd0ea.js"
+  ]
+ },
+ "/api/biz/v1/entity/delete": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "i._.productDelete",
+   "securityCheck:\"/api/web/v1/security/check\",realPersonQrCreate:\"/api/web/v1/character/realperson/qr/create\",realPersonQrScan:\"/api/web/v1/cha"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/3d_director_platform/upload_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/3d_director_platform/list_assets\",\"/api/biz/v1/context/history\",\"/api/biz/v1/context/history_delete\",\"/api/biz/v1/context/histo",
+   "P=0xc800000;class j extends Error{constructor(e,t){super(e),this.name=\"DirectorModelUploadError\",this.responseData=t}}async function N(e){if"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__616044.82a3c713c4.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/3d_director_platform/list_assets": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/history\",\"/api/biz/v1/context/history_delete\",\"/api/biz/v1/context/history_update\",\"/api/biz/v1/context/message\",\"/api/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__616044.82a3c713c4.js"
+  ]
+ },
+ "/api/biz/v1/context/history": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/history_delete\",\"/api/biz/v1/context/history_update\",\"/api/biz/v1/context/message\",\"/api/biz/v1/context/generate_ids\",\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/history_delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/history_update\",\"/api/biz/v1/context/message\",\"/api/biz/v1/context/generate_ids\",\"/api/biz/v1/context/generate_infos\",\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/history_update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/message\",\"/api/biz/v1/context/generate_ids\",\"/api/biz/v1/context/generate_infos\",\"/api/biz/v1/context/generate_light_in"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/message": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/generate_ids\",\"/api/biz/v1/context/generate_infos\",\"/api/biz/v1/context/generate_light_infos\",\"/api/biz/v1/agent/get_th"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_ids": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/generate_infos\",\"/api/biz/v1/context/generate_light_infos\",\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/create_cre"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_infos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/context/generate_light_infos\",\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/create_creative_project\",\"/api/biz/v1/agent/upd"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/context/generate_light_infos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/create_creative_project\",\"/api/biz/v1/agent/update_creative_project\",\"/api/biz/v1/agent/li"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getThread"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/create_creative_project\",\"/api/biz/v1/agent/update_creative_project\",\"/api/biz/v1/agent/list_creative_project\",\"/api/biz/",
+   "\"/api/biz/v1/agent/get_run\",\"/api/biz/v1/agent/subscribe_run\",\"/api/biz/v1/agent/list_user_history\",\"/api/biz/v1/agent/download_with_pay\",\"/",
+   "{...e,scopes:[\"all\"]}"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__297147.ff7dafe8ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/create_creative_project": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createCreativeProject"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/update_creative_project\",\"/api/biz/v1/agent/list_creative_project\",\"/api/biz/v1/agent/get_thread_share_id\",\"/api/biz/v1/a",
+   "deleteEpisode:\"/api/biz/v1/agent/novel/delete_episode\",deleteStyle:\"/api/biz/v1/agent/novel_style/delete\",eraseVideoSubtitleForNovelAgent:\"/",
+   "function(e={}){return{title:e.title,user_info:uW(e.userInfo)}}(e),{withCredentials:!0}"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_creative_project": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "updateCreativeProject"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/list_creative_project\",\"/api/biz/v1/agent/get_thread_share_id\",\"/api/biz/v1/agent/clone_thread\",\"/api/biz/v1/agent/create",
+   "updateEpisodeVideoList:\"/api/biz/v1/agent/novel/update_episode_video_list\",updateAiScriptAsset:\"/api/biz/v1/agent/novel/update_ai_script_ass",
+   "{project_id:e.projectId,status:e.status,title:e.title,user_info:uW(e.userInfo)},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_creative_project": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getCreativeProjectList"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/get_thread_share_id\",\"/api/biz/v1/agent/clone_thread\",\"/api/biz/v1/agent/create_creative_project_canvas\",\"/api/biz/v1/age",
+   "function(e={}){return{cursor:e.cursor,limit:e.limit,project_id_list:e.projectIdList,status_list:e.statusList,user_info:uW(e.userInfo)}}(e),{",
+   "getPackageInfoLite:\"/api/biz/v1/editor/get_package_info_lite\",initCanvasAssetFromOuter:\"/api/biz/v1/agent/init_canvas_asset_from_outer\",mget"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread_share_id": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getThreadShareId"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/clone_thread\",\"/api/biz/v1/agent/create_creative_project_canvas\",\"/api/biz/v1/agent/clone_novel_project\",\"/api/biz/v1/age",
+   "t"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/clone_thread": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/create_creative_project_canvas\",\"/api/biz/v1/agent/clone_novel_project\",\"/api/biz/v1/agent-test/get_thread\",\"/api/biz/v1/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/create_creative_project_canvas": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/clone_novel_project\",\"/api/biz/v1/agent-test/get_thread\",\"/api/biz/v1/agent-test/create_creative_project\",\"/api/biz/v1/ag"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/agent/clone_novel_project": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent-test/get_thread\",\"/api/biz/v1/agent-test/create_creative_project\",\"/api/biz/v1/agent-test/update_creative_project\",\"/api/",
+   "createCreativeProject:\"/api/biz/v1/agent/create_creative_project\",deleteEpisode:\"/api/biz/v1/agent/novel/delete_episode\",deleteStyle:\"/api/b"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/novel_script_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/generate_images\",\"/api/biz/v1/agent/novel/set_user_contract\",\"/api/biz/v1/agent/novel/get_user_contract\",\"/api/biz/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/generate_images": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/set_user_contract\",\"/api/biz/v1/agent/novel/get_user_contract\",\"/api/biz/v1/agent/novel/update_ai_script_asset\",\"/a",
+   "ListShowcase:\"/api/biz/v1/agent/list_showcase\",SecurityCheckWeb:m,SetUserContract:\"/api/biz/v1/agent/novel/set_user_contract\",StoryBoard21Mo"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/set_user_contract": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/get_user_contract\",\"/api/biz/v1/agent/novel/update_ai_script_asset\",\"/api/biz/v1/agent/novel/update_script_content\"",
+   "StoryBoard21ModifyWeb:\"/api/biz/v1/agent/video/storyboard_21_modify\",StoryBoardSave21Web:\"/api/biz/v1/agent/video/storyboard_21_save\",Update"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/get_user_contract": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/update_ai_script_asset\",\"/api/biz/v1/agent/novel/update_script_content\",\"/api/biz/v1/agent/novel/update_novel_setti",
+   "ImagesGenerate:\"/api/biz/v1/agent/novel/generate_images\",ListShowcase:\"/api/biz/v1/agent/list_showcase\",SecurityCheckWeb:m,SetUserContract:\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/update_ai_script_asset": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/update_script_content\",\"/api/biz/v1/agent/novel/update_novel_settings\",\"/api/biz/v1/agent/novel/erase_video_subtitl",
+   "updateNovelSettings:\"/api/biz/v1/agent/novel/update_novel_settings\",updateScriptContent:\"/api/biz/v1/agent/novel/update_script_content\",upda"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/update_script_content": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/update_novel_settings\",\"/api/biz/v1/agent/novel/erase_video_subtitle_for_novel_agent\",\"/api/biz/v1/agent/novel/dele",
+   "updateStyle:\"/api/biz/v1/agent/novel_style/update\",uploadFile:\"/api/biz/v1/editor/upload_file\",webNovelStyleList:\"/api/biz/v1/agent/novel_st"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/update_novel_settings": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/erase_video_subtitle_for_novel_agent\",\"/api/biz/v1/agent/novel/delete_episode\",\"/api/biz/v1/agent/novel/generate_ne",
+   "updateScriptContent:\"/api/biz/v1/agent/novel/update_script_content\",updateStyle:\"/api/biz/v1/agent/novel_style/update\",uploadFile:\"/api/biz/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/erase_video_subtitle_for_novel_agent": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/delete_episode\",\"/api/biz/v1/agent/novel/generate_new_episode\",\"/api/biz/v1/agent/novel/ai_script_reset_snapshot\",\"",
+   "generateEpisode:\"/api/biz/v1/agent/novel/generate_new_episode\",getCreativeProjectList:\"/api/biz/v1/agent/list_creative_project\",getPackageIn"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/delete_episode": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/generate_new_episode\",\"/api/biz/v1/agent/novel/ai_script_reset_snapshot\",\"/api/biz/v1/agent/novel/update_episode_vi",
+   "deleteStyle:\"/api/biz/v1/agent/novel_style/delete\",eraseVideoSubtitleForNovelAgent:\"/api/biz/v1/agent/novel/erase_video_subtitle_for_novel_a"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/generate_new_episode": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/ai_script_reset_snapshot\",\"/api/biz/v1/agent/novel/update_episode_video_list\",\"/api/biz/v1/agent/novel/get_dialogue",
+   "getCreativeProjectList:\"/api/biz/v1/agent/list_creative_project\",getPackageInfoLite:\"/api/biz/v1/editor/get_package_info_lite\",initCanvasAss"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/ai_script_reset_snapshot": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/update_episode_video_list\",\"/api/biz/v1/agent/novel/get_dialogue_limit_free_info\",\"/api/biz/v1/agent/novel/generate"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/update_episode_video_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/get_dialogue_limit_free_info\",\"/api/biz/v1/agent/novel/generate_new_story_board\",\"/api/biz/v1/agent/novel/generate_",
+   "updateAiScriptAsset:\"/api/biz/v1/agent/novel/update_ai_script_asset\",updateNovelSettings:\"/api/biz/v1/agent/novel/update_novel_settings\",upd"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/get_dialogue_limit_free_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/generate_new_story_board\",\"/api/biz/v1/agent/novel/generate_role_audio\",\"/api/biz/v1/asset/create\",\"/api/biz/v1/ass"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/generate_new_story_board": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/novel/generate_role_audio\",\"/api/biz/v1/asset/create\",\"/api/biz/v1/asset/create_v2\",\"/api/biz/v1/asset/list\",\"/api/biz/v1"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel/generate_role_audio": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/create\",\"/api/biz/v1/asset/create_v2\",\"/api/biz/v1/asset/list\",\"/api/biz/v1/asset/search\",\"/api/biz/v1/asset/usage/record"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/asset/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/create_v2\",\"/api/biz/v1/asset/list\",\"/api/biz/v1/asset/search\",\"/api/biz/v1/asset/usage/record\",\"/api/biz/v1/asset/canvas"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_v2": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/list\",\"/api/biz/v1/asset/search\",\"/api/biz/v1/asset/usage/record\",\"/api/biz/v1/asset/canvas_list\",\"/api/biz/v1/asset/deta"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/search\",\"/api/biz/v1/asset/usage/record\",\"/api/biz/v1/asset/canvas_list\",\"/api/biz/v1/asset/detail\",\"/api/biz/v1/asset/de",
+   "t,e"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/search": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/usage/record\",\"/api/biz/v1/asset/canvas_list\",\"/api/biz/v1/asset/detail\",\"/api/biz/v1/asset/detail_v2\",\"/api/biz/v1/asset"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/usage/record": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/canvas_list\",\"/api/biz/v1/asset/detail\",\"/api/biz/v1/asset/detail_v2\",\"/api/biz/v1/asset/showcase_detail\",\"/api/biz/v1/as"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/asset/canvas_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/detail\",\"/api/biz/v1/asset/detail_v2\",\"/api/biz/v1/asset/showcase_detail\",\"/api/biz/v1/asset/update\",\"/api/biz/v1/asset/d",
+   "canvasUnbind:\"/api/biz/v1/asset/unbind_canvas_root_asset\",characterManagePage:\"/api/web/v1/character/manage/page\",characterPickerPage:\"/api/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "c",
+   "l"
+  ],
+  "args": [
+   "\"/api/biz/v1/asset/detail_v2\",\"/api/biz/v1/asset/showcase_detail\",\"/api/biz/v1/asset/update\",\"/api/biz/v1/asset/delete\",\"/api/biz/v1/asset/c",
+   "{PippitAssetID:n},\"asset-detail\"",
+   "{PippitAssetID:r},\"asset-detail\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js",
+   "async__HomePageV5.3acb88ca96.js",
+   "async__MarketingAgent.f61bab4063.js"
+  ]
+ },
+ "/api/biz/v1/asset/detail_v2": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/showcase_detail\",\"/api/biz/v1/asset/update\",\"/api/biz/v1/asset/delete\",\"/api/biz/v1/asset/create_tag\",\"/api/biz/v1/asset/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js"
+  ]
+ },
+ "/api/biz/v1/asset/showcase_detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/update\",\"/api/biz/v1/asset/delete\",\"/api/biz/v1/asset/create_tag\",\"/api/biz/v1/asset/list_tag\",\"/api/biz/v1/asset/add_tag"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/delete\",\"/api/biz/v1/asset/create_tag\",\"/api/biz/v1/asset/list_tag\",\"/api/biz/v1/asset/add_tag\",\"/api/biz/v1/asset/delete",
+   "materialDelete:\"/api/biz/v1/asset/delete\",materialQuery:\"/api/biz/v1/asset/query\",canvasList:\"/api/biz/v1/asset/canvas_list\",canvasUnbind:\"/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/create_tag\",\"/api/biz/v1/asset/list_tag\",\"/api/biz/v1/asset/add_tag\",\"/api/biz/v1/asset/delete_tag\",\"/api/biz/v1/asset/bi",
+   "materialQuery:\"/api/biz/v1/asset/query\",canvasList:\"/api/biz/v1/asset/canvas_list\",canvasUnbind:\"/api/biz/v1/asset/unbind_canvas_root_asset\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_tag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/list_tag\",\"/api/biz/v1/asset/add_tag\",\"/api/biz/v1/asset/delete_tag\",\"/api/biz/v1/asset/bind_canvas_root_asset\",\"/api/biz"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/list_tag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/add_tag\",\"/api/biz/v1/asset/delete_tag\",\"/api/biz/v1/asset/bind_canvas_root_asset\",\"/api/biz/v1/asset/unbind_canvas_root_"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/add_tag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/delete_tag\",\"/api/biz/v1/asset/bind_canvas_root_asset\",\"/api/biz/v1/asset/unbind_canvas_root_asset\",\"/api/biz/v1/asset/hi"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/delete_tag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/bind_canvas_root_asset\",\"/api/biz/v1/asset/unbind_canvas_root_asset\",\"/api/biz/v1/asset/history\",\"/api/biz/v1/asset/names"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/bind_canvas_root_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/unbind_canvas_root_asset\",\"/api/biz/v1/asset/history\",\"/api/biz/v1/asset/namespace_create\",\"/api/biz/v1/asset/namespace_q"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/unbind_canvas_root_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/history\",\"/api/biz/v1/asset/namespace_create\",\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v1/asset/query\",\"/api/biz/v1/",
+   "characterManagePage:\"/api/web/v1/character/manage/page\",characterPickerPage:\"/api/web/v1/character/picker/page\",characterCreateBootstrap:\"/a"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/history": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/namespace_create\",\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v1/asset/query\",\"/api/biz/v1/asset/showcase_query\",\"/api/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/namespace_create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createAssetNamespace"
+  ],
+  "args": [
+   "\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v1/asset/query\",\"/api/biz/v1/asset/showcase_query\",\"/api/biz/v1/asset/create_text\",\"/api/biz/v",
+   "{Base:{Client:e.base.client},namespace_data:e.namespaceData.map(uB)},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/namespace_query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "queryAssetNamespace"
+  ],
+  "args": [
+   "\"/api/biz/v1/asset/query\",\"/api/biz/v1/asset/showcase_query\",\"/api/biz/v1/asset/create_text\",\"/api/biz/v1/asset/update_text\",\"/api/biz/v1/as",
+   "\"/api/biz/v2/common/generation_task_list\",\"/passport/web/email/send_code/\",\"/passport/web/email/register_verify_login/\",\"/passport/web/web_l",
+   "batchGenerateAssetID:\"/api/biz/v1/asset/batch_generate_asset_id\",batchPatchAsset:\"/api/biz/v1/asset/batch_patch_asset\",cloneNovelProject:\"/a",
+   "{Base:{Client:e.base.client},file_name:e.fileName,first_directory:e.firstDirectory,page_num:e.pageNum,page_size:e.pageSize,pippit_asset_id:e"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/asset/query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/showcase_query\"",
+   "\"/api/biz/v1/asset/showcase_query\",\"/api/biz/v1/asset/create_text\",\"/api/biz/v1/asset/update_text\",\"/api/biz/v1/asset/batch_patch_asset\",\"/a",
+   "CreateTextAsset:\"/api/biz/v1/asset/create_text\",EraseVideoSubtitleForNovelAgent:v.eraseVideoSubtitleForNovelAgent,GetUserContract:\"/api/biz/",
+   "canvasList:\"/api/biz/v1/asset/canvas_list\",canvasUnbind:\"/api/biz/v1/asset/unbind_canvas_root_asset\",characterManagePage:\"/api/web/v1/charac",
+   "ee=P?\"/api/biz/v1/tcc/get_config\":\"/api/web/v1/tcc/get_config\",et={Client:\"web\"};function ea(e,t){return!t||/^https?:\\/\\//.test(e)?e:new URL",
+   "idPoolBase:ey,logError:(e,t,r)=>{console.error(`[platform-business-novel:canvas] ${e}`,t,r)},onlineAssetBase:ey,onIdPoolRefillError:e=>{cons"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__143136.4167321aba.js",
+   "async__148472.1deaf815b3.js",
+   "async__347872.89986d0c3a.js",
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/showcase_query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/create_text\",\"/api/biz/v1/asset/update_text\",\"/api/biz/v1/asset/batch_patch_asset\",\"/api/biz/v1/asset/batch_generate_asse"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__347872.89986d0c3a.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/create_text": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/update_text\",\"/api/biz/v1/asset/batch_patch_asset\",\"/api/biz/v1/asset/batch_generate_asset_id\",\"/api/biz/v1/asset/subscri",
+   "EraseVideoSubtitleForNovelAgent:v.eraseVideoSubtitleForNovelAgent,GetUserContract:\"/api/biz/v1/agent/novel/get_user_contract\",ImagesGenerate"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/update_text": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/batch_patch_asset\",\"/api/biz/v1/asset/batch_generate_asset_id\",\"/api/biz/v1/asset/subscribe_asset\",\"/api/biz/v1/asset/upd",
+   "WebNovelStyleList:v.webNovelStyleList"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/batch_patch_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/batch_generate_asset_id\",\"/api/biz/v1/asset/subscribe_asset\",\"/api/biz/v1/asset/update_artifact\",\"/api/biz/v1/asset/query",
+   "cloneNovelProject:\"/api/biz/v1/agent/clone_novel_project\",createCreativeProject:\"/api/biz/v1/agent/create_creative_project\",deleteEpisode:\"/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__143136.4167321aba.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/batch_generate_asset_id": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/subscribe_asset\",\"/api/biz/v1/asset/update_artifact\",\"/api/biz/v1/asset/query_artifact\",\"/api/biz/v1/asset/query_share_as",
+   "batchPatchAsset:\"/api/biz/v1/asset/batch_patch_asset\",cloneNovelProject:\"/api/biz/v1/agent/clone_novel_project\",createCreativeProject:\"/api/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__143136.4167321aba.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/subscribe_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/update_artifact\",\"/api/biz/v1/asset/query_artifact\",\"/api/biz/v1/asset/query_share_asset\",\"/api/biz/v1/novel/template/rol",
+   "t,e",
+   "updateCreativeProject:\"/api/biz/v1/agent/update_creative_project\",updateEpisodeVideoList:\"/api/biz/v1/agent/novel/update_episode_video_list\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/update_artifact": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/query_artifact\",\"/api/biz/v1/asset/query_share_asset\",\"/api/biz/v1/novel/template/role-library/search\",\"/api/biz/v1/novel"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/query_artifact": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/asset/query_share_asset\",\"/api/biz/v1/novel/template/role-library/search\",\"/api/biz/v1/novel/template/role-library/detail\",\"/ap"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/asset/query_share_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/novel/template/role-library/search\",\"/api/biz/v1/novel/template/role-library/detail\",\"/api/biz/v1/novel/template/face-design/co"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v3/": {
+  "method": [],
+  "wrappers": [
+   "upload"
+  ],
+  "args": [],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/manage/page": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterPickerPage:\"/api/web/v1/character/picker/page\",characterCreateBootstrap:\"/api/web/v1/character/create/bootstrap\",characterCreate:\"/"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/picker/page": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterCreateBootstrap:\"/api/web/v1/character/create/bootstrap\",characterCreate:\"/api/biz/v1/character/create\",characterUpdate:\"/api/biz/v"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/create/bootstrap": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterCreate:\"/api/biz/v1/character/create\",characterUpdate:\"/api/biz/v1/character/update\",characterDetail:\"/api/biz/v1/character/detail\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterUpdate:\"/api/biz/v1/character/update\",characterDetail:\"/api/biz/v1/character/detail\",characterDelete:\"/api/biz/v1/character/delete\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterDetail:\"/api/biz/v1/character/detail\",characterDelete:\"/api/biz/v1/character/delete\",characterFavorite:\"/api/biz/v1/character/favor"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterDelete:\"/api/biz/v1/character/delete\",characterFavorite:\"/api/biz/v1/character/favorite\",characterUseResolve:\"/api/biz/v1/character"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterFavorite:\"/api/biz/v1/character/favorite\",characterUseResolve:\"/api/biz/v1/character/use/resolve\",characterGenerateSubmit:\"/api/biz"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/favorite": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterUseResolve:\"/api/biz/v1/character/use/resolve\",characterGenerateSubmit:\"/api/biz/v1/character/generate/submit\",characterGenerateQue"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/use/resolve": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterGenerateSubmit:\"/api/biz/v1/character/generate/submit\",characterGenerateQuery:\"/api/biz/v1/character/generate/query\",characterGener"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/submit": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterGenerateQuery:\"/api/biz/v1/character/generate/query\",characterGenerateConfirm:\"/api/biz/v1/character/generate/confirm\",characterVoi"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterGenerateConfirm:\"/api/biz/v1/character/generate/confirm\",characterVoiceGenerateSubmit:\"/api/biz/v1/character/voice/generate/submit\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/generate/confirm": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "characterVoiceGenerateSubmit:\"/api/biz/v1/character/voice/generate/submit\",characterVoiceGenerateQuery:\"/api/biz/v1/character/voice/generate"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/voice/generate/submit": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "characterVoiceGenerateQuery:\"/api/biz/v1/character/voice/generate/query\",recommendedPromptList:\"/api/web/v1/character/recommended-prompt/lis"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/character/voice/generate/query": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "recommendedPromptList:\"/api/web/v1/character/recommended-prompt/list\",productManagePage:\"/api/web/v1/entity/manage/page\",productPickerPage:\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/entity/picker/page": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "productMentionPage:\"/api/web/v1/entity/mention/page\",productCreate:\"/api/biz/v1/entity/create\",productUpdate:\"/api/biz/v1/entity/update\",pro"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/entity/mention/page": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "productCreate:\"/api/biz/v1/entity/create\",productUpdate:\"/api/biz/v1/entity/update\",productDelete:\"/api/biz/v1/entity/delete\",securityCheck:"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/entity/update": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "productDelete:\"/api/biz/v1/entity/delete\",securityCheck:\"/api/web/v1/security/check\",realPersonQrCreate:\"/api/web/v1/character/realperson/qr"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/security/check": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "checkSecurity"
+  ],
+  "args": [
+   "realPersonQrCreate:\"/api/web/v1/character/realperson/qr/create\",realPersonQrScan:\"/api/web/v1/character/realperson/qr/scan\",realPersonQrCall",
+   "{scene:e.scene,text_list:e.textList}"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "realPersonQrScan:\"/api/web/v1/character/realperson/qr/scan\",realPersonQrCallback:\"/api/web/v1/character/realperson/qr/callback\",realPersonQr"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/scan": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "realPersonQrCallback:\"/api/web/v1/character/realperson/qr/callback\",realPersonQrQuery:\"/api/web/v1/character/realperson/qr/query\",realPerson"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/callback": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "realPersonQrQuery:\"/api/web/v1/character/realperson/qr/query\",realPersonQrConfirm:\"/api/web/v1/character/realperson/qr/confirm\",usageRecord:"
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "realPersonQrConfirm:\"/api/web/v1/character/realperson/qr/confirm\",usageRecord:\"/api/web/v1/asset/usage/record\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/character/realperson/qr/confirm": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "usageRecord:\"/api/web/v1/asset/usage/record\""
+  ],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__889795.256f74ebdf.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/web/v1/asset/usage/record": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__141985.681aa9d9ef.js",
+   "async__148472.1deaf815b3.js",
+   "async__948162.8eb53cf747.js"
+  ]
+ },
+ "/api/biz/v1/asset/sse_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "q={Client:\"web\"},B=e=>e&&\"object\"==typeof e&&!Array.isArray(e)?e:void 0,J=(e,t)=>{let r=e?.[t];return\"string\"==typeof r&&r.trim()?r.trim():v"
+  ],
+  "files": [
+   "async__143136.4167321aba.js",
+   "async__297147.ff7dafe8ef.js",
+   "async__643916.4be081c651.js",
+   "async__850206.e38ec15e55.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/rewrite_prompt": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",data:r"
+  ],
+  "files": [
+   "async__143136.4167321aba.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v3/common/upload_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "p"
+  ],
+  "args": [
+   "a,{withCredentials:!0}"
+  ],
+  "files": [
+   "async__218907.c5ecb8b170.js"
+  ]
+ },
+ "/lv/v1/sc/age_gate/set_birthday_by_uid": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__229704.2761c8b51a.js"
+  ]
+ },
+ "/lv/v1/sc/age_gate/get_age_gate_config": {
+  "method": [],
+  "wrappers": [
+   "r"
+  ],
+  "args": [
+   "b(n,{},{headers:A(n,t,o)})"
+  ],
+  "files": [
+   "async__229704.2761c8b51a.js"
+  ]
+ },
+ "/lv/v1/sc/age_gate/log_in_age_check": {
+  "method": [],
+  "wrappers": [
+   "c",
+   "i"
+  ],
+  "args": [
+   "b(r,{},{headers:A(r,t,o,n)})",
+   "k=async(e,i,t)=>{let n,o=await fetch(new URL(y,location.origin).toString(),{method:\"POST\",credentials:\"include\",headers:{\"content-type\":\"app"
+  ],
+  "files": [
+   "async__229704.2761c8b51a.js",
+   "async__global-age-gate.c58dc04f7c.js"
+  ]
+ },
+ "/lv/v1/sc/age_gate/check_age_without_uid": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "b(e,{birthday:m},{headers:A(e,t,o)})"
+  ],
+  "files": [
+   "async__229704.2761c8b51a.js"
+  ]
+ },
+ "/lv/v1/sc/age_gate/set_birthday_with_check": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "b(e,{birthday:m},{headers:A(e,t,o,n),params:{customize_key:void 0,enable_punish:void 0}})"
+  ],
+  "files": [
+   "async__229704.2761c8b51a.js"
+  ]
+ },
+ "/lv/v1/render_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",headers:{loc:n.yl.CHANNEL,lan:o.Ay.language||n.yl.LAN,pf:n.yl.APP_PF,appvr:n.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-version\""
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/asset/aio_download": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "downloadAssets"
+  ],
+  "args": [
+   "e,{withCredentials:!0}"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/cancel_run": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "cancelRun"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/submit_run": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/update_thread_file\",\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/get_run\",\"/api/biz/v1/agent/subscribe_run\",\"/api/bi",
+   "t.runExtra"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_user_history": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "listUserHistory"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/download_with_pay\",\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v2/common/generation_task_list\",\"/passport/web/email/sen",
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/storage/save_pen_data": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "savePenData"
+  ],
+  "args": [
+   "{id:e,penDatas:t}"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/storage/load_pen_data": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "loadPenData"
+  ],
+  "args": [
+   "{id:e}"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/agent/delete_thread": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteThread"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_thread": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "updateThread"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/user_action": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "userAction"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/thread_mark_visible": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "threadMarkVisible"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_thread_share": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getThreadShare"
+  ],
+  "args": [
+   "t"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/videogen/script_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/videogen/generate\",\"/api/biz/v1/product/get_url_data\""
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/videogen/generate": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/product/get_url_data\""
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/product/get_url_data": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "d={CREATE_PRODUCT:`${c}/product/create`,DELETE_PRODUCT:`${c}/product/delete`,UPDATE_PRODUCT:`${c}/product/update`,GET_PRODUCT_LIST:`${c}/pro",
+   "method:\"POST\",headers:{loc:eI.yl.CHANNEL,lan:eZ.Ay.language||eI.yl.LAN,pf:eI.yl.APP_PF,appvr:eI.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-ver",
+   "o3={APPLY_FREE_TRIAL:`${o5}/subscribe/apply_free_trial`,GET_USER_CREDIT_HISTORY:`${o5}/subscribe/get_user_credit_history`,PURCHASE_ORDER:\"/c"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/product/create_from_file": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_PRODUCT_URL:`${c}/product/get_url_data`,QUERY_PRODUCT_PARSE_TASK:`${c}/product/get_url_data_task`,RECOMMEND_TARGET_AUDIENCE:\"/lv/v1/prod"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/lv/v1/product/recommend_target_audience": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RECOMMEND_SELLING_POINT:\"/lv/v1/product/recommend_selling_point\",GET_THIRD_PARTY_SHOP:`${c}/shop/third_party_shop`,CREATE_IMPORT_TASK:`${c}/"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/lv/v1/product/recommend_selling_point": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_THIRD_PARTY_SHOP:`${c}/shop/third_party_shop`,CREATE_IMPORT_TASK:`${c}/product/create_import_task`,QUERY_IMPORT_TASK:`${c}/product/qry_i"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/product/get_asset_upload_status": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v3/asset/create_v2": {
+  "method": [],
+  "wrappers": [
+   "c",
+   "l"
+  ],
+  "args": [
+   "{asset_source_type:1,asset_source_id:t.uri,asset_type:1,is_visible:2,name:t.file_name,client_extra:JSON.stringify({scene:\"template_studio_ha"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js",
+   "async__HomePageV5.3acb88ca96.js",
+   "async__MarketingAgent.f61bab4063.js"
+  ]
+ },
+ "/api/biz/v1/reward_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "p={GET_REWARD_TASK:`${u}/list`,FINISH_REWARD_TASK:`${u}/finish`,CLAIM_REWARD_TASK:`${u}/claim`};class h{get _networkClient(){let e;return th"
+  ],
+  "files": [
+   "async__297147.ff7dafe8ef.js"
+  ]
+ },
+ "/api/biz/v1/common/mget_asset_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "mGetCanvasAssetInfo"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/video/mget_showcase_asset_info\"",
+   "{app_id:u$.c.CapCutBusiness,asset_ids:Array.from(new Set(e.assetIds.map(e=>e.trim()).filter(Boolean))),need_transcode:!0,share_id:e.shareId?"
+  ],
+  "files": [
+   "async__347872.89986d0c3a.js",
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/mget_showcase_asset_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "novelStyleList:\"/api/biz/v1/agent/novel_style/list\",resolveStyleSnapshot:\"/api/biz/v1/agent/novel_style/resolve_snapshot\",subscribeAsset:\"/a"
+  ],
+  "files": [
+   "async__347872.89986d0c3a.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_available_model_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "data:{scene:_,source_model_key:\"\"}",
+   "{scene:e,source_model_key:\"\"},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__398897.120c71def9.js",
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/display_content/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "listWorks"
+  ],
+  "args": [
+   "{...r,page_size:r.page_size??100}"
+  ],
+  "files": [
+   "async__445075.d0b28b1d7a.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/promo_slot/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "listPromoSlots"
+  ],
+  "args": [
+   "{}"
+  ],
+  "files": [
+   "async__445075.d0b28b1d7a.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/query_ak": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "queryList"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/generate_ak": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createToken"
+  ],
+  "args": [
+   "{token_name:e,token_desc:t||void 0,expired_at:i}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/update_ak": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "updateTokenStatus"
+  ],
+  "args": [
+   "{access_token_list:e}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/delete_ak": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteTokens"
+  ],
+  "args": [
+   "{ak_ids:e}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/profile": {
+  "method": [],
+  "wrappers": [
+   "syncUserLocale"
+  ],
+  "args": [
+   "method:\"POST\",data:t"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v2/common/generation_task_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "fetchCommonTaskList"
+  ],
+  "args": [
+   "\"/passport/web/email/send_code/\",\"/passport/web/email/register_verify_login/\",\"/passport/web/web_login_success\",\"/passport/web/auth/login/\",",
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v2/common/generation_task_cancel": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "cancelCommonTask"
+  ],
+  "args": [
+   "e,{withCredentials:!0,headers:{\"x-commerce-v2\":\"1\"}}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v2/common/generation_task_delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteCommonTask"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v2/common/generation_task_retry": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "retryCommonTask"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/common_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "P={GET_TASK_LIST:`${A}/list`,BATCH_GET:`${A}/batch_get`};class N{get _networkClient(){let e;return this._networkClientInstance||(this._netwo"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/user": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",headers:{loc:eI.yl.CHANNEL,lan:eZ.Ay.language||eI.yl.LAN,pf:eI.yl.APP_PF,appvr:eI.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-ver",
+   "method:\"POST\",headers:{loc:s.yl.CHANNEL,lan:r.Ay.language||s.yl.LAN,pf:s.yl.APP_PF,appvr:s.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-version\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1": {
+  "method": [],
+  "wrappers": [
+   "checkBindEmailPopup",
+   "delPlatformAccountRelation",
+   "eJ",
+   "getOpenId",
+   "upload"
+  ],
+  "args": [
+   "method:\"POST\",headers:{loc:eI.yl.CHANNEL,lan:eZ.Ay.language||eI.yl.LAN,pf:eI.yl.APP_PF,appvr:eI.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-ver",
+   "method:\"POST\",headers:{loc:o.yl.CHANNEL,lan:o.yl.LAN,pf:o.yl.APP_PF,appvr:o.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-version\":o.yl.APP_SDK_V",
+   "method:\"POST\",headers:{loc:tm.yl.CHANNEL,lan:v.Ay.language||tm.yl.LAN,pf:tm.yl.APP_PF,appvr:tm.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-vers",
+   "url:\"/appeal/personal_info\",data:e,headers:{}",
+   "url:\"/third_party_clouds/save_tt_scope\",data:e",
+   "url:\"/web/openid\"",
+   "urlMap:{GET_COLLECTIONS:\"/music/get_collections\",GET_MUSIC_EFFECT_COLLECTIONS:\"/music/get_music_effect_collections\",GET_COLLECTION_SONGS:\"/m"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js",
+   "async__Settings.b6ba0340ee.js"
+  ]
+ },
+ "/lv/v1/commerce/get_entrances": {
+  "method": [],
+  "wrappers": [
+   "getEntrances"
+  ],
+  "args": [
+   "GET_CREDIT_SKU:\"/commerce/v1/purchase/price_list\",GET_USER_CREDITS:\"/commerce/v1/benefits/user_credit\",GET_BENEFIT_NOTICE_LIST:\"/commerce/v1",
+   "t=(0,u.i)({url:e,...g.headers}),i=await (0,_.A)(()=>{try{let e=window.__entrances;if(e&&\"0\"===e.ret)return window.__entrances=null,Promise.r",
+   "to,to,to,to,this",
+   "y.content",
+   "{appvr:t,pf:i,appID:r,did:s}=await tn(),a=tc({...tf.headers,url:e,pf:i,appvr:t,tdid:s});return await (0,tl.A)(()=>ty({baseURL:\"/\",url:e,head",
+   "{appvr:t,pf:i,appID:r,did:s}=to(),a=tc({...tp.headers,url:e,pf:i,appvr:t,tdid:s});return await (0,tl.A)(()=>th({baseURL:\"/\",url:e,headers:{a"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",headers:{loc:eI.yl.CHANNEL,lan:eI.yl.LAN,pf:eI.yl.APP_PF,appvr:eI.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-version\":eI.yl.APP_"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/user/web/add_questionnaire_record": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "n=(0,eV.i)({url:`${s}${a}`,pf:t,appvr:i,tdid:r});return fetch(`${s}${a}`,{credentials:\"include\",method:\"POST\",headers:{\"Content-Type\":\"appli"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/save_email": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "saveEmail"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/fetch_email_status": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [
+   "fetchEmailStatus"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/unsubscribe_email": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "unsubscribeEmail"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/authorize_email": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "authorizeEmail"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/send_authorize_email": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "authorityCode"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/home/mweb_copy_link_send_mail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "mwebCopyLinkSendEmail"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/home/reward_email_return_user": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "rewardEmailReturnUser"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/user/check_account_status_by_mobile": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/deAuthorize": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/get_bind_account_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/multi_get_platform_account": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/limit": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/del_relation": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/account/v1/add_relation": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/ever_photo/get_token": {
+  "method": [],
+  "wrappers": [
+   "getEverPhotoToken"
+  ],
+  "args": [
+   "{pf:t,appvr:i,tdid:r}=au.headers;return await ap({url:e,data:{},headers:{...(0,eV.i)({url:e,...au.headers,pf:t,appvr:i,tdid:r})}})"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/ever_photo/get_user_space": {
+  "method": [],
+  "wrappers": [
+   "getEverPhotoUserSpace"
+  ],
+  "args": [
+   "{pf:i,appvr:r,tdid:s}=au.headers;return await ap({url:t,data:{workspace_id:e},headers:{...(0,eV.i)({url:t,...au.headers,pf:i,appvr:r,tdid:s}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/ever_photo/promote_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "promoteAsset"
+  ],
+  "args": [
+   "{pf:i,appvr:r,tdid:s}=au.headers;return await ap({url:t,data:{asset_id:e.assetId,space_id:e.spaceId,workspace_id:e.workspaceId},headers:{..."
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/prepare_upload_cloud": {
+  "method": [],
+  "wrappers": [
+   "prepareUpload"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/submit_run\",\"/api/biz/v1/agent/update_thread_file\",\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/get_run\",\"/api/biz/v",
+   "{pf:i,appvr:r,tdid:s}=au.headers;return await ap({url:t,data:{...e,is_web_user:!0},headers:{...(0,eV.i)({url:t,...au.headers,pf:i,appvr:r,td"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/create_cloud_asset": {
+  "method": [],
+  "wrappers": [
+   "createAsset"
+  ],
+  "args": [
+   "{pf:i,appvr:r,tdid:s}=au.headers;return await ap({url:t,data:{...e,is_web_user:!0},headers:{...(0,eV.i)({url:t,...au.headers,pf:i,appvr:r,td"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/ever_photo/get_external_download_url": {
+  "method": [],
+  "wrappers": [
+   "getDownloadUrl"
+  ],
+  "args": [
+   "{pf:i,appvr:r,tdid:s}=au.headers;return await ap({url:t,data:{asset_id:e.assetId,workspace_id:e.workspaceId,max_time:e.maxTime,ttl:e.ttl},he"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/detail": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "aR=\"/lv/v1/asset/query\";var aA=i(353042);class aP{get _networkClient(){let e;return this._networkClientInstance||(this._networkClientInstanc"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/query": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getMaterials"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/copy": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "copyAsset"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteAssets",
+   "deleteMaterials"
+  ],
+  "args": [
+   "this._buildDeleteAssetsRequest({...i,assetList:e})"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/rename": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "renameAsset"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createAsset"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/label_as_exported": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "labelAssetsAsExported"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/asset/query_process": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "_checkAsyncTaskProcess"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/create": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "nr=\"/lv/v1/intelligence/query\";var ns=i(356932),na=i(481106);let nn=e=>{let{audioAssetId:t,videoAssetId:i,captionAssetId:r}=e,s=[],a={};retu"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/query": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/check_popup": {
+  "method": [],
+  "wrappers": [
+   "aiCheckPopup"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/confirm_popup": {
+  "method": [],
+  "wrappers": [
+   "aiConfirmPopup"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/image_highlight_analyse": {
+  "method": [],
+  "wrappers": [
+   "imageHighlightAnalyse"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/prompt_to_text": {
+  "method": [],
+  "wrappers": [
+   "promptToText"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/prompt_sug": {
+  "method": [],
+  "wrappers": [
+   "promptSug"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/text2video_preset": {
+  "method": [],
+  "wrappers": [
+   "getTextToVideoPreset"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/render_create": {
+  "method": [],
+  "wrappers": [
+   "generateVideo"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/package_sync_status": {
+  "method": [],
+  "wrappers": [
+   "syncPackageStatus"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/render_task/create": {
+  "method": [],
+  "wrappers": [
+   "createRenderTask"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/task/new": {
+  "method": [],
+  "wrappers": [
+   "createEditorTask"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/task/query": {
+  "method": [],
+  "wrappers": [
+   "getEditorTaskProcess"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/task/cancel": {
+  "method": [],
+  "wrappers": [
+   "cancelEditorTask"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/get_audio_snr": {
+  "method": [],
+  "wrappers": [
+   "getAudioSNR"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/product/add": {
+  "method": [],
+  "wrappers": [
+   "addIntelligentProduct"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/product/update": {
+  "method": [],
+  "wrappers": [
+   "updateIntelligentProduct"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/product/list": {
+  "method": [],
+  "wrappers": [
+   "getIntelligentProductList"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/lite/config/check_region": {
+  "method": [],
+  "wrappers": [
+   "avCheckControllableArea"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/recycle/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getRecycleAssets"
+  ],
+  "args": [
+   "this._buildListRecycleAssetsRequest(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/recycle/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteRecycleAssets"
+  ],
+  "args": [
+   "{workspace_id:e.workspaceId,resource_ids:t}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/recycle/restore": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "restoreRecycleAssets"
+  ],
+  "args": [
+   "{workspace_id:e.workspaceId,resource_ids:e.resourceIds,is_overwrite:e.isOverwrite}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/product/get_product_by_asset_id": {
+  "method": [],
+  "wrappers": [
+   "deleteAssets"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/list_task_by_asset": {
+  "method": [],
+  "wrappers": [
+   "deleteAssets"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/download_with_pay": {
+  "method": [],
+  "wrappers": [
+   "deleteAssets"
+  ],
+  "args": [
+   "\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v2/common/generation_task_list\",\"/passport/web/email/send_code/\",\"/passport/web/email/register"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/get_collections": {
+  "method": [],
+  "wrappers": [
+   "getConfig"
+  ],
+  "args": [
+   "SEARCH_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/search_templates\",BATCH_GET_TEMPLATES_BY_CATEGORY:\"/lv/v1/cc_web/ad_maker/ecom/get_collection_"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/search_templates": {
+  "method": [],
+  "wrappers": [
+   "getConfig"
+  ],
+  "args": [
+   "BATCH_GET_TEMPLATES_BY_CATEGORY:\"/lv/v1/cc_web/ad_maker/ecom/get_collection_templates\",BATCH_GET_FAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/get_collection_templates": {
+  "method": [],
+  "wrappers": [
+   "getConfig"
+  ],
+  "args": [
+   "BATCH_GET_FAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/get_business_favorite_list\",SEARCH_TEMPLATES_SUG:\"/lv/v1/cc_web/ad_maker/ecom/get_"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/get_business_favorite_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "SEARCH_TEMPLATES_SUG:\"/lv/v1/cc_web/ad_maker/ecom/get_sug\",FAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/favorite\",UNFAVORITE_TEMPLATES:\"/"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/get_sug": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "FAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/favorite\",UNFAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/unfavorite\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/favorite": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "UNFAVORITE_TEMPLATES:\"/lv/v1/cc_web/ad_maker/ecom/unfavorite\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/cc_web/ad_maker/ecom/unfavorite": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/recommend_hashtags": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [
+   "getRecommendHashTags"
+  ],
+  "args": [
+   "{params:(0,sz.w)(e),withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/omni/create_task_web": {
+  "method": [],
+  "wrappers": [
+   "createExportTaskOmni"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/render_task/batch_get": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/render_task/cancel": {
+  "method": [],
+  "wrappers": [
+   "cancelExportTask"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v2/intelligence/check_clone_voice_auth": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [
+   "CREATE_TASK:\"/lv/v1/intelligence/submit_clone_timbre\",QUERY_TASK:\"/lv/v1/intelligence/query_clone_timbre_result\",CANCEL_TASK:\"/lv/v1/intelli"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/submit_clone_timbre": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [
+   "QUERY_TASK:\"/lv/v1/intelligence/query_clone_timbre_result\",CANCEL_TASK:\"/lv/v1/intelligence/cancel_timbre_clone\",RELEASE_VOICE:\"/lv/v1/intel"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/query_clone_timbre_result": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [
+   "CANCEL_TASK:\"/lv/v1/intelligence/cancel_timbre_clone\",RELEASE_VOICE:\"/lv/v1/intelligence/release_clone_timber\",SAVE_VOICE:\"/lv/v1/intelligen"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/cancel_timbre_clone": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [
+   "RELEASE_VOICE:\"/lv/v1/intelligence/release_clone_timber\",SAVE_VOICE:\"/lv/v1/intelligence/save_timbre\",DELETE_VOICE:\"/lv/v1/intelligence/dele"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/release_clone_timber": {
+  "method": [],
+  "wrappers": [
+   "getExportTask"
+  ],
+  "args": [
+   "SAVE_VOICE:\"/lv/v1/intelligence/save_timbre\",DELETE_VOICE:\"/lv/v1/intelligence/delete_clone_voice\",GET_TEXT:\"/lv/v2/intelligence/get_voice_c"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/save_timbre": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "DELETE_VOICE:\"/api/biz/v1/voice/delete_clone_voice\",GET_TEXT:\"/api/biz/v1/voice/get_voice_clone_text\"",
+   "DELETE_VOICE:\"/lv/v1/intelligence/delete_clone_voice\",GET_TEXT:\"/lv/v2/intelligence/get_voice_clone_text\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/intelligence/delete_clone_voice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_TEXT:\"/lv/v2/intelligence/get_voice_clone_text\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v2/intelligence/get_voice_clone_text": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/check_voice_clone_auth": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "CREATE_TASK:\"/api/biz/v1/voice/submit_voice_clone_task\",QUERY_TASK:\"/api/biz/v1/voice/get_voice_clone_task\",CANCEL_TASK:\"/api/biz/v1/voice/c"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/submit_voice_clone_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "QUERY_TASK:\"/api/biz/v1/voice/get_voice_clone_task\",CANCEL_TASK:\"/api/biz/v1/voice/cancel_voice_clone_task\",RELEASE_VOICE:\"/api/biz/v1/voice"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/get_voice_clone_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "CANCEL_TASK:\"/api/biz/v1/voice/cancel_voice_clone_task\",RELEASE_VOICE:\"/api/biz/v1/voice/free_voice_clone_resource\",SAVE_VOICE:\"/lv/v1/intel"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/cancel_voice_clone_task": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RELEASE_VOICE:\"/api/biz/v1/voice/free_voice_clone_resource\",SAVE_VOICE:\"/lv/v1/intelligence/save_timbre\",DELETE_VOICE:\"/api/biz/v1/voice/del"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/free_voice_clone_resource": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "SAVE_VOICE:\"/lv/v1/intelligence/save_timbre\",DELETE_VOICE:\"/api/biz/v1/voice/delete_clone_voice\",GET_TEXT:\"/api/biz/v1/voice/get_voice_clone"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/delete_clone_voice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_TEXT:\"/api/biz/v1/voice/get_voice_clone_text\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/voice/get_voice_clone_text": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/cloud_storage/get_file_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/cloud_storage/upload_file": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/cloud_storage/get_upload_progress": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/cloud_storage/cancel_upload": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/perference": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/get_perference": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getPreference"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/product/list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_SUPPORT_FILM_CATEGORY:\"/api/biz/v1/home/recommend_inspiration\",GET_SEARCH_SUGGEST:\"/api/biz/v1/sug/list\",SET_SPEED_UP_RUN_TASK:\"/api/biz"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/home/recommend_inspiration": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_SEARCH_SUGGEST:\"/api/biz/v1/sug/list\",SET_SPEED_UP_RUN_TASK:\"/api/biz/v1/agent/speed_up_run_task\",USER_SUBSCRIBE_CALLBACK:\"/api/biz/v1/a"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/sug/list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "SET_SPEED_UP_RUN_TASK:\"/api/biz/v1/agent/speed_up_run_task\",USER_SUBSCRIBE_CALLBACK:\"/api/biz/v1/agent/user_subscribe_callback\",GET_USER_QUE"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/speed_up_run_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "USER_SUBSCRIBE_CALLBACK:\"/api/biz/v1/agent/user_subscribe_callback\",GET_USER_QUEUE_INFO:\"/api/biz/v1/agent/get_user_queue_info\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/user_subscribe_callback": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "GET_USER_QUEUE_INFO:\"/api/biz/v1/agent/get_user_queue_info\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_user_queue_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/commerce/v3/trade/init_trade": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v3/resource/benefit_metadata\",\"/commerce/v3/benefits/batch_get_user_benefit\",\"/commerce/v3/benefits/batch_check_withhold_deduct\",",
+   "\"/commerce/v3/trade/query_trade\",1,10",
+   "QUERY_ORDER_STATUS:\"/commerce/v3/trade/query_trade\",CANCEL_SUBSCRIPTION:\"/commerce/v3/trade/cancel_subscription\",RESUME_SUBSCRIPTION:\"/comme",
+   "this.d51_1=\"/commerce/v3/trade/query_trade\",this.e51_1=\"app\",this.f51_1=\"risk_info\",this.g51_1=\"pipo_iap_pay_info\",this.h51_1=\"pipo_context\"",
+   "v,g"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/query_trade": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "1,10",
+   "CANCEL_SUBSCRIPTION:\"/commerce/v3/trade/cancel_subscription\",RESUME_SUBSCRIPTION:\"/commerce/v3/trade/resume_subscription\",GET_PAYMENT_LIST:\"",
+   "this.e51_1=\"app\",this.f51_1=\"risk_info\",this.g51_1=\"pipo_iap_pay_info\",this.h51_1=\"pipo_context\",this.i51_1=\"app_id\",this.j51_1=\"language\",t",
+   "v,g"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/cancel_subscription": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RESUME_SUBSCRIPTION:\"/commerce/v3/trade/resume_subscription\",GET_PAYMENT_LIST:\"/commerce/v3/trade/trade_records\",APPLY_PROMO_CODE:`${o5}/sub",
+   "this.naa_1=\"/commerce/v3/trade/resume_subscription\"",
+   "y,wL.q1d(),bY.q1d(),g"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/resume_subscription": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_PAYMENT_LIST:\"/commerce/v3/trade/trade_records\",APPLY_PROMO_CODE:`${o5}/subscribe/apply_promo_code`,BENEFIT_META:\"/commerce/v3/resource/",
+   "y,wN.q1d(),bX.q1d(),g"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/trade_records": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "APPLY_PROMO_CODE:`${o5}/subscribe/apply_promo_code`,BENEFIT_META:\"/commerce/v3/resource/benefit_metadata\",BATCH_GET_USER_BENEFIT_V3:\"/commer",
+   "this.maa_1=\"/commerce/v3/trade/cancel_subscription\",this.naa_1=\"/commerce/v3/trade/resume_subscription\"",
+   "y,ea7().q1d(),euK().q1d(),g"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/resource/benefit_metadata": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v3/benefits/batch_get_user_benefit\"",
+   "\"/commerce/v3/benefits/batch_get_user_benefit\",\"/commerce/v3/benefits/batch_check_withhold_deduct\",\"/commerce/v1/benefits/credit_receive\",\"/",
+   "2592000000n",
+   "BATCH_GET_USER_BENEFIT_V3:\"/commerce/v3/benefits/batch_get_user_benefit\",BATCH_CHECK_WITHHOLD_DEDUCT:\"/commerce/v3/benefits/batch_check_with",
+   "q,this.d3g_1,to,to,this",
+   "q,this.o3g_1,to,to,this",
+   "txn(this.b3g_1,T.content)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/benefits/batch_get_user_benefit": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v3/benefits/batch_check_withhold_deduct\",\"/commerce/v1/benefits/credit_receive\",\"/commerce/v1/subscription/cc_price_list\",\"/comme",
+   "BATCH_CHECK_WITHHOLD_DEDUCT:\"/commerce/v3/benefits/batch_check_withhold_deduct\",GET_SUBSCRIBE_SKU:\"/commerce/v1/subscription/cc_price_list\",",
+   "M,\"extra_user_benefits\",this.u3h_1,to,this",
+   "P,this.k3h_1,to,to,this",
+   "P,this.z3g_1,to,to,this",
+   "this.j3h_1",
+   "txn(this.x3g_1,z.content)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/benefits/batch_check_withhold_deduct": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v1/benefits/credit_receive\",\"/commerce/v1/subscription/cc_price_list\",\"/commerce/v1/subscription/batch_get\"",
+   "GET_SUBSCRIBE_SKU:\"/commerce/v1/subscription/cc_price_list\",GET_SUBSCRIBE_DETAIL:\"/commerce/v1/subscription/user_info\",GET_IS_SUBSCRIBE_REGI",
+   "RR(k),txk(g.actionType),y,to,b"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/cc_price_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v1/subscription/batch_get\"",
+   "GET_SUBSCRIBE_DETAIL:\"/commerce/v1/subscription/user_info\",GET_IS_SUBSCRIBE_REGION:\"/lv/v1/commerce/get_entrances\",GET_CREDIT_SKU:\"/commerce"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/user_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "B.content",
+   "D,N??\"\",to,to,this",
+   "GET_IS_SUBSCRIBE_REGION:\"/lv/v1/commerce/get_entrances\",GET_CREDIT_SKU:\"/commerce/v1/purchase/price_list\",GET_USER_CREDITS:\"/commerce/v1/ben",
+   "this.v3d_1,i6.h26(),B"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/purchase/price_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_USER_CREDITS:\"/commerce/v1/benefits/user_credit\",GET_BENEFIT_NOTICE_LIST:\"/commerce/v1/benefits/credit_receive\",GET_CREDITS_NOTICE:\"/api"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/benefits/user_credit": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_BENEFIT_NOTICE_LIST:\"/commerce/v1/benefits/credit_receive\",GET_CREDITS_NOTICE:\"/api/biz/v1/benefit/notice/list\",ACK_CREDITS_NOTICE:\"/api",
+   "this.l5t_1=\"/commerce/v1/benefits/user_credit_history\",this.m5t_1=\"/commerce/v1/benefits/credit_receive\",this.n5t_1=\"/commerce/v1/benefits/t",
+   "this.x5t_1,h$.q1d(),tRv().q1d(),this"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/benefits/credit_receive": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v1/subscription/cc_price_list\",\"/commerce/v1/subscription/batch_get\"",
+   "GET_CREDITS_NOTICE:\"/api/biz/v1/benefit/notice/list\",ACK_CREDITS_NOTICE:\"/api/biz/v1/benefit/notice/ack\",SET_PAY_FOR_BEST_INFO:`${o5}/common",
+   "this.n5t_1=\"/commerce/v1/benefits/team_credit_allocate\"",
+   "this.t5u_1,fn.q1d(),fr.q1d(),this"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/api/biz/v1/benefit/notice/list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "ACK_CREDITS_NOTICE:\"/api/biz/v1/benefit/notice/ack\",SET_PAY_FOR_BEST_INFO:`${o5}/common/set_pay_for_best_info`,GET_PAY_FOR_BEST_INFO:`${o5}/"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/benefit/notice/ack": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "SET_PAY_FOR_BEST_INFO:`${o5}/common/set_pay_for_best_info`,GET_PAY_FOR_BEST_INFO:`${o5}/common/get_pay_for_best_info`,SET_PAY_FOR_BEST_DOWNL"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/commerce/v1/common/start_up": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "GET_COMMERCE_AUTH_INFO:`${o5}/commerce/get_commerce_auth_info`"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/video_draft/save": {
+  "method": [],
+  "wrappers": [
+   "deltaUpdate"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/video_draft/delta_update": {
+  "method": [],
+  "wrappers": [
+   "deltaUpdate"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/image/batch_detect_white_base_image": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "batchDetectWhiteBaseImage"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/image/recommend_preset_image": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "recommendPresetImage"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v3/context/generate_light_infos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getGenerateHistory"
+  ],
+  "args": [
+   "{generate_ids:e.generateIds,generate_type:e.generateType,generate_type_list:e.generateTypeList,offset:e.offset,size:e.size,title:e.title,uid"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v3/agent/get_thread_share": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getThreadShare"
+  ],
+  "args": [
+   "{share_id:e.shareId.trim()},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v3/agent/get_thread_share_id": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getThreadShareId"
+  ],
+  "args": [
+   "(i=void 0===e.projectId?{thread_id:e.threadId}:{...void 0===e.allowClone?{}:{allow_clone:e.allowClone},project_id:e.projectId},void 0!==e.ex"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_thread_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "listThreadFiles"
+  ],
+  "args": [
+   "t"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_thread_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "updateThreadFile"
+  ],
+  "args": [
+   "\"/api/biz/v1/agent/get_thread\",\"/api/biz/v1/agent/get_run\",\"/api/biz/v1/agent/subscribe_run\",\"/api/biz/v1/agent/list_user_history\",\"/api/biz",
+   "{thread_id:e.threadId,pippit_asset_id:e.pippitAssetId,content:e.content,file_path:e.filePath,Base:{Client:\"web\"}}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/get_thread_share_id": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createProjectShare"
+  ],
+  "args": [
+   "{project_id:e.projectId},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/get_thread_share": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getProjectShare"
+  ],
+  "args": [
+   "{share_id:e.shareId.trim()},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_project_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "listProjectFiles"
+  ],
+  "args": [
+   "{Base:{Client:e.base.client},PageNum:e.pageNum,PageSize:e.pageSize,path:e.path,pippit_asset_id:e.pippitAssetId,project_id:e.projectId,uid:e."
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/upload_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "uploadCanvasAsset"
+  ],
+  "args": [
+   "t,{headers:{appid:\"573081\",\"entrance-from\":\"web\"},onUploadProgress:e.onProgress?({loaded:t,total:i})=>{\"number\"!=typeof i||i<=0||e.onProgres"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/workspace/import_file_to_workspace": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "importAssets"
+  ],
+  "args": [
+   "{...e},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/workspace/get_import_file_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getImportAssetsTasks"
+  ],
+  "args": [
+   "{...e},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/workspace/cancel_import_file_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "cancelImportAssetsTasks"
+  ],
+  "args": [
+   "{...e},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_image_agent_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getSettings"
+  ],
+  "args": [
+   "e||{}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_web_agent_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getGeneralSettings"
+  ],
+  "args": [
+   "e||{}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/lv/v1/editor/plane/intelligence/create_batch_process_task": {
+  "method": [],
+  "wrappers": [
+   "_getModule"
+  ],
+  "args": [
+   "pL=\"/lv/v1/editor/plane/intelligence/query_batch_process_result\",pM=\"/lv/v1/editor/plane/intelligence/query_social_media_size\";var pj=i(2036"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/plane/intelligence/query_batch_process_result": {
+  "method": [],
+  "wrappers": [
+   "_getModule"
+  ],
+  "args": [
+   "pM=\"/lv/v1/editor/plane/intelligence/query_social_media_size\";var pj=i(203613);class pF{constructor(e){this._httpApiSettingService=e,this._n"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/plane/intelligence/query_social_media_size": {
+  "method": [],
+  "wrappers": [
+   "_getModule"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/home/recommend_video": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getOfflineVideoList"
+  ],
+  "args": [
+   "e,{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/smart_creation/list_offline_recommend": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getOfflineRecommendTaskList"
+  ],
+  "args": [
+   "{},{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/smart_creation/report_user_action": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "reportUserAction"
+  ],
+  "args": [
+   "e,{withCredentials:!0}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/common/security_check": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "securityCheck"
+  ],
+  "args": [
+   "{...e,language:eZ.Ay.language,region:this._httpApiSettingService.userLocationInfo.region}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/click_id": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/subscribe/apply_free_trial\",\"/api/biz/v1/reward_task/claim\",\"/lv/v1/asset/prepare_upload_cloud\",\"/api/biz/v1/agent/submit_run\",",
+   "(0,sz.w)(e??{})"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/subscribe/apply_free_trial": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/reward_task/claim\",\"/lv/v1/asset/prepare_upload_cloud\",\"/api/biz/v1/agent/submit_run\",\"/api/biz/v1/agent/update_thread_file\",\"/"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/reward_task/claim": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/lv/v1/asset/prepare_upload_cloud\",\"/api/biz/v1/agent/submit_run\",\"/api/biz/v1/agent/update_thread_file\",\"/api/biz/v1/agent/get_thread\",\"/a"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_run": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/subscribe_run\",\"/api/biz/v1/agent/list_user_history\",\"/api/biz/v1/agent/download_with_pay\",\"/api/biz/v1/asset/namespace_q"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/subscribe_run": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "\"/api/biz/v1/agent/list_user_history\",\"/api/biz/v1/agent/download_with_pay\",\"/api/biz/v1/asset/namespace_query\",\"/api/biz/v2/common/generati"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/lv/v1/rick_control/check_spam": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "\"/commerce/v3/trade/init_trade\",\"/commerce/v3/resource/benefit_metadata\",\"/commerce/v3/benefits/batch_get_user_benefit\",\"/commerce/v3/benefi"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/commerce/v1/subscription/batch_get": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/api/biz/v1/user/bui": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [
+   "getUserBuiInfo"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/set_bui": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "setUserBuiInfo"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/invite/invite_conf": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/invite/gen_invite_url": {
+  "method": [],
+  "wrappers": [
+   "getInviteConf"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/invite/issued_rewards": {
+  "method": [],
+  "wrappers": [
+   "genInviteUrl"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "mq={MGET_USER_SETTING:`${mJ}/mget_user_setting`,UPDATE_USER_SETTING:`${mJ}/update_user_setting`};function mQ(e){let t=(0,sz.o)(e.data??{});r"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/upload_sign": {
+  "method": [],
+  "wrappers": [
+   "_preloadBytedUploaderSdk"
+  ],
+  "args": [
+   "d=\"/api/biz/v1/digital_human/upload_sign\",u=l,_=l;var p=i(56219),h=i(956878),m=i(234503),g=i(59302),v=i(472335);class y{constructor(e){this."
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v2/intelligence/tts/curl_sync_everphoto": {
+  "method": [],
+  "wrappers": [
+   "syncUrlToEverPhoto"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/common": {
+  "method": [],
+  "wrappers": [
+   "getImageXToken"
+  ],
+  "args": [
+   "gP={GET_IMAGEX_TOKEN:`${gA}/get_upload_sign`,GET_PLAY_INFO:`${gA}/mget_play_info`,SET_STATUS:`${gA}/set_video_status`};class gN{constructor("
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/user/get_features": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "fetchFeatures"
+  ],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v2/oauth/access_token": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "m={loc:a.yl.CHANNEL,lan:s.Ay.language||a.yl.LAN,pf:a.yl.APP_PF,appvr:a.yl.VERSION,tdid:\"\",\"sign-ver\":1,\"app-sdk-version\":a.yl.APP_SDK_VERSIO"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/plane_draft/save": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/use_report": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "SEARCH:\"/lv/v1/effect/search\",GET_TAG_TREE:\"/lv/v1/effect/get_tag_tree\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/get_category_effects": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "GET_RESOURCE_BY_ID:\"/lv/v1/effect/batch_by_resource\",GET_RECENT_RESOURCE_BY_PANEL:\"/lv/v1/editor/effect/recent_list\",ADD_RECENT_RESOURCE:\"/l"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/editor/effect/recent_list": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "ADD_RECENT_RESOURCE:\"/lv/v1/editor/use_report\",SEARCH:\"/lv/v1/effect/search\",GET_TAG_TREE:\"/lv/v1/effect/get_tag_tree\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/batch_by_resource": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "GET_RECENT_RESOURCE_BY_PANEL:\"/lv/v1/editor/effect/recent_list\",ADD_RECENT_RESOURCE:\"/lv/v1/editor/use_report\",SEARCH:\"/lv/v1/effect/search\""
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/get_panel_info": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "GET_RESOURCES_BY_CATEGORY:\"/lv/v1/effect/get_category_effects\",GET_RESOURCE_BY_ID:\"/lv/v1/effect/batch_by_resource\",GET_RECENT_RESOURCE_BY_P"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/get_all_fonts": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/plane_draft/get_draft_detail": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/editor/pack_resource": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/ai_talking_photo/pre_process_image": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "c=\"/api/biz/v1/digital_human/ai_talking_photo/pre_process_audio\";var l=i(245489);class d{get _networkClient(){return this._networkClientInst"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/ai_talking_photo/pre_process_audio": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/omni/try_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "tryOmniTask"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/lv/v1/ever_photo/update_package": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "setDraftVisible"
+  ],
+  "args": [
+   "t,{withCredentials:!0,ctx:e}"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/notice/get_unread_count": {
+  "method": [],
+  "wrappers": [
+   "_formatRequest"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/notice/get_notice_list": {
+  "method": [],
+  "wrappers": [
+   "_formatRequest"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/lv/v1/notice/mark_read": {
+  "method": [],
+  "wrappers": [
+   "_formatRequest"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/list_schedule_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "get"
+  ],
+  "args": [
+   "this._formatListParams(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/create_schedule_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "create"
+  ],
+  "args": [
+   "this._formatCreateParams(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/batchcreate_schedule_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "_batchCreate"
+  ],
+  "args": [
+   "this._formatBatchCreateParams(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/update_schedule_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "update"
+  ],
+  "args": [
+   "this._formatUpdateParams(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/publish/delete_schedule_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "cancel"
+  ],
+  "args": [
+   "this._formatCancelParams(e)"
+  ],
+  "files": [
+   "async__450621.76fe1df8ae.js"
+  ]
+ },
+ "/api/biz/v1/marketing/get_marketing_showcases": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "B=\"/api/biz/v1/marketing/get_marketing_hooks\",Z=\"\\u83B7\\u53D6\\u8425\\u9500 Showcase \\u5217\\u8868\\u5931\\u8D25\",z=\"\\u6279\\u91CF\\u83B7\\u53D6\\u84"
+  ],
+  "files": [
+   "async__53019.0f91dddfd6.js"
+  ]
+ },
+ "/api/biz/v1/marketing/get_marketing_hooks": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "Z=\"\\u83B7\\u53D6\\u8425\\u9500 Showcase \\u5217\\u8868\\u5931\\u8D25\",z=\"\\u6279\\u91CF\\u83B7\\u53D6\\u8425\\u9500 Showcase \\u8BE6\\u60C5\\u5931\\u8D25\",K="
+  ],
+  "files": [
+   "async__53019.0f91dddfd6.js"
+  ]
+ },
+ "/api/biz/v1/marketing/batch_get_marketing_showcase_detail": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",body:{inspiration_id_list:i},signal:s.signal"
+  ],
+  "files": [
+   "async__53019.0f91dddfd6.js"
+  ]
+ },
+ "/api/biz/v1/marketing/mget_marketing_hooks": {
+  "method": [],
+  "wrappers": [
+   "b"
+  ],
+  "args": [
+   "method:\"POST\",body:{hook_ids:r},signal:a.signal"
+  ],
+  "files": [
+   "async__53019.0f91dddfd6.js"
+  ]
+ },
+ "/api/biz/v1/marketing/get_marketing_video_visual_styles": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",body:{},signal:t.signal"
+  ],
+  "files": [
+   "async__53019.0f91dddfd6.js"
+  ]
+ },
+ "/api/biz/v1/common/transfer_material": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",body:{scene:\"showcase\",...n?{id:n}:{},asset_id:a,workspace_id:r}"
+  ],
+  "files": [
+   "async__533601.182e91b756.js",
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/info": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/recommend_by_tag": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/get_fixed_position": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/filter_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/material/batch_get": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/get_upload_sign": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/security/check": {
+  "method": [
+   "GET",
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "f=[e=>e.url.endsWith(m)&&e.data?.scene===\"pippit_novelvideogen_check_user_input_image\"&&Array.isArray(e.data.image_list)?{...e,data:{...e.da"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/sync_asset_to_everphoto": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/material/create_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/preset/get_prompt_sug": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/preset/video_example": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/preset/image_example": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/videogen/batch_get_render_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/mget_video_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/check_user_beta_access": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/videogen/create_video": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/videogen/regenerate_video": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/report": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_tone_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/batch_delete_digital": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_hot_audio_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/before_create_limit_check": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_img_category_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_img_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/audio_to_text": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/details": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactions": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/feed": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/mylikes": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/like": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_fixed_position": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/get_user_img_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/update_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/detail_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/retry_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/feature_tab": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_for_image": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/transfer/batch_get_video_url": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/transfer/batch_get_image": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_for_omni": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_inspiration_automatically": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/sug_words": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/create_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_package_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/update_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/list_platform_material": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_generate_videos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_tts_avatar_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/query_tts_avatar_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/search_platform_material": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_platform_material_detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/query_generate_videos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/text_to_speech": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_t2v_task_count": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_run_artifact": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/create_generate_videos_deduct": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/commerce/grant_user_credits": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/share/info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/subscribe_thread": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/debug/update_debug_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/workspace/get_user_workspace": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_state": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/debug/create_tts_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/debug/create_debug_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/update_state": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/auth/check_web_platform_auth": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/create_ugc_inspiration": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/montage/get_montage_sug": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_for_fission": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/material/preprocess": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/notice/unread_count": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/notice/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_web_agent_sug": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_published_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_feed_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_published_inspiration_detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_inspiration_activity": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_inspiration_detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/list_platform_category": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/memory/get_user_memory": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/batch_get_interaction_status": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/get_odin_user_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/delete_ugc_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/cold_start_activate": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_i18n/create_agent_inspiration": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_modify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/debug/search_music": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_supported_templates": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_run_artifact": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/ref_image_generate": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_related_remix": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_feed_challenge": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/list_challenge_tools": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template_creative/batch_get_usage_count": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/image_object_detect": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/locate_challenge_position": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/preset_prompts/save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/user/preset_prompts/get": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/parse/check_input_valid": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/announcement/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/list": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/tcc/get_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js"
+  ]
+ },
+ "/api/biz/v1/user/get_prompt_intent": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/omni/preprocess_submit_request": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/material/ark_generate_callback": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/usage/get_web_daily_quota": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_inspiration_tab_config": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/common/download_with_pay": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/get_tos_source_by_path": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/remix/characters/get": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/remix/get_build_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/crop_image": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_app_agent_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/change_thread_business_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/mget_user_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/update_user_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_user_business_extra_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/batch_mark_badge_show_status": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/send_client_event": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/novel_agent/novel_script_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/video_state_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/video_state_21_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_21_modify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "StoryBoardSave21Web:\"/api/biz/v1/agent/video/storyboard_21_save\",UpdateNovelSettings:v.updateNovelSettings,UpdateTextAsset:\"/api/biz/v1/asse"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/video/storyboard_21_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "UpdateNovelSettings:v.updateNovelSettings,UpdateTextAsset:\"/api/biz/v1/asset/update_text\",WebNovelStyleList:v.webNovelStyleList"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/get_me": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/create": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/lv/v1/event/report": {
+  "method": [
+   "GET",
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/pull_sandbox_session": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/query_sandbox_session_status": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/get_showcase_run_artifact": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/list_showcase": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "SecurityCheckWeb:m,SetUserContract:\"/api/biz/v1/agent/novel/set_user_contract\",StoryBoard21ModifyWeb:\"/api/biz/v1/agent/video/storyboard_21_"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/query_op": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/entity/realperson/create_op": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel_style/delete": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "eraseVideoSubtitleForNovelAgent:\"/api/biz/v1/agent/novel/erase_video_subtitle_for_novel_agent\",generateEpisode:\"/api/biz/v1/agent/novel/gene"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_package_info_lite": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "initCanvasAssetFromOuter:\"/api/biz/v1/agent/init_canvas_asset_from_outer\",mgetShowcaseAssetInfo:\"/api/biz/v1/agent/video/mget_showcase_asset"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/init_canvas_asset_from_outer": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "mgetShowcaseAssetInfo:\"/api/biz/v1/agent/video/mget_showcase_asset_info\",novelStyleList:\"/api/biz/v1/agent/novel_style/list\",resolveStyleSna"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel_style/list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "resolveStyleSnapshot:\"/api/biz/v1/agent/novel_style/resolve_snapshot\",subscribeAsset:\"/api/biz/v1/asset/subscribe_asset\",updateCreativeProje"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel_style/resolve_snapshot": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "subscribeAsset:\"/api/biz/v1/asset/subscribe_asset\",updateCreativeProject:\"/api/biz/v1/agent/update_creative_project\",updateEpisodeVideoList:"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel_style/update": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "uploadFile:\"/api/biz/v1/editor/upload_file\",webNovelStyleList:\"/api/biz/v1/agent/novel_style_list\""
+  ],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/editor/upload_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "webNovelStyleList:\"/api/biz/v1/agent/novel_style_list\""
+  ],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/novel_style_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "t,e"
+  ],
+  "files": [
+   "async__599038.863e145e5b.js",
+   "async__643916.4be081c651.js"
+  ]
+ },
+ "/api/internal": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__599038.863e145e5b.js"
+  ]
+ },
+ "/api/biz/v1/commerce/get_commerce_auth_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "data:function(e,t,a=\"pippit_nest_agent\"){let i=Object.fromEntries(Object.entries(t.parameters).flatMap(([e,t])=>\"string\"==typeof t||\"number\""
+  ],
+  "files": [
+   "async__643916.4be081c651.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/tcc/get_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "et={Client:\"web\"};function ea(e,t){return!t||/^https?:\\/\\//.test(e)?e:new URL(e,t).toString()}async function ei(e,t,a){let i=a.fetcher??fetc"
+  ],
+  "files": [
+   "async__643916.4be081c651.js",
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/lv/v1/sc/compliance_popup/fetch_all": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "baseURL:location.origin,params:{region:e.ipRegion},data:{user_id:e.userId},headers:{tdid:\"0\",pf:\"7\",lan:e.lang}"
+  ],
+  "files": [
+   "async__668292.e34605bad2.js"
+  ]
+ },
+ "/lv/v1/sc/compliance_popup/submit_consent": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "baseURL:location.origin,data:{entity_key:e.entity_key,business_flow:e.business_flow,consent_status:e.consent_status,region:(null==(n=window."
+  ],
+  "files": [
+   "async__668292.e34605bad2.js"
+  ]
+ },
+ "/commerce/v3/resource/benefit_resource": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.e2j_1=\"aigc\",this.f2j_1=\"get_all\"",
+   "y=this.o2j_1.d3_1.toLowerCase(),b=tlh(),w=new tfH(O0(new tfQ(\"aigc\",\"get_all\"))),k=b.iu(),x=Yk(k,NV(Bo(tfH),[],!1)),C=b.l1b(zJ(x,Yt)?x:RX(),"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/benefits/user_credit_history": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.i5u_1,h2.q1d(),tR4().q1d(),this",
+   "this.m5t_1=\"/commerce/v1/benefits/credit_receive\",this.n5t_1=\"/commerce/v1/benefits/team_credit_allocate\""
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/benefits/team_credit_allocate": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.e5v_1,h7.q1d(),ft.q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.s69_1=\"/commerce/v3/teamwork/check_create_team\",this.t69_1=\"/commerce/v3/teamwork/update_team_info\",this.u69_1=\"/commerce/v3/teamwork/g"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/check_create_team": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "new tHN,pr.q1d(),dX.q1d(),this",
+   "this.t69_1=\"/commerce/v3/teamwork/update_team_info\",this.u69_1=\"/commerce/v3/teamwork/get_team_invitation_link\",this.v69_1=\"/commerce/v3/tea"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/update_team_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.u69_1=\"/commerce/v3/teamwork/get_team_invitation_link\",this.v69_1=\"/commerce/v3/teamwork/get_team_info_by_invite_link\",this.w69_1=\"/com",
+   "this.v6b_1,pn.q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/get_team_invitation_link": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.g6c_1,_K.q1d(),du.q1d(),this",
+   "this.v69_1=\"/commerce/v3/teamwork/get_team_info_by_invite_link\",this.w69_1=\"/commerce/v3/teamwork/get_lite_team_list\",this.x69_1=\"/commerce/"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/get_team_info_by_invite_link": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "new tVY(this.r6c_1),_Z.q1d(),tDW().q1d(),this",
+   "this.w69_1=\"/commerce/v3/teamwork/get_lite_team_list\",this.x69_1=\"/commerce/v3/teamwork/team_info\",this.y69_1=\"/commerce/v3/teamwork/join_te"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/get_lite_team_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.x69_1=\"/commerce/v3/teamwork/team_info\",this.y69_1=\"/commerce/v3/teamwork/join_team_by_invite_link\",this.z69_1=\"/commerce/v3/teamwork/g",
+   "this.x6a_1,_7.q1d(),tHk().q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/team_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "new tHQ(this.j6b_1),pa.q1d(),po.q1d(),this",
+   "this.y69_1=\"/commerce/v3/teamwork/join_team_by_invite_link\",this.z69_1=\"/commerce/v3/teamwork/get_team_member_list\",this.a6a_1=\"/commerce/v3"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/join_team_by_invite_link": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "new tVY(this.c6d_1),_Z.q1d(),this",
+   "this.z69_1=\"/commerce/v3/teamwork/get_team_member_list\",this.a6a_1=\"/commerce/v3/teamwork/update_team_member_info\",this.b6a_1=\"/commerce/v3/"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/get_team_member_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.a6a_1=\"/commerce/v3/teamwork/update_team_member_info\",this.b6a_1=\"/commerce/v3/teamwork/remove_team_member\",this.c6a_1=\"/commerce/v3/te",
+   "this.n6d_1,_1.q1d(),tV3().q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/update_team_member_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.b6a_1=\"/commerce/v3/teamwork/remove_team_member\",this.c6a_1=\"/commerce/v3/teamwork/get_join_team_approval_record_list\",this.d6a_1=\"/com",
+   "this.z6d_1,tHn().q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/remove_team_member": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.c6a_1=\"/commerce/v3/teamwork/get_join_team_approval_record_list\",this.d6a_1=\"/commerce/v3/teamwork/handle_join_team_approval\"",
+   "this.k6e_1,_4.q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/get_join_team_approval_record_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.d6a_1=\"/commerce/v3/teamwork/handle_join_team_approval\"",
+   "this.u6e_1,tVu().q1d(),tVp().q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/teamwork/handle_join_team_approval": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.h6f_1,tVx().q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/prepay_price_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/price_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/resource_position": {
+  "method": [],
+  "wrappers": [
+   "getVimoSlot"
+  ],
+  "args": [
+   "r=(0,u.i)({url:i,...g.headers});return await (0,_.A)(()=>v({baseURL:\"/\",url:i,headers:{...r},data:e}),{cacheKey:`promiseCache_getVimoSlot_${",
+   "this.c96_1=\"/commerce/v1/multi_resource_position\",this.d96_1=\"/commerce/v1/record_resource_action\"",
+   "tlh().l1b(nV.q1d(),new tt5(y)),to,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js",
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/commerce/v1/multi_resource_position": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.d96_1=\"/commerce/v1/record_resource_action\""
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/record_resource_action": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "tlh().l1b(et3().q1d(),x),to,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v2/subscription/sign_and_pay": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.m9s_1=\"/commerce/v2/subscription/make_unauto_order\",this.n9s_1=\"/commerce/v1/subscription/make_unauto_order\",this.o9s_1=3000n,this.p9s_"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v2/subscription/make_unauto_order": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.n9s_1=\"/commerce/v1/subscription/make_unauto_order\",this.o9s_1=3000n,this.p9s_1=1000n,this.q9s_1=8000n"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/make_unauto_order": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.o9s_1=3000n,this.p9s_1=1000n,this.q9s_1=8000n"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/subscription_infos": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.laa_1=\"/commerce/v3/trade/trade_records\",this.maa_1=\"/commerce/v3/trade/cancel_subscription\",this.naa_1=\"/commerce/v3/trade/resume_subs",
+   "y,eaX().q1d(),eoD().q1d(),g"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/appeal/submit": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "g,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/un_invoiced_order_record": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.paq_1,kW.q1d(),efQ().q1d(),this",
+   "this.rao_1=\"/commerce/v1/invoice/invoice_history\",this.sao_1=\"/commerce/v1/invoice/apply_invoice\",this.tao_1=\"/commerce/v1/invoice/update_in"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/invoice_history": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.eaq_1,kO.q1d(),efd().q1d(),this",
+   "this.sao_1=\"/commerce/v1/invoice/apply_invoice\",this.tao_1=\"/commerce/v1/invoice/update_invoice\",this.uao_1=\"/commerce/v1/invoice/apply_refu"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/apply_invoice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.iap_1,eca().q1d(),wX.q1d(),this",
+   "this.tao_1=\"/commerce/v1/invoice/update_invoice\",this.uao_1=\"/commerce/v1/invoice/apply_refund_invoice\",this.vao_1=\"/commerce/v1/invoice/bat"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/update_invoice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.tap_1,ede().q1d(),k0.q1d(),this",
+   "this.uao_1=\"/commerce/v1/invoice/apply_refund_invoice\",this.vao_1=\"/commerce/v1/invoice/batch_get_invoice_info\",this.wao_1=\"/commerce/v1/inv"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/apply_refund_invoice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.sas_1,w0.q1d(),YY(YK(tn),YK(tn)),this",
+   "this.vao_1=\"/commerce/v1/invoice/batch_get_invoice_info\",this.wao_1=\"/commerce/v1/invoice/fuzzy_query_enterprise_info\",this.xao_1=\"/commerce"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/batch_get_invoice_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.aar_1,eh_().q1d(),ehk().q1d(),this",
+   "this.wao_1=\"/commerce/v1/invoice/fuzzy_query_enterprise_info\",this.xao_1=\"/commerce/v1/invoice/last_time_invoice_info\",this.yao_1=\"/commerce"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/fuzzy_query_enterprise_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.lar_1,kj.q1d(),eh9().q1d(),this",
+   "this.xao_1=\"/commerce/v1/invoice/last_time_invoice_info\",this.yao_1=\"/commerce/v1/invoice/re_send_invoice\""
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/last_time_invoice_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.war_1,kN.q1d(),kU.q1d(),this",
+   "this.yao_1=\"/commerce/v1/invoice/re_send_invoice\""
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/invoice/re_send_invoice": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.has_1,kF.q1d(),kH.q1d(),this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/user/apply_order_refund": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/user/can_refund_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.eb6_1=\"/commerce/v3/trade/user/refund_record_list\",this.fb6_1=\"/commerce/v3/trade/user/apply_order_refund\"",
+   "this.hb5_1,e_5().q1d(),to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/trade/user/refund_record_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "this.fb6_1=\"/commerce/v3/trade/user/apply_order_refund\"",
+   "x,xD.q1d(),epv().q1d(),to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/subscription/get_user_lite_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "D,N??\"\",to,to,this",
+   "U.content"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/subscription/get_user_subscription_extra_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "D.content",
+   "O,M??\"\",to,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v1/student/verify/status": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "O2(Gd(\"for_report\",y)),to,to,to,this",
+   "T.content"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/benefits/batch_report_usage": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RR(y),to,this.w3c_1,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/benefits/exchange": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RR(y),to,to,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/commerce/v3/benefits/check_qualification": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "RR(y),to,to,to,this"
+  ],
+  "files": [
+   "async__691333.a6f2d6cec4.js"
+  ]
+ },
+ "/api/biz/v1/speech/speakers/filter_options": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "{},e"
+  ],
+  "files": [
+   "async__850206.e38ec15e55.js"
+  ]
+ },
+ "/api/biz/v1/speech/speakers/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [
+   "{keyword:e,page:t,limit:30,...i},n"
+  ],
+  "files": [
+   "async__850206.e38ec15e55.js"
+  ]
+ },
+ "/api/biz/v1/speech/speakers/favorites/list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "{keyword:e,page:t,limit:100,...i},n"
+  ],
+  "files": [
+   "async__850206.e38ec15e55.js"
+  ]
+ },
+ "/api/biz/v1/speech/speakers/favorite/set": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "{voice_type:e,is_favorite:t}"
+  ],
+  "files": [
+   "async__850206.e38ec15e55.js"
+  ]
+ },
+ "/api/web/v1/debug/update_debug_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/common/mget_asset_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/workspace/get_user_workspace": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/get_state": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/debug/create_tts_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/context/message": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/debug/create_debug_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/update_state": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/context/history": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/context/generate_light_infos": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/auth/check_web_platform_auth": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/common/upload_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/list_web_agent_sug": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/memory/get_user_memory": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/context/history_delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_modify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/debug/search_music": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/ref_image_generate": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/user/preset_prompts/save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/user/preset_prompts/get": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/announcement/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/usage/get_web_daily_quota": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/novel_script_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/video_state_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/video_state_21_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_21_modify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/video/storyboard_21_save": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_feature_tab_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/update_inspiration_like_status": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_liked_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_feed_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration_oversea/get_inspiration_tab_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/common/mget_showcase_asset_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_images": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/get_user_contract": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_random_story_outline_template": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/mget_device_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/update_device_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/skill/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/skill/get_thread": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/skill/submit_run": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/auth/exchange_cli_login_grant": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/auth/create_cli_login_grant": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_novel_settings": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template/category/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/task/query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/security/async/batch_query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/remix_tools/get_drama_sug_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/user/get_user_app_setting": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_drama_hot_topic": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template/creative_works/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template/homepage/creative_works/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent_sug/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent_sug/fork": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/speech/asr_access_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/tcc/get_config_without_login": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_ai_script_asset": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/v1/asset/namespace_query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/erase_video_subtitle_for_novel_agent": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/unbind_user_for_jianying": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_bind_jianying_accounts": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/unbind_user": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_pippit_user_info": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/get_bind_pippit_accounts": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/editor/re_transfer": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/novel_style_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_drama_sug_item": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/creativity/exposure/write": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/creativity/query": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/creativity/strategy/detail": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/update_script_content": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/template/get": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/work/search": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/app/create/bootstrap": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/app/tab/page": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/work/search": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/character/app/mine/page": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/agent/speed_up_run_task_to_vip_channel": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/delete_episode": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_new_episode": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/background/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/web_homepage/homepage/display_content/list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/skill/list_thread_file": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/skill/get_skill_install_command": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/skill/report_telemetry": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/generate_new_story_board": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/videogen/upload_audio_pre_check": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/update_episode": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/add_episode": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/get_story_dag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/interactive/delete_episodes": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/material/lang_detect": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",data:{detect_text_list:[e],base:{Client:\"web\"}}"
+  ],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/web/v1/agent/novel/ai_script_reset_snapshot": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "restore"
+  ],
+  "args": [],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/get_drama_general_publish_info": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",data:{thread_id:t}"
+  ],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/inspiration/publish_drama_general": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "method:\"POST\",data:{workspace_id:t.workspaceId,source_task_info:{thread_id:t.threadId,storyboard_asset_id:t.storyboardAssetId,last_inspirati"
+  ],
+  "files": [
+   "async__889795.256f74ebdf.js"
+  ]
+ },
+ "/api/biz/v1/common/im_access": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getImAccess"
+  ],
+  "args": [
+   "(0,l.w)((0,n.A)(e))"
+  ],
+  "files": [
+   "async__921839.a6250d076a.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/create_item": {
+  "method": [],
+  "wrappers": [
+   "_getModule"
+  ],
+  "args": [
+   "f=\"/api/biz/v1/digital_human/create_training_task\",b=\"/api/biz/v1/digital_human/query_training_task\";var C=i(656539),S=i(525682),T=i(589506)"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/create_training_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "_getModule",
+   "updateDigitalHumanDefaultVoice"
+  ],
+  "args": [
+   "b=\"/api/biz/v1/digital_human/query_training_task\";var C=i(656539),S=i(525682),T=i(589506);let R={1:\"11labs\",2:\"vimo\"},w=e=>({tasks:e.tasks.m",
+   "{...e,tasks:e.tasks.map(e=>({type:52,payload:JSON.stringify((0,v.w)(e.payload))}))}"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/query_training_task": {
+  "method": [],
+  "wrappers": [
+   "_getModule"
+  ],
+  "args": [],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/get_item_list": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getDigitalHumanList"
+  ],
+  "args": [
+   "{...e,actionType:73,effectType:60}"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/create_pre_process_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "createPreProcessTask"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/query_pre_process_task": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "queryPreProcessTask"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/delete": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "deleteCustomizeDigitalHuman"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/edit/digital_human/reactivate": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "reactiveCustomizeDigitalHuman"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/update": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "updateCustomizeDigitalHuman"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/edit/digital_human/recustom": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "recustomizeDigitalHuman"
+  ],
+  "args": [
+   "e"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/image_review": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "imageAudit"
+  ],
+  "args": [
+   "{imageUriList:[e.imageUri],imageUrlList:[]}"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/videogen/search_platform_material": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/videogen/digital_human_filter_config": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "getFilterConfigs"
+  ],
+  "args": [
+   "e,{withCredentials:!0}"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/videogen/recommend_digital_human_by_tag": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "searchOrFilterWithRecommendations"
+  ],
+  "args": [
+   "{...function(e){let t=(0,$.CM)(e)?e.config:e,{id2SelectedMap:i={},...r}=t,a=Object.entries(i).filter(([e,t])=>t.length>0).map(([e,t])=>({op:"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/commerce/v1/subscription/device/detect": {
+  "method": [],
+  "wrappers": [],
+  "args": [],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v2/editor/effect/recent_list": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "ADD_RECENT_RESOURCE:\"/lv/v1/editor/use_report\""
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/search": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [
+   "GET_TAG_TREE:\"/lv/v1/effect/get_tag_tree\""
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/effect/get_tag_tree": {
+  "method": [],
+  "wrappers": [
+   "l"
+  ],
+  "args": [],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/lv/v1/draft/get_package_info": {
+  "method": [],
+  "wrappers": [
+   "getPackageInfoFromJsonp"
+  ],
+  "args": [],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/digital_human/upload_sign": {
+  "method": [],
+  "wrappers": [],
+  "args": [
+   "u=l,_=l;var p=i(56219),h=i(956878),m=i(234503),g=i(59302),v=i(472335);class y{constructor(e){this._httpApiSettingService=e,this._networkClie"
+  ],
+  "files": [
+   "async__973395.f4cda13762.js"
+  ]
+ },
+ "/api/biz/v1/publish/products": {
+  "method": [
+   "GET"
+  ],
+  "wrappers": [
+   "getProductLink"
+  ],
+  "args": [
+   "this._buildRequestConfig(e)"
+  ],
+  "files": [
+   "async__media-publish.8c2f98b0f0.js"
+  ]
+ },
+ "/api/biz/v1/publish/product_add_verify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "verifyProductAdd"
+  ],
+  "args": [
+   "this._formatParams(e)"
+  ],
+  "files": [
+   "async__media-publish.8c2f98b0f0.js"
+  ]
+ },
+ "/api/biz/v1/publish/product_content_verify": {
+  "method": [
+   "POST"
+  ],
+  "wrappers": [
+   "verifyProductContent"
+  ],
+  "args": [
+   "this._formatParams(e)"
+  ],
+  "files": [
+   "async__media-publish.8c2f98b0f0.js"
+  ]
+ }
+}

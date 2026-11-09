@@ -1,0 +1,58 @@
+[
+ {
+  "name": "runtime.5a88d8be46.js",
+  "achado": true,
+  "chave": "https://pippit.ai https://pippit.ai https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/runtime.5a88d8be46.js",
+  "bytes_armazenados_no_cache": 61740,
+  "content_length_header": "61740",
+  "content_encoding": "br",
+  "bytes_descomprimidos": 126402,
+  "content_type": "application/javascript",
+  "data_header": "Thu, 29 Oct 2026 13:09:08 GMT",
+  "last_modified": "Wed, 28 Oct 2026 04:27:33 GMT",
+  "descompressao": "br",
+  "salvo_em": "scripts/current_20261029/async__runtime.5a88d8be46.js"
+ },
+ {
+  "name": "route-manifest-main.893d9794.js",
+  "achado": true,
+  "chave": "https://pippit.ai https://pippit.ai https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/route-manifest-main.893d9794.js",
+  "bytes_armazenados_no_cache": 3331,
+  "content_length_header": "3331",
+  "content_encoding": "br",
+  "bytes_descomprimidos": 12698,
+  "content_type": "application/javascript",
+  "data_header": "Thu, 29 Oct 2026 13:09:09 GMT",
+  "last_modified": "Wed, 28 Oct 2026 04:27:33 GMT",
+  "descompressao": "br",
+  "salvo_em": "scripts/current_20261029/async__route-manifest-main.893d9794.js"
+ },
+ {
+  "name": "main.944816e98d.js",
+  "achado": true,
+  "chave": "https://pippit.ai https://pippit.ai https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/main.944816e98d.js",
+  "bytes_armazenados_no_cache": 160517,
+  "content_length_header": "160517",
+  "content_encoding": "br",
+  "bytes_descomprimidos": 532023,
+  "content_type": "application/javascript",
+  "data_header": "Thu, 29 Oct 2026 13:09:08 GMT",
+  "last_modified": "Wed, 28 Oct 2026 04:27:33 GMT",
+  "descompressao": "br",
+  "salvo_em": "scripts/current_20261029/async__main.944816e98d.js"
+ },
+ {
+  "name": "HomePageV5.2ac9fffde5.js",
+  "achado": true,
+  "chave": "https://pippit.ai https://pippit.ai https://sf16-web-login-neutral.capcutstatic.com/obj/capcut-web-login-static/ies/lvweb/platform-business_online/static/js/async/HomePageV5.2ac9fffde5.js",
+  "bytes_armazenados_no_cache": 20631,
+  "content_length_header": "20631",
+  "content_encoding": "br",
+  "bytes_descomprimidos": 60804,
+  "content_type": "application/javascript",
+  "data_header": "Wed, 21 Oct 2026 09:09:19 GMT",
+  "last_modified": "Wed, 21 Oct 2026 06:43:19 GMT",
+  "descompressao": "br",
+  "salvo_em": "scripts/current_20261029/async__HomePageV5.2ac9fffde5.js"
+ }
+]

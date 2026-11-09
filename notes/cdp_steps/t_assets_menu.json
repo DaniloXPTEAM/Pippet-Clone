@@ -1,0 +1,59 @@
+{
+ "task": "t_assets_menu",
+ "steps": [
+  {
+   "goto": "asset-management-material",
+   "wait": 9000
+  },
+  {
+   "tag": "sort",
+   "click": {
+    "role": "button",
+    "name": "Sort"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "tag": "view",
+   "click": {
+    "role": "button",
+    "name": "Adjust view"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "adjust_view",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "tag": "add",
+   "click": {
+    "role": "button",
+    "name": "Add"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "add_menu",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+// Foto falante com provedor externo (navegador real): orçamento visível, botão de autorizar só com consentimento, nada enviado antes, acompanhamento, vídeo, cancelamento honesto.
+// O provedor é um servidor de MENTIRA em loopback (formato de predições). Isto NÃO é geração real de lip-sync. Requisições a hosts externos FALHAM o teste.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import http from 'node:http';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
+const { chromium } = require('playwright-core');
+const realFetch = globalThis.fetch; const external = [];
+globalThis.fetch = async (u, o) => { const h = new URL(typeof u === 'string' ? u : u.url).hostname; if (h !== '127.0.0.1') { external.push(String(u)); throw new Error('chamada externa bloqueada: ' + u); } return realFetch(u, o); };
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-tpu-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp; process.env.PIPPIT_JOB_POLL_MS = '0'; process.env.PIPPIT_JOB_TICK_MS = '60000';
+const MP4 = Buffer.from('FAKE-MP4-NAO-E-LIPSYNC'); const seen = []; const st = { hold: false, cancelOk: true, n: 0, polls: {} };
+const mock = http.createServer((req, res) => { const ch = []; req.on('data', (d) => ch.push(d)); req.on('end', () => { const url = new URL(req.url, 'http://x'); seen.push({ m: req.method, p: url.pathname, body: Buffer.concat(ch) }); const json = (o, c = 200) => { res.writeHead(c, { 'content-type': 'application/json' }); res.end(JSON.stringify(o)); };
+  if (req.method === 'POST' && url.pathname === '/r/models/acme/lipsync/predictions') return json({ id: `u${++st.n}`, status: 'starting' }); let m = /^\/r\/predictions\/(\w+)$/.exec(url.pathname); if (m && req.method === 'GET') { st.polls[m[1]] = (st.polls[m[1]] || 0) + 1; return json(st.hold || st.polls[m[1]] < 2 ? { id: m[1], status: 'processing' } : { id: m[1], status: 'succeeded', output: `http://127.0.0.1:5254/out/${m[1]}.mp4` }); }
+  if (/^\/out\//.test(url.pathname)) { res.writeHead(200, { 'content-type': 'video/mp4' }); return res.end(MP4); } if (/cancel$/.test(url.pathname)) return st.cancelOk ? json({ status: 'canceled' }) : json({ detail: 'não foi possível' }, 500); json({ error: 'rota inesperada' }, 404); }); });
+await new Promise((r) => mock.listen(5254, '127.0.0.1', r)); const posts = () => seen.filter((x) => x.m === 'POST' && /predictions$/.test(x.p)).length;
+const media = await import('../app/lib/media.mjs'); const { server } = await import('../app/server.mjs'); const PORT = 5255; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
+const api = async (m, p, b) => { const r = await realFetch(base + p, { method: m, headers: { 'content-type': 'application/json' }, body: b === undefined ? undefined : JSON.stringify(b) }); return { status: r.status, body: await r.json() }; };
+const ff = (args, out) => { assert.equal(spawnSync(media.FFMPEG, ['-y', '-v', 'error', ...args, out], { encoding: 'utf8' }).status, 0); return out; };
+const png = ff(['-f', 'lavfi', '-i', 'color=c=blue:s=400x400', '-frames:v', '1'], path.join(tmp, 'p.png')); const mp3 = ff(['-f', 'lavfi', '-i', 'sine=frequency=440:duration=3'], path.join(tmp, 'a.mp3'));
+const prov = { adapter: 'replicate-lipsync', baseUrl: 'http://127.0.0.1:5254/r', model: 'acme/lipsync', apiKey: 'SEGREDO', allowSpend: true, costPerSecond: 0.05, currency: 'USD', inputMap: { gesture: 'prompt' } };
+const bal0 = (await api('GET', '/api/state')).body.balance;
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [], ext = [];
+const page = await (await browser.newContext({ viewport: { width: 1500, height: 950 } })).newPage(); page.on('pageerror', (e) => errors.push(String(e))); page.on('request', (q) => { if (!q.url().startsWith(base) && !q.url().startsWith('data:') && !q.url().startsWith('blob:')) ext.push(q.url()); });
+const openStep2 = async (audio = true) => { await page.goto(`${base}/#/home`); await page.evaluate(() => { window.__tp = null; }); await page.waitForSelector('.skill[data-s=foto-falante-de-ia]'); await page.click('.skill[data-s=foto-falante-de-ia]'); await page.waitForSelector('#tpdrop');
+  let [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#tpdrop')]); await fc.setFiles(png); await page.waitForSelector('#tpname'); await page.check('#tpok'); await page.click('#tpnext'); await page.waitForSelector('#tptab-vo');
+  if (audio) { await page.click('#tptab-vo'); await page.waitForSelector('#tpaudiodrop'); [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#tpaudiodrop')]); await fc.setFiles(mp3); await page.waitForSelector('#tpaudioname'); } };
+
+// 1) sem provedor: o botão existe, está desabilitado e explica por quê
+await openStep2(); assert.equal(await page.locator('#tpprov').isDisabled(), true); assert.match(await page.locator('#tpprov').getAttribute('title'), /Configure um provedor de foto falante/);
+// 2) configura o provedor pelas Configurações (formulário real) e confere a segurança do formulário
+await page.goto(`${base}/#/settings/llm`); await page.waitForSelector('.prov[data-k=talkingphoto]'); const card = page.locator('.prov[data-k=talkingphoto]'); assert.match(await card.innerText(), /Foto falante \(lip-sync\)/); assert.match(await card.innerText(), /DESCONHECIDO|custo e moeda abaixo são informados por você/);
+await card.locator('[data-f=adapter]').selectOption('replicate-lipsync'); await card.locator('[data-f=baseUrl]').fill(prov.baseUrl); await card.locator('[data-f=model]').fill(prov.model); await card.locator('[data-f=apiKey]').fill(prov.apiKey); await card.locator('[data-f=costPerSecond]').fill('0.05'); await card.locator('[data-f=currency]').fill('USD'); await card.locator('[data-f=inputMap]').fill('{"gesture":"prompt"}'); await card.locator('[data-f=allowSpend]').check(); await card.locator('[data-psave=talkingphoto]').click();
+await page.waitForFunction(() => /Salvo/.test(document.querySelector('[data-pres=talkingphoto]')?.textContent || ''), null, { timeout: 5000 }); await page.waitForTimeout(700);
+const pub = (await api('GET', '/api/providers')).body.providers.talkingphoto; assert.equal(pub.configured, true); assert.equal(pub.costPerSecond, 0.05); assert.equal(pub.currency, 'USD'); assert.deepEqual(pub.inputMap, { gesture: 'prompt' }); assert.ok(!JSON.stringify(pub).includes('SEGREDO'));
+// 3) fluxo completo: orçamento -> consentimento -> envio -> vídeo
+await openStep2(); await page.fill('#tpgesture', 'acene'); await page.waitForFunction(() => !document.querySelector('#tpprov')?.disabled, null, { timeout: 5000 });
+const p0 = posts(); await page.click('#tpprov'); await page.waitForSelector('#tpq-cost'); assert.match(await page.locator('#tpq-cost').innerText(), /0\.15 USD/); assert.match(await page.locator('#tpq-prov').innerText(), /acme\/lipsync.*127\.0\.0\.1:5254/); assert.match(await page.locator('#tpq-sec').innerText(), /3/); const warn = await page.locator('#tpq-warn').innerText(); assert.match(warn, /não é verificada localmente/); assert.match(warn, /retidos/);
+assert.equal(await page.locator('#tpauth').isDisabled(), true, 'não autoriza sem marcar o consentimento'); assert.equal(posts(), p0, 'orçamento exibido: nada enviado'); assert.match(await page.locator('#tpreason').innerText(), /consentimento/);
+await page.check('#tpack1'); assert.equal(await page.locator('#tpauth').isDisabled(), false); assert.equal(posts(), p0, 'marcar o consentimento ainda não envia'); await page.click('#tpauth'); await page.waitForSelector('video[src*="/files/"]', { timeout: 30000 });
+assert.equal(posts(), p0 + 1); assert.match(await page.locator('#tpdone').innerText(), /NÃO é verificada localmente/); const sent = JSON.parse(seen.filter((x) => /predictions$/.test(x.p)).at(-1).body.toString()); assert.equal(sent.input.prompt, 'acene'); assert.match(sent.input.audio, /^data:audio\/mpeg;base64,/);
+assert.ok((await api('GET', '/api/assets?kind=video')).body.some((a) => /lip-sync/i.test(a.name))); assert.equal((await api('GET', '/api/state')).body.balance, bal0, 'nenhum crédito do Pippit debitado');
+// 4) custo desconhecido: precisa do segundo aceite; e cancelamento honesto (pedido aceito x recusado)
+await api('POST', '/api/providers/talkingphoto', { costPerSecond: '', currency: '' }); st.hold = true; await openStep2(); await page.waitForFunction(() => !document.querySelector('#tpprov')?.disabled, null, { timeout: 5000 }); await page.click('#tpprov'); await page.waitForSelector('#tpack2');
+assert.match(await page.locator('#tpq-cost').innerText(), /DESCONHECIDO/); await page.check('#tpack1'); assert.equal(await page.locator('#tpauth').isDisabled(), true, 'custo desconhecido exige o segundo aceite'); const p1 = posts(); await page.check('#tpack2'); await page.click('#tpauth'); await page.waitForSelector('#tprun', { timeout: 10000 }); assert.equal(posts(), p1 + 1);
+await page.click('#tpcancel'); await page.waitForSelector('#tpcanceled'); assert.match(await page.locator('#tpcanceled').innerText(), /Pedido de cancelamento enviado ao provedor \(a confirmação final é dele\)/);
+st.cancelOk = false; await openStep2(); await page.waitForFunction(() => !document.querySelector('#tpprov')?.disabled, null, { timeout: 5000 }); await page.click('#tpprov'); await page.waitForSelector('#tpack2'); await page.check('#tpack1'); await page.check('#tpack2'); await page.click('#tpauth'); await page.waitForSelector('#tprun', { timeout: 10000 });
+await page.click('#tpcancel'); await page.waitForSelector('#tpcanceled'); assert.match(await page.locator('#tpcanceled').innerText(), /Falha ao pedir o cancelamento ao provedor: a tarefa pode continuar e ser cobrada/);
+assert.deepEqual(errors, [], 'sem erros de página'); assert.deepEqual(ext, [], 'o navegador não fez requisições externas'); assert.deepEqual(external, [], 'o servidor não fez chamadas externas');
+await browser.close(); server.closeAllConnections?.(); mock.closeAllConnections?.(); mock.close(); fs.rmSync(tmp, { recursive: true, force: true }); console.log('OK talkingphoto_ui: orçamento, consentimento por tarefa, custo desconhecido, envio, acompanhamento, vídeo, cancelamento honesto — provedor de mentira em loopback, NÃO é geração real de lip-sync'); setTimeout(() => process.exit(0), 200);

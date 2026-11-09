@@ -1,0 +1,73 @@
+{
+ "task": "t_modo_imagem2",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "modo",
+   "click": {
+    "role": "button",
+    "name": "Creation mode"
+   },
+   "opts": {
+    "expect": {
+     "text": "Image"
+    }
+   }
+  },
+  {
+   "tag": "img",
+   "click": {
+    "role": "menuitemradio",
+    "name": "Image Choose",
+    "exact": false
+   },
+   "opts": {
+    "allowRisky": true
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "modelos_img_direto",
+   "tag": "shot_m"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "tag": "prompt",
+   "fill": {
+    "role": "textbox",
+    "name": "Please enter your message...",
+    "exact": false
+   },
+   "value": "a single red apple on a white table, simple, test",
+   "allowFill": true
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "composer_img",
+   "tag": "shot_c"
+  }
+ ]
+}

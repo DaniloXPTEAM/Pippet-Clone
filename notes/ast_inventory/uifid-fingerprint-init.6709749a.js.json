@@ -1,0 +1,45 @@
+{
+ "arquivo": "sf16-web-login-neutral.capcutstatic.com\\obj\\capcut-web-login-static\\ies\\ccweb\\scm_storage\\iife\\uifid-fingerprint-init\\uifid-fingerprint-init.6709749a.js",
+ "bytes": 377940,
+ "parse": "script",
+ "nos": 97973,
+ "strings_total": 2922,
+ "segredo_like_ignoradas": 1,
+ "urls": [
+  "https://github.com/zloirock/core-js",
+  "https://github.com/zloirock/core-js/blob/v3.32.2/LICENSE",
+  "https://m1.openfpcdn.io/fingerprintjs/v"
+ ],
+ "dominios": [
+  "github.com",
+  "m1.openfpcdn.io"
+ ],
+ "caminhos_api": [
+  "/npm-monitoring"
+ ],
+ "rotas_path": [
+  "/"
+ ],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "message",
+  "webglCreateContextError"
+ ],
+ "globais_window": [
+  "__UIFID_FINGERPRINT_INITED__"
+ ],
+ "postMessage": 1,
+ "cookie_refs": 3,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 218
+}

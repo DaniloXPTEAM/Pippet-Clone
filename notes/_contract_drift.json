@@ -1,0 +1,1370 @@
+{
+ "bundles_locais": 246,
+ "identicos": 198,
+ "alterados": 31,
+ "removidos": [
+  {
+   "bundle": "115495.35348f4a35",
+   "modulos": 1,
+   "migraram_para": {
+    "async__885736.fc153fa283.js": 1
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "14821.8b5828d561",
+   "modulos": 34,
+   "migraram_para": {
+    "async__405476.7bacd1b343.js": 1,
+    "async__571860.29884a2b9b.js": 1,
+    "async__509340.30b09d58ac.js": 15,
+    "async__307064.04c0a88d7c.js": 1,
+    "async__823519.6dc0f4b581.js": 2,
+    "async__22911.1be1fe6211.js": 7,
+    "async__191551.5f5306f574.js": 2,
+    "async__823733.7ae8dd02ca.js": 1,
+    "async__100733.7660a851f2.js": 1,
+    "async__325938.9a3b1b250c.js": 1,
+    "async__249988.d5b0e122bb.js": 2
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "229704.2761c8b51a",
+   "modulos": 61,
+   "migraram_para": {
+    "async__602545.c502898cb7.js": 60,
+    "async__649969.36bed94288.js": 1
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "2447.1f3dc355bb",
+   "modulos": 9,
+   "migraram_para": {
+    "async__376687.4822558075.js": 9
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "297147.ff7dafe8ef",
+   "modulos": 277,
+   "migraram_para": {
+    "async__394338.77fe7aad4e.js": 277
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "321514.7eac03ebd4",
+   "modulos": 25,
+   "migraram_para": {
+    "async__307064.04c0a88d7c.js": 1,
+    "async__428740.be0f71da8d.js": 3,
+    "async__738955.3b300aae34.js": 18,
+    "async__22911.1be1fe6211.js": 1,
+    "async__AvatarAndVoice.8f542b9f5a.js": 2
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "339549.0fa109fad3",
+   "modulos": 8,
+   "migraram_para": {
+    "async__358422.39f8aee7df.js": 8
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "445075.d0b28b1d7a",
+   "modulos": 1,
+   "migraram_para": {},
+   "sem_destino_conhecido": 1
+  },
+  {
+   "bundle": "450621.76fe1df8ae",
+   "modulos": 198,
+   "migraram_para": {
+    "async__745290.fef2c40418.js": 188,
+    "async__394338.77fe7aad4e.js": 2,
+    "async__media-publish.8c2f98b0f0.js": 7
+   },
+   "sem_destino_conhecido": 1
+  },
+  {
+   "bundle": "577598.a604d136cb",
+   "modulos": 8,
+   "migraram_para": {
+    "async__509340.30b09d58ac.js": 4,
+    "async__376687.4822558075.js": 1,
+    "async__630645.5fd809fe3a.js": 3
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "608542.f3539121f2",
+   "modulos": 16,
+   "migraram_para": {
+    "async__674439.2d5c1989a6.js": 2,
+    "async__681489.94620770d5.js": 1,
+    "async__68761.37adba3f1b.js": 1,
+    "async__385767.d84190b315.js": 11
+   },
+   "sem_destino_conhecido": 1
+  },
+  {
+   "bundle": "625265.2336b2bf0b",
+   "modulos": 9,
+   "migraram_para": {
+    "async__662230.01cccde76e.js": 1,
+    "async__22911.1be1fe6211.js": 4,
+    "async__453471.c3d8c75311.js": 4
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "691333.a6f2d6cec4",
+   "modulos": 514,
+   "migraram_para": {
+    "async__649969.36bed94288.js": 513
+   },
+   "sem_destino_conhecido": 1
+  },
+  {
+   "bundle": "714303.90397aa0ea",
+   "modulos": 6,
+   "migraram_para": {
+    "async__627944.d8cdc17466.js": 4,
+    "async__376687.4822558075.js": 2
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "747579.b77f11b9a0",
+   "modulos": 19,
+   "migraram_para": {
+    "async__358422.39f8aee7df.js": 4,
+    "async__837806.5397cabcb2.js": 14,
+    "async__399551.bd4a606ad3.js": 1
+   },
+   "sem_destino_conhecido": 0
+  },
+  {
+   "bundle": "914471.ff300c6433",
+   "modulos": 6,
+   "migraram_para": {
+    "async__68761.37adba3f1b.js": 5,
+    "async__428740.be0f71da8d.js": 1
+   },
+   "sem_destino_conhecido": 0
+  }
+ ],
+ "sem_correspondencia": [
+  {
+   "bundle": "home__page.e6f7b93173",
+   "observacao": "nome/hash nao consta no mapa antigo nem no novo (provavel artefato de nome do arquivo local)"
+  }
+ ],
+ "contratos": [
+  {
+   "probe": "front_tool",
+   "classe": "inalterado (re-empacotado em outro chunk; so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "388307"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "459488"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "459488: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "170399"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "170399: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "ai_agent",
+   "classe": "inalterado (re-empacotado em outro chunk; so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "388307"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "459488"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "459488: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "636598",
+      "681659"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "636598: byte-identico",
+      "681659: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "170399"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "170399: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "video_gen",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__143136.4167321aba.js",
+     "modulos": [
+      "566497",
+      "564704"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "566497: byte-identico",
+      "564704: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "361865"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "55921",
+      "59462",
+      "692490",
+      "932658"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "55921: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "59462: identico apos normalizar nomes/ids (agora em async__394338.77fe7aad4e.js)",
+      "692490: identico apos normalizar nomes/ids (agora em async__394338.77fe7aad4e.js)",
+      "932658: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "616025",
+      "485320",
+      "447569",
+      "867523"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "616025: identico apos normalizar nomes/ids (agora em async__745290.fef2c40418.js)",
+      "485320: NAO ENCONTRADO em nenhum chunk novo",
+      "447569: byte-identico (agora em async__745290.fef2c40418.js)",
+      "867523: byte-identico (agora em async__745290.fef2c40418.js)"
+     ]
+    },
+    {
+     "arquivo": "async__484886.deb1795c80.js",
+     "modulos": [
+      "664629"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "664629: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "image_gen",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__143136.4167321aba.js",
+     "modulos": [
+      "670307",
+      "290503"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "670307: byte-identico",
+      "290503: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "361865"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "55921",
+      "614829",
+      "194389"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "55921: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "614829: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "194389: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__312094.03b09b1fd9.js",
+     "modulos": [
+      "207587"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__484886.deb1795c80.js",
+     "modulos": [
+      "664629"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "664629: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "audio_gen",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "361865"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "194389"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "194389: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__484886.deb1795c80.js",
+     "modulos": [
+      "664629"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "664629: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__562045.88268997a2.js",
+     "modulos": [
+      "361865"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__616044.82a3c713c4.js",
+     "modulos": [
+      "43958",
+      "279706"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "43958: ALTERADO",
+      "279706: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "pre_activate_skills",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__143136.4167321aba.js",
+     "modulos": [
+      "586473"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "586473: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__148472.1deaf815b3.js",
+     "modulos": [
+      "715883"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "818319"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__53019.0f91dddfd6.js",
+     "modulos": [
+      "431552"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "431552: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__562045.88268997a2.js",
+     "modulos": [
+      "711538"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "pre_activate_skills_type",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__53019.0f91dddfd6.js",
+     "modulos": [
+      "431552"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "431552: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__787640.3487a3fc06.js",
+     "modulos": [
+      "765864"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "765864: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "45002"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "45002: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__975399.2c638cab52.js",
+     "modulos": [
+      "38256"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "38256: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "biz/preload_skill",
+   "classe": "inalterado (so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__519649.6c00b4a860.js",
+     "modulos": [
+      "108704",
+      "225576"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "225576"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "225576: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__889795.256f74ebdf.js",
+     "modulos": [
+      "822291",
+      "801706"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "822291: identico apos normalizar nomes/ids",
+      "801706: identico apos normalizar nomes/ids"
+     ]
+    },
+    {
+     "arquivo": "async__975399.2c638cab52.js",
+     "modulos": [
+      "38256"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "38256: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "biz/addon_skill",
+   "classe": "inalterado (so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__519649.6c00b4a860.js",
+     "modulos": [
+      "225576"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "225576"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "225576: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__975399.2c638cab52.js",
+     "modulos": [
+      "38256"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "38256: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "biz/x_data_direct_tool_call_req",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__312094.03b09b1fd9.js",
+     "modulos": [
+      "207587"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "615185",
+      "284456"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "615185: byte-identico",
+      "284456: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "634341",
+      "916151",
+      "184135",
+      "196955"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "634341: byte-identico",
+      "916151: byte-identico",
+      "184135: byte-identico",
+      "196955: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "biz/x_tool_name_video_part",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "196955"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "196955: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "pippit_video_part_agent",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "194389"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "194389: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "184135",
+      "196955"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "184135: byte-identico",
+      "196955: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__889795.256f74ebdf.js",
+     "modulos": [
+      "559392"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "559392: identico apos normalizar nomes/ids"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "pippit_image_part_agent",
+   "classe": "inalterado (so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "184135"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "184135: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "pippit_audio_part_agent",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "184135"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "184135: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__975399.2c638cab52.js",
+     "modulos": [
+      "852187"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "852187: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "pippit_nest_agent",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__357752.c35f03632c.js",
+     "modulos": [
+      "405468"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__399551.4bf2c59afb.js",
+     "modulos": [
+      "615941"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "615941: byte-identico"
+     ]
+    },
+    {
+     "arquivo": "async__489548.fc1b8819d1.js",
+     "modulos": [
+      "496903"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "496903: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__519649.6c00b4a860.js",
+     "modulos": [
+      "323051",
+      "190725",
+      "249695",
+      "883309"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__53019.0f91dddfd6.js",
+     "modulos": [
+      "431552"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "431552: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "web_video_direct",
+   "classe": "inalterado (so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__850206.e38ec15e55.js",
+     "modulos": [
+      "184135"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "184135: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "dynamic_questionnaire",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__114754.f424e83213.js",
+     "modulos": [
+      "688793"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "818319"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__298315.bdbcae67d4.js",
+     "modulos": [
+      "731882"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__553635.f7824cfd1d.js",
+     "modulos": [
+      "557152"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "284456"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "284456: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "marketing_agent",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__114928.58060f10a7.js",
+     "modulos": [
+      "282035"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__159201.ae1eeb6a6f.js",
+     "modulos": [
+      "818319"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__24986.9786909180.js",
+     "modulos": [
+      "205829",
+      "368460"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__357752.c35f03632c.js",
+     "modulos": [
+      "218289"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__399551.4bf2c59afb.js",
+     "modulos": [
+      "615941"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "615941: byte-identico"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "integrated_agent_canvas",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__114928.58060f10a7.js",
+     "modulos": [
+      "282035"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__616044.82a3c713c4.js",
+     "modulos": [
+      "279706"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "279706: ALTERADO"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/agent/submit_run",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "459488"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "459488: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    },
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "902516"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "902516: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__889795.256f74ebdf.js",
+     "modulos": [
+      "178548"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "178548: identico apos normalizar nomes/ids"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/videogen/script_segment",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__828557.fc7ea3772e.js",
+     "modulos": [
+      "636979"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/videogen/text_to_speech",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__973395.f4cda13762.js",
+     "modulos": [
+      "869298"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "/commerce/v3/benefits/batch_check_withhold_deduct",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    },
+    {
+     "arquivo": "async__691333.a6f2d6cec4.js",
+     "modulos": [
+      "520904"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "520904: ALTERADO (agora em async__649969.36bed94288.js)"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/omni/create_task_web",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/lv/v1/render_task/create",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "ai_talking_photo/pre_process_image",
+   "classe": "inalterado (re-empacotado em outro chunk; so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "466973"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "466973: byte-identico (agora em async__745290.fef2c40418.js)"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "ai_talking_photo/pre_process_audio",
+   "classe": "inalterado (re-empacotado em outro chunk; so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "466973"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "466973: byte-identico (agora em async__745290.fef2c40418.js)"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/videogen/recommend_digital_human_by_tag",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__973395.f4cda13762.js",
+     "modulos": [
+      "869298"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/videogen/search_platform_material",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__973395.f4cda13762.js",
+     "modulos": [
+      "869298"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "digital_human_filter_config",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__973395.f4cda13762.js",
+     "modulos": [
+      "869298"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "cc_biz_talking_photo",
+   "classe": "inalterado (re-empacotado em outro chunk; so nomes minificados/ids)",
+   "onde": [
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "614829"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "614829: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "/api/biz/v1/editor/create_tts_avatar_task",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__599038.863e145e5b.js",
+     "modulos": [
+      "902516"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "902516: ALTERADO"
+     ]
+    },
+    {
+     "arquivo": "async__889795.256f74ebdf.js",
+     "modulos": [
+      "178548"
+     ],
+     "chunk": "alterado",
+     "modulos_comparados": [
+      "178548: identico apos normalizar nomes/ids"
+     ]
+    }
+   ]
+  },
+  {
+   "probe": "smart_tool_type:20007",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__907969.65b04ec890.js",
+     "modulos": [
+      "91321"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "88320131",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__AvatarAndVoice.8f542b9f5a.js",
+     "modulos": [
+      "819351"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__avatar-based-generator.d1db384db7.js",
+     "modulos": [
+      "629281"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__bundle_avatar-editor-service.76367e03ff.js",
+     "modulos": [
+      "819351"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "1043788868",
+   "classe": "inalterado (chunk com hash identico)",
+   "onde": [
+    {
+     "arquivo": "async__AvatarAndVoice.8f542b9f5a.js",
+     "modulos": [
+      "819351"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__avatar-based-generator.d1db384db7.js",
+     "modulos": [
+      "629281"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__bundle_avatar-editor-service.76367e03ff.js",
+     "modulos": [
+      "819351"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "573081",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__229704.2761c8b51a.js",
+     "modulos": [
+      "737601"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "737601: identico apos normalizar nomes/ids (agora em async__602545.c502898cb7.js)"
+     ]
+    },
+    {
+     "arquivo": "async__280000.f57b818571.js",
+     "modulos": [
+      "729358",
+      "103408"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "46666",
+      "265134",
+      "295071",
+      "182059"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "46666: identico apos normalizar nomes/ids (agora em async__394338.77fe7aad4e.js)",
+      "265134: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "295071: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "182059: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320",
+      "476426"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo",
+      "476426: byte-identico (agora em async__745290.fef2c40418.js)"
+     ]
+    },
+    {
+     "arquivo": "async__553448.788defaee0.js",
+     "modulos": [
+      "235419"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "348188",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__229704.2761c8b51a.js",
+     "modulos": [
+      "737601"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "737601: identico apos normalizar nomes/ids (agora em async__602545.c502898cb7.js)"
+     ]
+    },
+    {
+     "arquivo": "async__297147.ff7dafe8ef.js",
+     "modulos": [
+      "295071",
+      "843312"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "295071: byte-identico (agora em async__394338.77fe7aad4e.js)",
+      "843312: byte-identico (agora em async__394338.77fe7aad4e.js)"
+     ]
+    },
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    },
+    {
+     "arquivo": "async__709170.fa8524ed21.js",
+     "modulos": [
+      "457737"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__895865.97355aba18.js",
+     "modulos": [
+      "488051"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "x-commerce-v2",
+   "classe": "ALTERADO",
+   "onde": [
+    {
+     "arquivo": "async__450621.76fe1df8ae.js",
+     "modulos": [
+      "65989",
+      "485320"
+     ],
+     "chunk": "removido",
+     "modulos_comparados": [
+      "65989: byte-identico (agora em async__745290.fef2c40418.js)",
+      "485320: NAO ENCONTRADO em nenhum chunk novo"
+     ]
+    },
+    {
+     "arquivo": "async__973395.f4cda13762.js",
+     "modulos": [
+      "869298"
+     ],
+     "chunk": "identico"
+    },
+    {
+     "arquivo": "async__828557.fc7ea3772e.js",
+     "modulos": [
+      "155346"
+     ],
+     "chunk": "identico"
+    }
+   ]
+  },
+  {
+   "probe": "MiniMax-H3-trial",
+   "classe": "nao localizado (nunca presente nos chunks analisados)",
+   "onde": []
+  }
+ ]
+}

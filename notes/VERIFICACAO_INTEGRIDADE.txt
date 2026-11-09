@@ -1,0 +1,27 @@
+JSON validos: 151 de 151 | invalidos: []
+PNG validos: 18 de 18
+   ('01_landing_desktop.png', 1440, 3818, 681)
+   ('01_landing_mobile.png', 390, 874, 137)
+   ('02_pricing_desktop.png', 1440, 6372, 1045)
+   ('02_pricing_mobile.png', 390, 9953, 898)
+   ('03_template-studio_desktop.png', 1440, 1633, 420)
+   ('03_template-studio_mobile.png', 390, 2249, 75)
+   ('04_tools_video-agent_desktop.png', 1440, 11621, 2882)
+   ('04_tools_video-agent_mobile.png', 390, 844, 79)
+   ('05_tools_ai-image-generator_desktop.png', 1440, 7682, 2294)
+   ('06_tools_ai-design-generator_desktop.png', 1440, 7587, 2330)
+   ('07_tools_ai-avatar-generator_desktop.png', 1440, 9745, 2451)
+   ('08_tools_ai-talking-photo_desktop.png', 1440, 6998, 1920)
+   ('09_models_ai-models_desktop.png', 1440, 900, 470)
+   ('10_models_seedance-2-5_desktop.png', 1440, 900, 390)
+   ('11_create_short-dramas_desktop.png', 1440, 9881, 2053)
+   ('12_tools_story-studio_desktop.png', 1440, 900, 430)
+   ('13_resource_help-center_desktop.png', 1440, 2252, 503)
+   ('14_partners_affiliate_desktop.png', 1440, 5773, 1775)
+manifesto REA: arquivos conferidos: 11 | hash do export confere: 11 | confere com o baixado em raw/: 11 | difere: [] | sem par em raw/: []
+URLs estaticas na lista: 37 | arquivos em raw/: 37
+README.md -> referencias a arquivos: 17 | ausentes: ['SNAPSHOT_VALIDATION_REPORT.md', 'PIECES_MODULES.csv', 'PIECES_CROSS_REFS.csv', 'MANIFEST_SHA256.csv', 'INDICE_MODULOS_POR_PECA.md']
+PIPPIT_PRODUCT_TECHNICAL_ANALYSIS.md -> referencias a arquivos: 17 | ausentes: ['manifest.json', 'pt-BR.89180.json', 'pt-BR.a61aa.json', '/manifest.json']
+OPPORTUNITY_IMPLEMENTATION_BLUEPRINT.md -> referencias a arquivos: 1 | ausentes: []
+CSV rede (landing/pre): 154 linhas | CSV paginas: 257
+URLs em PAGINAS_PUBLICAS: 61

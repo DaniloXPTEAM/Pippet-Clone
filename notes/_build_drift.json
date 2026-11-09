@@ -1,0 +1,408 @@
+{
+ "runtime_antigo": "runtime.e9428809bf.js",
+ "runtime_novo": "async__runtime.5a88d8be46.js",
+ "chunks_antigos": 5686,
+ "chunks_novos": 5689,
+ "alterados": 42,
+ "removidos": 18,
+ "adicionados": 21,
+ "iguais": 5626,
+ "bundles_locais": 246,
+ "bundles_identicos": 198,
+ "bundles_alterados": [
+  "143136.4167321aba",
+  "162657.2c46ed04a8",
+  "172333.771a8c4201",
+  "175922.c8d3b93894",
+  "236538.8abc684b50",
+  "300996.b7f8a665f7",
+  "398897.120c71def9",
+  "399551.4bf2c59afb",
+  "40279.95b8e22982",
+  "484886.deb1795c80",
+  "489548.fc1b8819d1",
+  "492105.0c7cec9d09",
+  "526853.cd52640fc7",
+  "53019.0f91dddfd6",
+  "565306.4029e093eb",
+  "599038.863e145e5b",
+  "616044.82a3c713c4",
+  "627000.ffd75e22aa",
+  "674439.04b916eeba",
+  "748861.163a67c3f7",
+  "787640.3487a3fc06",
+  "850206.e38ec15e55",
+  "889795.256f74ebdf",
+  "965310.4d5e15c203",
+  "975399.2c638cab52",
+  "AssetManagementMaterialV2.896b2fd0ea",
+  "HomePageV5.3acb88ca96",
+  "lazy-creative-works-component.581de85280",
+  "Novel.1d545af56c",
+  "Settings.b6ba0340ee",
+  "Skill.0d135cd20c"
+ ],
+ "bundles_removidos": 16,
+ "bundles_sem_correspondencia": 1,
+ "alterados_lista": [
+  {
+   "id": "39281",
+   "name": "Settings",
+   "antigo": "b6ba0340ee",
+   "novo": "82b161dbd1"
+  },
+  {
+   "id": "40279",
+   "name": null,
+   "antigo": "95b8e22982",
+   "novo": "a6d6787a21"
+  },
+  {
+   "id": "53019",
+   "name": null,
+   "antigo": "0f91dddfd6",
+   "novo": "1721d12225"
+  },
+  {
+   "id": "82317",
+   "name": "HomePageV5",
+   "antigo": "3acb88ca96",
+   "novo": "2ac9fffde5"
+  },
+  {
+   "id": "87517",
+   "name": "CanvasShare",
+   "antigo": "afcf0e1b91",
+   "novo": "a643396c1b"
+  },
+  {
+   "id": "134576",
+   "name": "asset-library-sdk-picker",
+   "antigo": "b97f3213a0",
+   "novo": "caf169df93"
+  },
+  {
+   "id": "143136",
+   "name": null,
+   "antigo": "4167321aba",
+   "novo": "fb0215e790"
+  },
+  {
+   "id": "162657",
+   "name": null,
+   "antigo": "2c46ed04a8",
+   "novo": "05c0c055ed"
+  },
+  {
+   "id": "172333",
+   "name": null,
+   "antigo": "771a8c4201",
+   "novo": "d04e9f07f2"
+  },
+  {
+   "id": "175922",
+   "name": null,
+   "antigo": "c8d3b93894",
+   "novo": "20aa6212b3"
+  },
+  {
+   "id": "192268",
+   "name": "activity-detail/(slug$)/page",
+   "antigo": "e65fa3979a",
+   "novo": "b1ff2caf1e"
+  },
+  {
+   "id": "213341",
+   "name": "home-page/page",
+   "antigo": "0da22e312d",
+   "novo": "149c12e5ad"
+  },
+  {
+   "id": "236538",
+   "name": null,
+   "antigo": "8abc684b50",
+   "novo": "906b5b5a3b"
+  },
+  {
+   "id": "279148",
+   "name": "AssetManagementMaterialV2",
+   "antigo": "896b2fd0ea",
+   "novo": "cea078addf"
+  },
+  {
+   "id": "300996",
+   "name": null,
+   "antigo": "b7f8a665f7",
+   "novo": "b6f6435eb8"
+  },
+  {
+   "id": "364997",
+   "name": null,
+   "antigo": "5edbbd1fb4",
+   "novo": "338928e099"
+  },
+  {
+   "id": "398897",
+   "name": null,
+   "antigo": "120c71def9",
+   "novo": "0d297c53cb"
+  },
+  {
+   "id": "399551",
+   "name": null,
+   "antigo": "4bf2c59afb",
+   "novo": "bd4a606ad3"
+  },
+  {
+   "id": "460049",
+   "name": "home/page",
+   "antigo": "e6f7b93173",
+   "novo": "5d9cc09adb"
+  },
+  {
+   "id": "484886",
+   "name": null,
+   "antigo": "deb1795c80",
+   "novo": "2a2a198243"
+  },
+  {
+   "id": "489548",
+   "name": null,
+   "antigo": "fc1b8819d1",
+   "novo": "ad1b791b2c"
+  },
+  {
+   "id": "492105",
+   "name": null,
+   "antigo": "0c7cec9d09",
+   "novo": "a4acf0531c"
+  },
+  {
+   "id": "526853",
+   "name": null,
+   "antigo": "cd52640fc7",
+   "novo": "6faa030af1"
+  },
+  {
+   "id": "565306",
+   "name": null,
+   "antigo": "4029e093eb",
+   "novo": "ddc6361090"
+  },
+  {
+   "id": "565447",
+   "name": null,
+   "antigo": "b46f92231f",
+   "novo": "73d43fa5f1"
+  },
+  {
+   "id": "599038",
+   "name": null,
+   "antigo": "863e145e5b",
+   "novo": "0ff5dc661b"
+  },
+  {
+   "id": "603234",
+   "name": "$",
+   "antigo": "e8604fb8c6",
+   "novo": "a4174b421f"
+  },
+  {
+   "id": "616044",
+   "name": null,
+   "antigo": "82a3c713c4",
+   "novo": "97e91c7056"
+  },
+  {
+   "id": "627000",
+   "name": null,
+   "antigo": "ffd75e22aa",
+   "novo": "c6f4450f99"
+  },
+  {
+   "id": "672341",
+   "name": "replay/page",
+   "antigo": "5b1b26cff1",
+   "novo": "0510768dea"
+  },
+  {
+   "id": "674439",
+   "name": null,
+   "antigo": "04b916eeba",
+   "novo": "2d5c1989a6"
+  },
+  {
+   "id": "720683",
+   "name": "Replay",
+   "antigo": "60010ed9fd",
+   "novo": "ad0d3d4575"
+  },
+  {
+   "id": "745643",
+   "name": "lazy-creative-works-component",
+   "antigo": "581de85280",
+   "novo": "cf25bb4373"
+  },
+  {
+   "id": "748861",
+   "name": null,
+   "antigo": "163a67c3f7",
+   "novo": "7f8db5ce8b"
+  },
+  {
+   "id": "787640",
+   "name": null,
+   "antigo": "3487a3fc06",
+   "novo": "3d54633110"
+  },
+  {
+   "id": "793868",
+   "name": "Novel",
+   "antigo": "1d545af56c",
+   "novo": "9f650b0f20"
+  },
+  {
+   "id": "850206",
+   "name": null,
+   "antigo": "e38ec15e55",
+   "novo": "048c255c3f"
+  },
+  {
+   "id": "889795",
+   "name": null,
+   "antigo": "256f74ebdf",
+   "novo": "32938b46b8"
+  },
+  {
+   "id": "942671",
+   "name": "Skill",
+   "antigo": "0d135cd20c",
+   "novo": "2edf69cba3"
+  },
+  {
+   "id": "963708",
+   "name": "ActivityDetail",
+   "antigo": "ef88cf9a68",
+   "novo": "630c23dfd9"
+  },
+  {
+   "id": "965310",
+   "name": null,
+   "antigo": "4d5e15c203",
+   "novo": "7ab2768398"
+  },
+  {
+   "id": "975399",
+   "name": null,
+   "antigo": "2c638cab52",
+   "novo": "206ceff65e"
+  }
+ ],
+ "adicionados_lista": [
+  {
+   "id": "68761",
+   "name": null,
+   "hash": "37adba3f1b"
+  },
+  {
+   "id": "358422",
+   "name": null,
+   "hash": "39f8aee7df"
+  },
+  {
+   "id": "376687",
+   "name": null,
+   "hash": "4822558075"
+  },
+  {
+   "id": "385767",
+   "name": null,
+   "hash": "d84190b315"
+  },
+  {
+   "id": "390596",
+   "name": null,
+   "hash": "50b126e818"
+  },
+  {
+   "id": "394338",
+   "name": null,
+   "hash": "77fe7aad4e"
+  },
+  {
+   "id": "428740",
+   "name": null,
+   "hash": "be0f71da8d"
+  },
+  {
+   "id": "453471",
+   "name": null,
+   "hash": "c3d8c75311"
+  },
+  {
+   "id": "509340",
+   "name": null,
+   "hash": "30b09d58ac"
+  },
+  {
+   "id": "602545",
+   "name": null,
+   "hash": "c502898cb7"
+  },
+  {
+   "id": "627944",
+   "name": null,
+   "hash": "d8cdc17466"
+  },
+  {
+   "id": "630645",
+   "name": null,
+   "hash": "5fd809fe3a"
+  },
+  {
+   "id": "634830",
+   "name": null,
+   "hash": "577f330ce2"
+  },
+  {
+   "id": "649969",
+   "name": null,
+   "hash": "36bed94288"
+  },
+  {
+   "id": "662230",
+   "name": null,
+   "hash": "01cccde76e"
+  },
+  {
+   "id": "681489",
+   "name": null,
+   "hash": "94620770d5"
+  },
+  {
+   "id": "708215",
+   "name": null,
+   "hash": "5ae1e17e4d"
+  },
+  {
+   "id": "738955",
+   "name": null,
+   "hash": "3b300aae34"
+  },
+  {
+   "id": "745290",
+   "name": null,
+   "hash": "fef2c40418"
+  },
+  {
+   "id": "837806",
+   "name": null,
+   "hash": "5397cabcb2"
+  },
+  {
+   "id": "885736",
+   "name": null,
+   "hash": "fc153fa283"
+  }
+ ]
+}

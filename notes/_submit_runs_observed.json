@@ -1,0 +1,168 @@
+[
+ {
+  "file": "auth/autoroute/rea_har_inspect.json",
+  "url": "https://www.pippit.ai/api/biz/v1/agent/submit_run?babi_param=%7B%22edit_type%22%3A%22integrated_agent%22%2C%22tool_id%22%3A%22integrated_agent_canvas%22%2C%22user_message_id%22%3A%22e9323dc0-248c-4f44-93fd-38159d39d5e9%22%2C%22section_id%22%3A%226731c6ff-0b84-436f-901f-fce25f280c43%22%2C%22scene_lv1%22%3A%22ai_agent%22%2C%22scene_lv2%22%3A%22front_tool%22%2C%22tab_name%22%3A%22canvas%22%2C%22enter_from%22%3A%22home_page_integrated_agent_combo_input_box%22%7D",
+  "agent_name": "pippit_video_part_agent",
+  "entrance_from": "web_video_direct",
+  "has_project_id": true,
+  "thread_id_shape": "canvas_thread_<id>_pippit_video_part_agent",
+  "concurrency_control": {
+   "policy": 1,
+   "conflict_key": "1219098883076"
+  },
+  "user_info_keys": [
+   "consumer_uid",
+   "workspace_id",
+   "space_id",
+   "app_id"
+  ],
+  "body_keys": [
+   "project_id",
+   "message",
+   "user_info",
+   "agent_name",
+   "concurrency_control",
+   "entrance_from",
+   "run_extra",
+   "request_id"
+  ],
+  "babi_param": {
+   "edit_type": "integrated_agent",
+   "tool_id": "integrated_agent_canvas",
+   "generate_id": "6731c6ff-0b84-436f-901f-fce25f280c43",
+   "user_message_id": "e9323dc0-248c-4f44-93fd-38159d39d5e9",
+   "section_id": "6731c6ff-0b84-436f-901f-fce25f280c43",
+   "scene_lv1": "ai_agent",
+   "scene_lv2": "front_tool",
+   "tab_name": "canvas",
+   "enter_from": "home_page_integrated_agent_combo_input_box"
+  },
+  "client_extra": {
+   "current_page": "/home",
+   "entrance_from": "home_page_integrated_agent_combo_input_box",
+   "generate_mode": "video_gen",
+   "generate_position": "home",
+   "canvas_type": "integrated_agent",
+   "edit_type": "integrated_agent",
+   "project_id": 1217274923268,
+   "position": "canvas",
+   "tab_name": "canvas",
+   "target": "video",
+   "run_source": "video_part",
+   "placement_name": "canvas"
+  },
+  "run_extra_keys": [
+   "babi_param",
+   "client_extra"
+  ],
+  "message_keys": [
+   "content",
+   "role",
+   "thread_id",
+   "run_id",
+   "created_at",
+   "message_id"
+  ],
+  "content": [
+   {
+    "type": "data",
+    "sub_type": "biz/x_data_direct_tool_call_req",
+    "tool_name": "biz/x_tool_name_video_part",
+    "param_keys": [
+     "prompt",
+     "images",
+     "ratio",
+     "resolution",
+     "videos",
+     "audios",
+     "model",
+     "duration_sec"
+    ],
+    "extra": "{}"
+   }
+  ]
+ },
+ {
+  "file": "auth/autoroute/rea_send3_inspect.json",
+  "url": "https://www.pippit.ai/api/biz/v1/agent/submit_run?babi_param=%7B%22edit_type%22%3A%22integrated_agent%22%2C%22tool_id%22%3A%22integrated_agent_canvas%22%2C%22user_message_id%22%3A%22629626e5-8a5f-48c2-8ac5-dc66da1617bf%22%2C%22section_id%22%3A%22122f8f48-b687-42ad-a2ba-5f35902b5c5c%22%2C%22scene_lv1%22%3A%22ai_agent%22%2C%22scene_lv2%22%3A%22front_tool%22%2C%22tab_name%22%3A%22canvas%22%2C%22enter_from%22%3A%22home_page_integrated_agent_combo_input_box%22%7D",
+  "agent_name": "pippit_video_part_agent",
+  "entrance_from": "web_video_direct",
+  "has_project_id": true,
+  "thread_id_shape": "canvas_thread_<id>_pippit_video_part_agent",
+  "concurrency_control": {
+   "policy": 1,
+   "conflict_key": "1219088384772"
+  },
+  "user_info_keys": [
+   "consumer_uid",
+   "workspace_id",
+   "space_id",
+   "app_id"
+  ],
+  "body_keys": [
+   "project_id",
+   "message",
+   "user_info",
+   "agent_name",
+   "concurrency_control",
+   "entrance_from",
+   "run_extra",
+   "request_id"
+  ],
+  "babi_param": {
+   "edit_type": "integrated_agent",
+   "tool_id": "integrated_agent_canvas",
+   "generate_id": "122f8f48-b687-42ad-a2ba-5f35902b5c5c",
+   "user_message_id": "629626e5-8a5f-48c2-8ac5-dc66da1617bf",
+   "section_id": "122f8f48-b687-42ad-a2ba-5f35902b5c5c",
+   "scene_lv1": "ai_agent",
+   "scene_lv2": "front_tool",
+   "tab_name": "canvas",
+   "enter_from": "home_page_integrated_agent_combo_input_box"
+  },
+  "client_extra": {
+   "current_page": "/home",
+   "entrance_from": "home_page_integrated_agent_combo_input_box",
+   "generate_mode": "video_gen",
+   "generate_position": "home",
+   "canvas_type": "integrated_agent",
+   "edit_type": "integrated_agent",
+   "project_id": 1216695876100,
+   "position": "canvas",
+   "tab_name": "canvas",
+   "target": "video",
+   "run_source": "video_part",
+   "placement_name": "canvas"
+  },
+  "run_extra_keys": [
+   "babi_param",
+   "client_extra"
+  ],
+  "message_keys": [
+   "content",
+   "role",
+   "thread_id",
+   "run_id",
+   "created_at",
+   "message_id"
+  ],
+  "content": [
+   {
+    "type": "data",
+    "sub_type": "biz/x_data_direct_tool_call_req",
+    "tool_name": "biz/x_tool_name_video_part",
+    "param_keys": [
+     "prompt",
+     "images",
+     "ratio",
+     "resolution",
+     "videos",
+     "audios",
+     "model",
+     "duration_sec"
+    ],
+    "extra": "{}"
+   }
+  ]
+ }
+]

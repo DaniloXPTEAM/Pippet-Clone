@@ -1,0 +1,7 @@
+{"task": "t_conta_more", "steps": [
+  {"goto": "home", "wait": 6000},
+  {"tag": "abre_menu_conta", "click": {"role": "button", "name": "Open account menu"}, "opts": {"expect": {"text": "Completed tasks"}}},
+  {"tag": "more", "click": {"role": "menuitem", "name": "More"}, "opts": {"hover": true}},
+  {"snap": "more_aberto", "tag": "shot_more"},
+  {"press": "Escape"}
+]}

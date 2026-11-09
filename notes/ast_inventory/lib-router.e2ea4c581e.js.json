@@ -1,0 +1,39 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\lib-router.e2ea4c581e.js",
+ "bytes": 103279,
+ "parse": "script",
+ "nos": 32398,
+ "strings_total": 993,
+ "segredo_like_ignoradas": 0,
+ "urls": [
+  "http://localhost"
+ ],
+ "dominios": [
+  "localhost"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "abort",
+  "pagehide"
+ ],
+ "globais_window": [
+  "__reactRouterVersion",
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 0,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 1,
+ "lazy": 1,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 23
+}

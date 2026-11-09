@@ -1,0 +1,45 @@
+{
+ "task": "t_story",
+ "steps": [
+  {
+   "goto": "story-studio/list",
+   "wait": 9000
+  },
+  {
+   "tag": "paste",
+   "click": {
+    "role": "button",
+    "name": "Paste script"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2000
+  },
+  {
+   "snap": "paste_script",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "tag": "ai_writer",
+   "click": {
+    "role": "button",
+    "name": "AI scriptwriter"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 2500
+  },
+  {
+   "snap": "ai_scriptwriter",
+   "tag": "shot"
+  },
+  {
+   "press": "Escape"
+  }
+ ]
+}

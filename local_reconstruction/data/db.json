@@ -1,0 +1,134 @@
+{
+ "user": {
+  "id": "1792629795373666164",
+  "name": "user5373077081",
+  "plan": "free",
+  "billing": "monthly",
+  "createdAt": "2026-10-22T00:43:15.373Z"
+ },
+ "settings": {
+  "language": "pt-BR",
+  "theme": "light",
+  "creditConfirm": {
+   "mode": "threshold",
+   "limit": 450
+  },
+  "watermark": false
+ },
+ "ledger": {
+  "lots": [
+   {
+    "label": "Créditos de bônus por criação de conta",
+    "remaining": 200,
+    "expiresAt": "2028-10-21T00:43:15.373Z"
+   },
+   {
+    "label": "Créditos gratuitos",
+    "remaining": 80,
+    "expiresAt": "2026-10-22T02:59:59.000Z"
+   }
+  ],
+  "entries": [
+   {
+    "at": "2026-10-22T00:43:15.373Z",
+    "label": "Créditos de bônus por criação de conta",
+    "delta": 200
+   },
+   {
+    "at": "2026-10-22T00:43:15.372Z",
+    "label": "Créditos gratuitos",
+    "delta": 80
+   }
+  ],
+  "lastDailyClaim": "Wed Oct 21 2026"
+ },
+ "projects": [],
+ "assets": [],
+ "avatars": {
+  "photoFreeUses": 3,
+  "photo": [],
+  "video": [],
+  "voices": []
+ },
+ "social": {
+  "accounts": {},
+  "limit": 3
+ },
+ "events": [
+  {
+   "t": "2026-10-22T00:44:07.948Z",
+   "is_pwa": "0",
+   "pwa_from": "not_pwa",
+   "open_from_pwa": "0",
+   "web_id": "1792629795373666164",
+   "event_name": "user_page_view",
+   "os_name": "unknown",
+   "app_version": "",
+   "is_first_visit_page": "0",
+   "is_session_start_page": "1",
+   "browser": "",
+   "referrer": "",
+   "branch": "master",
+   "custom": "{\"session_start_url\":\"/marketing\",\"channel_from\":\"ut\"}",
+   "seo_info": "{\"channel_level1\":\"Direct\",\"channel_level2\":\"enter_url\",\"channel_level3\":\"\",\"channel_level4\":\"\",\"branch\":\"master\"}"
+  },
+  {
+   "t": "2026-10-22T00:44:59.248Z",
+   "is_pwa": "0",
+   "pwa_from": "not_pwa",
+   "open_from_pwa": "0",
+   "web_id": "1792629795373666164",
+   "event_name": "user_page_view",
+   "os_name": "unknown",
+   "app_version": "",
+   "is_first_visit_page": "0",
+   "is_session_start_page": "1",
+   "browser": "",
+   "referrer": "",
+   "branch": "master",
+   "custom": "{\"session_start_url\":\"/story\",\"channel_from\":\"ut\"}",
+   "seo_info": "{\"channel_level1\":\"Direct\",\"channel_level2\":\"enter_url\",\"channel_level3\":\"\",\"channel_level4\":\"\",\"branch\":\"master\"}"
+  },
+  {
+   "t": "2026-10-22T00:45:34.400Z",
+   "is_pwa": "0",
+   "pwa_from": "not_pwa",
+   "open_from_pwa": "0",
+   "web_id": "1792629795373666164",
+   "event_name": "user_page_view",
+   "os_name": "unknown",
+   "app_version": "",
+   "is_first_visit_page": "0",
+   "is_session_start_page": "1",
+   "browser": "",
+   "referrer": "",
+   "branch": "master",
+   "custom": "{\"session_start_url\":\"/assets\",\"channel_from\":\"ut\"}",
+   "seo_info": "{\"channel_level1\":\"Direct\",\"channel_level2\":\"enter_url\",\"channel_level3\":\"\",\"channel_level4\":\"\",\"branch\":\"master\"}"
+  },
+  {
+   "t": "2026-10-22T00:46:16.902Z",
+   "is_pwa": "0",
+   "pwa_from": "not_pwa",
+   "open_from_pwa": "0",
+   "web_id": "1792629795373666164",
+   "event_name": "user_page_view",
+   "os_name": "unknown",
+   "app_version": "",
+   "is_first_visit_page": "0",
+   "is_session_start_page": "1",
+   "browser": "",
+   "referrer": "",
+   "branch": "master",
+   "custom": "{\"session_start_url\":\"/skills\",\"channel_from\":\"ut\"}",
+   "seo_info": "{\"channel_level1\":\"Direct\",\"channel_level2\":\"enter_url\",\"channel_level3\":\"\",\"channel_level4\":\"\",\"branch\":\"master\"}"
+  }
+ ],
+ "shares": {},
+ "notifications": [],
+ "jobs": [],
+ "skills": {
+  "favorites": [],
+  "custom": []
+ }
+}

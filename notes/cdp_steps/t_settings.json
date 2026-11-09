@@ -1,0 +1,37 @@
+{
+ "task": "t_settings",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 6000
+  },
+  {
+   "tag": "menu_conta",
+   "click": {
+    "role": "button",
+    "name": "Open account menu"
+   },
+   "opts": {
+    "expect": {
+     "text": "Settings"
+    }
+   }
+  },
+  {
+   "tag": "settings",
+   "click": {
+    "role": "menuitem",
+    "name": "Settings",
+    "exact": false
+   },
+   "opts": {}
+  },
+  {
+   "wait": 4000
+  },
+  {
+   "snap": "settings_aberto",
+   "tag": "shot"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "task": "t_modo_imagem",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "modo",
+   "click": {
+    "role": "button",
+    "name": "Creation mode"
+   },
+   "opts": {
+    "expect": {
+     "text": "Image"
+    }
+   }
+  },
+  {
+   "wait": 1000
+  },
+  {
+   "snap": "modos",
+   "tag": "shot_modos"
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "task": "t_custo_video",
+ "steps": [
+  {
+   "goto": "home",
+   "wait": 8000
+  },
+  {
+   "tag": "modo",
+   "click": {
+    "role": "button",
+    "name": "Creation mode"
+   },
+   "opts": {
+    "expect": {
+     "text": "Video"
+    }
+   }
+  },
+  {
+   "tag": "vid",
+   "click": {
+    "role": "menuitemradio",
+    "name": "Video Choose",
+    "exact": false
+   },
+   "opts": {
+    "allowRisky": true
+   }
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "tag": "abre_modelos",
+   "click": {
+    "role": "button",
+    "name": "Models and preferences"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1500
+  },
+  {
+   "snap": "video_modelos",
+   "tag": "shot_v"
+  },
+  {
+   "tag": "mini",
+   "click": {
+    "css": "[role=dialog] button:has-text('Mini (Trial)')"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 1000
+  },
+  {
+   "tag": "r480",
+   "click": {
+    "role": "radio",
+    "name": "480p"
+   },
+   "opts": {}
+  },
+  {
+   "tag": "custom",
+   "click": {
+    "role": "radio",
+    "name": "Custom duration"
+   },
+   "opts": {}
+  },
+  {
+   "wait": 800
+  },
+  {
+   "tag": "dur",
+   "fill": {
+    "role": "textbox",
+    "name": "Video duration in seconds"
+   },
+   "value": "4",
+   "allowFill": true
+  },
+  {
+   "press": "Tab"
+  },
+  {
+   "wait": 1200
+  },
+  {
+   "snap": "video_cfg",
+   "tag": "shot_cfg"
+  },
+  {
+   "press": "Escape"
+  },
+  {
+   "wait": 800
+  },
+  {
+   "snap": "composer_video",
+   "tag": "shot_comp"
+  }
+ ]
+}

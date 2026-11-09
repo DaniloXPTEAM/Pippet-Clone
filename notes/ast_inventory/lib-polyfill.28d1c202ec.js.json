@@ -1,0 +1,49 @@
+{
+ "arquivo": "sf16-ug-neutral.capcutstatic.com\\obj\\seeyou-us\\growth\\pippit\\landing_page\\static\\js\\lib-polyfill.28d1c202ec.js",
+ "bytes": 236828,
+ "parse": "script",
+ "nos": 91975,
+ "strings_total": 2247,
+ "segredo_like_ignoradas": 3,
+ "urls": [
+  "https://a",
+  "https://a#б",
+  "https://a/c%20d",
+  "https://a@b",
+  "https://github.com/zloirock/core-js",
+  "https://github.com/zloirock/core-js/blob/v3.49.0/LICENSE",
+  "https://x",
+  "https://тест"
+ ],
+ "dominios": [
+  "a",
+  "a#б",
+  "a@b",
+  "github.com",
+  "x",
+  "тест"
+ ],
+ "caminhos_api": [],
+ "rotas_path": [],
+ "chamadas_http": [],
+ "fetch": [],
+ "xhr_open": [],
+ "beacon": [],
+ "websocket": [],
+ "storage": [],
+ "eventos": [
+  "message"
+ ],
+ "globais_window": [
+  "rspackChunkpippit_landing_page"
+ ],
+ "postMessage": 3,
+ "cookie_refs": 0,
+ "indexeddb": 0,
+ "serviceworker": 0,
+ "worker": 0,
+ "dynamic_import": 0,
+ "lazy": 0,
+ "chaves_i18n_usadas": 0,
+ "modulos_webpack": 659
+}

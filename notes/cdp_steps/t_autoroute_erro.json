@@ -1,0 +1,4 @@
+{"task":"t_autoroute_erro","netlog":{"file":"C:/w/PiperLine/captures/auth/autoroute/erro_canvas.har","after_ms":28000},"steps":[
+{"goto":"https://www.pippit.ai/nest-agent-project?projectId=1217274923268&canvasId=1219047169540","wait":9000},
+{"snap":"canvas_reaberto","tag":"shot"}
+]}
