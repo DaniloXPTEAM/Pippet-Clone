@@ -122,7 +122,7 @@ async function pageProject(id) {
    <div class="cv-in" id="cvin"><svg class="edges" id="edges"></svg></div><div class="cv-add"><button class="primary" id="addN" aria-label="Adicionar nó">＋ Adicionar nó</button>${p.type === 'story' ? '<button id="tut" title="Abrir o tutorial" aria-label="Abrir o tutorial">📖</button><button id="kbd" title="Atalhos" aria-label="Abrir instruções de atalhos">⌨</button><button id="ptr" title="Ponteiro" aria-label="Ferramenta de ponteiro">➤</button>' : '<button id="lib">Biblioteca de recursos</button><button id="hlp">?</button>'}</div>
    <div class="cv-tools cv-bar">${p.type === 'story' ? '<button id="assetm" title="Abrir a biblioteca de ativos">▤ Gerenciamento de ativos</button>' : ''}<button id="zfit" title="Ajustar o zoom à tela" aria-label="Ajustar o zoom à tela">⟲</button><button id="hideEd" title="Ocultar conexões" aria-label="Ocultar conexões">⌇</button><button id="fit" title="Organizar a tela" aria-label="Organizar a tela">▦</button><button id="hidevar" title="Ocultar variações geradas" aria-label="Ocultar variações geradas">⑂</button><button id="minimap" title="Mostrar minimapa" aria-label="Mostrar minimapa">◎</button><button id="snap" title="Alinhar à grade" aria-label="Alinhar à grade">⌖</button><button id="mtrack" class="on" title="Modo trackpad: deslize com dois dedos para mover a tela" aria-label="Modo trackpad">▭</button><button id="mmouse" title="Modo mouse: role para dar zoom na tela" aria-label="Modo mouse">▯</button><button id="zopt" title="Opções de zoom" aria-label="Opções de zoom">100%</button></div>
    ${p.type === 'story' ? '<div class="cv-hint" id="hint"><button id="hintx" aria-label="Expandir o próximo passo">◉</button><span id="hinttx">Confirme personagens e cenas e depois gere o roteiro do storyboard</span><button id="hintgo" aria-label="Ir para a geração do roteiro do storyboard">→</button></div>' : ''}</div>
-   <div class="chat"><div class="h" title="${esc(chat.title)}"><button id="newChat" class="pill">＋ Novo chat</button><span style="flex:1"></span><button id="shareC">Compartilhar</button></div><div class="msgs" id="msgs"></div><div class="in"><textarea id="cin" placeholder="Digite para criar um vídeo/imagem. Use @ para mencionar a sua mídia ou avatares."></textarea><div class="row"><button class="pill" id="cplus" title="Adicionar mídia">＋</button><button class="pill" id="cat" title="Mencionar">@</button><span class="sp"></span><button class="primary" id="csend">↑</button></div></div></div></div>`;
+   <div class="chat"><div class="h" title="${esc(chat.title)}"><button id="newChat" class="pill">＋ Novo chat</button><button id="chatHistory" class="pill" title="Histórico local de chats">Histórico</button><span style="flex:1"></span><button id="shareC">Compartilhar</button></div><div class="msgs" id="msgs"></div><div class="in"><textarea id="cin" placeholder="Digite para criar um vídeo/imagem. Use @ para mencionar a sua mídia ou avatares."></textarea><div class="row"><button class="pill" id="cplus" title="Adicionar mídia">＋</button><button class="pill" id="cat" title="Mencionar">@</button><span class="sp"></span><button class="primary" id="csend">↑</button></div></div></div></div>`;
   bindCredits(); drawNodes(); drawEdges(); drawChat(chat);
   const cv = $('#cv'); $('#ttl').onchange = async (e) => { await patch('/api/projects/' + id, { title: e.target.value }); await refresh(); renderSide('/project/' + id); };
   document.querySelectorAll('#pal [data-t]').forEach((b) => (b.onclick = () => addNode(b.dataset.t)));
@@ -158,6 +158,11 @@ async function pageProject(id) {
   if ($('#hintgo')) $('#hintgo').onclick = () => toast('Gerar o roteiro do storyboard exige IA de roteiro e vídeo (sem provedor local): nada foi gerado nem debitado.', 6000);
   const share = async () => { const s = (await post(`/api/projects/${id}/share`)).body; try { await navigator.clipboard.writeText(s.link); } catch {} toast(s.message); }; $('#shareB').onclick = share; $('#shareC').onclick = share;
   $('#newChat').onclick = async () => { const c = (await post(`/api/projects/${id}/chats`)).body; CHATID = c.id; pageProject(id); };
+  $('#chatHistory').onclick = () => {
+    const prior = p.chats.filter((c) => c.id !== CHATID);
+    const m = modal(`<h2>Chat history</h2><p class="muted">Histórico disponível apenas neste projeto local.</p>${prior.length ? prior.map((c) => `<button class="mediaitem" data-chat="${esc(c.id)}">${esc(c.title || 'Novo chat')} <span class="muted">${c.messages.length} mensagem(ns)</span></button>`).join('') : '<p>No history yet</p>'}`, 'sm');
+    m.querySelectorAll('[data-chat]').forEach((b) => (b.onclick = () => { CHATID = b.dataset.chat; m.close(); pageProject(id); }));
+  };
   $('#cplus').onclick = () => pickAsset((x) => ($('#cin').value += ` [Mídia: ${x.name}]`)); $('#cat').onclick = () => toast('Menção de mídia (@): use o nome do ativo ou avatar no texto.');
   $('#csend').onclick = () => sendChat({ text: $('#cin').value.trim() }); $('#cin').onkeydown = (e) => { if (e.key === 'Enter' && e.ctrlKey) sendChat({ text: $('#cin').value.trim() }); };
 }
@@ -463,6 +468,29 @@ async function pageEditor(id) {
     };
   };
 }
+async function marketingEntityPicker(kind, choose) {
+  const isProduct = kind === 'product'; const endpoint = isProduct ? '/api/products' : '/api/characters';
+  const title = isProduct ? 'Produto' : 'Personagem'; let tab = 'mine', sort = 'desc', query = '', entries = (await api(endpoint)).body || [], selected = null;
+  const m = modal(`<h2>${title}</h2>${isProduct ? '' : '<div class="tabs"><button class="on" data-tab="mine">Minha</button><button data-tab="recommended">Recomendados</button></div>'}<div class="row"><input id="mkEntitySearch" placeholder="Pesquisar ${isProduct ? 'produtos' : 'personagens'}" style="flex:1"><button id="mkEntitySort">${sort === 'desc' ? 'Descendente' : 'Ascendente'} ⇅</button><button id="mkEntityAdd">＋ Adicionar</button></div><div id="mkEntityList" class="grid g3" style="max-height:55vh;overflow:auto"></div><div class="row"><button id="mkEntityCancel">Cancelar</button><span style="flex:1"></span><button id="mkEntityClose">Fechar</button><button class="primary" id="mkEntitySelect" disabled>Adicionar</button></div>`, 'sm');
+  const draw = () => {
+    const list = tab === 'recommended' ? [] : entries.filter((e) => e.name.toLowerCase().includes(query)).sort((a,b) => (sort === 'desc' ? -1 : 1) * String(a.createdAt).localeCompare(String(b.createdAt)));
+    $('#mkEntityList', m).innerHTML = tab === 'recommended'
+      ? '<p class="muted">Personagens recomendados vêm do serviço do Pippit; catálogo não incluído nesta reconstrução.</p>'
+      : list.map((e) => `<button class="card mk-entity ${selected?.id === e.id ? 'sel' : ''}" data-entity="${esc(e.id)}" style="text-align:left">${e.assets?.[0] ? `<img src="/files/${esc(e.assets[0].stored)}" style="width:100%;height:90px;object-fit:contain">` : ''}<b>${esc(e.name)}</b><small class="muted">${e.assetIds.length} imagem(ns)</small></button>`).join('') || `<p class="muted">${isProduct ? 'Nenhum produto ainda' : 'Nenhum personagem ainda'}</p>`;
+    m.querySelectorAll('[data-entity]').forEach((el) => (el.onclick = () => { selected = entries.find((e) => e.id === el.dataset.entity) || null; $('#mkEntitySelect', m).disabled = !selected; draw(); }));
+    m.querySelectorAll('[data-tab]').forEach((el) => (el.onclick = () => { tab = el.dataset.tab; m.querySelectorAll('[data-tab]').forEach((b) => b.classList.toggle('on', b === el)); draw(); }));
+  };
+  $('#mkEntitySearch', m).oninput = (e) => { query = e.target.value.toLowerCase(); draw(); };
+  $('#mkEntitySort', m).onclick = () => { sort = sort === 'desc' ? 'asc' : 'desc'; $('#mkEntitySort', m).textContent = `${sort === 'desc' ? 'Descendente' : 'Ascendente'} ⇅`; draw(); };
+  $('#mkEntityAdd', m).onclick = () => pickAsset(async (asset) => {
+    const name = await askName(`Adicionar ${isProduct ? 'produto' : 'personagem'}`, asset.name.replace(/\.[^.]+$/, '')); if (!name) return;
+    const result = await post(`/api/assets/${asset.id}/${kind}`, { name }); if (!result.ok) return toast(result.body.error, 4000);
+    entries = (await api(endpoint)).body || []; selected = result.body[kind] || null; draw(); $('#mkEntitySelect', m).disabled = !selected;
+  }, 'image');
+  $('#mkEntitySelect', m).onclick = () => { if (!selected) return; choose(selected); m.close(); };
+  $('#mkEntityCancel', m).onclick = () => m.close(); $('#mkEntityClose', m).onclick = () => m.close(); draw();
+}
+
 function pageMarketing() {
   const REC = [['anuncios-de-drama', 'GPT Image 2'], ['geracao-em-lote', ''], ['url-do-video', ''], ['traducao-de-video', ''], ['video-de-marketing', 'GPT Image 2']];
   $('#main').innerHTML = `${credits()}<div class="page mk-page"><h1 class="mk-title">Nunca fique sem boas ideias</h1><p class="center muted">Explore formatos de anúncio, ganchos e estilos, e dê vida a cada ideia</p><div class="composer mk-composer"><div class="mk-slots"><div class="mk-slot" id="prod"><span class="mk-tag">Produto</span><span>＋</span></div><div class="mk-slot" id="chr"><span class="mk-tag">Personagem</span><span>＋</span></div></div><div class="mk-main"><div id="mkchips" class="row" style="margin:0 0 6px"></div><textarea id="mp" placeholder="Adicione um produto e seus argumentos de venda e deixe o agente criar o plano"></textarea><div class="crow"><button class="pill" id="plus">＋</button><button class="pill" id="at">@</button><span class="sp"></span><button class="pill" id="mkskill">Habilidades ▾</button><button class="pill" id="fmt">Formatos de anúncio ▾</button><button class="pill" id="hook">Gancho ▾</button><button class="pill" id="sty">Estilo visual ▾</button><button class="pill" id="mkmodel">Modelos personalizados | Preferência ▾</button><label class="canvas-sw">Tela <input type="checkbox" id="mkcanvas" checked></label><button class="primary" id="gen" aria-label="Generate">↑</button></div></div></div>
@@ -490,7 +518,9 @@ function pageMarketing() {
   $('#fmt').onclick = picker('fmt', 'Formatos de anúncio', M.adFormats, M.adFormats.categories.filter((c) => c !== 'All'), M.adFormats.items.map((i) => ({ name: i.name, cat: i.category })));
   $('#hook').onclick = picker('hook', 'Gancho', M.hooks, M.hooks.categories, M.hooks.items);
   $('#sty').onclick = picker('sty', 'Estilo visual', M.styles, styleCats.map((c) => c.name), styleCats.flatMap((c) => c.items.map((n) => ({ name: n, cat: c.name })))); chips();
-  $('#prod').onclick = () => pickAsset((a) => ($('#mp').value += ` [Produto: ${a.name}]`), 'image'); $('#chr').onclick = () => modal('<h2>Personagem</h2><div class="tabs"><button class="on">Minha</button><button>Recomendados</button></div><p class="muted">Nenhum personagem ainda</p>', 'sm');
+  window.__mkEntities ||= { product: null, character: null };
+  const drawEntities = () => { for (const [kind, id] of [['product', 'prod'], ['character', 'chr']]) { const entity = window.__mkEntities[kind]; const el = $('#' + id); el.innerHTML = entity ? `<span class="mk-tag">${kind === 'product' ? 'Produto' : 'Personagem'}</span><b style="flex:1">${esc(entity.name)}</b><button data-clear="${kind}" aria-label="Remover">×</button>` : `<span class="mk-tag">${kind === 'product' ? 'Produto' : 'Personagem'}</span><span>＋</span>`; el.querySelector('[data-clear]')?.addEventListener('click', (e) => { e.stopPropagation(); window.__mkEntities[kind] = null; drawEntities(); }); el.onclick = () => marketingEntityPicker(kind, (value) => { window.__mkEntities[kind] = value; drawEntities(); }); } };
+  drawEntities();
   $('#gen').onclick = async () => { const t0 = $('#mp').value.trim(); if (!t0) return toast('Descreva o produto primeiro.'); const sel = [['Formato de anúncio', MK.fmt], ['Gancho', MK.hook], ['Estilo visual', MK.sty]].filter(([, v]) => v).map(([l, v]) => `${l}: ${v}`).join('; '); const t = sel ? `${t0}\n[${sel}]` : t0; const p = (await post('/api/projects', { type: 'canvas', title: t.slice(0, 40) })).body; const c = (await post(`/api/projects/${p.id}/chats`)).body; await post(`/api/projects/${p.id}/chats/${c.id}/messages`, { text: t, modelId: 'seedance-2.5' }); await refresh(); location.hash = '/project/' + p.id; };
 }
 function pageStory() {
