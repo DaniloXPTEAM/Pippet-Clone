@@ -30,6 +30,6 @@ for (const [route, labels, src] of CHECKS) {
   console.log(route, `${labels.length - miss.length}/${labels.length}`, miss.length ? 'AUSENTES: ' + miss.join(' | ') : 'ok');
 }
 // editor: abas do painel direito observadas (aparecem so com clipe selecionado; verificadas no teste ui)
-fs.writeFileSync(path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'parity-report.json'), JSON.stringify({ generatedAt: new Date().toISOString(), total, missing, report }, null, 1));
+fs.writeFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'parity-report.json'), JSON.stringify({ generatedAt: new Date().toISOString(), total, missing, report }, null, 1));
 console.log(`paridade de rotulos: ${total - missing}/${total}`);
 await browser.close(); server.close(); fs.rmSync(tmp, { recursive: true, force: true }); process.exit(0);

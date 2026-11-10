@@ -5,13 +5,14 @@ import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
 if (skipUnavailableBrowser('providers_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-pui-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp; process.env.PIPPIT_JOB_POLL_MS = '0'; process.env.PIPPIT_JOB_TICK_MS = '500';
 const { server } = await import('../app/server.mjs');
 const seen = []; const mock = http.createServer((req, res) => { const ch = []; req.on('data', (d) => ch.push(d)); req.on('end', () => { seen.push(`${req.method} ${req.url}`); res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(req.method === 'POST' ? { id: 'video_x' + seen.length, status: 'queued' } : { status: 'in_progress', progress: 30 })); }); });
 await new Promise((r) => mock.listen(5243, '127.0.0.1', r)); const PORT = 5197; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
-const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
+const SHOTS = path.join(path.dirname(fileURLToPath(import.meta.url)), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
 const post = (p, b) => fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }).then((r) => r.json());
 // tarefas vindas do agente (sem provedor): pedido -> tema -> confirmação
 const proj = await post('/api/projects', { type: 'canvas' }); const chat = await post(`/api/projects/${proj.id}/chats`); const M = `/api/projects/${proj.id}/chats/${chat.id}/messages`;
@@ -28,7 +29,7 @@ await page.waitForFunction(() => /Bloqueada/.test(document.querySelector('.job-t
 await page.goto(base + '/#/settings/llm'); await page.waitForSelector('.prov[data-k="video"]'); const card = page.locator('.prov[data-k="video"]');
 assert.match(await card.innerText(), /não configurado/); await card.locator('[data-f=adapter]').selectOption('openai-videos'); await card.locator('[data-f=baseUrl]').fill('http://127.0.0.1:5243/v1'); await card.locator('[data-f=model]').fill('sora-teste'); await card.locator('[data-f=apiKey]').fill('SEGREDO-UI');
 await card.locator('[data-psave=video]').click(); await page.waitForSelector('.prov[data-k="video"]:has-text("configurado"):not(:has-text("não configurado"))', { timeout: 8000 });
-assert.ok(!(await page.content()).includes('SEGREDO-UI'), 'a chave não volta para a página'); assert.match(await page.locator('.prov[data-k="video"] [data-f=apiKey]').getAttribute('placeholder'), /salva/); assert.equal(seen.length, 0, 'sem autorização, nada é enviado');
+assert.ok(!(await page.content()).includes('SEGREDO-UI'), 'a chave não volta para a página'); assert.match(await page.locator('.prov[data-k="video"] [data-f=apiKey]').getAttribute('placeholder'), /memória|ambiente/); assert.equal(seen.length, 0, 'sem autorização, nada é enviado');
 await page.goto(base + '/#/tasks'); await page.waitForSelector('.job-task'); assert.match(await page.locator('.job-task').first().innerText(), /autorização de gasto/); await shot('61_tarefas_aguardando_autorizacao');
 // 4) autorizar gasto (provedor de mentira local) -> a primeira tarefa é enviada e passa a Gerando; a segunda espera a primeira
 await page.goto(base + '/#/settings/llm'); await page.waitForSelector('.prov[data-k="video"]'); await page.locator('.prov[data-k="video"] [data-f=allowSpend]').check(); await page.locator('[data-psave=video]').click(); await page.waitForTimeout(1500);

@@ -4,9 +4,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
 if (skipUnavailableBrowser('fidelity3_ui')) process.exit(0);
-const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')); const CAT = JSON.parse(fs.readFileSync(path.join(here, '../app/lib/avatar_catalog.json'), 'utf8'));
+const here = path.dirname(fileURLToPath(import.meta.url)); const CAT = JSON.parse(fs.readFileSync(path.join(here, '../app/lib/avatar_catalog.json'), 'utf8'));
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-f3-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const { server } = await import('../app/server.mjs'); const PORT = 5248; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; }; const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }); const patch = (p, b) => j(p, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
@@ -41,7 +42,7 @@ await page.click('.avd-head h2'); const sc = campos.Scene.opcoes.find((o) => o.d
 if (indisp.length) { const [F, O] = indisp[0].split(':'); await page.click('.avd-head h2'); await page.click(`[data-f="${F}"]`); const idx = campos[F].opcoes.findIndex((o) => o.label === O); await page.locator('.avd-menu label').nth(idx).click(); assert.equal(await countTxt(), A.length + extra, 'sem dados: não filtra'); assert.match(await page.locator('#avdmiss').innerText(), /Sem dados do serviço/); await page.click('.avd-reset'); }
 // ---- favoritos (ícone ao passar o mouse; aba Favorites com estado vazio observado)
 await page.click('.avd-head h2'); const t1 = page.locator('#avdgrid [data-av]').nth(2); const nome = await t1.getAttribute('data-av'); await t1.hover(); await t1.locator('[data-fav]').click(); assert.deepEqual((await j('/api/avatar-favorites')).body.favorites, [nome]); await page.click('[data-sub="fav"]'); assert.equal(await page.locator('#avdrawer [data-av]').count(), 1); assert.equal(await page.locator('#avdrawer [data-av]').getAttribute('data-av'), nome);
-await page.locator('#avdrawer [data-av]').hover(); await page.locator('#avdrawer [data-fav]').click(); assert.match(await page.locator('#avdrawer').innerText(), /Nenhum avatar favorito ainda/); assert.deepEqual((await j('/api/avatar-favorites')).body.favorites, []);
+await page.locator('#avdrawer [data-av]').hover(); const [unfav] = await Promise.all([page.waitForResponse((x) => x.url().endsWith('/api/avatar-favorites') && x.request().method() === 'POST'), page.locator('#avdrawer [data-fav]').click()]); assert.deepEqual((await unfav.json()).favorites, []); await page.locator('#avdrawer .avd-empty').waitFor(); assert.match(await page.locator('#avdrawer').innerText(), /Nenhum avatar favorito ainda/);
 assert.equal((await post('/api/avatar-favorites', { name: '' })).status, 400); await page.click('#avclose');
 
 // ---- Canvas: atalhos
@@ -54,7 +55,7 @@ await page.keyboard.press('Tab'); await page.waitForSelector('.menu'); assert.ma
 const SL = (await j('/api/style-library')).body; assert.equal(SL.todos.length, 94); assert.equal(SL.categorias['Live-action'].length + SL.categorias['2D'].length + SL.categorias['3D'].length, 94); assert.equal(SL.categorias['3D'].filter((x) => x === '3D Cartoon').length, 2, 'o original repete "3D Cartoon"'); assert.ok(SL.categorias['3D'].includes('UE5 Realistic'));
 await page.goto(`${base}/#/project/${proj.id}`); await page.waitForSelector('#stylelib'); await page.click('#stylelib'); await page.waitForSelector('#stylepanel .sp-card'); assert.equal(await page.locator('#stylepanel .sp-card').count(), 94 + 2); assert.match(await page.locator('#stylepanel .sp-card.on').innerText(), /Nenhum/);
 await page.locator('#stylepanel [data-c="3D"]').click(); assert.equal(await page.locator('#stylepanel .sp-card[data-s]').count() - 1, 30); await page.locator('#stylepanel [data-c="All"]').click(); await page.click('#spsearch'); await page.fill('#spq', 'cinema'); assert.ok((await page.locator('#stylepanel .sp-card[data-s]').count()) - 1 >= 5); await page.fill('#spq', ''); await page.locator('#stylepanel .sp-card', { hasText: 'Cyberpunk' }).click();
-assert.equal((await j(`/api/projects/${proj.id}`)).body.style, 'Cyberpunk'); assert.match(await page.locator('#stylelib').innerText(), /Cyberpunk/); assert.equal((await patch(`/api/projects/${proj.id}`, { style: 'Estilo inventado' })).status, 400);
+assert.equal((await j(`/api/projects/${proj.id}`)).body.style, 'Cyberpunk'); await page.waitForFunction(() => document.querySelector('#stylelib')?.textContent.includes('Cyberpunk')); assert.match(await page.locator('#stylelib').innerText(), /Cyberpunk/); assert.equal((await patch(`/api/projects/${proj.id}`, { style: 'Estilo inventado' })).status, 400);
 await page.reload(); await page.waitForSelector('#stylelib'); assert.match(await page.locator('#stylelib').innerText(), /Cyberpunk/); await page.click('#stylelib'); await page.locator('#stylepanel [data-s=""]').click(); assert.equal((await j(`/api/projects/${proj.id}`)).body.style, null);
 assert.deepEqual(errors, [], 'sem erros de página'); assert.deepEqual(ext, [], 'nenhuma requisição externa');
 console.log(`OK fidelity3_ui: catálogo real (${A.length} avatares, ${CAT.filtros.reduce((n, f) => n + f.opcoes.filter((o) => o.disponivel).length, 0)} opções com dados), filtros OU/E conferidos com as respostas observadas, favoritos locais, atalhos do Canvas, Biblioteca de estilos`); await browser.close(); server.closeAllConnections?.(); server.close(); setTimeout(() => process.exit(0), 200);

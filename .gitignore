@@ -2,3 +2,10 @@
 node_modules/
 notes/node_modules/
 local_reconstruction/node_modules/
+
+# Local captures, synced evidence, and delivery archives stay outside source control.
+captures/auth/
+captures/*.json
+google_drive/
+*.zip
+*.bundle

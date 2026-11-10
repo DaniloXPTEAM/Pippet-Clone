@@ -57,8 +57,8 @@ const side = await page.locator('.sub').allInnerTexts(); assert.deepEqual(side.m
 const body = await page.locator('#main').innerText(); assert.match(body, /Vincular conta/); assert.match(body, /Publique mais, cresça mais/); assert.match(body, /extensão do PiperLine/); assert.match(body, /Rascunhos locais/); assert.match(body, /Nada é enviado nem agendado/); assert.match(body, /rascunho_local/);
 await page.fill('#pdcap', 'Legenda de teste'); assert.equal((await page.locator('#pdcount').innerText()).trim(), '16/2200');
 await page.click('#pdsave'); await page.waitForTimeout(400); assert.match(await page.locator('#toast').innerText(), /ao menos uma plataforma/);
-await page.check('.pdplat[value="301"]'); await page.click('#pdsave'); await page.waitForSelector('#pdlist [data-d]'); assert.equal(await page.locator('#pdlist [data-d]').count(), 2);
-await page.locator('[data-del]').first().click(); await page.waitForTimeout(500); assert.equal(await page.locator('#pdlist [data-d]').count(), 1);
+await page.check('.pdplat[value="301"]'); await page.click('#pdsave'); await page.waitForFunction(() => document.querySelectorAll('#pdlist [data-d]').length === 2, null, { timeout: 5000 });
+await page.locator('[data-del]').first().click(); await page.waitForFunction(() => document.querySelectorAll('#pdlist [data-d]').length === 1, null, { timeout: 5000 });
 await page.click('#vc'); await page.locator('.menu a', { hasText: 'TikTok' }).click(); await page.waitForTimeout(400); assert.match(await page.locator('#toast').innerText(), /OAuth/);
 assert.deepEqual(errors, [], 'sem erros de página'); assert.deepEqual(outbound, [], 'nenhuma chamada de rede para fora do servidor local');
 console.log('OK publishing: códigos/validações/formatos observados, rotas locais (conectar 501, publicar 409, rascunhos), Publicador no menu Mais (sem Editor, estrutura atual), 0 chamadas externas'); await browser.close(); server.closeAllConnections?.(); server.close(); setTimeout(() => process.exit(0), 200);
