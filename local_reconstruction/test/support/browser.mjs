@@ -22,7 +22,7 @@ const testable = (candidate) => {
 
 export function browserAvailability() {
   if (!chromium) return { ok: false, reason: `Playwright não carregou: ${loadError}` };
-  const explicit = process.env.PIPERLINE_CHROMIUM_EXECUTABLE || process.env.CHROME_PATH || process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+  const explicit = process.env.PIPERLINE_CHROMIUM_EXECUTABLE || process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || process.env.CHROME_PATH;
   if (explicit) return testable(explicit) ? { ok: true, executablePath: explicit } : { ok: false, reason: `Chromium configurado em ${explicit}, mas não executa (faltam dependências/libs ou o binário).` };
   const bundled = chromium.executablePath();
   if (testable(bundled)) return { ok: true, executablePath: bundled };

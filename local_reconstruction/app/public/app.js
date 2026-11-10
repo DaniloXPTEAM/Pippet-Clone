@@ -159,10 +159,10 @@ async function pageProject(id) {
   if ($('#hintgo')) $('#hintgo').onclick = () => toast('Gerar o roteiro do storyboard exige IA de roteiro e vídeo (sem provedor local): nada foi gerado nem debitado.', 6000);
   const share = async () => { const s = (await post(`/api/projects/${id}/share`)).body; try { await navigator.clipboard.writeText(s.link); } catch {} toast(s.message); }; $('#shareB').onclick = share; $('#shareC').onclick = share;
   $('#newChat').onclick = async () => { const c = (await post(`/api/projects/${id}/chats`)).body; CHATID = c.id; pageProject(id); };
-  $('#chatHistory').onclick = () => {
   $('#chatLeft').onclick = (e) => { const left = !$('.ws').classList.contains('chat-left'); $('.ws').classList.toggle('chat-left', left); e.currentTarget.setAttribute('aria-pressed', String(left)); e.currentTarget.title = left ? 'Mostrar no lado direito' : 'Mostrar no lado esquerdo'; };
   $('#chatClose').onclick = () => $('.ws').classList.add('chat-closed');
   $('#chatReopen').onclick = () => $('.ws').classList.remove('chat-closed');
+  $('#chatHistory').onclick = () => {
     const prior = p.chats.filter((c) => c.id !== CHATID);
     const m = modal(`<h2>Chat history</h2><p class="muted">Histórico disponível apenas neste projeto local.</p>${prior.length ? prior.map((c) => `<button class="mediaitem" data-chat="${esc(c.id)}">${esc(c.title || 'Novo chat')} <span class="muted">${c.messages.length} mensagem(ns)</span></button>`).join('') : '<p>No history yet</p>'}`, 'sm');
     m.querySelectorAll('[data-chat]').forEach((b) => (b.onclick = () => { CHATID = b.dataset.chat; m.close(); pageProject(id); }));
@@ -384,8 +384,8 @@ async function pageAvatars() {
   bindCredits(); document.querySelectorAll('[data-avatar-sample]').forEach((el) => { el.title = 'Amostra visual de referência; aplicação não disponível sem o serviço original.'; }); document.querySelectorAll('.avatar-create').forEach((el) => { el.onkeydown = (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); el.click(); } }; }); $('#va').onclick = async () => { const r = await post('/api/avatars/video'); const m = modal(`<h2>${r.body.paywall ? 'Você está usando um recurso Starter' : 'Vídeo em avatar'}</h2><p>${esc(r.body.error)}</p><div class="row"><button class="primary" id="pl">Assinar agora</button></div>`, 'sm'); $('#pl', m).onclick = () => { m.close(); plansModal(); }; };
   $('#pa').onclick = () => photoWizard(); $('#vc').onclick = () => fileInput('audio/*', async (f) => { const r = await api('/api/avatars/voice', { method: 'POST', headers: { 'x-voice-name': encodeURIComponent(f.name) }, body: f }); toast(r.ok ? 'Voz registrada como referência de áudio (sem clonagem por IA).' : 'erro'); pageAvatars(); });
   document.querySelectorAll('[data-apply]').forEach((b) => (b.onclick = () => { HOME.text = (HOME.text || '') + ' @' + a.photo.find((x) => x.id === b.dataset.apply).name; location.hash = '/home'; }));
-}
   document.querySelectorAll('[data-avatar-more]').forEach((b) => (b.onclick = () => modal(`<h2>Menu do avatar próprio</h2><p>O menu “…” de avatares do usuário não foi capturado. As ações disponíveis no Pippit são <b>UNOBSERVED</b>; nenhuma ação de renomear/excluir foi presumida.</p><p class="muted">Este controle só informa a lacuna e não altera o avatar.</p>`, 'sm')));
+}
 function photoWizard() {
   let file = null, step = 1, consent = false; const m = modal('<div id="w"></div>'); $('.modal', m).classList.add('avatar-wizard'); const draw = async () => {
     const w = $('#w', m); w.innerHTML = `<h2>Carregue uma foto</h2><div class="steps">${['Carregar', 'Verificar', 'Enviar'].map((s, i) => `<span class="${step === i + 1 ? 'on' : ''}">${i + 1} ${s}</span>`).join('')}</div>`;
