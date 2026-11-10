@@ -524,13 +524,13 @@ function pageMarketing() {
       const items = all.filter((i) => (cat === 'All' || i.cat === cat) && i.name.toLowerCase().includes(q));
       $('#mgrid', m).innerHTML = items.map((i) => `<div class="card mk-card" data-n="${esc(i.name)}"><b>${esc(i.name)}</b><div class="muted">${i.cat ? esc(i.cat) : ''}</div><div class="row"><button data-ex="${esc(i.name)}">Expand</button><button class="primary" data-sel="${esc(i.name)}">Select</button></div><div class="muted mk-ex" style="display:none">Prévia e descrição do serviço original não reproduzidas.</div></div>`).join('') || `<p class="muted">${cat !== 'All' && !items.length ? 'O conteúdo desta categoria não foi capturado do original.' : 'Nada encontrado.'}</p>`;
       m.querySelectorAll('#mcats [data-c]').forEach((b) => (b.onclick = () => { cat = b.dataset.c; draw(); }));
-      m.querySelectorAll('[data-ex]').forEach((b) => (b.onclick = () => { const e = b.closest('.mk-card').querySelector('.mk-ex'); e.style.display = e.style.display === 'none' ? '' : 'none'; }));
+      m.querySelectorAll('[data-ex]').forEach((b) => (b.onclick = () => { const e = b.closest('.mk-card').querySelector('.mk-ex'); const expanded = e.style.display === 'none'; e.style.display = expanded ? '' : 'none'; b.textContent = expanded ? 'Collapse' : 'Expand'; }));
       m.querySelectorAll('[data-sel]').forEach((b) => (b.onclick = () => { MK[key] = b.dataset.sel; chips(); m.close(); }));
     };
     $('#mq', m).oninput = (e) => { q = e.target.value.toLowerCase(); draw(); }; draw();
   };
   const M = CAT.marketing; const styleCats = M.styles.categories;
-  $('#fmt').onclick = picker('fmt', 'Formatos de anúncio', M.adFormats, M.adFormats.categories.filter((c) => c !== 'All'), M.adFormats.items.map((i) => ({ name: i.name, cat: i.category })));
+  $('#fmt').onclick = picker('fmt', 'Formatos de anúncio', M.adFormats, ['Trending Ads', 'UGC Ads', 'Product Demos', 'Visual Effects'], M.adFormats.items.map((i) => ({ name: i.name, cat: i.category })));
   $('#hook').onclick = picker('hook', 'Gancho', M.hooks, M.hooks.categories, M.hooks.items);
   $('#sty').onclick = picker('sty', 'Estilo visual', M.styles, styleCats.map((c) => c.name), styleCats.flatMap((c) => c.items.map((n) => ({ name: n, cat: c.name })))); chips();
   window.__mkEntities ||= { product: null, character: null };

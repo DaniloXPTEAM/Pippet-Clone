@@ -1,0 +1,2 @@
+import assert from 'node:assert/strict'; import { MARKETING } from '../app/lib/catalog.mjs';
+assert.equal(MARKETING.styles.categories.length,5);assert.equal(MARKETING.styles.categories.reduce((n,c)=>n+c.items.length,0),20);assert.equal(MARKETING.adFormats.search,'Search ad format');assert.equal(MARKETING.styles.search,'Search style');console.log('marketing_catalog_contract.test.mjs: ok (5 categories / 20 visual styles and evidenced search labels)');
