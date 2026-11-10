@@ -4,7 +4,7 @@ import { FREE_PROVIDER_CATALOG, ROUTER_TASKS, newFreeRouterConfig, planFreeRoute
 const cfg = newFreeRouterConfig();
 cfg.providers = [
   { id: 'ollama', enabled: true, baseUrl: 'http://127.0.0.1:11434/v1', priority: 1, models: [{ id: 'qwen-local', capabilities: ['text', 'vision'] }] },
-  { id: 'nvidia-nim', enabled: true, freeTierConfirmed: true, quotaAvailable: true, secretEnv: 'NVIDIA_API_KEY', baseUrl: 'https://nim.invalid/v1', priority: 2, models: [{ id: 'free-chat', capabilities: ['text', 'vision'] }, { id: 'paid-only', capabilities: ['video-output'] }] },
+  { id: 'nvidia-nim', enabled: true, freeTierConfirmed: true, quotaAvailable: true, dailyLimit: 10, secretEnv: 'NVIDIA_API_KEY', baseUrl: 'https://nim.invalid/v1', priority: 2, models: [{ id: 'free-chat', capabilities: ['text', 'vision'], freeTierConfirmed: true }, { id: 'explicit-free-video', capabilities: ['video-output'], freeTierConfirmed: true }] },
   { id: 'gemini', enabled: true, freeTierConfirmed: false, quotaAvailable: true, secretEnv: 'GEMINI_API_KEY', baseUrl: 'https://gemini.invalid/v1beta', models: [{ id: 'gemini-free', capabilities: ['text', 'vision', 'audio-input'] }] },
 ];
 assert.equal(FREE_PROVIDER_CATALOG.length, 3);

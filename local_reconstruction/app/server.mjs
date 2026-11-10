@@ -22,12 +22,40 @@ import * as TPH from './lib/talkingphoto.mjs';
 import { JobManager } from './lib/jobs.mjs';
 import { composeWorkflow } from './lib/compose.mjs';
 import { LLM, DEFAULT_BASE_URL, llmCreateSkill, llmRefinePrompt, llmSmartIdeas } from '../src/llm.mjs';
+import { FREE_PROVIDER_CATALOG, ROUTER_TASKS, newFreeRouterConfig, publicFreeRouterConfig, validateFreeRouterConfig, planFreeRoutes, executeFreeRoutes, createFreeRouterAdapters } from '../src/free_router.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(HERE, 'public');
 const PORT = Number(process.env.PORT || 5180);
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.mp4': 'video/mp4', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.md': 'text/markdown; charset=utf-8' };
 const db = () => S.load();
+const runtimeKeys = new Map();
+const SECRET_ENV = { llm: 'PIPPIT_LLM_API_KEY', imageProvider: 'PIPPIT_IMAGE_API_KEY', video: 'PIPPIT_VIDEO_API_KEY', audio: 'PIPPIT_AUDIO_API_KEY', image: 'PIPPIT_IMAGE_PROVIDER_API_KEY', talkingphoto: 'PIPPIT_TALKINGPHOTO_API_KEY' };
+function scrubPersistedSecrets() {
+  const settings = db().settings; let changed = false;
+  const strip = (obj, name) => { if (obj && typeof obj.apiKey === 'string' && obj.apiKey) { if (!runtimeKeys.has(name)) runtimeKeys.set(name, obj.apiKey); delete obj.apiKey; changed = true; } };
+  strip(settings.llm, 'llm'); strip(settings.imageProvider, 'imageProvider');
+  for (const [kind, cfg] of Object.entries(settings.providers || {})) strip(cfg, kind);
+  if (changed) S.save();
+}
+scrubPersistedSecrets();
+function secretFor(name) { return process.env[SECRET_ENV[name]] || runtimeKeys.get(name) || ''; }
+function providerRuntimeSettings() {
+  const settings = structuredClone(db().settings); const p = { ...(settings.providers || {}) };
+  for (const kind of ['video', 'audio', 'image', 'talkingphoto']) if (p[kind] || runtimeKeys.has(kind) || process.env[SECRET_ENV[kind]]) {
+    p[kind] = { ...(p[kind] || {}), apiKey: secretFor(kind) || undefined };
+    if (p[kind].baseUrl && !isLocalEndpoint(p[kind].baseUrl)) { p[kind].baseUrl = ''; p[kind].allowSpend = false; p[kind].apiKey = undefined; }
+  }
+  settings.providers = p;
+  if (settings.imageProvider || runtimeKeys.has('imageProvider') || process.env[SECRET_ENV.imageProvider]) {
+    settings.imageProvider = { ...(settings.imageProvider || {}), apiKey: secretFor('imageProvider') || undefined };
+    if (settings.imageProvider.baseUrl && !isLocalEndpoint(settings.imageProvider.baseUrl)) { settings.imageProvider.baseUrl = ''; settings.imageProvider.apiKey = undefined; }
+  }
+  return settings;
+}
+function isLocalEndpoint(value) {
+  try { const host = new URL(value).hostname.toLowerCase(); if (['localhost', '::1', '[::1]'].includes(host) || host.endsWith('.localhost') || host.endsWith('.local')) return true; const octets = host.split('.').map(Number); if (octets.length !== 4 || octets.some((x) => !Number.isInteger(x) || x < 0 || x > 255)) return false; const [a, b] = octets; return a === 10 || a === 127 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || (a === 169 && b === 254); } catch { return false; }
+}
 const send = (res, code, body, headers = {}) => { const b = typeof body === 'string' || Buffer.isBuffer(body) ? body : JSON.stringify(body); res.writeHead(code, { 'content-type': typeof body === 'string' ? 'text/plain; charset=utf-8' : Buffer.isBuffer(body) ? 'application/octet-stream' : 'application/json', ...headers }); res.end(b); };
 const readBody = (req) => new Promise((ok, no) => { const c = []; req.on('data', (d) => c.push(d)); req.on('end', () => ok(Buffer.concat(c))); req.on('error', no); });
 const readJson = async (req) => { const b = await readBody(req); try { return b.length ? JSON.parse(b.toString('utf8')) : {}; } catch { return {}; } };
@@ -51,7 +79,7 @@ function newProject(type, title) {
 const touch = (p) => { p.updatedAt = new Date().toISOString(); S.save(); };
 function addNode(p, type, title, extra = {}) {
   const c = new Canvas(p.id); c.nodes = p.canvas.nodes; const n = c.addNode(type); n.title = title || n.title; Object.assign(n, extra);
-  const i = p.canvas.nodes.length - 1; n.x = 80 + (i % 4) * 300; n.y = 80 + Math.floor(i / 4) * 340; n.panel = NODE_PANELS[type] ? { ...NODE_PANELS[type] } : null; n.id = `n${S.newId().slice(-6)}`; touch(p); return n;
+  const i = p.canvas.nodes.length - 1; n.x = 80 + (i % 4) * 300; n.y = 80 + Math.floor(i / 4) * 340; n.panel = NODE_PANELS[type] ? { ...NODE_PANELS[type] } : type === 'Texto' ? { kind: 'text', model: 'free-router' } : null; n.id = `n${S.newId().slice(-6)}`; touch(p); return n;
 }
 const addDoc = (p, title, text) => addNode(p, 'Texto', title, { text, doc: true });
 const link = (p, a, b) => { p.canvas.edges.push({ from: a.id, to: b.id }); touch(p); };
@@ -62,7 +90,7 @@ const skillGuide = (id) => {
   const b = SKILLS.find((x) => x.id === id); const d = skillDef(id); // skills oficiais com definição local: a instrução de planejamento é TEXTO DO PIPPERLINE (não a instrução privada do Pippit)
   return b ? { id, name: b.name, custom: false, official: !!d, instructions: String((d?.planning) || b.desc || '').slice(0, 1200) } : null;
 };
-const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(db().settings), jobs: jobsMgr });
+const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(providerRuntimeSettings()), jobs: jobsMgr });
 function state() {
   const d = db(); const bal = S.balance(); const plan = getPlan(d.user.plan);
   return { user: d.user, plan, balance: bal, balances: S.balances(), settings: publicSettings(d.settings), social: { limit: d.social.limit, accounts: d.social.accounts }, ffmpeg: media.available(), provider: d.settings.provider || 'none', avatarRules: AVATAR_RULES, photoFreeUses: d.avatars.photoFreeUses };
@@ -87,7 +115,7 @@ route('POST', /^\/api\/settings$/, async (q, r) => { const b = await readJson(q)
 const LANGS = [['id', 'Bahasa Indonesia'], ['ms', 'Bahasa Melayu'], ['de', 'Deutsch'], ['en', 'English'], ['es', 'Español'], ['fil', 'Filipino'], ['fr', 'Français'], ['it', 'Italiano'], ['pl', 'Polski'], ['pt-BR', 'Português'], ['vi', 'Tiếng Việt'], ['tr', 'Türkçe'], ['ru', 'Русский'], ['th', 'ไทย'], ['ja', '日本語'], ['zh-CN', '简体中文'], ['zh-TW', '繁體中文'], ['ko', '한국어']];
 route('GET', /^\/api\/tts-voices$/, async (q, r) => send(r, 200, { available: media.ttsAvailable(), voices: media.ttsAvailable() ? media.ttsVoices() : [], note: 'Voz sintética local do Windows (SAPI): não é IA generativa nem o Seed Audio do Pippit; só vozes instaladas (en-US).' }));
 route('GET', /^\/api\/settings-options$/, async (q, r) => send(r, 200, { languages: LANGS.map(([code, label]) => ({ code, label })), themes: ['light', 'dark'] }));
-route('POST', /^\/api\/preferences$/, async (q, r) => { const b = await readJson(q); const s = db().settings; if (b.language !== undefined) { if (!LANGS.some(([c]) => c === b.language)) return fail(r, 400, 'idioma inválido'); s.language = b.language; } if (b.theme !== undefined) { if (!['light', 'dark'].includes(b.theme)) return fail(r, 400, 'tema inválido'); s.theme = b.theme; } S.save(); send(r, 200, { ok: true, language: s.language, theme: s.theme }); });
+route('POST', /^\/api\/preferences$/, async (q, r) => { const b = await readJson(q); const s = db().settings; if (b.language !== undefined) { if (!LANGS.some(([c]) => c === b.language)) return fail(r, 400, 'idioma inválido'); s.language = b.language; } if (b.theme !== undefined) { if (!['light', 'dark'].includes(b.theme)) return fail(r, 400, 'tema inválido'); s.theme = b.theme; } if (b.saveWithoutWatermark !== undefined) { if (typeof b.saveWithoutWatermark !== 'boolean') return fail(r, 400, 'preferência de marca d’água inválida'); s.saveWithoutWatermark = b.saveWithoutWatermark; } S.save(); send(r, 200, { ok: true, language: s.language, theme: s.theme, saveWithoutWatermark: !!s.saveWithoutWatermark }); });
 // skills: favoritos e skills manuais do usuário (formato interno das skills do Pippit é DESCONHECIDO; este formato é local)
 const skillsState = () => (db().skills ||= { favorites: [], custom: [] });
 route('POST', /^\/api\/skills\/favorite$/, async (q, r) => { const b = await readJson(q); const s = skillsState(); const id = String(b.id || ''); if (!id) return fail(r, 400, 'id obrigatório'); s.favorites = s.favorites.filter((x) => x !== id); if (b.on !== false) s.favorites.push(id); S.save(); send(r, 200, s); });
@@ -144,7 +172,7 @@ const lastFrameOf = (assetId) => { try { const a = db().assets.find((x) => x.id 
 const tpInfoOf = (inputs) => ({ image: { sha: inputs.imageSha, size: inputs.imageSize, width: inputs.width, height: inputs.height }, audio: { sha: inputs.audioSha, size: inputs.audioSize }, audioSeconds: inputs.audioSeconds });
 const tpQuote = (job) => TPH.buildQuote(db().settings, job.inputs || {}, tpInfoOf(job.inputs || {}));
 const tpSummary = (qt) => (qt?.ok ? { digest: qt.digest, provider: qt.provider, seconds: qt.seconds, cost: qt.cost, maxCostPerTask: qt.maxCostPerTask, overLimit: qt.overLimit, limits: qt.limits, accepted: qt.accepted, ignored: qt.ignored, warnings: qt.warnings, needsConsent: true, needsUnknownCostAck: qt.needsUnknownCostAck } : { ok: false, reason: qt?.reason });
-const jobsMgr = new JobManager({ db, save: () => S.save(), newId: S.newId, media, readAsset: readAssetBytes, lastFrameOf, saveAsset: saveBuffer, consentProblem: (job, cfg) => TPH.consentProblem(job, tpQuote(job), cfg), onDone: (job) => { afterJob(job).catch(() => {}); }, pollMs: Number(process.env.PIPPIT_JOB_POLL_MS ?? 5000) });
+const jobsMgr = new JobManager({ db: () => { const raw = db(); raw.jobs ||= []; return { ...raw, jobs: raw.jobs, settings: providerRuntimeSettings() }; }, save: () => S.save(), newId: S.newId, media, readAsset: readAssetBytes, lastFrameOf, saveAsset: saveBuffer, consentProblem: (job, cfg) => TPH.consentProblem(job, tpQuote(job), cfg), onDone: (job) => { afterJob(job).catch(() => {}); }, pollMs: Number(process.env.PIPPIT_JOB_POLL_MS ?? 5000) });
 const jobView = (j) => ({ id: j.id, kind: j.kind, title: j.title, prompt: j.prompt, params: j.params, state: j.state, progress: j.progress, error: j.error, assetId: j.assetId, source: j.source, after: j.after || null, attempts: j.attempts, createdAt: j.createdAt, updatedAt: j.updatedAt, usedReference: !!j.usedReference, ...(j.kind === 'talkingphoto' ? { inputs: { imageAssetId: j.inputs?.imageAssetId, audioAssetId: j.inputs?.audioAssetId, hasText: !!j.inputs?.text, gesture: j.inputs?.gesture || '', audioSeconds: j.inputs?.audioSeconds }, quote: tpSummary(tpQuote(j)), authorized: !!j.authorization?.confirm, sent: j.sent || null, ambiguousSend: !!j.ambiguousSend, remoteCancel: j.remoteCancel || null, remoteCancelNote: j.remoteCancelNote || null } : { remoteCancel: j.remoteCancel || null }) });
 const chatMsg = (o) => ({ id: String(Math.random()).slice(2), t: new Date().toISOString(), role: 'agent', ...o });
 async function afterJob(job) {
@@ -168,20 +196,24 @@ async function finishAgent(job) {
 }
 // narração: provedor de áudio configurado (com autorização de gasto) ou voz local SAPI (não-IA)
 async function synth(text, voice) {
-  const cfg = PV.resolveProviders(db().settings).audio; const ad = cfg && PV.adapterFor('audio', cfg.adapter);
+  const cfg = PV.resolveProviders(providerRuntimeSettings()).audio; const ad = cfg && PV.adapterFor('audio', cfg.adapter);
   if (ad && !ad.local && PV.isConfigured(cfg, 'audio') && cfg.allowSpend === true) { const o = await ad.synth(cfg, { text, voice, fetchImpl: fetch }); return { asset: saveBuffer(`narracao.${o.ext}`, o.bytes, 'audio', 'works'), label: `${cfg.adapter} (${cfg.model})` }; }
   if (media.ttsAvailable()) { const out = S.pubFile(`_tts_${S.newId()}.wav`); media.ttsLocal(text, out, { voice: cfg?.voice }); const a = addAsset('narracao.wav', out, 'audio', 'works'); try { fs.unlinkSync(out); } catch {} return { asset: a, label: 'voz local SAPI (não-IA)' }; }
   return null;
 }
-route('GET', /^\/api\/providers$/, async (q, r) => send(r, 200, { providers: PV.publicProviders(db().settings), allowSpend: Object.fromEntries(PV.KINDS.map((k) => [k, PV.resolveProviders(db().settings)[k]?.allowSpend === true])), note: 'Provedores do USUÁRIO (URL/modelo/chave ficam só neste computador). Chamadas podem ser pagas no provedor; nada é enviado sem "Autorizo chamadas pagas". Não são os modelos nem as credenciais do Pippit.' }));
+route('GET', /^\/api\/providers$/, async (q, r) => send(r, 200, { providers: PV.publicProviders(providerRuntimeSettings()), allowSpend: Object.fromEntries(PV.KINDS.map((k) => [k, PV.resolveProviders(providerRuntimeSettings())[k]?.allowSpend === true])), note: 'Adaptadores genéricos legados só aceitam endpoint local/privado e não podem enviar dados para SaaS. Chaves Settings são efêmeras (memória); provedores cloud gratuitos devem usar o Roteador gratuito com cap e free-tier explícito.' }));
 route('POST', /^\/api\/providers\/(video|audio|image|talkingphoto)$/, async (q, r, m) => {
-  const b = await readJson(q); const kind = m[1]; const st = (db().settings.providers ||= {}); const cur = st[kind] || (kind === 'image' ? PV.resolveProviders(db().settings).image : null) || {};
+  const b = await readJson(q); const kind = m[1]; const st = (db().settings.providers ||= {}); const cur = PV.resolveProviders(providerRuntimeSettings())[kind] || {};
   const next = { ...cur, adapter: b.adapter ?? cur.adapter, baseUrl: b.baseUrl ?? cur.baseUrl, model: b.model ?? cur.model, voice: b.voice ?? cur.voice, size: b.size ?? cur.size, inputMap: b.inputMap ?? cur.inputMap, extraInput: b.extraInput ?? cur.extraInput };
-  if (kind === 'talkingphoto') for (const k of ['inputMap', 'paramMap', 'costPerSecond', 'currency', 'maxCostPerTask', 'maxAudioSeconds']) next[k] = k in b ? b[k] : cur[k]; for (const k of ['costPerSecond', 'maxCostPerTask', 'maxAudioSeconds']) if (typeof next[k] === 'string' && next[k].trim() !== '' && Number.isFinite(Number(next[k]))) next[k] = Number(next[k]); // custo/limites são informados PELO USUÁRIO (o PiperLine não consulta preços)
-  if ('apiKey' in b && String(b.apiKey).trim()) next.apiKey = String(b.apiKey).trim().slice(0, 400); if ('allowSpend' in b) next.allowSpend = b.allowSpend === true;
-  const err = PV.validateConfig(kind, next); if (err) return fail(r, 400, err); st[kind] = next; S.save(); await jobsMgr.tick(); send(r, 200, { ok: true });
+  delete next.apiKey;
+  if (kind === 'talkingphoto') for (const k of ['inputMap', 'paramMap', 'costPerSecond', 'currency', 'maxCostPerTask', 'maxAudioSeconds']) next[k] = k in b ? b[k] : cur[k]; for (const k of ['costPerSecond', 'maxCostPerTask', 'maxAudioSeconds']) if (typeof next[k] === 'string' && next[k].trim() !== '' && Number.isFinite(Number(next[k]))) next[k] = Number(next[k]);
+  if ('allowSpend' in b) next.allowSpend = b.allowSpend === true;
+  const err = PV.validateConfig(kind, next); if (err) return fail(r, 400, err);
+  if (next.baseUrl && !isLocalEndpoint(next.baseUrl)) return fail(r, 403, 'Provedores genéricos pagos/remotos estão desativados. Use endpoint local; integrações cloud precisam passar pelo Roteador gratuito.');
+  if ('apiKey' in b) { const key = String(b.apiKey || '').trim().slice(0, 400); if (key) runtimeKeys.set(kind, key); else runtimeKeys.delete(kind); }
+  st[kind] = next; S.save(); await jobsMgr.tick(); send(r, 200, { ok: true });
 });
-route('DELETE', /^\/api\/providers\/(video|audio|image|talkingphoto)$/, async (q, r, m) => { if (db().settings.providers) delete db().settings.providers[m[1]]; if (m[1] === 'image') delete db().settings.imageProvider; S.save(); send(r, 200, { ok: true }); });
+route('DELETE', /^\/api\/providers\/(video|audio|image|talkingphoto)$/, async (q, r, m) => { runtimeKeys.delete(m[1]); if (db().settings.providers) delete db().settings.providers[m[1]]; if (m[1] === 'image') delete db().settings.imageProvider; S.save(); send(r, 200, { ok: true }); });
 route('GET', /^\/api\/jobs$/, async (q, r) => send(r, 200, [...jobsMgr.jobs()].reverse().map(jobView)));
 route('POST', /^\/api\/jobs\/([\w-]+)\/(cancel|retry)$/, async (q, r, m) => {
   const job = jobsMgr.get(m[1]); if (!job) return fail(r, 404, 'tarefa inexistente');
@@ -272,7 +304,33 @@ route('POST', /^\/api\/projects\/(\d+)\/nodes\/([\w]+)\/tool$/, async (q, r, m) 
 route('POST', /^\/api\/projects\/(\d+)\/nodes\/([\w]+)\/generate$/, async (q, r, m) => {
   const p = project(m[1]); const n = p.canvas.nodes.find((x) => x.id === m[2]); if (!n) return fail(r, 404, 'nó inexistente'); const b = await readJson(q);
   const panel = { ...(n.panel || {}), ...b }; const kind = panel.kind; const provider = db().settings.provider || 'none';
-  if (kind === 'video' && PV.isConfigured(PV.resolveProviders(db().settings).video, 'video')) { // provedor de vídeo do usuário: cria TAREFA (assíncrona, persistente)
+  const freeTask = { video: 'video_generation', image: 'image_generation', audio: 'audio_generation', text: 'text' }[kind];
+  const nodeRouterPlan = freeTask ? planFreeRoutes(freeTask, freeRouterConfig(), { quotaUsage: freeRouterUsage() }) : null;
+  if (freeTask && nodeRouterPlan?.ok) {
+    const prompt = String(panel.prompt || n.text || '').trim(); if (!prompt) return fail(r, 400, kind === 'text' ? 'Escreva o texto a gerar' : 'Descreva o que deseja gerar');
+    if (kind === 'video' && prompt.length < 15) return fail(r, 400, 'Your prompt must contain at least 15 characters. Please provide a more detailed description.');
+    const credentials = {}; for (const policy of FREE_PROVIDER_CATALOG) if (policy.secretEnv) credentials[policy.secretEnv] = process.env[policy.secretEnv] || freeRouterSecrets.get(policy.id) || undefined;
+    let result; try {
+      result = await executeFreeRoutes(nodeRouterPlan.routes, { prompt, options: { ...(panel.ratio ? { aspect_ratio: panel.ratio } : {}), ...(panel.seconds ? { duration: Number(panel.seconds) } : {}) } }, {
+        adapters: createFreeRouterAdapters(), credentials,
+        onAttempt: (candidate) => { const entry = freeRouterUsage()[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.count++; S.save(); },
+        onQuota: (candidate) => { const entry = freeRouterUsage()[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.blocked = true; S.save(); },
+      });
+    } catch (error) { const message = String(error.message || error).slice(0, 500); return fail(r, error?.quotaExceeded ? 429 : /chave não configurada/.test(message) ? 503 : 502, message, { blocked: true, kind, creditsCharged: 0 }); }
+    let output, asset = null;
+    if (kind === 'text') { output = String(result.text || '').trim(); if (!output) return fail(r, 502, 'O provedor não retornou texto', { blocked: true }); n.text = output; }
+    else if (kind === 'image' || kind === 'audio') {
+      let data = kind === 'image' ? (result.image || result.images?.[0]?.data) : result.audio;
+      if (!data && kind === 'image' && result.url) { try { data = await (await fetch(result.url)).arrayBuffer(); } catch { return fail(r, 502, 'Não foi possível obter a imagem retornada pelo provedor', { blocked: true }); } }
+      if (!data) return fail(r, 502, `O provedor não retornou ${kind === 'image' ? 'imagem' : 'áudio'}`, { blocked: true, kind });
+      const mime = kind === 'audio' ? (result.mimeType || 'audio/mpeg') : (result.images?.[0]?.mimeType || 'image/png');
+      const ext = kind === 'audio' ? (mime.includes('wav') ? '.wav' : '.mp3') : (mime.includes('jpeg') ? '.jpg' : mime.includes('webp') ? '.webp' : '.png');
+      const out = path.join(S.FILES_DIR, `${p.id}_${n.id}_${Date.now()}${ext}`); fs.writeFileSync(out, Buffer.isBuffer(data) ? data : Buffer.from(data));
+      asset = addAsset(`${n.title}${ext}`, out, kind, 'works'); n.assetId = asset.id; n.hasMedia = true; n.tools?.forEach((t) => (t.enabled = true)); output = { assetId: asset.id, name: asset.name };
+    } else { output = result.operation || result; n.generationResult = output; }
+    touch(p); S.save(); return send(r, 200, { ok: true, task: freeTask, providerId: result.route?.providerId || result.providerId, result: output, ...(asset ? { asset } : {}), node: n, creditsCharged: 0 });
+  }
+  if (kind === 'video' && PV.isConfigured(PV.resolveProviders(providerRuntimeSettings()).video, 'video')) { // provedor de vídeo do usuário: cria TAREFA (assíncrona, persistente)
     const prompt = String(panel.prompt || n.text || '').trim(); if (prompt.length < 15) return fail(r, 400, 'Your prompt must contain at least 15 characters. Please provide a more detailed description.');
     const job = jobsMgr.create({ title: `${p.id}_${n.id}`, prompt, params: { seconds: Number(panel.seconds) || 5, ratio: panel.ratio || '9:16' }, source: { type: 'node', projectId: p.id, nodeId: n.id }, referenceAssetId: n.assetId && /\.(png|jpe?g|webp)$/i.test(db().assets.find((x) => x.id === n.assetId)?.stored || '') ? n.assetId : undefined }); await jobsMgr.tick();
     return send(r, 202, { ok: true, queued: true, job: jobView(job), note: job.state === 'blocked' ? `A tarefa foi criada mas não enviada: ${job.error}` : 'Tarefa enviada ao provedor; acompanhe em Tarefas.' });
@@ -289,7 +347,7 @@ route('POST', /^\/api\/projects\/(\d+)\/nodes\/([\w]+)\/generate$/, async (q, r,
     const a = addAsset(`${n.title}.wav`, out, 'audio', 'works'); n.assetId = a.id; n.hasMedia = true; n.tools.forEach((t) => (t.enabled = true)); touch(p);
     return send(r, 200, { ok: true, provider: 'voz local do Windows (SAPI, não-IA)', asset: a, creditsCharged: 0 });
   }
-  const ipc = PV.resolveProviders(db().settings).image;
+  const ipc = PV.resolveProviders(providerRuntimeSettings()).image;
   if (kind === 'image' && PV.isConfigured(ipc, 'image')) { // provedor de imagem do usuário (adaptador do registro; migra o antigo imageProvider)
     const ip = ipc; const prompt = String(panel.prompt || n.text || '').trim(); if (prompt.length < 3) return fail(r, 400, 'Descreva a imagem');
     let buf; try { buf = await PV.adapterFor('image', ip.adapter).generate(ip, { prompt, ratio: panel.ratio, fetchImpl: fetch }); } catch (e) { return fail(r, 502, `Falha no provedor de imagem: ${String(e.message || e).slice(0, 240)}`); }
@@ -482,11 +540,132 @@ route('POST', /^\/api\/talking-photo\/render$/, async (q, r) => {
     send(r, 200, { ok: true, video, audio, creditsCharged: 0, wire, gestureApplied: false, label: 'Prévia local: foto estática com ' + (up ? 'o áudio enviado' : 'a voz do Windows') + '. NÃO há animação labial nem IA' + (gesture ? '; o gesto/movimento descrito não é aplicado.' : '.') });
   } catch (e) { fail(r, 500, String(e.message || e).slice(0, 300)); }
 });
+// ---- roteador gratuito: metadados podem persistir; segredos só vivem em memória ou no ambiente deste processo.
+const freeRouterSecrets = new Map();
+const routerDay = () => new Date().toISOString().slice(0, 10);
+function freeRouterConfig() { return db().settings.freeRouter || newFreeRouterConfig(); }
+function freeRouterUsage() {
+  const raw = db().settings.freeRouterUsage || {};
+  const today = routerDay();
+  for (const id of Object.keys(raw)) if (raw[id]?.day !== today) delete raw[id];
+  db().settings.freeRouterUsage = raw;
+  return raw;
+}
+function freeRouterStatus() {
+  const config = publicFreeRouterConfig(freeRouterConfig()); const usage = freeRouterUsage();
+  config.providers = config.providers.map((p) => { const secretEnv = FREE_PROVIDER_CATALOG.find((x) => x.id === p.id)?.secretEnv || null; return { ...p, keyRequired: !!secretEnv, hasKey: !!(secretEnv && (process.env[secretEnv] || freeRouterSecrets.get(p.id))), usedToday: usage[p.id]?.count || 0, quotaBlocked: usage[p.id]?.blocked === true }; });
+  return { config, tasks: Object.fromEntries(Object.entries(ROUTER_TASKS).map(([id, task]) => [id, task.label])), note: 'Somente Ollama local e modelos/cotas gratuitas explicitamente confirmados são elegíveis. Limites diários são um bloqueio local; limites reais do provedor podem variar. Chaves são efêmeras (memória) ou do ambiente e nunca gravadas em db.json.' };
+}
+route('GET', new RegExp('^/api/free-router/config$'), async (q, r) => send(r, 200, freeRouterStatus()));
+route('POST', new RegExp('^/api/free-router/config$'), async (q, r) => {
+  const body = await readJson(q); const config = body.config || body;
+  const errors = validateFreeRouterConfig(config); if (errors.length) return fail(r, 400, errors.join('; '));
+  const safe = publicFreeRouterConfig(config);
+  for (const item of config.providers || []) {
+    const policy = FREE_PROVIDER_CATALOG.find((x) => x.id === item.id); const value = body.secrets?.[item.id];
+    if (policy?.secretEnv && value === null) freeRouterSecrets.delete(item.id);
+    else if (policy?.secretEnv && typeof value === 'string' && value.trim()) freeRouterSecrets.set(item.id, value.trim().slice(0, 500));
+  }
+  db().settings.freeRouter = safe; S.save(); send(r, 200, { ok: true, status: freeRouterStatus() });
+});
+route('POST', new RegExp('^/api/free-router/execute$'), async (q, r) => {
+  const body = await readJson(q); const task = String(body.task || ''); const usage = freeRouterUsage();
+  const planned = planFreeRoutes(task, freeRouterConfig(), { quotaUsage: usage });
+  if (!planned.ok) return fail(r, 503, planned.reason, { blocked: true, routesTried: 0 });
+  const credentials = {};
+  for (const policy of FREE_PROVIDER_CATALOG) if (policy.secretEnv) credentials[policy.secretEnv] = process.env[policy.secretEnv] || freeRouterSecrets.get(policy.id) || undefined;
+  try {
+    const result = await executeFreeRoutes(planned.routes, body.payload || {}, {
+      adapters: createFreeRouterAdapters(), credentials,
+      onAttempt: (candidate) => { const current = freeRouterUsage(); const entry = current[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.count++; S.save(); },
+      onQuota: (candidate) => { const current = freeRouterUsage(); const entry = current[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.blocked = true; S.save(); },
+    });
+    const safe = { ...result, route: { ...result.route, taskEndpoints: undefined, secretEnv: undefined } };
+    for (const [key, value] of Object.entries(safe)) if (Buffer.isBuffer(value)) safe[key] = { base64: value.toString('base64') };
+    send(r, 200, { ok: true, ...safe, usage: freeRouterUsage() });
+  } catch (error) { const message = String(error.message || error).slice(0, 1200); const status = error?.quotaExceeded ? 429 : /chave não configurada/.test(message) ? 503 : 502; send(r, status, { ok: false, error: message, blocked: true, usage: freeRouterUsage() }); }
+});
+
+
+// E2: execução gratuita como tarefa local persistente com estados, eventos SSE, cancelamento e resultado ligado a Canvas/Histórico.
+const localRunControllers = new Map();
+const localRunListeners = new Map();
+const localRuns = () => (db().localRuns ||= []);
+const runPublic = (run) => ({ id: run.id, task: run.task, state: run.state, prompt: run.prompt, projectId: run.projectId, chatId: run.chatId, sourceNodeId: run.sourceNodeId, resultNodeId: run.resultNodeId || null, result: run.result || null, error: run.error || null, route: run.route || null, createdAt: run.createdAt, updatedAt: run.updatedAt });
+function publishLocalRun(run, state, fields = {}) {
+  Object.assign(run, fields, { state, updatedAt: new Date().toISOString() });
+  const event = { id: (run.events?.at(-1)?.id || 0) + 1, event: 'state', data: runPublic(run) };
+  run.events ||= []; run.events.push(event); if (run.events.length > 40) run.events.shift(); S.save();
+  for (const listener of localRunListeners.get(run.id) || []) listener(event);
+  return event;
+}
+function getLocalRun(id) { return localRuns().find((x) => x.id === id); }
+async function executeLocalRun(run) {
+  const controller = localRunControllers.get(run.id); if (!controller || run.state !== 'queued') return;
+  publishLocalRun(run, 'running', { phase: 'routing' });
+  const usage = freeRouterUsage(); const planned = planFreeRoutes(run.task, freeRouterConfig(), { quotaUsage: usage });
+  if (!planned.ok) throw Object.assign(new Error(planned.reason), { blocked: true });
+  const credentials = {};
+  for (const policy of FREE_PROVIDER_CATALOG) if (policy.secretEnv) credentials[policy.secretEnv] = process.env[policy.secretEnv] || freeRouterSecrets.get(policy.id) || undefined;
+  const result = await executeFreeRoutes(planned.routes, { prompt: run.prompt }, {
+    adapters: createFreeRouterAdapters(), credentials, signal: controller.signal,
+    onAttempt: (candidate) => { const u = freeRouterUsage(); const entry = u[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.count++; S.save(); },
+    onQuota: (candidate) => { const u = freeRouterUsage(); const entry = u[candidate.providerId] ||= { day: routerDay(), count: 0, blocked: false }; entry.blocked = true; S.save(); },
+  });
+  if (controller.signal.aborted || run.state === 'canceled') return;
+  const text = String(result.text ?? '').trim().slice(0, 12000);
+  if (!text) throw new Error('O modelo não retornou texto; nenhuma resposta foi salva.');
+  const p = project(run.projectId); const chat = p.chats.find((x) => x.id === run.chatId);
+  const now = new Date().toISOString(); chat.messages.push({ id: S.newId(), t: now, role: 'agent', text, steps: [{ label: 'Roteador gratuito', state: 'done', provider: result.route.providerName, reason: result.route.modelId }] });
+  const node = addNode(p, 'Texto', 'Resposta do roteador gratuito', { text, doc: true }); linkId(p, run.sourceNodeId, node.id); touch(p);
+  publishLocalRun(run, 'succeeded', { result: text, resultNodeId: node.id, route: { providerId: result.route.providerId, providerName: result.route.providerName, modelId: result.route.modelId, locality: result.route.locality } });
+}
+function startLocalRun(run) {
+  const controller = new AbortController(); localRunControllers.set(run.id, controller);
+  setImmediate(async () => {
+    try { await executeLocalRun(run); }
+    catch (error) {
+      if (run.state === 'canceled' || controller.signal.aborted) return;
+      const message = String(error?.message || error).slice(0, 1000); const p = project(run.projectId); const chat = p.chats.find((x) => x.id === run.chatId);
+      chat.messages.push({ id: S.newId(), t: new Date().toISOString(), role: 'agent', text: `A tarefa não foi concluída: ${message}`, steps: [{ label: error.blocked ? 'Bloqueada' : 'Falhou', state: 'failed', reason: message }] }); touch(p);
+      publishLocalRun(run, error.blocked ? 'blocked' : 'failed', { error: message });
+    } finally { localRunControllers.delete(run.id); }
+  });
+}
+route('GET', /^\/api\/local-runs$/, async (q, r) => send(r, 200, localRuns().map(runPublic)));
+route('POST', /^\/api\/local-runs$/, async (q, r) => {
+  const body = await readJson(q); const prompt = String(body.prompt || '').trim();
+  if (!prompt) return fail(r, 400, 'Descreva sua ideia primeiro.');
+  const id = S.newId(); const p = newProject('canvas', prompt.slice(0, 50)); const chat = { id: S.newId(), title: prompt.slice(0, 50), messages: [{ id: S.newId(), t: new Date().toISOString(), role: 'user', text: prompt }], state: {} }; p.chats.push(chat);
+  const source = addNode(p, 'Texto', 'Solicitação do composer', { text: prompt, doc: true });
+  const run = { id, task: 'text', state: 'queued', prompt: prompt.slice(0, 4000), projectId: p.id, chatId: chat.id, sourceNodeId: source.id, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), events: [] };
+  localRuns().unshift(run); publishLocalRun(run, 'queued'); startLocalRun(run); send(r, 202, { ok: true, run: runPublic(run) });
+});
+route('GET', /^\/api\/local-runs\/([\w-]+)$/, async (q, r, m) => { const run = getLocalRun(m[1]); if (!run) return fail(r, 404, 'tarefa inexistente'); send(r, 200, runPublic(run)); });
+route('POST', /^\/api\/local-runs\/([\w-]+)\/cancel$/, async (q, r, m) => {
+  const run = getLocalRun(m[1]); if (!run) return fail(r, 404, 'tarefa inexistente');
+  if (!['queued', 'running'].includes(run.state)) return fail(r, 409, `a tarefa está "${run.state}" e não pode ser cancelada`);
+  localRunControllers.get(run.id)?.abort(new Error('tarefa cancelada pelo usuário'));
+  const p = project(run.projectId); const chat = p.chats.find((x) => x.id === run.chatId); chat.messages.push({ id: S.newId(), t: new Date().toISOString(), role: 'agent', text: 'Tarefa cancelada localmente. O roteador não iniciará outra tentativa.' }); touch(p);
+  publishLocalRun(run, 'canceled', { error: 'Cancelada pelo usuário.' }); send(r, 200, { ok: true, run: runPublic(run) });
+});
+route('GET', /^\/api\/local-runs\/([\w-]+)\/events$/, async (q, r, m) => {
+  const run = getLocalRun(m[1]); if (!run) return fail(r, 404, 'tarefa inexistente');
+  r.writeHead(200, { 'content-type': 'text/event-stream; charset=utf-8', 'cache-control': 'no-cache', connection: 'keep-alive' }); r.flushHeaders?.();
+  const write = (event) => { if (!r.destroyed && !r.writableEnded) r.write(`id:${event.id}\nevent:${event.event}\ndata:${JSON.stringify(event.data)}\n\n`); };
+  const last = Number(q.headers['last-event-id'] || 0); for (const event of run.events || []) if (event.id > last) write(event);
+  if (['succeeded', 'failed', 'blocked', 'canceled'].includes(run.state)) return r.end();
+  const listeners = localRunListeners.get(run.id) || new Set(); localRunListeners.set(run.id, listeners); const listener = (event) => { write(event); if (['succeeded', 'failed', 'blocked', 'canceled'].includes(event.data.state)) { listeners.delete(listener); r.end(); } }; listeners.add(listener);
+  const heartbeat = setInterval(() => { if (!r.destroyed && !r.writableEnded) r.write(': keep-alive\n\n'); }, 15000); heartbeat.unref();
+  const cleanup = () => { clearInterval(heartbeat); listeners.delete(listener); if (!listeners.size) localRunListeners.delete(run.id); };
+  r.once('close', cleanup); r.once('error', cleanup);
+});
+
 // ---- LLM (planejador do agente, skills com IA, refinamento de prompt, Criação Inteligente). Padrão: Ollama local autodetectado; configurável (compatível com OpenAI).
-const publicSettings = (st) => ({ ...st, llm: st.llm ? { ...st.llm, apiKey: undefined, hasKey: !!st.llm.apiKey } : undefined, imageProvider: st.imageProvider ? { ...st.imageProvider, apiKey: undefined, hasKey: !!st.imageProvider.apiKey } : undefined, providers: st.providers ? Object.fromEntries(Object.entries(st.providers).map(([k, v]) => [k, { ...v, apiKey: undefined, hasKey: !!v.apiKey }])) : undefined });
+const publicSettings = (st) => ({ ...st, llm: st.llm ? { ...st.llm, apiKey: undefined, hasKey: !!secretFor('llm') } : undefined, imageProvider: st.imageProvider ? { ...st.imageProvider, apiKey: undefined, hasKey: !!secretFor('imageProvider') } : undefined, providers: st.providers ? Object.fromEntries(Object.entries(st.providers).map(([k, v]) => [k, { ...v, apiKey: undefined, hasKey: !!secretFor(k) }])) : undefined });
 let llmCache = { key: '', at: 0, client: null, source: 'none', models: [], error: null };
 async function getLLM(force = false) {
-  const cfg = db().settings.llm || {}; const key = JSON.stringify(cfg); if (cfg.enabled === false) return null;
+  const cfg = { ...(db().settings.llm || {}), apiKey: secretFor('llm') || undefined }; const key = JSON.stringify(cfg); if (cfg.enabled === false) return null;
   if (process.env.PIPPIT_LLM === 'off' && !cfg.model) { llmCache = { key, at: Date.now(), client: null, source: 'auto', models: [], error: 'autodetecção desativada (PIPPIT_LLM=off)' }; return null; } // usado pelos testes para ficarem determinísticos
   if (!force && llmCache.key === key && Date.now() - llmCache.at < 30000) return llmCache.client;
   const baseUrl = cfg.baseUrl || DEFAULT_BASE_URL; let client = null, models = [], error = null, source = cfg.model ? 'manual' : 'auto';
@@ -509,18 +688,20 @@ function llmResultCache() {
 }
 route('GET', /^\/api\/llm\/stats$/, async (q, r) => { const c = await getLLM(); send(r, 200, { available: !!c, label: c?.label || null, native: !!c?.native, keepAlive: c?.keepAlive || null, options: c?.options || {}, cachedEntries: Object.keys(db().llmCache || {}).length, stats: c?.stats || null, note: 'Medições por etapa: carregamento (loadMs), processamento do prompt (promptMs) e geração de tokens (genMs); válidas apenas para o caminho nativo do Ollama.' }); });
 route('POST', /^\/api\/llm\/cache\/clear$/, async (q, r) => { db().llmCache = {}; S.save(); send(r, 200, { ok: true }); });
-route('GET', /^\/api\/llm\/status$/, async (q, r) => { const c = await getLLM(true); const cfg = db().settings.llm || {}; send(r, 200, { enabled: cfg.enabled !== false, source: llmCache.source, label: c?.label || null, reachable: !!c, baseUrl: cfg.baseUrl || DEFAULT_BASE_URL, model: cfg.model || c?.model || null, hasKey: !!cfg.apiKey, whisperModel: db().settings.whisperModel || null, whisperFilter: media.whisperAvailable(), models: llmCache.models, error: llmCache.error, note: 'Planejador do agente, skills com IA, refinamento de prompt e Criação Inteligente usam este LLM; sem ele, o agente usa regras locais. Não é o LLM do Pippit.' }); });
+route('GET', /^\/api\/llm\/status$/, async (q, r) => { const c = await getLLM(true); const cfg = db().settings.llm || {}; send(r, 200, { enabled: cfg.enabled !== false, source: llmCache.source, label: c?.label || null, reachable: !!c, baseUrl: cfg.baseUrl || DEFAULT_BASE_URL, model: cfg.model || c?.model || null, hasKey: !!secretFor('llm'), whisperModel: db().settings.whisperModel || null, whisperFilter: media.whisperAvailable(), models: llmCache.models, error: llmCache.error, note: 'Planejador do agente, skills com IA, refinamento de prompt e Criação Inteligente usam este LLM; sem ele, o agente usa regras locais. Não é o LLM do Pippit.' }); });
 route('POST', /^\/api\/llm\/config$/, async (q, r) => {
   const b = await readJson(q); const cur = db().settings.llm || {}; const next = { ...cur };
-  if ('enabled' in b) next.enabled = !!b.enabled; if ('model' in b) next.model = String(b.model || '').trim().slice(0, 120) || undefined; if ('apiKey' in b) next.apiKey = String(b.apiKey || '').trim().slice(0, 300) || undefined;
-  if ('baseUrl' in b) { const u = String(b.baseUrl || '').trim(); if (u && !/^https?:\/\/[^\s]+$/i.test(u)) return fail(r, 400, 'baseUrl inválida (use http(s)://…/v1)'); next.baseUrl = u || undefined; }
+  if ('enabled' in b) next.enabled = !!b.enabled; if ('model' in b) next.model = String(b.model || '').trim().slice(0, 120) || undefined;
+  if ('baseUrl' in b) { const u = String(b.baseUrl || '').trim(); if (u && !/^https?:\/\/[^\s]+$/i.test(u)) return fail(r, 400, 'baseUrl inválida (use http(s)://…/v1)'); if (u && !isLocalEndpoint(u)) return fail(r, 403, 'LLM genérico remoto desativado; use Ollama local ou Roteador gratuito com confirmação de cota.'); next.baseUrl = u || undefined; }
+  if ('apiKey' in b) { const apiKey = String(b.apiKey || '').trim().slice(0, 300); if (apiKey) runtimeKeys.set('llm', apiKey); else runtimeKeys.delete('llm'); }
+  delete next.apiKey;
   if ('native' in b) next.native = b.native === null ? undefined : !!b.native; if ('keepAlive' in b) { const k = String(b.keepAlive || '').trim(); if (k && !/^(-1|\d+(s|m|h)?)$/.test(k)) return fail(r, 400, 'keepAlive inválido (ex.: 30m, 1h, -1)'); next.keepAlive = k || undefined; }
   if ('options' in b) { const o = b.options; if (o !== null && (typeof o !== 'object' || Array.isArray(o))) return fail(r, 400, 'options deve ser um objeto'); const okKeys = ['num_thread', 'num_gpu', 'num_ctx', 'num_batch', 'top_k', 'top_p', 'repeat_penalty']; const clean = {}; for (const [k, v] of Object.entries(o || {})) { if (!okKeys.includes(k) || typeof v !== 'number' || !Number.isFinite(v)) return fail(r, 400, `opção inválida: ${k} (permitidas: ${okKeys.join(', ')})`); clean[k] = v; } next.options = o ? clean : undefined; }
   if ('whisperModel' in b) { const w = String(b.whisperModel || '').trim(); if (w && !fs.existsSync(w)) return fail(r, 400, 'arquivo do modelo Whisper não encontrado'); db().settings.whisperModel = w || undefined; }
   db().settings.llm = next; S.save(); llmCache.key = ''; send(r, 200, { ok: true });
 });
-route('GET', /^\/api\/image-provider$/, async (q, r) => { const c = db().settings.imageProvider || {}; send(r, 200, { configured: !!(c.baseUrl && c.model), baseUrl: c.baseUrl || '', model: c.model || '', hasKey: !!c.apiKey, note: 'Provedor de imagem do USUÁRIO (API compatível com OpenAI /images/generations); não são os modelos do Pippit. Chave e URL ficam só neste computador.' }); });
-route('POST', /^\/api\/image-provider$/, async (q, r) => { const b = await readJson(q); const cur = db().settings.imageProvider || {}; const next = { ...cur }; if ('baseUrl' in b) { const u = String(b.baseUrl || '').trim(); if (u && !/^https?:\/\/[^\s]+$/i.test(u)) return fail(r, 400, 'baseUrl inválida'); next.baseUrl = u || undefined; } if ('model' in b) next.model = String(b.model || '').trim().slice(0, 120) || undefined; if ('apiKey' in b) next.apiKey = String(b.apiKey || '').trim().slice(0, 300) || undefined; db().settings.imageProvider = next; S.save(); send(r, 200, { ok: true }); });
+route('GET', /^\/api\/image-provider$/, async (q, r) => { const c = providerRuntimeSettings().imageProvider || {}; send(r, 200, { configured: !!(c.baseUrl && c.model), baseUrl: c.baseUrl || '', model: c.model || '', hasKey: !!secretFor('imageProvider'), note: 'Somente endpoint local. Chave efêmera; geração externa só pelo Roteador gratuito com confirmação de free tier e limite de cota.' }); });
+route('POST', /^\/api\/image-provider$/, async (q, r) => { const b = await readJson(q); const cur = db().settings.imageProvider || {}; const next = { ...cur }; if ('baseUrl' in b) { const u = String(b.baseUrl || '').trim(); if (u && !/^https?:\/\/[^\s]+$/i.test(u)) return fail(r, 400, 'baseUrl inválida'); if (u && !isLocalEndpoint(u)) return fail(r, 403, 'Provedores de imagem remotos estão desativados; use o Roteador gratuito.'); next.baseUrl = u || undefined; } if ('model' in b) next.model = String(b.model || '').trim().slice(0, 120) || undefined; if ('apiKey' in b) { const key = String(b.apiKey || '').trim(); if (key) runtimeKeys.set('imageProvider', key.slice(0, 300)); else runtimeKeys.delete('imageProvider'); } delete next.apiKey; db().settings.imageProvider = next; S.save(); send(r, 200, { ok: true }); });
 route('POST', /^\/api\/llm\/test$/, async (q, r) => { const c = await getLLM(true); if (!c) return fail(r, 503, `Nenhum LLM disponível${llmCache.error ? ': ' + llmCache.error : ''}`); const t0 = Date.now(); try { const text = await c.chat([{ role: 'user', content: 'Responda apenas com a palavra: pronto' }], { maxTokens: 20, temperature: 0 }); send(r, 200, { ok: true, label: c.label, text: text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim(), ms: Date.now() - t0 }); } catch (e) { fail(r, 502, String(e.message || e)); } });
 const needLLM = async (r) => { const c = await getLLM(); if (!c) { fail(r, 503, `Nenhum LLM disponível${llmCache.error ? ' (' + llmCache.error + ')' : ''}. Inicie o Ollama com um modelo ou configure um servidor compatível em Configurações > LLM.`); return null; } return c; };
 route('POST', /^\/api\/prompt\/refine$/, async (q, r) => { const b = await readJson(q); const text = String(b.text || '').trim(); if (text.length < 3) return fail(r, 400, 'Digite uma ideia'); const c = await needLLM(r); if (!c) return; try { send(r, 200, { prompt: await llmRefinePrompt(c, text, b.kind === 'image' ? 'imagem' : 'vídeo'), label: c.label }); } catch (e) { fail(r, 502, `Falha ao refinar: ${String(e.message || e).slice(0, 200)}`); } });
