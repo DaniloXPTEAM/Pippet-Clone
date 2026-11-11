@@ -1,0 +1,60 @@
+# PiperLine — Briefing completo para o orquestrador (ChatGPT)
+
+Cole este arquivo inteiro no início de uma conversa nova. Seu papel: **orquestrar** o término do projeto (planejar, priorizar, escrever tarefas claras, revisar relatórios). Você não executa código: quem executa são o **Arena** (coder em sandbox, lê o GitHub e o Google Drive) e o **Claude Code** (no PC do usuário, com acesso aos arquivos locais). O usuário fala português (BR), é direto e não gosta de texto confuso: respostas curtas, em passos simples.
+
+## 1. Objetivo
+O **PiperLine** é a engenharia reversa (**REA**) do site **Pippit** (editor/gerador de vídeo com IA, pippit.ai) para **clonar** o site e deixá-lo **idêntico ao original**, rodando **localmente**. Depois o usuário vai modificar o clone e **juntá-lo a um projeto próprio** muito parecido. Primeiro: pronto e idêntico. Publicar online e conectar redes sociais (OAuth) ficam para o FIM; não trabalhar nisso agora.
+
+## 2. Regras (do usuário)
+1. **Custo zero.** O projeto inteiro é grátis. Só provedores **gratuitos** (NVIDIA NIM, Gemini com cota grátis, Ollama local, outros free tiers). Nada de provedor pago.
+2. **Se faltar informação, PERGUNTAR** ao usuário (chave, provedor, autorização, escopo, prioridade). Nunca presumir nem inventar valor.
+3. **Créditos do Pippit** (conta do usuário, ~100 créditos, saldo exibido em 29/10: 125): só gastar dizendo o custo exato antes e recebendo "confirmo". Sem compras, assinaturas, publicação, exclusão de dados, envio de conteúdo pessoal ou vínculo de contas sem autorização específica.
+4. **Nunca declarar equivalência** com o Pippit sem prova. O REA não aprovou nenhuma verificação formal de UI (limitação do REA: `verify_reconstruction` não aceita comparação de páginas web). "Teste local passou" não é equivalência.
+5. Separar sempre o que é **evidência REA** do que é só Playwright/observação manual. Estados por funcionalidade: não investigada / investigada / especificada / implementada / verificada / bloqueada.
+6. Não procurar nem usar a foto do avatar pessoal "Crys". Usar só imagens de exemplo do próprio Pippit em testes.
+7. Não apagar evidências. Não comparar com "CineForma" até o usuário pedir.
+8. Não colocar cookies, tokens, chaves nem dados de login em nenhum arquivo (o repositório é **público**).
+
+## 3. Onde está tudo
+- **GitHub (público):** https://github.com/DaniloXPTEAM/Pippet-Clone — código do app (`local_reconstruction/`), scripts e notas (`notes/`), documentos de RE (`*.md` na raiz), inventário (`FEATURE_INVENTORY.md`), manifesto SHA-256, registro do REA (`captures/current_670/rea_session_bundle_lote12.json`, 65 MB).
+- **Google Drive:** pasta `PiperLine_REA_Evidencias` (link: https://drive.google.com/drive/folders/1FKoC6t1gcXjI4zSc4vqC_M_dx_bMDZT6). **Mesa de operação** (subpasta `mesa_de_operacao`): o Arena entrega ali, a cada etapa, `STATUS.md`, `relatorios/`, `entregaveis/` (git bundle + patches) e `testes/`. O orquestrador e o Claude Code verificam por lá. **Estado em 09/11/2026:** o Arena trabalha na branch `arena/a14d8a49-pippet-clone` (6 commits sobre a `main` 48ca7bb; a `main` está intacta), com 59 testes aprovados, 2 skips e 0 falhas (61). Ele tem **1 push por sessão, reservado para o fim do projeto**; a `main` é do usuário. Plano do Arena (E1–E7): roteador gratuito real (NVIDIA/Gemini/Ollama), geração fim a fim, Foto falante/Avatar, legendas com Whisper local, fidelidade visual, pendências menores, fechamento (STATUS.md com a palavra PRONTO) com ZIPs: `scripts.zip` (250 bundles JS do Pippit + 76 do build de 28/10), `evidence_cli.zip` (análises do REA, ~9 GB descompactado), `captures.zip`, `screenshots.zip`, `verify_data.zip`, mais `rea_session_bundle_lote10/12.json` e `MANIFEST_SHA256.csv`. Ficou de fora de propósito: `captures/auth` e arquivos `.har` (cookies/tokens).
+- **PC do usuário:** `C:\w\PiperLine` (original completo). Documento mestre de retomada: fim do `CLAUDE.md` (seção "RETOMADA 08/11/2026").
+- Rodar o app: `node local_reconstruction/app/server.mjs` → http://127.0.0.1:5180. Testes: `node local_reconstruction/test/run-all.mjs` (47 testes; última rodada completa 47/47; definir `PIPPIT_LLM=off` para ser determinístico).
+
+## 4. Como o projeto funciona
+- **App local** (Node, sem framework pesado): UI que reproduz o Pippit atual (Home com abas Criativo/Marketing/Histórias, composer, Skills, Canvas, editor, Avatares, Foto falante, Publicador, Configurações), servidor local com as mesmas rotas/caminhos observados do Pippit, créditos simulados (bolsas, planos locais, paywall por modelo), tarefas persistentes.
+- **O clone não depende do servidor do Pippit.** "Depende do servidor" só significa: para copiar um detalhe exato do original (preço, formato de resposta) é preciso vê-lo rodando no Pippit real, o que gasta crédito. É falta de evidência, não dependência do clone.
+- **Provedores:** o app já está pronto para receber provedor (`src/providers.mjs`, `app/lib/jobs.mjs`, Configurações > provedores). Tarefas de mídia nascem **bloqueadas** até o usuário configurar provedor e autorizar gasto (proteção contra cobrança). Testado só com provedor de mentira em loopback. Também existem: `local-ffmpeg` (vídeo sem IA, sem custo), LLM local via Ollama (`qwen3-local`, ~4 tok/s), voz SAPI, corte por silêncio, Whisper do ffmpeg (precisa de modelo ggml).
+- **Contratos reconstruídos** (funções puras + testes): `app/lib/agent_contract.mjs` (submit_run, babi_param, pre_activate_skills, questionário), `avatar_contract.mjs`, `talking_photo_contract.mjs`, provedor de Foto falante (`app/lib/talkingphoto.mjs`, consentimento por tarefa, bloqueio no servidor, reenvio proibido, cancelamento honesto).
+
+## 5. Estado atual (08/11/2026)
+- **Inventário:** 132 funcionalidades: 26 implementadas, 46 verificadas por teste automatizado, 51 "investigadas" (evidência existe, falta implementar/decidir), 9 bloqueadas. Cerca de **70% do escopo reproduzível** está pronto (55% por contagem bruta; descontando linhas que são telemetria/ferramentas de RE/conteúdo editorial, que não se implementam).
+- **Feito (resumo):** auditoria de cobertura (250 bundles do app logado, 645 endpoints catalogados); protocolo de geração direta observado em execução real (Auto Route, 12 créditos, saldo 125→113); contrato do agente recuperado; Avatar video (drawer, catálogo de 331 avatares com filtros reais, Style library de 94 estilos); Foto falante (3 etapas, prévia local sem lip-sync, provedor externo implementado em código); Skills como pacotes SKILL.md/ZIP (13 oficiais, botão Use); Publicação (rascunhos locais, adaptadores "não conectado"); editor (export, ratio, velocidade, áudio, fundo, corte por silêncio); 18 idiomas e modo escuro; LLM real local.
+- **Engenharia reversa do build novo:** o Pippit foi reimplantado em 28/10/2026. De 5.686 chunks, 5.626 idênticos, 42 alterados (todos já baixados/lidos), 246 bundles locais = 198 idênticos + 32 alterados + 16 re-empacotados. Dos 39 marcadores de contrato: nenhum mudou na rede (2 mudaram fora da rede). SDK: 333 endpoints iguais. Detalhe: `PIPPIT_RE_CLOSURE.md`. A RE **não** está encerrada.
+- **REA:** versão 6.8.0. A sessão do REA é em memória e **zera**: no início de cada sessão importar `rea_session_bundle_lote12.json` (ou `lote10`, 2 MB). **Nunca** importar `lote9` (182 MB, estoura o heap). Dois arquivos de 4 MB (`889795`, `616044`) deram timeout na análise semântica; foram comparados só de forma estática.
+
+## 6. O que falta (ordem de prioridade)
+1. **Resposta ao vivo (SSE) e estados de run — PRIMEIRO.** Já existe base em `local_reconstruction/app/server.mjs` (~linha 583: `sse`, `subscribe_thread`, eventos `run`). Falta conferir contra o formato observado do Pippit (`ping`, `AssetJsonUpdate` com patches do canvas, `generation.state.status` failed/succeeded; `subscribe_run` ao vivo é desconhecido), cobrir `cancel_run` e a ligação run↔tarefa, com teste. Enum de RunState (0–9) já implementado.
+2. **Avatar: custo por duração e exportação.** Só há 1 medida (5,88 s = 11 créditos; riscado 23). Medir editando o roteiro no drawer **sem exportar** (pedir autorização, usar poucos créditos). Destino da exportação (`create_tts_avatar_task`) desconhecido.
+3. **Telas/diálogos "investigados" ainda não implementados:** Marketing (Ad formats, Hook por categoria, Visual style com 20 estilos, Product/Character, Expand/Select); Templates (template-studio, 10 templates); Settings internos (Idioma/Aparência/"Salvar sem marca d'água"); menu da conta (More/CLI/Wishlist); detalhes de Skills e menu Create skill (3 fluxos); Chat history e barra do Canvas de projeto existente; aplicação da Biblioteca de estilos; menu "…" do avatar e prévia de áudio; Omni/humano digital (`omni/*`, `digital_human/*`); Feed Inspiration/desafios; central de notificações; preços/FAQ; dropdowns do composer (modelos/preferências); modo Áudio da Home (presets); painel `agent-connect`/`export-task`; portas de idade/PWA.
+4. **Roteador de provedores gratuitos** dentro do site: junta provedores/modelos gratuitos e escolhe o modelo por tarefa (multimodal), isolado do resto. O "Omniroom" do usuário não funciona (combos explodem); aproveitar só a lista de provedores/modelos gratuitos que ele tinha. **Antes de implementar: perguntar ao usuário quais chaves gratuitas ele tem e quais modelos quer.**
+5. **Teste real controlado** com um provedor gratuito (vídeo/imagem/áudio e lip-sync da Foto falante) quando o usuário configurar a chave.
+6. Pendências menores: legendas automáticas (usar Whisper local), 3D "Imagem de IA", "Programar" após vincular conta, "Salvar sem marca d'água" (pode alterar a conta: pedir autorização).
+- **Não implementar (não são funcionalidade do clone):** telemetria (Slardar/MCS/GA/Clarity), ferramentas de RE, convites/recompensas, compra real de plano, login por Google/TikTok.
+- **Desconhecidos declarados (precisam de execução paga ou alteram a conta):** corpo/resposta reais de `create_tts_avatar_task`, `pre_process_*` da Foto falante e crédito por segundo; toolResp do questionário e texto do usuário em Agent mode; regra de cobrança do Avatar; aplicação da Style library; presets do modo Áudio; subtítulo de paywall em português (só o texto em inglês "Upgrade to get credits" está provado).
+
+## 7. Como orquestrar
+- Divida em tarefas pequenas e independentes para o Arena/Claude Code, cada uma com: objetivo, arquivos envolvidos, critério de pronto (teste que deve passar) e o que **não** fazer. Uma tarefa por vez no mesmo conjunto de arquivos.
+- Exija de cada executor um relatório curto: o que mudou, quais testes rodou (saída resumida), o que ficou desconhecido. Rejeite relatório que afirme "idêntico ao Pippit" sem evidência.
+- Primeira tarefa sugerida (item 1): "Leia o fim do CLAUDE.md. Em `server.mjs` (~linha 583) compare o SSE local com o formato observado (ver `PIPPIT_API_CATALOG.md`, HARs só no PC do usuário). Cubra cancel_run e run↔tarefa com teste. Rode `run-all.mjs`. Reporte."
+- Registre tudo que o usuário decidir no `CLAUDE.md` do repositório.
+
+## 8. Armadilhas técnicas (Windows)
+- Windows: caminhos longos; `heredoc` quebra aspas/acentos (escrever arquivos pelo editor, não por shell); **crases dentro de `node -e "..."` executam comandos**; `app.js` tem fim de linha CRLF e um comentário `//` no meio de linha longa engole o resto da linha.
+- Testes que terminam com `server.close(); process.exit(0)` podem travar: usar `closeAllConnections()` + `setTimeout(() => process.exit(0), 200)`.
+- Playwright: nunca clicar por texto genérico em páginas do Pippit logado (um clique em "Canvas" criou um projeto vazio "PROJECT" na conta do usuário em 22/10; não foi apagado). Usar viewport 1440×900 e esperas por polling, não fixas.
+- Chrome do Pippit logado: perfil `C:\w\rea_chrome_profile`, porta de depuração 9222 (só no PC do usuário).
+- O manifesto SHA-256 (`MANIFEST_SHA256.csv`) só se regenera em marco maior (leva 10–15 min).
+
+## 9. Uma pergunta para começar
+Ao assumir, confirme com o usuário: (a) o link do Drive foi preenchido na seção 3? (b) o Arena já conseguiu abrir o repositório? (c) quais provedores gratuitos e chaves ele tem hoje? Depois siga a ordem da seção 6.
