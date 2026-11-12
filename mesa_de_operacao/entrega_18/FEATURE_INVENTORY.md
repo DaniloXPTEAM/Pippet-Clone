@@ -1,5 +1,5 @@
 # Inventário integral de funcionalidades do Pippit (reconstrução local)
-Estados: **não investigada · investigada · especificada · implementada · verificada (teste automatizado contra a evidência observada) · parcial · bloqueada (com motivo) · decidido (decisão do orquestrador na r18 — fecha como DECIDIDO, não como feito; não conta como pronta)**. "Verificada" NÃO significa equivalência formal comprovada pelo REA (`verify_reconstruction` ainda não executado). Nenhuma funcionalidade conhecida foi omitida; o que depende do serviço remoto do Pippit permanece bloqueado, não simulado.
+Estados: **não investigada · investigada · especificada · implementada · verificada (teste automatizado contra a evidência observada) · parcial · bloqueada (com motivo)**. "Verificada" NÃO significa equivalência formal comprovada pelo REA (`verify_reconstruction` ainda não executado). Nenhuma funcionalidade conhecida foi omitida; o que depende do serviço remoto do Pippit permanece bloqueado, não simulado.
 
 ## Método e limites (régua da r16)
 Marcador por linha e o que ele significa. A r16 endureceu a régua depois que os 56 testes de tela rodaram no Windows e revelaram 4 defeitos:
@@ -17,30 +17,12 @@ Resumo — **as duas réguas, lado a lado** (denominadores diferentes; os % **n�
 
 | régua | o que conta | base | prontas (implementadas + verificadas) | % |
 |---|---|---|---|---|
-| **(a) r15 (critério antigo)** | escopo reproduzível da r15 | **122 linhas** | **105** (30 implementadas + 75 verificadas) | **86,1%** |
-| **(b) r15 com escopo reduzido por decisão (r18)** | 122 − 4 linhas decididas "fora do escopo atual" (#3, #14, #27, #39) | **118 linhas** | **105** (as 4 saídas não eram prontas) | **89,0%** |
-| **r16/r17 (catálogo integral)** | catálogo integral; UNOBSERVED ≠ verificada; decidido ≠ pronta | **423 linhas** | **151** (66 implementadas UNOBSERVED + 85 verificadas) | **35,7%** |
+| **r15 (critério antigo)** | escopo reproduzível da r15 | **122 linhas** | **105** (30 implementadas + 75 verificadas) | **86,1%** |
+| **r16/r17 (catálogo integral)** | catálogo integral, UNOBSERVED ≠ verificada | **423 linhas** | **151** (66 implementadas UNOBSERVED + 85 verificadas) | **35,7%** |
 
-- **(a) Régua antiga: 105/122 = 86,1%** — o mesmo número da r15; decisões não promovem linha.
-- **(b) Escopo reduzido por decisão: 105/118 = 89,0%** — só as 4 "fora do escopo atual" saem do denominador; nenhuma era pronta (numerador inalterado, sem inflação).
-- **Catálogo integral: 85 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 0 não verificadas / 271 inventadas / 1 decidida (r18)** (= 423) → 151/423 = 35,7%.
-- A diferença (a)→(b) é **escopo menor por decisão política, não progresso**; a diferença para o catálogo integral vem das 272→271 linhas inventadas (que a régua r15 não contava) e da separação UNOBSERVED/verificada. Cobertura de linhas, **não** paridade com o Pippit.
-
-### Decisões da r18 — estado novo: **decidido** (detalhe em `DECISOES_R18.md`)
-
-| # (régua r15) | Linha | Estado | Rótulo |
-|---|---|---|---|
-| 39 | Compra/assinatura real | decidido | estrutura, fora do escopo atual (produto gratuito; sem gateway) |
-| 19 | Widget de ajuda de terceiros (kefu) | decidido | equivalente local (central de ajuda local) |
-| 27 | Portas de idade, aviso US, instalador PWA, painel dev | decidido | fora do escopo atual (sem evidência) |
-| 14 | Integrações de marketplace/loja | decidido | fora do escopo atual (sem evidência) |
-| 3 | Chat legado (agent-chat) | decidido | fora do escopo atual (sem evidência) |
-| 9 | Vincular conta (OAuth) | decidido | estrutura (até o fim do projeto) |
-| 10 | Publicar / Agendado / Análise | decidido | estrutura (até o fim do projeto) |
-| 17 | Promoções variáveis | decidido | histórico observado, valor atual desconhecido (ref. 20/10 e 21/10) |
-| 12 | Botão de ajuda (?) | decidido | equivalente aceito (central de ajuda local) |
-
-Só as 4 linhas com rótulo "fora do escopo atual" (#3, #14, #27, #39) saem do denominador da conta (b); as outras 5 continuam na base 122, com rótulo.
+- **Régua antiga hoje: 105/122 = 86,1%** — o mesmo número da r15. Enquanto `features_ui` esteve instável (r16) a linha "Central de notificações" valia 104/122 = 85,2%; a correção da r17, provada 4/4 aqui, devolveu a 105/122.
+- **Régua nova: 85 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 0 não verificadas / 272 inventadas / 0 bloqueadas** (= 423) → 151/423 = 35,7%.
+- Por que os % diferem: (a) a régua nova inclui **272 linhas inventadas** (conteúdo apagado/não preservado) que a antiga não contava; (b) a régua nova separa "implementada (conteúdo UNOBSERVED)" de "verificada", e o par clássico soma as duas. Cobertura de linhas, **não** paridade com o Pippit.
 
 Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de escopo) está preservada em `entrega_15/FEATURE_INVENTORY.md` (Drive). O catálogo integral de 423 linhas foi regenerado na r16 a partir da evidência (a r15 e a r16 perderam o `.git`; o gerador do inventário se perdeu junto — a recontagem é feita por patch direto do markdown). Cada linha registra o que existe e o que foi verificado por teste.
 
@@ -506,7 +488,7 @@ Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de 
 
 | — | 23 recortes legados do editor (home_spec) | inventada | reports/recortes/20260213-231315/home_spec.md | preservados |
 | — | Ferramentas de serviço (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
-| — | Chat legado | decidido | reports/recortes/20260213-231315/home_spec.md | r18 #3: fora do escopo atual (sem evidência) — decisão em DECISOES_R18.md |
+| — | Chat legado | inventada | reports/recortes/20260213-231315/home_spec.md | preservado (falta evidência) |
 | — | Blocos /plugins desativados (2 recortes) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `home_layout, plugin_apis` | 2 verificados |
 | — | Métricas do agente do chat (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
 | — | Declaração de independência (preâmbulo) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `declare_backend` | verificada |
@@ -556,15 +538,15 @@ Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de 
 
 ## Recapitulação — 7 canais (contagem calculada)
 
-| Canal | Linhas | Inventada | Implementada (conteúdo UNOBSERVED) | Verificada | Bloqueada | Não verificada | Decidida (r18) | Implementação | Verificação |
-|---|---|---|---|---|---|---|---|---|---|
-| 1. Design/estrutura/Playbook | 44 | 32 | 1 | 11 | 0 | 0 | 0 | 12/44 (27%) | 11/44 (25%) |
-| 2. Header/contas/substituto | 35 | 16 | 3 | 16 | 0 | 0 | 0 | 19/35 (54%) | 16/35 (45%) |
-| 3. Home (4 vistas)/card/hero | 26 | 12 | 7 | 7 | 0 | 0 | 0 | 14/26 (53%) | 7/26 (26%) |
-| 4. Playlists/histórico/aba | 34 | 15 | 4 | 15 | 0 | 0 | 0 | 19/34 (55%) | 15/34 (44%) |
-| 5. Editor (B3) | 142 | 80 | 39 | 23 | 0 | 0 | 0 | 62/142 (43%) | 23/142 (16%) |
-| 6. Estúdio (imagem/vídeo/IA) | 48 | 44 | 1 | 3 | 0 | 0 | 0 | 4/48 (8%) | 3/48 (6%) |
-| 7. Preços/notificações/observacional | 94 | 72 | 11 | 10 | 0 | 0 | 1 | 21/94 (22%) | 10/94 (11%) |
-| **Total** | **423** | **271** | **66** | **85** | **0** | **0** | **1** | **151/423 (36%)** | **85/423 (20%)** |
+| Canal | Linhas | Inventada | Implementada (conteúdo UNOBSERVED) | Verificada | Bloqueada | Não verificada | Implementação | Verificação |
+|---|---|---|---|---|---|---|---|---|
+| 1. Design/estrutura/Playbook | 44 | 32 | 1 | 11 | 0 | 0 | 12/44 (27%) | 11/44 (25%) |
+| 2. Header/contas/substituto | 35 | 16 | 3 | 16 | 0 | 0 | 19/35 (54%) | 16/35 (45%) |
+| 3. Home (4 vistas)/card/hero | 26 | 12 | 7 | 7 | 0 | 0 | 14/26 (53%) | 7/26 (26%) |
+| 4. Playlists/histórico/aba | 34 | 15 | 4 | 15 | 0 | 0 | 19/34 (55%) | 15/34 (44%) |
+| 5. Editor (B3) | 142 | 80 | 39 | 23 | 0 | 0 | 62/142 (43%) | 23/142 (16%) |
+| 6. Estúdio (imagem/vídeo/IA) | 48 | 44 | 1 | 3 | 0 | 0 | 4/48 (8%) | 3/48 (6%) |
+| 7. Preços/notificações/observacional | 94 | 73 | 11 | 9 | 0 | 1 | 20/94 (21%) | 9/94 (9%) |
+| **Total** | **423** | **272** | **66** | **84** | **0** | **1** | **150/423 (35%)** | **84/423 (19%)** |
 
-**Contagem interpretada (par clássico): 151 de 423** = 35,7% (catálogo integral; decidido ≠ pronta). **Régua antiga (r15): (a) 105 de 122 = 86,1% · (b) escopo reduzido por decisão (r18): 105 de 118 = 89,0%** — lado a lado, como no resumo do topo. Placar da r17 no sandbox com navegador: **133 ok / 2 skip / 0 falhas (de 135)** (validado no Windows do usuário com o mesmo placar).
+**Contagem interpretada (par clássico): 151 de 423** = 35,7% (régua do catálogo integral). **Régua antiga (r15, 122 linhas): 105 de 122 = 86,1%** — lado a lado, como no resumo do topo. Placar desta r17 revisada no sandbox **com navegador**: **133 ok / 2 skip / 0 falhas (de 135)**; Windows r16: 133/2/1 (a instável `features_ui` foi corrigida e passou 4/4 aqui).
