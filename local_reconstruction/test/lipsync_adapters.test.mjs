@@ -225,13 +225,21 @@ execFileSync(process.env.PIPPIT_FFMPEG || 'ffmpeg', ['-y', '-hide_banner', '-log
   const localVideo = (await api('/api/assets', undefined, 'GET')).body.find((a) => a.id === localRun.job.assetId);
   assert.ok(fs.statSync(path.join(tmp, 'files', localVideo.stored)).size > 1000, 'o comando local gerou um MP4 real (foto+áudio)');
 
-  // Rodada 11, prova do caso do Windows: um "powershell" de mentira que aplica a MESMA regra do parser
-  // real (linha começando com aspas = expressão → "Token inesperado na expressão") e executa o resto
-  // quando a linha é válida. É simulação, não é o PowerShell: aqui não existe pwsh. O que se prova é que
-  // o comando que o app monta passa por essa regra e RODA, e que a mesma linha SEM o '& ' seria recusada.
-  const psSim = path.join(tmp, 'Meus Programas', 'powershell');
-  fs.mkdirSync(path.dirname(psSim), { recursive: true });
-  fs.writeFileSync(psSim, `#!/usr/bin/env node
+  // Rodada 12, item 1: no Windows não existe execução por shebang. O "powershell" simulado da rodada 11 era
+  // um arquivo SEM EXTENSÃO com #!/usr/bin/env node e o "node com espaço" um #!/bin/sh — o Windows não roda
+  // nenhum dos dois, o spawnSync devolvia status null e o teste falhava 6 de 6 na linha do controle negativo.
+  // Agora o teste é independente de sistema:
+  //   - no Windows usa o PowerShell DE VERDADE (existe em qualquer Windows) — nada simulado;
+  //   - no Linux/macOS usa um imitador que aplica a MESMA regra documentada do parser (lá shebang executa);
+  //   - o primeiro token do comando é um node de verdade em caminho COM ESPAÇO (no Windows o próprio
+  //     process.execPath já é "C:\Program Files\nodejs\node.exe"; se não tiver espaço, hardlink para uma pasta
+  //     com espaço — hardlink de executável roda, ao contrário de um script com shebang).
+  const noWindows = process.platform === 'win32';
+  let psImpostor = '';
+  if (!noWindows) {
+    psImpostor = path.join(tmp, 'Meus Programas', 'powershell');
+    fs.mkdirSync(path.dirname(psImpostor), { recursive: true });
+    fs.writeFileSync(psImpostor, `#!/usr/bin/env node
 const argv = process.argv.slice(2);
 const i = argv.indexOf('-Command');
 const cmd = String(i >= 0 ? argv[i + 1] || '' : '');
@@ -252,20 +260,38 @@ if (!toks.length) { console.error('nada para executar'); process.exit(2); }
 const r = require('node:child_process').spawnSync(toks[0], toks.slice(1), { stdio: 'inherit' });
 process.exit(r.status === null ? 1 : r.status);
 `);
-  fs.chmodSync(psSim, 0o755);
-  const nodeComEspaco = path.join(tmp, 'Node Com Espaço', 'node');
-  fs.mkdirSync(path.dirname(nodeComEspaco), { recursive: true });
-  fs.writeFileSync(nodeComEspaco, `#!/bin/sh\nexec "${process.execPath}" "$@"\n`); fs.chmodSync(nodeComEspaco, 0o755);
+    fs.chmodSync(psImpostor, 0o755);
+  }
+  const shellDoTeste = noWindows ? 'powershell' : psImpostor; // no Windows: o PowerShell real, no PATH
+  const rodarShell = (cmd) => spawnSync(shellDoTeste, ['-NoProfile', '-Command', cmd], { encoding: 'utf8', windowsHide: true });
+
+  let nodeComEspaco = process.execPath;
+  if (!/\s/.test(nodeComEspaco)) {
+    const dirEsp = path.join(tmp, 'Node Com Espaço');
+    fs.mkdirSync(dirEsp, { recursive: true });
+    const alvo = path.join(dirEsp, path.basename(process.execPath));
+    // hardlink primeiro (instantâneo); cópia depois (funciona em qualquer sistema de arquivos); por último,
+    // no POSIX, um script #!/bin/sh (que o Windows não executa, por isso não serve lá).
+    try { fs.linkSync(process.execPath, alvo); nodeComEspaco = alvo; }
+    catch {
+      try { fs.copyFileSync(process.execPath, alvo); fs.chmodSync(alvo, 0o755); nodeComEspaco = alvo; }
+      catch {
+        if (!noWindows) { fs.writeFileSync(alvo, `#!/bin/sh\nexec "${process.execPath}" "$@"\n`); fs.chmodSync(alvo, 0o755); nodeComEspaco = alvo; }
+      }
+    }
+  }
+  assert.match(nodeComEspaco, /\s/, `o primeiro token do comando precisa ter espaço (o caso do relato); achei ${nodeComEspaco}`);
   const comandoDoRelato = `"${nodeComEspaco}" "${script}" {image} {audio} {out}`;
 
-  // controle negativo: exatamente a linha relatada, sem o '& ', morre no parser simulado
-  const recusado = spawnSync(psSim, ['-NoProfile', '-Command', comandoDoRelato], { encoding: 'utf8' });
-  assert.equal(recusado.status, 2, 'sem "& " a linha entre aspas é recusada');
-  assert.match(recusado.stderr, /Token inesperado/, 'erro do Windows reproduzido na simulação');
-  assert.ok(!fs.existsSync(path.join(tmp, 'nada-deveria-rodar')), 'a linha recusada não executou nada');
+  // controle negativo: exatamente a linha relatada, sem o '& ', é recusada pelo shell — e o shell RODOU
+  // (status null era o defeito: significava "não consegui executar", não "recusou a linha").
+  const recusado = rodarShell(comandoDoRelato);
+  assert.notEqual(recusado.status, null, `o shell ${shellDoTeste} não chegou a rodar (status null); stderr: ${recusado.stderr || ''}`);
+  assert.notEqual(recusado.status, 0, 'sem "& " a linha entre aspas é recusada');
+  assert.match(String(recusado.stderr || ''), /Token inesperado|Unexpected token|inesperado/i, `o shell precisa recusar a linha com erro de parser; stderr: ${recusado.stderr || recusado.stdout || '(vazio)'}`);
 
-  // com o plano corrigido (prepare → '& "..."), o MESMO comando roda pelo "powershell" simulado
-  ok(await api('/api/providers/talkingphoto', { adapter: 'local-command', shell: psSim, command: comandoDoRelato, maxAudioSeconds: 120 }), 'executor local via PowerShell com caminho entre aspas e com espaço');
+  // com o plano corrigido (prepare → '& "...'), o MESMO comando roda pelo shell
+  ok(await api('/api/providers/talkingphoto', { adapter: 'local-command', shell: noWindows ? '' : psImpostor, command: comandoDoRelato, maxAudioSeconds: 120 }), 'executor local via PowerShell com caminho entre aspas e com espaço');
   const runPs = await runJob({ assetId: foto.id, audioAssetId: voz.id });
   assert.equal(runPs.job.state, 'succeeded', runPs.job.error || '');
   const videoPs = (await api('/api/assets', undefined, 'GET')).body.find((a) => a.id === runPs.job.assetId);
