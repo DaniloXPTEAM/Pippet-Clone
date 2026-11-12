@@ -1,0 +1,31 @@
+# Restauração do bundle (rodada 12) — verificação, cabeçalhos e prova de restauração
+# gerado em 2026-11-12T00:57:03Z, no commit f5f3332
+
+$ git bundle verify piperline_rodada12.bundle
+/tmp/piperline_rodada12.bundle is okay
+The bundle contains these 6 refs:
+f5f33328ea4dde0b34c83e07ce7764960d16c563 refs/heads/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/heads/main
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/HEAD
+144374502d5e25cb857b32d05a7fcf4f71a76004 refs/remotes/origin/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/main
+f5f33328ea4dde0b34c83e07ce7764960d16c563 HEAD
+The bundle records a complete history.
+The bundle uses this hash algorithm: sha1
+
+$ git bundle list-heads piperline_rodada12.bundle
+f5f33328ea4dde0b34c83e07ce7764960d16c563 refs/heads/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/heads/main
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/HEAD
+144374502d5e25cb857b32d05a7fcf4f71a76004 refs/remotes/origin/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/main
+f5f33328ea4dde0b34c83e07ce7764960d16c563 HEAD
+
+# Prova de restauração numa pasta VAZIA (não é o mesmo repositório):
+#   git init && git fetch ../piperline_rodada12.bundle "refs/heads/*:refs/remotes/bundle/*"
+#   git checkout -b teste bundle/arena/a14d8a49-pippet-clone
+RESTAUROU f5f3332 rodada 12 item 3 (parte 5): manifesto e ENTREGA refeitos com os hashes finais
+commits=11 arquivos=657
+
+# O bundle é autossuficiente porque o repositório foi deixado de ser raso (git fetch --unshallow).
+# O primeiro bundle desta rodada falhava no fetch com "did not send all necessary objects" por causa disso.

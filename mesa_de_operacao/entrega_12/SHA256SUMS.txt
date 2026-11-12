@@ -1,0 +1,20 @@
+# SHA256SUMS — mesa_de_operacao/entrega_12 (rodada 12)
+# gerado em 2026-11-12T00:57:11Z
+# ordem: sha256, bytes, arquivo
+052f37f79861061b26f3dda0ba9f13fc5cc0df8919d9d550b9c2a2e7fdfe65df        1362  .env.example
+c5aeaaa7847ed171f8fdc4fa4e4f8527be6d57081ecd8d977d5c681dd9d07ffe       13477  ENTREGA.md
+7611c91dc8ed34a662d66afd67781fca2b6a41f5eab7e0c26527375495aa979f       76232  FEATURE_INVENTORY.md
+2f974f8d030f94e1c09fd8de306a2b8dfe9e3b9b8151c1e40e805cb45e6ae15f       12446  LEIA_PRIMEIRO_NOVA_SESSAO.md
+1c3f9c5575ef31a2ddf4567d3a4499918312aafffd47f66eaf5ed70aced274a3       71611  MANIFESTO_SHA256.csv
+36304d6654081d0bb006ccfbc3e4de25003612716a43a784f0f376d21d91f879        7236  PREPARO_PUSH.md
+a091874d6620efcd8fbff667284dbb49d99e4230214d0899887747333fa3969c         122  SHA256SUMS.txt
+b723069d746f9e3169248077aee6dca71372aa8ea78c2c4934cc4c8a47d7f863       50210  STATUS.md
+d1ae3791e4c9e4f71535335bcf95bedbf52ce4a5a3c4287beeea0a7da6a43723         604  browser_probe_antes_depois.txt
+46d5b34cff170ce75b1fcc9a004fdc5102aab0d8ebccf5beaaf87c0e6d39675a         411  lipsync_adapters_3x.txt
+f31b58998148fd1e94ed45b080cbaef2b850f6d428a6b9fe16065fa6997f74ab    18023904  piperline_arvore_rodada12.zip
+dc5b279c51dde3074333d188be2655bdfc82a793d9df7ef5b26a625854df611c    17843438  piperline_rodada12.bundle
+a55a264c7bf025589eaec8fd5cdd6ed9156a395dd3c19103c5f51de0ba7b7562        1764  piperline_rodada12_bundle_verify.txt
+72882167e1725f3daebf414f725b97d11c2355dd2b79d3d1158293e7a19b3aa2        3752  pricing_faq_ui_20x.txt
+6c345fd17b2adb3751b4d20c311bf8447892157be9e7deb4cd43e9f4a95bff49        1125  pricing_faq_ui_cpu.txt
+c1cd0b57240d18d7d5371d27e703f4af4f58ef5c7da622bead46d9d9ced46b31        3492  segredos_varredura.txt
+5df2878601e640749ba15cd28d4118e2fae29b98e5fd8a83909ffc7c4c06d368        4024  suite_rodada12_final.txt
