@@ -16,8 +16,11 @@ try {
   assert.match(q.questions[5], /sem créditos antes do final do mês/);
   assert.equal(q.answersPreserved, false);
   assert.equal(q.answers, 'UNOBSERVED', 'respostas completas não preservadas');
-  assert.equal(q.ratings, 'UNOBSERVED', 'avaliações não preservadas');
-  assert.equal(q.featureSections, 'UNOBSERVED');
+  assert.equal(q.ratings, 'UNOBSERVED', 'textos das avaliações não preservados');
+  assert.equal(q.ratingsNavigation.reviews, 5, 'carrossel de 5 revisões observado');
+  assert.deepEqual(q.ratingsNavigation.controls.slice(0, 2), ['Previous review', 'Next review']);
+  assert.deepEqual(q.featureSections.slice(0, 2), ['Detalhes do plano', 'Créditos'], 'títulos de seções observados');
+  assert.equal(q.featureSectionsContent, 'UNOBSERVED', 'conteúdo das seções não preservado');
   assert.equal(q.planComparison, 'local', 'a comparação de planos é local');
   assert.equal(q.externalCalls, false);
   assert.match(q.source, /linha 78/);

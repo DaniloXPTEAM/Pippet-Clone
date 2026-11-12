@@ -953,10 +953,11 @@ const ACCOUNT_UNOBSERVED = Object.freeze({
   externalCalls: false,
 });
 route('GET', /^\/api\/account\/unobserved$/, (q, r) => send(r, 200, { ok: true, ...ACCOUNT_UNOBSERVED }));
-// FAQ da página de preços (linha 78): as seis perguntas foram preservadas; as RESPOSTAS, as avaliações e as
-// seções de recursos não. A comparação de planos é local. A rota serve a página para não repetir texto solto.
+// FAQ da página de preços (linha 78): as seis perguntas foram preservadas; as RESPOSTAS não. As seções
+// de recursos têm títulos observados (notes/pages/02_pricing.json) e conteúdo não preservado. As avaliações
+// têm carrossel observado (5 revisões, Previous/Next/Show review 1–5) e textos não preservados.
 const PRICING_FAQ_OBSERVED = Object.freeze({
-  source: 'FEATURE_INVENTORY.md linha 78 (REA ev_58c189b5…74a9; test/pricing_faq_ui.test.mjs)',
+  source: 'FEATURE_INVENTORY.md linha 78 (REA ev_58c189b5…74a9; notes/pages/02_pricing.json; test/pricing_faq_ui.test.mjs, pricing_reviews_ui.test.mjs)',
   questions: [
     'Há testes gratuitos disponíveis?',
     'Qual é a diferença entre assinatura e créditos?',
@@ -968,7 +969,9 @@ const PRICING_FAQ_OBSERVED = Object.freeze({
   answersPreserved: false,
   answers: 'UNOBSERVED',
   ratings: 'UNOBSERVED',
-  featureSections: 'UNOBSERVED',
+  ratingsNavigation: { reviews: 5, controls: ['Previous review', 'Next review', 'Show review 1', 'Show review 2', 'Show review 3', 'Show review 4', 'Show review 5'], texts: 'UNOBSERVED' },
+  featureSections: ['Detalhes do plano', 'Créditos', 'Por que escolher o Pippit', 'Perguntas frequentes', 'Crie com asas Criação de conteúdo turbinada', 'O Agente de IA definitivo que facilita o marketing eficaz.'],
+  featureSectionsContent: 'UNOBSERVED',
   planComparison: 'local',
   externalCalls: false,
 });
