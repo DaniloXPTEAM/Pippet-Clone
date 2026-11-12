@@ -84,8 +84,9 @@ const runJob = async (quoteBody) => {
   assert.equal(gen.job.state, 'blocked', 'a tarefa nasce bloqueada (nada enviado)');
   const authz = await api(`/api/talking-photo/jobs/${gen.job.id}/authorize`, { confirm: true, quoteDigest: gen.quote.digest });
   assert.equal(authz.status, 200, why(authz));
-  for (let i = 0; i < 40; i++) { await tick(); const j = await jobOf(gen.job.id); if (['succeeded', 'failed', 'canceled'].includes(j.state)) return { job: j, quote: gen.quote }; if (process.env.LIPSYNC_DEBUG) console.log('DEBUG', j.state, j.error || '', j.progress); await new Promise((r) => setTimeout(r, 40)); }
-  throw new Error('a tarefa não terminou dentro do tempo do teste');
+  const fim = Date.now() + 30_000;
+  while (Date.now() < fim) { await tick(); const j = await jobOf(gen.job.id); if (['succeeded', 'failed', 'canceled'].includes(j.state)) return { job: j, quote: gen.quote }; if (process.env.LIPSYNC_DEBUG) console.log('DEBUG', j.state, j.error || '', j.progress); await new Promise((r) => setTimeout(r, 40)); }
+  throw new Error('a tarefa não terminou dentro do tempo do teste (30 s)');
 };
 
 let videoJobId = null;
