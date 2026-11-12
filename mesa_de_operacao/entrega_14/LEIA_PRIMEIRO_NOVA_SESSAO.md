@@ -9,7 +9,7 @@
 
 O app roda, a suíte passa **128/2/0 de 130** no sandbox (três execuções completas hoje, mais a soma dos blocos) e o usuário validou a rodada 13 no Windows com **126 ok / 2 skip / 2 falhas (de 130)** — as duas falhas eram `omni_router_ui` (tempo; passou 4/4 em reexecução) e `lipsync_adapters` (4/4; causa provada e **corrigida nesta rodada**, `afb2550`). **Não há push desta sessão** e **o `.git` foi perdido de novo** (sandbox novo): o código foi restaurado do bundle `piperline_rodada13.bundle` e o HEAD confere em `9e57f96` antes dos commits da r14.
 
-**Atenção, isto continua valendo desde a rodada 12:** a branch `arena/a14d8a49-pippet-clone` **já existe no GitHub**, com **12 commits originais das rodadas 1–6** (ponta `1443745`) — o histórico local divergiu dela: o local tem **23 commits** que o remoto não tem (28 depois do pacote da r14) e o remoto tem **12** que o local não tem (base comum `48ca7bb`). Um `git push` simples **seria recusado**; **nunca force**. `PREPARO_PUSH.md` traz as três opções (recomendada: publicar numa branch nova, sem tocar na existente) e os comandos prontos, **não executados**.
+**Atenção, isto continua valendo desde a rodada 12:** a branch `arena/a14d8a49-pippet-clone` **já existe no GitHub**, com **12 commits originais das rodadas 1–6** (ponta `1443745`) — o histórico local divergiu dela: o local tem **23 commits** que o remoto não tem (29 depois do pacote da r14) e o remoto tem **12** que o local não tem (base comum `48ca7bb`). Um `git push` simples **seria recusado**; **nunca force**. `PREPARO_PUSH.md` traz as três opções (recomendada: publicar numa branch nova, sem tocar na existente) e os comandos prontos, **não executados**.
 
 ## 2. Regras do usuário (não negociáveis, valem para toda rodada)
 
@@ -148,7 +148,7 @@ Notas de uso:
 | `ENTREGA.md` | relatório da rodada 14 (itens 1, 2 e 3) e a classificação do que está no Drive |
 | `FEATURE_INVENTORY.md` | inventário de linhas (122 reproduzíveis; 83/122 = 68,0% — cobertura de linhas, **não** paridade) |
 | `.env.example` | **nomes** das variáveis, todos vazios |
-| `MANIFESTO_SHA256.csv` | sha256 de cada arquivo versionado (682 arquivos) |
+| `MANIFESTO_SHA256.csv` | sha256 de cada arquivo versionado (lista 682 — não se lista a si mesmo; 683 versionados com ele) |
 | `PREPARO_PUSH.md` | branch, commits, divergência com o remoto e o comando de push **não executado** |
 | `segredos_varredura_r14.txt` | resultado cru da varredura de segredos desta rodada |
 | `suite_rodada14_final.txt` | suíte completa: **128 passaram, 2 skip explícito, 0 falharam (de 130)** |
