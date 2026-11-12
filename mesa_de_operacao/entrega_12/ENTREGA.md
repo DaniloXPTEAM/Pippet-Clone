@@ -91,8 +91,36 @@ Nenhuma mudança em `app/`. Em 20 + 40 + 4 execuções (inclusive com CPU 100×)
 3. **Os outros três testes lentos** (`notifications_ui`, `workflow_jobs`, `talkingphoto_ui`) **não foram tocados** — ficaram fora da ordem, e você vai repeti-los quando a máquina estiver livre.
 4. **Rodada 12 começou com o quinto reset do sandbox:** o `.git` voltou ao clone (HEAD `48ca7bb`) e `.deps`/`/tmp` sumiram. A árvore sobreviveu inteira; refiz o ambiente com `recuperar_ambiente.sh --sem-suite` e registrei o estado da rodada 11 num **commit de recuperação** (`bfa9169`) antes dos itens.
 
+## Item 3 — pacote de passagem para a sessão nova (`ae68fa0`, `d85f88d`)
+
+O sandbox já apagou o `.git` **cinco vezes**. Se ele apagar de novo, o trabalho não se perde **se** estiver no Drive — por isso esta pasta agora tem tudo o que a sessão nova precisa para continuar sem o sandbox:
+
+| Arquivo | Tamanho | SHA-256 |
+|---|---|---|
+| `LEIA_PRIMEIRO_NOVA_SESSAO.md` | 11.627 B | `d8c50cffdaf2b426c739fd58a266fd4f6503a41f446199d84497c40e2ab84903` |
+| `PREPARO_PUSH.md` | 5.756 B | `434a6dc052c572789c61497058e2a437b8cb4c9b8cc060f0c6610e21a648e11a` |
+| `MANIFESTO_SHA256.csv` (656 arquivos versionados) | 71.610 B | `c9875691d77f1b5f17ab032c719aec238425c4be361c3e51427404b470b605b6` |
+| `segredos_varredura.txt` | 3.492 B | `c1cd0b57240d18d7d5371d27e703f4af4f58ef5c7da622bead46d9d9ced46b31` |
+| `STATUS.md` | 50.210 B | `b723069d746f9e3169248077aee6dca71372aa8ea78c2c4934cc4c8a47d7f863` |
+| `FEATURE_INVENTORY.md` | 76.232 B | `7611c91dc8ed34a662d66afd67781fca2b6a41f5eab7e0c26527375495aa979f` |
+| `.env.example` (só nomes) | 1.362 B | `052f37f79861061b26f3dda0ba9f13fc5cc0df8919d9d550b9c2a2e7fdfe65df` |
+| `suite_rodada12_final.txt` | 4.024 B | `5df2878601e640749ba15cd28d4118e2fae29b98e5fd8a83909ffc7c4c06d368` |
+| `pricing_faq_ui_20x.txt` | 3.752 B | `72882167e1725f3daebf414f725b97d11c2355dd2b79d3d1158293e7a19b3aa2` |
+| `pricing_faq_ui_cpu.txt` | 1.125 B | `6c345fd17b2adb3751b4d20c311bf8447892157be9e7deb4cd43e9f4a95bff49` |
+| `browser_probe_antes_depois.txt` | 604 B | `d1ae3791e4c9e4f71535335bcf95bedbf52ce4a5a3c4287beeea0a7da6a43723` |
+| `lipsync_adapters_3x.txt` | 411 B | `46d5b34cff170ce75b1fcc9a004fdc5102aab0d8ebccf5beaaf87c0e6d39675a` |
+
+**Artefatos gerados depois deste relatório** (tamanho e sha256 no `SHA256SUMS.txt`, ao lado deles): `piperline_rodada12.bundle` (+ `piperline_rodada12_bundle_verify.txt`) e `piperline_arvore_rodada12.zip`. O bundle é **autossuficiente** (`git bundle create --all`) e o zip tem a **árvore sem `.git`** e sem `node_modules`/`.deps` — assim há dois caminhos de recuperação, com e sem git.
+
+**O que está em cada documento:**
+
+- **`LEIA_PRIMEIRO_NOVA_SESSAO.md`** — objetivo do projeto; as 10 regras do usuário (respostas curtas, nada em segundo plano, sem push sem ordem, nenhuma chave em arquivo/commit/log/Drive, `127.0.0.1` sempre, testes não alteram arquivo versionado, sem equivalência com o Pippit, sem dado inventado, mensagens ≤ ~2800 caracteres, um commit por item); placar de **todas as rodadas** no sandbox e no Windows; como recuperar o ambiente (`recuperar_ambiente.sh`) e rodar a suíte em blocos; falhas conhecidas com causa **provada** ou **NÃO provada**; o que só o PC do usuário prova; limites do sandbox; pendências por prioridade; a lista exata dos arquivos da entrega.
+- **`PREPARO_PUSH.md`** — branch `arena/a14d8a49-pippet-clone`, remoto, o que seria enviado (650 arquivos; o `captures/current_670/rea_session_bundle_lote12.json` de **68 MB**, já no commit base), os commits que existem hoje e por que o histórico é **reconstruído**, o resultado da varredura de segredos e o comando `git push -u origin arena/a14d8a49-pippet-clone` **pronto e NÃO executado**, com a regra de nunca usar `--force`.
+- **`segredos_varredura.txt`** — 22 ocorrências do padrão “valor colado”, **todas não-credenciais** (14 chaves falsas de teste, 6 marcadores em inglês, 2 nomes de variável de ambiente), **0 exigindo revisão**.
+- **`MANIFESTO_SHA256.csv`** — `caminho,bytes,sha256` dos 656 arquivos versionados no commit `ae68fa0` (o próprio manifesto e este relatório não entram, porque mudariam o próprio hash).
+
 ## Estado do repositório
 
-- **HEAD:** o commit que fecha esta rodada (mensagem **“rodada 12: entrega escrita …”**) · commits: `bfa9169` (recuperação do estado da rodada 11), `6a6292d` (item 1), `722f235` (item 2) e o commit da entrega.
+- **HEAD:** o commit que fecha esta rodada (mensagem **“rodada 12: entrega escrita …”**) · commits: `bfa9169` (recuperação do estado da rodada 11), `6a6292d` (item 1), `722f235` (item 2), `329e67d` (entrega dos itens 1 e 2), `ae68fa0` e `d85f88d` (item 3: passagem e manifesto) e o commit desta atualização.
 - **Nenhum push**, nenhum `--force`, nenhuma chave.
 - Bundle autossuficiente: `piperline_rodada12.bundle` (no Drive, pasta `entrega_12`).
