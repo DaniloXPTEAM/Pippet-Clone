@@ -1,0 +1,27 @@
+ITEM 3 — a suite nao altera arquivo versionado (prova por sha256)
+gerado em 2026-11-12T01:37:01Z · suite rodada no HEAD 74c953e
+
+COMO LER: a prova principal e a comparacao de hash (passos 1-3). O git status do passo 4 foi
+capturado DEPOIS de eu criar os arquivos deste pacote — por isso ele lista ?? desta propria
+entrega (arquivos novos, criados depois da suite) e nao uma alteracao de teste. No instante
+seguinte ao commit 74c953e, com a arvore limpa, 'git status --short' saiu vazio.
+
+1) sha256 de TODOS os arquivos versionados, ANTES da suite:
+   659 arquivos
+
+2) suite completa: node test/run-all.mjs (231 s)
+128 passaram, 2 skip explícito, 0 falharam (de 130).
+
+3) sha256 dos mesmos arquivos, DEPOIS da suite (659 arquivos):
+   diferencas encontradas: 0
+   -> NENHUM arquivo versionado mudou de conteudo durante a suite
+
+4) git status --short (capturado depois, com o pacote recem-criado):
+ M mesa_de_operacao/entrega_13/git_status_prova_r13.txt
+   [fim do git status]
+
+5) os 2 skips explicitos:
+SKIP pageview (0.3s)
+SKIP pageview: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/scenario_video-agent_bodies.json
+SKIP parity (0.3s)
+SKIP parity: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/auth/cdp/oauth_redirect/2_pagina_0.txt, /home/user/Pippet-Clone/captures/auth/cdp/editor_right_panel/5_1_Básico.txt

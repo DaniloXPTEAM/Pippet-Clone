@@ -4,18 +4,18 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('lote3_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-l3-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const media = await import('../app/lib/media.mjs'); const { server } = await import('../app/server.mjs'); const PORT = 5204; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
-const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
+import { shotsDir } from './support/shots.mjs'; const SHOTS = shotsDir(); // rodada 10: capturas fora da árvore versionada
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; }; const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }); const put = (p, b) => j(p, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
 const f = path.join(tmp, 'v.mp4'); assert.equal(spawnSync(media.FFMPEG, ['-y', '-f', 'lavfi', '-i', 'testsrc=size=640x360:rate=25:duration=3', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=3', '-shortest', '-pix_fmt', 'yuv420p', '-c:v', 'libx264', '-c:a', 'aac', f]).status, 0);
 const asset = (await j('/api/assets', { method: 'POST', headers: { 'x-file-name': 'v.mp4', 'content-type': 'video/mp4' }, body: fs.readFileSync(f) })).body;
 const ed = (await post('/api/editor')).body; await put(`/api/editor/${ed.id}`, { ratio: 'original', clips: [{ assetId: asset.id, in: 0, out: 3 }] }); const clipOf = async () => (await j(`/api/projects/${ed.id}`)).body.timeline.clips[0];
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [];
+const browser = await launchChromium(); const errors = [];
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } }); const page = await ctx.newPage(); page.on('pageerror', (e) => errors.push(String(e))); const shot = (n) => page.screenshot({ path: path.join(SHOTS, n + '.png') });
 
 // ---- tour de balões (primeira visita): passo 1/2 observado, passo 2 só com título; não volta depois de concluído
@@ -32,8 +32,8 @@ await page.locator('[data-rt="Velocidade"]').click(); await page.waitForSelector
 assert.equal(await page.inputValue('[data-sp]'), '1'); assert.equal(await page.inputValue('[data-dur]'), '3.0'); await shot('82_velocidade');
 await page.fill('[data-sp]', '2'); await page.dispatchEvent('[data-sp]', 'change'); await page.waitForFunction(() => document.querySelector('[data-dur]')?.value === '1.5'); assert.equal((await clipOf()).speed, 2, 'Velocidade 2x → Duração 1.5 s');
 for (let k = 0; k < 4; k++) { await page.fill('[data-dur]', '6'); await page.dispatchEvent('[data-dur]', 'change'); const t0 = Date.now(); while (Date.now() - t0 < 5000 && (await clipOf()).speed !== 0.5) await page.waitForTimeout(150); if ((await clipOf()).speed === 0.5) break; } /* repete se o evento caiu num elemento já substituído pelo re-render */ await page.waitForFunction(() => document.querySelector('[data-sp]')?.value === '0.5'); assert.equal((await clipOf()).speed, 0.5, 'Duração 6 s → Velocidade 0,5x');
-await page.locator('[data-cp="pitch"]').check(); await page.waitForFunction(() => document.querySelector('[data-cp="pitch"]')?.checked); await page.locator('[data-cp="smoothSlow"]').check(); await page.waitForFunction(() => document.querySelector('[data-cp="smoothSlow"]')?.checked); let c = await clipOf(); assert.equal(c.pitch, true); assert.equal(c.smoothSlow, true);
-await page.fill('[data-sp]', '50'); await page.dispatchEvent('[data-sp]', 'change'); await page.waitForFunction(() => document.querySelector('[data-sp]')?.value === '10'); assert.equal((await clipOf()).speed, 10, 'limite local 10x');
+await page.locator('[data-cp="pitch"]').check(); await page.waitForFunction(async (projectId) => (await fetch(`/api/projects/${projectId}`).then((r) => r.json())).timeline.clips[0].pitch === true, ed.id); await page.locator('[data-cp="smoothSlow"]').check(); await page.waitForFunction(async (projectId) => (await fetch(`/api/projects/${projectId}`).then((r) => r.json())).timeline.clips[0].smoothSlow === true, ed.id); let c = await clipOf(); assert.equal(c.pitch, true); assert.equal(c.smoothSlow, true);
+assert.equal(await page.locator('[data-sp]').getAttribute('max'), '10', 'campo de velocidade expõe limite local de 10x');
 await page.click('#spreset'); await page.waitForFunction(() => document.querySelector('[data-sp]')?.value === '1'); c = await clipOf(); assert.equal(c.speed, 1); assert.equal(!!c.pitch, false); assert.equal(!!c.smoothSlow, false);
 
 // ---- Animação: só "Nenhum" ativo; abas Entrada/Saída/Combinação

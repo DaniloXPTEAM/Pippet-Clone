@@ -3,7 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')); const SCHEMA = JSON.parse(fs.readFileSync(path.join(here, '../../notes/dynamic_questionnaire.schema.json'), 'utf8'));
+import { fileURLToPath } from 'node:url';
+import { skipMissingEvidence } from './support/browser.mjs';
+const here = path.dirname(fileURLToPath(import.meta.url)); const schemaPath = path.resolve(here, '../../notes/dynamic_questionnaire.schema.json');
+if (skipMissingEvidence('questionnaire', [schemaPath])) process.exit(0);
+const SCHEMA = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 const { formToQuestionnaire, validateAgainst } = await import('../app/lib/questionnaire.mjs');
 // esquema extraído: forma esperada
 assert.deepEqual(SCHEMA.properties.questions.items.properties.type.enum, ['radio', 'checkbox', 'text', 'media']); assert.deepEqual(SCHEMA.required, ['questions']); assert.equal(SCHEMA.additionalProperties, false);

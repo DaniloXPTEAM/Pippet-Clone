@@ -1,0 +1,16 @@
+# Roteador: código anterior (0405dd1, com instrumentação só de medição) x código da rodada 9
+# 2026-11-11T19:19:21Z, Linux, mesmo navegador
+
+ANTES (0405dd1 + contadores, sem correção):
+carga   : {"renders":1,"concurrent":0,"maxConcurrent":1,"lastRoute":"/home","homeRenders":1} | /api/state = 1
+rajada  : {"renders":4,"concurrent":0,"maxConcurrent":3,"lastRoute":"/home","homeRenders":4} | /api/state = 4
+
+DEPOIS (rodada 9, medido pelo teste route_single_render):
+carga   : renders=1, maxConcurrent=1, homeRenders=1
+rajada  : renders=2, maxConcurrent=1, homeRenders=2, skipped>=1 quando a rota muda no meio
+
+Leitura: no código anterior uma rajada de três mudanças de hash deixou TRÊS execuções do
+roteador ao mesmo tempo (maxConcurrent=3) e desenhou a Home 4 vezes; agora há uma execução por
+vez e a Home desenha uma vez por chegada nela. Na carga simples as duas versões desenham a Home
+uma vez neste ambiente; a duplicação aparecia quando o hash mudava durante uma renderização
+(redirecionamento para /login, navegação rápida) — é o caso capturado pelo item 3 do teste.

@@ -1,0 +1,10 @@
+# pricing_faq_ui sob CPU mais lenta (CDP Emulation.setCPUThrottlingRate) — gerado nesta execução
+# Serve para ver QUAL etapa cresce quando a máquina está ruim.
+=== CPU 8x ===
+pricing_faq_ui: 1032 ms — servidor=0ms · navegador=56ms · aba=48ms · rota /pricing=457ms · nota de integrações=124ms · nota do FAQ=25ms · 6 perguntas=44ms · abrir resposta=72ms · comparação de planos=175ms
+=== CPU 20x ===
+pricing_faq_ui: 2115 ms — servidor=0ms · navegador=57ms · aba=45ms · rota /pricing=1022ms · nota de integrações=300ms · nota do FAQ=37ms · 6 perguntas=109ms · abrir resposta=207ms · comparação de planos=307ms
+=== CPU 50x ===
+pricing_faq_ui: 5753 ms — servidor=0ms · navegador=58ms · aba=41ms · rota /pricing=2772ms · nota de integrações=1128ms · nota do FAQ=96ms · 6 perguntas=256ms · abrir resposta=492ms · comparação de planos=881ms
+=== CPU 100x ===
+pricing_faq_ui: 10249 ms — servidor=0ms · navegador=55ms · aba=44ms · rota /pricing=4699ms · nota de integrações=1801ms · nota do FAQ=161ms · 6 perguntas=517ms · abrir resposta=1105ms · comparação de planos=1826ms

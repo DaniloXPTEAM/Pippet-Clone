@@ -1,0 +1,33 @@
+VARREDURA DE SEGREDOS — rodada 13 (somente leitura, nada executado)
+gerado em 2026-11-12T01:35:28Z
+escopo: os 659 arquivos versionados (git ls-files)
+
+== 1) padroes de credencial real ==
+   (vazio acima = nenhuma credencial com forma real)
+
+== 2) valor colado em nome de chave (padrao 'apiKey: ...' / 'token=...') ==
+local_reconstruction/app/lib/auth.mjs:211:        signup: 'POST {SUPABASE_URL}/auth/v1/signup', password: 'POST {SUPABASE_URL}/auth/v1/token?grant_type=password',
+local_reconstruction/src/publishing.mjs:78:    env: { clientId: 'TIKTOK_CLIENT_KEY', clientSecret: 'TIKTOK_CLIENT_SECRET', redirect: 'TIKTOK_REDIRECT_URL' },
+local_reconstruction/src/publishing.mjs:85:    env: { clientId: 'META_APP_ID', clientSecret: 'META_APP_SECRET', redirect: 'META_REDIRECT_URL' },
+local_reconstruction/src/publishing.mjs:92:    env: { clientId: 'META_APP_ID', clientSecret: 'META_APP_SECRET', redirect: 'META_REDIRECT_URL' },
+local_reconstruction/src/publishing.mjs:99:    env: { clientId: 'GOOGLE_CLIENT_ID', clientSecret: 'GOOGLE_CLIENT_SECRET', redirect: 'GOOGLE_REDIRECT_URL' },
+mesa_de_operacao/entrega_12/segredos_varredura.txt:4:VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/src/publishing.mjs:78 — Secret: 'TIKTOK_CLIENT_SECRET'
+mesa_de_operacao/entrega_12/segredos_varredura.txt:5:VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/src/publishing.mjs:99 — Secret: 'GOOGLE_CLIENT_SECRET'
+   (fim)
+
+== 3) arquivos de ambiente versionados (nao deve listar .env) ==
+.env.example
+mesa_de_operacao/entrega_12/.env.example
+   (fim)
+
+== 4) chaves falsas de teste (esperado existir; nao sao credenciais) ==
+local_reconstruction/test/cloudflare_router.test.mjs:51:'chave-do-freellmapi'
+local_reconstruction/test/cloudflare_router.test.mjs:52:'chave-do-omni'
+local_reconstruction/test/cloudflare_router.test.mjs:53:'chave-do-nvidia'
+local_reconstruction/test/cloudflare_routes.test.mjs:49:'chave-free-llm'
+local_reconstruction/test/cloudflare_routes.test.mjs:51:'chave-omni'
+local_reconstruction/test/cloudflare_routes.test.mjs:52:'chave-nvidia'
+local_reconstruction/test/flow_e2e_providers.test.mjs:72:'chave-freellmapi-flow'
+local_reconstruction/test/flow_e2e_providers.test.mjs:73:'chave-omni-flow'
+
+CONCLUSao: nenhuma credencial real; os achados do item 4 sao nomes de variavel e valores falsos de teste.

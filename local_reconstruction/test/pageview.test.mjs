@@ -1,7 +1,11 @@
 // Compara a reconstrucao com o evento capturado pelo REA (captures/scenario_video-agent_bodies.json).
 import fs from 'node:fs'; import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+import { skipMissingEvidence } from './support/browser.mjs';
 import { buildPageViewUrl, reportPageView } from '../src/pageview.mjs';
-const cap = JSON.parse(fs.readFileSync(new URL('../../captures/scenario_video-agent_bodies.json', import.meta.url), 'utf8')).normalized_result;
+const capturePath = fileURLToPath(new URL('../../captures/scenario_video-agent_bodies.json', import.meta.url));
+if (skipMissingEvidence('pageview', [capturePath])) process.exit(0);
+const cap = JSON.parse(fs.readFileSync(capturePath, 'utf8')).normalized_result;
 const ev = cap.events.items.find((e) => e.kind === 'request' && e.url?.url.includes('event/report'));
 const orig = new URL(ev.url.url);
 const webId = orig.searchParams.get('web_id');

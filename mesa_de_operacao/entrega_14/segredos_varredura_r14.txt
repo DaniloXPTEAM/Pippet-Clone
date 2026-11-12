@@ -1,0 +1,35 @@
+# varredura de segredos — rodada 14 — 2026-11-12T13:34:27Z
+# padrões: sk- / hf_ / ghp_ gho_ github_pat_ / AIza / xox / eyJ(JWT) / BEGIN PRIVATE KEY / valor colado em apiKey|token|secret|senha|password / SUPABASE_SERVICE_ROLE_KEY=
+672
+padrão [sk-[A-Za-z0-9]{20,}]: 0 arquivo(s)
+padrão [hf_[A-Za-z0-9]{20,}]: 0 arquivo(s)
+padrão [gh[pousr]_[A-Za-z0-9]{20,}]: 0 arquivo(s)
+padrão [github_pat_[A-Za-z0-9_]{20,}]: 0 arquivo(s)
+padrão [AIza[A-Za-z0-9_-]{30,}]: 0 arquivo(s)
+padrão [xox[baprs]-[A-Za-z0-9-]{10,}]: 0 arquivo(s)
+padrão [eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}]: 0 arquivo(s)
+padrão [BEGIN [A-Z ]*PRIVATE KEY]: 0 arquivo(s)
+padrão [SUPABASE_SERVICE_ROLE_KEY=[^[:space:]]+]: 2 arquivo(s)
+mesa_de_operacao/entrega_12/PREPARO_PUSH.md:79:- **9 padrões**: `sk-…`, `hf_…`, `ghp_/gho_/github_pat_…`, `AIza…`, `xox…`, `eyJ…` (JWT), `-----BEGIN … PRIVATE KEY-----`, valor colado em `apiKey/token/secret/senha/password`, `SUPABASE_SERVICE_ROLE_KEY=…`.
+mesa_de_operacao/entrega_13/PREPARO_PUSH.md:81:- **9 padrões**: `sk-…`, `hf_…`, `ghp_/gho_/github_pat_…`, `AIza…`, `xox…`, `eyJ…` (JWT), `-----BEGIN … PRIVATE KEY-----`, valor colado em `apiKey/token/secret/senha/password`, `SUPABASE_SERVICE_ROLE_KEY=…`.
+--- padrão valor colado (apiKey/token/secret/senha/password) ---
+local_reconstruction/app/lib/auth.mjs:139:  const token = crypto.randomBytes(32).toString('base64url');
+local_reconstruction/app/lib/auth.mjs:250:    const r = await gotrue('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: refreshToken }, fetchImpl });
+local_reconstruction/app/server.mjs:61:    p[kind] = { ...(p[kind] || {}), apiKey: secretFor(kind) || undefined };
+local_reconstruction/app/server.mjs:62:    if (p[kind].baseUrl && !isLocalEndpoint(p[kind].baseUrl)) { p[kind].baseUrl = ''; p[kind].allowSpend = false; p[kind].apiKey = undefined; }
+local_reconstruction/app/server.mjs:66:    settings.imageProvider = { ...(settings.imageProvider || {}), apiKey: secretFor('imageProvider') || undefined };
+local_reconstruction/app/server.mjs:67:    if (settings.imageProvider.baseUrl && !isLocalEndpoint(settings.imageProvider.baseUrl)) { settings.imageProvider.baseUrl = ''; settings.imageProvider.apiKey = undefined; }
+local_reconstruction/app/server.mjs:124:const sessionOf = (req) => { const token = AUTH.parseCookies(req.headers.cookie || '')[AUTH.SESSION_COOKIE]; if (!token) return null; const st = authState(); const s = AUTH.verifySession({ secret: AUTH_SECRET, token, sessions: st.sessions || [] }); if (s) { st.sessions = AUTH.pruneSessions(st.sessions, Date.now()); } return s || null; };
+local_reconstruction/app/server.mjs:127:  const { token, session } = AUTH.newSession({ secret: AUTH_SECRET, userId: user?.id || 'supabase', adapter: 'supabase', ttlMs: Math.max(300, tokens.expiresIn) * 1000 });
+local_reconstruction/app/server.mjs:179:  const b = await readJson(q); const email = String(b.email || '').trim(); const password = String(b.password || '');
+local_reconstruction/app/server.mjs:193:    const res = await adapter.signIn({ email, password: String(b.password) });
+local_reconstruction/app/server.mjs:200:  const { token, session } = AUTH.newSession({ secret: AUTH_SECRET, userId: d.user.id, adapter: adapter.id });
+local_reconstruction/app/server.mjs:1044:          apiKey: routerKeyFor(route), signal: controller.signal,
+local_reconstruction/app/server.mjs:1552:  const apiKey = routerKeyFor(route);
+local_reconstruction/app/server.mjs:1742:const publicSettings = (st) => ({ ...st, llm: st.llm ? { ...st.llm, apiKey: undefined, hasKey: !!secretFor('llm') } : undefined, imageProvider: st.imageProvider ? { ...st.imageProvider, apiKey: undefined, hasKey: !!secretFor('imageProvider') } : undefined, providers: st.providers ? Object.fromEntries(Object.entries(st.providers).map(([k, v]) => [k, { ...v, apiKey: undefined, hasKey: !!secretFor(k) }])) : undefined });
+local_reconstruction/app/server.mjs:1763:  const cfg = { ...(db().settings.llm || {}), apiKey: secretFor('llm') || undefined }; const key = JSON.stringify(cfg) + (cfg.model ? '' : '|' + routerSignature()); if (cfg.enabled === false) return null;
+local_reconstruction/app/server.mjs:1802:  if ('apiKey' in b) { const apiKey = String(b.apiKey || '').trim().slice(0, 300); if (apiKey) runtimeKeys.set('llm', apiKey); else runtimeKeys.delete('llm'); }
+local_reconstruction/src/free_router.mjs:673:    const apiKey = keyEnv ? credentials[keyEnv] : undefined;
+local_reconstruction/src/llm.mjs:27:    if (!model) throw new Error('modelo não configurado'); this.baseUrl = baseUrl.replace(/\/+$/, ''); this.model = model; this.apiKey = apiKey; this.timeoutMs = timeoutMs; this.fetch = fetchImpl;
+local_reconstruction/test/auth_structure.test.mjs:18:  if (req.url.startsWith('/auth/v1/token')) return res.end(JSON.stringify({ access_token: 'at-falso', refresh_token: 'rt-falso', expires_in: 3600, user: { id: 'u-falso', email: 'a@b.c', app_metadata: { provider: 'email' } } }));
+local_reconstruction/test/auth_structure.test.mjs:81:assert.equal((await post('/api/auth/password', { password: 'senha-boa' })).status, 200);

@@ -21,11 +21,17 @@ let ss = (await post('/api/skills/favorite', { id: sk.id, on: true })).body; ass
 ss = (await post('/api/skills/favorite', { id: sk.id, on: false })).body; assert.deepEqual(ss.favorites, ['drama-ads']); assert.equal((await post('/api/skills/favorite', {})).status, 400);
 ss = (await post('/api/skills/favorite', { id: sk.id, on: true })).body; ss = (await j('/api/skills/custom/' + sk.id, { method: 'DELETE' })).body; assert.equal(ss.custom.length, 0); assert.ok(!ss.favorites.includes(sk.id), 'excluir remove dos favoritos');
 
-// notificações: uma geração direta com prompt curto falha -> notificação não lida; "Todas lidas" zera
-assert.deepEqual((await j('/api/notifications')).body, { items: [], unread: 0 });
+// notificações: os 8 anúncios editoriais observados (REA ev_72d7b4c2…7b20) entram como não lidos;
+// eventos locais do app começam vazios. "Todas lidas" zera o contador.
+const nt0 = (await j('/api/notifications')).body;
+assert.deepEqual(nt0.items.filter((i) => i.kind !== 'ad'), []);
+assert.equal(nt0.items.filter((i) => i.kind === 'ad').length, 8);
+assert.equal(nt0.unread, 8);
+assert.equal((await post('/api/notifications/read-all')).body.unread, 0);
+assert.deepEqual((await j('/api/notifications')).body.items.filter((i) => i.kind !== 'ad'), []);
 const pr = (await post('/api/biz/v1/agent/create_creative_project', { user_info: { consumer_uid: 'u' } })).body.data.project_id; const cv = (await post('/api/biz/v1/asset/batch_generate_asset_id')).body.data.ids[0];
 await post('/api/biz/v1/asset/namespace_create', { namespace_data: [{ FileName: 'canvas.json', PippitAssetID: cv, ProjectID: String(pr) }] });
 await post('/api/biz/v1/agent/submit_run', { project_id: pr, message: { content: [{ type: 'data', data: JSON.stringify({ param: JSON.stringify({ prompt: 'red apple', ratio: '9:16', resolution: '768p', model: 'MiniMax-H3-trial', duration_sec: 4 }), extra: '{}', tool_name: 'biz/x_tool_name_video_part' }), sub_type: 'biz/x_data_direct_tool_call_req' }], role: 'user', thread_id: `canvas_thread_${cv}_pippit_video_part_agent`, run_id: 'n1', created_at: 1, message_id: 'm1' }, user_info: {}, agent_name: 'pippit_video_part_agent', concurrency_control: { policy: 1, conflict_key: 'node-n1' }, run_extra: '{}' });
-for (let i = 0; i < 50 && !(await j('/api/notifications')).body.unread; i++) await sleep(100); let nt = (await j('/api/notifications')).body; assert.equal(nt.unread, 1); assert.equal(nt.items[0].title, 'Falha na geração'); assert.match(nt.items[0].body, /at least 15 characters/); assert.equal(nt.items[0].kind, 'error');
-assert.equal((await post('/api/notifications/read-all')).body.unread, 0); nt = (await j('/api/notifications')).body; assert.equal(nt.unread, 0); assert.equal(nt.items.length, 1);
+for (let i = 0; i < 50 && !(await j('/api/notifications')).body.items.filter((x) => x.kind !== 'ad' && !x.read).length; i++) await sleep(100); let nt = (await j('/api/notifications')).body; const ev = nt.items.filter((x) => x.kind !== 'ad'); assert.equal(nt.unread, 1); assert.equal(ev[0].title, 'Falha na geração'); assert.match(ev[0].body, /at least 15 characters/); assert.equal(ev[0].kind, 'error');
+assert.equal((await post('/api/notifications/read-all')).body.unread, 0); nt = (await j('/api/notifications')).body; assert.equal(nt.unread, 0); assert.equal(nt.items.filter((x) => x.kind !== 'ad').length, 1);
 console.log('OK features: 18 idiomas e tema, skills (manual/favoritos), notificações de geração'); server.close(); process.exit(0);

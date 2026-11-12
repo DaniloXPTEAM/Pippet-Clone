@@ -1,0 +1,18 @@
+### watermark_export
+watermark_export: OK
+exit=0
+### auth_structure
+auth_structure: OK
+exit=0
+### node_generation_route
+node_generation_route.test.mjs: ok (fake provider result is written back to node)
+exit=0
+### cloudflare_routes
+cloudflare_routes: ok (pilha, nó Imagem/Texto/Áudio, composer imagem/áudio opt-in, vídeo PENDING, reserva Omni em 401)
+exit=0
+### route_single_render
+route_single_render.test.mjs: uma renderização por rota; carga desenha a Home 1x; rajada de hash e rota lenta não sobrepõem nem redesenham em loop
+exit=0
+### passo_a_passo
+passo_a_passo: OK
+exit=0

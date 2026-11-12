@@ -1,16 +1,81 @@
 // Operacoes reais de midia via ffmpeg/ffprobe: sonda, geracao local (NAO e IA), ultimo quadro, concatenacao e exportacao de timeline.
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
-const WINGET = 'C:/Users/Dannilo/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin';
+import { extractChunkArgs } from './transcribe.mjs';
+import { buildWatermarkFilter } from './watermark.mjs';
+// Localização do ffmpeg/ffprobe do WinGet (pacote Gyan.FFmpeg): varre
+// %LOCALAPPDATA%\Microsoft\WinGet\Packages\Gyan.FFmpeg_*\*\bin em QUALQUER versão
+// (o caminho antigo era fixo numa única versão do build e quebrava a cada atualização).
+// Sem nome de usuário no código: as raízes vêm do ambiente (%LOCALAPPDATA%) e do home.
+const cmpVersao = (a, b) => { const pa = a.match(/\d+/g) || [], pb = b.match(/\d+/g) || []; for (let i = 0; i < Math.max(pa.length, pb.length); i++) { const d = Number(pb[i] || 0) - Number(pa[i] || 0); if (d) return d; } return b.localeCompare(a); };
+function wingetBins(name) {
+  const raizes = [process.env.LOCALAPPDATA, path.join(os.homedir(), 'AppData', 'Local')].filter(Boolean);
+  const achados = [];
+  for (const raiz of raizes) {
+    const pacotes = path.join(raiz, 'Microsoft', 'WinGet', 'Packages');
+    let entradas = []; try { entradas = fs.readdirSync(pacotes); } catch { continue; }
+    for (const pkg of entradas.filter((e) => e.startsWith('Gyan.FFmpeg_')).sort(cmpVersao)) {
+      const dir = path.join(pacotes, pkg);
+      let subs = ['']; try { subs = ['', ...fs.readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name)]; } catch { continue; }
+      for (const sub of subs.sort(cmpVersao)) {
+        const w = path.join(dir, sub, 'bin', name + '.exe');
+        if (fs.existsSync(w)) achados.push(w);
+      }
+    }
+  }
+  return achados;
+}
 function find(bin) {
   if (process.env['PIPPIT_' + bin.toUpperCase()]) return process.env['PIPPIT_' + bin.toUpperCase()];
   const t = spawnSync(bin, ['-version'], { encoding: 'utf8' }); if (!t.error) return bin;
-  const w = path.join(WINGET, bin + '.exe'); return fs.existsSync(w) ? w : null;
+  const w = wingetBins(bin)[0]; return w || null;
 }
 export const FFMPEG = find('ffmpeg'), FFPROBE = find('ffprobe');
 export const available = () => !!(FFMPEG && FFPROBE);
+// Codificador de vídeo com fallback: alguns builds de ffmpeg falham no libx264 com
+// "Generic error in an external library" (x264 quebrado/ausente). Nesse caso usamos mpeg4 com yuv420p,
+// guardando o stderr real do ffmpeg em `ENCODER.error` para aparecer no relatório da suíte.
+let ENCODER = null;
+export const ENCODER_STATE = { codec: null, error: null, probedAt: null };
+const CODEC_ARGS = {
+  libx264: () => ['-c:v', 'libx264', '-pix_fmt', 'yuv420p'],
+  mpeg4: () => ['-c:v', 'mpeg4', '-pix_fmt', 'yuv420p', '-q:v', '4'],
+};
+export function ensureEncoder() {
+  if (ENCODER) return ENCODER;
+  if (!FFMPEG) { ENCODER = 'libx264'; return ENCODER; }
+  const probeOut = path.join(require_tmpdir(), `pippit-enc-${process.pid}-${Date.now()}.mp4`);
+  const attempt = (codec) => spawnSync(FFMPEG, ['-y', '-f', 'lavfi', '-i', 'color=c=black:s=64x64:r=25:d=0.2', '-c:v', codec, '-pix_fmt', 'yuv420p', '-an', probeOut], { encoding: 'utf8' });
+  const first = attempt('libx264');
+  if (first.status === 0) { ENCODER = 'libx264'; ENCODER_STATE.codec = 'libx264'; }
+  else {
+    const stderr = String(first.stderr || first.stdout || '').trim();
+    ENCODER_STATE.error = stderr.split('\n').slice(-8).join('\n');
+    const fallback = attempt('mpeg4');
+    if (fallback.status === 0) {
+      ENCODER = 'mpeg4'; ENCODER_STATE.codec = 'mpeg4';
+      console.warn('[media] libx264 indisponível; usando mpeg4 com yuv420p. ffmpeg: ' + (ENCODER_STATE.error.split('\n').at(-1) || 'erro desconhecido'));
+    } else {
+      ENCODER = 'libx264'; ENCODER_STATE.codec = 'libx264';
+      ENCODER_STATE.error = [ENCODER_STATE.error, String(fallback.stderr || '').trim().split('\n').slice(-4).join('\n')].filter(Boolean).join('\n');
+    }
+  }
+  ENCODER_STATE.probedAt = new Date().toISOString();
+  try { fs.unlinkSync(probeOut); } catch {}
+  return ENCODER;
+}
+const codecArgs = () => CODEC_ARGS[ensureEncoder()]();
+export const encoderInfo = () => ({ ...ENCODER_STATE, codec: ensureEncoder() });
+// Args de codificação de vídeo já resolvidos (preset/crf/tune só existem no libx264).
+export function videoEncodeArgs({ crf, preset, tune, q } = {}) {
+  if (ensureEncoder() === 'mpeg4') return ['-c:v', 'mpeg4', '-pix_fmt', 'yuv420p', '-q:v', String(q ?? Math.max(2, Math.min(10, Math.round(((Number(crf) || 23) - 14) / 2) + 2)))];
+  return ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', ...(preset ? ['-preset', preset] : []), ...(crf != null ? ['-crf', String(crf)] : []), ...(tune ? ['-tune', tune] : [])];
+}
+const require_tmpdir = () => { try { return os.tmpdir(); } catch { return path.dirname(process.execPath); } };
 function run(bin, args) { const r = spawnSync(bin, args, { encoding: 'utf8', maxBuffer: 1 << 28 }); if (r.status !== 0) throw new Error((r.stderr || r.stdout || 'ffmpeg falhou').split('\n').slice(-6).join('\n')); return r.stdout; }
+function runAsync(bin, args, { signal } = {}) { return new Promise((resolve, reject) => { if (signal?.aborted) return reject(Object.assign(new Error('Operação cancelada'), { name: 'AbortError' })); const child = spawn(bin, args, { stdio: ['ignore', 'ignore', 'pipe'] }); let stderr = ''; const abort = () => child.kill('SIGTERM'); child.stderr.setEncoding('utf8'); child.stderr.on('data', (s) => { stderr = (stderr + s).slice(-12000); }); child.once('error', reject); child.once('close', (code, sig) => { signal?.removeEventListener('abort', abort); if (signal?.aborted) return reject(Object.assign(new Error('Operação cancelada'), { name: 'AbortError' })); if (code !== 0) return reject(new Error((stderr || `ffmpeg terminou (${sig || code})`).split('\n').slice(-6).join('\n'))); resolve(); }); signal?.addEventListener('abort', abort, { once: true }); }); }
 export function probe(file) {
   const j = JSON.parse(run(FFPROBE, ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', file]));
   const v = j.streams.find((s) => s.codec_type === 'video'), a = j.streams.find((s) => s.codec_type === 'audio');
@@ -29,13 +94,33 @@ export function normalizeExportOptions(o = {}) {
   if (!EXPORT_OPTIONS.resolution[r.resolution]) throw new Error('resolucao invalida'); if (!EXPORT_OPTIONS.quality[r.quality]) throw new Error('qualidade invalida'); if (!EXPORT_OPTIONS.fps.includes(r.fps)) throw new Error('taxa de quadros invalida'); if (!EXPORT_OPTIONS.format[r.format]) throw new Error('formato invalido');
   return r;
 }
-// Reencoda o resultado conforme as opcoes (escala pelo lado menor mantendo a proporcao, fps, qualidade, formato e marca d'agua opcional).
-export function finalize(src, out, opts) {
+// Reencoda o resultado conforme as opcoes (escala pelo lado menor mantendo a proporcao, fps, qualidade, formato e marca d'agua).
+// A marca d'água vem do módulo único app/lib/watermark.mjs: quem chama decide se ela está ativa e passa
+// { active, cfg, brandName, imagePath, imageExists, fontFile }. Sem esse contexto, nada é desenhado (padrão: desligada).
+export function finalize(src, out, opts, { watermark = null } = {}) {
   const o = normalizeExportOptions(opts); const p = probe(src); const short = Math.min(p.width, p.height); const f = EXPORT_OPTIONS.resolution[o.resolution] / short;
-  const ev = (n) => Math.max(2, Math.round((n * f) / 2) * 2); const vf = [`scale=${ev(p.width)}:${ev(p.height)}:flags=lanczos`, `fps=${o.fps}`];
-  if (o.watermark) vf.push(`drawtext=fontfile='${FONT}':text='Pippit':x=w-text_w-16:y=h-text_h-16:fontsize=${Math.max(14, Math.round(EXPORT_OPTIONS.resolution[o.resolution] / 24))}:fontcolor=white@0.7:box=1:boxcolor=black@0.35`);
-  const q = EXPORT_OPTIONS.quality[o.quality]; const args = ['-y', '-i', src, '-vf', vf.join(','), '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf), '-pix_fmt', 'yuv420p'];
-  if (p.hasAudio) args.push('-c:a', 'aac'); else args.push('-an'); args.push('-f', EXPORT_OPTIONS.format[o.format], out); run(FFMPEG, args); return { ...probe(out), options: o };
+  const ev = (n) => Math.max(2, Math.round((n * f) / 2) * 2); const w = ev(p.width), h = ev(p.height);
+  const base = [`scale=${w}:${h}:flags=lanczos`, `fps=${o.fps}`];
+  const q = EXPORT_OPTIONS.quality[o.quality]; const enc = videoEncodeArgs({ preset: q.preset, crf: q.crf });
+  let filter = null;
+  if (watermark?.active && watermark.cfg) {
+    const wm = buildWatermarkFilter(watermark.cfg, { videoW: w, videoH: h, brandName: watermark.brandName || '', fontFile: watermark.fontFile, imagePath: watermark.imagePath || null, imageExists: watermark.imageExists !== false, baseFilters: base });
+    if (wm.ok && wm.mode === 'image') filter = { mode: 'image', complex: wm.filterComplex, extraInputs: wm.extraInputs };
+    else if (wm.ok) filter = { mode: 'text', vf: [...base, wm.drawtext] };
+    else { if (watermark) watermark.reason = wm.reason; } // sem imagem/nome: exporta SEM marca e informa o motivo
+  }
+  let args;
+  if (filter?.mode === 'image') {
+    args = ['-y', '-i', src, ...filter.extraInputs.flatMap((f2) => ['-i', f2]), '-filter_complex', filter.complex, '-map', '[outv]'];
+    if (p.hasAudio) args.push('-map', '0:a?', '-c:a', 'aac'); else args.push('-an');
+    args.push(...enc, '-f', EXPORT_OPTIONS.format[o.format], out);
+  } else {
+    args = ['-y', '-i', src, '-vf', (filter?.vf || base).join(','), ...enc];
+    if (p.hasAudio) args.push('-c:a', 'aac'); else args.push('-an');
+    args.push('-f', EXPORT_OPTIONS.format[o.format], out);
+  }
+  run(FFMPEG, args);
+  return { ...probe(out), options: o, watermark: filter ? { applied: true, kind: filter.mode, reason: watermark?.reason || "marca d'água aplicada" } : { applied: false, reason: watermark?.reason || "marca d'água desligada" } };
 }
 const RATIOS = { '9:16': [720, 1280], '16:9': [1280, 720], '1:1': [720, 720], '3:4': [720, 960], '4:3': [960, 720], '2:1': [1280, 640], '21:9': [1280, 548] };
 export const sizeFor = (ratio) => RATIOS[ratio] || RATIOS['9:16'];
@@ -53,11 +138,19 @@ export function generateLocalVideo(out, { seconds = 5, ratio = '9:16', image = n
   const [w, h] = sizeFor(ratio); const fps = 25; const frames = Math.max(1, Math.round(seconds * fps));
   const cap = caption ? wrapCaption(caption, ratio).map((ln, i, a) => `drawtext=fontfile='${FONT}':text='${esc(ln)}':x=(w-text_w)/2:y=h*0.5+${(i - (a.length - 1) / 2) * 52}:fontsize=38:fontcolor=white:box=1:boxcolor=black@0.45`).join(',') : '';
   if (image) {
-    run(FFMPEG, ['-y', '-loop', '1', '-i', image, '-vf', `scale=${w * 2}:${h * 2}:force_original_aspect_ratio=increase,crop=${w * 2}:${h * 2},zoompan=z='min(zoom+0.0008,1.2)':d=${frames}:s=${w}x${h}:fps=${fps}${cap ? ',' + cap : ''}`, '-t', String(seconds), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', out]);
+    run(FFMPEG, ['-y', '-loop', '1', '-i', image, '-vf', `scale=${w * 2}:${h * 2}:force_original_aspect_ratio=increase,crop=${w * 2}:${h * 2},zoompan=z='min(zoom+0.0008,1.2)':d=${frames}:s=${w}x${h}:fps=${fps}${cap ? ',' + cap : ''}`, '-t', String(seconds), ...codecArgs(), '-an', out]);
   } else {
-    run(FFMPEG, ['-y', '-f', 'lavfi', '-i', `color=c=0x${color}:s=${w}x${h}:r=${fps}:d=${seconds}`, ...(cap ? ['-vf', cap] : []), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', out]);
+    run(FFMPEG, ['-y', '-f', 'lavfi', '-i', `color=c=0x${color}:s=${w}x${h}:r=${fps}:d=${seconds}`, ...(cap ? ['-vf', cap] : []), ...codecArgs(), '-an', out]);
   }
   return probe(out);
+}
+export async function generateLocalVideoAsync(out, { seconds = 5, ratio = '9:16', image = null, color = '1b1b2f', caption = null, signal } = {}) {
+  const [w, h] = sizeFor(ratio); const fps = 25; const frames = Math.max(1, Math.round(seconds * fps));
+  const cap = caption ? wrapCaption(caption, ratio).map((ln, i, a) => `drawtext=fontfile='${FONT}':text='${esc(ln)}':x=(w-text_w)/2:y=h*0.5+${(i - (a.length - 1) / 2) * 52}:fontsize=38:fontcolor=white:box=1:boxcolor=black@0.45`).join(',') : '';
+  const args = image
+    ? ['-y', '-loop', '1', '-i', image, '-vf', `scale=${w * 2}:${h * 2}:force_original_aspect_ratio=increase,crop=${w * 2}:${h * 2},zoompan=z='min(zoom+0.0008,1.2)':d=${frames}:s=${w}x${h}:fps=${fps}${cap ? ',' + cap : ''}`, '-t', String(seconds), ...codecArgs(), '-an', out]
+    : ['-y', '-f', 'lavfi', '-i', `color=c=0x${color}:s=${w}x${h}:r=${fps}:d=${seconds}`, ...(cap ? ['-vf', cap] : []), ...codecArgs(), '-an', out];
+  await runAsync(FFMPEG, args, { signal }); return probe(out);
 }
 // quebra a legenda do storyboard em linhas curtas (ate 5) para caber no cartao
 function wrapCaption(text, ratio) {
@@ -70,11 +163,16 @@ export function lastFrame(video, out) { run(FFMPEG, ['-y', '-sseof', '-0.1', '-i
 export function extractFrameAt(video, out, t) { run(FFMPEG, ['-y', '-ss', String(Math.max(0, t)), '-i', video, '-frames:v', '1', out]); return out; }
 export function trimVideo(video, out, start, end) {
   const p = probe(video); const a = Math.max(0, start || 0), b = Math.min(p.duration, end || p.duration); if (!(b > a)) throw new Error('intervalo de corte invalido');
-  run(FFMPEG, ['-y', '-i', video, '-ss', String(a), '-to', String(b), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', ...(p.hasAudio ? ['-c:a', 'aac'] : ['-an']), out]); return probe(out);
+  run(FFMPEG, ['-y', '-i', video, '-ss', String(a), '-to', String(b), ...codecArgs(), ...(p.hasAudio ? ['-c:a', 'aac'] : ['-an']), out]); return probe(out);
 }
 // Voz sintetica LOCAL (Windows SAPI via PowerShell; NAO e IA generativa nem o Seed Audio do Pippit). Texto e voz passam por variaveis de ambiente (sem interpolacao no comando).
 let ttsOk;
-export function ttsAvailable() { if (ttsOk === undefined) { ttsOk = process.platform === 'win32' && !spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech'], { encoding: 'utf8' }).status ? true : false; } return ttsOk; }
+// `PIPPIT_TTS=off` (ou 0/false) finge que o SAPI não existe — usado pelos testes para que a regra
+// "sem voz local, o nó de Áudio bloqueia" seja determinística em qualquer sistema (no Windows o
+// SAPI responde de verdade e a rota devolvia 200 onde o teste esperava 409). Qualquer outro valor
+// mantém a detecção normal; nunca liga a voz à força, para não inventar capacidade inexistente.
+export function ttsForcedOff() { return /^(off|0|false|no)$/i.test(String(process.env.PIPPIT_TTS || '').trim()); }
+export function ttsAvailable() { if (ttsForcedOff()) return false; if (ttsOk === undefined) { ttsOk = process.platform === 'win32' && !spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech'], { encoding: 'utf8' }).status ? true : false; } return ttsOk; }
 export function ttsVoices() {
   const r = spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; $s.GetInstalledVoices() | ForEach-Object { $_.VoiceInfo.Name }; $s.Dispose()'], { encoding: 'utf8' });
   return r.status === 0 ? r.stdout.split(/\r?\n/).map((x) => x.trim()).filter(Boolean) : [];
@@ -111,25 +209,27 @@ export function transcribeSrt(src, srt, opts) { run(FFMPEG, whisperArgs(src, srt
 export function parseSrt(text) {
   return String(text).replace(/\r/g, '').split(/\n\n+/).map((b) => b.split('\n')).filter((l) => l.length >= 3).map((l) => { const m = /(\d+):(\d+):(\d+)[,.](\d+) --> (\d+):(\d+):(\d+)[,.](\d+)/.exec(l[1]); if (!m) return null; const t = (h, mi, se, ms) => Number(h) * 3600 + Number(mi) * 60 + Number(se) + Number(ms) / 1000; return { start: t(m[1], m[2], m[3], m[4]), end: t(m[5], m[6], m[7], m[8]), text: l.slice(2).join(' ').trim() }; }).filter(Boolean);
 }
+// Extrai um trecho de áudio mono 16 kHz (WAV) para transcrição — usado pelas legendas automáticas e pelo corte por transcrição.
+export function extractChunk(src, out, opts = {}) { run(FFMPEG, extractChunkArgs(src, out, opts)); return out; }
 export function extractAudio(video, out) { if (!probe(video).hasAudio) throw new Error('o video nao tem faixa de audio'); run(FFMPEG, ['-y', '-i', video, '-vn', '-c:a', 'libmp3lame', '-q:a', '2', out]); return probe(out); }
 // "Melhorar qualidade" (video) e "Amplificar" (imagem) CONVENCIONAIS: ampliacao 2x (lanczos) + reducao de ruido leve + nitidez. NAO e o upscaler de IA do Pippit.
 export function enhanceMedia(file, out, isVideo) {
   const p = probe(file); const w = Math.min(p.width * 2, 3840), h = Math.min(p.height * 2, 3840); const ev = (n) => Math.max(2, Math.round(n / 2) * 2);
   const vf = `scale=${ev(w)}:${ev(h)}:flags=lanczos,${isVideo ? 'hqdn3d=1.5:1.5:6:6,' : ''}unsharp=5:5:0.8:5:5:0.0`;
-  run(FFMPEG, ['-y', '-i', file, '-vf', vf, ...(isVideo ? ['-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
+  run(FFMPEG, ['-y', '-i', file, '-vf', vf, ...(isVideo ? [...videoEncodeArgs({ crf: 18 }), '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
 }
 export function cropToRatio(file, out, ratio, isVideo) {
   const p = probe(file); const [rw, rh] = String(ratio).split(':').map(Number); if (!(rw > 0 && rh > 0)) throw new Error('proporcao invalida');
   const target = rw / rh; const cur = p.width / p.height; const w = cur > target ? Math.round((p.height * target) / 2) * 2 : p.width; const h = cur > target ? p.height : Math.round((p.width / target) / 2) * 2;
-  run(FFMPEG, ['-y', '-i', file, '-vf', `crop=${w}:${h}`, ...(isVideo ? ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
+  run(FFMPEG, ['-y', '-i', file, '-vf', `crop=${w}:${h}`, ...(isVideo ? [...codecArgs(), '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
 }
 export function rotateMedia(file, out, degrees, isVideo) {
   const f = { 90: 'transpose=1', 180: 'transpose=1,transpose=1', 270: 'transpose=2' }[degrees]; if (!f) throw new Error('angulo invalido (90, 180 ou 270)');
-  run(FFMPEG, ['-y', '-i', file, '-vf', f, ...(isVideo ? ['-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
+  run(FFMPEG, ['-y', '-i', file, '-vf', f, ...(isVideo ? [...codecArgs(), '-c:a', 'copy'] : ['-frames:v', '1']), out]); return probe(out);
 }
 export function concat(files, out) {
   const list = out + '.txt'; fs.writeFileSync(list, files.map((f) => "file '" + f.split('\\').join('/').split("'").join("'"+"\\"+"''") + "'").join(String.fromCharCode(10)));
-  run(FFMPEG, ['-y', '-f', 'concat', '-safe', '0', '-i', list, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-r', '25', '-an', out]); fs.unlinkSync(list); return probe(out);
+  run(FFMPEG, ['-y', '-f', 'concat', '-safe', '0', '-i', list, ...codecArgs(), '-r', '25', '-an', out]); fs.unlinkSync(list); return probe(out);
 }
 const FONT = 'C\\:/Windows/Fonts/arial.ttf';
 const BS = String.fromCharCode(92);
@@ -149,10 +249,10 @@ export function exportTimeline(tl, resolve, out) {
     const smooth = !!c.smoothSlow && sp < 1; const baseV = smooth ? `${base},minterpolate=fps=25:mi_mode=mci:mc_mode=aobmc:vsbmc=1` : base;
     if (bg.type === 'blur') {
       const fc = `[0:v]${baseV},split[a][b];[a]scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},boxblur=20:5[bg];[b]scale=${w}:${h}:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2,setsar=1,fps=25[v]`;
-      run(FFMPEG, ['-y', '-i', src, '-filter_complex', fc, '-map', '[v]', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', f]);
+      run(FFMPEG, ['-y', '-i', src, '-filter_complex', fc, '-map', '[v]', ...codecArgs(), '-an', f]);
     } else {
       const vf = [baseV, `scale=${w}:${h}:force_original_aspect_ratio=decrease`, `pad=${w}:${h}:(ow-iw)/2:(oh-ih)/2:color=0x${color}`, 'setsar=1', 'fps=25'];
-      run(FFMPEG, ['-y', '-i', src, '-vf', vf.join(','), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-an', f]);
+      run(FFMPEG, ['-y', '-i', src, '-vf', vf.join(','), ...codecArgs(), '-an', f]);
     }
     parts.push(f);
     const wav = path.join(dir, `_aud${i}_${stamp}.wav`); tmp.push(wav);
@@ -173,9 +273,9 @@ export function exportTimeline(tl, resolve, out) {
   const fc = []; if (filters.length) fc.push(`[0:v]${filters.join(',')}[v]`);
   if (ains.length) { ains.forEach((a, i) => fc.push(`[${i + 1}:a]volume=${a.volume},adelay=${Math.round(a.start * 1000)}|${Math.round(a.start * 1000)}[a${i}]`)); fc.push(`${ains.map((_, i) => `[a${i}]`).join('')}amix=inputs=${ains.length}:duration=longest:normalize=0[aout]`); }
   if (fc.length) args.push('-filter_complex', fc.join(';')); else args.push('-c:v', 'copy');
-  if (fc.length) { args.push('-map', filters.length ? '[v]' : '0:v'); if (ains.length) args.push('-map', '[aout]'); args.push('-c:v', 'libx264', '-pix_fmt', 'yuv420p'); if (ains.length) args.push('-c:a', 'aac', '-shortest'); }
+  if (fc.length) { args.push('-map', filters.length ? '[v]' : '0:v'); if (ains.length) args.push('-map', '[aout]'); args.push(...codecArgs()); if (ains.length) args.push('-c:a', 'aac', '-shortest'); }
   args.push(out); run(FFMPEG, args); tmp.forEach((x) => { try { fs.unlinkSync(x); } catch {} });
   return probe(out);
 }
 // Foto falante (prévia local, SEM animação labial/IA): foto estática + narração
-export function stillWithAudio(image, wav, out) { run(FFMPEG, ['-y', '-loop', '1', '-i', image, '-i', wav, '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2,format=yuv420p', '-c:v', 'libx264', '-tune', 'stillimage', '-c:a', 'aac', '-shortest', '-r', '25', out]); return probe(out); }
+export function stillWithAudio(image, wav, out) { run(FFMPEG, ['-y', '-loop', '1', '-i', image, '-i', wav, '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2,format=yuv420p', ...videoEncodeArgs({ tune: 'stillimage' }), '-c:a', 'aac', '-shortest', '-r', '25', out]); return probe(out); }

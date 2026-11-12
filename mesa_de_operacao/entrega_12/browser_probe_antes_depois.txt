@@ -1,0 +1,8 @@
+=== código ANTIGO (sondagem de 5 s) com um navegador que demora 6 s para responder --version ===
+5007 ms {"ok":false,"reason":"Chromium configurado em /tmp/chrome_lento, mas não executa (faltam dependências/libs ou o binário)."}
+
+=== código NOVO (sondagem de 20 s) com o MESMO navegador ===
+6014 ms {"ok":true,"executablePath":"/tmp/chrome_lento","probeMs":6013,"origem":"PIPERLINE_CHROMIUM_EXECUTABLE"}
+
+=== o teste inteiro com o mesmo navegador lento (antes: SKIP) ===
+pricing_faq_ui.test.mjs: ok (6 perguntas registradas, respostas desconhecidas preservadas e planos locais sem pagamento) [6.4s]

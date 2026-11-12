@@ -2,6 +2,8 @@
 
 Estudo de produto e benchmarking para a implementação própria da Opportunity. Navegação **pública, sem login**; nada foi contornado e nenhum endpoint foi chamado à mão.
 
+> **Estado atual (09/11/2026):** reconstrução até a **rodada 8** — `STATUS.md` (resumo) e `FEATURE_INVENTORY.md` (linha a linha, 83/122 = 68,0%). Suíte: **126 testes** (75 sem navegador + 51 de interface). As seções abaixo contam a história da auditoria e das retomadas; quando falam de contagem de testes, referem-se à data da seção. Guia de uso: `PASSO_A_PASSO_USUARIO.md`.
+
 ## Leia nesta ordem
 1. `PIPPIT_PRODUCT_TECHNICAL_ANALYSIS.md` — o que foi observado (stack, rotas, recursos, rede, funcionalidades, interface, limitações).
 2. `OPPORTUNITY_IMPLEMENTATION_BLUEPRINT.md` — requisitos **independentes** para construirmos nossa solução (sem copiar nada do Pippit).
@@ -33,6 +35,7 @@ Estudo de produto e benchmarking para a implementação própria da Opportunity.
 | `PIPPIT_CAPTURE_STATUS.md` | estado das capturas automáticas pelo REA CLI (lotes 1–6), falhas e pendências |
 | `PIPPIT_SOCIAL_PUBLISHING.md` | prioridade: conexão de TikTok/Instagram/Facebook/YouTube, publicação agendada, análise; o que foi observado e o que depende de OAuth/Publicar |
 | `PIPPIT_WORKFLOW_OBSERVATIONS.md` | projetos existentes da conta: tipos, workflow do agente, design doc, nós/arestas, gating por plano; observável × desconhecido |
+| `local_reconstruction/recuperar_ambiente.sh` | **1 comando** para voltar depois de um reset de sandbox: instala dependências em `.deps` (fora da árvore versionada), acha ffmpeg/ffprobe/Chromium e roda a suíte; aceita `--bundle` para restaurar o código do Drive |
 | `local_reconstruction/` | **aplicação local executável** (`node local_reconstruction/app/server.mjs` → http://127.0.0.1:5180) + módulos e testes; ver `local_reconstruction/README.md` |
 | `FEATURE_INVENTORY.md` | inventário integral: estado de cada funcionalidade (não investigada/investigada/especificada/implementada/verificada/bloqueada) e diferenças |
 | `evidence_cli/recovered/` e `evidence_cli/recovered_pecas/` | **70 scripts recuperados** (63 antes ausentes + gtm/gtag) analisados pela CLI do REA; saídas inteiras e peças dos 4+2 que truncam. Índice: `evidence_cli/recovered/INDEX.md`; tabela por script: `notes/RECOVERY_STATUS.csv` |
@@ -88,7 +91,7 @@ Verificado no início: Chrome 9222 logado (1 aba), REA MCP ativo, manifesto rege
 **Ainda pendente:** "Criar com IA"/"Enviar skill", menu "…" do avatar, "Programar" pós-conta, 3D "Imagem de IA", SSE ao vivo/`subscribe_run`, planos pagos, conteúdo editorial do serviço (galeria, anúncios, prévias), animações/ferramentas inteligentes do editor, "Salvar sem marca d'água" (Settings), tradução da interface para os outros 17 idiomas.
 
 ## Segunda retomada (21/10/2026): IA real, skills em pacote e revisão de fidelidade
-**Suíte:** `node local_reconstruction/test/run-all.mjs` (25 testes). `test/llm_live.test.mjs` (opcional, lento) valida os planejadores com o Ollama real (`qwen3-local`, 24–103 s por chamada).
+**Suíte (naquela retomada; hoje 126 testes — ver `STATUS.md`):** `node local_reconstruction/test/run-all.mjs` (25 testes então). `test/llm_live.test.mjs` (opcional, lento) valida os planejadores com o Ollama real (`qwen3-local`, 24–103 s por chamada).
 **IA integrada de forma legítima (sem depender de endpoints privados do Pippit):**
 - **LLM** (`src/llm.mjs`): Ollama local autodetectado (modelo já instalado `qwen3-local`) ou qualquer servidor compatível com OpenAI (URL/modelo/chave em Configurações > Assistente de IA; chaves só em data/db.json). Usado em: planejador do agente (temas, design doc, storyboard por segmento, com fallback para regras e aviso), Criar skill com IA, Refinar prompt (Gerador), Criação Inteligente (ideias diárias/sob demanda a partir do histórico + notificação). **Não é o LLM do Pippit.**
 - **Imagem** (`src/imagegen.mjs`): provedor do usuário via `/images/generations` (nó Imagem). Testado só com servidor de mentira (sem chave real).
@@ -126,7 +129,8 @@ Verificado no início: Chrome 9222 logado (1 aba), REA MCP ativo, manifesto rege
 **Teste ponta a ponta controlado (21/10/2026, Qwen3 real, 	est/e2e_live.test.mjs, relatório em captures/e2e_live/):** projeto -> pedido -> temas (63,5 s) e storyboard (51,4 s) do LLM real -> tarefas de geração preparadas e bloqueadas (sem provedor) -> reabertura em outro processo com persistência confirmada; repetir o mesmo pedido veio do cache (0 s). Nada gerado, nenhum crédito. Dependência exata para geração/composição/exportação reais: provedor de vídeo configurado + autorização de gasto (adiado por decisão do usuário).
 
 **Comparação passiva por tela (21/10/2026, REA inspect-web-page + compare-web-captures, 
-otes/compare_screens.mjs/ecompare.mjs, saídas em captures/verify/screens/):** Marketing Studio, Story Studio, Assets e Skills do Pippit logado vs. telas locais = **changed** nas quatro (evidências ev_8c45e5c3…, ev_59fd5209…, ev_2984de7e…, ev_74d86783…): dom_structure changed(2), accessibility changed(1), storage changed(150); scripts/resources/network/metadata/webmcp = unknown (observação de 500 ms, sem eventos). Os números idênticos nas quatro telas indicam diferença dominada por estrutura/armazenamento global, não por conteúdo de cada tela; a ferramenta não mede o conteúdo visível. Sem aprovação formal possível (verify_reconstruction não aceita web); nenhuma equivalência afirmada. Nada gerado.
+otes/compare_screens.mjs/
+ecompare.mjs, saídas em captures/verify/screens/):** Marketing Studio, Story Studio, Assets e Skills do Pippit logado vs. telas locais = **changed** nas quatro (evidências ev_8c45e5c3…, ev_59fd5209…, ev_2984de7e…, ev_74d86783…): dom_structure changed(2), accessibility changed(1), storage changed(150); scripts/resources/network/metadata/webmcp = unknown (observação de 500 ms, sem eventos). Os números idênticos nas quatro telas indicam diferença dominada por estrutura/armazenamento global, não por conteúdo de cada tela; a ferramenta não mede o conteúdo visível. Sem aprovação formal possível (verify_reconstruction não aceita web); nenhuma equivalência afirmada. Nada gerado.
 
 ## Lote 2 (21/10/2026): proporção do editor, menu de ativos, bolsas de créditos e Canvas → Editor
 
@@ -183,3 +187,87 @@ Atualizado de 6.5.0 para 6.7.0 (setup do Claude Code + skill; `rea update` não 
 
 ## Lote 5 — especificação de avatares, matriz de engenharia reversa e contratos estáticos (23/10/2026)
 `PIPPIT_AVATAR_SPEC.md`, `PIPPIT_REVERSE_MATRIX.md` (gerada por `notes/build_reverse_matrix.mjs`), `notes/dynamic_questionnaire.schema.json`. REA: 9 incertezas registradas (`notes/rea_unknowns.json`, bundles `captures/current_670/rea_session_bundle_lote5*.json`). O agente local passou a emitir `questionnaire` (contrato recuperado do bundle). Contrato do agente (`submit_run`, Skills × agentes × modelos, exemplos JSON): `PIPPIT_AGENT_CONTRACT.md`; mensagens do agente local ganham o campo informativo `wire` (`app/lib/agent_contract.mjs`). Execução real: filtros de avatar funcionam; estilos só selecionáveis (não aplicados); Foto falante = prévia local sem animação; avatar selecionado não gera vídeo.
+
+## Retomada PiperLine — SSE e cancelamento local (09/11/2026)
+
+A revisão do passo inicial conferiu o servidor com o contrato que as capturas realmente documentam: replay de `subscribe_thread` = `message/message/ping`; replay de `sse_asset` = `ping: connected`, `AssetJsonUpdate` com JSON de patches e `ping` final. **O fluxo incremental ao vivo de `subscribe_run` continua sem evidência do Pippit**; a rota local usa um fallback que reemite o snapshot do thread e não deve ser tratado como formato original.
+
+Ajustes locais: o fechamento dos streams é ligado à resposta (evita listener órfão); estados Working/Generating também notificam SSE; ffmpeg local agora roda sem bloquear o servidor e aceita abort ao cancelar. Testes cobrem as atualizações ao vivo locais, cancelamento antes do processamento e cancelamento com renderer injetado, verificando que o resultado cancelado não é publicado. O caminho HTTP de cancelamento durante ffmpeg é executado apenas quando ffmpeg está disponível. Nenhuma geração foi enviada ao Pippit, nenhum crédito foi gasto e nenhuma autorização externa foi usada.
+
+**Limite de prova:** testes locais validam a implementação local, não o formato ao vivo do Pippit nem os contratos remotos de `cancel_run` e run↔tarefa; equivalência não foi demonstrada. O usuário não tem acesso à conta Pippit disponível ao agente: observações de custo/exportação/respostas reais do Avatar ficam **PENDENTE DE OBSERVAÇÃO HUMANA**; não tentar acesso nem solicitar autorização.
+
+## Retomada local — telas e roteador gratuito (09/11/2026)
+
+Implementado o seletor local de Produto/Personagem no Marketing (cadastros locais, busca, ordenação, seleção e criação a partir de um ativo de imagem); catálogo recomendado não capturado permanece indisponível. Canvas: diálogo `Chat history` com histórico por projeto local e `No history yet` quando vazio; os dados não são compartilhados com o Pippit. Os detalhes dos 10 templates continuam incompletos: só oito nomes foram preservados, dois são desconhecidos e nenhum texto pré-preenchido ausente foi inventado. As telas de criação/detalhes de Skills já existiam.
+
+Adicionado `local_reconstruction/src/free_router.mjs`: configuração sem segredo persistido, catálogo limitado a adaptadores locais/possíveis cotas gratuitas, roteamento por capacidades e preferência de tarefa, bloqueio do fallback pago e adaptadores OpenAI-compatible/Gemini com testes de fetch falso. Free tiers cloud são condicionais e exigem confirmação de disponibilidade/quota; nenhuma chamada real de provedor foi feita.
+
+Suíte completa com Chromium temporário ativo: `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/tmp/chromium LD_LIBRARY_PATH=/tmp/al2023/lib`, FFmpeg/ffprobe temporários e `PIPPIT_LLM=off` → **59 passaram, 2 SKIP por evidência ausente, 0 falharam (61)**. Filtro `ui`: 25/25 passaram; `publishing` (UI) passou também. Capturas ausentes: `captures/scenario_video-agent_bodies.json`; `captures/auth/cdp/oauth_redirect/2_pagina_0.txt`; `captures/auth/cdp/editor_right_panel/5_1_Básico.txt`. Ver lista e classificação em `ARENA_STATUS.md`.
+
+### Telas investigadas com cobertura local de UI (09/11/2026)
+
+Adicionados testes UI focados para `Templates`, `Settings` internos, detalhes de Skills e menu/Create skill, menu de avatar próprio, Omni, Inspiration/feed, notificações, FAQ de preços, dropdowns do composer e modo Áudio da Home. Quando a captura não contém o conteúdo operacional, a tela local o marca `UNOBSERVED` e não inventa ações/respostas: só oito nomes de templates são conhecidos; o menu de avatar próprio, o feed Inspiration e os contratos/respostas Omni ainda não foram observados; as respostas do FAQ e os presets/custos do modo Áudio não foram preservados. Os fluxos de geração não são chamados. Detalhes por tela e `UNOBSERVED` estão em `FEATURE_INVENTORY.md` e `ARENA_STATUS.md`.
+
+A instalação direta via CDN/apt falhou; o Chromium de teste foi executado com binário temporário e bibliotecas extraídas do pacote npm serverless. **25/25** testes do filtro UI passaram; na suíte completa, **26 verificações de UI passaram** (incluindo `publishing`), com apenas os dois skips de capturas REA ausentes listados acima.
+
+## E1 — Roteador gratuito com adaptadores conectados (09/11/2026)
+
+`src/free_router.mjs` oferece execução em runtime para Ollama e NVIDIA NIM por chat completions OpenAI-compatible, Gemini via `generateContent` (inclui imagem/áudio multimodais quando o modelo retorna bytes) e operações de vídeo de longa duração via `predictLongRunning`. A tela Configurações permite declarar base URL, IDs/capacidades do modelo, prioridades/preferências por tarefa, confirmação de tier gratuito e limite diário local. API: `GET/POST /api/free-router/config`; execução iniciada explicitamente por `POST /api/free-router/execute`.
+
+Cloud só é elegível se **provedor e cada modelo** estiverem marcados como gratuitos, houver limite diário positivo e cota local não estiver bloqueada. Um HTTP 429 bloqueia o provedor localmente até o próximo dia UTC; limites do provedor seguem sendo autoritativos. Fallback pago é recusado; fallback só ocorre para outro candidato gratuito configurado. Text, visão, áudio de entrada, saída de imagem/áudio/vídeo são capacidades distintas; endpoint/modelo sem implementação compatível falha fechado.
+
+Segredos: `NVIDIA_API_KEY`/`GEMINI_API_KEY` do ambiente do servidor ou entrada password opcional nas Configurações (memória do processo apenas). Metadados ficam no armazenamento local; nenhum segredo é gravado no `db.json` ou versionado. Legacy LLM/provedores também migram chaves antigas para memória, não as persistem e restringem endpoints genéricos a rede local; chamadas cloud devem passar pelo roteador. Sem chave, provedores cloud mostram não configurado e suas tarefas ficam bloqueadas; Ollama não requer chave. Nenhuma chamada real ou chave foi usada nesta etapa. A marcação de tier gratuito é configuração/declaração do usuário, não consulta de faturamento: não é possível provar previamente a quota remanescente sem uma chamada ao fornecedor.
+
+Testes: `free_router` (planner/adapters simulados), `free_router_http` (servidores falsos de Ollama/NIM/Gemini), `free_router_ui` (configuração de Settings e ausência do segredo na resposta). Na suíte completa: 61 passou, 2 skip explícitos por capturas ausentes, 0 falhas (63 testes). Aprovação local não prova equivalência com o Pippit nem disponibilidade/custo de API externa.
+
+## E2 — Composer → tarefa → roteador → Canvas/Histórico
+
+O botão **Executar grátis** no composer inicia uma tarefa de texto no roteador gratuito. A tarefa cria um projeto local no Canvas, guarda o prompt/resposta no histórico do chat e coloca prompt e resultado em nós ligados. Estados persistentes: `queued`, `running`, `succeeded`, `blocked`, `failed`, `canceled`; o cliente acompanha mudanças via SSE (`GET /api/local-runs/:id/events`) e pode cancelar (`POST /api/local-runs/:id/cancel`). Cancelamento aborta o fetch ativo e impede fallback para a próxima rota.
+
+`GET /api/local-runs` lista tarefas; `POST /api/local-runs` cria execução de texto; `GET /api/local-runs/:id` consulta estado. Quando não há rota elegível, a tarefa termina como bloqueada, com explicação registrada no projeto; nenhuma rota paga é tentada. A suíte E2 usa somente servidor fake Ollama e cobre execução, SSE/replay ordenado, persistência Canvas/Histórico e cancelamento durante chamada. Isso é uma extensão local: não implementa nem alega reproduzir o contrato remoto `subscribe_run`/`cancel_run` do Pippit, e não chama geração de mídia. Suíte completa E2: **62 passaram, 2 SKIP explícitos por capturas ausentes, 0 falhas (64 testes)**.
+
+## E3 — Foto falante: prévia local, sem lip-sync
+
+O fluxo local permite enviar uma foto JPG/PNG, escrever um roteiro ou enviar áudio (mp3/wma/flac; vídeo aceito para extração local do áudio), indicar um gesto apenas como anotação e exportar uma prévia MP4 com FFmpeg. É uma foto estática com áudio, não uma animação: a interface marca claramente **sem IA e sem animação labial**. O arquivo é salvo em Ativos e o fluxo local não chama Pippit nem debita créditos. Em Windows com SAPI instalado, o roteiro pode gerar voz offline; onde SAPI não existe, a solicitação de locução por roteiro falha com 503 explícito, não faz fallback de rede, e o upload de áudio continua disponível. Não há modelos de voz baixados automaticamente.
+
+Cobertura E3 no teste `talkingphoto_ui`: exportação fake/isolada de mídia local a partir de foto+áudio enviado, presença de imagem/áudio no MP4, rótulo de prévia, saldo inalterado e bloqueio de TTS sem SAPI. Não confundir com o provedor externo opcional (fluxo à parte com autorização e custo; sem uso nesta etapa). Único custo de avatar observado: **5,88 s = 11 créditos**; nenhum outro custo pode ser extrapolado e todo o restante segue `UNOBSERVED`. Suíte completa após E3: **62 passaram, 2 SKIP explícitos por capturas ausentes, 0 falhas (64 testes)**.
+
+## E4 — Whisper local para legendas
+
+O Editor usa o filtro Whisper local do FFmpeg (`whisper.cpp`) e um arquivo GGML escolhido pelo usuário em Configurações > Assistente de IA. Nenhum modelo é baixado automaticamente. Se FFmpeg não tiver o filtro ou o modelo GGML não existir, a API de legendas automáticas retorna **HTTP 501** com `blocked: true`, em vez de simular uma transcrição. Neste ambiente o FFmpeg não inclui Whisper e não há modelo local, logo transcrição ponta a ponta permanece bloqueada até o usuário disponibilizar ambos. `whisper_local.test.mjs`, `silence.test.mjs` e `llm_ui.test.mjs` cobrem o bloqueio, configuração, comando e parser SRT. Suíte completa E4: **63 passaram, 2 SKIP explícitos por capturas ausentes, 0 falhas (65 testes)**.
+
+## Fechamento E6/E7 — retomada local (09/11/2026)
+
+E6 validado localmente: Estúdio 3D “Imagem de IA” e “Programar” permanecem em estados locais; a preferência “Salvar sem marca d’água” persiste localmente, mas seu efeito na exportação é **UNOBSERVED**. Whisper usa somente runtime/modelo GGML fornecidos localmente e responde 501 quando indisponíveis. Não houve chamada real a provedor, OAuth, publicação, conta/créditos Pippit ou download de modelo.
+
+Suíte final: `node local_reconstruction/test/run-all.mjs` com `PIPPIT_LLM=off`: **66 total — 64 passaram, 2 skips explícitos, 0 falhas**. `pageview` foi pulado por ausência de `captures/scenario_video-agent_bodies.json`; `parity` foi pulado pela ausência de seus dois arquivos de captura. Detalhes reproduzíveis em `/home/user/pippet-e6-final-suite.txt` neste ambiente. Os skips são apenas por evidência de captura ausente; não contam como aprovação.
+
+Readiness recalculada: **77/119 = 64,7%** dentro do escopo reproduzível (26 implementadas + 51 verificadas). As 14 linhas explicitamente fora de escopo — telemetria/funil, editorial, recompensa/convite, compra real, login de provedores e ferramentas/artefatos de RE — estão separadas em `FEATURE_INVENTORY.md`, fora do denominador. No escopo restam 12 parciais, 23 investigadas e 7 bloqueadas. É cobertura local por linha, não equivalência; lacunas seguem `PENDENTE DE OBSERVAÇÃO HUMANA` ou `UNOBSERVED`.
+
+A retomada foi feita sobre a árvore recuperada em `4c04a5f` (base operacional desta etapa), preservando a história local e reaplicando o trabalho E5 previamente guardado, além de completar E6 e estes documentos E7. O fechamento E6/E7 foi commitado localmente (`9e8d864`); não foi feito push. Aguarda autorização explícita antes de qualquer push.
+
+## Continuação E7 — comparação Canvas e controles do painel (09/11/2026)
+
+Comparação do `screenshots/auth/tela_atual_usuario.png` de Drive com o Canvas local: o painel do agente original tem ações de histórico, Show on left, Share e Close; a UI local anterior não tinha mover/fechar e usava rótulos textuais. Agora há controles com ícones/títulos acessíveis, mover à esquerda/direita, fechar/reabrir sem perder o rascunho. Validação em `local_reconstruction/test/canvas_panel_ui.test.mjs`; revisão também do par de avatar `b1_avatar_voice_w01.png` × `07_avatar_etapa1.png`, sem diferença material perceptível nesse estado. A revisão visual ainda não cobre todas as telas/estados.
+
+## Continuação E7 — página de avatares (etapa 4, 09/11/2026)
+
+Na referência Drive `auth/b3_existing_avatar_w03.png`, a tela de Avatares fica deslocada para a direita e usa tiles verticais de 128×228 px, com duas amostras de vídeo, duas amostras de foto e espaços vazios. A versão local foi ajustada com as miniaturas Emily, Kavi, Malcolm e Helena recortadas das evidências (em `local_reconstruction/app/public/assets/avatar-samples/`); o avatar próprio é uma foto local, continua dinâmico. Não há chamadas ao Pippit para as amostras. `avatar_gallery_ui.test.mjs` verifica miniaturas locais, alinhamento, dimensões, seis posições, avatar próprio e erros de browser. Captura em `local_reconstruction/test/ui-shots/95_avatar_gallery.png`.
+
+Na etapa 4, a suíte `node local_reconstruction/test/run-all.mjs` com `PIPPIT_LLM=off`, FFmpeg 9 e Chromium 153 teve **68 total — 66 passaram, 2 skips de captura ausente, 0 falhas**. Log: `/home/user/pippet-stage4-full-suite.txt`.
+
+## Continuação E7 — menu do histórico (etapa 5, 09/11/2026)
+
+Comparei as referências `auth/guia_historico.png` e `auth/historico_menu_mais_usuario.png` com a captura local `12_historico_menu.png`. Ajustei a abertura do menu para a esquerda do botão, dentro da barra lateral, e acrescentei os ícones da captura para compartilhar, renomear e excluir. `ui.test.mjs` valida os três ícones e a geometria do popup. A semântica/ação continua local (compartilhamento copia link local somente leitura); nada de serviço externo foi suposto.
+
+Suíte de referência anterior: **68 total — 66 passaram, 2 skips de capturas ausentes, 0 falhas**. Log integral incluído no bundle da etapa 5 no Drive.
+
+## Continuação E7 — catálogo de Hooks (etapa 6)
+
+Implementei os 40 itens de Hook nas cinco categorias conforme o inventário de evidências; `features_ui.test.mjs` testa a lista exata, filtros, busca “crunch”, seleção e remoção do chip. Captura: `local_reconstruction/test/ui-shots/96_marketing_hooks.png`. O teste focado e a suíte completa passaram: **68 total — 66 passaram, 2 skips por capturas ausentes, 0 falhas**. Log completo da etapa 6: `/home/user/pippet-stage6-full-suite.txt` (incluído no bundle atualizado do Drive). Quatro linhas relacionadas a Marketing passam a `parcial (teste UI)`; prontidão permanece 77/119 (64,7%), com 13 parciais, 22 investigadas e 7 bloqueadas entre as 42 não prontas.
+
+## Continuação E7 — opções de Export settings (etapa 7)
+
+Atualizei `ui.test.mjs` para checar os campos/valores padrão do diálogo (watermark, resoluções, qualidade, FPS, formato), nome obrigatório/limite e exportação local via FFmpeg. Screenshot de regressão: `local_reconstruction/test/ui-shots/97_export_settings.png`. O clique em capa não foi inferido nem implementado porque a evidência diz que não abre seletor; exportação local não é paridade do render Pippit. Teste focado e suíte completa passaram: **68 total — 66 passaram, 2 skips por capturas ausentes, 0 falhas**; log `/home/user/pippet-stage7-full-suite.txt` (incluído no bundle desta etapa). Inventário: 13 parciais, 22 investigadas, 7 bloqueadas nas 42 restantes; readiness segue 77/119 (64,7%).
+
+E1b (tentativa autorizada): NVIDIA/Gemini/Ollama — `present`; HTTP `n/a` para os três, pois nenhuma requisição foi emitida. O sandbox bloqueia saída aos endpoints dos provedores; não tentei contornar a política. Os valores não foram copiados para arquivos, logs, commits ou Drive.

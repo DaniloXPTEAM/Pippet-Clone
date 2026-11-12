@@ -1,0 +1,3 @@
+lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)

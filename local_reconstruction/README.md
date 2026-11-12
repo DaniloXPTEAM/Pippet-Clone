@@ -6,7 +6,9 @@ Reconstrução funcional **somente do que foi observado** (sem invenção). Roda
 - `src/pageview.mjs`: cliente de page view `GET /lv/v1/event/report` (variantes cms_consumer e landing). Teste compara URL e ordem de parâmetros com `captures/scenario_video-agent_bodies.json`, regras de não-envio (sem host/web_id, bots), transporte e erro engolido.
 - Especificação: `../TELEMETRY_SPEC.md`.
 
-## NÃO reconstruído: sem evidência (DESCONHECIDO)
+## Estado da 1ª análise (2026-10) — hoje SUPERADO
+> Histórico, não é o estado atual: autenticação, projetos, geração, agentes, editor, mídia, exportação, histórico, agendamento, canvas e créditos/planos **já foram reconstruídos** nas rodadas 1–8 (ver `../STATUS.md` e `../FEATURE_INVENTORY.md`). O parágrafo abaixo descreve apenas o que se sabia antes de olhar os bundles autenticados.
+
 Autenticação, projetos, geração (vídeo/imagem), agentes, editor, mídia, exportação, histórico, agendamento, canvas, créditos/planos. A navegação pública só mostrou textos de UI (60 chaves `Pippit_agent_*`) e `POST /lv/v1/user/web/user_info`; nenhuma API de geração foi chamada. Implementá-los seria inventar. Eles dependem de sessão autenticada (regra do projeto: não acessar áreas privadas nem contornar login) e de backend que o frontend público não expõe.
 ## Pendências de verificação
 - Corpos dos POSTs de monitoramento (Slardar/MCS/Clarity/GA/Bing/abtest) e valor da constante de host de fallback (`ti.KR`).
@@ -22,6 +24,23 @@ Autenticação, projetos, geração (vídeo/imagem), agentes, editor, mídia, ex
 | Workflow do agente (segmentação ≤15 s, pergunta, confirmação, gating por plano, nós/arestas, custo 7/s) | `src/workflow.mjs` | PARCIALMENTE EQUIVALENTE (estrutura e regras observadas; o planejador/LLM e os prompts internos são DESCONHECIDOS e ficam como interface `planner`) | `../PIPPIT_WORKFLOW_OBSERVATIONS.md` |
 Verificação formal `verify_reconstruction` do REA: não executada (exige captura comparável da reconstrução).
 
+
+## Recuperar o ambiente depois de um reset do sandbox (1 comando)
+Um reset apaga `node_modules`, `.deps`, `/tmp/env.sh` e a toolchain — o código fica (ou volta pelo bundle). Depois de recuperar o repositório:
+
+```bash
+./local_reconstruction/recuperar_ambiente.sh            # instala dependências fora da árvore, acha ffmpeg/ffprobe/Chromium e roda a suíte
+./local_reconstruction/recuperar_ambiente.sh --bundle rodada6.bundle   # o mesmo, restaurando o código do bundle baixado do Drive (pasta 1FKoC6t1gcXjI4zSc4vqC_M_dx_bMDZT6)
+source local_reconstruction/.deps/env.sh                 # para usar outro shell depois
+```
+
+O que o script garante: dependências em **`.deps/node_modules`** (fora do código versionado; `node_modules` é só um atalho para o ESM resolver `import 'playwright'`), `ffmpeg` (usa `PIPPIT_FFMPEG` ou instala `imageio-ffmpeg`), `ffprobe` (`@ffprobe-installer`), Chromium (`PIPERLINE_CHROMIUM_EXECUTABLE`/`/tmp/chromium`/`@sparticuz/chromium`) e a suíte completa. Sem ffmpeg/Chromium ele avisa e a suíte segue com os testes que dependem disso pulados, em vez de falhar em cascata.
+
+## Credenciais: ambiente ou `.env` local (nunca no git)
+
+- `.env.example` na raiz lista **só os nomes** das variáveis (`SUPABASE_URL`, `SUPABASE_ANON_KEY`, `FREELLMAPI_API_KEY`, `OMNIROUTER_API_KEY`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `NOVAI_API_KEY`, `NVIDIA_API_KEY`, `HF_TOKEN`).
+- Para usar o arquivo: copie `.env.example` para `.env` na raiz e preencha. O `.env` está no `.gitignore`; o servidor o lê **antes de qualquer outro módulo** (`app/lib/env-file.mjs`, primeiro import de `app/server.mjs`), sem imprimir valor e **sem sobrescrever** variável que já exista no ambiente — o ambiente sempre vence. `PIPERLINE_ENV_FILE` aponta outro arquivo.
+- A tela **Provedores** (Configurações → Assistente de IA) mostra apenas **presente/ausente**, os nomes esperados e se as credenciais vieram do ambiente ou do `.env`. `GET /api/env-file` devolve só contagens e nomes. Nenhum valor aparece em API, log, `db.json` ou relatório.
 
 ## Aplicação local (reconstrução funcional)
 **Iniciar:** `node local_reconstruction/app/server.mjs` → abrir **http://127.0.0.1:5180** (Node 24; ffmpeg encontrado automaticamente em `PATH`/WinGet ou via `PIPPIT_FFMPEG`/`PIPPIT_FFPROBE`). Dados em `local_reconstruction/data/` (`PIPPIT_LOCAL_DATA` para trocar; `POST /api/reset` zera).

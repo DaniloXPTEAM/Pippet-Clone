@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { fileURLToPath } from 'node:url';
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('features_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-fui-')); process.env.PIPPIT_LLM ??= 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const { server } = await import('../app/server.mjs'); const PORT = 5198; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
-const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+import { shotsDir } from './support/shots.mjs'; const SHOTS = shotsDir(); // rodada 10: capturas fora da árvore versionada
+const browser = await launchChromium();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
 const shot = (n) => page.screenshot({ path: path.join(SHOTS, n + '.png') });
 const post = (p, b) => fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }).then((r) => r.json());
@@ -44,7 +44,16 @@ await page.click('#sty'); await page.waitForSelector('.mk-card'); assert.equal(a
 await page.locator('#mcats [data-c="Premium Aesthetics"]').click(); assert.equal(await page.locator('.mk-card').count(), 6); await page.locator('#mcats [data-c="All"]').click();
 await page.fill('#mq', 'y2k'); assert.equal(await page.locator('.mk-card').count(), 1); await page.locator('.mk-card [data-ex]').click(); assert.ok(await page.locator('.mk-ex').isVisible()); await shot('33_marketing_style');
 await page.locator('.mk-card [data-sel]').click(); await page.waitForSelector('#mkchips [data-x="sty"]'); assert.match(await page.locator('#mkchips').innerText(), /Estilo: Y2K Chrome/);
-await page.click('#hook'); await page.waitForSelector('#mcats'); assert.equal(await page.locator('#mcats button').count(), 6); await page.locator('#mcats [data-c="Catchy Sounds"]').click(); assert.match(await page.locator('#mgrid').innerText(), /não foi capturado/); await page.evaluate(() => document.querySelectorAll('.modal-bg').forEach((m) => m.remove()));
-await page.click('#fmt'); await page.waitForSelector('.mk-card'); assert.equal(await page.locator('.mk-card').count(), 8); assert.equal(await page.locator('#mcats button').count(), 8); await page.locator('.mk-card', { hasText: 'Secret Shelf Test' }).locator('[data-sel]').click();
+await page.click('#hook'); await page.waitForSelector('#mcats'); assert.equal(await page.locator('#mcats button').count(), 6);
+const hookNames = {
+  'Eye-Catching Visuals': ['Giant Product Crash', 'Tiny Meets Giant', 'Wing Walk Selfie', 'Train-Top Selfie', 'Lava-Side Selfie', 'Edge of the City', 'Desert Ride Selfie', 'Splash Reveal', 'Product Storm'],
+  'Video Formats': ['Street Reactions', 'Mirror Review', 'Day-in-the-Life Pick', 'GRWM', 'Beat-Synced Looks', 'Elevator Lookbook', 'Laptop Flip', 'Jump-Change Look', 'Which Look Wins?'],
+  'Persuasive Messaging': ['Tired of This?', 'You’ve Been Doing It Wrong', 'See the Result First', 'The Product Challenge', 'Spot the Difference', 'Here’s Why', 'This One’s for You'],
+  'Catchy Sounds': ['ASMR Unboxing', 'The Perfect Mist', 'Hear That Crunch', 'Clicks Snaps Done', 'Sounds Like Real Life', 'Say It Loud', 'The Movie Trailer'],
+  'Standout Styles': ['Words Come to Life', 'Animated Problem Solver', 'Meet the Mascot', 'Ready for Liftoff', 'Red Carpet Moment', 'Anime-Level Reaction', 'Glitch to Smooth', 'Reaction Split-Screen'],
+};
+for (const [category, names] of Object.entries(hookNames)) { await page.locator(`#mcats [data-c="${category}"]`).click(); assert.deepEqual(await page.locator('.mk-card b').allTextContents(), names, category); }
+await page.locator('#mcats [data-c="Catchy Sounds"]').click(); await shot('96_marketing_hooks'); await page.fill('#mq', 'crunch'); assert.equal(await page.locator('.mk-card').count(), 1); assert.match(await page.locator('#mgrid').innerText(), /Hear That Crunch/); await page.locator('.mk-card [data-sel]').click(); assert.match(await page.locator('#mkchips').innerText(), /Gancho: Hear That Crunch/); await page.locator('#mkchips [data-x="hook"]').click();
+await page.click('#fmt'); await page.waitForSelector('.mk-card'); assert.equal(await page.locator('.mk-card').count(), 8); assert.equal(await page.locator('#mcats button').count(), 5); await page.locator('.mk-card', { hasText: 'Secret Shelf Test' }).locator('[data-sel]').click();
 assert.match(await page.locator('#mkchips').innerText(), /Formato: Secret Shelf Test/); await page.locator('#mkchips [data-x="sty"]').click(); assert.equal(await page.locator('#mkchips [data-x="sty"]').count(), 0);
 assert.deepEqual(errors, []); await browser.close(); server.close(); console.log('OK features_ui: idioma/modo escuro, skills (manual/favoritos/usar), notificações, seletores de marketing'); process.exit(0);

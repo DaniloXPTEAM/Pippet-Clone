@@ -1,0 +1,18 @@
+# prova item 1 — rodada 14 — lipsync_adapters: espera por TEMPO (30 s) em vez de 40 voltas de 40 ms
+# gerado em 2026-11-12T13:36:04Z — Linux sandbox (sem pwsh; a causa é a demora do PowerShell medida no Windows do usuário: 2,2-2,7 s)
+
+## 1. causa provada — o laço antigo (40x40ms) estoura com o job ainda 'running'
+laço antigo (linha 87 antiga): 40 voltas de 40 ms, terminou em 1607 ms — ESTOUROA com o job still running quando o shell leva 2,2-2,7 s
+laço novo (Date.now() + 30 s): aguentou 2500 ms — o job termina dentro da janela
+
+## 2. a correção (test/lipsync_adapters.test.mjs, runJob)
+- antes: for (let i = 0; i < 40; i++) { ... setTimeout(r, 40) }   // teto ~1,6 s
+- depois: const fim = Date.now() + 30_000; while (Date.now() < fim) { ... setTimeout(r, 40) }  // teto 30 s por tempo
+- o resto do teste (tick por volta, debug LIPSYNC_DEBUG, asserções, mensagem) ficou igual.
+
+## 3. cinco execuções seguidas
+execução 1: exit=0 tempo=1537ms — lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+execução 2: exit=0 tempo=1432ms — lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+execução 3: exit=0 tempo=1420ms — lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+execução 4: exit=0 tempo=1535ms — lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)
+execução 5: exit=0 tempo=1552ms — lipsync_adapters: ok (Space Gradio com upload/call/stream/download e token opcional, executor local com comando e cancelamento, consentimento por tarefa, erro e host estranho recusados, sem provedor = 409)

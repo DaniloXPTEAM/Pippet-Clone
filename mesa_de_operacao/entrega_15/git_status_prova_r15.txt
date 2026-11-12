@@ -1,0 +1,24 @@
+== git status --short ==
+?? mesa_de_operacao/entrega_15/ENTREGA.md
+?? mesa_de_operacao/entrega_15/LEIA_PRIMEIRO_NOVA_SESSAO.md
+?? mesa_de_operacao/entrega_15/PREPARO_PUSH.md
+?? mesa_de_operacao/entrega_15/STATUS.md
+?? mesa_de_operacao/entrega_15/git_status_prova_r15.txt
+?? mesa_de_operacao/entrega_15/suite_rodada15_final.txt
+== rev-list --left-right --count origin/arena/a14d8a49-pippet-clone-r14...HEAD ==
+0	9
+== rev-list --count HEAD (commits totais) ==
+40
+== ls-files (arquivos versionados) ==
+691
+== log r15 ==
+2a8b0c9 rodada 15 itens 2-4: FEATURE_INVENTORY atualizado (recontagem 105/122 = 86,1% prontas; 75 verificadas) + BLOQUEIOS_R15.md (motivo exato por linha + perguntas objetivas)
+6078452 rodada 15 item 2: linha 5 — 9 atalhos do canvas implementados como extensões locais (Ctrl G/Shift G agrupar com grupo persistido, Ctrl A, Delete, Ctrl F localizar, Ctrl Enter gerar, Alt/Ctrl Alt + arrastar duplicar/cópia, Espaço + arrastar pan); 19/20 locais, só Pinça pendente
+bafd80c rodada 15 item 2: linha 24 — feed Inspiration com áreas nomeadas pelos endpoints observados dos bundles (feed/curtir/remix/publicados/atividades; comportamento UNOBSERVED)
+17ad175 rodada 15 item 2: linhas 26/31 — painéis da title-bar com metadados estáticos observados (AgentConnect right/ordem 101/Custom, ExportTask ordem 4; conteúdo UNOBSERVED) + teste titlebar_panels_route
+b27abcc rodada 15 item 2: central de notificações com os 8 anúncios editoriais observados por tema (REA ev_72d7b4c2, jan-abr/2026; títulos/datas/textos UNOBSERVED) + testes notifications_editorial_route e notifications_ui
+50e29c0 rodada 15 item 2: linha 15 — página de preços com seções observadas e carrossel de avaliações (Previous/Next/Show review 1-5; textos UNOBSERVED) + teste pricing_reviews_ui
+5791db5 rodada 15 item 2: linha 29 — campo de ideia do Chat history (documentado no capture; envio local cria chat; destino original UNOBSERVED) com teste chat_history_idea_ui
+14033c5 rodada 15 item 1b: lipsync_adapters espera por tempo com teto de 60 s
+eea9b74 rodada 15 item 1a: ffmpeg do WinGet achado por varredura, sem caminho fixo
+76aee1a rodada 14: contagem dos arquivos e fecho do pacote

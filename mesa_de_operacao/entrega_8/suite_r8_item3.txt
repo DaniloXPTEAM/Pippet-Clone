@@ -1,0 +1,3 @@
+passo_a_passo: OK
+env_file: OK
+auth_structure: OK

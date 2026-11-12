@@ -11,7 +11,12 @@ const PORT = 5201; await new Promise((r) => server.listen(PORT, '127.0.0.1', r))
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; };
 const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
 const put = (p, b) => j(p, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
-const src = path.join(tmp, 'a.mp4'); assert.equal(spawnSync(media.FFMPEG, ['-y', '-f', 'lavfi', '-i', 'testsrc=size=640x360:rate=25:duration=4', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=4', '-pix_fmt', 'yuv420p', '-c:v', 'libx264', '-c:a', 'aac', '-shortest', src]).status, 0);
+// Fonte de teste: usa o codificador que a máquina realmente tem (libx264 ou mpeg4), nunca só libx264.
+const src = path.join(tmp, 'a.mp4');
+const made = spawnSync(media.FFMPEG, ['-y', '-f', 'lavfi', '-i', 'testsrc=size=640x360:rate=25:duration=4', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=4', ...media.videoEncodeArgs({ crf: 23 }), '-c:a', 'aac', '-shortest', src], { encoding: 'utf8' });
+assert.equal(made.status, 0, 'ffmpeg não gerou a fonte: ' + String(made.stderr || '').split('\n').slice(-6).join(' | '));
+const encoder = media.encoderInfo();
+if (encoder.codec !== 'libx264') console.log('[editor_audio] libx264 indisponível nesta máquina; usando ' + encoder.codec + '. ffmpeg: ' + String(encoder.error || '').split('\n').slice(-2).join(' | '));
 const A = (await j('/api/assets', { method: 'POST', headers: { 'x-file-name': 'a.mp4', 'content-type': 'video/mp4' }, body: fs.readFileSync(src) })).body;
 const meanVol = (file, secs) => { const r = spawnSync(media.FFMPEG, ['-i', file, ...(secs ? ['-t', String(secs)] : []), '-af', 'volumedetect', '-vn', '-f', 'null', '-'], { encoding: 'utf8' }); const m = /mean_volume: (-?[\d.]+) dB/.exec(r.stderr); return m ? Number(m[1]) : -Infinity; };
 const pixel = (file, x, y) => { const r = spawnSync(media.FFMPEG, ['-i', file, '-vf', `crop=2:2:${x}:${y}`, '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { encoding: 'buffer' }); return [...r.stdout.subarray(0, 3)]; };
@@ -27,4 +32,4 @@ const pb = pixel(f0, 2, 2); assert.ok(pb.every((v) => v < 10), 'padrão preto ' 
 const pc = pixel(await ed({}, { background: { type: 'color', color: 'ff0000' } }), 2, 2); assert.ok(pc[0] > 200 && pc[1] < 60 && pc[2] < 60, 'cor vermelha ' + pc);
 const pu = pixel(await ed({}, { background: { type: 'blur' } }), 2, 2); assert.ok(pu.some((v) => v > 20), 'desfoque usa o próprio vídeo ' + pu);
 assert.equal((await j('/api/projects')).body.length >= 8, true);
-console.log('OK editor_audio: áudio do clipe (mudo/dB/fade/denoise/velocidade) e plano de fundo (preto/cor/desfoque)'); server.close(); process.exit(0);
+console.log('OK editor_audio: áudio do clipe (mudo/dB/fade/denoise/velocidade) e plano de fundo (preto/cor/desfoque) · codec=' + media.encoderInfo().codec + (media.encoderInfo().error ? ' (fallback registrado)' : '')); server.close(); process.exit(0);
