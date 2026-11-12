@@ -55,7 +55,9 @@ Pré-requisito: Node 20+ (`node -v`). Se o `.git` sumir, restaure primeiro o có
 # os números da r14 estão em `piperline_rodada14_bundle_verify.txt`)
 git init piperline && cd piperline
 git fetch ../piperline_rodada14.bundle 'refs/heads/*:refs/remotes/bundle/*'
-git checkout -b arena/a14d8a49-pippet-clone bundle/arena/a14d8a49-pippet-clone
+git checkout -b arena/d9cee29f-pippet-clone bundle/arena/d9cee29f-pippet-clone
+# (a ponta é 06eb194, o HEAD final da r14; no bundle da r13 o ref se chamava
+#  bundle/arena/a14d8a49-pippet-clone e a ponta era 9e57f96)
 
 # caminho 2 — pelo zip (sem git nenhum)
 unzip piperline_arvore_rodada14.zip -d piperline
