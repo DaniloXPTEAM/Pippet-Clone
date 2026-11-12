@@ -398,6 +398,21 @@ route('POST', /^\/api\/skills\/ai$/, async (q, r) => {
 // notificações locais (o original tem central de anúncios editoriais + contador de não lidas; aqui: eventos do próprio app)
 const notes = () => (db().notifications ||= []);
 const notify = (title, body, kind = 'info') => { notes().unshift({ id: S.newId(), title, body, kind, at: new Date().toISOString(), read: false }); if (notes().length > 100) notes().length = 100; S.save(); };
+// Anúncios editoriais observados (REA ev_72d7b4c2…7b20; FEATURE_INVENTORY linha 147): o relatório
+// registra 8 anúncios de jan–abr/2026 enumerados por TEMA. Títulos, datas e textos individuais não
+// foram preservados — cada cartão traz o tema observado e marca o resto UNOBSERVED (nada é inventado).
+const EDITORIAL_ADS = Object.freeze([
+  'GPT Image 2', '700+ avatares via @', 'Pesquisa de satisfação (pt/es)', 'Descontinuação temporária de Nano Banana Pro/Veo 3.1',
+  'Descontinuação temporária de Seedream 4.1', 'Seedream 5.0', 'Geração agendada', 'Mais tarefas de crédito',
+].map((theme, i) => ({ id: `ad-${i + 1}`, theme })));
+const EDITORIAL_ADS_META = Object.freeze({
+  source: 'REA ev_72d7b4c2…7b20 (FEATURE_INVENTORY linha 147)',
+  period: 'jan–abr/2026', count: 8,
+  titles: 'UNOBSERVED', dates: 'UNOBSERVED', bodies: 'UNOBSERVED', themeToAdMapping: 'UNOBSERVED',
+  note: 'Os temas vêm da enumeração observada do relatório; título, data e texto de cada anúncio não foram preservados.',
+  externalCalls: false,
+});
+const editorialAds = () => { const rd = (db().editorialAdsRead ||= {}); return EDITORIAL_ADS.map((a) => ({ id: a.id, kind: 'ad', title: a.theme, body: 'Conteúdo do anúncio: UNOBSERVED (REA ev_72d7b4c2…7b20) · jan–abr/2026', at: null, read: !!rd[a.id] })); };
 // ---- provedores de mídia + tarefas de geração (src/providers.mjs, app/lib/jobs.mjs, app/lib/compose.mjs)
 const saveBuffer = (name, bytes, kind, cat) => { const tmp = S.pubFile('_job_' + S.newId() + path.extname(name)); fs.writeFileSync(tmp, bytes); const a = addAsset(name, tmp, kind, cat); try { fs.unlinkSync(tmp); } catch {} return a; };
 const readAssetBytes = (id) => { const a = db().assets.find((x) => x.id === id); if (!a || !fs.existsSync(S.pubFile(a.stored))) return null; return { bytes: fs.readFileSync(S.pubFile(a.stored)), mime: ({ '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.flac': 'audio/flac', '.wma': 'audio/x-ms-wma' })[path.extname(a.stored || a.name || '').toLowerCase()] || (a.kind === 'image' ? 'image/png' : 'application/octet-stream'), name: a.name }; };
@@ -508,8 +523,8 @@ route('DELETE', /^\/api\/talking-photo\/jobs\/([\w-]+)\/authorize$/, async (q, r
   job.authorization = null; jobsMgr.touch(job, { state: 'blocked', error: 'consentimento revogado' }); S.save(); send(r, 200, jobView(job));
 });
 const jobTimer = setInterval(() => { jobsMgr.tick().catch(() => {}); }, Number(process.env.PIPPIT_JOB_TICK_MS ?? 3000)); jobTimer.unref();
-route('GET', /^\/api\/notifications$/, async (q, r) => send(r, 200, { items: notes(), unread: notes().filter((n) => !n.read).length }));
-route('POST', /^\/api\/notifications\/read-all$/, async (q, r) => { notes().forEach((n) => (n.read = true)); S.save(); send(r, 200, { ok: true, unread: 0 }); });
+route('GET', /^\/api\/notifications$/, async (q, r) => send(r, 200, { items: [...editorialAds(), ...notes()], unread: [...editorialAds(), ...notes()].filter((n) => !n.read).length, editorial: EDITORIAL_ADS_META }));
+route('POST', /^\/api\/notifications\/read-all$/, async (q, r) => { const rd = (db().editorialAdsRead ||= {}); EDITORIAL_ADS.forEach((a) => (rd[a.id] = true)); notes().forEach((n) => (n.read = true)); S.save(); send(r, 200, { ok: true, unread: 0 }); });
 route('GET', /^\/api\/projects$/, async (q, r) => send(r, 200, db().projects.map((p) => ({ id: p.id, title: p.title, type: p.type, updatedAt: p.updatedAt, subtitle: p.type === 'canvas' ? 'Tela' : p.type === 'direct' ? 'Geração direta' : p.type, href: p.direct ? `/direct/${p.id}/${p.direct.canvasId}/${p.direct.runId}` : undefined }))));
 route('POST', /^\/api\/projects$/, async (q, r) => { const b = await readJson(q); send(r, 200, newProject(b.type || 'canvas', b.title)); });
 route('GET', /^\/api\/projects\/(\d+)$/, async (q, r, m) => send(r, 200, project(m[1])));

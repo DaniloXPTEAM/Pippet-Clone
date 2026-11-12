@@ -1083,10 +1083,12 @@ async function pageDirect(pid, canvasId, runId) {
   }
 }
 let NOTE_UNREAD = 0;
-// Central de notificações: lista, "Todas lidas" e ponto vermelho de não lidas (comportamento observado); conteúdo = eventos do próprio app (os anúncios editoriais do Pippit não são reproduzidos)
+// Central de notificações: lista, "Todas lidas" e ponto vermelho de não lidas (comportamento observado).
+// Conteúdo: eventos do próprio app + os 8 anúncios editoriais observados por tema (REA ev_72d7b4c2…7b20,
+// jan–abr/2026) — títulos, datas e textos individuais dos anúncios são UNOBSERVED e não são inventados.
 async function openNotifications() {
-  const n = (await api('/api/notifications')).body; const kind = { success: '✔', error: '✖', info: 'ℹ' };
-  const m = modal(`<h2>Notificações</h2><button id="allread">Todas lidas</button>${n.items.length ? n.items.map((x) => `<div class="card note ${x.read ? '' : 'unread'}" style="margin:6px 0"><b>${kind[x.kind] || ''} ${esc(x.title)}</b>${x.read ? '' : ' <span class="muted">• novo</span>'}<div class="muted">${esc(x.body)}</div><small class="muted">${new Date(x.at).toLocaleString('pt-BR')}</small></div>`).join('') : '<p class="muted">Sem notificações.</p>'}`, 'sm');
+  const n = (await api('/api/notifications')).body; const kind = { success: '✔', error: '✖', info: 'ℹ', ad: '📣' };
+  const m = modal(`<h2>Notificações</h2><button id="allread">Todas lidas</button>${n.items.length ? n.items.map((x) => `<div class="card note ${x.read ? '' : 'unread'}" style="margin:6px 0"><b>${kind[x.kind] || ''} ${esc(x.title)}</b>${x.read ? '' : ' <span class="muted">• novo</span>'}<div class="muted">${esc(x.body)}</div><small class="muted">${x.at ? new Date(x.at).toLocaleString('pt-BR') : 'anúncio observado por tema (jan–abr/2026); título/data/texto originais UNOBSERVED'}</small></div>`).join('') : '<p class="muted">Sem notificações.</p>'}<p class="blocked" style="font-size:12px">Anúncios editoriais: 8 temas observados (REA ev_72d7b4c2…7b20). Títulos, datas e textos originais não foram preservados — nada é inventado.</p>`, 'sm');
   $('#allread', m).onclick = async () => { await post('/api/notifications/read-all'); NOTE_UNREAD = 0; m.close(); renderSide(location.hash.replace(/^#/, '') || '/home'); };
 }
 const KNOWN_MARKETING_TEMPLATES = Object.freeze([
