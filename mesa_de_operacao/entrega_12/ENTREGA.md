@@ -97,8 +97,8 @@ O sandbox já apagou o `.git` **cinco vezes**. Se ele apagar de novo, o trabalho
 
 | Arquivo | Tamanho | SHA-256 |
 |---|---|---|
-| `LEIA_PRIMEIRO_NOVA_SESSAO.md` | 11.627 B | `d8c50cffdaf2b426c739fd58a266fd4f6503a41f446199d84497c40e2ab84903` |
-| `PREPARO_PUSH.md` | 5.756 B | `434a6dc052c572789c61497058e2a437b8cb4c9b8cc060f0c6610e21a648e11a` |
+| `LEIA_PRIMEIRO_NOVA_SESSAO.md` | 12.446 B | `2f974f8d030f94e1c09fd8de306a2b8dfe9e3b9b8151c1e40e805cb45e6ae15f` |
+| `PREPARO_PUSH.md` | 7.236 B | `36304d6654081d0bb006ccfbc3e4de25003612716a43a784f0f376d21d91f879` |
 | `MANIFESTO_SHA256.csv` (656 arquivos versionados) | 71.610 B | `c9875691d77f1b5f17ab032c719aec238425c4be361c3e51427404b470b605b6` |
 | `segredos_varredura.txt` | 3.492 B | `c1cd0b57240d18d7d5371d27e703f4af4f58ef5c7da622bead46d9d9ced46b31` |
 | `STATUS.md` | 50.210 B | `b723069d746f9e3169248077aee6dca71372aa8ea78c2c4934cc4c8a47d7f863` |
