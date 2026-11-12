@@ -113,7 +113,7 @@ Conferência feita por listagem e busca na API do Drive (nada apagado — **só 
 
 ## Estado do repositório
 
-- **HEAD:** o último commit desta rodada (mensagem **"rodada 13: pacote de entrega…"**) · commits desta rodada: `ce8693c` (item 1), `85ebc03` (item 2), `eb129b4` (dois arquivos da r12 que estavam fora do git) e `74c953e` (auditoria), sobre `f5f3332` (r12).
+- **HEAD:** `894a0ff` (manifesto final; o commit do manifesto não pode listar a si mesmo) · commits desta rodada, em ordem: `ce8693c` (item 1), `85ebc03` (item 2), `eb129b4` (dois arquivos da r12 que estavam fora do git), `74c953e` (auditoria), `ac1ab3e` (documentos e provas), `b826bc3` (prova do bundle), `193f265`/`1e953e9`/`894a0ff` (manifesto), `f1b60e2` (prova do item 3) e `432b1c5` (SHA256SUMS e prova do bundle fora do git), sobre `f5f3332` (r12).
 - **Divergência com o remoto (medida com `git rev-list --left-right --count`):** local **13** commits que o remoto não tem (14 depois deste pacote) · remoto **12** (pontas `1443745`), base comum `48ca7bb`. `git push` seria recusado; **nunca `--force`**. Ver `PREPARO_PUSH.md`.
 - **Nenhum push**, nenhuma chave.
 - Bundle autossuficiente (`--all`) e zip da árvore: `piperline_rodada13.bundle` e `piperline_arvore_rodada13.zip`, com tamanho e sha256 no `SHA256SUMS.txt`.
