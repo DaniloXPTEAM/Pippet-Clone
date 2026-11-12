@@ -7,14 +7,18 @@
 //   2) prazo normal → aprovado, com o caminho e a origem;
 //   3) a checagem é feita uma vez só por processo (mesma resposta, mesmo objeto).
 import assert from 'node:assert/strict';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_TEST = HERE;
-const inspector = path.join(REPO_TEST, '..', '.deps-inspector.mjs');
+// Rodada 16 item 4: o inspetor é escrito numa pasta TEMPORÁRIA — o teste não pode escrever/apagar
+// arquivo versionado (antes ia em `local_reconstruction/.deps-inspector.mjs` e o `git status` ficava sujo).
 const fs = await import('node:fs');
+const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pippet-browser-probe-'));
+const inspector = path.join(tmpDir, '.deps-inspector.mjs');
 
 // Pequeno inspetor executado em processo novo: imprime o resultado da checagem em JSON.
 // Rodada 13: o import precisa ser URL de arquivo. Com caminho absoluto cru o Windows quebra com
@@ -62,5 +66,5 @@ try {
 
   console.log('browser_probe.test.mjs: ok (prazo curto é reportado como TEMPO, prazo normal aprova, uma sondagem por processo e caminho ausente explicado)');
 } finally {
-  fs.rmSync(inspector, { force: true });
+  fs.rmSync(tmpDir, { recursive: true, force: true });
 }
