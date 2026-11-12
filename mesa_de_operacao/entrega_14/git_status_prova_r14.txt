@@ -1,0 +1,14 @@
+# prova item 3 — rodada 14 — a suíte não altera arquivo versionado
+# gerado em 2026-11-12T13:41:26Z — acompanha suite_rodada14_final.txt (execução oficial do pacote)
+
+## sha256 dos 672 arquivos versionados antes e depois do node test/run-all.mjs completo:
+diferenças (linhas '<' ou '>' no diff): 0
+
+## resultado da suíte completa (run-all sem filtro):
+128 passaram, 2 skip explícito, 0 falharam (de 130).   (223 s)
+skips: pageview, parity (evidências do Pippit fora deste checkout — os 2 fixos)
+
+## cobertura por blocos (manhã desta rodada): a soma dos blocos por teste único também fechou 128/2/0 de 130; 5 testes rodaram 2x por sobreposição de filtro do run-all (composer_audio_mode, editor_audio, editor_canvas, node_generation_audio_ui, flow_e2e_providers), todos com o mesmo resultado nas duas execuções.
+
+## git status --short no fim da execução oficial (só os artefatos de entrega, ainda fora do git até o commit do item 2):
+?? mesa_de_operacao/entrega_14/
