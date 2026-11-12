@@ -1,36 +1,13 @@
-# ENTREGA 17 — 2026-11-12 (rodada 17)
+# ENTREGA 17 (revisada) — Pippet-Clone, 2026-11-12
 
-A entrega 17 fecha os pontos apontados pela validação da r16 no Windows (**133 ok / 2 skip / 1 falha instável de 135**): a falha instável (`features_ui`) foi corrigida, o histórico do git foi restaurado por completo e o inventário foi recontado com o placar real.
+Resumo: a r16 foi validada no Windows (133 ok / 2 skip / 1 falha instável de 135); esta rodada corrigiu a instável, restaurou o histórico **com os SHAs originais dos bundles** e passou a rodar **a suíte inteira, incluindo os 56 testes de tela, neste sandbox**: **133 ok / 2 skip / 0 falhas (de 135)**.
 
-## O que a entrega 17 contém
+## Os 3 pontos da revisão
 
-- `LEIA_PRIMEIRO_NOVA_SESSAO.md` — contrato e estado (atualizado com o placar do Windows).
-- `STATUS.md` — estado atual com a recontagem.
-- `ENTREGA.md` — este documento.
-- `FEATURE_INVENTORY.md` — inventário recontado (423 linhas granulares: **84 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 1 não verificada (instável) / 272 inventadas**).
-- `PROVA_HISTORICO.md` — a restauração do histórico (as fontes, o método e os números).
-- `SHA256SUMS` — formato `hash  arquivo` (2 espaços).
-- `MANIFESTO.md` — conferências (inclui a prova do bundle com `git clone`).
-- `pippet-clone-r17.bundle` — bundle git **autossuficiente com TODOS os commits** (branch + tags de legado).
-- `pippet-clone-r17.zip` — pacote completo (tudo exceto `.git`, `.claude`, `node_modules`).
+1. **Réguas lado a lado** — `FEATURE_INVENTORY.md`: **105/122 = 86,1%** (critério antigo da r15) e **151/423 = 35,7%** (catálogo integral: 85 verificadas / 66 implementadas UNOBSERVED / 272 inventadas). Denominadores diferentes; explicação no próprio inventário (e corrigido o texto de "229 linhas").
+2. **Histórico sem reescrever os bundles** — a r15 e a r16 nasceram em ramos paralelos (o `.git` foi apagado na virada r15→r16). A costura (merge `5a82113`) une os dois ramos: **53/53 commits dos bundles com SHA original**; só os commits fora de bundle ganham SHA novo (`PROVA_HISTORICO.md` traz o mapa lado a lado).
+3. **Os 56 testes de tela contam** — com Chromium 153 headless (`@sparticuz/chromium`) a suíte roda completa aqui: **133 ok / 2 skip explícitos (evidência local ausente) / 0 falhas**. `features_ui` passou **4/4** (a instabilidade era o loop de espera por `unread`, corrigido no item 1).
 
-## Os 3 itens da rodada
+## O que vem no pacote
 
-1. **`features_ui` corrigido** — ordem determinística das notificações (eventos reais primeiro, data desc, empate por id; anúncios sem data por último) + teste que acha a nota pelo conteúdo (`hasText`, não a primeira). **10/10 execuções seguidas** na rota de notificações. Falta a suíte do Windows para fechar.
-2. **Histórico restaurado** — a remontagem tinha deixado o bundle da r16 com 9 commits. Recuperado o histórico completo: branch com **53 commits** (r14 + r15 + r16 + r17), **72 commits** ao todo (as tags `legado-r16-original` e `legado-branch-antiga` preservam os objetos antigos). Prova do bundle (clone em pasta vazia + nº de commits) no `MANIFESTO.md`.
-3. **Recontagem** — placar do Windows da r16 registrado nos 4 documentos; os testes de tela passaram a contar (validação real), menos a linha de `features_ui` (instável): **84 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 1 não verificada / 272 inventadas** (423 linhas).
-
-## Como restaurar
-
-```bash
-unzip pippet-clone-r17.zip
-cd pippet-clone-r17 && cd local_reconstruction && node test/run-all.mjs
-# ou pelo bundle (com git):
-git clone pippet-clone-r17.bundle pippet-clone-r17
-```
-
-## Quanto falta para terminar
-
-- **Para o reproduzível**: falta **1 linha não verificada** (`features_ui`) — a correção está nesta rodada; rodando a suíte no Windows e passando, tudo o que é possível com a evidência existente fica fechado.
-- **Para o catálogo inteiro (423 linhas)**: 272 (64%) são conteúdo apagado/não documentado — sem evidência nova do Pippit não voltam; o teto sem evidência nova é **151/423 = 36%**.
-- **Push**: apenas no fim do projeto, por ordem explícita ("PUSH AUTORIZADO").
+`pippet-clone-r17.bundle` (autossuficiente — clone em pasta vazia prova o histórico; números no `MANIFESTO.md`), `pippet-clone-r17.zip` (sem `.git/.claude/node_modules`), `SHA256SUMS` (formato `hash  arquivo`), `MANIFESTO.md`, `LEIA_PRIMEIRO_NOVA_SESSAO.md`, `STATUS.md`, `FEATURE_INVENTORY.md`, `PROVA_HISTORICO.md`, `ENTREGA.md` (este). **Sem push; nenhuma chave.**

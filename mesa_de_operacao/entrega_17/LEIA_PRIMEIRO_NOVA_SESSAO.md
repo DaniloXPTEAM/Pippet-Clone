@@ -1,13 +1,13 @@
 # LEIA PRIMEIRO — passagem para a sessão nova (rodada 17)
 
 **Projeto:** PiperLine — reconstrução local do Pippit (`DaniloXPTEAM/Pippet-Clone`), em português, rodando na máquina do usuário, sem depender de serviço pago para funcionar.
-**Este arquivo** é o retrato do estado no fim da **rodada 15** (2026-11-12). Se você é a sessão nova: leia tudo, nesta ordem. Ele foi escrito para que **nada do que está no sandbox seja necessário** — tudo o que importa está nesta pasta do Drive.
+**Este arquivo** é o retrato do estado no fim da **rodada 17 revisada** (2026-11-12). Se você é a sessão nova: leia tudo, nesta ordem. Ele foi escrito para que **nada do que está no sandbox seja necessário** — tudo o que importa está nesta pasta do Drive.
 
 ---
 
 ## 1. Situação em uma frase
 
-A rodada 16 foi validada no Windows do usuário (com navegador): **133 ok / 2 skip / 1 falha instável (de 135)** — pacote íntegro (os 2 hashes batem). A r17 fez três coisas: (1) corrigiu o que a validação apontou — ordem **determinística** das notificações (eventos reais primeiro, data desc, empate por id; anúncios sem data por último) e `features_ui` agora procura a nota pelo **conteúdo** (`hasText`), provado com **10/10 execuções seguidas** na rota; (2) **restaurou o histórico completo** (o `.git` tinha sido perdido/remontado e o bundle da r16 saiu com 9 commits): a branch volta a ter **53 commits** (r14 + r15 + r16 + r17), 72 ao todo com as tags de legado; (3) **recontagem rigorosa** (§3): **84 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 1 não verificada (instável) / 272 inventadas** (423 linhas granulares). **Não há push** (só no fim do projeto, quando o usuário escrever "PUSH AUTORIZADO"); o código está no bundle `pippet-clone-r17.bundle` da entrega_17.
+A rodada 16 foi validada no Windows do usuário (com navegador): **133 ok / 2 skip / 1 falha instável (de 135)**. A r17 corrigiu a instável e a revisão da r17 fechou os 3 pontos apontados pelo usuário: (1) **as duas réguas lado a lado** (§3): **105/122 = 86,1%** (critério r15) e **151/423 = 35,7%** (catálogo integral: 85 verificadas / 66 implementadas UNOBSERVED / 272 inventadas); (2) **histórico com os SHAs originais dos bundles** — a r15 e a r16 nasceram em ramos paralelos (o `.git` foi apagado na virada r15→r16) e a **costura** (merge `5a82113`) une os dois ramos sem reescrever nada: 53/53 commits dos bundles com SHA original (`PROVA_HISTORICO.md` traz o mapa lado a lado); (3) **a suíte inteira roda no sandbox com navegador** — **133 ok / 2 skip explícitos / 0 falhas (de 135)** com o Chromium 153 headless (§5/§8), `features_ui` incluída (**4/4 aqui**; a instabilidade era o loop de espera por `unread`, corrigido no item 1). **Não há push** (só no fim do projeto, quando o usuário escrever "PUSH AUTORIZADO"); o código está no bundle `pippet-clone-r17.bundle` da entrega_17.
 
 **Atenção, isto continua valendo desde a rodada 12:** a branch `arena/a14d8a49-pippet-clone-r14` **já foi publicada no GitHub** (push autorizado e consumido na r14, ponta `76aee1a`). A branch de trabalho desta sessão é `arena/d9cee29f-pippet-clone`, com os commits da r15 **não publicados**. `PREPARO_PUSH.md` traz os comandos prontos, **não executados** — só quando o usuário escrever "PUSH AUTORIZADO", um push, nunca `--force`.
 
@@ -45,7 +45,7 @@ Placar = **passaram / skip / falharam (total)**. "Sandbox" = este ambiente Linux
 | 14 | espera por tempo no `lipsync_adapters` + esta passagem | **128/2/0 (130)** | aguardando a suíte do usuário |
 | 15 | terminar o projeto: 39 linhas, inventário recontado (105/122), 8 anúncios, atalhos 19/20 | **79/56/0 (135)** — 56 skips de navegador | 56 UI rodaram; **4 defeitos** (corrigidos na r16) |
 | 16 | os 4 defeitos do Windows + régua honesta (UNOBSERVED ≠ verificada; UI só conta passando) | **79/56/0 (135)** | **133/2/1 (135)** — validado pelo usuário; a falha instável = `features_ui` (passa 1 de 3) |
-| 17 | ordem determinística das notificações + histórico restaurado + recontagem | **10/10** na rota de notificações (a suíte completa roda no fim) | aguardando a suíte do usuário |
+| 17 | ordem determinística das notificações + histórico costurado (SHAs originais) + réguas lado a lado | **133 ok / 2 skip / 0 falhas (de 135)** com Chromium headless; `features_ui` **4/4** | aguardando a suíte do usuário |
 
 As duas falhas da r13 no Windows: `omni_router_ui` (**falha de tempo**; passou **4/4** em reexecução — mesma classe sem causa provada de `notifications_ui`/`workflow_jobs`) e `lipsync_adapters` (falhou **4/4**; **causa provada**: o laço de espera do teste dava 40 voltas de 40 ms ≈ 1,6 s e o PowerShell leva 2,2–2,7 s para abrir — o job ficava "running" e o teste estourava "a tarefa não terminou dentro do tempo do teste"). **Corrigido na r14** (`afb2550`): o laço agora espera **por tempo** (`Date.now()`, teto de 30 s), com o resto do teste idêntico; provado com **5 execuções seguidas**. Veja §6.
 
@@ -96,6 +96,7 @@ Notas de uso:
 - `PIPERLINE_BROWSER_PROBE_MS` ajusta o prazo da sondagem do navegador (padrão 20 s).
 - `PIPERLINE_CHROMIUM_EXECUTABLE` aponta o navegador; `PIPERLINE_TEST_SKIP_BROWSER` não existe — o skip vem de `skipUnavailableBrowser`.
 - Os 2 skips fixos (`pageview`, `parity`) dependem de `captures/` do Pippit, que **não** fazem parte do checkout versionado.
+- **Placar desta r17 revisada, rodado aqui com navegador: 133 ok / 2 skip explícito / 0 falhas (de 135)** — os 56 testes de tela **rodam no sandbox** (§8, item 2). No Arena, se `.deps/` não existir: `npm install` em `local_reconstruction/`, `npm install --no-save @sparticuz/chromium`, extrair `bin/al2023.tar.br` do pacote e exportar `PIPERLINE_CHROMIUM_EXECUTABLE=/tmp/chromium` + `LD_LIBRARY_PATH` da pasta das libs; ffmpeg/ffprobe estáticos em `/home/user/.tools/` (a pasta é apagada entre sessões — reinstale: wheel `imageio-ffmpeg` no PyPI + tarball `ffprobe-static` no npm).
 
 ## 6. Falhas conhecidas — com a causa provada ou NÃO provada
 
@@ -143,19 +144,19 @@ Notas de uso:
 5. **`talkingphoto_ui` / `e2e` / `omni_router_ui`** — instabilidade de tempo; precisam de uma rodada própria com o PC do usuário livre.
 6. **Push** — o GitHub **não** tem nada disto. Só com ordem explícita; ver `PREPARO_PUSH.md`.
 
-## 10. Arquivos desta entrega (`mesa_de_operacao/entrega_14` no Drive)
+## 10. Arquivos desta entrega (`mesa_de_operacao/entrega_17` no Drive)
 
 | Arquivo | O que é |
 |---|---|
 | `LEIA_PRIMEIRO_NOVA_SESSAO.md` | este texto |
-| `piperline_rodada14.bundle` | **bundle autossuficiente** (`--all`) com todo o histórico local |
-| `piperline_rodada14_bundle_verify.txt` | `git bundle verify` + `list-heads` + a prova de restauração (`git clone` do bundle numa pasta vazia) |
-| `piperline_arvore_rodada14.zip` | árvore do projeto **sem `.git`**, sem `node_modules`/`.deps` |
+| `pippet-clone-r17.bundle` | **bundle autossuficiente** com todo o histórico (53 SHAs originais dos bundles + costura + r17; prova no `MANIFESTO.md`) |
+| `pippet-clone-r17.zip` | árvore do projeto **sem `.git`**, sem `node_modules`/`.claude` |
+| `SHA256SUMS` | hashes dos dois pacotes, formato `hash  arquivo` |
 | `STATUS.md` | estado oficial (todas as rodadas) |
 | `ENTREGA.md` | relatório da rodada 14 (itens 1, 2 e 3) e a classificação do que está no Drive |
-| `FEATURE_INVENTORY.md` | inventário de linhas (122 reproduzíveis; 83/122 = 68,0% — cobertura de linhas, **não** paridade) |
-| `.env.example` | **nomes** das variáveis, todos vazios |
-| `MANIFESTO_SHA256.csv` | sha256 de cada arquivo versionado (lista 682 — não se lista a si mesmo; 683 versionados com ele) |
+| `FEATURE_INVENTORY.md` | inventário com **as duas réguas lado a lado** (105/122 = 86,1% e 151/423 = 35,7% — cobertura de linhas, **não** paridade) |
+| `PROVA_HISTORICO.md` | mapa lado a lado: o que é SHA original dos bundles e o que é SHA novo, e por quê |
+| `MANIFESTO.md` | conferências do pacote + prova do `git clone` em pasta vazia |
 | `PREPARO_PUSH.md` | branch, commits, divergência com o remoto e o comando de push **não executado** |
 | `segredos_varredura_r14.txt` | resultado cru da varredura de segredos desta rodada |
 | `suite_rodada14_final.txt` | suíte completa: **128 passaram, 2 skip explícito, 0 falharam (de 130)** |

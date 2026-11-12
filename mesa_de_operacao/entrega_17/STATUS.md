@@ -1,36 +1,46 @@
-# STATUS DA RECONSTRUÇÃO LOCAL DO PIPPIT — RODADA 17 (ENTREGA 17)
+# STATUS DA RECONSTRUÇÃO LOCAL DO PIPPIT — RODADA 17 REVISADA (ENTREGA 17)
 
-## 1. O que esta rodada fez
+## 1. Os 3 pontos da revisão (e o que foi feito)
 
-A r16 foi validada no Windows do usuário (com navegador): **133 ok / 2 skip / 1 falha instável (de 135)** — pacote íntegro (os 2 hashes batem). A r17 atacou os 3 pontos da ordem:
+1. **Denominadores lado a lado** (o % novo não era comparável com 68%/86%): `FEATURE_INVENTORY.md` agora mostra **as duas réguas lado a lado** — **105/122 = 86,1%** (critério r15: escopo reproduzível, 122 linhas) e **151/423 = 35,7%** (critério r16/r17: catálogo integral, 85 verificadas / 66 implementadas UNOBSERVED / 272 inventadas). Também corrigido o texto errado de "229 linhas".
+2. **Histórico: SHAs dos bundles preservados** (os commits da r16 tinham sido recriados): agora a **costura r15+r16** (commit de merge) une os dois ramos dos bundles **sem reescrever nenhum SHA** — os 53 commits de `piperline_rodada15.bundle` + `pippet-clone-r16.bundle` entram com os SHAs originais. Só ganham SHA novo os commits que nunca estiveram em bundle (mapa lado a lado em `PROVA_HISTORICO.md`).
+3. **Os 56 testes de tela contam — e agora rodam no sandbox**: a suíte inteira passa **neste ambiente com navegador**: **133 ok / 2 skip explícitos / 0 falhas (de 135)**. Os 2 skips são de evidência local ausente (`pageview`, `parity`), não de navegador. `features_ui` (a instável do Windows, 1 em 3) passou **4/4 aqui** (suíte + 3 seguidas).
 
-1. **`features_ui` (instável: passa 1 de 3) — corrigido** (`rodada 17 item 1`): causa provada — a espera era por `unread > 0`, que os 8 anúncios deixam sempre verdadeiro, e `.note.first()` podia pegar um anúncio. Agora o **servidor** ordena de forma determinística (eventos reais primeiro, data desc, empate por id; anúncios sem data por último) e o **teste** espera o evento real e acha a nota pelo conteúdo (`hasText`). **Prova: 10/10 execuções seguidas** na rota (`notifications_editorial_route`).
-2. **Histórico completo restaurado** (`rodada 17 item 2`): o `.git` tinha sido perdido/remontado e o bundle da r16 saiu com 9 commits. Trouxe a r14/r15 do GitHub + dos bundles do Drive e recriou os commits perdidos com `commit-tree` (árvores e mensagens originais). A branch volta a ter **53 commits** (r14 → r15 → r16 → r17); **72 commits** ao todo com as tags `legado-r16-original` e `legado-branch-antiga`. `git status` limpo; working tree idêntica ao estado validado + correção do item 1. Detalhes em `PROVA_HISTORICO.md`.
-3. **Recontagem rigorosa** (item 3): placar do Windows registrado e 56 testes de tela passam a contar (rodraram e passaram lá, menos a instável).
+## 2. Como rodar a suíte completa aqui (com navegador)
 
-## 2. Contagens (FEATURE_INVENTORY, 423 linhas granulares)
+O sandbox não traz navegador pronto; o Chromium 153 headless vem do pacote npm `@sparticuz/chromium` (binário dentro do pacote — sem download de CDN):
 
-| Estado | Linhas | % |
+```bash
+cd local_reconstruction
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install          # playwright (devDependency)
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-save @sparticuz/chromium
+node -e "require('@sparticuz/chromium').default.executablePath().then(console.log)"   # extrai /tmp/chromium
+# libs do pacote (NSPR/NSS): descompactar bin/al2023.tar.br e apontar LD_LIBRARY_PATH
+cd .. && \
+PIPERLINE_CHROMIUM_EXECUTABLE=/tmp/chromium LD_LIBRARY_PATH=/tmp/al2023lib/lib \
+PIPPIT_FFMPEG=/home/user/.tools/iof/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2 \
+PIPPIT_FFPROBE=/home/user/.tools/ffprobe-pkg/ffprobe \
+node local_reconstruction/test/run-all.mjs
+```
+
+ffmpeg 9.0.2 estático = wheel `imageio-ffmpeg` (PyPI); ffprobe 4.0.2 estático = tarball `ffprobe-static` (npm) — em `/home/user/.tools/` (essa pasta **é apagada entre sessões**; reinstale antes de rodar).
+
+## 3. Contagens — as duas réguas, lado a lado
+
+| régua | base | prontas (impl. + verif.) | % | composição |
+|---|---|---|---|---|
+| **r15 (critério antigo)** | 122 | **105** | **86,1%** | 30 implementadas + 75 verificadas |
+| **r16/r17 (catálogo integral)** | 423 | **151** | **35,7%** | 66 implementadas (UNOBSERVED) + 85 verificadas; 272 inventadas não contam |
+
+A régua antiga hoje dá o mesmo número da r15 (a linha da central de notificações valeu 104/122 = 85,2% enquanto `features_ui` esteve instável; a correção da r17 devolveu 105/122). Os denominadores são diferentes: a régua nova inclui as 272 linhas inventadas e separa UNOBSERVED de verificada. Cobertura de linhas, **não** paridade com o Pippit.
+
+## 4. Placares
+
+| ronda | sandbox | Windows |
 |---|---|---|
-| verificada (teste passou aqui OU no Windows r16) | 84 | 20% |
-| implementada (conteúdo UNOBSERVED) | 66 | 16% |
-| não verificada (instável — `features_ui`) | 1 | 0,2% |
-| inventada (conteúdo apagado/não documentado) | 272 | 64% |
-| **Total** | **423** | 100% |
+| r16 | 79 ok / 56 skip (sem navegador) / 0 falhas (135) | **133 ok / 2 skip / 1 falha instável (135)** — validado |
+| **r17 revisada** | **133 ok / 2 skip / 0 falhas (135)** — com Chromium headless | aguardando a suíte do usuário |
 
-- **Implementação**: 150 de 423 = 35%. **Verificação**: 84 de 423 = 20%. Contagem interpretada (par clássico): **150 de 423 = 35%**.
-- Regra inalterada: conteúdo UNOBSERVED/inventado com teste = "implementada (conteúdo UNOBSERVED)", nunca "verificada".
+## 5. Commits da r17
 
-## 3. Pendências e riscos
-
-1. Rodar a suíte no Windows para fechar `features_ui` (a última não verificada).
-2. Conteúdo inventado/apagado (272 linhas): irreproduzível sem evidência nova do Pippit.
-3. Bloqueios de licença/monetização: documentados, não simulados.
-4. **Push só no fim do projeto** (ordem do usuário), quando escrever "PUSH AUTORIZADO".
-
-## 4. Linha do tempo
-
-r14 (11/11): ~83/122 · pacote r14 (56 UI no Windows = 2 falhas) · push `arena/a14d8a49-pippet-clone-r14`.  
-r15 (11/11): 105/122 (régua antiga) · pacote r15 validado no Windows (4 defeitos).  
-r16 (12/12): 4 defeitos corrigidos · régua honesta · pacote validado no Windows: **133/2/1 (135)**.  
-**r17 (12/12): `features_ui` corrigida (10/10) · histórico restaurado (53 commits) · recontagem 84/66/1/272 · entrega_17.**
+`443a435` (item 1: ordem determinística + `hasText`, prova 10/10), `29ded87` (item 2: histórico), `c7ff946` (item 3: docs), `06b9072` (revisão ponto 2: costura), `ab9b8d2` (ponto 1: réguas lado a lado), este (ponto 3) e o de pacote. Todos com teste (suíte 133/2/0). **Sem push** (só no fim do projeto), **nenhuma chave** em lugar nenhum.
