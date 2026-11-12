@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { DirectGen, newDirectState, applyPatch, MIN_PROMPT, RUN_STATE, AUTO_ROUTE, creditsFor } from '../src/directgen.mjs';
 
 const mkCredits = (n) => ({ n, balance() { return this.n; }, debit(label, a) { if (this.n < a) return { ok: false }; this.n -= a; this.log = [...(this.log || []), [label, -a]]; return { ok: true }; } });
-const mk = (opts = {}) => { const credits = mkCredits(opts.credits ?? 125); const state = newDirectState(); const svc = new DirectGen({ state, credits, render: opts.render }); return { svc, credits, state }; };
+const mk = (opts = {}) => { const credits = mkCredits(opts.credits ?? 125); const state = newDirectState(); const svc = new DirectGen({ state, credits, render: opts.render, listeners: opts.listeners }); return { svc, credits, state }; };
 const submit = (svc, projectId, canvasId, prompt) => {
   const threadId = `canvas_thread_${canvasId}_pippit_video_part_agent`;
   const param = JSON.stringify({ prompt, images: [], ratio: '9:16', resolution: '768p', model: AUTO_ROUTE.modelKey, duration_sec: 4 });
@@ -56,12 +56,13 @@ assert.equal(creditsFor(4), 12);
 { const { svc, state } = mk(); state.tries.auto = 0; const c = svc.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_id: AUTO_ROUTE.resourceId, resource_type: 'aigc', benefit_type: AUTO_ROUTE.benefitType, high_precision_amount: 4 }] }); assert.equal(c.data.status, 2); assert.equal(c.data.paywall, 'subscribe'); }
 
 // cancel_run (estado/corpo UNOBSERVED): cancela run submetido durante a renderizacao; renderizador nao sobrescreve; run concluido nao muda
-{ let release; const gate = new Promise((r) => (release = r)); const { svc, credits } = mk({ render: async () => { await gate; return { assetId: 'a1', name: 'x.mp4', durationMs: 4000, width: 768, height: 1344 }; } }); const pid = open(svc);
-  const r = submit(svc, pid, 'canvas1', 'a red apple rotating on a white table'); const p = svc.process(r.data.run.run_id); await new Promise((x) => setTimeout(x, 10));
-  const c = svc.cancelRun({ run_id: r.data.run.run_id, thread_id: r.data.run.thread_id }); assert.equal(c.data.run.state, RUN_STATE.canceled); assert.equal(svc.s.assets.node1.root.content.generation.state.status, 'cancelled');
+{ let release, renderSignal, svc; const gate = new Promise((r) => (release = r)); const events = []; const listeners = new Set([(ev) => { if (ev.type === 'run') events.push(svc.s.runs[ev.run_id].state); }]); const built = mk({ listeners, render: async (_run, { signal }) => { renderSignal = signal; await gate; return { assetId: 'a1', name: 'x.mp4', durationMs: 4000, width: 768, height: 1344 }; } }); svc = built.svc; const credits = built.credits; const pid = open(svc);
+  const r = submit(svc, pid, 'canvas1', 'a red apple rotating on a white table'); const p = svc.process(r.data.run.run_id); await new Promise((x) => setTimeout(x, 10)); assert.equal(svc.s.runs[r.data.run.run_id].state, RUN_STATE.generating);
+  const c = svc.cancelRun({ run_id: r.data.run.run_id, thread_id: r.data.run.thread_id }); assert.equal(c.data.run.state, RUN_STATE.canceled); assert.equal(renderSignal.aborted, true, 'cancel sinaliza o renderer em voo'); assert.deepEqual(events, [RUN_STATE.working, RUN_STATE.generating, RUN_STATE.canceled], 'SSE listeners veem as transicoes de run em ordem'); assert.equal(svc.s.assets.node1.root.content.generation.state.status, 'cancelled');
   release(); const run = await p; assert.equal(run.state, RUN_STATE.canceled); assert.equal(svc.s.projects[pid].files.length, 0); assert.equal(credits.balance(), 113, 'sem estorno: regra desconhecida (documentada)');
   assert.equal(svc.cancelRun({ run_id: r.data.run.run_id }).data.run.state, RUN_STATE.canceled); assert.equal(svc.cancelRun({ run_id: 'inexistente' }).ret, '8');
-  const rows = svc.listRuns(); assert.equal(rows.length, 1); assert.equal(rows[0].state, RUN_STATE.canceled); assert.equal(rows[0].prompt, 'a red apple rotating on a white table'); assert.equal(rows[0].canvas_id, 'canvas1'); }
+  const rows = svc.listRuns(); assert.equal(rows.length, 1); assert.equal(rows[0].state, RUN_STATE.canceled); assert.equal(rows[0].prompt, 'a red apple rotating on a white table'); assert.equal(rows[0].canvas_id, 'canvas1');
+  const task = svc.listLocalTasks()[0]; assert.equal(task.run_id, run.run_id); assert.equal(task.run_state, RUN_STATE.canceled); assert.equal(task.local_task_id, `local_run_task_${run.run_id}`); }
 
 // recurso nao observado: nao inventa preco
 { const { svc } = mk(); const c = svc.checkWithholdDeduct({ item_list: [{ resource_id: 'cc_biz_outro', resource_type: 'aigc' }] }); assert.equal(c.data.item_list[0].status, 0); assert.ok(c.data.item_list[0]._unobserved); }

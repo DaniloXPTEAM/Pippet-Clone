@@ -2,8 +2,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\//, ''));
-const OBS = JSON.parse(fs.readFileSync(path.join(here, '../../notes/_submit_runs_observed.json'), 'utf8'));
+import { fileURLToPath } from 'node:url';
+import { skipMissingEvidence } from './support/browser.mjs';
+const here = path.dirname(fileURLToPath(import.meta.url)); const fixture = path.resolve(here, '../../notes/_submit_runs_observed.json');
+if (skipMissingEvidence('agent_contract', [fixture])) process.exit(0);
+const OBS = JSON.parse(fs.readFileSync(fixture, 'utf8'));
 const C = await import('../app/lib/agent_contract.mjs');
 // generate_mode: so os 4 valores do validador; mapeamento categoria -> valor
 assert.deepEqual(C.GENERATE_MODES, ['agent', 'video_gen', 'image_gen', 'audio_gen']);

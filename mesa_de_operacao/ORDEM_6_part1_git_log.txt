@@ -1,0 +1,4 @@
+164033e (HEAD -> arena/a14d8a49-pippet-clone) Restore cumulative status and feature inventory
+f616916 Restore cumulative regression tests and evidence
+a106a39 Restore cumulative app and router implementation
+48ca7bb (grafted, origin/main, origin/HEAD, main) Importa PiperLine: app local, notas, documentos de RE e registro REA (lote12)

@@ -6,9 +6,8 @@ import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('talkingphoto_ui')) process.exit(0);
 const realFetch = globalThis.fetch; const external = [];
 globalThis.fetch = async (u, o) => { const h = new URL(typeof u === 'string' ? u : u.url).hostname; if (h !== '127.0.0.1') { external.push(String(u)); throw new Error('chamada externa bloqueada: ' + u); } return realFetch(u, o); };
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-tpu-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp; process.env.PIPPIT_JOB_POLL_MS = '0'; process.env.PIPPIT_JOB_TICK_MS = '60000';
@@ -23,14 +22,21 @@ const ff = (args, out) => { assert.equal(spawnSync(media.FFMPEG, ['-y', '-v', 'e
 const png = ff(['-f', 'lavfi', '-i', 'color=c=blue:s=400x400', '-frames:v', '1'], path.join(tmp, 'p.png')); const mp3 = ff(['-f', 'lavfi', '-i', 'sine=frequency=440:duration=3'], path.join(tmp, 'a.mp3'));
 const prov = { adapter: 'replicate-lipsync', baseUrl: 'http://127.0.0.1:5254/r', model: 'acme/lipsync', apiKey: 'SEGREDO', allowSpend: true, costPerSecond: 0.05, currency: 'USD', inputMap: { gesture: 'prompt' } };
 const bal0 = (await api('GET', '/api/state')).body.balance;
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [], ext = [];
+const browser = await launchChromium(); const errors = [], ext = [];
 const page = await (await browser.newContext({ viewport: { width: 1500, height: 950 } })).newPage(); page.on('pageerror', (e) => errors.push(String(e))); page.on('request', (q) => { if (!q.url().startsWith(base) && !q.url().startsWith('data:') && !q.url().startsWith('blob:')) ext.push(q.url()); });
 const openStep2 = async (audio = true) => { await page.goto(`${base}/#/home`); await page.evaluate(() => { window.__tp = null; }); await page.waitForSelector('.skill[data-s=foto-falante-de-ia]'); await page.click('.skill[data-s=foto-falante-de-ia]'); await page.waitForSelector('#tpdrop');
   let [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#tpdrop')]); await fc.setFiles(png); await page.waitForSelector('#tpname'); await page.check('#tpok'); await page.click('#tpnext'); await page.waitForSelector('#tptab-vo');
   if (audio) { await page.click('#tptab-vo'); await page.waitForSelector('#tpaudiodrop'); [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#tpaudiodrop')]); await fc.setFiles(mp3); await page.waitForSelector('#tpaudioname'); } };
 
-// 1) sem provedor: o botão existe, está desabilitado e explica por quê
+// 1) sem provedor externo, usa somente a prévia local: foto estática + clipe enviado; sem lip-sync/IA, chamadas de provedor ou débito.
 await openStep2(); assert.equal(await page.locator('#tpprov').isDisabled(), true); assert.match(await page.locator('#tpprov').getAttribute('title'), /Configure um provedor de foto falante/);
+const localProviderPosts = posts(); await page.click('#tpexport'); await page.waitForSelector('.tp-box video[src*="/files/"]', { timeout: 30000 });
+assert.match(await page.locator('.tp-box .muted').innerText(), /Prévia local: foto estática com o áudio enviado\. NÃO há animação labial nem IA/);
+const localVideo = (await api('GET', '/api/assets?kind=video')).body.find((asset) => /prévia local sem animação labial/i.test(asset.name)); assert.ok(localVideo, 'preview exported as a local asset');
+const localInfo = media.probe(path.join(tmp, 'files', localVideo.stored)); assert.equal(localInfo.hasVideo, true); assert.equal(localInfo.hasAudio, true); assert.ok(localInfo.duration >= 2.9 && localInfo.duration <= 3.1, `duração da prévia local: ${localInfo.duration}`);
+assert.equal(posts(), localProviderPosts, 'local preview did not call an external provider'); assert.equal((await api('GET', '/api/state')).body.balance, bal0, 'local preview does not spend Pippit credits');
+const voiceStatus = (await api('GET', '/api/tts-voices')).body;
+if (!voiceStatus.available) { const photoAsset = (await api('GET', '/api/assets?kind=image')).body[0]; const scriptOnly = await api('POST', '/api/talking-photo/render', { assetId: photoAsset.id, text: 'Olá, esta é uma locução de teste.' }); assert.equal(scriptOnly.status, 503); assert.equal(scriptOnly.body.blocked, true); assert.match(scriptOnly.body.error, /SAPI|voz do Windows/); }
 // 2) configura o provedor pelas Configurações (formulário real) e confere a segurança do formulário
 await page.goto(`${base}/#/settings/llm`); await page.waitForSelector('.prov[data-k=talkingphoto]'); const card = page.locator('.prov[data-k=talkingphoto]'); assert.match(await card.innerText(), /Foto falante \(lip-sync\)/); assert.match(await card.innerText(), /DESCONHECIDO|custo e moeda abaixo são informados por você/);
 await card.locator('[data-f=adapter]').selectOption('replicate-lipsync'); await card.locator('[data-f=baseUrl]').fill(prov.baseUrl); await card.locator('[data-f=model]').fill(prov.model); await card.locator('[data-f=apiKey]').fill(prov.apiKey); await card.locator('[data-f=costPerSecond]').fill('0.05'); await card.locator('[data-f=currency]').fill('USD'); await card.locator('[data-f=inputMap]').fill('{"gesture":"prompt"}'); await card.locator('[data-f=allowSpend]').check(); await card.locator('[data-psave=talkingphoto]').click();
@@ -38,7 +44,7 @@ await page.waitForFunction(() => /Salvo/.test(document.querySelector('[data-pres
 const pub = (await api('GET', '/api/providers')).body.providers.talkingphoto; assert.equal(pub.configured, true); assert.equal(pub.costPerSecond, 0.05); assert.equal(pub.currency, 'USD'); assert.deepEqual(pub.inputMap, { gesture: 'prompt' }); assert.ok(!JSON.stringify(pub).includes('SEGREDO'));
 // 3) fluxo completo: orçamento -> consentimento -> envio -> vídeo
 await openStep2(); await page.fill('#tpgesture', 'acene'); await page.waitForFunction(() => !document.querySelector('#tpprov')?.disabled, null, { timeout: 5000 });
-const p0 = posts(); await page.click('#tpprov'); await page.waitForSelector('#tpq-cost'); assert.match(await page.locator('#tpq-cost').innerText(), /0\.15 USD/); assert.match(await page.locator('#tpq-prov').innerText(), /acme\/lipsync.*127\.0\.0\.1:5254/); assert.match(await page.locator('#tpq-sec').innerText(), /3/); const warn = await page.locator('#tpq-warn').innerText(); assert.match(warn, /não é verificada localmente/); assert.match(warn, /retidos/);
+const p0 = posts(); await page.click('#tpprov'); await page.waitForSelector('#tpq-cost'); const quoteText = await page.locator('#tpq-cost').innerText(); const quoteAmount = Number(quoteText.match(/^([\d.]+)/)?.[1]); const quoteSeconds = Number(quoteText.match(/\(([\d.]+) s ×/)?.[1]); assert.ok(quoteSeconds >= 3 && quoteSeconds < 3.1, quoteText); assert.ok(Math.abs(quoteAmount - quoteSeconds * 0.05) < 1e-6, `orçamento deve derivar da duração medida: ${quoteText}`); assert.match(quoteText, /USD/); assert.match(await page.locator('#tpq-prov').innerText(), /acme\/lipsync.*127\.0\.0\.1:5254/); assert.match(await page.locator('#tpq-sec').innerText(), /3/); const warn = await page.locator('#tpq-warn').innerText(); assert.match(warn, /não é verificada localmente/); assert.match(warn, /retidos/);
 assert.equal(await page.locator('#tpauth').isDisabled(), true, 'não autoriza sem marcar o consentimento'); assert.equal(posts(), p0, 'orçamento exibido: nada enviado'); assert.match(await page.locator('#tpreason').innerText(), /consentimento/);
 await page.check('#tpack1'); assert.equal(await page.locator('#tpauth').isDisabled(), false); assert.equal(posts(), p0, 'marcar o consentimento ainda não envia'); await page.click('#tpauth'); await page.waitForSelector('video[src*="/files/"]', { timeout: 30000 });
 assert.equal(posts(), p0 + 1); assert.match(await page.locator('#tpdone').innerText(), /NÃO é verificada localmente/); const sent = JSON.parse(seen.filter((x) => /predictions$/.test(x.p)).at(-1).body.toString()); assert.equal(sent.input.prompt, 'acene'); assert.match(sent.input.audio, /^data:audio\/mpeg;base64,/);

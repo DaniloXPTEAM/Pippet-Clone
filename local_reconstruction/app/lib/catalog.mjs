@@ -45,11 +45,17 @@ export function videoCost(modelId, seconds) {
   return m.perSecond ? m.perSecond * seconds : null; // custo exibido so observado para 2.5 (37/s) e Mini teste (7/s)
 }
 export const NEEDS = { video: 'Nenhum provedor de geração de vídeo por IA configurado nesta instalação local.', image: 'Nenhum provedor de geração de imagem por IA configurado nesta instalação local.', audio: 'Nenhum provedor de áudio/voz por IA configurado nesta instalação local.' };
-// Estúdio de marketing: seletores observados (FEATURE_INVENTORY.md: Ad formats, Hook, Visual style). A categoria de cada cartão de Ad formats e os itens de Hook NÃO foram capturados (null/[]).
+// Estúdio de marketing: seletores observados (FEATURE_INVENTORY.md: Ad formats, Hook, Visual style). Categorias dos cartões Ad formats permanecem desconhecidas; nomes de Hooks foram preenchidos pelas listas capturadas por categoria.
 export const MARKETING = {
   adFormats: { search: 'Search ad format', categories: ['All', 'Trending Ads', 'UGC Ads', 'Product Demos', 'Visual Effects', 'Story-Driven Ads', 'Seedance 2.5', 'ASMR'],
     items: ['Shot-and-Drop Reveal', 'Secret Shelf Test', 'Living Garment Swap Reveal', 'Cursor Download Reveal', 'Product Spin Reveal', 'Folder Outfit Demo', 'Robbery Bag Reveal', 'Single Image Detail Stop'].map((name) => ({ name, category: null })) },
-  hooks: { search: 'Search hook', categories: ['Eye-Catching Visuals', 'Video Formats', 'Persuasive Messaging', 'Catchy Sounds', 'Standout Styles'], items: [] },
+  hooks: { search: 'Search hook', categories: ['Eye-Catching Visuals', 'Video Formats', 'Persuasive Messaging', 'Catchy Sounds', 'Standout Styles'], items: [
+    ...['Giant Product Crash', 'Tiny Meets Giant', 'Wing Walk Selfie', 'Train-Top Selfie', 'Lava-Side Selfie', 'Edge of the City', 'Desert Ride Selfie', 'Splash Reveal', 'Product Storm'].map((name) => ({ name, cat: 'Eye-Catching Visuals' })),
+    ...['Street Reactions', 'Mirror Review', 'Day-in-the-Life Pick', 'GRWM', 'Beat-Synced Looks', 'Elevator Lookbook', 'Laptop Flip', 'Jump-Change Look', 'Which Look Wins?'].map((name) => ({ name, cat: 'Video Formats' })),
+    ...['Tired of This?', 'You’ve Been Doing It Wrong', 'See the Result First', 'The Product Challenge', 'Spot the Difference', 'Here’s Why', 'This One’s for You'].map((name) => ({ name, cat: 'Persuasive Messaging' })),
+    ...['ASMR Unboxing', 'The Perfect Mist', 'Hear That Crunch', 'Clicks Snaps Done', 'Sounds Like Real Life', 'Say It Loud', 'The Movie Trailer'].map((name) => ({ name, cat: 'Catchy Sounds' })),
+    ...['Words Come to Life', 'Animated Problem Solver', 'Meet the Mascot', 'Ready for Liftoff', 'Red Carpet Moment', 'Anime-Level Reaction', 'Glitch to Smooth', 'Reaction Split-Screen'].map((name) => ({ name, cat: 'Standout Styles' })),
+  ] },
   styles: { search: 'Search style', categories: [
     { name: 'Natural Living', items: ['Outdoor Forest Natural Light', 'Paris Street Film', 'Candid Social Film', 'Scandinavian Natural', 'Mediterranean Wellness', 'California Sunshine Lifestyle', 'French Countryside Natural'] },
     { name: 'Eastern Aesthetics', items: ['Retro Hong Kong Comedy', 'Ancient Eastern Palace', 'Modern Chinese Elegance'] },

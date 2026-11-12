@@ -4,9 +4,9 @@ import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { fileURLToPath } from 'node:url';
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('llm_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-lui-')); process.env.PIPPIT_LLM ??= 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const { server } = await import('../app/server.mjs');
 const mock = http.createServer((req, res) => {
@@ -22,12 +22,14 @@ const mock = http.createServer((req, res) => {
 });
 await new Promise((r) => mock.listen(5216, '127.0.0.1', r));
 const PORT = 5217; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
-const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\//, '')), 'ui-shots'); fs.mkdirSync(SHOTS, { recursive: true });
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+import { shotsDir } from './support/shots.mjs'; const SHOTS = shotsDir(); // rodada 10: capturas fora da árvore versionada
+const browser = await launchChromium();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } }); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
 const shot = (n) => page.screenshot({ path: path.join(SHOTS, n + '.png') });
 const post = (p, b) => fetch(base + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }).then((r) => r.json());
-await page.goto(base + '/#/settings/llm'); await page.waitForSelector('#llurl');
+await page.goto(base + '/#/settings/llm'); await page.waitForSelector('#llurl'); await page.waitForSelector('#llwh');
+assert.match(await page.locator('#llwh').getAttribute('placeholder'), /baixe você mesmo; nada é baixado automaticamente/);
+const whisperStatus = await page.locator('#llwh').locator('xpath=..').innerText(); assert.match(whisperStatus, /filtro whisper do ffmpeg disponível|este ffmpeg não tem o filtro whisper/);
 assert.match(await page.locator('#llmst').innerText(), /Indisponível/);
 await page.fill('#llurl', 'http://127.0.0.1:5216/v1'); await page.fill('#llmod', 'mock-chat'); await page.click('#llsave'); await page.waitForSelector('#llmst:has-text("Ativo")'); assert.match(await page.locator('#llmst').innerText(), /mock-chat/);
 await page.click('#lltest'); await page.waitForFunction(() => /OK em/.test(document.querySelector('#llres')?.textContent || '')); await shot('40_llm_settings');
@@ -35,7 +37,7 @@ await page.click('#lltest'); await page.waitForFunction(() => /OK em/.test(docum
 await page.goto(base + '/#/skills'); await page.waitForSelector('#mk'); await page.click('#mk'); await page.getByText('Criar com IA', { exact: true }).click(); await page.fill('#skb', 'skill para anúncios de frutas em planos fechados'); await page.click('#skgo');
 await page.waitForSelector('.skill-card:has-text("Skill do LLM")'); assert.equal(await page.locator('button[data-top="Minhas skills"].on').count(), 1);
 // refinar prompt no Gerador
-await page.goto(base + '/#/gen'); await page.waitForSelector('#grf'); await page.fill('#gp', 'maçã girando'); await page.click('#grf'); await page.waitForFunction(() => /maçã vermelha girando/.test(document.querySelector('#gp').value)); await shot('41_refine');
+await page.goto(base + '/#/gen'); await page.waitForSelector('#grf'); await page.waitForFunction(()=>/UNOBSERVED/.test(document.querySelector('#genToolsNote')?.textContent||'')); assert.match(await page.locator('#genToolsNote').innerText(),/5 ferramentas com nome observado/); assert.match(await page.locator('#genToolsNote').innerText(),/lista de chips original: UNOBSERVED/); await page.fill('#gp', 'maçã girando'); await page.click('#grf'); await page.waitForFunction(() => /maçã vermelha girando/.test(document.querySelector('#gp').value)); await shot('41_refine');
 // Criação Inteligente
 await post('/api/smart-creation', { authorize: true }); await page.goto(base + '/#/smart'); await page.waitForSelector('#sgo'); await page.click('#sgo'); await page.waitForSelector('.idea:has-text("Ideia A")'); await page.click('[data-idea]'); await page.waitForSelector('#prompt');
 assert.equal(await page.inputValue('#prompt'), 'Um gato dormindo ao sol numa janela de manhã'); await shot('42_smart_idea');

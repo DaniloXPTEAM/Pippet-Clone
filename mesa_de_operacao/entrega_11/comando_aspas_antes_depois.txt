@@ -1,0 +1,14 @@
+comando configurado pelo usuário:
+  "/tmp/demo11-DKuBxe/Node Com Espaço/eco" "argumento com espaço"
+
+[até a rodada 10] PowerShell recebia a linha como veio:
+  "/tmp/demo11-DKuBxe/Node Com Espaço/eco" "argumento com espaço"
+  → saída (2): ParserError: Token inesperado na expressão.
+
+[rodada 11] prepare() do plano do PowerShell:
+  & "/tmp/demo11-DKuBxe/Node Com Espaço/eco" "argumento com espaço"
+  → saída (0): o comando rodou: argumento com espaço
+
+[o que NÃO muda] comando que não começa com aspas:
+  wav2lip --face {image} --out {out}
+cmd.exe e POSIX: prepare() devolve a linha intacta.

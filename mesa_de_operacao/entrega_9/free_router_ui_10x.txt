@@ -1,0 +1,16 @@
+# free_router_ui — execuções seguidas na árvore final (após o 2º reset do sandbox)
+# 2026-11-11T19:41:57Z · v22.22.3 · Linux x86_64 · commits 84b8dd0..b7e25ec
+execução 1: OK
+execução 2: OK
+execução 3: OK
+execução 4: OK
+execução 5: OK
+execução 6: OK
+execução 7: OK
+execução 8: OK
+execução 9: OK
+execução 10: OK
+resultado desta bateria: 10 de 10 ok
+
+# Bateria anterior (mesma árvore, antes do 2º reset): 10 de 10 ok.
+# Total na rodada: 20 execuções seguidas, 0 falhas.

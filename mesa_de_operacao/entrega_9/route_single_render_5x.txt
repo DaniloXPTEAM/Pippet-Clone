@@ -1,0 +1,6 @@
+# route_single_render — 5 execuções seguidas
+execução 1: OK
+execução 2: OK
+execução 3: OK
+execução 4: OK
+execução 5: OK

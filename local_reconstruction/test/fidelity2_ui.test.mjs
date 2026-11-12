@@ -6,9 +6,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/Dannilo/AppData/Local/npm-cache/_npx/9b9809298fe40d2c/node_modules/rea-agents/package.json');
-const { chromium } = require('playwright-core');
+import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+if (skipUnavailableBrowser('fidelity2_ui')) process.exit(0);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pippit-f2-')); process.env.PIPPIT_LLM = 'off'; process.env.PIPPIT_LOCAL_DATA = tmp;
 const media = await import('../app/lib/media.mjs'); const { server } = await import('../app/server.mjs'); const PORT = 5247; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; }; const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
@@ -17,7 +16,7 @@ const big = png('grande.png', '400x400'), small = png('pequena.png', '200x200');
 // dados observados do drawer (arquivo gerado a partir das capturas)
 let r = await j('/api/avatar-drawer'); assert.equal(r.body.avatares.length, 51); assert.equal(r.body.idiomas.length, 31); assert.deepEqual(Object.keys(r.body.filtros), ['Gender', 'Age', 'Figure', 'Name', 'Industry', 'Scene', 'Pose', 'Outfit style']); assert.equal(r.body.custo.tooltip, '5.88 second = 11 credits');
 const balance0 = (await j('/api/state')).body.balance; const proj = (await post('/api/projects', { type: 'story', title: 'Untitled' })).body; const cproj = (await post('/api/projects', { type: 'canvas', title: 'Tela' })).body;
-const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true }); const errors = [], ext = [];
+const browser = await launchChromium(); const errors = [], ext = [];
 const ctx = await browser.newContext({ viewport: { width: 1600, height: 950 } }); const page = await ctx.newPage(); page.on('pageerror', (e) => errors.push(String(e))); page.on('request', (q) => { if (!q.url().startsWith(base) && !q.url().includes('larkoffice') && !q.url().startsWith('data:') && !q.url().startsWith('blob:')) ext.push(q.url()); });
 await ctx.route('https://bytedance.larkoffice.com/**', (rt) => rt.fulfill({ status: 200, body: 'tutorial' }));
 
@@ -50,7 +49,7 @@ await page.click('#modelB'); await page.locator('.modal .card', { hasText: 'Drea
 await page.click('#modeB'); t = await page.locator('.menu').innerText(); assert.match(t, /Escolha um modelo de vídeo e gere diretamente/); assert.match(t, /o agente a refina e escolhe os modelos certos/); await page.mouse.click(5, 5);
 
 // ---- Drawer Avatar video (Skills recomendadas)
-await page.goto(`${base}/#/home`); await page.waitForSelector('.skill[data-s=video-de-avatar]'); await page.click('.skill[data-s=video-de-avatar]'); await page.waitForSelector('#avdrawer .avd'); t = await page.locator('#avdrawer').innerText();
+await page.goto(`${base}/#/home`); await page.waitForSelector('.skill[data-s=video-de-avatar]'); await page.locator('.skill[data-s=video-de-avatar]').evaluate((el) => el.click()); await page.waitForSelector('#avdrawer .avd'); t = await page.locator('#avdrawer').innerText();
 for (const x of ['Crie rapidamente um vídeo com avatar', 'A sincronização labial precisa estará disponível após a exportação', 'Editar mais', 'Exportar vídeo', 'Escolher avatar', 'Editar roteiro', 'Avatares recomendados', 'Favoritos', 'Meus avatares', 'Gênero', 'Idade', 'Figura', 'Nome', 'Setor', 'Cena', 'Pose', 'Estilo de roupa', 'Victor in the kitchen']) assert.match(t, new RegExp(x));
 assert.equal(await page.locator('#avdrawer [data-av]').count(), 50); assert.equal(await page.locator('#avundo').isDisabled(), true); assert.match(await page.locator('#avexp').getAttribute('title'), /Não é uma tabela de preços/); assert.match(await page.locator('#avexp').innerText(), /11\s+23/);
 await page.click('[data-f="Gender"]'); t = await page.locator('.avd-menu').innerText(); assert.match(t, /Feminino/); assert.match(t, /Masculino/); assert.match(t, /Redefinir/); await page.locator('.avd-menu label', { hasText: 'Feminino' }).click(); assert.match(await page.locator('[data-f="Gender"]').innerText(), /Feminino/); await page.click('.avd-reset'); await page.click('.avd-head h2');

@@ -7,6 +7,14 @@ import { adapterFor, resolveProviders, isConfigured } from '../../src/providers.
 export const KIND = 'talkingphoto';
 export const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 const host = (u) => { try { return new URL(u).host; } catch { return ''; } };
+// Hosts exibidos no orçamento: quando o adaptador não usa baseUrl (Space do Hugging Face), mostra o Space.
+const providerHost = (cfg) => {
+  if (!cfg) return '';
+  if (cfg.adapter === 'local-command') return 'execução local (sem rede)';
+  const h = host(cfg.baseUrl);
+  if (cfg.adapter === 'huggingface-space') return cfg.space ? `${cfg.space}${h ? ` (${h})` : ''}` : h;
+  return h;
+};
 const r2 = (n) => Math.round(n * 100) / 100;
 
 // Entradas da tarefa (persistidas no job): { imageAssetId, audioAssetId, text, voice, gesture, params }
@@ -32,10 +40,11 @@ export function buildQuote(settings, inputs, info) {
   const overLimit = cost.known && max !== null && Number.isFinite(max) && cost.amount > max;
   const warnings = [];
   if (!cost.known) warnings.push('Custo DESCONHECIDO: o provedor pode cobrar por esta geração. Só prossiga se aceitar um custo que o PiperLine não consegue estimar.');
+  if (adapter?.freeExecution) warnings.push('Execução gratuita: nada é cobrado pelo PiperLine. ' + (adapter.local ? 'O comando roda na sua máquina (o custo é o uso dela).' : 'O Space pode ter fila e limite de uso.'));
   if (desc.ignored.length) warnings.push(`Este provedor/configuração NÃO recebe: ${desc.ignored.join(', ')} (campos sem mapeamento em "inputMap"/"paramMap"); eles não influenciam o resultado.`);
   warnings.push('A sincronização labial depende do modelo do provedor e não é verificada localmente; o resultado pode não ter lip-sync correto.');
   warnings.push('A foto e o áudio serão enviados ao provedor e podem ser retidos conforme os termos dele.');
-  const core = { adapter: cfg.adapter, model: cfg.model, host: host(cfg.baseUrl), seconds, cost, accepted: desc.accepted, ignored: desc.ignored, image: info.image.sha, audio: info.audio.sha, text: inputs.text || '', voice: inputs.voice || '', gesture: inputs.gesture || '', params: inputs.params || {} };
+  const core = { adapter: cfg.adapter, model: cfg.model, host: providerHost(cfg), seconds, cost, accepted: desc.accepted, ignored: desc.ignored, image: info.image.sha, audio: info.audio.sha, text: inputs.text || '', voice: inputs.voice || '', gesture: inputs.gesture || '', params: inputs.params || {} };
   const digest = sha256(Buffer.from(JSON.stringify(core)));
   return { ok: true, digest, provider: { adapter: cfg.adapter, label: adapter.label, model: cfg.model, host: core.host }, seconds, cost, maxCostPerTask: max, overLimit, limits, accepted: desc.accepted, ignored: desc.ignored, warnings, needsConsent: true, needsUnknownCostAck: !cost.known, inputs: { image: core.image, audio: core.audio } };
 }
@@ -47,6 +56,9 @@ export function consentProblem(job, quote, cfg) {
   const a = job.authorization; if (!a || a.confirm !== true) return 'aguardando seu consentimento para esta tarefa (revise o orçamento e autorize)';
   if (a.quoteDigest !== quote.digest) return 'o consentimento não vale mais: provedor, modelo, duração, custo ou entradas mudaram desde o orçamento mostrado';
   if (!quote.cost.known && a.acknowledgeUnknownCost !== true) return 'custo desconhecido: exige confirmação explícita de que você aceita uma cobrança que não foi estimada';
-  if (cfg?.allowSpend !== true) return 'aguardando autorização de gasto do provedor ("Autorizo chamadas pagas" nas configurações do provedor)';
+  // Adaptadores de execução gratuita (Space do HF, executor local) não cobram: pedir "autorizo chamadas pagas" seria falso.
+  // O consentimento POR TAREFA continua obrigatório acima (confirm + digest do orçamento).
+  const adapter = cfg?.adapter ? adapterFor(KIND, cfg.adapter) : null;
+  if (adapter?.freeExecution !== true && cfg?.allowSpend !== true) return 'aguardando autorização de gasto do provedor ("Autorizo chamadas pagas" nas configurações do provedor)';
   return null;
 }

@@ -1,0 +1,45 @@
+# Bateria free_router_ui — árvore da rodada 10 (repaintIfRoute + retry de clique)
+## A) 20 execuções normais
+execução 1: OK — 133 ms do clique
+execução 2: OK — 133 ms do clique
+execução 3: OK — 135 ms do clique
+execução 4: OK — 121 ms do clique
+execução 5: OK — 120 ms do clique
+execução 6: OK — 145 ms do clique
+execução 7: OK — 120 ms do clique
+execução 8: OK — 132 ms do clique
+execução 9: OK — 130 ms do clique
+execução 10: OK — 116 ms do clique
+execução 11: OK — 135 ms do clique
+execução 12: OK — 171 ms do clique
+execução 13: OK — 131 ms do clique
+execução 14: OK — 129 ms do clique
+execução 15: OK — 147 ms do clique
+execução 16: OK — 137 ms do clique
+execução 17: OK — 149 ms do clique
+execução 18: OK — 134 ms do clique
+execução 19: OK — 125 ms do clique
+execução 20: OK — 118 ms do clique
+resultado A: 20 de 20 ok
+## B) 20 execuções com CPU 8x mais lenta (PIPERLINE_TEST_CPU_RATE=8)
+execução 1: OK — 417 ms do clique
+execução 2: OK — 377 ms do clique
+execução 3: OK — 402 ms do clique
+execução 4: OK — 402 ms do clique
+execução 5: OK — 367 ms do clique
+execução 6: OK — 394 ms do clique
+execução 7: OK — 391 ms do clique
+execução 8: OK — 452 ms do clique
+execução 9: OK — 417 ms do clique
+execução 10: OK — 374 ms do clique
+execução 11: OK — 382 ms do clique
+execução 12: OK — 387 ms do clique
+execução 13: OK — 325 ms do clique
+execução 14: OK — 410 ms do clique
+execução 15: OK — 392 ms do clique
+execução 16: OK — 393 ms do clique
+execução 17: OK — 359 ms do clique
+execução 18: OK — 394 ms do clique
+execução 19: OK — 428 ms do clique
+execução 20: OK — 438 ms do clique
+resultado B: 20 de 20 ok

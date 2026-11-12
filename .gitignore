@@ -1,0 +1,22 @@
+# Installed dependencies are reproducible from package manifests and are not source files.
+node_modules
+notes/node_modules
+local_reconstruction/node_modules
+
+# Local captures, synced evidence, and delivery archives stay outside source control.
+captures/auth/
+captures/*.json
+google_drive/
+*.zip
+*.bundle
+
+# Dependências fora da árvore versionada (recuperar_ambiente.sh recria tudo).
+.deps/
+local_reconstruction/.deps/
+
+# Segredo local do servidor (gerado em runtime; nunca versionar).
+local_reconstruction/data/auth-secret
+
+# Credenciais locais: somente nomes em .env.example; valores ficam no .env, nunca versionado.
+.env
+.env.local
