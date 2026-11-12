@@ -23,8 +23,8 @@ try {
   await page.locator('#chIdeaGo').click();
   await page.locator('.modal-bg').waitFor({ state: 'detached' });
   // Equivalente local: a ideia virou a primeira mensagem de um novo chat deste projeto.
-  const res = await fetch(`${f.base}/api/projects/${project.id}/chats`).then((r) => r.json());
-  const withIdea = res.find((c) => c.messages.some((m) => m.text === 'Ideia documentada no capture'));
+  const res = await fetch(`${f.base}/api/projects/${project.id}`).then((r) => r.json());
+  const withIdea = (res.chats || []).find((c) => c.messages.some((m) => m.text === 'Ideia documentada no capture'));
   assert.ok(withIdea, 'novo chat local criado com a ideia como primeira mensagem');
   assert.match(await page.locator('#msgs').innerText(), /Ideia documentada no capture/);
   assert.deepEqual(errors, []);

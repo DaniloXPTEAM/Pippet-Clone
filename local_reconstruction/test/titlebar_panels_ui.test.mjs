@@ -6,6 +6,6 @@ try{browser=await launchChromium();const page=await browser.newPage();await page
   assert.match(ac,/UNOBSERVED[\s\S]*Nenhuma conexão ou chamada de rede/);
   await page.locator('.modal button').last().click().catch(()=>{});
   await page.locator('#exportTasks').click();const et=await page.locator('.modal').innerText();
-  assert.match(et,/Export tasks[\s\S]*TitleBarExportTask/);assert.match(et,/ordem <b>4<\/b>/);
+  assert.match(et,/Export tasks[\s\S]*TitleBarExportTask/);assert.match(et,/ordem 4/);
   assert.match(et,/UNOBSERVED[\s\S]*Nenhuma tarefa é presumida/);
   console.log('titlebar_panels_ui.test.mjs: ok (metadados observados AgentConnect right/101/Custom e ExportTask ordem 4; conteúdo UNOBSERVED)');}finally{await browser?.close();await f.close();}
