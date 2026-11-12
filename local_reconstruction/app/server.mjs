@@ -523,7 +523,15 @@ route('DELETE', /^\/api\/talking-photo\/jobs\/([\w-]+)\/authorize$/, async (q, r
   job.authorization = null; jobsMgr.touch(job, { state: 'blocked', error: 'consentimento revogado' }); S.save(); send(r, 200, jobView(job));
 });
 const jobTimer = setInterval(() => { jobsMgr.tick().catch(() => {}); }, Number(process.env.PIPPIT_JOB_TICK_MS ?? 3000)); jobTimer.unref();
-route('GET', /^\/api\/notifications$/, async (q, r) => send(r, 200, { items: [...notes(), ...editorialAds()], unread: [...notes(), ...editorialAds()].filter((n) => !n.read).length, editorial: EDITORIAL_ADS_META }));
+// r17 item 1: ordem DETERMINÍSTICA — eventos reais do usuário sempre primeiro (data desc, empate por id);
+// anúncios (sem data) sempre por último, na ordem editorial. A instabilidade que fazia o `.note` primeiro
+// virar anúncio vinha de misturar as duas listas sem ordenação estável.
+const orderNotifications = (items) => items.sort((a, b) => {
+  const sa = a.kind === 'ad' ? '' : String(a.at || ''); const sb = b.kind === 'ad' ? '' : String(b.at || '');
+  if (sa !== sb) return sa === '' ? 1 : sb === '' ? -1 : sb.localeCompare(sa);
+  return String(a.id).localeCompare(String(b.id));
+});
+route('GET', /^\/api\/notifications$/, async (q, r) => { const items = orderNotifications([...notes(), ...editorialAds()]); send(r, 200, { items, unread: items.filter((n) => !n.read).length, editorial: EDITORIAL_ADS_META }); });
 route('POST', /^\/api\/notifications\/read-all$/, async (q, r) => { const rd = (db().editorialAdsRead ||= {}); EDITORIAL_ADS.forEach((a) => (rd[a.id] = true)); notes().forEach((n) => (n.read = true)); S.save(); send(r, 200, { ok: true, unread: 0 }); });
 route('GET', /^\/api\/projects$/, async (q, r) => send(r, 200, db().projects.map((p) => ({ id: p.id, title: p.title, type: p.type, updatedAt: p.updatedAt, subtitle: p.type === 'canvas' ? 'Tela' : p.type === 'direct' ? 'Geração direta' : p.type, href: p.direct ? `/direct/${p.id}/${p.direct.canvasId}/${p.direct.runId}` : undefined }))));
 route('POST', /^\/api\/projects$/, async (q, r) => { const b = await readJson(q); send(r, 200, newProject(b.type || 'canvas', b.title)); });

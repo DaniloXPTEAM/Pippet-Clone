@@ -35,8 +35,10 @@ await page.locator('.skill-card [data-u]').click(); await page.waitForSelector('
 const pr = (await post('/api/biz/v1/agent/create_creative_project', { user_info: { consumer_uid: 'u' } })).data.project_id; const cv = (await post('/api/biz/v1/asset/batch_generate_asset_id')).data.ids[0];
 await post('/api/biz/v1/asset/namespace_create', { namespace_data: [{ FileName: 'canvas.json', PippitAssetID: cv, ProjectID: String(pr) }] });
 await post('/api/biz/v1/agent/submit_run', { project_id: pr, message: { content: [{ type: 'data', data: JSON.stringify({ param: JSON.stringify({ prompt: 'red apple', ratio: '9:16', resolution: '768p', model: 'MiniMax-H3-trial', duration_sec: 4 }), extra: '{}', tool_name: 'biz/x_tool_name_video_part' }), sub_type: 'biz/x_data_direct_tool_call_req' }], role: 'user', thread_id: `canvas_thread_${cv}_pippit_video_part_agent`, run_id: 'u1', created_at: 1, message_id: 'm1' }, user_info: {}, agent_name: 'pippit_video_part_agent', concurrency_control: { policy: 1, conflict_key: 'node-u1' }, run_extra: '{}' });
-for (let i = 0; i < 50 && !((await (await fetch(base + '/api/notifications')).json()).unread); i++) await page.waitForTimeout(100); await page.goto(base + '/#/home'); await page.reload(); await page.waitForSelector('#bell'); assert.equal(await page.locator('#bell .dot').count(), 1);
-await page.click('#bell'); await page.waitForSelector('.note'); assert.match(await page.locator('.note').first().innerText(), /Falha na geração/); await shot('32_notifications');
+// r17 item 1: o contador já nasce não-lido por causa dos 8 anúncios — esperar só `unread` sai cedo demais
+// e a primeira `.note` pode ser um anúncio. Espera-se o EVENTO real e procura-se a nota pelo CONTEÚDO.
+for (let i = 0; i < 50 && !((await (await fetch(base + '/api/notifications')).json()).items.some((x) => x.kind !== 'ad')); i++) await page.waitForTimeout(100); await page.goto(base + '/#/home'); await page.reload(); await page.waitForSelector('#bell'); assert.equal(await page.locator('#bell .dot').count(), 1);
+await page.click('#bell'); const notaFalha = page.locator('.note').filter({ hasText: 'Falha na geração' }).first(); await notaFalha.waitFor(); assert.match(await notaFalha.innerText(), /Falha na geração/); await shot('32_notifications');
 await page.click('#allread'); await page.waitForTimeout(500); assert.equal(await page.locator('#bell .dot').count(), 0);
 // 4) estúdio de marketing: seletores com busca/categorias/Expand/Select (dados observados)
 await page.goto(base + '/#/marketing'); await page.waitForSelector('#sty');
