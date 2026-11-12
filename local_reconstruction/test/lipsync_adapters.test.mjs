@@ -182,10 +182,14 @@ try {
   const { localShellPlan } = await import('../src/providers.mjs');
   const plWin = localShellPlan('', 'win32');
   assert.equal(plWin.bin, 'powershell', 'padrão do Windows é PowerShell, não bash/WSL');
-  assert.deepEqual(plWin.argsFor('x'), ['-NoProfile', '-Command', 'x']);
+  // Rodada 13: no PowerShell o código de saída de um programa nativo NÃO é repassado (falha vira 1), então
+  // o plano termina a linha com '; exit $LASTEXITCODE' para o executor local relatar o código real.
+  assert.deepEqual(plWin.argsFor('x'), ['-NoProfile', '-Command', 'x; exit $LASTEXITCODE'], 'PowerShell encadeia exit $LASTEXITCODE');
+  assert.deepEqual(localShellPlan('pwsh', 'win32').argsFor('x'), ['-NoProfile', '-Command', 'x; exit $LASTEXITCODE'], 'pwsh também');
+  assert.ok(!localShellPlan('cmd', 'win32').argsFor('x').join(' ').includes('LASTEXITCODE'), 'cmd.exe não muda');
+  assert.deepEqual(localShellPlan('', 'linux').argsFor('x'), ['-lc', 'x'], 'POSIX não muda');
   assert.equal(plWin.quote('C:\\tmp com espaço\\a.mp4'), '"C:\\tmp com espaço\\a.mp4"', 'aspas do Windows são "..."');
   assert.equal(plWin.quote('diz "oi"'), '"diz ""oi"""', 'aspas internas são dobradas no Windows');
-  assert.deepEqual(localShellPlan('', 'linux').argsFor('x'), ['-lc', 'x']);
   assert.equal(localShellPlan('', 'linux').quote("a'b"), "'a'\\''b'", 'POSIX continua com aspas simples');
   assert.equal(localShellPlan('cmd', 'win32').bin, 'cmd');
   assert.deepEqual(localShellPlan('cmd', 'win32').argsFor('x'), ['/d', '/s', '/c', 'x']);
@@ -245,10 +249,15 @@ const i = argv.indexOf('-Command');
 const cmd = String(i >= 0 ? argv[i + 1] || '' : '');
 const first = cmd.trim()[0] || '';
 if (first === '"' || first === "'") { console.error('ParserError: Token inesperado na expressão.'); process.exit(2); }
+// Rodada 13: mesma regra do PowerShell de verdade para codigo de saida. powershell -Command devolve 1
+// quando um programa nativo falha; a linha so repassa o codigo real quando termina com o sufixo do plano.
+const sufixo = '; exit $LASTEXITCODE';
+const propaga = cmd.trimEnd().endsWith(sufixo);
+const linha = propaga ? cmd.trimEnd().slice(0, -sufixo.length) : cmd;
 const toks = []; let cur = '', quoted = '', has = false;
-for (let k = 0; k < cmd.length; k++) {
-  const c = cmd[k];
-  if (quoted && c === quoted && cmd[k + 1] === quoted) { cur += quoted; k++; continue; }
+for (let k = 0; k < linha.length; k++) {
+  const c = linha[k];
+  if (quoted && c === quoted && linha[k + 1] === quoted) { cur += quoted; k++; continue; }
   if (quoted) { if (c === quoted) { quoted = ''; } else { cur += c; } continue; }
   if (c === '"' || c === "'") { quoted = c; has = true; continue; }
   if (c !== '' && c.trim() === '') { if (cur || has) { toks.push(cur); cur = ''; has = false; } continue; }
@@ -258,7 +267,9 @@ if (cur || has) toks.push(cur);
 if (toks[0] === '&') toks.shift(); // operador de chamada do PowerShell não é argumento
 if (!toks.length) { console.error('nada para executar'); process.exit(2); }
 const r = require('node:child_process').spawnSync(toks[0], toks.slice(1), { stdio: 'inherit' });
-process.exit(r.status === null ? 1 : r.status);
+const codigo = r.status === null ? 1 : r.status;
+// Sem o sufixo, falha de programa nativo vira 1 (o defeito que o usuário viu); com ele, o código real passa.
+process.exit(propaga ? codigo : (codigo === 0 ? 0 : 1));
 `);
     fs.chmodSync(psImpostor, 0o755);
   }
@@ -296,6 +307,28 @@ process.exit(r.status === null ? 1 : r.status);
   assert.equal(runPs.job.state, 'succeeded', runPs.job.error || '');
   const videoPs = (await api('/api/assets', undefined, 'GET')).body.find((a) => a.id === runPs.job.assetId);
   assert.ok(fs.statSync(path.join(tmp, 'files', videoPs.stored)).size > 1000, 'o comando rodou de verdade pelo plano do PowerShell (vídeo gerado)');
+
+  // Rodada 13, o caso do seu Windows: o PowerShell devolve 1 quando um programa NATIVO falha e não repassa o
+  // código. O plano agora termina a linha com '; exit $LASTEXITCODE', então o executor local relata o código
+  // real (3). Prova em três passos: (a) a linha SEM o sufixo dá 1 — é o defeito relatado; (b) a linha COM o
+  // sufixo dá 3; (c) o app, com o mesmo comando, termina a tarefa com "código 3" no motivo.
+  const falhaPs = path.join(tmp, 'lipsync_falha_ps.mjs');
+  fs.writeFileSync(falhaPs, "console.error('sem modelo wav2lip instalado'); process.exit(3);\n");
+  const comandoQueFalha = `"${nodeComEspaco}" "${falhaPs}"`;
+  // Para medir o CÓDIGO (e não o parser de aspas), o controle negativo usa a linha já com o operador '&'.
+  const linhaValida = `& ${comandoQueFalha}`;
+
+  const semSufixo = rodarShell(linhaValida);
+  assert.equal(semSufixo.status, 1, `sem o sufixo, o PowerShell (${shellDoTeste}) devolve 1 e o código real se perde`);
+  const comSufixo = rodarShell(`${linhaValida}; exit $LASTEXITCODE`);
+  assert.equal(comSufixo.status, 3, 'com exit $LASTEXITCODE o código real (3) chega ao app');
+
+  ok(await api('/api/providers/talkingphoto', { adapter: 'local-command', shell: noWindows ? '' : psImpostor, command: comandoQueFalha }), 'configurar comando que falha via PowerShell');
+  const falhouPs = await runJob({ assetId: foto.id, audioAssetId: voz.id });
+  assert.equal(falhouPs.job.state, 'failed');
+  assert.match(falhouPs.job.error, /código 3/, `o motivo precisa trazer o código real; veio: ${falhouPs.job.error}`);
+  assert.ok(!/código 1\b/.test(falhouPs.job.error), 'não pode confundir a falha do programa com erro do shell');
+  assert.match(falhouPs.job.error, /sem modelo wav2lip instalado/, 'o erro do programa continua indo para o motivo');
 
   // comando que falha → motivo do stderr/código, sem sucesso inventado
   const falha = path.join(tmp, 'lipsync_falha.mjs');

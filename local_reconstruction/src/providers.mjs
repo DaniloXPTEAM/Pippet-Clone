@@ -251,7 +251,12 @@ export function localShellPlan(shell, platform = process.platform) {
   const windows = platform === 'win32';
   const powershell = /(^|[\\/])(pwsh|powershell)(\.exe)?$/i.test(bin);
   const cmdExe = /(^|[\\/])cmd(\.exe)?$/i.test(bin);
-  const argsFor = (cmd) => (powershell ? ['-NoProfile', '-Command', cmd] : cmdExe ? ['/d', '/s', '/c', cmd] : ['-lc', cmd]);
+  // Rodada 13: `powershell -Command` devolve 1 quando um programa NATIVO falha, sem repassar o código dele
+  // (provado no Windows com `& node -e 'process.exit(3)'` → 1; com `; exit $LASTEXITCODE` → 3). Sem isso o
+  // executor local relata "código 1" em vez do código real e o teste de comando que falha não fecha.
+  // `; exit $LASTEXITCODE` faz o PowerShell terminar com o código do último programa nativo (0 quando não
+  // houve nenhum). cmd.exe já repassa o código; POSIX também — os dois ramos ficam iguais.
+  const argsFor = (cmd) => (powershell ? ['-NoProfile', '-Command', `${cmd}; exit $LASTEXITCODE`] : cmdExe ? ['/d', '/s', '/c', cmd] : ['-lc', cmd]);
   // aspas: POSIX usa '...' (com '\\'' para aspas internas); PowerShell/cmd usam "..." (com "" dobrado)
   const quote = windows ? (v) => `"${String(v).replace(/"/g, '""')}"` : (v) => `'${String(v).replace(/'/g, `'\\''`)}'`;
   // Rodada 11: no PowerShell um comando que COMEÇA com aspas é lido como EXPRESSÃO (a string), não como
