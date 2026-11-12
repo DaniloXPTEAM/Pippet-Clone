@@ -1154,7 +1154,8 @@ async function pageHelp() {
 }
 async function pageInspiration() {
   const s = (await api('/api/inspiration/state')).body;
-  $('#main').innerHTML = `${credits()}<div class="page" id="inspirationLocal"><h1>Inspiration · feed e desafios</h1><p>O inventário conhece nomes de endpoints para feed, curtidas, remix, publicações e desafios; nenhuma tela/feed capturado está neste checkout.</p><div class="blocked">Conteúdo não incluído. Sem cartões inventados, curtidas, remix ou chamadas a serviços externos.</div><ul>${(s.features || []).map((f) => `<li><code>${esc(f.id)}</code> — ${esc(f.label)}: <b>${esc(f.status)}</b></li>`).join('')}</ul><p class="muted">${esc(s.note || '')}</p></div>`; bindCredits();
+  const areas = Object.entries(s.endpointAreas || {}).map(([area, eps]) => `<h2>${esc(area)}</h2><ul>${eps.map((e) => `<li><code>${esc(e)}</code> — contrato/resposta <b>UNOBSERVED</b></li>`).join('')}</ul>`).join('');
+  $('#main').innerHTML = `${credits()}<div class="page" id="inspirationLocal"><h1>Inspiration · feed e desafios</h1><p>O inventário conhece nomes de endpoints para feed, curtidas, remix, publicações e desafios; nenhuma tela/feed capturado está neste checkout.</p><div class="blocked">Conteúdo não incluído. Sem cartões inventados, curtidas, remix ou chamadas a serviços externos.</div><ul>${(s.features || []).map((f) => `<li><code>${esc(f.id)}</code> — ${esc(f.label)}: <b>${esc(f.status)}</b></li>`).join('')}</ul><h2>Endpoints observados por área (nomes estáticos dos bundles)</h2>${areas}<p class="muted">${esc(s.note || '')}</p></div>`; bindCredits();
 }
 function pagePricing() {
   const questions = ['Há testes gratuitos disponíveis?', 'Qual é a diferença entre assinatura e créditos?', 'Quais são as diferenças entre a assinatura anual e a mensal?', 'Quais métodos de pagamento são aceitos?', 'Como usar os créditos do Pippit?', 'E se eu ficar sem créditos antes do final do mês?'];

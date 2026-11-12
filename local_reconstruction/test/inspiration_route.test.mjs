@@ -15,6 +15,13 @@ try {
   assert.equal(s.externalCalls, false);
   assert.deepEqual(s.features.map((f) => f.id), ['feed', 'like/mylikes', 'list_related_remix', 'list_published_inspiration', 'feed_challenge', 'challenge_tools']);
   assert.ok(s.features.every((f) => f.status === 'UNOBSERVED'), 'toda função sem captura fica UNOBSERVED');
+  // áreas nomeadas pelos endpoints observados nos bundles (só nomes estáticos; comportamento UNOBSERVED)
+  assert.deepEqual(Object.keys(s.endpointAreas), ['feed', 'curtir', 'remix', 'publicados', 'atividades']);
+  assert.ok(s.endpointAreas.feed.some((e) => e.includes('inspiration/feed')));
+  assert.ok(s.endpointAreas.curtir.includes('inspiration/like') && s.endpointAreas.curtir.includes('inspiration/mylikes'));
+  assert.ok(s.endpointAreas.remix.includes('inspiration/list_related_remix'));
+  assert.ok(s.endpointAreas.publicados.includes('inspiration/list_published_inspiration'));
+  assert.ok(s.endpointAreas.atividades.includes('inspiration/list_feed_challenge') && s.endpointAreas.atividades.includes('inspiration/list_inspiration_activity'));
   assert.match(s.source, /PIPPIT_API_CATALOG\.md/);
   assert.ok(!/curtidas:|likes:|feed_items|cards/i.test(JSON.stringify(s)), 'a rota não devolve conteúdo de feed inventado');
   const ui = fs.readFileSync(new URL('../app/public/app.js', import.meta.url), 'utf8');

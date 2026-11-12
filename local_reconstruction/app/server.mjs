@@ -826,10 +826,11 @@ const PROMO_OBSERVED = Object.freeze({
   ],
   unobserved: ['qual valor de preço corresponde a qual data', 'duração das promoções', 'efeito real no valor cobrado', 'preço praticado hoje'],
 });
-// Feed Inspiration / desafios: NENHUMA tela de feed foi capturada. A rota devolve só os nomes de função
-// que os bundles citam, todos marcados UNOBSERVED; nada de cartões, curtidas, remix ou chamadas externas.
+// Feed Inspiration / desafios: NENHUMA tela de feed foi capturada. A rota devolve os nomes de função
+// e caminhos de endpoint que os bundles citam (PIPPIT_API_CATALOG.md), todos marcados UNOBSERVED em
+// comportamento; nada de cartões, curtidas, remix ou chamadas externas.
 const INSPIRATION_OBSERVED = Object.freeze({
-  source: 'PIPPIT_API_CATALOG.md (nomes de endpoints estáticos)',
+  source: 'PIPPIT_API_CATALOG.md (nomes de endpoints estáticos; 78 linhas de inspiration)',
   feedCaptured: false,
   features: [
     { id: 'feed', label: 'Feed', status: 'UNOBSERVED' },
@@ -839,6 +840,15 @@ const INSPIRATION_OBSERVED = Object.freeze({
     { id: 'feed_challenge', label: 'Desafios', status: 'UNOBSERVED' },
     { id: 'challenge_tools', label: 'Ferramentas do desafio', status: 'UNOBSERVED' },
   ],
+  // Áreas nomeadas pelos endpoints observados nos bundles (só nomes/caminhos estáticos; contrato e
+  // resposta em execução nunca foram capturados — cada área segue UNOBSERVED no comportamento).
+  endpointAreas: {
+    feed: ['inspiration/feed (GetInspirations)', 'inspiration/list_feed_inspiration', 'inspiration/detail_list', 'inspiration/details', 'inspiration/feature_tab', 'inspiration/get_inspiration_tab_config'],
+    curtir: ['inspiration/like', 'inspiration/mylikes', 'inspiration/interactions', 'inspiration/batch_get_interaction_status'],
+    remix: ['inspiration/list_related_remix', 'inspiration/list_for_fission'],
+    publicados: ['inspiration/list_published_inspiration', 'inspiration/get_published_inspiration_detail', 'inspiration/publish_drama_general'],
+    atividades: ['inspiration/list_inspiration_activity', 'inspiration/list_feed_challenge', 'inspiration/list_challenge_tools', 'inspiration/locate_challenge_position', 'inspiration/get_drama_hot_topic', 'inspiration/get_drama_sug_item'],
+  },
   externalCalls: false,
   note: 'Nenhuma tela, cartão ou resposta de feed foi capturada neste checkout; nada é inventado e nada é enviado.',
 });
