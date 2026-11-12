@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
+import { applyCpuThrottle, launchChromium, skipUnavailableBrowser } from './support/browser.mjs';
 import { startUiFixture } from './support/ui-fixture.mjs';
 if (skipUnavailableBrowser('free_router_ui')) process.exit(0);
 const fixture = await startUiFixture('piperline-free-router-ui-'); let browser;
@@ -7,8 +7,7 @@ try {
   browser = await launchChromium(); const page = await browser.newPage();
   // PIPERLINE_TEST_CPU_RATE=8 deixa o navegador ~8x mais lento (CDP), para reproduzir em Linux o
   // timing de um PC modesto — foi sob lentidão que a instabilidade aparecia no Windows.
-  const cpuRate = Number(process.env.PIPERLINE_TEST_CPU_RATE || 0);
-  if (cpuRate > 1) { const cdp = await page.context().newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate', { rate: cpuRate }); }
+  await applyCpuThrottle(page);
   await page.goto(`${fixture.base}/#/settings/llm`); await page.locator('#free-router').waitFor();
   // Clique com diagnóstico e com nova tentativa. Rodada 10, item 3: o SPA redesenha a tela enquanto o
   // roteador trabalha, e o Playwright aborta o clique quando o nó é trocado no meio ("element was
