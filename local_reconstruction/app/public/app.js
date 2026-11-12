@@ -24,7 +24,7 @@ function renderSide(route) {
   const nav = (href, label, extra = '') => `<a href="#${href}" class="${route.startsWith(href) ? 'on' : ''}">${label}${extra}</a>`;
   $('#side').innerHTML = `<div class="logo">Pippit</div><div class="nav">
     ${nav('/home', '✦ Criativo')}${nav('/marketing', 'Estúdio de marketing')}${nav('/story', 'Estúdio de histórias')}<a id="navTela">Tela<span class="new">NEW</span></a><hr>
-    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}${nav('/integrations', 'Integrações')}${window.__devPanelEnabled ? nav('/dev', 'Painel dev') : ''}
+    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}${nav('/integrations', 'Integrações')}${nav('/legacy-chat', 'Chat legado')}${window.__devPanelEnabled ? nav('/dev', 'Painel dev') : ''}
     <a id="navMais">Mais ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? '▴' : '▾'}</a>
     ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? `${nav('/gen', 'Gerador de vídeos').replace('<a ', '<a class="sub" ')}${nav('/avatars', 'Avatares e vozes').replace('<a ', '<a class="sub" ')}${nav('/analytics', 'Análise').replace('<a ', '<a class="sub" ')}${nav('/schedule', 'Publicador').replace('<a ', '<a class="sub" ')}` : ''}
   </div><div class="hist-h">Histórico</div>
@@ -1284,6 +1284,22 @@ async function pageDev() {
   const d = (await api('/api/dev-panel')).body || {};
   $('#main').innerHTML = `${credits()}<div class="page" id="devPanel"><h1>Painel dev</h1><p class="muted">Ativado por configuração (PIPPIT_DEV_PANEL). Só presença/ausência de variáveis — nunca valores.</p><pre id="devJson">${esc(JSON.stringify(d, null, 2))}</pre></div>`;
 }
+// ---------- Chat legado (#3) SOMENTE LEITURA — leitor do formato conhecido (agent-chat); UNOBSERVED onde faltar.
+async function pageLegacyChat() {
+  $('#main').innerHTML = `${credits()}<div class="page" id="legacyChat"><h1>Chat legado</h1>
+    <p class="muted">Somente leitura. O conteúdo real de conversas antigas não foi capturado — <b>UNOBSERVED</b>. Cole a conversa exportada (array, <code>{"{ messages: [] }"}</code> ou JSONL) e o leitor interpreta o formato.</p>
+    <textarea id="lcText" rows="8" style="width:100%" placeholder='[{"role":"user","content":"…"}]'></textarea>
+    <div class="row"><button id="lcRead" class="primary">Ler conversa</button><span class="muted" id="lcInfo"></span></div>
+    <div id="lcOut"></div></div>`;
+  $('#lcRead').onclick = async () => {
+    let data = null; try { data = JSON.parse($('#lcText').value); } catch { data = $('#lcText').value; }
+    const r = await post('/api/legacy-chat/read', { data });
+    if (!r.body?.ok) { $('#lcOut').innerHTML = `<p class="blocked">${esc(r.body?.error || 'não foi possível ler')}</p>`; return; }
+    $('#lcInfo').textContent = `${r.body.messages.length} mensagem(ns) — somente leitura`;
+    $('#lcOut').innerHTML = r.body.messages.map((m) => `<div class="card" style="margin:8px 0"><b>${esc(m.role)}</b> <small class="muted">${esc(m.at || 'UNOBSERVED')}</small>
+      <div>${esc(m.content)} ${m.content === 'UNOBSERVED' ? '<span class="blocked">UNOBSERVED</span>' : ''}</div></div>`).join('') + r.body.warnings.map((w) => `<p class="blocked">${esc(w)}</p>`).join('');
+  };
+}
 // ---------- Widget de ajuda local (#19): botão flutuante, painel e conversa — MESMA interface genérica
 // do widget de terceiros observado (kefu-im), mas 100% local e SEM token de terceiro. Textos do widget
 // real UNOBSERVED; as respostas vêm da base local (app/lib/help_widget.mjs).
@@ -1364,7 +1380,7 @@ function paintRoute(r) {
   if (r.startsWith('/editor')) return pageEditor(r.split('/')[2]); if (r.startsWith('/marketing')) return pageMarketing(); if (r.startsWith('/templates')) return pageTemplates(); if (r.startsWith('/help')) return pageHelp(); if (r.startsWith('/omni')) return pageOmni(); if (r.startsWith('/inspiration')) return pageInspiration(); if (r.startsWith('/pricing')) return pagePricing(); if (r.startsWith('/story')) return pageStory(); if (r.startsWith('/gen')) return pageGen();
   const localRunMatch = r.match(/^\/tasks\/run\/([\w-]+)$/); if (localRunMatch) return pageLocalRun(localRunMatch[1]);
   if (r.startsWith('/settings')) return pageSettings(r.split('/')[2] || 'personal_information'); if (r.startsWith('/tasks')) return pageTasks(); if (r.startsWith('/analytics')) return pageSocial('analytics'); if (r.startsWith('/schedule')) return pageSocial('schedule');
-  if (r.startsWith('/integrations')) return pageIntegrations(); if (r.startsWith('/dev')) return pageDev();
+  if (r.startsWith('/integrations')) return pageIntegrations(); if (r.startsWith('/dev')) return pageDev(); if (r.startsWith('/legacy-chat')) return pageLegacyChat();
   if (r.startsWith('/login')) return pageLogin(); if (r.startsWith('/share/')) return pageShare(r.split('/')[2]); return pageHome();
 }
 // Falha ao desenhar uma tela: mostrar o motivo NA TELA (com "tentar de novo"), nunca deixar a tela

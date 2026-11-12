@@ -316,6 +316,15 @@ route('GET', /^\/api\/dev-panel$/, (q, r) => {
 });
 route('GET', /^\/manifest\.webmanifest$/, (q, r) => send(r, 200, GATES.MANIFEST, { 'content-type': 'application/manifest+json' }));
 route('GET', /^\/sw\.js$/, (q, r) => { r.writeHead(200, { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' }); r.end(GATES.SERVICE_WORKER); });
+// ----- Chat legado (#3) SOMENTE LEITURA — leitor do formato conhecido (agent-chat); UNOBSERVED onde faltar.
+import * as LC from './lib/legacy_chat.mjs';
+route('GET', /^\/api\/legacy-chat$/, (q, r) => send(r, 200, { ok: true, ...LC.chatSummary() }));
+route('POST', /^\/api\/legacy-chat\/read$/, async (q, r) => {
+  const b = await readJson(q);
+  const res = LC.parseConversation(b.data !== undefined ? b.data : b.text);
+  if (!res.ok) return fail(r, 400, res.error);
+  send(r, 200, { ok: true, readOnly: true, messages: res.messages, warnings: res.warnings, note: 'Somente leitura — nada foi alterado; conteúdo não capturado é UNOBSERVED.' });
+});
 
 const CAT_PT = { 'Short Drama': 'Drama curto', 'Marketing Advertising': 'Marketing Publicidade', 'Professional film and television': 'Cinema e televisão profissionais' };
 // dados observados no servidor (official_skills.json, REA 6.7.0): categorias, ferramentas declaradas, modelos padrão e textos de guia
