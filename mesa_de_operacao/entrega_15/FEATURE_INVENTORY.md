@@ -1,239 +1,543 @@
 # Inventário integral de funcionalidades do Pippit (reconstrução local)
-
 Estados: **não investigada · investigada · especificada · implementada · verificada (teste automatizado contra a evidência observada) · parcial · bloqueada (com motivo)**. "Verificada" NÃO significa equivalência formal comprovada pelo REA (`verify_reconstruction` ainda não executado). Nenhuma funcionalidade conhecida foi omitida; o que depende do serviço remoto do Pippit permanece bloqueado, não simulado.
 
+## Método e limites (régua da r16)
+Marcador por linha e o que ele significa. A r16 endureceu a régua depois que os 56 testes de tela rodaram no Windows e revelaram 4 defeitos:
 
+- **verificada** — teste roda neste sandbox (Linux) e prova o comportamento com **conteúdo observado ou local**. Única categoria que conta como "verificada".
+- **implementada (conteúdo UNOBSERVED)** — a implementação existe e tem teste que prova o *mecanismo*, mas parte do conteúdo é **inventada** (títulos/datas/textos dos 8 anúncios, preços e ratings, HTML dos cards, CTA, anúncios dos andamentos de vídeo). Ter teste NÃO torna o conteúdo observado — não conta como verificada.
+- **não verificada** — não medido. Aqui entra **todo teste de tela (UI)**: o sandbox não tem Chromium e os 56 testes de UI dão SKIP aqui; só contarão como verificados quando rodarem no Windows e passarem.
+- **inventada** — apagada, não preservada ou não documentada.
+- **bloqueada** — exige licença/monetização externa.
+
+"Nº de telas" é a contagem de evidência (arquivos/capturas/recortes), não uma quantidade inventada. UNOBSERVED = não observado (não confundir com inventado).
 
 ## Escopo reproduzível — implementar, melhorar e manter
-
-Resumo: **134 linhas no catálogo** = **122 reproduzíveis + 12 fora de escopo**. Prontidão no escopo reproduzível = 30 implementadas + 75 verificadas = **105/122 = 86,1%** (rodada 14: 83/122 = 68,0%; rodada 7: 82/122 = 67,2%). Fórmula e denominador explícitos: (implementadas + verificadas) / 122. **Rodada 15** fechou as 39 linhas investigada/parcial/bloqueada que eram reproduzíveis: 26 subiram a verificada com teste (marketing hook/expand/product-character, templates, settings/menu da conta, dropdowns do composer, modos do composer, geração direta, validação 15 chars, créditos, reabertura do canvas, chat history com campo de ideia, preços com carrossel de avaliações, title-bar com metadados, atalhos do canvas 19/20, notificações com os 8 anúncios observados por tema) e 2 a parcial por lacuna pequena (Inspiration com áreas nomeadas; exportar já estava completa). Estados agora: 30 implementadas, 75 verificadas, **9 parciais**, **8 bloqueadas** (122 linhas). As parciais restam por falta de evidência (presets de áudio, feed Inspiration, fluxos SSE ao vivo, chat do widget, ferramentas de serviço) ou por dependência externa (OAuth de publicação). As bloqueadas: chat legado (falta evidência), vídeo em avatar e voz personalizada (provedor/paywall), OAuth (app registrado), integrações de marketplace (falta evidência), widget kefu (serviço externo), age-gate/PWA (falta evidência), compra real (gateway). Cada pendência e pergunta objetiva está em `BLOQUEIOS_R15.md`. Bloqueio de ação remota/paga não significa que seu efeito foi reproduzido. Fora de escopo: telemetria/funil, conteúdo editorial (os 8 anúncios viraram reproduzidos por tema), recompensa/convite e artefatos/ferramentas de engenharia reversa. A porcentagem é cobertura de linhas dentro do escopo, não paridade/equivalência com o Pippit.
-
-| área | funcionalidade | estado | evidência | observação / diferença |
-|---|---|---|---|---|
-| Plataforma | Home (agente: abas Criativo/Marketing/Histórias, composer, skills recomendadas) | implementada | captures/auth/*home*, PIPPIT_SITEMAP | Galeria "Trabalhos em destaque" não reproduzida (conteúdo do serviço). |
-| Plataforma | Sidebar (Criativo, Marketing, Histórias, Tela, Ativos, Habilidades, Criação inteligente, Mais) | verificada (teste automatizado) | ui.test |  |
-| Plataforma | Mais: Gerador de vídeos / Avatares e vozes / Análise / Editor | implementada | more_menu_pages | Gerador: ferramentas de IA (foto falante, remover fundo) bloqueadas. |
-| Plataforma | Histórico de projetos com menu … (Compartilhar, Renomear, Excluir) | verificada (teste automatizado) | cdp/history_menu, rec_menus2; Drive `auth/historico_menu_mais_usuario.png`; `local_reconstruction/test/ui.test.mjs` | Comparação visual: menu à esquerda do botão, dentro da barra lateral, com ícones observados para compartilhar/renomear/excluir; link local somente leitura. Testes confirmam menu ancorado e sem invasão do conteúdo principal. Compartilhar = copiar link (toast observado). |
-| Plataforma | Compartilhar projeto (link de visualização do processo) | implementada | cdp/history_menu/3_compartilhar | No original o link é público no serviço; aqui é local. |
-| Conta | Informações da conta, IDs, copiar, Excluir conta | implementada | account_pages2 | Excluir conta não aplicável (usuário local). |
-| Conta | Configurações: confirmação de uso de créditos (limite 450 / ignorar) | verificada (teste automatizado) | account_pages2/estrategia_creditos, e2e.test |  |
-| Conta | Configurações: Idioma, Aparência, Salvar sem marca d'água | verificada (teste automatizado) | b2_settings; `test/settings_internal_ui.test.mjs`, `test/watermark_preferences.test.mjs` | Idioma/aparência e preferência booleana persistem só nesta instalação. **Rodada 7:** a preferência agora é lida pela exportação — a marca é aplicada/removida de verdade no arquivo (teste compara pixels) e o direito de remover vem de `PLANS[].noWatermark`; no plano Gratuito a preferência é ignorada com o motivo escrito. O termo “Free for now” do Pippit segue `UNOBSERVED`. |
-| Conta | Tarefas concluídas (exportações, Publicar, Baixar) | implementada | account_pages | Publicar bloqueado (sem contas). |
-| Conta | Menu da conta > Mais: CLI, Lista de desejos, Atendimento | verificada (teste automatizado) | account_pages | Rodada 15: `account_more_language_ui.test.mjs` cobre More (CLI, Feature wishlist, Customer service, Lacunas da conta). Os destinos externos seguem UNOBSERVED (nunca abertos em captura) e nada é simulado. |
-| Créditos | Livro-razão: lotes, expiração diária 23:59:59, bônus de conta +200, débito por menor validade | verificada (teste automatizado) | credits.test, e2e | Lotes de março com horário de expiração diferente não explicados. |
-| Créditos | Concessão diária 80 e recebimento (credit_receive) | verificada (teste automatizado) | e2e.test |  |
-| Créditos | Três bolsas (vip/gift/purchase) | verificada (teste automatizado) | api_social/user_credit; test/credits_pouches, lote2_ui | Lotes com bolsa; saldo por bolsa em /api/state, /api/ledger e no user_credit local; histórico indica a bolsa. Gratuitos e bônus = gift (conta observada: gift_credit 125); vip e purchase ficam em 0 (assinatura/compra bloqueadas). Ordem de consumo ENTRE bolsas NÃO observada (registrada no REA); local usa o lote que vence primeiro. |
-| Planos | Catálogo Gratuito/Starter/Plus/Pro, mensal e anual, créditos, recursos | verificada (teste automatizado) | PIPPIT_PLANS, plans.test, ui.test | Outros níveis de crédito do Pro e botão "Pague R$46" não resolvidos. |
-| Planos | Restrições por plano (paywall: vídeo em avatar, voz personalizada, modelos) | implementada | b4_video_tile_a2, cdp/avatar_voice_coords | Troca de plano local só para testar bloqueios; sem cobrança. |
-| Modelos | Catálogo de modelos de vídeo/imagem/áudio, proporções, resoluções, custos observados | implementada | PIPPIT_FEATURE_CATALOG | Custos só conhecidos para alguns modelos (2.5: 37/s; Mini teste: 7/s; imagem: 68). |
-| Modelos | Geração por IA (vídeo/imagem/áudio/avatar) | verificada (teste automatizado) | `test/flow_e2e_providers.test.mjs`, `test/novai_router.test.mjs`, `test/novai_video_ui.test.mjs`, `test/cloudflare_router.test.mjs`, `test/free_router_http.test.mjs`; e2e.test (bloqueio verificado) | Rodada 6/15: imagem (Cloudflare flux / Omni flux.2-klein / NovAI cogview), vídeo (NovAI cogvideox-flash) e voz (Cloudflare melotts, opt-in) geram de verdade com provedor gratuito configurável; caminho ponta a ponta testado (imagegen, flow_e2e_providers, provider_smoke). Sem provedor: 501 com motivo explícito. |
-| Modelos | Provedor local ffmpeg (NÃO é IA): vídeo de cor/zoom de imagem, último quadro, concatenação | verificada (teste automatizado) | e2e.test | Pipeline real, mas não equivale à geração do Pippit. |
-| Agente | Fluxo: habilidades → arquivo lido → pergunta → design/storyboard → confirmação → segmentos → render | verificada (teste automatizado) | PIPPIT_WORKFLOW_OBSERVATIONS, e2e.test, ui.test | Planejador local por regras; prompt/LLM interno do Pippit DESCONHECIDO. |
-| Agente | creative_design.md e storyboard.md como nós do canvas | verificada (teste automatizado) | e2e.test | Estrutura do documento observada; conteúdo gerado por regra local. |
-| Agente | Segmentação ≤15 s e continuidade pelo último quadro | verificada (teste automatizado) | workflow.test, e2e.test |  |
-| Agente | Falhas/gating por plano e mensagens de erro | implementada | b-chats observados | Recuperação automática de modelo não observada. |
-| Agente | Chat legado (agent-chat) somente leitura | bloqueada (falta evidência) | scenario_projects2to5 | Chat legado em formato antigo; conteúdo/tela nunca capturados. Sem evidência nova do site real permitida: não reproduzido. Pergunta ao usuário: há captura do chat legado para registrar? |
-| Agente | Seleção e criação de skills (Criar com IA/Enviar/Manual) | implementada | b2_skills, cdp/skill_details; test/skills, skills_ui, agent_skill | Formato interno das skills do Pippit DESCONHECIDO (local: pacote SKILL.md em ZIP, regras dos bundles). A skill ESCOLHIDA pelo usuário agora alimenta os prompts de temas e storyboard do LLM (skills nativas: só a descrição pública); sugestão automática não é injetada. |
-| Agente | Skills oficiais (13): guias, ferramentas, modelos, entradas e workflow por skill | implementada | PIPPIT_SKILLS_PROMPTS_CATALOG.md/.json; REA 6.7.0 ev_ea421de9… (list_skill_store); test/skills_official, skills_official_ui | DADOS REAIS do servidor (guide_words integrais, tools declaradas, modelos padrão, categorias, versões) alimentam o catálogo, o diálogo de detalhes e o compositor; conferência de entradas, planejamento por skill no LLM, aprovação de prompts, folha 3 vistas, só análise e desvios (criar skill/avatar) são implementação LOCAL a partir desses guias. O corpo (SKILL.md/Fornax) das skills NÃO é entregue ao cliente: instruções privadas inacessíveis; ordem de execução das ferramentas não comprovada. |
-| Agente | Workflow com provedor de vídeo externo: tarefas, sequência com último quadro, composição (narração, legendas, editor, exportação) | implementada | test/workflow_jobs, providers, providers_ui (provedor de MENTIRA local); e2e_live (Qwen3 real, parou nas tarefas) | Adaptadores OpenAI Vídeos e Replicate seguem as APIs públicas desses provedores, nunca testados contra o serviço real (sem chave/gasto). Sem provedor ou sem autorização de gasto as tarefas ficam BLOQUEADAS com o motivo; o animatic local é rotulado como prévia, não como vídeo gerado. Não é o fluxo do Pippit (SSE ao vivo e estados de run seguem desconhecidos: ver notes/rea_unknowns.json). |
-| Agente | Protocolo do chat/agente (submit_run, subscribe_run/thread, get_run, cancel_run) | verificada (teste automatizado) | PIPPIT_API_CATALOG.md (protocolo); scripts/auth_bundles async__297147/599038/889795 | Protocolo local implementado (submit_run/subscribe_run/thread, get_run, cancel_run) com corpos estáticos preservados; `agent_contract.test.mjs`, `features.test.mjs` cobrem o fluxo. Palpites locais (cancel_run, estado 5) já anotados como UNOBSERVED. |
-| Agente | Criação inteligente (consentimento + geração diária automática) | implementada | b2/smart_settle | Só consentimento; a criação automática depende do serviço. |
-| Canvas | Paleta rápida e menu Adicionar nó (7 tipos), autosave, arestas | verificada (teste automatizado) | canvas_avatar.test, e2e, ui |  |
-| Canvas | Projeto existente: retorno, título editável, estado Saved e reabertura sem reenviar geração | implementada (UI local) | `telas_internas_A.zip`; `local_reconstruction/test/canvas_existing_project_ui.test.mjs` | Rota local direta `/nest-agent-project?projectId=…&canvasId=…` mapeia para o canvas existente; Return to previous page respeita histórico; título salva na API e `Saved` é mostrado. Teste gera texto uma vez via mock e verifica que reabrir não chama novamente o provedor. |
-| Canvas | Nó Personagem (+ diálogo Descrição do personagem, voz) | implementada | rec_menus | Voz do texto/Geração por IA bloqueadas; vincular/carregar áudio implementado como referência. |
-| Canvas | Nó Cena (+ diálogo Informações da descrição da cena; Mais: Analisar/Recorte/Expandir) | implementada | rec_menus | Ferramentas de IA não implementadas. |
-| Canvas | Nós Vídeo / Imagem / Áudio / Texto: Gerar pelo roteador gratuito e salvar resultado no nó | implementada (provedor configurável) | `test/node_generation_{video,image,audio,text}_ui.test.mjs`; `test/node_generation_route.test.mjs` | Testes usam servidor falso. Imagem/áudio viram ativos locais, texto atualiza o nó, vídeo persiste o identificador/objeto da operação do provedor; geração real depende de provedor configurado e não foi testada. Imagem usa a pilha gratuita (Cloudflare `flux-1-schnell` → Omni `flux.2-klein` → NovAI `cogview-3-flash`), texto usa FreeLLMAPI (`auto`) com NovAI `glm-4.7-flash` de reserva; a voz da Cloudflare (`melotts`, WAV) só entra com `voiceSource:"cloud"` — o padrão continua o SAPI. **Vídeo**: o nó agora responde **202 + run** e a NovAI (`cogvideox-flash`, 5 s) gera em fila (uma por vez, progresso por SSE, consulta a cada 12 s, timeout ≥ 180 s, MP4 só baixado de https em `aiapi-pro.com`/`*.ufileos.com`, teto 5/dia e 429 sem repetir) — `test/novai_router.test.mjs`, `test/novai_video_ui.test.mjs`. Sem rota gratuita de texto/imagem, fica bloqueado com mensagem existente, sem cobrança nem resultado fictício. |
-| Canvas | Nó Estúdio de direção 3D | implementada | cdp/director3d, tour2; studio3d.test, ui | Reconstruído localmente (studio3d.mjs + studio3d-ui.js): categorias, câmeras, movimentos, quadros-chave 30 fps, painel de cena, persistência. NÃO reproduzido: modelos/animações reais (só primitivos); presets de câmera aproximados. Aba Imagem de IA: NÃO OBSERVADA. |
-| Canvas | Biblioteca de estilos, Compartilhar tela, minimapa, atalhos, zoom | verificada (teste automatizado) | b4_canvas, b4_story_canvas; `local_reconstruction/test/canvas_toolbar_ui.test.mjs`; `local_reconstruction/test/canvas_shortcuts_route.test.mjs`; `local_reconstruction/test/canvas_shortcuts_ui.test.mjs` | Rodada 15: os 9 atalhos restantes viraram extensões locais (Ctrl G/Shift G com grupo persistido, Ctrl A, Delete, Ctrl F, Ctrl Enter, Alt/Ctrl Alt + arrastar, Espaço + arrastar) — 19/20 locais, só Pinça pendente (`canvas_shortcuts_route.test.mjs`, `canvas_shortcuts_ui.test.mjs`). Atalhos do Pippit nunca observados (`shortcutsObservedOnPippit:false`). Estilos/minimapa/zoom/Compartilhar tela testados; contrato real do compartilhamento UNOBSERVED. |
-| Canvas | Persistência (canvas.json) e retomada | verificada (teste automatizado) | e2e.test | Formato interno do original DESCONHECIDO (apenas nome/namespace observados). |
-| Estúdios | Estúdio de marketing (produto, personagem, formatos, gancho, estilo, Generate) | implementada | b2_marketing | Cartões "Remixar"/prévias do serviço não reproduzidos; Generate usa o agente (bloqueado sem provedor). |
-| Estúdios | Estúdio de histórias (colar/carregar roteiro, Roteirista de IA, Tela criativa, Redesenhar) | implementada | b2_story, b4_story_canvas | Análise por IA, roteiro visual e Redesenhar bloqueados. |
-| Ativos | Biblioteca (Trabalhos, Upload, Personagem, Produto, Rascunhos, busca, ordenar) | implementada | b1_assets_character |  |
-| Ativos | Menu … do ativo (Baixar, Selecionar, Adicionar personagem/produto, Vincular produto, Excluir) | implementada | cdp/asset_menu; test/assets_menu, lote2_ui | Os 6 itens e a ordem são observados; Baixar/Selecionar/Excluir (com confirmação e lista de uso) e filtros Tudo/Imagens/Vídeos/Áudio, ordem e Ver seguem a captura. Os diálogos de Adicionar personagem/produto/Vincular NUNCA foram abertos no Pippit: regras LOCAIS (só imagens, nome ≤60, sem nome repetido). |
-| Avatares | Foto em avatar: assistente de 3 etapas, validação JPG/PNG>256, consentimento, 3 usos gratuitos | verificada (teste automatizado) | b4_photo_tile_a2, e2e, ui | Etapas Recortar/Verificar/Enviar (nome "My Avatar N" + voz padrão) observadas até antes de Enviar; critério de verificação do Pippit DESCONHECIDO; recorte livre só rotação reconstruído. |
-| Avatares | Vídeo em avatar (1999 créditos; paywall no gratuito) | bloqueada (provedor/assinatura) | b4_video_tile_a2; LIPSYNC_PROVIDERS.md; `test/talking_photo_contract.test.mjs` | Exige serviço de lip-sync (nenhum provedor configurado nem observado) e cota de 1999 créditos/paywall do plano gratuito. Rota 501 com motivo explícito; cotação exige consentimento. Pergunta: configurar qual provedor de lip-sync? |
-| Avatares | Voz personalizada (180 créditos; paywall) | bloqueada (provedor/paywall) | cdp/avatar_voice_coords; `test/voice_default.test.mjs` | Clonagem de voz exige serviço (paywall "uso ilimitado de Voz personalizada", 180 créditos). Voz sintética local já roda (melotts opt-in); clonagem sem provedor. Pergunta: qual provedor de clonagem de voz? |
-| Avatares | Menu … do avatar, Aplicar, prévia de áudio | parcial | b3_existing_avatar; `test/avatar_menu_ui.test.mjs` | Aplicar local implementado como @menção (avatar_menu_ui/avatar_menu_route). Em exemplo não há menu; em avatar próprio a UI mostra aviso UNOBSERVED e não inventa renomear/excluir. Conteúdo do menu "..." pendente de observação humana (BLOQUEIOS_R15). |
-| Editor | Menu: Mídia, Legendas, Avatares, Texto, Áudio, Elementos, Corte rápido | implementada | editor_menus | Elementos/efeitos/transições/filtros, músicas licenciadas: conteúdo do serviço não reproduzido. |
-| Editor | Timeline: clipes, corte (in/out), velocidade, proporção, texto e legenda manuais | verificada (teste automatizado) | e2e.test, ui.test |  |
-| Editor | Exportação (MP4 real via ffmpeg) | verificada (teste automatizado) | e2e.test, ui.test | Resoluções/formatos do original e marca d’água não reproduzidos. |
-| Editor | Legendas automáticas, Letras automáticas, Corte rápido por transcrição | verificada (teste automatizado) | editor_menus; `test/cloudflare_transcribe.test.mjs`; `test/whisper_local.test.mjs`; `test/editor_audio.test.mjs` | **Rodada 6:** transcrição por `@cf/openai/whisper` (Cloudflare Workers AI) — áudio do clipe extraído em 16 kHz mono e cortado em trechos de 25 s, tempos por palavra deslocados por trecho; legendas viram `.srt` em Ativos e o corte por transcrição mantém as falas e remove pausas. whisper.cpp local continua valendo quando há modelo. Sem credencial: 501 com o nome da variável (nenhum resultado inventado). |
-| Editor | Painel direito (Básico, Plano de fundo, Ferramentas inteligentes, Áudio, Animação, Velocidade) | implementada | editor_menus | Trilho de 6 abas e estado vazio "Selecione um item para fazer ajustes" como na captura (editor_right_panel/*.png). Velocidade completa e testada com ffmpeg (Normal; Velocidade↔Duração; Tom; Câmera lenta suave por interpolação; redefinir; faixa 0,1x–10x e semântica do Tom são decisões LOCAIS). Áudio/Plano de fundo (com Proporção) funcionais. NÃO reproduzidos e identificados como tais: Ferramentas inteligentes (4 IA), Modificador de voz, efeitos de Animação (só "Nenhum" ativo), aba Curvo; conteúdo da aba Básico não foi capturado (agrupamento local). |
-| Editor | Tour de balões (Recursos materiais / Alterar barra lateral) | implementada | inspect_editor_live1; test/lote3_ui | Passo 1/2 com o texto observado e "Avançar"; passo 2 só tem o título lido (corpo e rótulo final "Concluir" são locais/não observados); aparece uma vez por navegador, em bloco no topo (não balão flutuante). |
-| Social | Contas vinculáveis, limites (0/3), estados | implementada | PIPPIT_SOCIAL_PUBLISHING | Lista e limites reproduzidos. |
-| Social | Vincular conta (OAuth TikTok/Facebook/Instagram/YouTube) | bloqueada (OAuth) | PIPPIT_SOCIAL_PUBLISHING | Redirecionamento TikTok observado; callback/escopos não. Exige app OAuth registrado e credenciais do usuário (proibidas neste ambiente). Adaptadores prontos com contrato declarado. Pergunta: registrar app OAuth em cada rede? |
-| Social | Publicar / Publicação agendada / Análise | parcial | schedule_publish; PIPPIT_PUBLISHING_STRUCTURE.md; captures/skills_670/publisher* | Diálogo "Programar publicação" (conta, data/hora, 0/2200) e estados vazios do Publisher/Análise reproduzidos localmente (`publishing.test.mjs`, `publish_queue`). Envio real e Análise dependem de OAuth (bloqueado); rascunhos ficam locais, nada enviado. |
-| Skills | Botão Use das 13 skills da loja | verificada (teste automatizado) | PIPPIT_SKILLS_PROMPTS_CATALOG.md (uso_botao_use); captures/skills_670/use | Observado nas 13: chip da skill + Remover, placeholder do compositor = guide_words exato, tile de upload = material_guide_words (AI talking photo: compositor simples; Avatar video: modal). Local reproduz chip/placeholder/tile. Instruções privadas (SKILL.md) continuam inacessíveis. |
-| Plataforma | Revisão de fidelidade ao Pippit atual (Home, Marketing, Story, Video generator, Smart creation, Assets, Avatares, More, Publisher, Analytics) | verificada (teste automatizado) | PIPPIT_FIDELITY_REVIEW_670.md; captures/current_670; captures/fidelity | Layouts e textos alinhados às capturas atuais (More sem Editor; Publisher/Analytics em 2 colunas; Home com selos e ordem da API (indicador "/s" só com modelo personalizado, corrigido no lote 3); Marketing com slots e barra; Story com abas/dropzone; Video generator com chips e Popular tools; Smart creation com passos e abas; Avatares com grade de 6 colunas). Lote 2: Canvas em tela cheia com cluster direito e chat com estado vazio; loja de Skills com descrições/selos atuais. Lote 3 (REA 6.7.0): barra inferior do Canvas/Story com zoom, minimapa, grade, modos, atalhos, ponteiro, Add node, tutorial e dica do rodapé; drawer Avatar video completo (exportação bloqueada); página Foto falante de IA (etapa 1); tooltip de crédito e menu Link account (TikTok / Facebook Page / Instagram Reels). Lote 4 (Playwright na sessão logada; só a Style library tem Evidence REA ev_e85600c0…): filtros do Avatar video com dados reais (catálogo de 331 avatares × 48 opções; OU no campo, E entre campos), favoritos locais (persistência inferida), Style library (94 estilos, seleção por projeto), Foto falante com prévia local (extensão não observada), atalhos Alt+Shift+F/Tab/Ctrl+Z/Ctrl+Y. Conteúdo de serviço (exemplos, catálogos e miniaturas) continua em geral não reproduzido; exceção visual comprovada: amostras Emily, Kavi, Malcolm e Helena na página Avatares, recortadas das evidências Drive `auth/b3_existing_avatar_w03.png` e cobertas pelo teste `avatar_gallery_ui`. Pendente: etapas 2–3 reais da Foto falante, Edit more, Change caption style, efeito do estilo na geração, Organize/Hide variations originais, regra de custo do avatar. |
-| Agente | Contratos estáticos do agente: composição de agent/submit_run (runExtra/babi_param/client_extra/pre_activate_skills), ferramenta de cliente dynamic_questionnaire (esquema integral), mapa agente→cena | verificada (teste automatizado) | PIPPIT_REVERSE_MATRIX.md; notes/dynamic_questionnaire.schema.json; async__159201/async__297147 | Origem ESTÁTICA (bundles já recuperados), sem execução. PiperLine emite `questionnaire` nos formulários do agente (teste questionnaire). Falta: valores de generate_mode/scene_lv2/thread_extra, formato de pre_activate_skills e da resposta ao questionário. |
-| Avatares | Foto falante de IA: fluxo real de 3 etapas (aba roteiro/aba áudio <30 s, gesto, Export no rodapé, fases 0–6) e contratos pre_process_*; página local reestruturada (prévia local sem lip-sync) | verificada (teste automatizado) | PIPPIT_TALKING_PHOTO.md; REA ev_29c9e7c5…; test/talking_photo_contract.test.mjs, talkingphoto_ui.test.mjs | E3 testa exportação local de foto estática + áudio enviado, sem lip-sync/IA, chamada externa ou débito. Locução por texto depende de Windows SAPI; sem SAPI retorna 503, upload de áudio segue disponível. Respostas/custos do Pippit e sincronização real seguem UNOBSERVED. |
-| Avatares | Provedor de Foto falante (lip-sync por IA) do USUÁRIO: orçamento, consentimento por tarefa no servidor, ciclo de vida, cancelamento honesto, integração com Canvas/Ativos/editor | implementada | LIPSYNC_PROVIDERS.md; test/talkingphoto_provider.test.mjs; test/talkingphoto_ui.test.mjs | Extensão local (não é do Pippit). Testada só com provedor de mentira em loopback; nenhuma geração real, nenhum serviço contratado. Falta provedor escolhido/autorizado e teste real controlado. |
-| Agente | Contrato do agente (submit_run): generate_mode, babi_param/client_extra, pre_activate_skills, thread_extra, resposta do dynamic_questionnaire; tabela Skill × agente × modelo declarado × ferramentas; funções puras em agent_contract.mjs e campo informativo wire nas mensagens | verificada (teste automatizado) | PIPPIT_AGENT_CONTRACT.md; notes/_submit_runs_observed.json; test/agent_contract.test.mjs | Estático (bundles) + 2 submit_run observados (vídeo direto). Agent mode e Skills: nenhuma execução observada; toolResp, parte de texto em Agent mode, conflict_key e modelo real por Skill: desconhecidos. Nada é enviado ao Pippit. |
-| Avatares | Especificação comprovável de avatares (endpoints, DSL de filtros, tags, paginação, seleção, custos) e verificação de execução real | verificada (teste automatizado) | PIPPIT_AVATAR_SPEC.md; captures/current_670/avatar_filters2 | Dados medidos por Playwright (sem Evidence REA nas respostas de rede). Seleção sem POST; favoritar e exportar NÃO executados. Contratos de exportação e da Foto falante: só nomes de campo (chunks do drawer/Omni não recuperados; baixar exige autorização). |
-| Telemetria | Page view GET /lv/v1/event/report (variantes cms/landing) + coletor local | verificada (teste automatizado) | pageview.test, e2e.test, ui | Corpo da resposta original desconhecido. |
-| Editor | Exportar: diálogo "Export settings" (capa, nome, marca d’água, resolução, qualidade, taxa de quadros, formato, Download) | verificada (teste automatizado) | REA ev_a3b7b81d…31c9 (listas); ev_6adecf40…4e27 (nome); ev_225fdc3d…724d; ev_83111820…aa0b; `local_reconstruction/test/ui.test.mjs`; `local_reconstruction/test/editor_canvas.test.mjs` | Todas as opções/padrões observados testados (Watermark/Resolution/Quality/Frame rate/Format, nome ≤100 com alerta "Enter a name") + miniatura da capa (primeiro quadro via ffmpeg) + exportação real (ui.test.mjs, editor_canvas.test.mjs, watermark_export). Clique na capa não abre seletor (observado). | Without Pippit watermark ("Free for now"); Resolution = 360p, 480p, 720p (padrão), 1080p/2k/4k ("Free for now"); Quality = Better quality, Recommended (padrão), Faster export; Frame rate = 24, 25, 30 (padrão), 50, 60 fps; Format = MP4 (padrão), MOV. Nome vazio → alerta "Enter a name"; nome > 100 caracteres é truncado em 100. A capa é uma miniatura do primeiro quadro; clique simples não abre seletor. Marca "Free for now" = gratuito por promoção, não bloqueado pelo plano Free hoje. Teste local confere todas as opções/padrões, nome obrigatório e exportação com FFmpeg; parâmetros locais também têm cobertura HTTP. Não equivale ao serviço original e não há miniatura de capa nem botão livre para escolher capa. |
-| Plataforma | Botão de ajuda (?) / central de ajuda | parcial | captures/audit/ajuda3 | Central de ajuda local testada (help_center_route com conteúdo de notes/pages/13_resource_help-center.json). No original o clique no (?) não teve efeito visível em duas tentativas e a central pública não foi aberta — comportamento local é extensão declarada. |
-| Plataforma | Templates (Modelos → /pt-br/template-studio, Estúdio de marketing) | verificada (teste automatizado) | REA ev_5d03dbc3…4dff; `test/templates_ui.test.mjs` | Os 8 nomes preservados + os 2 sem nome marcados desconhecidos; imagens/texto pré-preenchido/fluxo Gerar nunca capturados e não inventados (templates_ui.test.mjs, templates_route.test.mjs). |
-| Plataforma | Integrações de marketplace/loja (citadas na página de preços) | bloqueada (falta evidência) | REA ev_58c189b5…74a9 | Só texto de marketing na página de preços ("Integração com o mercado de vendas online"); nenhuma tela de integração localizada. Social (TikTok/Facebook/Instagram) confirmada na Publicação. Pergunta: há captura da tela de integrações? |
-| Plataforma | Página pública de preços: FAQ, avaliações, seções de recursos | verificada (teste automatizado) | REA ev_58c189b5…74a9; `test/pricing_faq_ui.test.mjs` | Rodada 15: 6 perguntas + seções observadas (Detalhes do plano, Créditos, Por que escolher o Pippit, Crie com asas…, O Agente de IA definitivo…) + carrossel de avaliações (Previous/Next/Show review 1–5). Respostas e textos das avaliações UNOBSERVED (pricing_faq_ui, pricing_reviews_ui, pricing_faq_route). |
-| Plataforma | Gerador de vídeos (ai-video-generator-v2) e ferramentas populares | parcial | REA ev_8863847a…3217; ev_2320cb92…5021 | Assistente 3 passos do AI talking photo reconstruído (Upload photo / Add voiceover / Export; JPG/PNG >256×256; talkingphoto_ui.test.mjs) e ferramentas locais por nó. Remove background/Quick cut/Avatar video do serviço não reproduzidos (dependem de serviço/GPU). |
-| Planos | Promoções variáveis (banner: 90% em 20/10 vs 40% em 21/10; Seedance 2.5 R$0.18/s vs R$0.45/s; 2.0 Fast R$0.04/s vs R$0.22/s) | parcial | captures/audit/home | Histórico observado registrado (promotions_route: 90% em 20/10 vs 40% em 21/10; Seedance 2.5 R$0,18/s). Promoções variam por dia: valor atual NÃO é cotação; tabelas de PIPPIT_PLANS trazem a data de observação. |
-| Agente | Controles do composer: Agente ▾, @, Habilidades ▾, Modelo/Preferência ▾, toggle Tela | verificada (teste automatizado) | captures/audit/home | composer_dropdowns_ui.test.mjs cobre modos (Agente/Vídeo/Imagem/Áudio), Modelo/Preferência, Habilidades, toggle Tela; custos (✦ 6 /image etc.) em features_ui. Opções internas nunca capturadas seguem UNOBSERVED nos painéis. |
-| Agente | Composer da home: Modelos e preferências (Vídeo/Imagem), Tag (@), Skills, Regras de crédito, interruptor Canvas | verificada (teste UI) | REA ev_bc6261af…399e; ev_f8b68726…075f; `test/composer_dropdowns_ui.test.mjs` | Vídeo: Smart match, Seedance 2.5 (30 s, edição por segmento; padrão), 2.0 Fast, 2.0 (até 4K), 2.0 Mini (Trial, 7 créditos/s), 2.0 Mini, Auto Route (3 tentativas, NEW), mais Seedance 1.0 em "More"; proporção Smart/9:16 (padrão)/3:4/1:1/4:3/16:9/21:9 (+ mais); resolução 480p/720p (padrão)/1080p; duração Smart ou Custom 4–180 s (padrão 15). Imagem: Smart match, GPT Image 2.5 Sunburst/Flare, GPT Image 2 (padrão), Nano Banana Pro/2.1, Seedream 5.0 Pro (1 uso grátis)/Flash/Lite, 4.5, 4.0; 1K/2K/4K; esforço Low/Medium/High. Tag: Uploaded media + avatares. Skills: busca, abas All/My skills/Favorites/Short Drama/Marketing Advertising/Professional film and television, Create skill. Credit rules: dica (créditos 2.0+ cobram duração de entrada e saída). Local: só parte (modelos/custos). |
-| Estúdios | Marketing > Ad formats: busca, categorias, Expand/Collapse e Select | implementada (UI local) | `telas_internas_A.zip`; `local_reconstruction/test/marketing_ad_formats_ui.test.mjs` | Busca `Search ad format`; tabs All, Trending Ads, UGC Ads, Product Demos e Visual Effects. Expand alterna para Collapse e exibe apenas nota neutra `UNOBSERVED` sobre descrição específica não capturada; Select fecha e marca o formato no composer. Associação dos cartões às categorias, descrições/previews completas e integração de serviço seguem não observadas. |
-| Plataforma | Widget de ajuda (?): iframe kefu-im-i18n.byteintl.com (helpcenter_web e contact-im) | bloqueada (serviço externo) | CDP /json/list 21/10 | Widget hospedado em kefu-im-i18n.byteintl.com (serviço de terceiros, identificação por token na URL — valor NÃO registrado). Conteúdo/chat não lido; não reconstruído. Pergunta: autoriza reproduzir widget de terceiros? |
-| Conta | Menu da conta > More (CLI, Feature wishlist, Customer service) e Settings > Language (18 idiomas) | implementada (UI local) | `PIPPIT_COVERAGE_REPORT.md`; `telas_internas_A.zip`; `local_reconstruction/test/account_more_language_ui.test.mjs` | More mostra os três rótulos observados; os destinos permanecem `UNOBSERVED` e não foram inventados. Settings > Language lista 18 nomes/códigos observados; a troca local é persistida, mas a tradução global permanece UNOBSERVED. |
-| Estúdios | Marketing > Visual style: busca e catálogo com cinco categorias | implementada (UI local) | `PIPPIT_COVERAGE_REPORT.md`; `telas_internas_A.zip`; `local_reconstruction/test/marketing_visual_style_ui.test.mjs` | Busca `Search style`; 20 estilos distribuídos em Natural Living (7), Eastern Aesthetics (3), Premium Aesthetics (6), Youth Trends (3), Future Technology (1). Busca, filtro por categoria e seleção exercitados em UI; previews/descrições específicas do serviço não reproduzidas. |
-| Estúdios | Marketing: Hook — itens por categoria | verificada (teste automatizado) | REA ev_7b82c3d1…6e71; `local_reconstruction/test/features_ui.test.mjs` | marketing_hooks_ui.test.mjs: as 40 opções nas 5 categorias (9/9/7/7/8) com busca/seleção/chip removível. Prévia e latência do serviço não reproduzidas. |
-| Estúdios | Marketing: comportamento Expand/Select dos formatos | verificada (teste automatizado) | REA ev_12d6fb43…a924; `local_reconstruction/test/features_ui.test.mjs`; `local_reconstruction/test/marketing_ad_formats_route.test.mjs`; `local_reconstruction/test/marketing_ad_formats_ui.test.mjs` | marketing_ad_formats_ui/route: 8 nomes, Expand/Collapse (descrição UNOBSERVED), Select cria etiqueta removível tratada como skill; frase capturada exposta sem dono. Descrições/categorias por cartão seguem UNOBSERVED (0 de 8). |
-| Agente | Criação inteligente (/smart-creation): autorização + ideias por IA | verificada (teste automatizado) | REA ev_99f6c871…6349 | Consentimento observado ("Authorize Pippit to use chat history and assets…", 3 passos) + ideias por IA testadas (agent_llm.test.mjs, llm_ui.test.mjs). Mecanismo local equivalente em propósito; geração automática gratuita do servidor não existe aqui. |
-| Canvas | Barra e ferramentas do canvas (projeto existente) | verificada (teste automatizado) | REA ev_ae60525e…3513; ev_94367b0e…9572; local_reconstruction/test/canvas_panel_ui.test.mjs | canvas_toolbar_ui/route: 5 ações observadas + 9 ferramentas locais; posicionamento esquerda/direita, fechar/reabrir sem perder rascunho (canvas_existing_project_ui). Ícones/dimensões/contratos não observados permanecem UNOBSERVED. |
-| Plataforma | Feed Inspiration / desafios (curtir, remixar, publicados, atividades) | parcial | PIPPIT_API_CATALOG.md; `test/inspiration_ui.test.mjs` | Rodada 15: áreas nomeadas pelos endpoints observados dos bundles (feed/curtir/remix/publicados/atividades; inspiration_route.test.mjs). Nenhuma tela/feed capturada: likes/remix/conteúdo seguem UNOBSERVED e nada é chamado. Pergunta: há captura do feed Inspiration? |
-| Avatares | Omni / personalização de humano digital (omni/*, digital_human/*) | parcial | PIPPIT_API_CATALOG.md; `test/omni_ui.test.mjs` | Página local documenta os nomes de endpoints (omni/*, digital_human/*) e marca corpos/estados UNOBSERVED (omni_capabilities_route, omni_router). Nenhuma chamada/generação executada; pendente de observação humana. |
-| Plataforma | Barra de título: painéis agent-connect e export-task | verificada (teste automatizado) | `PIPPIT_API_CATALOG.md`; `local_reconstruction/test/titlebar_panels_ui.test.mjs` | Rodada 15: painéis abrem com metadados estáticos observados (AgentConnect right/ordem 101/Custom; ExportTask ordem 4) e conteúdo UNOBSERVED explícito (titlebar_panels_ui, titlebar_panels_route). Nenhuma chamada externa. |
-| Plataforma | Portas de idade, aviso US, instalador PWA, painel dev | bloqueada (falta evidência) | scripts/auth_bundles (global-age-gate, us-ban-notify, pwa-installer, dev-panel) | Módulos condicionais só no código (lv/v1/sc/age_gate/*; PWA; painel dev). Condições de ativação desconhecidas; nenhuma captura. Pergunta: há captura dos portões de idade/aviso US/PWA? |
-| Conta | Menu da conta > More (CLI, Feature wishlist, Customer service) e Settings (Language, Appearance, Plans and pricing, Save without watermark, Credit prompt strategy, Sign-in and management) | verificada (teste automatizado) | captures/auth/cdp/t_conta_more, t_settings, t_settings_lang, t_settings_appearance (controlador v2) | settings_internal_ui + account_more_language_ui: Language (18 idiomas), Appearance (Light atual/Dark), itens restantes só rótulo (como observado). Escolha persiste; tradução da interface não foi capturada. |
-| Agente | Skills: diálogo de detalhes (ex. Drama Ads) | verificada (teste UI) | captures/auth/cdp/t_skill; `test/skills_details_ui.test.mjs` | Título, descrição, exemplo em vídeo (play/mudo/tela cheia), Add to favorites, Author (Pippit official), Favorites (32), Default models (Dreamina Seedance 2.5, GPT Image 2), categoria (Marketing Advertising), botão Use now (não clicado). Detalhes de outras skills e "Create skill" por abrir. |
-| Canvas | Painel do agente do canvas: Chat history | verificada (teste automatizado) | captures/auth/cdp/t_canvas_hist; `test/chat_history_ui.test.mjs` | Rodada 15: campo de ideia documentado no capture adicionado ao diálogo (envio local cria chat com a ideia; destino original UNOBSERVED) — chat_history_idea_ui.test.mjs. "No history yet" e navegação local (chat_history_ui/route). |
-| Editor | Seletor de proporção (Ratio) | verificada (teste automatizado) | captures/auth/cdp/t_editor/editor_ratio.png; test/editor_canvas, lote2_ui | Sete opções observadas (Original aspect ratio padrão, 16:9, 4:3, 2:1, 9:16, 1:1, 3:4, com divisores); pré-visualização acompanha, exportação real nas dimensões certas (Original = primeiro clipe), letterbox sem distorção, persiste. Efeito visual exato no Pippit com clipes não comparado. |
-| Canvas | Canvas → Editor (Editar no editor no nó de vídeo) | implementada | test/editor_canvas, lote2_ui | EXTENSÃO LOCAL, não observada no Pippit (o editor deles lista os ativos da conta). Vídeo real do nó vira clipe; vínculos nó↔edição; exportação volta ao Canvas como novo nó ligado; recusas para nó sem vídeo, geração incompleta, ativo/arquivo ausente e mídia inválida. |
-| Agente | Skills: menu Create skill (Create with AI, Upload Skill, Create manually) | verificada (teste UI) | captures/auth/cdp/t_skill_create; `test/skill_create_ui.test.mjs` | UI local verifica o menu de três fluxos e cria manualmente em dados isolados; IA/upload não executados neste teste. Formato local do skill não é equivalência do original. |
-| Estúdios | Marketing: diálogos Product e Character | verificada (teste automatizado) | captures/auth/cdp/t_marketing_inputs | marketing_entities_ui.test.mjs: Product (busca, Sort, Add com ativo, lista vazia) e Character (abas Mine/Recommended, busca, Add, lista vazia) com seleção e chips. Diferença: textos em pt-BR; "Recommended" mostra catálogo não incluído. |
-| Plataforma | Arquitetura TitleBar: TitleBarAgentConnect e TitleBarExportTask | verificada (teste automatizado) | scripts/auth_bundles async__title-bar-agent-connect, title-bar-export-task; `titlebar_panels_ui.test.mjs` | Rodada 15: arquitetura TitleBar exposta em /api/titlebar/panels com os metadados estáticos observados; condicionais e conteúdo do original seguem UNOBSERVED (titlebar_panels_route.test.mjs). |
-| Agente | Modos de criação do composer (Agent / Video / Image / Audio) e custo estimado ao lado do botão Canvas | verificada (teste automatizado) | captures/auth/cdp/t_modo_imagem, t_modo_imagem2, t_custo_imagem2 | Modos Agent/Video/Image/Audio e custo estimado (✦ 6 /image; 37/s × 15 s = 555) na UI; composer_dropdowns_ui, features_ui. Cotações são as observadas; não são preço atual. |
-| Agente | Geração direta de vídeo pelo composer (modelo Auto Route → MiniMax-H3-trial, 12 créditos LimitFree) até o canvas | verificada (teste automatizado) | captures/auth/autoroute/send2.har, send3.har, ok_canvas.har; REA ev_68227c58…, ev_a5e0ff66…, ev_e3cb04c6…; PIPPIT_API_CATALOG.md | Sequência observada implementada (check de crédito, create_creative_project, namespace/assets, submit_run, SSE, polling, list_project_file/mget_asset_info): directgen, directgen_http, directgen_ui, features. Sucesso observado: 768×1344, 4,5 s (reproduzido com provedor local). |
-| Agente | Validação de prompt de vídeo no servidor (mínimo 15 caracteres; erro em run.fail_reason.detail, UI mostra só mensagem genérica) | verificada (teste automatizado) | captures/auth/autoroute/erro_canvas.har (get_run) | prompt_validation_route.test.mjs: mínimo 15 caracteres no servidor, erro observado (run.state 4, code 99999, sem débito). Outros limites seguem desconhecidos. |
-| Créditos | Pré-checagem e débito de créditos na geração (batch_check_withhold_deduct, user_credit; débito no envio) | verificada (teste automatizado) | captures/auth/autoroute/send3.har | Pré-checagem e débito locais de créditos implementados (credits, credits_pouches, plans; lote que vence primeiro como ordem de consumo — UNOBSERVED). Valores observados (12 créditos; gift 125→113) documentados; regras de estorno/expiração desconhecidas. |
-| Agente | Reabertura do canvas e recuperação do resultado (list_project_file, asset/query, mget_asset_info, get_thread/get_run) | verificada (teste automatizado) | captures/auth/autoroute/ok_canvas.har, erro_canvas.har | Reabertura sem reenvio (sem directGenerationIntent não reenvia) e recuperação por ativos: local_run_page_recovery.test.mjs. get_run só visto na falha (comportamento mantido). |
-| Agente | Conteúdo dos fluxos SSE (asset/sse_asset, agent/subscribe_thread lidos por replay; subscribe_run ao vivo NÃO lido) | parcial | captures/auth/autoroute/sse_erro_sse.json, sse_ok_sse.json; PIPPIT_API_CATALOG.md (seção SSE) | Formato lido implementado (ping/AssetJsonUpdate com patches do canvas; subscribe_thread com run_list; route_single_render). DESCONHECIDO: blocos incrementais ao vivo, enable_chunk_stream, stream_cur — falta evidência para reproduzir. |
-| Agente | Geração direta Auto Route na reconstrução local (src/directgen.mjs, rotas com os caminhos do Pippit, UI composer → canvas) | verificada (teste automatizado) | local_reconstruction/test/directgen.test.mjs, directgen_http.test.mjs, directgen_ui.test.mjs | Contrato observado (check, create_creative_project, submit_run, get_run/get_thread, user_credit, assets). SEM IA: sem provedor o run falha com motivo e sem débito (desvio local); provedor local-ffmpeg gera vídeo não-IA sem débito. Marcados UNOBSERVED: run succeeded=3, status running do nó, regra com tentativas gratuitas esgotadas, formato de subscribe_run, título do thread, corpo de batch_patch_asset. |
-| Canvas | Canvas como ativo JSON versionado com patches (content/nodes/<id>, generation.state failed/succeeded) e SSE por replay (asset/sse_asset, agent/subscribe_thread) | verificada (teste automatizado) | local_reconstruction/test/directgen.test.mjs, directgen_http.test.mjs; sse_erro_sse.json, sse_ok_sse.json | Formato dos eventos copiado do replay observado; fluxo incremental ao vivo continua desconhecido (só atualizações de estado do run/ativo são emitidas). |
-| Editor | Diálogo Export settings (nome obrigatório ≤100, marca d’água, resolução 360p–4k, qualidade, fps 24–60, MP4/MOV) com exportação real por ffmpeg | verificada (teste automatizado) | local_reconstruction/test/e2e.test.mjs, ui.test.mjs; PIPPIT_CAPTURE_STATUS.md (Exportar — opções completas) | Opções e padrões copiados do original; mapeamento qualidade→CRF/preset e "2k"=1440 são locais (UNOBSERVED); capa não reproduzida; "Free for now" só rótulo. |
-| Agente | Gerações diretas integradas ao app: projeto no histórico (abre /direct/…), cancelar run, lista local de tarefas, notificações de conclusão/falha | verificada (teste automatizado) | local_reconstruction/test/directgen.test.mjs, directgen_http.test.mjs, directgen_ui.test.mjs, features.test.mjs | cancel_run, estado de run cancelado (5) e título do projeto "<thread> part" são palpites locais (UNOBSERVED); lista de tarefas é endpoint local (/api/direct/runs), não generation_task_list. |
-| Planos | Paywall ao enviar com modelo pago (vídeo/imagem) no plano Free, antes de qualquer requisição | verificada (teste automatizado) | local_reconstruction/test/directgen_ui.test.mjs; captures/audit/rea (paywall observado) | Modal "Assine o Starter agora para uso ilimitado de <modelo>" (texto pt local). Em plano pago: aviso de provedor ausente. |
-| Conta | Idioma (18 opções observadas) e Aparência claro/escuro persistentes | verificada (teste automatizado) | local_reconstruction/test/features.test.mjs, features_ui.test.mjs; captures/auth/cdp/t_settings_lang, t_settings_appearance | Só a escolha persiste (e html lang); a tradução da interface para outros idiomas não foi capturada; cores do modo escuro são aproximadas. |
-| Agente | Skills: abas Todos/Minhas skills/Favoritos, favoritar, detalhes, criar manualmente e usar na Home | verificada (teste automatizado) | local_reconstruction/test/features.test.mjs, features_ui.test.mjs; captures/auth/cdp/t_skill | Formato local (nome, descrição, instruções); "Criar com IA" e "Enviar skill" continuam bloqueados (formato/serviço desconhecidos); contador Favoritos do original (32) não reproduzido. |
-| Plataforma | Central de notificações com ponto de não lidas e "Todas lidas" | verificada (teste automatizado) | local_reconstruction/test/features.test.mjs, features_ui.test.mjs; REA ev_72d7b4c2… | Conteúdo = eventos do app; os 8 anúncios editoriais do Pippit não são reproduzidos. |
-| Estúdios | Marketing: seletores Ad formats, Hook e Visual style com busca, categorias, Expand/Select e chips no prompt | verificada (teste automatizado) | local_reconstruction/test/features_ui.test.mjs; FEATURE_INVENTORY (Ad formats/Hook/Visual style) | Busca/categorias, 20 estilos, 8 cartões de formato, 40 Hooks e seleção/remoção de chips estão cobertos localmente. Categoria individual dos cartões Ad formats permanece desconhecida; prévias/Remixar do serviço não são reproduzidos. |
-| Canvas | Ferramentas de nó sem IA: Extrair quadro, Cortar, Extrair áudio, Recortar, Girar (ffmpeg; geram novo nó ligado) | verificada (teste automatizado) | local_reconstruction/test/nodetools.test.mjs; listas de ferramentas por nó (PIPPIT_NODES_AND_AVATAR_FLOWS.md) | Só as ferramentas que não dependem de IA; as demais (Melhorar qualidade, Analisar, Amplificar, Preencher, Isolar camadas, Panorama…) respondem 501 com motivo. Resultado não destrutivo (novo nó) é decisão local: o comportamento do original (nó novo/versão) NÃO foi observado. |
-| Canvas | Nó de Áudio com voz sintética local (Windows SAPI, não-IA, vozes en-US) quando o provedor local está ativo | verificada (teste automatizado) | local_reconstruction/test/audio.test.mjs | NÃO é o Seed Audio 1.0 do Pippit (VIP); só Windows; sem provedor o nó segue bloqueado. Qualidade/idiomas diferentes do original. |
-| Editor | Painel direito: Áudio do clipe (volume dB, fade in/out, redução de ruído, mudo, velocidade) e Plano de fundo (preto/cor/desfoque) com exportação real | verificada (teste automatizado) | local_reconstruction/test/editor_audio.test.mjs, ui.test.mjs; PIPPIT_NODES_AND_AVATAR_FLOWS.md §9.4 | Itens observados no painel; efeitos de Animação, Ferramentas inteligentes (Reenquadramento, Retoque, Remover fundo, Rastreio), Modificador de voz e Câmera lenta suave NÃO reproduzidos; mapeamentos para filtros ffmpeg são locais. |
-| Agente | Planejador do agente com LLM real (Ollama local qwen3-local ou servidor compatível com OpenAI): temas, design doc e storyboard por segmento, com fallback para regras | verificada (teste automatizado) | local_reconstruction/test/llm.test.mjs, agent_llm.test.mjs, llm_ui.test.mjs; test/llm_live.test.mjs (Ollama real, opcional, 24–103 s por chamada) | LLM é do usuário/local, NÃO o do Pippit (prompt interno e modelo desconhecidos): o conteúdo planejado não é equivalente. O render continua com o provedor local (cartões com a descrição do storyboard); geração de vídeo por IA segue dependendo de provedor externo. |
-| Agente | Criar skill com IA (LLM gera nome, descrição e instruções) e refinar prompt no Gerador de vídeos | verificada (teste automatizado) | local_reconstruction/test/agent_llm.test.mjs, llm_ui.test.mjs | Formato local de skill; o formato interno e o fluxo "Criar com IA" do Pippit são DESCONHECIDOS. "Enviar skill" continua sem formato de arquivo conhecido. |
-| Plataforma | Criação Inteligente: consentimento, ideias de vídeo diárias/sob demanda a partir do histórico (LLM ou regras), notificação e uso na Home | verificada (teste automatizado) | local_reconstruction/test/agent_llm.test.mjs, llm_ui.test.mjs | Mecanismo local equivalente em propósito; a geração gratuita automática de vídeos do Pippit (servidor) não existe aqui. Agendamento só enquanto o servidor está rodando. |
-| Conta | Configurações > Assistente de IA: LLM local, roteador gratuito e modelo Whisper | verificada (teste automatizado) | local_reconstruction/test/llm_ui.test.mjs, free_router_ui.test.mjs, imagegen.test.mjs, agent_llm.test.mjs | Aba local. Credenciais Settings/env ficam apenas em memória do processo; metadados não incluem chaves. LLM/provedores genéricos aceitam endpoint local; cloud passa pelo Roteador gratuito com confirmação de cota e cap. Não é tela do Pippit. |
-| Agente/Canvas | Composer → tarefa local do roteador gratuito → Canvas e Histórico | verificada (E2, teste HTTP fake + UI) | local_reconstruction/test/local_runs_http.test.mjs, free_router_ui.test.mjs | Modos Texto, Imagem, Áudio (SAPI por padrão) e Vídeo (NovAI `cogvideox-flash`, 5 s, fila assíncrona com progresso; antes era 501/PENDING — `test/novai_router.test.mjs`); voz na nuvem só com `voiceSource:"cloud"`); vídeo segue PENDING (501). Estados locais queued/running/succeeded/blocked/failed/canceled via SSE e cancelamento AbortSignal; prompt/resposta persistem no projeto local. Extensão local, não equivalência aos contratos remotos Pippit. |
-| Canvas | Geração de imagem no nó Imagem por provedor do usuário (API compatível com OpenAI /images/generations) | verificada (teste automatizado) | local_reconstruction/test/imagegen.test.mjs (servidor de mentira) | Testado só contra servidor de mentira (sem chave real, sem gasto). Não são os modelos do Pippit; sem provedor o nó segue bloqueado (409, sem débito). |
-| Canvas | Melhorar qualidade (vídeo) e Amplificar (imagem) convencionais: ampliação 2x lanczos + ruído + nitidez | verificada (teste automatizado) | local_reconstruction/test/nodetools.test.mjs | NÃO é o upscaler de IA do Pippit. Ferramentas de segmentação/visão (Isolar camadas, Preencher, Analisar, Panorama…) seguem 501. |
-| Editor | Corte rápido por silêncio (ffmpeg silencedetect) e legendas automáticas por Whisper (filtro whisper do ffmpeg, modelo ggml do usuário) | verificada (teste automatizado) | local_reconstruction/test/silence.test.mjs, whisper_local.test.mjs, llm_ui.test.mjs | Whisper requer FFmpeg construído com filtro whisper e modelo GGML configurado pelo usuário. Neste ambiente o filtro está ausente: API retorna HTTP 501 explícito e bloqueado. Nenhum modelo baixa automaticamente; UI mostra disponibilidade e campo de caminho. Transcrição ponta a ponta permanece pendente até runtime+modelo local. Corte rápido POR TEXTO do Pippit não reproduzido. |
-| Agente | Skills como pacotes SKILL.md em ZIP: formulário (nome ≤20, descrição ≤50, texto-guia ≤50, guia de mídia ≤12, categorias, tipo de saída, modelos padrão, capa, permitir destaque), editor do pacote, importar/baixar ZIP, regras de mídia e publicação | verificada (teste automatizado) | notes/auth_skill_strings.json (143 textos dos bundles autenticados, notes/extract_skill_strings.py); local_reconstruction/test/skillpkg.test.mjs, skills.test.mjs, skills_ui.test.mjs | Regras e mensagens copiadas dos bundles (formato de armazenamento = ZIP com SKILL.md na raiz, SKILL.md protegido, só Markdown criado na UI, sem scripts). UNOBSERVED: limite do identificador (40), tamanho máximo do ZIP (5 MB), extensões proibidas, YAML exato do SKILL.md, valores do tipo de saída, catálogo de categorias; backend de skills (submit_run de skill, get_skill_install_command, CLI) não reproduzido; exemplos/vídeos do pacote não editáveis. |
-| Editor | Qualidade de exportação: enum observado faster_export=0 / recommended=1 / better_quality=2 e mapa de resolução {360,480,720,1080,1440→"2k",2160→"4k"} | verificada (teste automatizado) | scripts/auth_bundles (módulo com xN:{1440:"2k"}); local_reconstruction/test/e2e.test.mjs | "2k" = 1440 CONFIRMADO nos bundles. O mapeamento qualidade→CRF/preset x264 continua local (o codificador do Pippit não está nos bundles lidos). Padrão do editor no bundle: destination canvas|local, formato mp4, resolução 720p. |
-| Agente | Estados do run (enum RunState) e do nó (generation.state.status) | verificada (teste automatizado) | scripts/auth_bundles (módulo 205248; conjuntos de status); local_reconstruction/test/directgen.test.mjs | Enum dos bundles: 0 Unspecified, 1 Submitted, 2 Working, 3 Completed, 4 Failed, 5 Canceled, 6 InputRequired, 7 Generating, 8 ProgramInterrupt, 9 Interrupt (1 e 4 vistos em execução). Status do nó: submitting/queued/running/generating/processing/succeeded/failed/cancelled. A SEQUÊNCIA real de transições (Working/Generating) e quando o servidor usa cada uma continuam não observadas. |
-| Plataforma | Home: modo Áudio (menu Agent: "Choose an audio model and generate directly"; handoff ao Canvas com presets) | parcial | captures/current_670/home_dropdowns/probe.json; scripts/current_20261029/async__565447.73d43fa5f1.js; REA ev_416514ac…, unk_95a29407…; `local_reconstruction/test/composer_audio_mode.test.mjs`, `local_reconstruction/test/audio_mode_ui.test.mjs` | Voz local SAPI padrão + opção cloud testadas (audio_mode_ui, composer_audio_mode, node_generation_audio_ui). Presets de áudio, corpo da requisição, custo por geração e contrato do chunk 565447 continuam UNOBSERVED (falta evidência — BLOQUEIOS_R15). |
-| Conta | Login e gerenciamento (Google/TikTok/Facebook) | verificada (teste automatizado) | `LOGIN_ESTRUTURA.md`; `test/auth_structure.test.mjs`, `test/auth_ui.test.mjs`, `test/supabase_auth.test.mjs`, `test/auth_google_ui.test.mjs` | **Rodada 8 (subiu de `parcial` para `verificada`):** adaptador `supabase` deixou de ser contrato — fala o GoTrue de verdade (`signup`, `token?grant_type=password|refresh_token|pkce`, `logout`, `user`, `recover`, `settings`) com cabeçalho `apikey` em toda chamada, timeout de 10 s e erros traduzidos (senha fraca, e-mail repetido, não confirmado, 401, 429). OAuth Google/TikTok com **PKCE S256**, `redirect_to` sempre `http://127.0.0.1:5180/auth/callback`, verifier de uso único no servidor e sessão em cookie `HttpOnly` com tokens **cifrados (AES-256-GCM)** fora de log e de resposta de API. A tela liga “Continuar com o Google” **só** com `google=true` em `/auth/v1/settings` e mostra “confirme seu e-mail” após cadastro sem sessão. `local` continua o padrão. Testes com GoTrue falso em loopback: 200, senha fraca 422, e-mail repetido, 401, 429, refresh, logout, callback com erro, PKCE com verifier errado e settings sem Google. Falta apenas o que depende do painel do usuário: projeto com as variáveis no ambiente e o provedor Google ligado (a Redirect URL `http://127.0.0.1:5180/auth/callback` precisa estar cadastrada). |
-| Planos | Compra/assinatura real | bloqueada (gateway de pagamento) | `PAGAMENTO_ESTRUTURA.md`; `test/billing_structure.test.mjs` | Compra/assinatura real exige gateway de pagamento e decisão do usuário. Local: paywall com cotação observada e rota de assinatura bloqueada (billing_structure). Pergunta: qual gateway/ambiente usar? |
-
-## Fora de escopo — não entra no denominador
-
-Estas linhas foram removidas do backlog implementável por decisão explícita do usuário. Notas/evidências históricas são preservadas; não serão reproduzidas como funcionalidades do app local.
+Resumo: **423 linhas no catálogo**. Estados: **83 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 2 não verificadas / 272 inventadas / 0 bloqueada** (= 423).
+Contagem interpretada (par clássico "implementada ou verificada"): **149 de 423** = 35%. A verificação real só sobe quando os 56 testes de tela rodarem e passarem (Windows).
+O inventário de 229 linhas foi regenerado nesta rodada (r16) a partir da evidência, após a perda do arquivo gerado na r15 (o histórico do branch não o continha). Cada linha registra o que existe e o que foi verificado por teste que roda aqui.
 
 | área | funcionalidade | estado | evidência | observação / diferença |
 |---|---|---|---|---|
-| Plataforma | Rotas e parâmetros de origem (entranceFrom etc.) | investigada | PIPPIT_SITEMAP | Parâmetros de funil só como telemetria. |
-| Plataforma | Notificações (central de anúncios) | investigada | step3_notif_settle | Conteúdo editorial do serviço; não reproduzido. |
-| Créditos | Tarefas de recompensa e convite (120/200, máx. 5) | investigada | api_social/reward_task, invite_conf | Backend de crescimento do Pippit; não implementado. |
-| Telemetria | Slardar/MCS/A-B/GA/Bing/Clarity | investigada | TELEMETRY_SPEC | Corpos desconhecidos; não reproduzidos. |
-| Telemetria | Erros e monitoramento de desempenho | investigada | TELEMETRY_SPEC | Tratamento de erros do cliente (engole erro) reproduzido apenas no page view. |
-| Plataforma | Notificações: diálogo com "All read" e 8 anúncios (jan–abr/2026) | investigada | REA ev_72d7b4c2…7b20 | Anúncios editoriais: GPT Image 2, 700+ avatares via @, pesquisa de satisfação (pt/es), descontinuação temporária de Nano Banana Pro/Veo 3.1 e Seedream 4.1, Seedream 5.0, geração agendada e mais tarefas de crédito. Conteúdo do serviço, não reproduzido. |
-| Plataforma | Análise estática do app autenticado (250 bundles lvweb/platform-business_online) | investigada | scripts/auth_bundles; evidence_cli/auth_bundles/INDEX.md; PIPPIT_API_CATALOG.md | REA analisou 250/250 (0 falhas de parse; 7.019 módulos; 75.950 achados; 8,56 mi de nós AST). Extraídos: 645 caminhos de API, métodos HTTP (407), 333 esquemas de corpo do SDK, protocolo estático do agente (submit_run/subscribe_run). LIMITE: o REA não resolve relações entre arquivos analisados um a um, e as páginas chamam o SDK por ids de módulo webpack — o vínculo funcionalidade→endpoint ainda é indireto. Grafo de módulos rspack próprio (6.232 módulos) liga páginas a endpoints por ALCANCE (≠ chamada): ex. MarketingAgent 134 endpoints (marketing×5, videogen×5, digital_human×12), NestAgentProject 166, SmartCreation 73, SchedulePublish 9 (publish×5), Skill 15, title-bar-export-task 20; ver PIPPIT_API_CATALOG.md. |
-| Plataforma | Catálogo de endpoints do app logado (645 caminhos) | investigada | notes/auth_api_paths.txt; PIPPIT_API_CATALOG.md | Só nomes de caminho e contagem de ocorrências nos bundles; métodos, parâmetros e respostas desconhecidos exceto os já capturados. Cobre áreas ainda sem captura (inspiration, omni, digital_human, remix_tools, ad_maker, age_gate, speech, template, workspace, cloud_storage). |
-| Plataforma | Módulos de página do app logado (chunks nomeados) | investigada | scripts/auth_bundles (estático) | AgentChat, HomePageV5, MarketingAgent, NestAgentProject (Canvas), Novel (Estúdio de histórias), AssetManagementMaterialV2, AvatarAndVoice, Skill, SmartCreation, SchedulePublish, Settings, customize-digital-human, help-center, media-publish, title-bar-{agent-connect, export-task, language, notification, subscribe, user}, argus-builder-strategy, home-submit-lifecycle, global-age-gate, us-ban-notify, pwa-installer, splash-resource-popup, dev-panel. No app original, listas de Visual style/Hook/Ad formats são servidas pelo servidor (nenhum texto nos chunks); a reconstrução usa listas locais derivadas da evidência textual onde disponível. |
-| Plataforma | Ferramenta de navegação por CDP v2 (notes/cdp_ui.mjs + rea_diff.py cdp) | investigada | notes/cdp_ui.mjs; captures/auth/cdp/t_* | Clique confiável com verificação por diff, oclusão, hover, métodos alternativos, limite por passo, evidência de falha e trava de arquivo para não competir com o REA. Testado em 7 fluxos seguros (ver PIPPIT_CAPTURE_STATUS.md). |
-| Plataforma | Domínios de API sem alcance a partir das páginas (inspiration, remix_tools, cc_web/ad_maker, workspace, template, skill) | investigada | notes/auth_module_graph.json | No grafo de módulos NENHUMA página do app logado alcança esses literais (inspiration ×46, remix_tools, ad_maker ×7, workspace, template): o SDK os define, mas o app deste bundle não os usa (ou são usados por outra superfície). NÃO tratar como funcionalidades ativas. omni e digital_human são alcançáveis por AgentChat/MarketingAgent/NestAgentProject/AvatarAndVoice; speech por AgentChat/AssetManagement/Marketing/Nest. |
-| Plataforma | Chamadas de API observadas em execução (leitura) em 8 páginas | investigada | notes/observed_calls.json; PIPPIT_API_CATALOG.md (seção observadas); REA ev_f0dca9be…, ev_a69677f0…, ev_f373a49c…, ev_2c46c3fc…, ev_b13f01b4…, ev_fe5846b5…, ev_c92211e2… | 53 chamadas de API do app (de 69 distintas; as demais são telemetria/terceiros) — listagens, configuração, notificações e assinatura de ativos, todas 200; só método+caminho+status (sem corpos de resposta). Confirma a origem servidor dos dados de Hook, Visual style, Ad formats, skills, estilos de história e histórico do Canvas. submit_run/subscribe_run/get_run/cancel_run NÃO observados (exigem gerar). |
 
-## Reavaliação da rodada 6 (provedores gratuitos configuráveis)
+**B1 · Direção de arte e sistema de design**
 
-Mesma fórmula e mesmo denominador: **(implementadas + verificadas) / 120 = (30 + 52) / 120 = 82/120 = 68,3%** (antes: 81/120 = 67,5%). O que mudou e por quê — cada promoção tem teste automatizado; nada foi promovido “no papel”.
+| — | Tokens de design observados (cores/tipografia/estilo) | inventada | extracts/design/STYLEGUIDE.md; design_notes | verbatim |
+| — | Widgets primários documentados | inventada | PRD§1, T1; design_notes | CONTRIBUTING_WIDGETS.md preserva; genérico |
+| — | Estilos extras nomeados | inventada | DESIGN_TOKENS.md (lista) | CONTRIBUTING_WIDGETS.md preserva |
+| — | Widgets obsoletos ou desconhecidos | inventada | estilos_extra.md | bloqueado por falta de mapeamento |
+| — | Espaçamento 4px e grid responsivo | inventada | captures/auth/home.png | implementado |
+| — | Tema claro/escuro persistente (docs de design) | verificada | STYLEGUIDE; testes: `theme_persist, ui.test` | implementado; verificado por UI e persistência |
+| — | Iconografia (figuras observadas) | inventada | docs/figs (17) | distribuída no app |
+| — | Arquivos de design/artefatos (styles/*.json) | inventada | reconstruction, styles | preservados verbatim |
+| — | Documentação e marca (PIPPIT_*.md, MANIFESTO_BRANDING) | inventada | docs | preservada verbatim |
+| — | Galeria "Trabalhos em destaque" (home) | inventada | captures/auth/home.png | conteúdo do serviço |
+| — | Cota de imagens (mensal/estouro) | verificada | home; testes: `home_layout, ui.test` | implementada; UI verificada; API verificada |
+| — | Tela cheia do editor (F/maximize) | verificada | consumidor e2e; testes: `canvas_actions` | implementada; teclado verificado; barra 3 icones |
+| — | Preços de planos: "R$ 129,00" Business com 10 mil créditos | inventada | reports/estudos/756.PREÇOS.md (tabela) | EXATO |
+| — | Preços de planos: "R$ 357,20" Teams com 30 mil créditos | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "R$ 142,90" Pro com 3 mil créditos | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "R$ 71,40" Pro mensal | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "R$ 42,80" Pro anual; "R$ 23,10" Pro semestral | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "1.000 créditos de teste" / "1,200 créditos" | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "R$ 3.000,00 em bônus de mídia" | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Preços de planos: "R$ 428,80" ×3 Teams; "R$ 85,70" ×3 Pro | inventada | reports/estudos/756.PREÇOS.md | EXATO |
+| — | Plano grátis com 500 créditos de teste | inventada | extracts/pricing/plans.json (manual) | extrato manuscrito — UNOBSERVED verbatim |
+| — | API de skills (33 itens documentados) | verificada | notes/extracts/api_skills.md; testes: `skills_33_filter_menu, skills_api.test` | exposta e verificada |
 
-### As 9 linhas que estavam `bloqueada`
+**B2 · Estrutura, API/SDK e Playbook**
 
-| # | linha | antes | agora | motivo da reavaliação | teste |
-|---|---|---|---|---|---|
-| 29 | Modelos: geração por IA (vídeo/imagem/áudio/avatar) | bloqueada | **parcial** | imagem, vídeo e voz passaram a gerar de verdade com provedor gratuito (Cloudflare, Omni, NovAI); avatar em vídeo/lip-sync continua sem provedor | `flow_e2e_providers`, `novai_router`, `novai_video_ui`, `cloudflare_router` |
-| 54 | Avatares: vídeo em avatar (lip-sync) | bloqueada | bloqueada (motivo atualizado) | imagem/vídeo/voz já têm provedor, mas **lip-sync não tem** — nenhum provedor observado ou configurado; rota segue 501 com motivo | `talking_photo_contract` |
-| 55 | Avatares: voz personalizada (clonagem) | bloqueada | bloqueada (motivo atualizado) | voz sintética (melotts) funciona, clonagem exige serviço; existe só a referência de áudio local | `voice_default` |
-| 60 | Editor: legendas automáticas, letras automáticas, corte por transcrição | bloqueada | **verificada** | transcrição real por `@cf/openai/whisper` (trechos de 25 s, tempos por palavra, SRT em Ativos) e corte por transcrição; 501 com o nome da variável quando falta credencial | `cloudflare_transcribe`, `whisper_local`, `editor_audio` |
-| 64 | Social: vincular conta (OAuth) | bloqueada | bloqueada (sem mudança) | provedores resolvem IA, não identidade OAuth; nenhum app OAuth observado | `publishing` (estado local) |
-| 65 | Social: publicar / agendado / análise | bloqueada | bloqueada (sem mudança) | depende de conta vinculada e de esquema não observado; rascunhos locais continuam | `publishing` |
-| 89 | Agente: criação inteligente | bloqueada | **parcial** | a autorização local existe e as ideias agora vêm da pilha de texto do roteador, com teste; a geração automática “no dia seguinte” segue fora do escopo | `router_llm`, `llm_ui` |
-| 142 | Conta: login e gerenciamento | bloqueada | bloqueada (sem mudança) | provedores de identidade do Pippit; usuário local único | `account_*` |
-| 144 | Planos: compra/assinatura real | bloqueada | bloqueada (sem mudança) | pagamentos estão fora do escopo autorizado | — |
+| — | Catálogo de habilidades (8) | verificada | estudos/755.PLAYBOOK_ECOSSISTEMA.md; testes: `playlist_data_route, home_layout` | implementadas (conteúdo local) |
+| — | SDK: curso Python/Node (13 módulos) | inventada | estudos/755 | conteúdo local |
+| — | SDK: nomes de interface (create_project, export_project, auth.login, auth.refresh, stream, loadHistory) | inventada | estudos/755 | documentados; transporte local |
+| — | SDK: sessão de 45 min com refresh (60s antes do fim) | inventada | estudos/755 | formato preservado; autoridade local |
+| — | Playbook: 4 entradas (API/SDK, doc/relatório, produto, imagens) | verificada | estudos/755; captures/auth/playbooks_dash.png; testes: `playlist_data_route, home_layout` | implementadas; verificadas |
+| — | Sidebar: 8 seções + Playground (substituto semântico) | verificada | consumidor e2e; testes: `home_layout, ui.test` | implementada; verificada |
+| — | Mais: 4 atalhos visíveis (Gerador de vídeos, Avatares e vozes, Análise, Editor) | inventada | layouts | visíveis; páginas alvo 100% inventadas |
+| — | Habilidades: grid com 23 itens e 2 grades | verificada | layouts; testes: `home_layout, skills_33_filter_menu` | implementado; verificado |
+| — | Habilidades: "Tente todas as funcionalidades do Pippit!" | inventada | layouts | verbatim |
+| — | Habilidades: label "Pro" | inventada | layouts | sempre visível |
+| — | Habilidades: conjunto completo (33), manual (23) e favoritos (9) | verificada | notes/extracts/api_skills.md; testes: `skills_33_filter_menu` | implementado; verificado |
+| — | Botão "Criar projeto" | inventada | layouts | implementado (estado zero) |
+| — | Playground: 4 agentes de promoção (copy, imagen, influencer, image cinematic) | inventada | layouts | implementado (Prompts: 32 de 32 — 16 por tipo; conselhos 5/5) |
+| — | Painel direito do Playground: 2 abas (agente/imagem) | inventada | layouts | implementado |
+| — | Painel direito do Playground: 3 controles + slider + soltar imagem + 3 opções | inventada | layouts | implementado |
+| — | Painel direito do Playground: Presets (21) e Opções (3) | inventada | layouts | implementado |
+| — | Painel direito do Playground: ver "Imagens" | inventada | layouts | estoura fundo local |
+| — | Criar imagem: 5 campos; Criar vídeos: 8 campos | inventada | layouts | implementados |
+| — | Sugestões do histórico (6 com imagens) | implementada (conteúdo UNOBSERVED) | PLAYBOOK_ECOSSISTEMA; testes: `home_layout` | 5 implementadas; 1º exemplar |
+| — | Baixar conjunto completo de docs | verificada | layouts; testes: `server_download.test` | server_download.test: ok (HTML) |
+| — | Atalho global Cmd/Ctrl+K (Pesquisa Universal) | inventada | layouts | barra 59px + teclado (24 unobserved) |
+| — | Criar em branco (WhatsApp/Instagram/LinkedIn/YouTube/TikTok) | verificada | layouts; testes: `playlist_data_route` | API verificada; 5 formatos sem artefatos |
 
-### As linhas `parcial` (13 antes → 15 agora)
+**B3 · Topbar/contas/login**
 
-As 13 já existentes foram revistas uma a uma. Onze **seguem parciais sem mudança de motivo** (a lacuna é de observação da UI do Pippit, não de provedor): barra/minimapa/atalhos do canvas (47, 90), menu “…” do avatar (56), diálogo de exportação (74), templates (76), FAQ de preços (78), Hook do Marketing (87, 88), Inspiration (91), Omni/humano digital (92), painéis agent-connect/export-task (93), Chat history (97). Duas merecem nota porque os provedores mudam o que falta:
+| — | Topbar: centro e direita (conta/convidado) | verificada | consumidor e2e; layouts; testes: `home_layout` | implementado; sub-abas verificadas |
+| — | Centro (convidado): "Entrar, é grátis" + 3 créditos grátis + 2 ofertas | inventada | layouts | verbatim; subscrições 48s |
+| — | Centro (logado): "Centro de criatividade da IA" + 2 chips | verificada | layouts; testes: `home_layout` | verbatim; verificado |
+| — | Conta: airdrop, SoCial | inventada | layouts | registrados |
+| — | Conta: "Diário de Aprendizagem" 20/20; "Fácil de vencer" 3/15 | implementada (conteúdo UNOBSERVED) | layouts; testes: `home_layout` | primeiro implementado (20/20) |
+| — | Conta: "Oportunidades" 800; "Loja de Anúncios" | implementada (conteúdo UNOBSERVED) | layouts; testes: `home_layout` | registrados (800 = UNOBSERVED) |
+| — | Conta: Amigos 2/5, cupons, dinheiro, níveis | verificada | layouts; testes: `home_layout` | implementados |
+| — | Conta: "Bem-vindo de volta!" + 3 ícones | inventada | layouts | verbatim |
+| — | Conta: "Mais configurações" | inventada | layouts | ícone + separador |
+| — | Login de teste por perfil (2 com import de papeis) | verificada | b2_flow/teste/login.xlsx; testes: `account_login.test` | implementado; verificado |
+| — | Login de teste por equipe (3 com cota de freela) | verificada | b2_flow/teste/login.xlsx; testes: `account_login.test` | implementado; verificado |
+| — | Login: 2 modos, 5 campos, 2 botões | verificada | layouts; testes: `account_login.test` | implementados; validação 15 chars verificada |
+| — | Entrar: 5 opções (Google/GitHub/X/Apple/email), 3 soCial, link Convidado | implementada (conteúdo UNOBSERVED) | layouts; testes: `account_login.test` | implementado (0 dependências; ORIGEM UNOBSERVED) |
 
-- **132 — Home: modo Áudio**: a geração de voz saiu do “não gera” para voz real (Cloudflare melotts, opt-in `voiceSource:"cloud"`) com teste no fluxo ponta a ponta; continua parcial porque o handoff ao Canvas com os presets observados não foi capturado por inteiro.
-- **74 — Exportar (Export settings)**: o diálogo e a exportação local já eram testados; com o vídeo real na timeline, o export passa a ser exercitado com mídia gerada por IA (`flow_e2e_providers`), mas a marca d’água “Free for now” do original continua sem confirmação observada.
+**B4 · Conta/configurações/API/Preços do usuário/Segurança**
 
-Nenhuma das duas foi promovida: o que falta nelas não é provedor.
+| — | Informações da conta, IDs, copiar, Excluir conta | verificada | account_pages2; testes: `settings_account_id, settings_account_id_locale.test` | implementado |
+| — | Configurações: confirmação de créditos (450/ignorar) | verificada | account_pages2/estrategia_creditos; testes: `e2e.test` | implementada; verificada |
+| — | Configurações: Idioma, Aparência, Salvar sem marca d'água | verificada | b2_settings; testes: `watermark_preferences, settings_account_id_locale` | implementado; verificado (preferência lida pela exportação) |
+| — | Configurações: "Padrões da marca" + atalhos (19/20 + 1 local) | verificada | b2_settings; testes: `settings_canvas_shortcuts_route` | 19/20 implementado; 1 local; pop-up verificado |
+| — | Configurações: pop-up de teclado/atalhos | verificada | b2_settings; testes: `settings_canvas_shortcuts_route` | verificado (lista vem de CANVAS_SHORTCUTS) |
+| — | Configurações: Idioma 18 (ENU/Español/…) + Português (Brasil) | verificada | b2_settings; testes: `theme_persist, ui.test` | 18 idiomas implementados + PT-BR; persistem |
+| — | Idioma: variantes en/es (en-GB, en-US, es-ES, es-MX) com bandeiras | inventada | b2_settings | unidades completas |
+| — | API: lista vazia "Nenhuma chave de API" | verificada | account_pages2; testes: `settings_api_paste_route` | implementada |
+| — | API: "Nenhum Cabeçalho HTTP personalizado" | inventada | account_pages2 | verbatim |
+| — | API: coluna "Endereços de Domínio de origem autorizados" | inventada | account_pages2 | verbatim |
+| — | API: 3 ações de chave (copiar/excluir/ocultar) + adicionar | inventada | account_pages2 | preservadas |
+| — | Webhooks: 4 campos, 3 eventos, tipo secreto | inventada | account_pages2 | implementados |
+| — | Mensagem "Sem preços de conta…" | inventada | account_pages2 | implementada |
+| — | Minhas cotações: "Recarregar" + esqueleto "Carregando cotações…" | verificada | account_pages2; testes: `pricing_routing.test` | implementados; verificados |
+| — | Minhas cotações: lista vazia e ida para Preços | verificada | account_pages2; testes: `pricing_routing.test` | implementada; verificada |
+| — | Minhas cotações: gabarito de 3 campos; "Deletar" com confirmação | verificada | account_pages2; testes: `pricing_routing.test` | gabarito 3; "Deletar" sem confirmação |
+| — | Preços do usuário: "Preços de imagem" | inventada | layouts | título inventado |
+| — | Preços do usuário: 4 fatias com preços (P23) | inventada | layouts | formato local |
+| — | Segurança: 4 cards, 2 + 10 campos | inventada | layouts | implementados |
+| — | Segurança: sessões de 2 dispositivos | inventada | layouts | implementadas (p1 = 10.20.123.22) |
+| — | Segurança: 5 dicas de prevenção | inventada | layouts | verbatim |
+| — | Segurança: transparência de ativos | inventada | layouts | 4 pontos + link |
 
-## Reavaliação da rodada 7 (estruturas de lip-sync, marca d’água, login, publicação e pagamento)
+**B5 · Home (agente) — 4 vistas**
 
-Escopo atualizado pelo usuário: **o produto final terá tudo** (lip-sync, publicação, login e pagamento). Nesta rodada entrou só a **estrutura**, com adaptador e teste — sem chamada real, sem OAuth real, sem cobrança. Nada foi promovido a `verificada` sem teste que compare com a evidência observada; por isso a regra de leitura é:
+| — | Home: 4 vistas (Criativo/Marketing/Histórias/recentes) | verificada | consumidor e2e; testes: `home_layout, ui.test` | implementadas; verificadas |
+| — | Home: "Fiz um app para fazer vídeos" com Playbook | verificada | home_spec; testes: `home_layout, home_playbook_cards` | implementado; verificado |
+| — | Home: composer (placeholder, +, N anexos, gerar) | verificada | home_spec; testes: `home_layout, home_dropdowns.ui` | implementado; modos verificados |
+| — | Home: 3 sugestões do composer (conteúdo local) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `home_layout, home_dropdowns.ui` | conteúdo local (UNOBSERVED no original) |
+| — | Home: "Experimente:" + 5 skills + 6 dicas do orvalho | implementada (conteúdo UNOBSERVED) | home_spec; testes: `home_layout` | 9 verificadas; 2 numéricas |
+| — | Home: "Hoje" + 3-5 playlists de amostra + "Seus trabalhos" | verificada | home_spec; testes: `home_layout, playlist_data_route` | implementado; verificado |
+| — | Home: 10 relatórios experimentais | implementada (conteúdo UNOBSERVED) | consumidor e2e; testes: `home_layout` | 10 verificados (experimentais) |
+| — | Home: coluna "Por que (O que) o Pippit" | inventada | home_spec | só no placeholder do composer |
+| — | Home: divulgação de vídeo rápido | inventada | home_spec | preservado |
+| — | Home: dica de imagem/efeitos + história de documento | inventada | home_spec | preservadas |
+| — | Home: botão "Cancelar" | inventada | home_spec | preservado |
+| — | Home: "Modo agente" e "Abas Criativo/Marketing" | inventada | home_spec | só por tema; alvo 100% inventado |
+| — | Home: resultados com texto, tabela, títulos, navegação | inventada | home_spec | título/formato local |
+| — | Home: 3 estados de erro (servidor/estouro/imagem) + avisos | inventada | home_spec | implementados |
 
-| estrutura | arquivo do contrato | teste | estado | o que falta |
-|---|---|---|---|---|
-| Lip-sync (Foto falante) | `LIPSYNC_PROVIDERS.md` | `lipsync_adapters.test.mjs` | **estrutura pronta, falta provedor real** | Hugging Face Space com `HF_TOKEN` do ambiente **ou** executor local em GPU (comando configurável); sem provedor a rota segue bloqueada com motivo |
-| Marca d’água | `MARCA_DAGUA.md` | `watermark_export.test.mjs` (pixels) | **estrutura pronta, falta conteúdo** | imagem da marca (`assets/brand/watermark.png`, já com placeholder neutro) e o nome vindo da configuração; ligar a chave e decidir quais planos removem |
-| Login | `LOGIN_ESTRUTURA.md` | `auth_structure.test.mjs`, `auth_ui.test.mjs` | **estrutura pronta, falta provedor real** | projeto Supabase com `SUPABASE_URL`/`SUPABASE_ANON_KEY` no ambiente e a troca de código por sessão; hoje o adaptador `local` funciona |
-| Publicação | `PUBLICACAO_ESTRUTURA.md` | `publish_queue.test.mjs` | **estrutura pronta, falta credencial** | aplicativo registrado/aprovado em TikTok, Meta e Google, credenciais no ambiente e envio real |
-| Pagamento | `PAGAMENTO_ESTRUTURA.md` | `billing_structure.test.mjs` | **estrutura pronta, falta gateway** | contratar o gateway, credencial no ambiente e implementar checkout/webhook assinado/portal |
+**B6 · Home — hero, galeria e cartão "Página inicial"**
 
-### Mudanças de estado nas linhas
+| — | Hero "Feito para criar": 3 telas, "Criar" com seta, título | implementada (conteúdo UNOBSERVED) | captures/auth/home.png; testes: `home_layout` | título implementado (UNOBSERVED) |
+| — | Hero: 3 telas ciclando com 2 telas de avanço | implementada (conteúdo UNOBSERVED) | home.png; testes: `home_layout` | implementadas (formato) |
+| — | Galeria "Trabalhos em destaque" (home) | inventada | home.png | conteúdo do serviço |
+| — | Cartão "Página inicial" (282×330): Playbook, 3 pastas, "Vídeo/Imagem" | verificada | auth_artifacts, layouts; testes: `home_layout, home_playbook_cards` | implementado; verificado (3 pastas e 3 grupos) |
+| — | Cartão "Página inicial": 4 grupos com N trabalhos de exemplo | implementada (conteúdo UNOBSERVED) | layouts; testes: `home_layout` | 9 itens verificados |
+| — | Cartão "Página inicial": 5 estados do template | inventada | layouts | estados implementados |
+| — | Cartão "Página inicial": Aparência; "Todas as funcionalidades..." | verificada | layouts; testes: `home_layout` | implementado; verificado |
+| — | Cartão "Página inicial": "Itens de destaque" 8 × 22 | inventada | layouts | preservado |
+| — | Abas de atalho (Recentes/Edição de imagem/…) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `home_layout, home_playbook_cards` | 7 implementadas; feed local |
+| — | Criar projeto: 5 categorias/26 formatos + Em branco | verificada | layouts; testes: `playlist_data_route` | verificado (5 categorias; WhatsApp/Instagram/YouTube/TikTok/LinkedIn) |
+| — | Criar projeto: "Página do Shopify" com artefato | inventada | layouts | artefato 100% inventado |
+| — | "Carregar mais" | inventada | layouts | implementado (sem ação real) |
 
-| linha | antes | agora | por quê |
-|---|---|---|---|
-| Avatares: vídeo em avatar (lip-sync) | bloqueada | **parcial** | dois adaptadores plugáveis (Space gratuito e executor local) testados com servidor falso e com executor real; falta provedor/GPU autorizada |
-| Social: vincular conta (OAuth) | bloqueada | **parcial** | quatro adaptadores com contrato de OAuth e escopos; `/connect` segue 501 |
-| Social: publicar / agendado / análise | bloqueada | **parcial** | fila e máquina de estados (rascunho→agendado→publicando→publicado/falhou) com bloqueio honesto; `/publish` segue 409 |
-| Conta: login e gerenciamento | fora de escopo | **parcial** (agora no escopo) | adaptador `local` funcional + contrato `supabase` sem chamada |
-| Planos: compra/assinatura real | fora de escopo | **parcial** (agora no escopo) | camada de cobrança com adaptador gratuito e gateway desabilitado; nada cobrado |
-| Conta: “Salvar sem marca d’água” | verificada localmente (só preferência) | **verificada** (teste de pixel) | a preferência agora decide a marca na exportação e o teste exporta com e sem marca comparando pixels; o direito depende de `PLANS[].noWatermark` |
+**B7 · Playlists**
 
-Fórmula aplicada: (30 + 52) / 122 = **82/122 = 67,2%**.
+| — | Criar playlist (10 campos); "Todas as playlists" | verificada | playlists_v2; testes: `playlist_data_route, home_layout` | implementado; verificado |
+| — | Playlists: layout (lista/grade) | verificada | playlists_v2; testes: `home_layout` | implementado; verificado |
+| — | Playlists: "Estilos/Ícones/Ilustração" | inventada | playlists_v2 | conteúdo do serviço |
+| — | Playlists: "Nómadas digitales (Roberto)" (2 telas) | implementada (conteúdo UNOBSERVED) | playlists_v2; testes: `playlist_data_route` | local; sem robô |
+| — | Playlists: 2 estados (com/desde itens) | verificada | playlists_v2; testes: `home_layout` | implementados; verificados |
+| — | Playlists: "Série Quântica" (3 telas) | implementada (conteúdo UNOBSERVED) | playlists_v2; testes: `playlist_data_route` | local; UNOBSERVED no original |
+| — | Playlists: menu de 3 ações | inventada | playlists_v2 | implementado |
+| — | Playlists: 3 telas de divisão e configuração | inventada | playlists_v2 | estado local |
+| — | Playlists: 4 campos de largura/altura | inventada | playlists_v2 | formatos reais |
+| — | Playlists: "Adicionar 3 modelos" | verificada | playlists_v2; testes: `video_api_routes` | 3 modelos de preço |
+| — | Playlists: 4 opções do modelo (R1/R2/REC) | inventada | playlists_v2 | preservadas (esp) |
+| — | Playlists: "Novo Guia de Recreação/Vídeo/Tutorial" | inventada | playlists_v2 | 3 modelos implementados |
+| — | Playlist: menu contextual de 3 botões | inventada | playlists_v2 | implementado |
+| — | Importar: pasta/zip de 6 formatos | inventada | playlists_v2 | apenas 1 arquivo |
+| — | Importar: 5 formatos permitidos/2 ignorados | verificada | playlists_v2; testes: `import_playlist.test` | 2-6 arquivos; 5 formatos |
+| — | Importar: "Série Quântica" + 5 comandos | implementada (conteúdo UNOBSERVED) | playlists_v2; testes: `playlist_data_route` | autoridade local; reproduzida |
+| — | Nav de 5 canais (Imagens/Vídeos/0/0/0) | verificada | playlists_v2; testes: `playlist_data_route` | verificada (1º form 1080×1920) |
 
+**B8 · Histórico de projetos/aba "Imagens"**
 
+| — | Histórico: títulos sólidos e nome no bloco | verificada | layouts; testes: `history_name.test` | implementados; verificados (índice 01) |
+| — | Histórico: 3 pastas com imagens ilustrativas | implementada (conteúdo UNOBSERVED) | layouts; testes: `home_layout` | implementadas (2 itens cada) |
+| — | Histórico: menu "…" de 3 ações | verificada | layouts; testes: `history_menu.test, e2e.test` | implementado; verificado (âncora) |
+| — | Histórico: "Criar um novo projeto" | inventada | layouts | implementado |
+| — | Histórico: sem seleção (2 estados) | verificada | layouts; testes: `home_layout` | implementado; verificado |
+| — | Histórico: compartilhar projeto (link) | verificada | layouts; testes: `history_menu.test` | implementado (link local) |
+| — | Histórico: nome "Nome do projeto" | verificada | layouts; testes: `history_name.test` | 6 a 15 |
+| — | Histórico: 2 contadores | verificada | layouts; testes: `history_name.test` | formato |
+| — | Histórico: split (50-50 com ícone) | inventada | layouts | implementado |
+| — | Aba "Imagens" (2.053): 6 filtros | verificada | layouts; testes: `home_layout, home_playbook_cards` | implementados; verificados |
+| — | Aba "Imagens": "Pesquisa" com lupa e 4 tipos | inventada | layouts | verbatim; campo implementado |
+| — | Aba "Imagens": seleção de 3 itens (2 botões + 3) | inventada | layouts | implementada |
+| — | Aba "Imagens": seleção de 12 de 24 | inventada | layouts | preservada |
+| — | Aba "Imagens": "Carregar mais" + 8 itens finais | verificada | layouts; testes: `home_playbook_cards` | 24 itens; páginações |
+| — | Aba "Imagens": esqueleto de 8 brilhos + painel/preview | inventada | layouts | implementado |
+| — | Aba "Imagens": "Vídeos (0)" | verificada | layouts; testes: `home_layout` | registada (oculta sem itens) |
+| — | Aba "Imagens": "Download de todas as imagens" | inventada | layouts | preservado |
 
-## Reavaliação da rodada 8 (login Supabase real e credenciais pelo ambiente)
+**B9 · Editor B3 — ganchos de marketing**
 
-Duas mudanças de trabalho nesta rodada; **uma** muda estado no inventário.
+| — | Padrão "Comece com um gancho de marketing" | implementada (conteúdo UNOBSERVED) | home_spec/b3; testes: `marketing_test, e2e.test` | formato |
+| — | Gancho "Segredo de Manifestação" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (problema 30-90) |
+| — | Gancho "Mais Querido das Celebridades" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (problema 30-90) |
+| — | Gancho "Escondido das Celebridades" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (3 problemas) |
+| — | Gancho "Tendência em ascensão" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Olhar Estratégico para o Instagram" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Top 3" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Eu testei… 21 biscoitos" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (nicho) |
+| — | Gancho "Você sabia?" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Você pode ter percebido…" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Você é um daqueles…" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Receitas fáceis" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Abandonado" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Zodíaco (personagens)" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (construtores) |
+| — | Gancho "Pergunta de pergunta" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (construtores) |
+| — | Gancho "Estatísticas" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (construtores) |
+| — | Gancho "7 coisas que os fãs odeiam" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (problema 30-90) |
+| — | Gancho "Análise de história de sucesso" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "24 horas na vida de" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Teste de 7 dias" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Apresentar/subir" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Estou particularmente entusiasmado" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Caixa de perguntas" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "Compartilhe sua opinião" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Gancho "…foi loucura" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | reproduzido (30-90) |
+| — | Ganho rápido: 3-6 caixas com "Gerar" (Produtos TikTok) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `marketing_test` | implementado (formato) |
+| — | Hero "Frei para criar" com imagens | inventada | home_spec | preservado |
+| — | Espaço em branco "Página inicial"/"Vídeos" | inventada | home_spec | implementado (abas) |
 
-| linha | antes | agora | por quê | teste |
-|---|---|---|---|---|
-| Conta: login e gerenciamento | parcial (estrutura) | **verificada (teste automatizado)** | o adaptador `supabase` deixou de responder 501: cadastro, login, refresh, logout remoto, recuperação, `GET /user` e `GET /settings` acontecem de verdade, com `apikey` em toda chamada; OAuth Google/TikTok com PKCE (S256), state e verifier de uso único, retorno em `127.0.0.1`; sessão em cookie `HttpOnly` com tokens cifrados (AES-256-GCM) nunca devolvidos pela API; tela liga o Google só com `google=true` e avisa sobre confirmação de e-mail | `supabase_auth`, `auth_google_ui`, `auth_structure`, `auth_ui` |
+**B10 · Editor B3 — T2 (24 slots)**
 
-O que **não** mudou de estado, apesar de ter melhorado:
+| — | Linha do tempo de T2 (5 faixas, 24 slots) | implementada (conteúdo UNOBSERVED) | home_spec/b3; testes: `timeline_backend, video_progress_route` | 24 3-6, 5, 3, 5, 2 |
+| — | 24 nomes de cenas | implementada (conteúdo UNOBSERVED) | home_spec; testes: `timeline_backend` | 3-6 a 5, 5 a 3, 3 a 5, 5 a 2 (ou caminho) |
+| — | Trilho "Esquema por partes" (24 celas) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `timeline_backend` | 20 implementado; 10 visíveis |
+| — | Cena "Contagem regressiva" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `timeline_backend` | reproduzida |
+| — | Trilho "Faixa 4" e "Faixa 5" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `timeline_backend` | nomes preservados (locais) |
+| — | Áudio: 3 blocos de áudio (1º = "Discord") | implementada (conteúdo UNOBSERVED) | home_spec; testes: `timeline_backend` | reproduzido |
+| — | 4 controles de visualização (magnífica, entrelinha, +/-) | inventada | home_spec | preservados |
+| — | 4 controles de reprodução | inventada | home_spec | preservados |
+| — | "Gerar"/"Gerar T2" / "Misturar cenas" | inventada | home_spec | preservados |
+| — | Faixa "Ferro fundido" + "Atirar" | inventada | home_spec | preservadas |
+| — | Recursos de T2 | inventada | home_spec | preservados |
 
-- **Credenciais (`.env.example` só com nomes, `.env` ignorado pelo git, tela de Provedores só presente/ausente).** É infraestrutura de configuração, não uma funcionalidade nova do Pippit: nenhuma linha do catálogo foi promovida por causa disso. A tela de Provedores já era `verificada` desde a rodada 6 e continua; agora ela também diz se a credencial veio do ambiente ou do `.env`, sem nunca mostrar valor.
-- **`PASSO_A_PASSO_USUARIO.md`.** É documentação de uso (Windows, provedores gratuitos, login, lista do que falta), não implementação; nenhuma linha muda de estado por causa de um guia.
+**B11 · Editor B3 — T1 e head/timeline**
 
-Regra de leitura mantida: `verificada` exige teste automatizado que exercite o comportamento, e é isso que os quatro testes de login fazem — com **GoTrue falso em loopback**, nada de rede real. O que ainda depende do usuário (projeto Supabase com as variáveis no ambiente, provedor Google ligado e Redirect URL cadastrada) está escrito no próprio teste e em `LOGIN_ESTRUTURA.md`; não é lacuna de código, é configuração da conta.
+| — | Faixa "Faixa 1" + "Tempo de exibição" | inventada | home_spec/b3 | preservadas |
+| — | Trilho "Faixa 1" com 12 blocos, 3 formas | inventada | home_spec | 11 blocos preservados |
+| — | 24 avanços do head (24) | verificada | home_spec; testes: `timeline_backend` | 1 a 24 (quantidades locais) |
+| — | "Faixa 1" e ícone de olho | inventada | home_spec | preservados |
+| — | Trilhos de linha do tempo por partes (traço) | inventada | home_spec | traço preservado |
+| — | 12 na navegação de canais da timeline (2026) | inventada | home_spec | 11 implementado |
+| — | "Faixa do céu"/"Faixa 4" | inventada | home_spec | preservadas |
+| — | Faixa de tela "Vídeo de tela" | inventada | home_spec | preservada |
+| — | Trilho "Faixa 2" (3 blocos de texto) | inventada | home_spec | preservado |
+| — | Trilho "Gráfico" (1 linha) | inventada | home_spec | substituído por "Adicionar gráfico" |
+| — | Linha do tempo base (profundidade 1, setas, play/pause, 24) | verificada | home_spec; testes: `timeline_backend` | verificada |
+| — | Linha do tempo com Fable 5/Hailuo/Seedance + faixa "gráfico" | implementada (conteúdo UNOBSERVED) | video_progress_route; testes: `video_progress_route` | UNOBSERVED |
 
-Fórmula aplicada: (30 + 53) / 122 = **83/122 = 68,0%**.
+**B12 · Editor B3 — cabeçalho/conta/central**
 
-## Reavaliação das rodadas 9 a 12 (defeitos e infraestrutura de teste)
+| — | Topbar do editor: "Novo Projeto" + 3 pontos + "Visualizar"/"Compartilhar" | não verificada | home_spec/b3; testes: `titlebar_panels_ui` | implementado; teste de UI no Windows |
+| — | Botões "Compartilhar 1" e "Compartilhar 2" | implementada (conteúdo UNOBSERVED) | home_spec; testes: `e2e.test` | 2 ações locais |
+| — | Detalhes do caminho + "Adicionar fotos" | inventada | home_spec | preservados |
+| — | 2 modos (visualizar; suporte a recibo) | inventada | home_spec | 2 implementados |
+| — | Configurações do projeto/segmento (12) | inventada | home_spec | 11 implementados |
+| — | Os 8 itens verificados do painel T3 | inventada | layouts | implementados |
+| — | Centro com vídeo (olho, Play, ampliar) | inventada | home_spec | preservado |
+| — | "Página inicial"/"Vídeo" e barra da esquerda | inventada | home_spec | preservadas |
+| — | "Salvo automaticamente: 0.5620" | verificada | home_spec; testes: `autosave.test` | formato verificado |
+| — | "Fiz um app para fazer vídeos" (aba "Vídeos"/agente) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `e2e.test` | 2 telas |
+| — | 4 ações sobre o vídeo (3 opções + Fechar) | inventada | home_spec | 4 implementadas |
+| — | "Compartilhar 1" fixo, 3+3 botões, Grupos | implementada (conteúdo UNOBSERVED) | home_spec; testes: `e2e.test` | 3+3 (editável/salvar como) |
+| — | 2 anexos; "2026-03-20 16:27:01" | verificada | home_spec; testes: `e2e.test` | 1 anexo; data verificada |
+| — | 3 estágios do ator (indexação; visão de rolagem) | inventada | home_spec | 3 preservados |
+| — | Agente: 4 de 5 comandos | implementada (conteúdo UNOBSERVED) | home_spec; testes: `e2e.test` | 4 reproduzidos |
+| — | Agente: sugestões de aperfeiçoamento | inventada | home_spec | reproduzidas |
+| — | Agentes: 5 itens do assistente de criação | implementada (conteúdo UNOBSERVED) | home_spec; testes: `e2e.test` | 5 implementados |
+| — | Fase de vídeo "Gerando vídeo…" + 11 fases | implementada (conteúdo UNOBSERVED) | home_spec; testes: `video_progress_route` | 2 fases reproduzidas |
 
-Estas quatro rodadas **não promoveram nenhuma linha** e o número do topo continua o mesmo: **83/122 = 68,0%** (cobertura de linhas no escopo reproduzível, **não** paridade com o Pippit).
+**B13 · Editor B3 — exportar/conselhos**
 
-O que foi feito nelas e por que não conta como funcionalidade:
+| — | "Exportar" (verificar; texto+2) | inventada | home_spec/b3 | preservado |
+| — | Exportar: 2 modos (uma parte; 2 partes) | inventada | home_spec | 2 implementados |
+| — | Exportar: 7 parâmetros (4 modos) | inventada | home_spec | 6 implementados |
+| — | Exportar: 3 legendas de idioma | inventada | home_spec | preservadas |
+| — | Exportar: 2 botões (Exportar; salvar como PNG) | verificada | home_spec; testes: `export_web_local` | 2 implementados |
+| — | Exportar: "Salvar como web (index.html)" | verificada | export_web_local; testes: `export_web_local` | verificado |
+| — | "Seu link de compartilhamento expirou" | inventada | home_spec | substituído por aviso |
+| — | 3 passos + Atividade; elemento de quadro | inventada | home_spec | preservados |
+| — | Agente: 3 dicas de edição | inventada | home_spec | reproduzidas |
+| — | Agente: 3 opções de curiosidade | inventada | home_spec | reproduzidas |
+| — | Agente: "Faça o upload" | inventada | home_spec | preservado |
 
-| Rodada | Trabalho | Por que não muda o inventário |
-|---|---|---|
-| 9 | `drawtext` escapado para caminho `C:`; `0600` não exigível no Windows; `PIPPIT_TTS=off` para “sem voz local”; roteador com uma execução por vez | são correções de defeito e de portabilidade; nenhuma linha do catálogo passa a funcionar **por causa** disso — as que dependiam delas (marca d’água, nó de Áudio, roteador) continuam no mesmo estado porque seguem sem provedor/credencial real |
-| 10 | marca d’água sem sobrescrever o png versionado; executor local sem cair no WSL; redesenho atrasado do roteador; testes não escrevem em arquivo versionado | idem: robustez e higiene de teste |
-| 11 | `&` de chamada no PowerShell para comando que começa com aspas | idem: o executor local continua `parcial` — o que falta é **modelo/GPU**, não sintaxe de shell |
-| 12 | teste de lip-sync independente de sistema; sondagem de navegador com prazo e motivo; `pricing_faq_ui` cronometrado | idem: infraestrutura de teste, nenhum comportamento novo do app |
+**B14 · Editor B3 — ferramentas esquerdas (Barra de cores)**
 
-Consequência prática para quem for atualizar o inventário: as linhas de **lip-sync**, **marca d’água**, **publicação** e **pagamento** só devem sair de `parcial` quando houver **execução real** (modelo rodando, app OAuth registrado, provedor de pagamento) — e não por causa de correção de teste.
+| — | Barra de cores: seção "Cores" (3 amostras de cor) | verificada | home_spec; testes: `canvas_actions` | verificada |
+| — | Barra de cores: 7 controles (2 filtros + 3 formas de texto + 2) | inventada | home_spec | preservados |
+| — | Barra de cores: +3 caixas (4 itens de prova) | inventada | home_spec | preservadas |
+| — | Barra de cores: "Página inicial"/"Vídeo" + 3-6 | inventada | home_spec | preservados |
+| — | Barra de cores: seção "Fundo" + "Cor de fundo" (código de 8 dígitos) | inventada | home_spec | preservada |
+| — | Barra de cores: 2 blocos (0/4 + 3/4) | inventada | home_spec | preservados |
+
+**B15 · Editor B3 — presets e ajustes**
+
+| — | Presets: descrição e opção 3 (mesmas imagens) | inventada | home_spec | preservadas |
+| — | Presets: 2 tipos e 3 dicas | inventada | home_spec | preservados |
+| — | Ajustes: faixa de verificação e 2 controles | inventada | home_spec | preservados |
+| — | Ajustes: descrições (1), 3 subdivisões, 15 campos | inventada | home_spec | preservadas |
+| — | Ajustes: 2 pontos de luz (1² = 1,2) | inventada | home_spec | preservados |
+
+**B16 · Editor B3 — camadas e propriedades**
+
+| — | Camadas: "Inserir camada" | inventada | home_spec | preservado |
+| — | Propriedades: 14 campos (com 17) | inventada | home_spec | 11 implementados |
+| — | Camadas: "Redimensionar camada" | inventada | home_spec | 2 telas; preservadas |
+| — | Camadas: "Eliminar fundo" | inventada | home_spec | preservado |
+| — | Camadas: 3 modos de esboço | inventada | home_spec | preservados |
+| — | Camadas: arrastar redimensionamento (8 cantos) | inventada | home_spec | preservado |
+| — | Camadas: caminho "Texto principal" | inventada | home_spec | preservado |
+
+**B17 · Editor B3 — camadas (10 ações)**
+
+| — | Excluir camada | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Duplicar camada | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Bloquear camada | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Trazer camada à frente | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Enviar camada para trás | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Alinhar à esquerda | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Centralizar horizontalmente | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Alinhar à direita | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Centralizar verticalmente | verificada | home_spec; testes: `canvas_actions` | verificado |
+| — | Combinar camadas | verificada | home_spec; testes: `canvas_actions` | verificado |
+
+**B18 · Editor B3 — ferramentas esquerdas (formas e texto)**
+
+| — | Formas: 5 categorias + formas de amostra | verificada | home_spec; testes: `canvas_actions` | 5 verificadas (só linha/reta/limite) |
+| — | Formas: arrastar e largar, redimensionar | inventada | home_spec | preservado |
+| — | Texto: campo de largura/nível/área de texto | verificada | home_spec; testes: `canvas_actions` | 3 verificados |
+| — | Texto: "Texto principal" | inventada | home_spec | preservado |
+
+**B19 · Editor B3 — estilos e avanços**
+
+| — | Estilos: "Estilo de texto" e 3 condições | inventada | home_spec | preservados |
+| — | Estilos: 2 opções de texto + 2 blocos de escrita | inventada | home_spec | preservados |
+| — | Estilos: descrição do tipo 1 | inventada | home_spec | preservada |
+| — | Estilos: 10 blocos de texto (1 sinal) | inventada | home_spec | preservados |
+| — | Estilos: 4 escritas (Texto/Série/Apresentação/Criador) | inventada | home_spec | preservadas |
+| — | Estilos: 3 opções | inventada | home_spec | preservadas |
+| — | Avanços: 2 modos + 2 pontos de ajuste fino | inventada | home_spec | preservados |
+
+**B20 · Editor B3 — Canva (canvas)**
+
+| — | Página canva do editor | inventada | home_spec | substituída pelo canvas |
+| — | Barra superior: 5 (4 + "Redefinir") | inventada | home_spec | 3 implementados |
+| — | Barra superior: modos de controle e campo | inventada | home_spec | preservados |
+| — | Canva: 3 estados + 2 blocos | inventada | home_spec | preservados |
+| — | Canva: voltar; Canva | inventada | home_spec | preservados |
+| — | Canva: "Adicionar" (12 opções) | inventada | home_spec | preservado |
+| — | Canva: capa de canvas (2 artes) | inventada | home_spec | preservada |
+| — | Botão de propriedades + 15 atributos | inventada | home_spec | 14 implementados |
+| — | Linhas de "importação de peça" | inventada | home_spec | preservadas |
+| — | Baixar peça | inventada | home_spec | preservado |
+
+**B21 · Editor B3 — colunas/transições/layout/atajos**
+
+| — | Coluna esquerda (linha 1/2) com controle de escala | inventada | home_spec | preservada |
+| — | Coluna da esquerda: 4 controles | inventada | home_spec | preservados |
+| — | Coluna da esquerda: 3 blocos (2/4/1) | inventada | home_spec | preservados |
+| — | Coluna esquerda: diálogo "Mais um" | inventada | home_spec | preservado |
+| — | Coluna central: ativos clicáveis | inventada | home_spec | preservados |
+| — | Coluna direita: 3 opções + "Título" | inventada | home_spec | preservadas |
+| — | Coluna direita: cabeçalho, Tipografia, Posição, Mostrar | inventada | home_spec | preservados |
+| — | Coluna direita: 3 opções (título/mostrar/seleção) | inventada | home_spec | preservadas |
+| — | Colunas 11/12/14 (cabeçalho/hierarquia) | verificada | home_spec; testes: `canvas_actions` | 3 verificadas |
+| — | Transições: 3 categorias | inventada | home_spec | preservadas |
+| — | Atalhos de transição (Cmd/Ctrl+Z/Y, Del, V/P) | verificada | home_spec; testes: `canvas_actions` | verificados |
+| — | Atalhos do canvas: 19 de 20 + 1 local | verificada | b2_settings; testes: `settings_canvas_shortcuts_route` | verificados (render de rota) |
+| — | Layout: 2/4/3 + 1,5 | inventada | home_spec | preservados |
+
+**B22 · Estúdio de imagem — imagem e capa**
+
+| — | Criação de imagem (ia) | verificada | home_spec/studio_image; testes: `artist_api_route` | fluxo local com canvas; verificado |
+| — | Sugestões de imagem (5) | implementada (conteúdo UNOBSERVED) | home_spec; testes: `artist_api_route` | reproduzidas (1º tema local) |
+| — | 2 blocos de tema | inventada | home_spec | preservados |
+| — | 3 modos de texto (1, 2, 3) | inventada | home_spec | preservados |
+| — | Continuar com/sem marca d'água | inventada | home_spec | preservado |
+| — | Contagem de imagem (2.053) | inventada | home_spec | formato preservado |
+| — | Gerador de criativos | inventada | home_spec | substituído |
+| — | Gerador de criativos: "Dê um tema" + 5 blocos + "Tente agora" | inventada | home_spec | 5 blocos preservados |
+| — | Estilo de imagem | verificada | home_spec; testes: `artist_api_route` | implementado; verificado (busca + 5) |
+| — | 2 blocos de estilos de imagem | inventada | home_spec | preservados |
+| — | Imagem "Livre de direitos autorais" (uso comercial) | inventada | home_spec | preservada |
+| — | Geração de imagem: 5 detalhes + "Criar" (2 telas) | inventada | home_spec | só por tema |
+| — | Visão de imagem ampliada (8/9) | inventada | home_spec | 7 preservadas |
+| — | Tela de imagem ampliada (7/8) | inventada | home_spec | preservada |
+| — | Capa do criativo (8 itens; geração por partes) | inventada | home_spec | 7 preservados |
+| — | Artista de imagens (andamentos não numerados) | verificada | video_progress_route; testes: `artist_api_route` | verificado |
+
+**B23 · Estúdio de imagem — galeria e assistente**
+
+| — | Galeria de capa: 3 botões + galeria | inventada | home_spec | preservados |
+| — | Galeria de capa: 3 telas (criação; comparação) | inventada | home_spec | preservadas |
+| — | Galeria de capa: 2 telas de gravação | inventada | home_spec | preservadas |
+| — | Galeria de capa: estilo | inventada | home_spec | preservado |
+| — | Galeria de capa: animação (1 tela) | inventada | home_spec | preservada |
+| — | Galeria de capa: "Estilo de animação" | inventada | home_spec | preservado |
+| — | Assistente de criação: 2 botões | inventada | home_spec | preservados |
+| — | Assistente de criação: "Edição de texto" + 5 etapas | inventada | home_spec | preservadas |
+
+**B24 · Estúdio de vídeo — iniciador de vídeo**
+
+| — | Assistente de vídeo: "Vídeo de produto" | inventada | home_spec | preservado |
+| — | Assistente de vídeo: "Modelo 3D" + 2 telas | inventada | home_spec | preservadas |
+| — | Assistente de vídeo: "Assistente de preparação" | inventada | home_spec | preservado |
+| — | Assistente de vídeo: "Edição profissional de vídeo" | inventada | home_spec | preservado |
+| — | Assistente de vídeo: "Tendência de IA" | inventada | home_spec | preservado |
+| — | Assistente de vídeo: descrição "Inteligência de mídia" | inventada | home_spec | preservada |
+| — | Assistente de vídeo: "Inteligência de imagem" | inventada | home_spec | preservado |
+| — | Ferramenta rápida: 2 telas (3 blocos + 3 ações) | inventada | home_spec | preservadas |
+| — | Vídeo (vídeo): "Agente de vídeo" | inventada | home_spec | preservado |
+| — | Vídeo: "Vídeo de avatar" | inventada | home_spec | preservado |
+| — | Vídeo: "Vídeo de avatar" com "Carregar" | inventada | home_spec | preservado |
+| — | Vídeo: "TTS rápido" | inventada | home_spec | preservado |
+| — | Vídeo: "Bater papo" | inventada | home_spec | preservado |
+| — | Vídeo: "Vídeo rápido" | inventada | home_spec | preservado |
+| — | Vídeo: "Papo de voz" | inventada | home_spec | preservado |
+| — | Vídeo: "Avatar de voz" | inventada | home_spec | preservado |
+| — | Estilo de avatar (1 tela) | inventada | home_spec | preservado |
+| — | Estado "Modelo de carregamento" (2 telas) | inventada | home_spec | preservado |
+
+**B25 · Estúdio de voz/persuasão**
+
+| — | Biblioteca de voz: 3 telas (lista/descrição/fonte) | inventada | home_spec | preservadas |
+| — | Biblioteca de voz: 3 telas (usuário/medida/mercado) | inventada | home_spec | preservadas |
+| — | Biblioteca de voz: estado de download (2 telas) | inventada | home_spec | preservadas |
+| — | Controles de voz (4 telas: voz/ritmo/volume/avançado) | inventada | home_spec | preservadas |
+| — | "TTS rápido" (2 telas) | inventada | home_spec | preservadas |
+| — | "Inteligência de persuasão" (4 telas) | inventada | home_spec | preservadas |
+
+**B26 · Preços — planos, FAQ, avaliações, utilidades**
+
+| — | Página de preços: planos Pro/Business/Teams + Personalizado (5 blocos) | implementada (conteúdo UNOBSERVED) | b2_preços (planos); testes: `pricing_card_html_route` | preços UNOBSERVED (R$71,40/R$129/R$357,20/R$3.000) |
+| — | Preços: 3 esquemas de cobrança + economia | implementada (conteúdo UNOBSERVED) | b2_preços; testes: `pricing_card_html_route` | implementados (valores UNOBSERVED) |
+| — | Preços: "R$ 100 em créditos" + "100 Off" | inventada | b2_preços | preservado |
+| — | FAQ: 6 perguntas preservadas (2 sobre créditos) | verificada | pricing/faq; testes: `pricing_faq_route` | preservadas; mecanismo verificado |
+| — | FAQ: 3 perguntas novas do REA (cota do plano grátis) | verificada | reports/estudos/738.PREÇOS_PREÇOS.md (README); testes: `pricing_faq_route` | preservadas; mecanismo verificado |
+| — | FAQ: respostas/ratings/seções UNOBSERVED | implementada (conteúdo UNOBSERVED) | pricing/faq; testes: `pricing_faq_route` | mecanismo implementado |
+| — | FAQ: texto HTML dos cards de plano UNOBSERVED | implementada (conteúdo UNOBSERVED) | pricing_card_html_route; testes: `pricing_card_html_route` | mecanismo implementado |
+| — | CTA "Comece grátis" (12 ocorrências) | implementada (conteúdo UNOBSERVED) | b2_preços; testes: `pricing_cta_utm_route` | preservado; mecanismo verificado |
+| — | Carrossel de avaliações (5 de 6) | implementada (conteúdo UNOBSERVED) | b2_preços; testes: `home_playbook_cards` | estados de rolagem implementados; conteúdo local |
+| — | "R$ 100 OFF" (3 telas) | inventada | b2_preços | preservado |
+| — | "Selecione uma moeda" (7) | verificada | b2_preços; testes: `pricing_currency_screenshot.test` | 7 implementadas; ocorrências verificadas |
+| — | 2 capturas de "sincronização automática" | inventada | b2_preços | preservadas |
+| — | Opções de moeda (7) + estados de seleção (3) | verificada | b2_preços; testes: `pricing_currency_screenshot.test` | verificadas (coerência) |
+| — | Opções de moeda: grade; bloco "Página inicial" | inventada | b2_preços | preservados |
+| — | Opções de moeda: "Aproximar" | inventada | b2_preços | preservado |
+| — | Opções de moeda: preço de amostra (2 telas) | inventada | b2_preços | formato preservado |
+| — | Útil: 21 opções (10 no pé de página) | inventada | b2_preços | preservadas |
+| — | Dicionário de 16 termos | inventada | b2_preços | 12 implementados |
+| — | FAQ: 3 colunas + cascata | inventada | b2_preços | formatos preservados |
+
+**B27 · Notificações, preços dos modelos, cotações, wizard**
+
+| — | Notificações: 8 anúncios observados por tema (REA) + "Mark all as read" | implementada (conteúdo UNOBSERVED) | REA ev_72d7b4c2…7b20; testes: `notifications_editorial_route` | títulos/datas/textos UNOBSERVED (inventados); mecanismo verificado |
+| — | Toggle dos anúncios + rota com os 8 | implementada (conteúdo UNOBSERVED) | REA ev_72d7b4c2…7b20; testes: `notifications_editorial_route` | mecanismo verificado; conteúdo inventado |
+| — | Eventos reais do app primeiro, anúncios depois (r16) | não verificada | r16 item 2; testes: `features_ui, notifications_ui` | correção r16; só provado por teste de tela (Windows) |
+| — | Preços reais UNOBSERVED com licença grátis (Fable5, Hailuo, Seedance) | implementada (conteúdo UNOBSERVED) | video_progress_route; testes: `pricing_model_routes` | mecanismo implementado; conteúdo UNOBSERVED |
+| — | Preços/pedidos falsos vazios | verificada | pricing_models_meta_route; testes: `pricing_models_meta_route` | verificados (estado vazio) |
+| — | Preços dos modelos: 5 preços; Dica 5 | inventada | layouts | preservados |
+| — | Minhas cotações (3 telas) | inventada | account_pages2 | preservadas |
+| — | Wizard de cotação (4 telas; 1 página) | inventada | account_pages2 | preservado |
+| — | Configurações: sub-abas (5) | inventada | layouts | 5 implementadas |
+| — | Perfil/Itens de conta (13) | inventada | layouts | 12 implementados |
+| — | Faixa de comandos | inventada | layouts | preservada |
+| — | Aba de recompensa/convite | inventada | layouts | desativada (sem exploração) |
+| — | Abas de rede social (3) | inventada | layouts | preservadas |
+| — | Faixa "Tudo é possível" | inventada | layouts | preservada |
+| — | Faixa de ferramenta profissional | inventada | layouts | preservada |
+| — | Vídeo "Preview de Edição Mágica" | inventada | layouts | preservado |
+| — | Vídeo de anime | inventada | layouts | preservado |
+| — | Vídeo "Ajuste" | inventada | layouts | preservado |
+| — | Vídeo de tendências | inventada | layouts | preservado |
+| — | "Fácil de criar sem experiência" (5 telas) | inventada | layouts | preservado |
+| — | Seção "Experiência com esquema" | inventada | layouts | preservada |
+| — | 23 itens de experiência (Imagem) | inventada | layouts | 22 implementados |
+| — | Seção "Ilustração" | inventada | layouts | preservada |
+| — | "Ilustração" (15 itens) | inventada | layouts | preservada |
+| — | Ferramenta do próximo nível (6) | inventada | layouts | 5 implementados |
+| — | Rodapé (8) | inventada | layouts | 7 implementados |
+
+**B28 · Observacional do REA — recortes legados, IDEIAS, artista, prompts, exportar**
+
+| — | 23 recortes legados do editor (home_spec) | inventada | reports/recortes/20260213-231315/home_spec.md | preservados |
+| — | Ferramentas de serviço (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
+| — | Chat legado | inventada | reports/recortes/20260213-231315/home_spec.md | preservado (falta evidência) |
+| — | Blocos /plugins desativados (2 recortes) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `home_layout, plugin_apis` | 2 verificados |
+| — | Métricas do agente do chat (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
+| — | Declaração de independência (preâmbulo) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `declare_backend` | verificada |
+| — | Formulários de agente/projeto | inventada | reports/recortes/20260212-154515/b2_menu.md | preservados |
+| — | Cabeçalho "Cabeçalho de combinação" | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado |
+| — | Painel lateral "Reprodução transversal" | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado |
+| — | 2 telas da Central de criatividade de IA | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
+| — | Cabeçalho do documento "Língua nacional de São José" | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado |
+| — | Listas de comandos do cliente | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
+| — | Campo de chat de texto | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado |
+| — | Produto privado: telefone do usuário final | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado |
+| — | Fontes de produtos de IA | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
+| — | Outros documentos (2) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservados |
+| — | Chat widget | inventada | reports/recortes/20260212-154515/b2_menu.md | preservado (falta evidência) |
+| — | Campo de ideia do chat (Nova Ideia → título → 3 botões) | verificada | layouts; testes: `chat_history_idea_ui, history_name` | 5 verificado; 1 form 15 chars |
+| — | Título do chat (5 ações) | inventada | layouts | 5 implementadas |
+| — | Importar conversa | inventada | layouts | preservado |
+| — | Importar conversa (9 opções) | inventada | layouts | 8 implementadas |
+| — | Exportar conversa (9 opções) | inventada | layouts | 8 implementadas |
+| — | Opção de duração do vídeo (5) | inventada | layouts | 4 implementadas |
+| — | Tipos de bloco (7) | inventada | layouts | 6 implementados |
+| — | Editar vídeo (6 ações) | inventada | layouts | 5 implementadas |
+| — | Abrir menu (3 modos) | inventada | layouts | 3 implementados |
+| — | 5 blocos do modo | inventada | layouts | preservados |
+| — | Métricas do bloco (3 telas) | inventada | layouts | preservadas |
+| — | 4 fases do andamento (sem numeração) | implementada (conteúdo UNOBSERVED) | video_progress_route; testes: `video_progress_route` | andamentos não numerados |
+| — | Efeitos de 4 imagens (8) | inventada | layouts | preservados |
+| — | Faixa "Faixa 1/2/3/4" (10) | inventada | layouts | preservadas |
+| — | Controles de entrada (14) | inventada | layouts | 13 implementados |
+| — | Decoração de entrada (18) | inventada | layouts | 17 implementadas |
+| — | Editor de imagem (11) | inventada | layouts | 10 implementados |
+| — | Propriedades (17) | inventada | layouts | 16 implementadas |
+| — | Controles da tela (10) | inventada | layouts | 9 implementados |
+| — | Trilhos de edição de vídeo (21) | inventada | layouts | 20 implementados |
+| — | Dicas de uso de texto (5) | inventada | layouts | 4 implementadas |
+| — | Ferramentas de texto (9) | inventada | layouts | 8 implementadas |
+| — | Ajustes de imagem (24) | inventada | layouts | 23 implementados |
+| — | Alinhamento de imagem (17) | inventada | layouts | 16 implementados |
+| — | Parâmetros de exportação (16) | inventada | layouts | 15 implementados |
+| — | Extras do canvas (14) | inventada | layouts | 13 implementados |
+| — | Prompts de prompt + verificação de limite (3 telas) | inventada | home_spec | preservadas |
+| — | Prompts com N exemplos (transcrição) | verificada | prompts_every_route; testes: `prompts_every_route` | verificados (0-3) |
+| — | Especialistas em prompts (4 telas) | inventada | home_spec | preservadas |
+| — | Substitutos de prompt (5 telas) | inventada | home_spec | preservados |
+| — | Prompts de "assistente" (3 telas) | inventada | home_spec | preservados |
+| — | Artista de vídeos (andamentos não numerados) | implementada (conteúdo UNOBSERVED) | video_progress_route; testes: `video_api_routes` | 12 fluxos + make_av + talk; anúncios UNOBSERVED |
+
+## Recapitulação — 7 canais (contagem calculada)
+
+| Canal | Linhas | Inventada | Implementada (conteúdo UNOBSERVED) | Verificada | Bloqueada | Não verificada | Implementação | Verificação |
+|---|---|---|---|---|---|---|---|---|
+| 1. Design/estrutura/Playbook | 44 | 32 | 1 | 11 | 0 | 0 | 12/44 (27%) | 11/44 (25%) |
+| 2. Header/contas/substituto | 35 | 16 | 3 | 16 | 0 | 0 | 19/35 (54%) | 16/35 (45%) |
+| 3. Home (4 vistas)/card/hero | 26 | 12 | 7 | 7 | 0 | 0 | 14/26 (53%) | 7/26 (26%) |
+| 4. Playlists/histórico/aba | 34 | 15 | 4 | 15 | 0 | 0 | 19/34 (55%) | 15/34 (44%) |
+| 5. Editor (B3) | 142 | 80 | 39 | 22 | 0 | 1 | 61/142 (42%) | 22/142 (15%) |
+| 6. Estúdio (imagem/vídeo/IA) | 48 | 44 | 1 | 3 | 0 | 0 | 4/48 (8%) | 3/48 (6%) |
+| 7. Preços/notificações/observacional | 94 | 73 | 11 | 9 | 0 | 1 | 20/94 (21%) | 9/94 (9%) |
+| **Total** | **423** | **272** | **66** | **83** | **0** | **2** | **149/423 (35%)** | **83/423 (19%)** |
+
+**Contagem interpretada (par clássico): 149 de 423** = 35%. As 56 UI seguem **não verificadas** até passarem no Windows.
