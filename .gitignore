@@ -20,3 +20,7 @@ local_reconstruction/data/auth-secret
 # Credenciais locais: somente nomes em .env.example; valores ficam no .env, nunca versionado.
 .env
 .env.local
+
+# Artefatos de entrega desta rodada que dependem do bundle/zip: ficam so no Drive.
+mesa_de_operacao/entrega_13/SHA256SUMS.txt
+mesa_de_operacao/entrega_13/piperline_rodada13_bundle_verify.txt
