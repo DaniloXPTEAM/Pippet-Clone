@@ -1,0 +1,33 @@
+BUNDLE DA RODADA 13 — verificacao e prova de restauracao
+gerado em 2026-11-12T01:36:39Z
+
+arquivo: piperline_rodada13.bundle (17868219 bytes, sha256 38caf0912fc0c6c5b6fe3e75d0e02a5962840dac81b2560848575a6a2e5722ba)
+repositorio de origem: ac1ab3eb456af4f76ae0eb59170533c09eb4a45d · shallow = false
+
+== 1) git bundle verify ==
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/main
+ac1ab3eb456af4f76ae0eb59170533c09eb4a45d HEAD
+The bundle records a complete history.
+The bundle uses this hash algorithm: sha1
+
+== 2) git bundle list-heads ==
+ac1ab3eb456af4f76ae0eb59170533c09eb4a45d refs/heads/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/heads/main
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/HEAD
+144374502d5e25cb857b32d05a7fcf4f71a76004 refs/remotes/origin/arena/a14d8a49-pippet-clone
+ba09c73c266fb9df0030819d2097d75358685d89 refs/remotes/origin/main
+ac1ab3eb456af4f76ae0eb59170533c09eb4a45d HEAD
+
+== 3) prova: git clone do bundle numa pasta VAZIA ==
+comando: git clone -b arena/a14d8a49-pippet-clone <bundle> repo
+  HEAD restaurado: ac1ab3eb456af4f76ae0eb59170533c09eb4a45d
+  commits: 16
+  arquivos versionados: 671
+  branch: arena/a14d8a49-pippet-clone
+  shallow: false
+  git status --short: vazio (clone limpo)
+
+== 4) conferencia cruzada ==
+  HEAD do repositorio de origem: ac1ab3eb456af4f76ae0eb59170533c09eb4a45d
+  arquivos versionados na origem: 671
+  -> iguais: HEAD sim; arquivos sim
