@@ -17,8 +17,10 @@ try {
   assert.match(await page.locator('#kbdPop').innerText(), /não implementado/i);
   assert.match(await page.locator('#kbdPop').innerText(), /Compartilhar tela: copia o link.*UNOBSERVED/);
   assert.equal((await page.locator('#kbdPop [data-k="Ctrl Z"] .kstate').textContent()).trim(), 'local');
-  assert.equal((await page.locator('#kbdPop [data-k="Ctrl G"] .kstate').textContent()).trim(), 'não implementado');
-  assert.equal((await page.locator('#kbdPop [data-k="Delete"] .kstate').textContent()).trim(), 'não implementado');
+  // Rodada 15: os atalhos da referência viraram extensões locais; só a pinça segue não implementada.
+  assert.equal((await page.locator('#kbdPop [data-k="Ctrl G"] .kstate').textContent()).trim(), 'local');
+  assert.equal((await page.locator('#kbdPop [data-k="Delete"] .kstate').textContent()).trim(), 'local');
+  assert.equal((await page.locator('#kbdPop [data-k="Pinça"] .kstate').textContent()).trim(), 'não implementado');
   // O atalho de zoom marcado como local funciona de fato (evento, não prazo fixo).
   await page.locator('#kbdPop').click(); // fecha o pop
   const before = await page.locator('#zopt').innerText();
