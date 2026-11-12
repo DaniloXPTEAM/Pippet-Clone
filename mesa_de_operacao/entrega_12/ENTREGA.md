@@ -112,6 +112,12 @@ O sandbox já apagou o `.git` **cinco vezes**. Se ele apagar de novo, o trabalho
 
 **Artefatos gerados depois deste relatório** (tamanho e sha256 no `SHA256SUMS.txt`, ao lado deles): `piperline_rodada12.bundle` (+ `piperline_rodada12_bundle_verify.txt`) e `piperline_arvore_rodada12.zip`. O bundle é **autossuficiente** (`git bundle create --all`) e o zip tem a **árvore sem `.git`** e sem `node_modules`/`.deps` — assim há dois caminhos de recuperação, com e sem git.
 
+**O que apareceu de novo ao montar o pacote (e mudou o `PREPARO_PUSH.md`):**
+
+1. **A branch já existe no GitHub** — `origin/arena/a14d8a49-pippet-clone` tem **12 commits originais das rodadas 1–6** (ponta `1443745`), que o `STATUS.md` dava como perdidos. O histórico local divergiu: o local tem **7 commits** que o remoto não tem e o remoto tem **12** que o local não tem, com base comum em `48ca7bb`. **`git push` seria recusado**; `--force` está fora de questão. O `PREPARO_PUSH.md` traz as três opções (recomendada: branch nova `…-r12`, sem tocar na existente) e os comandos **prontos e não executados**.
+2. **O primeiro bundle não era autossuficiente.** O repositório local era **shallow** (clone raso com `.git/shallow` em `48ca7bb`): `git bundle create --all` herdava essa fronteira, o `git bundle verify` dizia “complete history” e mesmo assim o `git fetch` do bundle falhava com *“did not send all necessary objects”*. Corrigi com `git fetch --unshallow origin` e **provei restaurando de verdade**: pasta vazia → `git fetch` do bundle → `git checkout` → **9 commits, 657 arquivos, HEAD `3f08230`** (`piperline_rodada12_bundle_verify.txt`). O bundle entregue é o regenerado depois disso.
+3. **O zip** tem a árvore sem `.git` e sem `node_modules`/`.deps`: 685 entradas, 80.9 MB descompactados, **18 MB** comprimidos.
+
 **O que está em cada documento:**
 
 - **`LEIA_PRIMEIRO_NOVA_SESSAO.md`** — objetivo do projeto; as 10 regras do usuário (respostas curtas, nada em segundo plano, sem push sem ordem, nenhuma chave em arquivo/commit/log/Drive, `127.0.0.1` sempre, testes não alteram arquivo versionado, sem equivalência com o Pippit, sem dado inventado, mensagens ≤ ~2800 caracteres, um commit por item); placar de **todas as rodadas** no sandbox e no Windows; como recuperar o ambiente (`recuperar_ambiente.sh`) e rodar a suíte em blocos; falhas conhecidas com causa **provada** ou **NÃO provada**; o que só o PC do usuário prova; limites do sandbox; pendências por prioridade; a lista exata dos arquivos da entrega.

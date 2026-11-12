@@ -7,7 +7,9 @@
 
 ## 1. Situação em uma frase
 
-O app roda, a suíte passa **128/2/0 de 130** no sandbox e o usuário validou as rodadas 9, 10 e 11 no Windows. **Não há push** (o GitHub **não** tem este trabalho) e **o `.git` local foi apagado pelo sandbox 5 vezes** — por isso esta entrega existe: bundle + zip + este texto.
+O app roda, a suíte passa **128/2/0 de 130** no sandbox e o usuário validou as rodadas 9, 10 e 11 no Windows. **Não há push desta sessão** e **o `.git` local foi apagado pelo sandbox 5 vezes** — por isso esta entrega existe: bundle + zip + este texto.
+
+**Atenção, isto mudou na rodada 12:** a branch `arena/a14d8a49-pippet-clone` **já existe no GitHub**, com **12 commits originais das rodadas 1–6** (ponta `1443745`) — o que o `STATUS.md` dava como perdido. O histórico local divergiu dela: o local tem **7 commits que o remoto não tem** e o remoto tem **12 que o local não tem** (base comum `48ca7bb`). Um `git push` simples **seria recusado**; **nunca force**. `PREPARO_PUSH.md` traz as três opções (recomendada: publicar numa branch nova, sem tocar na existente) e os comandos prontos, **não executados**.
 
 ## 2. Regras do usuário (não negociáveis, valem para toda rodada)
 
@@ -47,10 +49,13 @@ Detalhe das duas últimas falhas conhecidas do Windows (rodada 11): `lipsync_ada
 Pré-requisito: Node 20+ (`node -v`). Se o `.git` sumir, restaure primeiro o código:
 
 ```bash
-git clone https://github.com/DaniloXPTEAM/Pippet-Clone.git  # ou: git init + git fetch do bundle
-git bundle verify piperline_rodada12.bundle
-git fetch piperline_rodada12.bundle 'refs/*:refs/remotes/bundle/*'
+# caminho 1 — pelo bundle (autossuficiente; testado restaurando numa pasta vazia: 9 commits, 657 arquivos)
+git init piperline && cd piperline
+git fetch ../piperline_rodada12.bundle 'refs/heads/*:refs/remotes/bundle/*'
 git checkout -b arena/a14d8a49-pippet-clone bundle/arena/a14d8a49-pippet-clone
+
+# caminho 2 — pelo zip (sem git nenhum)
+unzip piperline_arvore_rodada12.zip -d piperline
 ```
 
 Ou, sem git nenhum, descompacte `piperline_arvore_rodada12.zip` (a árvore sem `.git`).
@@ -126,7 +131,7 @@ Notas de uso:
 |---|---|
 | `LEIA_PRIMEIRO_NOVA_SESSAO.md` | este texto |
 | `piperline_rodada12.bundle` | **bundle autossuficiente** (`--all`) com todo o histórico local |
-| `piperline_rodada12_bundle_verify.txt` | saída de `git bundle verify` |
+| `piperline_rodada12_bundle_verify.txt` | `git bundle verify` + `list-heads` + a prova de restauração numa pasta vazia |
 | `piperline_arvore_rodada12.zip` | árvore do projeto **sem `.git`**, sem `node_modules`/`.deps` |
 | `STATUS.md` | estado oficial (todas as rodadas) |
 | `FEATURE_INVENTORY.md` | inventário de linhas (122 reproduzíveis; 83/122 = 68,0% — cobertura de linhas, **não** paridade) |
@@ -139,6 +144,7 @@ Notas de uso:
 | `pricing_faq_ui_20x.txt`, `pricing_faq_ui_cpu.txt` | 20 execuções (mín/mediana/máx) e a tabela de CPU 8×/20×/50×/100× |
 | `browser_probe_antes_depois.txt` | o SKIP do Windows reproduzido e corrigido |
 | `lipsync_adapters_3x.txt` | 3 execuções do teste de lip-sync após a correção |
+| `SHA256SUMS.txt` | sha256 de **todos** os arquivos da entrega, inclusive do bundle e do zip (gerado depois deles) |
 
 ## 11. Primeiros passos sugeridos para a sessão nova
 
