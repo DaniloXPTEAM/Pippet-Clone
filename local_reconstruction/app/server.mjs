@@ -388,7 +388,7 @@ route('POST', /^\/api\/voiceclone\/runs\/([\w]+)\/cancel$/, async (q, r, m) => {
 import * as BF from '../src/billing_flow.mjs';
 const billingSessions = () => (db().billingSessions ||= []);
 route('GET', /^\/api\/billing\/flow$/, (q, r) => send(r, 200, { ok: true, ...BF.flowSummary(), configured: BF.gatewayConfig().configured, sessions: billingSessions() }));
-route('POST', /^\/api\/billing\/checkout$/, async (q, r) => {
+route('POST', /^\/api\/billing\/flow\/checkout$/, async (q, r) => {
   const b = await readJson(q);
   const res = await BF.createCheckout({ planId: b.planId, billing: b.billing, customerReference: db().user.id, successUrl: b.successUrl, cancelUrl: b.cancelUrl });
   if (!res.ok) return fail(r, res.blocked ? 409 : res.status || 502, res.error, res.blocked ? { blocked: true, env: res.env, contract: res.contract } : undefined);
@@ -396,7 +396,7 @@ route('POST', /^\/api\/billing\/checkout$/, async (q, r) => {
   billingSessions().unshift(session); S.save();
   send(r, 200, { ok: true, session, checkoutUrl: res.session.url, note: 'Sessão criada como checkout_pendente; só o webhook assinado muda o estado. Nada foi cobrado (estrutura).' });
 });
-route('POST', /^\/api\/billing\/webhook$/, async (q, r) => {
+route('POST', /^\/api\/billing\/flow\/webhook$/, async (q, r) => {
   const raw = await readBody(q);
   const res = BF.handleWebhook({ rawBody: raw, signature: q.headers['x-signature'] });
   if (!res.ok) return fail(r, res.status, res.error);
@@ -406,7 +406,7 @@ route('POST', /^\/api\/billing\/webhook$/, async (q, r) => {
   Object.assign(session, applied.session); S.save();
   send(r, 200, { ok: true, event: res.event, session, planChange: applied.planChange });
 });
-route('POST', /^\/api\/billing\/portal$/, async (q, r) => {
+route('POST', /^\/api\/billing\/flow\/portal$/, async (q, r) => {
   const res = await BF.createPortal({ customerReference: db().user.id });
   if (!res.ok) return fail(r, res.blocked ? 409 : 502, res.error, res.blocked ? { blocked: true, env: res.env, contract: res.contract } : undefined);
   send(r, 200, { ok: true, portalUrl: res.portalUrl });
@@ -418,7 +418,7 @@ const enrichSkill = (sk) => { const o = OFFICIAL[sk.id]; if (!o) return sk; cons
 route('GET', /^\/api\/catalog$/, async (q, r) => send(r, 200, { videoModels: VIDEO_MODELS, imageModels: IMAGE_MODELS, audioModels: AUDIO_MODELS, videoRatios: VIDEO_RATIOS, imageRatios: IMAGE_RATIOS, videoRes: VIDEO_RES, imageRes: IMAGE_RES, editorRatios: media.EDITOR_RATIOS, skills: SKILLS.map(enrichSkill), skillDefs: Object.fromEntries(Object.keys(SKILL_DEFS).map((id) => [id, skillSummary(id)])), plans: PLANS, nodeTypes: NODE_TYPES, nodeTools: NODE_TOOLS, nodePanels: NODE_PANELS, marketing: MARKETING }));
 // Cobrança (estrutura): planos e créditos locais; adaptador `gratuito` funcional e `gateway` desabilitado.
 // Sem SDK e sem chamada aqui; o FLUXO completo (checkout/webhook assinado/portal contra o gateway do
-// ambiente — servidor falso nos testes) vive em /api/billing/checkout|webhook|portal (src/billing_flow.mjs).
+// ambiente — servidor falso nos testes) vive em /api/billing/flow/checkout|webhook|portal (src/billing_flow.mjs).
 const billingAdapter = () => (db().settings.billing?.adapter === 'gateway' ? 'gateway' : 'gratuito');
 route('GET', /^\/api\/billing$/, async (q, r) => send(r, 200, { ok: true, ...BILL.billingSummary({ adapter: billingAdapter(), user: db().user, balance: S.balance() }) }));
 route('POST', /^\/api\/billing\/adapter$/, async (q, r) => {

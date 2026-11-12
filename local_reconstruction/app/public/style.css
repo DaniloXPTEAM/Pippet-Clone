@@ -204,3 +204,4 @@ body.cv-full #side { display:none; } .cv-right { position:absolute; right:14px; 
 #usNotice { background:#b99cff; color:#111; padding:8px 36px 8px 16px; text-align:center; font-size:13px; position:relative; z-index:80; }
 #usNoticeX { position:absolute; right:10px; top:4px; border:none; background:none; font-size:16px; }
 #devJson { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; overflow:auto; font-size:12px; }
+.hw-panel[hidden] { display: none; }

@@ -35,7 +35,7 @@ try {
   await etapa('rota /pricing', async () => { await page.goto(`${f.base}/#/pricing`); await page.locator('#pricingFaq').waitFor(); });
   await etapa('nota de integrações', async () => {
     await page.waitForFunction(() => /UNOBSERVED/.test(document.querySelector('#integrationsNote')?.textContent || ''));
-    assert.match(await page.locator('#integrationsNote').innerText(), /mercado de vendas online: UNOBSERVED/);
+    assert.match(await page.locator('#integrationsNote').innerText(), /mercado de vendas online: implementada \(conteúdo UNOBSERVED\)/);
     assert.match(await page.locator('#integrationsNote').innerText(), /Redes sociais confirmadas: TikTok, Facebook, Instagram/);
   });
   await etapa('nota do FAQ', async () => {

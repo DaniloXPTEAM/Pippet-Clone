@@ -44,7 +44,7 @@ const why = (r) => (r.body?.error || JSON.stringify(r.body)).slice(0, 300);
 const ok = (r, what) => { assert.ok(r.status >= 200 && r.status < 300, `${what}: HTTP ${r.status} — ${why(r)}`); return r.body; };
 const postWebhook = async (event, signature) => {
   const raw = JSON.stringify(event);
-  const r = await fetch(base + '/api/billing/webhook', { method: 'POST', headers: { 'content-type': 'application/json', 'x-signature': signature }, body: raw });
+  const r = await fetch(base + '/api/billing/flow/webhook', { method: 'POST', headers: { 'content-type': 'application/json', 'x-signature': signature }, body: raw });
   return { status: r.status, body: await r.json().catch(() => ({})) };
 };
 
@@ -58,7 +58,7 @@ try {
   assert.ok(!JSON.stringify(flow).includes('gw-key-test') && !JSON.stringify(flow).includes('whsec-teste'), 'credenciais nunca em resposta');
 
   // ---------- checkout ----------
-  const ck = ok(await api('/api/billing/checkout', { planId: 'starter', billing: 'monthly' }), 'checkout');
+  const ck = ok(await api('/api/billing/flow/checkout', { planId: 'starter', billing: 'monthly' }), 'checkout');
   assert.equal(ck.session.state, 'checkout_pendente');
   assert.equal(ck.session.amount, 7.59, 'valor do catálogo local');
   assert.equal(ck.session.id, 'cs-1');
@@ -66,10 +66,10 @@ try {
   const gh = gw.hits.find((h) => h.path === '/v1/checkout/sessions');
   assert.ok(gh && gh.auth === 'Bearer gw-key-test', 'gateway recebe a chave do ambiente');
   assert.ok(gh.body.includes('"plan_id":"starter"') && gh.body.includes('"amount":7.59'));
-  const ckFree = await api('/api/billing/checkout', { planId: 'free' });
+  const ckFree = await api('/api/billing/flow/checkout', { planId: 'free' });
   assert.equal(ckFree.status, 400, 'plano gratuito não abre checkout real'); // priceFor ok mas o gateway... free: amount 0
   // (free: checkoutIntent devolve sem_cobranca e a rota registra sessão — aqui esperamos 400 só para plano inválido)
-  const ckRuim = await api('/api/billing/checkout', { planId: 'nao-existe' });
+  const ckRuim = await api('/api/billing/flow/checkout', { planId: 'nao-existe' });
   assert.equal(ckRuim.status, 400);
 
   // ---------- webhook assinado ----------
@@ -92,16 +92,16 @@ try {
   assert.equal(reemb.body.session.state, 'reembolsado');
 
   // ---------- portal ----------
-  const pt = ok(await api('/api/billing/portal', {}), 'portal');
+  const pt = ok(await api('/api/billing/flow/portal', {}), 'portal');
   assert.match(pt.portalUrl, /\/portal\/p-1/);
 
   // ---------- sem gateway no ambiente: bloqueio honesto com os NOMES das variáveis ----------
   const saved = [process.env.BILLING_GATEWAY_BASE_URL, process.env.BILLING_GATEWAY_KEY];
   delete process.env.BILLING_GATEWAY_BASE_URL; delete process.env.BILLING_GATEWAY_KEY;
-  const semCfg = await api('/api/billing/checkout', { planId: 'starter' });
+  const semCfg = await api('/api/billing/flow/checkout', { planId: 'starter' });
   assert.equal(semCfg.status, 409); assert.equal(semCfg.body.blocked, true);
   assert.match(semCfg.body.error, /BILLING_GATEWAY_BASE_URL/);
-  const semPortal = await api('/api/billing/portal', {});
+  const semPortal = await api('/api/billing/flow/portal', {});
   assert.equal(semPortal.status, 409);
   process.env.BILLING_GATEWAY_BASE_URL = saved[0]; process.env.BILLING_GATEWAY_KEY = saved[1];
 
