@@ -1,0 +1,35 @@
+ITEM 3 — a suite nao altera arquivo versionado (prova por sha256)
+gerado em 2026-11-12T01:35:23Z · HEAD 74c953e
+
+1) sha256 de TODOS os arquivos versionados, ANTES da suite:
+   659 arquivos -> /tmp/antes_r13.txt (659 linhas)
+
+2) suite completa: node test/run-all.mjs (231 s)
+128 passaram, 2 skip explícito, 0 falharam (de 130).
+
+3) sha256 dos mesmos arquivos, DEPOIS da suite (659 linhas):
+   diferencas encontradas: 0
+
+4) git status --short depois da suite (vazio = limpo):
+?? mesa_de_operacao/entrega_13/.env.example
+?? mesa_de_operacao/entrega_13/FEATURE_INVENTORY.md
+?? mesa_de_operacao/entrega_13/LEIA_PRIMEIRO_NOVA_SESSAO.md
+?? mesa_de_operacao/entrega_13/PREPARO_PUSH.md
+?? mesa_de_operacao/entrega_13/STATUS.md
+?? mesa_de_operacao/entrega_13/browser_probe_r13.txt
+?? mesa_de_operacao/entrega_13/git_status_prova_r13.txt
+?? mesa_de_operacao/entrega_13/lipsync_adapters_3x_r13.txt
+?? mesa_de_operacao/entrega_13/suite_rodada13_final.txt
+   [fim do git status]
+
+5) resumo da suite por categoria (ultimas linhas do log):
+OK   auth_google_ui (0.8s)
+OK   publish_queue (2.5s)
+OK   billing_structure (1.4s)
+128 passaram, 2 skip explícito, 0 falharam (de 130).
+
+6) os 2 skips explicitos:
+SKIP pageview (0.3s)
+SKIP pageview: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/scenario_video-agent_bodies.json
+SKIP parity (0.3s)
+SKIP parity: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/auth/cdp/oauth_redirect/2_pagina_0.txt, /home/user/Pippet-Clone/captures/auth/cdp/editor_right_panel/5_1_Básico.txt
