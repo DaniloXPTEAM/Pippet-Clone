@@ -24,7 +24,7 @@ function renderSide(route) {
   const nav = (href, label, extra = '') => `<a href="#${href}" class="${route.startsWith(href) ? 'on' : ''}">${label}${extra}</a>`;
   $('#side').innerHTML = `<div class="logo">Pippit</div><div class="nav">
     ${nav('/home', '✦ Criativo')}${nav('/marketing', 'Estúdio de marketing')}${nav('/story', 'Estúdio de histórias')}<a id="navTela">Tela<span class="new">NEW</span></a><hr>
-    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}${nav('/integrations', 'Integrações')}
+    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}${nav('/integrations', 'Integrações')}${window.__devPanelEnabled ? nav('/dev', 'Painel dev') : ''}
     <a id="navMais">Mais ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? '▴' : '▾'}</a>
     ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? `${nav('/gen', 'Gerador de vídeos').replace('<a ', '<a class="sub" ')}${nav('/avatars', 'Avatares e vozes').replace('<a ', '<a class="sub" ')}${nav('/analytics', 'Análise').replace('<a ', '<a class="sub" ')}${nav('/schedule', 'Publicador').replace('<a ', '<a class="sub" ')}` : ''}
   </div><div class="hist-h">Histórico</div>
@@ -1245,6 +1245,45 @@ function runRoute(force) {
     if (forced || routeTarget() !== routeDiag.lastRoute) setTimeout(() => runRoute(forced), 0);
   });
 }
+// ---------- Portas de idade, aviso US, PWA e painel dev (#27) — TUDO por configuração (PIPPIT_AGE_GATE,
+// PIPIT_US_NOTICE, PIPIT_PWA, PIPIT_DEV_PANEL). Desligado = a interface não muda. Textos reais UNOBSERVED.
+async function ensureGates() {
+  if (window.__gatesDone) return; window.__gatesDone = true;
+  const g = (await api('/api/gates')).body || {}; window.__gates = g;
+  if (g.age?.enabled && !localStorage.getItem('piperline_age_ok')) {
+    const ov = document.createElement('div'); ov.id = 'ageGate'; ov.setAttribute('role', 'dialog');
+    ov.innerHTML = `<div class="gate-card"><h2>${esc(g.age.title || 'Confirme sua idade')}</h2><p class="muted">${esc(g.age.text || '')} — entrada restrita a maiores de ${g.age.minAge} anos.</p>
+      <div class="row"><input type="date" id="ageBirth" aria-label="Data de nascimento"><button id="ageOk" class="primary">Entrar</button></div><p class="blocked" id="ageErr"></p></div>`;
+    document.body.append(ov);
+    $('#ageOk').onclick = async () => {
+      const r = await post('/api/gates/age/verify', { birthDate: $('#ageBirth').value });
+      if (r.body?.allowed) { localStorage.setItem('piperline_age_ok', '1'); ov.remove(); }
+      else $('#ageErr').textContent = r.body?.reason || 'não foi possível verificar';
+    };
+  }
+  if (g.usNotice?.enabled) {
+    const bar = document.createElement('div'); bar.id = 'usNotice';
+    bar.innerHTML = `<span>${esc(g.usNotice.text || '')} (aviso US — texto real UNOBSERVED)</span><button id="usNoticeX" aria-label="Fechar">×</button>`;
+    document.body.prepend(bar);
+    $('#usNoticeX').onclick = () => bar.remove();
+  }
+  if (g.pwa?.enabled) {
+    const link = document.createElement('link'); link.rel = 'manifest'; link.href = '/manifest.webmanifest'; document.head.append(link);
+    if ('serviceWorker' in navigator) { try { await navigator.serviceWorker.register('/sw.js'); } catch {} }
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      const b = document.createElement('button'); b.id = 'pwaInstall'; b.className = 'pill'; b.textContent = g.pwa.installLabel || 'Instalar app';
+      b.style.cssText = 'position:fixed; right:78px; bottom:26px; z-index:65;';
+      b.onclick = async () => { b.remove(); e.prompt(); };
+      document.body.append(b);
+    });
+  }
+  if (g.devPanel?.enabled) window.__devPanelEnabled = true;
+}
+async function pageDev() {
+  const d = (await api('/api/dev-panel')).body || {};
+  $('#main').innerHTML = `${credits()}<div class="page" id="devPanel"><h1>Painel dev</h1><p class="muted">Ativado por configuração (PIPPIT_DEV_PANEL). Só presença/ausência de variáveis — nunca valores.</p><pre id="devJson">${esc(JSON.stringify(d, null, 2))}</pre></div>`;
+}
 // ---------- Widget de ajuda local (#19): botão flutuante, painel e conversa — MESMA interface genérica
 // do widget de terceiros observado (kefu-im), mas 100% local e SEM token de terceiro. Textos do widget
 // real UNOBSERVED; as respostas vêm da base local (app/lib/help_widget.mjs).
@@ -1308,7 +1347,7 @@ async function renderRoute() {
   // a rota mudou enquanto buscávamos: esta execução está obsoleta, a próxima desenha o alvo certo
   if (r !== routeTarget()) { routeDiag.skipped += 1; return; }
   document.body.classList.toggle('cv-full', /^\/(project\/|ai-talking-photo)/.test(r)); document.documentElement.dataset.theme = ST.settings.theme === 'dark' ? 'dark' : 'light'; document.documentElement.lang = ST.settings.language || 'pt-BR';
-  renderSide(r); track(r); ensureHelpWidget();
+  renderSide(r); track(r); ensureHelpWidget(); ensureGates();
   // Rodada 10, item 3: a rota só entra em lastRoute DEPOIS de pintar. Antes, lastRoute era gravado
   // antes do despacho: se a página falhasse (por exemplo GET /api/local-runs/<id> respondendo 404/500),
   // nada aparecia e a deduplicação do roteador tratava a rota como "já desenhada" — qualquer novo
@@ -1325,7 +1364,7 @@ function paintRoute(r) {
   if (r.startsWith('/editor')) return pageEditor(r.split('/')[2]); if (r.startsWith('/marketing')) return pageMarketing(); if (r.startsWith('/templates')) return pageTemplates(); if (r.startsWith('/help')) return pageHelp(); if (r.startsWith('/omni')) return pageOmni(); if (r.startsWith('/inspiration')) return pageInspiration(); if (r.startsWith('/pricing')) return pagePricing(); if (r.startsWith('/story')) return pageStory(); if (r.startsWith('/gen')) return pageGen();
   const localRunMatch = r.match(/^\/tasks\/run\/([\w-]+)$/); if (localRunMatch) return pageLocalRun(localRunMatch[1]);
   if (r.startsWith('/settings')) return pageSettings(r.split('/')[2] || 'personal_information'); if (r.startsWith('/tasks')) return pageTasks(); if (r.startsWith('/analytics')) return pageSocial('analytics'); if (r.startsWith('/schedule')) return pageSocial('schedule');
-  if (r.startsWith('/integrations')) return pageIntegrations();
+  if (r.startsWith('/integrations')) return pageIntegrations(); if (r.startsWith('/dev')) return pageDev();
   if (r.startsWith('/login')) return pageLogin(); if (r.startsWith('/share/')) return pageShare(r.split('/')[2]); return pageHome();
 }
 // Falha ao desenhar uma tela: mostrar o motivo NA TELA (com "tentar de novo"), nunca deixar a tela

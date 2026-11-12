@@ -289,6 +289,33 @@ route('POST', /^\/api\/help-widget\/chat$/, async (q, r) => {
   if (!res.ok) return fail(r, 400, res.error);
   send(r, 200, { ok: true, reply: res.reply, source: res.source, confidence: res.confidence, kbId: res.kbId, widget: HW.WIDGET });
 });
+// ----- Portas de idade, aviso US, PWA e painel dev (#27) — TUDO por configuração (app/lib/gates.mjs).
+import * as GATES from './lib/gates.mjs';
+const gatesAccepted = () => (db().gates ||= { ageAccepted: null });
+route('GET', /^\/api\/gates$/, (q, r) => send(r, 200, { ok: true, ...GATES.gates(), age: { ...GATES.gates().ageGate, accepted: gatesAccepted().ageAccepted } }));
+route('POST', /^\/api\/gates\/age\/verify$/, async (q, r) => {
+  const cfg = GATES.gates().ageGate;
+  if (!cfg.enabled) return fail(r, 403, 'porta de idade desativada (ative com PIPIT_AGE_GATE=on)');
+  const b = await readJson(q);
+  const v = GATES.verifyAge(b.birthDate, { minAge: cfg.minAge });
+  if (v.allowed) { gatesAccepted().ageAccepted = new Date().toISOString(); S.save(); }
+  send(r, 200, { ok: true, allowed: v.allowed, age: v.age ?? null, reason: v.reason ?? null, acceptedAt: gatesAccepted().ageAccepted });
+});
+route('GET', /^\/api\/dev-panel$/, (q, r) => {
+  if (!GATES.gates().devPanel.enabled) return fail(r, 403, 'painel dev desativado (ative com PIPIT_DEV_PANEL=on)');
+  const d = db();
+  send(r, 200, {
+    ok: true, node: process.version, platform: process.platform, arch: process.arch,
+    startedAt: new Date(Date.now() - Math.round(process.uptime() * 1000)).toISOString(), uptimeSec: Math.round(process.uptime()),
+    memoryMB: Math.round(process.memoryUsage().rss / 1048576),
+    counts: { projects: d.projects.length, assets: d.assets.length, jobs: (d.jobs || []).length, queue: (d.social?.queue || []).length, notifications: (d.notifications || []).length },
+    gates: GATES.gates(),
+    envPresence: Object.fromEntries(['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'TIKTOK_CLIENT_KEY', 'META_APP_ID', 'GOOGLE_CLIENT_ID', 'MARKETPLACE_BASE_URL', 'MARKETPLACE_API_KEY', 'HF_TOKEN'].map((k) => [k, !!process.env[k]])),
+    note: 'Só presença/ausência de variáveis — nenhum valor de credencial aparece aqui.',
+  });
+});
+route('GET', /^\/manifest\.webmanifest$/, (q, r) => send(r, 200, GATES.MANIFEST, { 'content-type': 'application/manifest+json' }));
+route('GET', /^\/sw\.js$/, (q, r) => { r.writeHead(200, { 'content-type': 'text/javascript; charset=utf-8', 'cache-control': 'no-cache' }); r.end(GATES.SERVICE_WORKER); });
 
 const CAT_PT = { 'Short Drama': 'Drama curto', 'Marketing Advertising': 'Marketing Publicidade', 'Professional film and television': 'Cinema e televisão profissionais' };
 // dados observados no servidor (official_skills.json, REA 6.7.0): categorias, ferramentas declaradas, modelos padrão e textos de guia
