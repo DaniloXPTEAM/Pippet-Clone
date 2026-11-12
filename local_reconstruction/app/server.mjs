@@ -281,6 +281,14 @@ const HELP_OBSERVED = Object.freeze({
   externalCalls: false,
 });
 route('GET', /^\/api\/help$/, (q, r) => send(r, 200, { ok: true, ...HELP_OBSERVED }));
+// Widget de ajuda local (#19) — botão/painel/conversa com respostas locais; NUNCA token de terceiro.
+import * as HW from './lib/help_widget.mjs';
+route('GET', /^\/api\/help-widget\/config$/, (q, r) => send(r, 200, { ok: true, ...HW.widgetSummary() }));
+route('POST', /^\/api\/help-widget\/chat$/, async (q, r) => {
+  const b = await readJson(q); const res = HW.answer(b.message);
+  if (!res.ok) return fail(r, 400, res.error);
+  send(r, 200, { ok: true, reply: res.reply, source: res.source, confidence: res.confidence, kbId: res.kbId, widget: HW.WIDGET });
+});
 
 const CAT_PT = { 'Short Drama': 'Drama curto', 'Marketing Advertising': 'Marketing Publicidade', 'Professional film and television': 'Cinema e televisão profissionais' };
 // dados observados no servidor (official_skills.json, REA 6.7.0): categorias, ferramentas declaradas, modelos padrão e textos de guia

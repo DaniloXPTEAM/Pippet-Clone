@@ -1245,6 +1245,30 @@ function runRoute(force) {
     if (forced || routeTarget() !== routeDiag.lastRoute) setTimeout(() => runRoute(forced), 0);
   });
 }
+// ---------- Widget de ajuda local (#19): botão flutuante, painel e conversa — MESMA interface genérica
+// do widget de terceiros observado (kefu-im), mas 100% local e SEM token de terceiro. Textos do widget
+// real UNOBSERVED; as respostas vêm da base local (app/lib/help_widget.mjs).
+function ensureHelpWidget() {
+  if (document.getElementById('helpWidgetBtn')) return;
+  const btn = document.createElement('button'); btn.id = 'helpWidgetBtn'; btn.className = 'hw-btn'; btn.setAttribute('aria-label', 'Ajuda'); btn.title = 'Ajuda'; btn.textContent = '?';
+  const panel = document.createElement('div'); panel.id = 'helpWidgetPanel'; panel.className = 'hw-panel'; panel.hidden = true;
+  panel.innerHTML = `<div class="hw-head"><b id="hwTitle">Como podemos ajudar?</b><button id="hwClose" aria-label="Fechar">×</button></div>
+    <div class="hw-msgs" id="helpWidgetMsgs"></div>
+    <form class="hw-form" id="hwForm"><input id="hwInput" placeholder="Escreva sua dúvida…" autocomplete="off" aria-label="Mensagem"><button id="hwSend" class="primary">Enviar</button></form>
+    <small class="hw-note">Widget local — sem atendimento de terceiros. Perguntas sem base local respondem como UNOBSERVED.</small>`;
+  document.body.append(btn, panel);
+  btn.onclick = () => { panel.hidden = !panel.hidden; if (!panel.hidden) document.getElementById('hwInput').focus(); };
+  document.getElementById('hwClose').onclick = () => { panel.hidden = true; };
+  document.getElementById('hwForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('hwInput'); const text = input.value.trim(); if (!text) return;
+    const msgs = document.getElementById('helpWidgetMsgs');
+    msgs.insertAdjacentHTML('beforeend', `<div class="hw-msg user">${esc(text)}</div>`); input.value = '';
+    const r = await post('/api/help-widget/chat', { message: text }); const b = r.body || {};
+    msgs.insertAdjacentHTML('beforeend', `<div class="hw-msg bot">${esc(b.reply || 'Não foi possível responder agora.')} ${b.confidence === 'unobserved' ? '<span class="blocked">UNOBSERVED</span>' : ''}</div>`);
+    msgs.scrollTop = msgs.scrollHeight;
+  };
+}
 // ---------- Integrações (linha #14): conexão com loja, importação de produto e envio de vídeo.
 // A credencial vive SÓ no ambiente; a tela nunca mostra chave. O layout da tela do Pippit real não foi
 // capturado — a estrutura local é funcional mas o conteúdo visual original é UNOBSERVED.
@@ -1284,7 +1308,7 @@ async function renderRoute() {
   // a rota mudou enquanto buscávamos: esta execução está obsoleta, a próxima desenha o alvo certo
   if (r !== routeTarget()) { routeDiag.skipped += 1; return; }
   document.body.classList.toggle('cv-full', /^\/(project\/|ai-talking-photo)/.test(r)); document.documentElement.dataset.theme = ST.settings.theme === 'dark' ? 'dark' : 'light'; document.documentElement.lang = ST.settings.language || 'pt-BR';
-  renderSide(r); track(r);
+  renderSide(r); track(r); ensureHelpWidget();
   // Rodada 10, item 3: a rota só entra em lastRoute DEPOIS de pintar. Antes, lastRoute era gravado
   // antes do despacho: se a página falhasse (por exemplo GET /api/local-runs/<id> respondendo 404/500),
   // nada aparecia e a deduplicação do roteador tratava a rota como "já desenhada" — qualquer novo
