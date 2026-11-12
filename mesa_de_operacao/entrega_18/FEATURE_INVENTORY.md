@@ -17,11 +17,11 @@ Resumo — **as duas réguas, lado a lado** (denominadores diferentes; os % **n�
 
 | régua | o que conta | base | prontas (implementadas + verificadas) | % |
 |---|---|---|---|---|
-| **r15 (critério antigo)** | escopo reproduzível da r15 | **122 linhas** | **105** (30 implementadas + 75 verificadas) | **86,1%** |
-| **r16/r17 (catálogo integral)** | catálogo integral, UNOBSERVED ≠ verificada | **423 linhas** | **151** (66 implementadas UNOBSERVED + 85 verificadas) | **35,7%** |
+| **r15 (critério antigo)** | escopo reproduzível da r15 | **122 linhas** | **113** (38 implementadas + 75 verificadas) | **92,6%** |
+| **r16–r18 (catálogo integral)** | catálogo integral, UNOBSERVED ≠ verificada | **423 linhas** | **152** (67 implementadas UNOBSERVED + 85 verificadas) | **35,9%** |
 
-- **Régua antiga hoje: 105/122 = 86,1%** — o mesmo número da r15. Enquanto `features_ui` esteve instável (r16) a linha "Central de notificações" valia 104/122 = 85,2%; a correção da r17, provada 4/4 aqui, devolveu a 105/122.
-- **Régua nova: 85 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 0 não verificadas / 272 inventadas / 0 bloqueadas** (= 423) → 151/423 = 35,7%.
+- **Régua antiga hoje: 113/122 = 92,6%** (38 implementadas + 75 verificadas). Base r15–r17: 105/122 = 86,1% (30+75). A r18 implementou 8 das 9 linhas bloqueadas (#3 #6 #7 #9 #14 #19 #27 #39) como "implementada (conteúdo UNOBSERVED)" — subiram +8 sem virar "verificada" (UNOBSERVED nunca vira verificada). As 9 parciais (#8 #10 #12 #16 #17 #24 #25 #37 #38) seguem à espera de captura/conteúdo real.
+- **Régua nova: 85 verificadas / 67 implementadas (conteúdo UNOBSERVED) / 0 não verificadas / 271 inventadas / 0 bloqueadas** (= 423) → 152/423 = 35,9%. A r18 moveu "Chat legado" (#3) de inventada para implementada (conteúdo UNOBSERVED): leitor do formato agent-chat + tela somente leitura, testados.
 - Por que os % diferem: (a) a régua nova inclui **272 linhas inventadas** (conteúdo apagado/não preservado) que a antiga não contava; (b) a régua nova separa "implementada (conteúdo UNOBSERVED)" de "verificada", e o par clássico soma as duas. Cobertura de linhas, **não** paridade com o Pippit.
 
 Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de escopo) está preservada em `entrega_15/FEATURE_INVENTORY.md` (Drive). O catálogo integral de 423 linhas foi regenerado na r16 a partir da evidência (a r15 e a r16 perderam o `.git`; o gerador do inventário se perdeu junto — a recontagem é feita por patch direto do markdown). Cada linha registra o que existe e o que foi verificado por teste.
@@ -488,7 +488,7 @@ Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de 
 
 | — | 23 recortes legados do editor (home_spec) | inventada | reports/recortes/20260213-231315/home_spec.md | preservados |
 | — | Ferramentas de serviço (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
-| — | Chat legado | inventada | reports/recortes/20260213-231315/home_spec.md | preservado (falta evidência) |
+| — | Chat legado | implementada (conteúdo UNOBSERVED) | reports/recortes/20260213-231315/home_spec.md; testes: `legacy_chat` | leitor do formato agent-chat + tela somente leitura (r18); CONTEÚDO real não capturado — UNOBSERVED |
 | — | Blocos /plugins desativados (2 recortes) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `home_layout, plugin_apis` | 2 verificados |
 | — | Métricas do agente do chat (2 recortes) | inventada | reports/recortes/20260212-154515/b2_menu.md | preservadas |
 | — | Declaração de independência (preâmbulo) | verificada | reports/recortes/20260212-154515/b2_menu.md; testes: `declare_backend` | verificada |
@@ -546,7 +546,23 @@ Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de 
 | 4. Playlists/histórico/aba | 34 | 15 | 4 | 15 | 0 | 0 | 19/34 (55%) | 15/34 (44%) |
 | 5. Editor (B3) | 142 | 80 | 39 | 23 | 0 | 0 | 62/142 (43%) | 23/142 (16%) |
 | 6. Estúdio (imagem/vídeo/IA) | 48 | 44 | 1 | 3 | 0 | 0 | 4/48 (8%) | 3/48 (6%) |
-| 7. Preços/notificações/observacional | 94 | 73 | 11 | 9 | 0 | 1 | 20/94 (21%) | 9/94 (9%) |
-| **Total** | **423** | **272** | **66** | **84** | **0** | **1** | **150/423 (35%)** | **84/423 (19%)** |
+| 7. Preços/notificações/observacional | 94 | 72 | 12 | 10 | 0 | 0 | 21/94 (22%) | 10/94 (11%) |
+| **Total** | **423** | **271** | **67** | **85** | **0** | **0** | **152/423 (36%)** | **85/423 (20%)** |
 
-**Contagem interpretada (par clássico): 151 de 423** = 35,7% (régua do catálogo integral). **Régua antiga (r15, 122 linhas): 105 de 122 = 86,1%** — lado a lado, como no resumo do topo. Placar desta r17 revisada no sandbox **com navegador**: **133 ok / 2 skip / 0 falhas (de 135)**; Windows r16: 133/2/1 (a instável `features_ui` foi corrigida e passou 4/4 aqui).
+**Contagem interpretada (par clássico): 152 de 423** = 35,9% (régua do catálogo integral). **Régua antiga (r15, 122 linhas): 113 de 122 = 92,6%** — lado a lado, como no resumo do topo. Placar da r18 no sandbox **com navegador**: **140 ok / 2 skip / 0 falhas (de 142)** (os mesmos 2 skip de evidência da r17: `pageview`, `parity`); Windows r17 validado pelo usuário: **133 ok / 2 skip / 0 falhas (de 135)** — a r18 acrescenta 7 testes novos a validar no Windows. As duas contagens são de sistemas de régua diferentes e os % não são comparáveis entre si.
+
+## Rodada 18 (ordem substitutiva) — o que foi implementado (tudo com teste; nada sai do escopo)
+
+Revogação: a ordem anterior de "decisões do orquestrador" (estados "decidido"/"fora do escopo", régua de escopo reduzido 105/118, `DECISOES_R18.md`) foi **substituída e desfeita** (commit `3c20390` reverte `5559abb`). Bloqueio = pendência com CAMINHO de implementação (ver `BLOQUEIOS_R18.md`); contagens x/122 e x/423 mantidas; UNOBSERVED nunca vira verificada.
+
+| linha | o que a r18 implementou (testes) | o que fica pendente (UNOBSERVED até o usuário) |
+|---|---|---|
+| #3 Chat legado | leitor do formato agent-chat (array/JSON/JSONL) + tela somente leitura (`legacy_chat`) | conteúdo das conversas reais |
+| #6 Lip-sync | adaptadores huggingface-space/local-command completos vs servidor falso (`lipsync_adapters`, r17) | provedor real + credencial |
+| #7 Voz personalizada | adaptadores huggingface-space/local-command de clonagem vs servidor falso (`voiceclone_adapters`) | provedor real + amostra |
+| #9 Vincular conta | OAuth TikTok/Facebook/Instagram/YouTube: PKCE/state, callback 127.0.0.1, tokens cifrados (`oauth_social`) | apps registrados + credenciais no ambiente |
+| #10 Publicar/Agendado | fila de publicação + fluxo "gerar vídeo → publicar" ponta a ponta vs servidor falso (`oauth_social`) | envio real (credenciais) e Análise (dados reais) |
+| #14 Marketplace/loja | tela Integrações + conexão/importação/envio de vídeo, adaptador plugável (`marketplace`) | credencial da loja + captura da tela real |
+| #19 Widget de ajuda | widget local (botão/painel/conversa) com respostas locais (`help_widget_ui`) | textos do widget real |
+| #27 Idade/US/PWA/dev | portas de idade, aviso US, PWA (manifest+sw+ícones), painel dev — por configuração (`gates_pwa`) | textos das telas reais |
+| #39 Pagamento | SÓ ESTRUTURA (decisão do usuário): checkout/webhook assinado/portal vs servidor falso (`billing_flow`) | gateway real (decisão futura do usuário) |

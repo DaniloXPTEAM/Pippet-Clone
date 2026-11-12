@@ -1,0 +1,23 @@
+# LEIA_PRIMEIRO_NOVA_SESSAO — rodada 18 (ordem substitutiva)
+
+**Contexto:** "Pippet-Clone" = reconstrução local do Pippit (BytePlus). Regras do projeto: `mesa_de_operacao/entrega_15/LEIA_PRIMEIRO_NOVA_SESSAO.md` (endereços 127.0.0.1; "NÃO provado" quando não medido; nada inventado; UNOBSERVED ≠ verificada; `--force` proibido; respostas curtas).
+
+**Regras vigentes da r18 (ordem substitutiva — SUBSTITUI qualquer ordem r18 anterior):**
+- NADA sai do escopo sem autorização do usuário. Bloqueio = pendência com CAMINHO de implementação — nunca remoção.
+- Contagens **x/122 (critério antigo)** e **x/423 (catálogo integral)** mantidas, lado a lado; SEM régua de escopo reduzido.
+- A ordem anterior de "decisões" (estados "decidido"/"fora do escopo", `DECISOES_R18.md`) foi REVOGADA e desfeita (`3c20390` reverte `5559abb`) — nunca reimplementar esses estados.
+- Diferenças aceitas do Pippit: modelos gratuitos; site gratuito por enquanto; pagamento SÓ estrutura.
+- Credenciais SÓ por variável de ambiente (nomes em `local_reconstruction/.env.example`); sem chave em arquivo; widget de ajuda local sem token de terceiro.
+- Um commit por item, com teste; sem push (push único só no fim do projeto); testes não alteram arquivos versionados.
+
+**Réguas atuais:** 113/122 = 92,6% (38 impl + 75 verif) e 152/423 = 35,9% (85 verif / 67 impl UNOBSERVED / 271 inventadas / 0 bloqueadas). UNOBSERVED nunca vira verificada.
+
+**Placar:** r18 sandbox Linux **140 ok / 2 skip / 0 falhas (de 142)** (2 skip = evidência local: `pageview`, `parity`); Windows r17 = 133 ok / 2 skip / 0 falhas (de 135) — os 7 testes novos da r18 (`oauth_social`, `marketplace`, `help_widget_ui`, `gates_pwa`, `legacy_chat`, `voiceclone_adapters`, `billing_flow`) estão no `run-all` e faltam validar no Windows. Comando: `node local_reconstruction/test/run-all.mjs` com `PIPPIT_FFMPEG`, `PIPPIT_FFPROBE` e (para UI) `PIPERLINE_CHROMIUM_EXECUTABLE`.
+
+**Código novo da r18:** `src/oauth_social.mjs`, `src/marketplace.mjs`, `src/voiceclone.mjs`, `src/billing_flow.mjs`, `app/lib/help_widget.mjs`, `app/lib/gates.mjs`, `app/lib/legacy_chat.mjs` + rotas em `app/server.mjs` + telas `#/integrations`, `#/legacy-chat`, `#/dev`, widget flutuante. Fluxo de pagamento em `/api/billing/flow/*` (as rotas `/api/billing/checkout|webhook` antigas continuam com o contrato 501 da estrutura).
+
+**Pendências (só o usuário):** `PERGUNTAS_USUARIO.md` (9 perguntas — capturas do Pippit real, provedor de lip-sync/voz, credenciais de cada rede no ambiente). Cada resposta atualiza `FEATURE_INVENTORY.md` (UNOBSERVED → CONFIRMED no conteúdo correspondente).
+
+**Histórico:** 63 commits até `b204895` + os desta entrega; SHAs originais preservados (merge `5a82113`; raízes `851a3b5`/`48ca7bb`). Se o `.git` resetar para `ba09c73`, refazer a costura: `git commit-tree 'fb9db1f^{tree}' -p 3684da6` (autor `DaniloXPTEAM <276125030+DaniloXPTEAM@users.noreply.github.com>`, data de fb9db1f) → merge (pais `b2dc510`+`e07f5b2`) → cherry-picks na ordem do `git log`.
+
+**Drive:** pasta "entregaveis" `1GJr1ZzN-foDMJNWPp5N6d64NV5DnWqqQ` (entrega_10..17 completas — não mexer; entrega_18 = esta). ShA dos arquivos publicados em `SHA256SUMS.txt` ("hash  arquivo", dois espaços).
