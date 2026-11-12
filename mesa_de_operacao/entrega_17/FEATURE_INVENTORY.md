@@ -4,18 +4,27 @@ Estados: **não investigada · investigada · especificada · implementada · ve
 ## Método e limites (régua da r16)
 Marcador por linha e o que ele significa. A r16 endureceu a régua depois que os 56 testes de tela rodaram no Windows e revelaram 4 defeitos:
 
-- **verificada** — teste passou neste sandbox (Linux, não-UI) **ou no Windows do usuário** (testes de tela; validação da r16: **133 ok / 2 skip / 1 falha instável de 135**) e prova o comportamento com **conteúdo observado ou local**.
+- **verificada** — teste passou neste sandbox **ou no Windows do usuário** e prova o comportamento com **conteúdo observado ou local**. Desde a r17 revisada a suíte inteira roda **neste sandbox, incluindo os 56 testes de tela** (Chromium 153 headless do pacote `@sparticuz/chromium`, via `PIPERLINE_CHROMIUM_EXECUTABLE`; ver LEIA_PRIMEIRO §4).
 - **implementada (conteúdo UNOBSERVED)** — a implementação existe e tem teste que prova o *mecanismo*, mas parte do conteúdo é **inventada** (títulos/datas/textos dos 8 anúncios, preços e ratings, HTML dos cards, CTA, anúncios dos andamentos de vídeo). Ter teste NÃO torna o conteúdo observado — não conta como verificada.
-- **não verificada** — não medido. Os 56 testes de tela rodaram no Windows na r16 (133/2/1): as linhas provadas por eles contam como verificadas; a única restante é a da central de notificações (`features_ui` instável — passa 1 de 3), corrigida na r17 (ordem determinística + `hasText`) e aguardando nova validação no Windows.
+- **não verificada** — não medido. **Nenhuma linha está neste estado agora.** Os 56 testes de tela rodaram e passaram aqui na r17 revisada (**133 ok / 2 skip / 0 falhas de 135**), `features_ui` incluída (4/4 aqui: suíte + 3 seguidas; a instabilidade de 1 em 3 do Windows era o loop de espera, corrigido na r17).
 - **inventada** — apagada, não preservada ou não documentada.
 - **bloqueada** — exige licença/monetização externa.
 
 "Nº de telas" é a contagem de evidência (arquivos/capturas/recortes), não uma quantidade inventada. UNOBSERVED = não observado (não confundir com inventado).
 
 ## Escopo reproduzível — implementar, melhorar e manter
-Resumo: **423 linhas no catálogo**. Estados: **84 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 1 não verificada (instável) / 272 inventadas / 0 bloqueada** (= 423).
-Contagem interpretada (par clássico "implementada ou verificada"): **150 de 423** = 35%. Recontagem r17: as linhas provadas pelos testes de tela contam após a validação da r16 no Windows (133/2/1); a única não verificada restante é a de `features_ui` (instável), corrigida na r17.
-O inventário de 229 linhas foi regenerado nesta rodada (r16) a partir da evidência, após a perda do arquivo gerado na r15 (o histórico do branch não o continha). Cada linha registra o que existe e o que foi verificado por teste que roda aqui.
+Resumo — **as duas réguas, lado a lado** (denominadores diferentes; os % **não** são comparáveis entre si):
+
+| régua | o que conta | base | prontas (implementadas + verificadas) | % |
+|---|---|---|---|---|
+| **r15 (critério antigo)** | escopo reproduzível da r15 | **122 linhas** | **105** (30 implementadas + 75 verificadas) | **86,1%** |
+| **r16/r17 (catálogo integral)** | catálogo integral, UNOBSERVED ≠ verificada | **423 linhas** | **151** (66 implementadas UNOBSERVED + 85 verificadas) | **35,7%** |
+
+- **Régua antiga hoje: 105/122 = 86,1%** — o mesmo número da r15. Enquanto `features_ui` esteve instável (r16) a linha "Central de notificações" valia 104/122 = 85,2%; a correção da r17, provada 4/4 aqui, devolveu a 105/122.
+- **Régua nova: 85 verificadas / 66 implementadas (conteúdo UNOBSERVED) / 0 não verificadas / 272 inventadas / 0 bloqueadas** (= 423) → 151/423 = 35,7%.
+- Por que os % diferem: (a) a régua nova inclui **272 linhas inventadas** (conteúdo apagado/não preservado) que a antiga não contava; (b) a régua nova separa "implementada (conteúdo UNOBSERVED)" de "verificada", e o par clássico soma as duas. Cobertura de linhas, **não** paridade com o Pippit.
+
+Sobre a origem: a régua de 122 linhas (134 no catálogo da r15, com 12 fora de escopo) está preservada em `entrega_15/FEATURE_INVENTORY.md` (Drive). O catálogo integral de 423 linhas foi regenerado na r16 a partir da evidência (a r15 e a r16 perderam o `.git`; o gerador do inventário se perdeu junto — a recontagem é feita por patch direto do markdown). Cada linha registra o que existe e o que foi verificado por teste.
 
 | área | funcionalidade | estado | evidência | observação / diferença |
 |---|---|---|---|---|
@@ -450,7 +459,7 @@ O inventário de 229 linhas foi regenerado nesta rodada (r16) a partir da evidê
 
 | — | Notificações: 8 anúncios observados por tema (REA) + "Mark all as read" | implementada (conteúdo UNOBSERVED) | REA ev_72d7b4c2…7b20; testes: `notifications_editorial_route` | títulos/datas/textos UNOBSERVED (inventados); mecanismo verificado |
 | — | Toggle dos anúncios + rota com os 8 | implementada (conteúdo UNOBSERVED) | REA ev_72d7b4c2…7b20; testes: `notifications_editorial_route` | mecanismo verificado; conteúdo inventado |
-| — | Eventos reais do app primeiro, anúncios depois (r16) | não verificada | r17 item 1; testes: `features_ui, notifications_ui` | corrigido na r17 (ordem determinística + hasText); features_ui instável no Windows — não verificada até passar lá |
+| — | Eventos reais do app primeiro, anúncios depois (r16) | verificada | r17 item 1; testes: `features_ui, notifications_ui` | ordem determinística + hasText; features_ui passou 4/4 aqui na r17 revisada (suíte + 3 seguidas) |
 | — | Preços reais UNOBSERVED com licença grátis (Fable5, Hailuo, Seedance) | implementada (conteúdo UNOBSERVED) | video_progress_route; testes: `pricing_model_routes` | mecanismo implementado; conteúdo UNOBSERVED |
 | — | Preços/pedidos falsos vazios | verificada | pricing_models_meta_route; testes: `pricing_models_meta_route` | verificados (estado vazio) |
 | — | Preços dos modelos: 5 preços; Dica 5 | inventada | layouts | preservados |
@@ -540,4 +549,4 @@ O inventário de 229 linhas foi regenerado nesta rodada (r16) a partir da evidê
 | 7. Preços/notificações/observacional | 94 | 73 | 11 | 9 | 0 | 1 | 20/94 (21%) | 9/94 (9%) |
 | **Total** | **423** | **272** | **66** | **84** | **0** | **1** | **150/423 (35%)** | **84/423 (19%)** |
 
-**Contagem interpretada (par clássico): 150 de 423** = 35%. Placar do Windows da r16: **133 ok / 2 skip / 1 falha instável (de 135)**; `features_ui` (instável) corrigida na r17 — falta validá-la lá.
+**Contagem interpretada (par clássico): 151 de 423** = 35,7% (régua do catálogo integral). **Régua antiga (r15, 122 linhas): 105 de 122 = 86,1%** — lado a lado, como no resumo do topo. Placar desta r17 revisada no sandbox **com navegador**: **133 ok / 2 skip / 0 falhas (de 135)**; Windows r16: 133/2/1 (a instável `features_ui` foi corrigida e passou 4/4 aqui).
