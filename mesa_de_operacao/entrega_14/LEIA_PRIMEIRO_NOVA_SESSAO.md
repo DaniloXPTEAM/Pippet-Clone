@@ -146,7 +146,7 @@ Notas de uso:
 | `ENTREGA.md` | relatório da rodada 14 (itens 1, 2 e 3) e a classificação do que está no Drive |
 | `FEATURE_INVENTORY.md` | inventário de linhas (122 reproduzíveis; 83/122 = 68,0% — cobertura de linhas, **não** paridade) |
 | `.env.example` | **nomes** das variáveis, todos vazios |
-| `MANIFESTO_SHA256.csv` | sha256 de cada arquivo versionado (672 arquivos) |
+| `MANIFESTO_SHA256.csv` | sha256 de cada arquivo versionado (682 arquivos) |
 | `PREPARO_PUSH.md` | branch, commits, divergência com o remoto e o comando de push **não executado** |
 | `segredos_varredura_r14.txt` | resultado cru da varredura de segredos desta rodada |
 | `suite_rodada14_final.txt` | suíte completa: **128 passaram, 2 skip explícito, 0 falharam (de 130)** |

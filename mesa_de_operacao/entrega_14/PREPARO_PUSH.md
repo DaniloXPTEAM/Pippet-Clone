@@ -39,7 +39,7 @@ Ou seja: **o histórico por rodada das rodadas 1–6 não está perdido — est�
 
 ## 2. O que seria enviado
 
-- **~683 arquivos** no commit final do pacote da r14, ~81 MB de conteúdo (o mesmo da árvore versionada).
+- **682 arquivos** no commit final do pacote da r14, ~81 MB de conteúdo (o mesmo da árvore versionada).
 - **Fora do push** (por `.gitignore` e por escolha): `node_modules`, `.deps`, `*.bundle`, `*.zip`, `.env`, `.env.local`, `local_reconstruction/data/auth-secret`, `captures/auth/`, `google_drive/`, e os artefatos `SHA256SUMS.txt`/`*_bundle_verify.txt` das entregas.
 - **Arquivo grande já versionado:** `captures/current_670/rea_session_bundle_lote12.json` tem **68 MB** e já está no commit base `48ca7bb`. Passa do limite de aviso do GitHub (50 MB) e fica abaixo do limite duro (100 MB): o push funciona, mas demora. Tirá-lo é decisão do usuário e uma rodada própria.
 - **55 pngs de `test/ui-shots/`** vão junto (evidência histórica; desde a rodada 10 são somente leitura para os testes).
