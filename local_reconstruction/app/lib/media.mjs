@@ -5,11 +5,32 @@ import os from 'node:os';
 import path from 'node:path';
 import { extractChunkArgs } from './transcribe.mjs';
 import { buildWatermarkFilter } from './watermark.mjs';
-const WINGET = 'C:/Users/Dannilo/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin';
+// Localização do ffmpeg/ffprobe do WinGet (pacote Gyan.FFmpeg): varre
+// %LOCALAPPDATA%\Microsoft\WinGet\Packages\Gyan.FFmpeg_*\*\bin em QUALQUER versão
+// (o caminho antigo era fixo numa única versão do build e quebrava a cada atualização).
+// Sem nome de usuário no código: as raízes vêm do ambiente (%LOCALAPPDATA%) e do home.
+const cmpVersao = (a, b) => { const pa = a.match(/\d+/g) || [], pb = b.match(/\d+/g) || []; for (let i = 0; i < Math.max(pa.length, pb.length); i++) { const d = Number(pb[i] || 0) - Number(pa[i] || 0); if (d) return d; } return b.localeCompare(a); };
+function wingetBins(name) {
+  const raizes = [process.env.LOCALAPPDATA, path.join(os.homedir(), 'AppData', 'Local')].filter(Boolean);
+  const achados = [];
+  for (const raiz of raizes) {
+    const pacotes = path.join(raiz, 'Microsoft', 'WinGet', 'Packages');
+    let entradas = []; try { entradas = fs.readdirSync(pacotes); } catch { continue; }
+    for (const pkg of entradas.filter((e) => e.startsWith('Gyan.FFmpeg_')).sort(cmpVersao)) {
+      const dir = path.join(pacotes, pkg);
+      let subs = ['']; try { subs = ['', ...fs.readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name)]; } catch { continue; }
+      for (const sub of subs.sort(cmpVersao)) {
+        const w = path.join(dir, sub, 'bin', name + '.exe');
+        if (fs.existsSync(w)) achados.push(w);
+      }
+    }
+  }
+  return achados;
+}
 function find(bin) {
   if (process.env['PIPPIT_' + bin.toUpperCase()]) return process.env['PIPPIT_' + bin.toUpperCase()];
   const t = spawnSync(bin, ['-version'], { encoding: 'utf8' }); if (!t.error) return bin;
-  const w = path.join(WINGET, bin + '.exe'); return fs.existsSync(w) ? w : null;
+  const w = wingetBins(bin)[0]; return w || null;
 }
 export const FFMPEG = find('ffmpeg'), FFPROBE = find('ffprobe');
 export const available = () => !!(FFMPEG && FFPROBE);
