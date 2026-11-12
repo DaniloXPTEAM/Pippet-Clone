@@ -17,6 +17,8 @@ Ordem do usuário: terminar o projeto. (1) dois ajustes primeiro (ffmpeg do WinG
 | `bafd80c` | linha 24 — Inspiration: áreas nomeadas pelos endpoints dos bundles |
 | `6078452` | linha 5 — 9 atalhos do canvas como extensões locais (19/20) |
 | `2a8b0c9` | itens 2–4 — FEATURE_INVENTORY atualizado + BLOQUEIOS_R15.md |
+| `bb59ae3`/`6c30124` | item 5 — entrega_15 (docs, provas, SHA256SUMS, MANIFESTO) |
+| `2d282d7` | revisão pós-entrega — 2 bugs dos testes de UI novos só detectáveis no navegador (rota de chats; innerText vs tags) |
 
 ## Recontagem (critério rigoroso: teste automatizado = verificada)
 
@@ -179,6 +181,10 @@ Os 56 skips são todos de navegador (Chromium não existe no sandbox; downloads 
 ### Falharam (0)
 
 (nenhuma)
+
+## Revisão pós-entrega
+
+Antes da sua suíte do Windows, os 5 testes de UI novos foram relidos contra o código: `chat_history_idea_ui` (usava rota inexistente `GET /api/projects/:id/chats`) e `titlebar_panels_ui` (comparava `innerText` com tags HTML) foram corrigidos (`2d282d7`). Textos/atalhos/seletores dos demais conferidos contra a implementação (en-dash dos anúncios, headings de preços, `data-k`/`kstate` do diálogo de atalhos).
 
 ## Limites honestos
 

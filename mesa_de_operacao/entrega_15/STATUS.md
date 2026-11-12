@@ -1,6 +1,7 @@
 # STATUS
 
 **Estado: RODADA 15 PRONTA — TERMINAR O PROJETO: 39 LINHAS FECHADAS, INVENTÁRIO RECONTADO** (2026-11-12) · suíte **79 aprovados, 56 skips explícitos (browser), 0 falhas (135)** no sandbox Linux com ffmpeg 9.0.2 estático · inventário **105/122 = 86,1%** prontas (75 verificadas) · 9 commits com teste · nenhum push, **nenhuma chave**.
+**Revisão pós-entrega (2026-11-12, `2d282d7`):** os 5 testes de UI novos foram relidos contra o código antes da sua suíte do Windows — duas falhas que só apareceriam lá foram corrigidas: `chat_history_idea_ui` usava `GET /api/projects/:id/chats` (rota inexistente; agora lê `.chats` de `GET /api/projects/:id`) e `titlebar_panels_ui` comparava `innerText` com tags HTML (`<b>4</b>`); agora compara `ordem 4`. Pacote/bundle refeitos com o HEAD final.
 
 ## RODADA 15 PRONTA — terminar o projeto: as 39 linhas investigada/parcial/bloqueada (2026-11-12)
 
