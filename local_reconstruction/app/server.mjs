@@ -325,6 +325,64 @@ route('POST', /^\/api\/legacy-chat\/read$/, async (q, r) => {
   if (!res.ok) return fail(r, 400, res.error);
   send(r, 200, { ok: true, readOnly: true, messages: res.messages, warnings: res.warnings, note: 'Somente leitura — nada foi alterado; conteúdo não capturado é UNOBSERVED.' });
 });
+// ----- Voz personalizada / clonagem (#7) — adaptadores huggingface-space e local-command (src/voiceclone.mjs).
+import * as VC from '../src/voiceclone.mjs';
+const vcCfg = () => (db().settings.voiceclone ||= {});
+const vcRuns = () => (db().voicecloneRuns ||= []);
+const vcPublicCfg = () => { const c = vcCfg(); return { adapter: c.adapter || null, space: c.space || null, apiName: c.apiName || null, baseUrl: c.baseUrl || null, command: c.command || null, fields: c.fields || null, hfTokenInEnv: !!process.env.HF_TOKEN }; };
+route('GET', /^\/api\/voiceclone\/contract$/, (q, r) => send(r, 200, { ok: true, ...VC.contractSummary(), config: vcPublicCfg() }));
+route('POST', /^\/api\/voiceclone\/config$/, async (q, r) => {
+  const b = await readJson(q);
+  const ad = VC.adapterFor(String(b.adapter || '')); if (!ad) return fail(r, 400, 'adaptador inválido (use huggingface-space ou local-command)');
+  const cfg = { adapter: ad.id, space: b.space, apiName: b.apiName, baseUrl: b.baseUrl, command: b.command, fields: b.fields };
+  const err = ad.validateConfig(cfg); if (err) return fail(r, 400, err);
+  Object.assign(vcCfg(), cfg); S.save();
+  send(r, 200, { ok: true, config: vcPublicCfg(), note: 'Configuração local; HF_TOKEN só no ambiente. Contrato testado com servidor falso (UNOBSERVED contra o serviço real).' });
+});
+const vcSample = (assetId) => {
+  const a = db().assets.find((x) => x.id === String(assetId || ''));
+  if (!a) return { error: 'amostra (asset) não encontrada' };
+  const file = assetPath(a.id); if (!fs.existsSync(file)) return { error: 'arquivo da amostra ausente' };
+  return { sample: { bytes: fs.readFileSync(file), name: a.name || 'amostra.wav', mime: a.kind === 'audio' ? 'audio/wav' : 'application/octet-stream' } };
+};
+route('GET', /^\/api\/voiceclone\/runs$/, async (q, r) => send(r, 200, { ok: true, runs: vcRuns() }));
+route('POST', /^\/api\/voiceclone\/runs$/, async (q, r) => {
+  const b = await readJson(q);
+  const ad = VC.adapterFor(vcCfg().adapter); if (!ad) return fail(r, 409, 'configure o adaptador primeiro (/api/voiceclone/config)', { blocked: true });
+  const err = ad.validateConfig(vcCfg()); if (err) return fail(r, 409, err, { blocked: true });
+  const s = vcSample(b.sampleAssetId); if (s.error) return fail(r, 404, s.error);
+  let sub;
+  try { sub = await ad.submit(vcCfg(), { sample: s.sample, text: String(b.text || '') }); }
+  catch (e) { return fail(r, 502, String(e.message || e).slice(0, 300)); }
+  if (sub.state === 'failed') return fail(r, 502, sub.error);
+  const run = { id: S.newId(), adapter: ad.id, remoteId: sub.jobId, state: 'running', accepted: sub.accepted, ignored: sub.ignored, resultAssetId: null, error: null, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+  vcRuns().unshift(run); S.save();
+  send(r, 200, { ok: true, run, note: 'Execução por consentimento por tarefa; nada é cobrado (execução gratuita declarada).' });
+});
+route('POST', /^\/api\/voiceclone\/runs\/([\w]+)\/tick$/, async (q, r, m) => {
+  const run = vcRuns().find((x) => x.id === m[1]); if (!run) return fail(r, 404, 'execução inexistente');
+  if (run.state !== 'running') return send(r, 200, { ok: true, run });
+  const ad = VC.adapterFor(run.adapter);
+  const p = await ad.poll(vcCfg(), { jobId: run.remoteId });
+  run.state = p.state; run.error = p.error || null; run.updatedAt = new Date().toISOString();
+  if (p.state === 'succeeded') {
+    const bytes = await ad.download(vcCfg(), { result: p.result });
+    if (!bytes?.length) { run.state = 'failed'; run.error = 'não foi possível baixar o áudio gerado'; }
+    else {
+      const tmpFile = S.pubFile('_vc_' + S.newId() + '.wav'); fs.writeFileSync(tmpFile, bytes);
+      const asset = addAsset('voz_clonada.wav', tmpFile, 'audio', 'voiceclone'); try { fs.unlinkSync(tmpFile); } catch {}
+      run.resultAssetId = asset.id;
+    }
+  }
+  S.save(); send(r, 200, { ok: true, run });
+});
+route('POST', /^\/api\/voiceclone\/runs\/([\w]+)\/cancel$/, async (q, r, m) => {
+  const run = vcRuns().find((x) => x.id === m[1]); if (!run) return fail(r, 404, 'execução inexistente');
+  const ad = VC.adapterFor(run.adapter);
+  const c = ad.cancel ? ad.cancel(vcCfg(), { jobId: run.remoteId }) : { requested: false };
+  if (c.requested) { run.state = 'failed'; run.error = 'cancelada pelo usuário'; run.updatedAt = new Date().toISOString(); S.save(); }
+  send(r, 200, { ok: true, ...c, run });
+});
 
 const CAT_PT = { 'Short Drama': 'Drama curto', 'Marketing Advertising': 'Marketing Publicidade', 'Professional film and television': 'Cinema e televisão profissionais' };
 // dados observados no servidor (official_skills.json, REA 6.7.0): categorias, ferramentas declaradas, modelos padrão e textos de guia
