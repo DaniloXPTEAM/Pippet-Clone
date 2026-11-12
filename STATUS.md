@@ -1,6 +1,18 @@
 # STATUS
 
-**Estado: RODADA 11 PRONTA — O ÚLTIMO VERMELHO DO WINDOWS (comando local entre aspas no PowerShell)** (2026-11-09) · suíte **127 aprovados, 2 skips explícitos, 0 falhas (129)** · 1 item, 1 commit, com teste (`e31726b`) · `lipsync_adapters` **5 execuções seguidas, 5 ok** · nenhum push, **nenhuma chave**.
+**Estado: RODADA 12 PRONTA — O TESTE QUE O WINDOWS NÃO RODAVA E O SKIP SEM MOTIVO** (2026-11-09) · suíte **128 aprovados, 2 skips explícitos, 0 falhas (130)** · 2 itens, 1 commit cada, com teste (`6a6292d`, `722f235`) · `pricing_faq_ui` **20 execuções seguidas, 20 ok** (min 697 ms, mediana 734 ms, max 826 ms) · nenhum push, **nenhuma chave**.
+
+## RODADA 12 PRONTA — shebang no Windows e o SKIP do navegador (2026-11-09)
+
+Sua rodada 11 no Windows deu **119 ok / 5 skip / 5 falhas (129)**; o item 2 foi enxugado para **só `pricing_faq_ui`**.
+
+**Item 1 — `lipsync_adapters` falhava 6 de 6 (`6a6292d`).** O teste montava o cenário com um "powershell" **sem extensão** (`#!/usr/bin/env node`) e um "node" (`#!/bin/sh`): **o Windows não executa shebang**, o `spawnSync` devolvia `status: null` e a asserção olhava o código esperado (2) em vez de notar que o shell nem rodou. Agora o teste é independente de sistema: **no Windows usa o PowerShell de verdade**, no Linux/macOS o imitador da rodada 11; o primeiro token é um **node real em caminho com espaço** (no Windows `C:\Program Files\nodejs\node.exe`; se faltar espaço, hardlink e depois cópia); o controle negativo exige primeiro que o shell tenha rodado e aceita o erro do parser em pt-BR e en. O app **não** mudou — o `prepare()` com `& ` foi provado no seu PowerShell.
+
+**Item 2 — `pricing_faq_ui`: SKIP e 74 s (`722f235`).** O SKIP **não era do app**: `test/support/browser.mjs` dava **5 s** para o binário responder `--version`; num PC carregado um Chrome frio passa disso, todos os candidatos "não executam" e o teste é pulado **com o motivo errado** ("faltam libs") — até 3 candidatos × 5 s, checados **duas vezes** por teste: os **14–19 s** de SKIP. Reproduzido com um navegador que demora 6 s: código antigo → 5007 ms, `ok=false` e motivo errado; código novo → 6014 ms, `ok=true`; o teste completo passa em 6,4 s. Correção na infraestrutura (uma sondagem por processo, prazo de 20 s ajustável, motivo sempre explicando o que aconteceu) e teste novo **`browser_probe`**. Sobre os **74 s**: não reproduzi aqui (20 de 20 seguidas: 697/734/826 ms; 40 em paralelo: 40 ok; CPU 100×: 10,2 s) — o que dá para afirmar com medição é que **até 30 s do teste antigo eram sondagens do navegador** antes de ele abrir, o que explica ~74 s quando uma espera de 30 s estoura num PC sobrecarregado. O teste agora **cronometra cada etapa** e, ao falhar, diz a etapa, o tempo e o estado da tela (se a nota ficou em "verificando…", é o app; se a página não carregou, é o ambiente).
+
+**Limite honesto:** nada foi rodado em Windows; os 74 s não foram reproduzidos. Relatório completo: `mesa_de_operacao/entrega_12/ENTREGA.md`.
+
+**Estado anterior: RODADA 11 PRONTA — O ÚLTIMO VERMELHO DO WINDOWS (comando local entre aspas no PowerShell)** (2026-11-09) · suíte **127 aprovados, 2 skips explícitos, 0 falhas (129)** · 1 item, 1 commit, com teste (`e31726b`) · `lipsync_adapters` **5 execuções seguidas, 5 ok** · nenhum push, **nenhuma chave**.
 
 ## RODADA 11 PRONTA — comando local entre aspas roda no PowerShell (2026-11-09)
 
