@@ -1,0 +1,28 @@
+# Varredura de segredos — 2026-11-12T00:54:50.758Z
+# arquivos examinados: 651 (git ls-files + documentos da entrega)
+# regras: 9
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/src/publishing.mjs:78 — Secret: 'TIKTOK_CLIENT_SECRET'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/src/publishing.mjs:99 — Secret: 'GOOGLE_CLIENT_SECRET'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/cloudflare_router.test.mjs:51 — API_KEY: 'chave-do-freellmapi'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/flow_e2e_providers.test.mjs:72 — API_KEY: 'chave-freellmapi-flow'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/flow_e2e_providers.test.mjs:74 — API_KEY: 'chave-nvidia-flow'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/flow_e2e_providers.test.mjs:75 — API_KEY: 'chave-novai-flow'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/flow_e2e_providers.test.mjs:77 — API_TOKEN: 'chave-cloudflare-flow'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router.test.mjs:43 — API_KEY: 'transient-test-key'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router.test.mjs:45 — API_KEY: 'transient-test-key'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router_http.test.mjs:47 — apiKey: 'must-not-be-accepted'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router_http.test.mjs:49 — apiKey: 'ephemeral-llm-secret'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router_http.test.mjs:50 — apiKey: 'must-not-be-accepted'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/free_router_http.test.mjs:51 — apiKey: 'ephemeral-provider-secret'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/providers_panel.test.mjs:35 — API_KEY: 'chave-freellmapi-nao-expor'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/providers_panel.test.mjs:36 — API_KEY: 'chave-omni-nao-expor'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/providers_panel.test.mjs:37 — API_KEY: 'chave-nvidia-nao-expor'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/providers_panel.test.mjs:38 — API_KEY: 'chave-novai-nao-expor'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/providers_panel.test.mjs:39 — API_TOKEN: 'chave-cloudflare-nao-expor'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/router_llm.test.mjs:45 — API_KEY: 'chave-freellmapi-teste'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/router_llm.test.mjs:46 — API_KEY: 'chave-omni-teste'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/router_llm.test.mjs:47 — API_KEY: 'chave-nvidia-teste'
+VALOR DE TESTE valor colado em api/token/secret em local_reconstruction/test/router_llm.test.mjs:48 — API_KEY: 'chave-novai-teste'
+
+TOTAL: 22 ocorrência(s) do padrão; 22 não são credenciais (chave falsa de teste, marcador em inglês ou NOME de variável de ambiente) e 0 exigem revisão.
+Conclusão: nenhuma credencial real nos arquivos que seriam enviados; os valores casados são chaves falsas escritas nos testes.

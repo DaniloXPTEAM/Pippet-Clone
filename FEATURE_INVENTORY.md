@@ -222,3 +222,18 @@ O que **não** mudou de estado, apesar de ter melhorado:
 Regra de leitura mantida: `verificada` exige teste automatizado que exercite o comportamento, e é isso que os quatro testes de login fazem — com **GoTrue falso em loopback**, nada de rede real. O que ainda depende do usuário (projeto Supabase com as variáveis no ambiente, provedor Google ligado e Redirect URL cadastrada) está escrito no próprio teste e em `LOGIN_ESTRUTURA.md`; não é lacuna de código, é configuração da conta.
 
 Fórmula aplicada: (30 + 53) / 122 = **83/122 = 68,0%**.
+
+## Reavaliação das rodadas 9 a 12 (defeitos e infraestrutura de teste)
+
+Estas quatro rodadas **não promoveram nenhuma linha** e o número do topo continua o mesmo: **83/122 = 68,0%** (cobertura de linhas no escopo reproduzível, **não** paridade com o Pippit).
+
+O que foi feito nelas e por que não conta como funcionalidade:
+
+| Rodada | Trabalho | Por que não muda o inventário |
+|---|---|---|
+| 9 | `drawtext` escapado para caminho `C:`; `0600` não exigível no Windows; `PIPPIT_TTS=off` para “sem voz local”; roteador com uma execução por vez | são correções de defeito e de portabilidade; nenhuma linha do catálogo passa a funcionar **por causa** disso — as que dependiam delas (marca d’água, nó de Áudio, roteador) continuam no mesmo estado porque seguem sem provedor/credencial real |
+| 10 | marca d’água sem sobrescrever o png versionado; executor local sem cair no WSL; redesenho atrasado do roteador; testes não escrevem em arquivo versionado | idem: robustez e higiene de teste |
+| 11 | `&` de chamada no PowerShell para comando que começa com aspas | idem: o executor local continua `parcial` — o que falta é **modelo/GPU**, não sintaxe de shell |
+| 12 | teste de lip-sync independente de sistema; sondagem de navegador com prazo e motivo; `pricing_faq_ui` cronometrado | idem: infraestrutura de teste, nenhum comportamento novo do app |
+
+Consequência prática para quem for atualizar o inventário: as linhas de **lip-sync**, **marca d’água**, **publicação** e **pagamento** só devem sair de `parcial` quando houver **execução real** (modelo rodando, app OAuth registrado, provedor de pagamento) — e não por causa de correção de teste.
