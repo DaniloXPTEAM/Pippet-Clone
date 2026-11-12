@@ -9,7 +9,7 @@
 
 O app roda, a suíte passa **128/2/0 de 130** no sandbox (três execuções completas hoje, mais a soma dos blocos) e o usuário validou a rodada 13 no Windows com **126 ok / 2 skip / 2 falhas (de 130)** — as duas falhas eram `omni_router_ui` (tempo; passou 4/4 em reexecução) e `lipsync_adapters` (4/4; causa provada e **corrigida nesta rodada**, `afb2550`). **Não há push desta sessão** e **o `.git` foi perdido de novo** (sandbox novo): o código foi restaurado do bundle `piperline_rodada13.bundle` e o HEAD confere em `9e57f96` antes dos commits da r14.
 
-**Atenção, isto continua valendo desde a rodada 12:** a branch `arena/a14d8a49-pippet-clone` **já existe no GitHub**, com **12 commits originais das rodadas 1–6** (ponta `1443745`) — o histórico local divergiu dela: o local tem **23 commits** que o remoto não tem (26 depois do pacote da r14) e o remoto tem **12** que o local não tem (base comum `48ca7bb`). Um `git push` simples **seria recusado**; **nunca force**. `PREPARO_PUSH.md` traz as três opções (recomendada: publicar numa branch nova, sem tocar na existente) e os comandos prontos, **não executados**.
+**Atenção, isto continua valendo desde a rodada 12:** a branch `arena/a14d8a49-pippet-clone` **já existe no GitHub**, com **12 commits originais das rodadas 1–6** (ponta `1443745`) — o histórico local divergiu dela: o local tem **23 commits** que o remoto não tem (28 depois do pacote da r14) e o remoto tem **12** que o local não tem (base comum `48ca7bb`). Um `git push` simples **seria recusado**; **nunca force**. `PREPARO_PUSH.md` traz as três opções (recomendada: publicar numa branch nova, sem tocar na existente) e os comandos prontos, **não executados**.
 
 ## 2. Regras do usuário (não negociáveis, valem para toda rodada)
 
@@ -56,8 +56,8 @@ Pré-requisito: Node 20+ (`node -v`). Se o `.git` sumir, restaure primeiro o có
 git init piperline && cd piperline
 git fetch ../piperline_rodada14.bundle 'refs/heads/*:refs/remotes/bundle/*'
 git checkout -b arena/d9cee29f-pippet-clone bundle/arena/d9cee29f-pippet-clone
-# (a ponta é 06eb194, o HEAD final da r14; no bundle da r13 o ref se chamava
-#  bundle/arena/a14d8a49-pippet-clone e a ponta era 9e57f96)
+# (a ponta do bundle é o HEAD final da r14 — o sha está no `SHA256SUMS.txt`;
+#  no bundle da r13 o ref se chamava bundle/arena/a14d8a49-pippet-clone, ponta 9e57f96)
 
 # caminho 2 — pelo zip (sem git nenhum)
 unzip piperline_arvore_rodada14.zip -d piperline

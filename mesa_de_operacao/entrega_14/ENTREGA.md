@@ -64,8 +64,8 @@ Quando você escrever **"PUSH AUTORIZADO"**: **um único push, sem `--force`**, 
 ## Estado do repositório
 
 - **HEAD base da rodada:** `9e57f96` (conferido após a restauração do bundle).
-- **Commits desta rodada, em ordem:** `afb2550` (item 1 — espera por tempo no `lipsync_adapters`), `7304dfa` (item 2 — docs da passagem, provas e pacote `entrega_14`), `25e1441` (manifesto sha256 — 682 arquivos versionados em 683 linhas com cabeçalho; o manifesto não lista a si mesmo nem este commit) e este (`rodada 14: ENTREGA com a lista real de commits e o HEAD final`).
-- **Divergência com o remoto (medida com `git rev-list --left-right --count`):** local **26** commits que o remoto não tem (23 antes do pacote) · remoto **12** (ponta `1443745`), base comum `48ca7bb`. `git push` seria recusado; **nunca `--force`**. Ver `PREPARO_PUSH.md`.
+- **Commits desta rodada, em ordem:** `afb2550` (item 1 — espera por tempo no `lipsync_adapters`), `7304dfa` (item 2 — docs da passagem, provas e pacote `entrega_14`), `25e1441` (manifesto sha256 — 682 arquivos versionados em 683 linhas com cabeçalho), `06eb194` (ENTREGA com a lista real), `e850437` (LEIA_PRIMEIRO aponta o ref real do bundle + manifesto final) e este (`rodada 14: lista final de commits e HEAD estavel`). **O sha deste último commit está no `SHA256SUMS.txt`** (linha `# gerado em … · HEAD <sha>`) — um documento versionado não pode citar o sha do commit que o grava.
+- **Divergência com o remoto (medida com `git rev-list --left-right --count`):** local **28** commits que o remoto não tem (23 antes do pacote) · remoto **12** (ponta `1443745`), base comum `48ca7bb`. `git push` seria recusado; **nunca `--force`**. Ver `PREPARO_PUSH.md`.
 - **Nenhum push**, nenhuma chave.
 - Bundle autossuficiente (`--all`, com `git fetch --unshallow` antes) e zip da árvore: `piperline_rodada14.bundle` e `piperline_arvore_rodada14.zip`, com tamanho e sha256 no `SHA256SUMS.txt`.
 

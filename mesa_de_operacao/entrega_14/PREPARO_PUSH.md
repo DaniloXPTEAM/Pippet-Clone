@@ -14,7 +14,7 @@ Medido nesta rodada (`git fetch --unshallow origin`, depois `git rev-list --left
 
 | Lado | Commits que o outro não tem |
 |---|---|
-| **local** (`HEAD`) | **23** (26 depois do pacote da r14) |
+| **local** (`HEAD`) | **23** (28 depois do pacote da r14) |
 | **remoto** (`origin/arena/a14d8a49-pippet-clone`) | **12** |
 
 **Consequência:** `git push` **seria recusado** (non-fast-forward). **Não use `--force`.** A branch remota tem os commits **originais das rodadas 1–6**, que o sandbox tinha dado como perdidos:
@@ -89,13 +89,13 @@ Executada nesta rodada sobre os **672 arquivos versionados** (`segredos_varredur
 cd /home/user/Pippet-Clone
 git status --short                     # precisa sair vazio
 git rev-list --left-right --count HEAD...origin/arena/a14d8a49-pippet-clone
-# medido hoje: 23 locais / 12 remotos (26/12 depois do pacote da r14)
+# medido hoje: 23 locais / 12 remotos (28/12 depois do pacote da r14)
 git ls-files | grep -E '(^|/)\.env$|auth-secret|node_modules|\.bundle$'   # não pode listar nada
 source local_reconstruction/.deps/env.sh && node local_reconstruction/test/run-all.mjs
 # esperado: 128 passaram, 2 skip explícito, 0 falharam (de 130)
 ```
 
-Resultado desta rodada: `git status --short` **vazio** após os commits · rev-list **23/12** (26/12 com o pacote) · grep **sem resultados** · suíte **128/2/0** (três execuções completas em 2026-11-12: duas do `run-all` e a soma dos blocos; ver `suite_rodada14_final.txt` e `git_status_prova_r14.txt`).
+Resultado desta rodada: `git status --short` **vazio** após os commits · rev-list **23/12** (28/12 com o pacote) · grep **sem resultados** · suíte **128/2/0** (três execuções completas em 2026-11-12: duas do `run-all` e a soma dos blocos; ver `suite_rodada14_final.txt` e `git_status_prova_r14.txt`).
 
 ## 6. Depois do push
 
