@@ -56,3 +56,19 @@ Fontes consultadas: [sync.so — modelos](https://sync.so/docs/models), [Replica
 - Se o provedor não aceitar *data URI*: um adaptador específico (envio por URL/multipart) — não implementado.
 - Um **teste real controlado** (não feito): só ele prova que o adaptador funciona contra o serviço e que há lip-sync correto. O PiperLine não verifica a qualidade da sincronização labial.
 - Preços reais por modelo: informados pelo usuário (o PiperLine não os consulta).
+
+## 5. Adaptador `huggingface-space` — o que o usuário precisa configurar (rodada 18)
+
+Este adaptador fala com a **API do Gradio** de um Space do Hugging Face (upload → call → stream SSE → download) e é o caminho para destravar as linhas **#6 (vídeo em avatar)** e **#16 (ferramentas: Remove background, Quick cut, Avatar video)** sem contratar serviço pago: a GPU é a do próprio Space. O que é preciso — **nada disto vai em arquivo versionado**:
+
+1. **Conta no Hugging Face + um Space de lip-sync em Gradio.** O campo `space` recebe `dono/nome-do-space` (ex.: `meu-usuario/wav2lip-gradio`). O app do Space precisa aceitar **imagem + áudio** e devolver **vídeo** (muitos modelos famosos pedem vídeo + áudio — confira antes).
+2. **Token (opcional), só no ambiente.** Se o Space for privado ou sofrer limite de acesso: crie um token em *Settings → Access Tokens* e exporte `HF_TOKEN=hf_...` **apenas no ambiente**. O PiperLine envia `Authorization: Bearer <token>` no upload/call/download e **nunca** devolve o token em UI, tarefas ou respostas (provado no teste).
+3. **Configuração do provedor** (Configurações > Assistente de IA > Provedores > "Foto falante (lip-sync)"):
+   - `adapter`: `huggingface-space`; `space`: `dono/nome-do-space`; `apiName`: a função Gradio chamada (ex.: `predict`);
+   - `inputMap`/`paramMap` só para os campos que o app do Space **realmente** aceita (os demais aparecem no orçamento como "NÃO recebe" e não são enviados);
+   - `maxAudioSeconds` conforme o limite do modelo. Custo é do usuário (padrão: gratuito, `cost.amount = 0`).
+4. **Sem segredo em arquivo:** nenhum token/chave entra em `.env` versionado, commit, log ou este documento. `HF_TOKEN` lê do ambiente.
+
+**O que o teste com servidor falso cobre agora (caminho completo, r18):** upload (2 arquivos, com e sem token) · call/enfileirar · stream SSE (progresso + complete) · download do vídeo gravado em Ativos · **erro no upload** (HTTP 500 → `failed` com o motivo) · **erro na consulta** (HTTP 500 → `failed`) · **download recusado** (host estranho) e **download quebrado** (HTTP 404 → sem sucesso inventado) · **cancelamento em execução** (estado `canceled` + a verdade `remoteCancel: unsupported` — o Gradio não tem rota de cancelamento por `event_id`, a fila do Space pode continuar e a UI avisa). Tudo em loopback, com consentimento por tarefa; falha se houver chamada a host externo.
+
+Com um Space configurado e um teste real controlado (orçamento mínimo, autorização explícita), as linhas #6/#16 saem de "bloqueada: provedor/GPU" — a **qualidade** do lip-sync não é verificada pelo PiperLine (§4).

@@ -40,6 +40,7 @@ const fake = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1'); const root = `http://127.0.0.1:${fake.address().port}`;
     const json = (code, body) => { res.writeHead(code, { 'content-type': 'application/json' }); res.end(JSON.stringify(body)); };
     if (url.pathname === '/gradio_api/upload' && req.method === 'POST') {
+      if (gradio.mode === 'upload_error') { res.writeHead(500, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ detail: 'fila de upload do Space indisponível' })); }
       gradio.uploads += 1; gradio.auth.push(req.headers.authorization || null);
       // dois arquivos por tarefa (foto e áudio)
       return json(200, [`/tmp/gradio/uploaded-${gradio.uploads * 2 - 1}.png`, `/tmp/gradio/uploaded-${gradio.uploads * 2}.wav`]);
@@ -56,11 +57,12 @@ const fake = http.createServer((req, res) => {
       res.writeHead(200, { 'content-type': 'text/event-stream' });
       res.write('event: generating\ndata: {"msg":"na fila"}\n\n');
       if (done) {
-        const url_ = gradio.mode === 'foreign' ? 'https://evil.example/out.mp4' : `${root}/gradio_api/file=/tmp/gradio/out-${id}.mp4`;
+        const url_ = gradio.mode === 'foreign' ? 'https://evil.example/out.mp4' : gradio.mode === 'gone' ? `${root}/gradio_api/file=/tmp/gradio/out-${id}-gone.mp4` : `${root}/gradio_api/file=/tmp/gradio/out-${id}.mp4`;
         res.write(`event: complete\ndata: ${JSON.stringify({ data: [{ path: `/tmp/gradio/out-${id}.mp4`, url: url_, meta: { _type: 'gradio.FileData' } }] })}\n\n`);
       }
       return res.end();
     }
+    if (url.pathname.includes('-gone.mp4')) { res.writeHead(404, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ error: 'arquivo expirado no Space' })); }
     if (url.pathname.startsWith('/gradio_api/file=') || url.pathname.startsWith('/files/')) { res.writeHead(200, { 'content-type': 'video/mp4' }); return res.end(MP4); }
     if (url.pathname === '/gradio_api/file=/tmp/gradio/out-ev-1.mp4') { res.writeHead(200, { 'content-type': 'video/mp4' }); return res.end(MP4); }
     return json(404, { error: `rota falsa ${url.pathname}` });
@@ -176,6 +178,42 @@ try {
     assert.equal(cancel.state, 'canceled');
   }
   gradio.mode = 'ok';
+
+  // ---------- (a2) caminho completo da r18: erro NO UPLOAD, erro NO DOWNLOAD, cancelamento EM EXECUÇÃO ----------
+  // (a2.1) upload que responde HTTP 500 → a tarefa falha com o motivo do upload; nada chega ao Space nem vira vídeo.
+  gradio.mode = 'upload_error'; gradio.streams = 0; gradio.completeAt = 1;
+  const upFail = await runJob({ assetId: foto.id, audioAssetId: voz.id });
+  assert.equal(upFail.job.state, 'failed', 'upload quebrado = falha, não sucesso');
+  assert.match(upFail.job.error, /upload no Space/, `o motivo precisa citar o upload: ${upFail.job.error}`);
+  assert.ok(!upFail.job.assetId, 'nenhum vídeo inventado após falha de upload');
+
+  // (a2.2) o complete aponta para um arquivo que responde HTTP 404 → o download falha; sem sucesso inventado
+  // (mesma regra do host estranho: o erro fica registrado e a tarefa não é concluída de mentira).
+  gradio.mode = 'gone'; gradio.streams = 0; gradio.completeAt = 1;
+  {
+    const gen3 = ok(await api('/api/talking-photo/generate', { assetId: foto.id, audioAssetId: voz.id }), 'tarefa com download quebrado');
+    ok(await api(`/api/talking-photo/jobs/${gen3.job.id}/authorize`, { confirm: true, quoteDigest: gen3.quote.digest }), 'autorizar');
+    const gone = await until(async () => { await tick(); const j = await jobOf(gen3.job.id); return /download do Space|falha ao baixar/.test(j.error || '') ? j : null; }, 15_000, 'o erro de download');
+    assert.notEqual(gone.state, 'succeeded', 'sem sucesso inventado quando o download falha');
+    assert.equal(gone.assetId || null, null, 'nenhum ativo salvo com download quebrado');
+    if (gone.state === 'running') ok(await api(`/api/jobs/${gen3.job.id}/cancel`, {}), 'cancelar a tarefa com download quebrado');
+  }
+
+  // (a2.3) cancelamento DURANTE a execução: a tarefa está rodando na consulta do Space e o usuário cancela.
+  // A verdade sobre o provedor: o Gradio não tem rota de cancelamento por event_id → remoteCancel = 'unsupported'
+  // (a fila do Space pode continuar; a UI avisa). Nada de "cancelado no provedor" de mentira.
+  gradio.mode = 'ok'; gradio.streams = 0; gradio.completeAt = 999;
+  {
+    const slow = ok(await api('/api/talking-photo/generate', { assetId: foto.id, audioAssetId: voz.id }), 'tarefa lenta');
+    ok(await api(`/api/talking-photo/jobs/${slow.job.id}/authorize`, { confirm: true, quoteDigest: slow.quote.digest }), 'autorizar a tarefa lenta');
+    await until(async () => { await tick(); const j = await jobOf(slow.job.id); return j.state === 'running' ? j : null; }, 20_000, 'a tarefa em execução');
+    const cancelMid = ok(await api(`/api/jobs/${slow.job.id}/cancel`, {}), 'cancelar durante a execução');
+    assert.equal(cancelMid.state, 'canceled');
+    assert.equal(cancelMid.error, 'cancelada pelo usuário');
+    assert.equal(cancelMid.remoteCancel, 'unsupported', 'sem rota de cancelamento no Gradio: a verdade é unsupported');
+    assert.ok(!cancelMid.assetId, 'cancelamento não inventa vídeo');
+    gradio.mode = 'ok';
+  }
 
   // ---------- (b) executor local: comando configurável ----------
   // Plano de shell por sistema (rodada 10, item 2): no Windows NUNCA 'bash' (cai no WSL e o comando
