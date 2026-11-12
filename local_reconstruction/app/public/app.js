@@ -248,8 +248,16 @@ async function pageProject(id) {
   $('#chatReopen').onclick = () => $('.ws').classList.remove('chat-closed');
   $('#chatHistory').onclick = () => {
     const prior = p.chats.filter((c) => c.id !== CHATID);
-    const m = modal(`<h2>Chat history</h2><p class="muted">Histórico disponível apenas neste projeto local.</p>${prior.length ? prior.map((c) => `<button class="mediaitem" data-chat="${esc(c.id)}">${esc(c.title || 'Novo chat')} <span class="muted">${c.messages.length} mensagem(ns)</span></button>`).join('') : '<p>No history yet</p>'}`, 'sm');
+    const m = modal(`<h2>Chat history</h2><p class="muted">Histórico disponível apenas neste projeto local.</p>${prior.length ? prior.map((c) => `<button class="mediaitem" data-chat="${esc(c.id)}">${esc(c.title || 'Novo chat')} <span class="muted">${c.messages.length} mensagem(ns)</span></button>`).join('') : '<p>No history yet</p>'}<div class="row" style="margin-top:10px"><input id="chIdea" placeholder="Campo de ideia (documentado no capture; destino no original UNOBSERVED)" style="flex:1"><button class="primary" id="chIdeaGo" aria-label="Enviar ideia">↑</button></div>`, 'sm');
     m.querySelectorAll('[data-chat]').forEach((b) => (b.onclick = () => { CHATID = b.dataset.chat; m.close(); pageProject(id); }));
+    // Campo de ideia documentado no capture: o envio real nunca foi observado. Equivalente local: cria um
+    // novo chat do projeto com a ideia como primeira mensagem (nada é enviado ao Pippit).
+    $('#chIdeaGo').onclick = async () => {
+      const t = $('#chIdea').value.trim(); if (!t) return;
+      const c = (await post(`/api/projects/${id}/chats`)).body;
+      await post(`/api/projects/${id}/chats/${c.id}/messages`, { text: t });
+      CHATID = c.id; m.close(); pageProject(id);
+    };
   };
   $('#cplus').onclick = () => pickAsset((x) => ($('#cin').value += ` [Mídia: ${x.name}]`)); $('#cat').onclick = () => toast('Menção de mídia (@): use o nome do ativo ou avatar no texto.');
   $('#csend').onclick = () => sendChat({ text: $('#cin').value.trim() }); $('#cin').onkeydown = (e) => { if (e.key === 'Enter' && e.ctrlKey) sendChat({ text: $('#cin').value.trim() }); };
