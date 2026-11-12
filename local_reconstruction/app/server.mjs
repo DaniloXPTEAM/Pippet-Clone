@@ -968,6 +968,19 @@ const ACCOUNT_UNOBSERVED = Object.freeze({
   externalCalls: false,
 });
 route('GET', /^\/api\/account\/unobserved$/, (q, r) => send(r, 200, { ok: true, ...ACCOUNT_UNOBSERVED }));
+// Painéis da barra de título (linha 31 do inventário; evidência estática: scripts/auth_bundles —
+// módulos async__title-bar-agent-connect e title-bar-export-task). Os metadados de composição abaixo
+// foram observados; conteúdo, condição de render e ações dos painéis seguem UNOBSERVED.
+const TITLEBAR_PANELS = Object.freeze({
+  source: 'scripts/auth_bundles (async__title-bar-agent-connect, title-bar-export-task); PIPPIT_API_CATALOG.md',
+  panels: [
+    { id: 'agent-connect', component: 'TitleBarAgentConnect', position: 'right', order: 101, type: 'Custom', renderCondition: 'UNOBSERVED', content: 'UNOBSERVED', actions: 'UNOBSERVED' },
+    { id: 'export-task', component: 'TitleBarExportTask', position: 'UNOBSERVED', order: 4, type: 'UNOBSERVED', renderCondition: 'UNOBSERVED', content: 'UNOBSERVED', actions: 'UNOBSERVED' },
+  ],
+  externalCalls: false,
+  note: 'Só a arquitetura estática foi observada; nada do comportamento em execução foi presumido.',
+});
+route('GET', /^\/api\/titlebar\/panels$/, (q, r) => send(r, 200, { ok: true, ...TITLEBAR_PANELS }));
 // FAQ da página de preços (linha 78): as seis perguntas foram preservadas; as RESPOSTAS não. As seções
 // de recursos têm títulos observados (notes/pages/02_pricing.json) e conteúdo não preservado. As avaliações
 // têm carrossel observado (5 revisões, Previous/Next/Show review 1–5) e textos não preservados.
