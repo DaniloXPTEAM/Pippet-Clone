@@ -9,7 +9,7 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_TEST = HERE;
@@ -17,7 +17,11 @@ const inspector = path.join(REPO_TEST, '..', '.deps-inspector.mjs');
 const fs = await import('node:fs');
 
 // Pequeno inspetor executado em processo novo: imprime o resultado da checagem em JSON.
-const codigo = `import { browserAvailability } from ${JSON.stringify(path.join(REPO_TEST, 'support/browser.mjs'))};
+// Rodada 13: o import precisa ser URL de arquivo. Com caminho absoluto cru o Windows quebra com
+// ERR_UNSUPPORTED_ESM_URL_SCHEME ("C:\\..." não é um esquema suportado); pathToFileURL(...).href resolve
+// nos dois sistemas (file:///C:/... no Windows, file:///home/... no Linux).
+const especificador = pathToFileURL(path.join(REPO_TEST, 'support/browser.mjs')).href;
+const codigo = `import { browserAvailability } from ${JSON.stringify(especificador)};
 const a = browserAvailability(); const b = browserAvailability();
 console.log('RESULTADO ' + JSON.stringify({ ...a, mesmaResposta: a === b }));`;
 fs.writeFileSync(inspector, codigo);
