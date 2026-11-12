@@ -24,7 +24,7 @@ function renderSide(route) {
   const nav = (href, label, extra = '') => `<a href="#${href}" class="${route.startsWith(href) ? 'on' : ''}">${label}${extra}</a>`;
   $('#side').innerHTML = `<div class="logo">Pippit</div><div class="nav">
     ${nav('/home', '✦ Criativo')}${nav('/marketing', 'Estúdio de marketing')}${nav('/story', 'Estúdio de histórias')}<a id="navTela">Tela<span class="new">NEW</span></a><hr>
-    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}
+    ${nav('/assets', 'Ativos')}${nav('/skills', 'Habilidades')}${nav('/smart', 'Criação inteligente')}${nav('/integrations', 'Integrações')}
     <a id="navMais">Mais ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? '▴' : '▾'}</a>
     ${route.match(/^\/(gen|avatars|analytics|schedule)/) || window.__maisOpen ? `${nav('/gen', 'Gerador de vídeos').replace('<a ', '<a class="sub" ')}${nav('/avatars', 'Avatares e vozes').replace('<a ', '<a class="sub" ')}${nav('/analytics', 'Análise').replace('<a ', '<a class="sub" ')}${nav('/schedule', 'Publicador').replace('<a ', '<a class="sub" ')}` : ''}
   </div><div class="hist-h">Histórico</div>
@@ -1245,6 +1245,34 @@ function runRoute(force) {
     if (forced || routeTarget() !== routeDiag.lastRoute) setTimeout(() => runRoute(forced), 0);
   });
 }
+// ---------- Integrações (linha #14): conexão com loja, importação de produto e envio de vídeo.
+// A credencial vive SÓ no ambiente; a tela nunca mostra chave. O layout da tela do Pippit real não foi
+// capturado — a estrutura local é funcional mas o conteúdo visual original é UNOBSERVED.
+async function pageIntegrations() {
+  $('#main').innerHTML = `${credits()}<div class="page" id="integrationsPage"><h1>Integrações</h1>
+    <p class="muted">Loja/marketplace: conexão, importação de produto e envio de vídeo. Credencial no ambiente (<code>MARKETPLACE_BASE_URL</code> + <code>MARKETPLACE_API_KEY</code>). Layout da tela do Pippit real <b>UNOBSERVED</b>.</p>
+    <div class="card"><h3>Loja</h3><div id="mktState">verificando…</div><button id="mktConnect" class="primary">Conectar loja</button></div>
+    <div class="card"><h3>Produtos</h3><div class="row"><input id="mktProdId" placeholder="id do produto"><button id="mktImport">Importar produto</button><button id="mktList">Listar da loja</button></div><div id="mktProducts"></div></div>
+    <div class="card"><h3>Enviar vídeo ao produto</h3><div class="row"><select id="mktAsset"></select><input id="mktProdAlvo" placeholder="id do produto"><input id="mktCaption" placeholder="legenda"></div><button id="mktSend" class="primary">Enviar vídeo</button><div id="mktSendOut"></div></div></div>`;
+  const state = async () => {
+    const s = (await api('/api/marketplace/status')).body || {};
+    const el = $('#mktState'); if (!el) return s;
+    el.innerHTML = `Conexão: <b>${s.connected ? `conectada${s.shop?.name ? ' — ' + esc(s.shop.name) : ''}` : 'desconectada'}</b> · configuração no ambiente: <b>${s.configured ? 'presente' : 'ausente'}</b> · produtos importados: <b>${(s.products || []).length}</b><br><small class="muted">${esc(s.note || '')}</small>`;
+    return s;
+  };
+  const prods = (list) => { const el = $('#mktProducts'); if (el) el.innerHTML = (list || []).map((p) => `<div class="row"><b>${esc(p.id)}</b> ${esc(p.title)} — ${esc(String(p.price))} ${p.price === 'UNOBSERVED' ? '<span class="blocked">UNOBSERVED</span>' : ''}</div>`).join('') || '<p class="muted">nenhum produto</p>'; };
+  const s0 = await state(); prods(s0.products);
+  const assets = (await api('/api/assets')).body; const list = (assets && (assets.assets || assets)) || [];
+  const vids = Array.isArray(list) ? list.filter((a) => a.kind === 'video') : [];
+  $('#mktAsset').innerHTML = vids.map((a) => `<option value="${a.id}">${esc(a.name || a.id)}</option>`).join('') || '<option value="">nenhum vídeo nos ativos</option>';
+  $('#mktConnect').onclick = async () => { const r = await post('/api/marketplace/connect', {}); $('#mktState').textContent = r.body?.ok ? 'Loja conectada.' : `Falha: ${r.body?.error || r.status}`; await state(); };
+  $('#mktList').onclick = async () => { const r = await api('/api/marketplace/products'); if (r.body?.ok) prods(r.body.products); else $('#mktProducts').textContent = `Falha: ${r.body?.error || r.status}`; };
+  $('#mktImport').onclick = async () => { const r = await post('/api/marketplace/products/import', { productId: $('#mktProdId').value }); $('#mktProducts').innerHTML = r.body?.ok ? `Importado: <b>${esc(r.body.product.id)}</b> ${esc(r.body.product.title)}` : `Falha: ${esc(r.body?.error || String(r.status))}`; await state(); };
+  $('#mktSend').onclick = async () => {
+    const r = await post('/api/marketplace/video', { productId: $('#mktProdAlvo').value, assetId: $('#mktAsset').value, caption: $('#mktCaption').value });
+    $('#mktSendOut').innerHTML = r.body?.ok ? `Vídeo enviado (id remoto: ${esc(String(r.body.remoteId))}).` : `<span class="blocked">Falha: ${esc(r.body?.error || String(r.status))}</span>`;
+  };
+}
 async function renderRoute() {
   const r = routeTarget();
   // login exigido? a tela de entrada vem antes de qualquer outra chamada (o resto da API responde 401)
@@ -1273,6 +1301,7 @@ function paintRoute(r) {
   if (r.startsWith('/editor')) return pageEditor(r.split('/')[2]); if (r.startsWith('/marketing')) return pageMarketing(); if (r.startsWith('/templates')) return pageTemplates(); if (r.startsWith('/help')) return pageHelp(); if (r.startsWith('/omni')) return pageOmni(); if (r.startsWith('/inspiration')) return pageInspiration(); if (r.startsWith('/pricing')) return pagePricing(); if (r.startsWith('/story')) return pageStory(); if (r.startsWith('/gen')) return pageGen();
   const localRunMatch = r.match(/^\/tasks\/run\/([\w-]+)$/); if (localRunMatch) return pageLocalRun(localRunMatch[1]);
   if (r.startsWith('/settings')) return pageSettings(r.split('/')[2] || 'personal_information'); if (r.startsWith('/tasks')) return pageTasks(); if (r.startsWith('/analytics')) return pageSocial('analytics'); if (r.startsWith('/schedule')) return pageSocial('schedule');
+  if (r.startsWith('/integrations')) return pageIntegrations();
   if (r.startsWith('/login')) return pageLogin(); if (r.startsWith('/share/')) return pageShare(r.split('/')[2]); return pageHome();
 }
 // Falha ao desenhar uma tela: mostrar o motivo NA TELA (com "tentar de novo"), nunca deixar a tela

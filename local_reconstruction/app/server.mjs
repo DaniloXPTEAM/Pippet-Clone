@@ -25,6 +25,7 @@ import * as SP from '../src/skillpkg.mjs';
 import * as PV from '../src/providers.mjs';
 import * as PUB from '../src/publishing.mjs';
 import * as OAS from '../src/oauth_social.mjs';
+import * as MKT from '../src/marketplace.mjs';
 import * as TP from './lib/talking_photo_contract.mjs';
 import * as TPH from './lib/talkingphoto.mjs';
 import { planChunks, normalizeTranscription, offsetWords, cuesFromWords, cuesFromText, toSrt, keepRangesFromWords, clipSegments, MAX_CHUNK_MS } from './lib/transcribe.mjs';
@@ -904,7 +905,18 @@ const INTEGRATIONS_OBSERVED = Object.freeze({
   oauth: 'UNOBSERVED',
   externalCalls: false,
 });
-route('GET', /^\/api\/integrations$/, (q, r) => send(r, 200, { ok: true, ...INTEGRATIONS_OBSERVED }));
+route('GET', /^\/api\/integrations$/, (q, r) => send(r, 200, {
+  ok: true, ...INTEGRATIONS_OBSERVED,
+  // Rodada 18 (#14): a tela de integrações EXISTE localmente (src/marketplace.mjs). O que a tela do Pippit
+  // real mostra continua UNOBSERVED; aqui só o que foi implementado + o que foi observado.
+  marketplace: {
+    ...INTEGRATIONS_OBSERVED.marketplace,
+    screens: 1,
+    status: 'implementada (conteúdo UNOBSERVED)',
+    note: 'tela local criada em #/integrations (conexão, importação de produto, envio de vídeo) — o layout da tela do Pippit real não foi capturado (UNOBSERVED)',
+    adapter: { id: MKT.contractSummary().adapter, label: MKT.contractSummary().label },
+  },
+}));
 // Gerador de vídeos / ferramentas populares (linha 79): o inventário preservou os NOMES e alguns detalhes
 // (passos da foto falante, tamanho mínimo de imagem, presets), mas a tela do gerador e a lista de chips
 // nunca foram capturadas. A rota devolve o que foi observado e marca o resto como UNOBSERVED.
@@ -1308,6 +1320,40 @@ route('GET', /^\/api\/assets\/([\w]+)\/file$/, async (q, r, m) => {
   const a = db().assets.find((x) => x.id === m[1]); if (!a) return fail(r, 404, 'asset inexistente');
   const file = assetPath(a.id); if (!fs.existsSync(file)) return fail(r, 404, 'arquivo do asset ausente');
   r.writeHead(200, { 'content-type': a.kind === 'video' ? 'video/mp4' : a.kind === 'audio' ? 'audio/mpeg' : 'application/octet-stream' }); fs.createReadStream(file).pipe(r);
+});
+// ----- Marketplace/loja (#14) — tela de integrações: conexão, importação de produto e envio de vídeo.
+// Credencial SÓ por ambiente (MARKETPLACE_BASE_URL / MARKETPLACE_API_KEY — nomes no .env.example).
+const mktState = () => (db().marketplace ||= { connected: false, shop: null, products: [] });
+route('GET', /^\/api\/marketplace\/status$/, async (q, r) => send(r, 200, {
+  ok: true, ...mktState(), configured: MKT.config().configured, contract: MKT.contractSummary(),
+  note: 'A chave da loja vive só no ambiente; a API informa conexão e produtos, nunca a credencial.',
+}));
+route('POST', /^\/api\/marketplace\/connect$/, async (q, r) => {
+  const res = await MKT.connect({});
+  if (!res.ok) return fail(r, res.blocked ? 409 : 502, res.error, { blocked: !!res.blocked, env: MKT.MARKETPLACE_ENV });
+  const st = mktState(); st.connected = true; st.shop = res.shop; S.save();
+  send(r, 200, { ok: true, shop: res.shop, note: 'Loja conectada (servidor configurado no ambiente).' });
+});
+route('GET', /^\/api\/marketplace\/products$/, async (q, r) => {
+  const res = await MKT.listProducts({});
+  if (!res.ok) return fail(r, res.blocked ? 409 : 502, res.error, { blocked: !!res.blocked });
+  send(r, 200, { ok: true, products: res.products, note: 'Campos que a loja não devolve ficam UNOBSERVED.' });
+});
+route('POST', /^\/api\/marketplace\/products\/import$/, async (q, r) => {
+  const b = await readJson(q);
+  const res = await MKT.importProduct({ productId: b.productId });
+  if (!res.ok) return fail(r, res.blocked ? 409 : 502, res.error, { blocked: !!res.blocked });
+  const st = mktState(); if (!st.products.some((p) => p.id === res.product.id)) st.products.unshift(res.product); S.save();
+  send(r, 200, { ok: true, product: res.product, imported: st.products.length });
+});
+route('POST', /^\/api\/marketplace\/video$/, async (q, r) => {
+  const b = await readJson(q);
+  const asset = db().assets.find((x) => x.id === String(b.assetId || ''));
+  if (!asset) return fail(r, 404, 'vídeo (asset) não encontrado');
+  const file = assetPath(asset.id); const videoBytes = fs.existsSync(file) ? fs.readFileSync(file) : null;
+  const res = await MKT.sendVideo({ productId: b.productId, caption: b.caption || '', videoBytes, videoUrl: `${AUTH.publicOrigin()}/api/assets/${asset.id}/file` });
+  if (!res.ok) return fail(r, res.blocked ? 409 : 502, res.error, { blocked: !!res.blocked });
+  send(r, 200, { ok: true, remoteId: res.remoteId, note: 'Vídeo enviado ao produto no servidor configurado (contrato documentado; loja real UNOBSERVED).' });
 });
 // formatos observados do Pippit (somente leitura; contas sempre vazias)
 route('POST', /^\/api\/biz\/v1\/publish\/list_schedule_task$/, async (q, r) => send(r, 200, PUB.listScheduleTask(drafts(), await readJson(q))));

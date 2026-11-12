@@ -1,4 +1,5 @@
-// Integrações de loja/marketplace (linha 77): a frase é marketing; nenhuma tela existe. Só social confirmado.
+// Integrações de loja/marketplace (linha 77): a frase de marketing é observada; a TELA local existe desde a
+// rodada 18 (#14) — o conteúdo da tela do Pippit real continua UNOBSERVED. Social confirmado.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -13,9 +14,11 @@ try {
   assert.equal(res.status, 200); assert.equal(i.ok, true);
   assert.equal(i.claimCaptured, true, 'a frase de marketing foi vista');
   assert.match(i.marketingClaim, /mercado de vendas online/);
-  assert.equal(i.marketplace.screens, 0, 'nenhuma tela de marketplace localizada');
-  assert.equal(i.marketplace.status, 'UNOBSERVED');
-  assert.match(i.marketplace.note, /nenhuma tela/);
+  assert.equal(i.marketplace.screens, 1, 'a tela de integrações foi implementada (rodada 18, #14)');
+  assert.match(i.marketplace.status, /implementada.*UNOBSERVED/);
+  assert.match(i.marketplace.note, /tela local/);
+  assert.equal(i.marketplace.adapter.id, 'generic-rest');
+  assert.ok(!/api[_-]?key|token|secret/i.test(JSON.stringify(i)), 'nem nome/valor de credencial nesta rota');
   assert.deepEqual(i.social.map((x) => x.id), ['tiktok', 'facebook', 'instagram']);
   assert.ok(i.social.every((x) => x.status === 'CONFIRMED'), 'só o social está confirmado');
   assert.ok(i.social.every((x) => /publicação/.test(x.where)), 'cada canal aponta onde aparece');
@@ -28,7 +31,7 @@ try {
   assert.match(ui, /api\/integrations/, 'a página de preços lê a rota local');
   assert.match(ui, /id="integrationsNote"/, 'a página de preços tem o aviso na tela');
   assert.match(ui, /Redes sociais confirmadas/, 'o aviso nomeia o que está confirmado');
-  console.log('OK integrations_route: marketplace UNOBSERVED, 3 canais sociais confirmados, sem chamada externa');
+  console.log('OK integrations_route: marketplace implementado (conteúdo UNOBSERVED), 3 canais sociais confirmados, sem chamada externa');
 } finally {
   await new Promise((x) => server.close(x)); fs.rmSync(tmp, { recursive: true, force: true });
 }
