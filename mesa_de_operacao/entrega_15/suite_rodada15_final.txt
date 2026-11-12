@@ -1,0 +1,194 @@
+OK   free_router (0.1s)
+OK   free_router_blocked_default (0.0s)
+OK   marketing_catalog_contract (0.0s)
+SKIP templates_ui (0.3s)
+SKIP templates_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP settings_internal_ui (0.3s)
+SKIP settings_internal_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP skills_details_ui (0.3s)
+SKIP skills_details_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP skill_create_ui (0.3s)
+SKIP skill_create_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP avatar_menu_ui (0.3s)
+SKIP avatar_menu_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP omni_ui (0.3s)
+SKIP omni_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP inspiration_ui (0.3s)
+SKIP inspiration_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP notifications_ui (0.3s)
+SKIP notifications_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP pricing_faq_ui (0.3s)
+SKIP pricing_faq_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP composer_dropdowns_ui (0.3s)
+SKIP composer_dropdowns_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP audio_mode_ui (0.3s)
+SKIP audio_mode_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP pageview (0.2s)
+SKIP pageview: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/scenario_video-agent_bodies.json
+OK   credits (0.0s)
+OK   plans (0.0s)
+OK   workflow (0.0s)
+OK   canvas_avatar (0.0s)
+OK   studio3d (0.0s)
+OK   directgen (0.0s)
+OK   directgen_http (8.4s)
+OK   features (0.5s)
+OK   llm (0.5s)
+OK   agent_llm (7.9s)
+OK   imagegen (0.2s)
+OK   silence (1.9s)
+OK   skillpkg (0.1s)
+OK   skills (0.2s)
+OK   skills_official (0.4s)
+OK   agent_skill (0.4s)
+OK   nodetools (2.4s)
+OK   audio (0.1s)
+OK   llm_perf (0.3s)
+OK   providers (0.3s)
+OK   editor_audio (9.7s)
+OK   editor_speed (8.1s)
+OK   assets_menu (0.5s)
+OK   credits_pouches (0.3s)
+OK   editor_canvas (12.2s)
+OK   workflow_jobs (3.4s)
+OK   e2e (10.5s)
+SKIP parity (0.3s)
+SKIP parity: evidência local não incluída neste checkout: /home/user/Pippet-Clone/captures/auth/cdp/oauth_redirect/2_pagina_0.txt, /home/user/Pippet-Clone/captures/auth/cdp/editor_right_panel/5_1_Básico.txt
+SKIP ui (0.3s)
+SKIP ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP directgen_ui (0.3s)
+SKIP directgen_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP features_ui (0.3s)
+SKIP features_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP llm_ui (0.3s)
+SKIP llm_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP skills_ui (0.3s)
+SKIP skills_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP providers_ui (0.3s)
+SKIP providers_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP lote2_ui (0.3s)
+SKIP lote2_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP lote3_ui (0.3s)
+SKIP lote3_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP skills_official_ui (0.3s)
+SKIP skills_official_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP publishing (0.3s)
+SKIP publishing: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP chat_history_ui (0.2s)
+SKIP chat_history_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP canvas_panel_ui (0.2s)
+SKIP canvas_panel_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP canvas_existing_project_ui (0.3s)
+SKIP canvas_existing_project_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP account_more_language_ui (0.2s)
+SKIP account_more_language_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP titlebar_panels_ui (0.3s)
+SKIP titlebar_panels_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP avatar_gallery_ui (0.3s)
+SKIP avatar_gallery_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP marketing_entities_ui (0.3s)
+SKIP marketing_entities_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP marketing_ad_formats_ui (0.2s)
+SKIP marketing_ad_formats_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP marketing_visual_style_ui (0.3s)
+SKIP marketing_visual_style_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP fidelity2_ui (0.3s)
+SKIP fidelity2_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP fidelity3_ui (0.3s)
+SKIP fidelity3_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   questionnaire (0.6s)
+OK   agent_contract (0.3s)
+OK   avatar_contract (0.0s)
+OK   talking_photo_contract (0.9s)
+OK   talkingphoto_provider (1.0s)
+SKIP talkingphoto_ui (0.3s)
+SKIP talkingphoto_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   free_router_http (0.1s)
+OK   free_router_fallback (3.2s)
+SKIP free_router_ui (0.3s)
+SKIP free_router_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP local_run_page_recovery (0.3s)
+SKIP local_run_page_recovery: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP browser_probe (0.3s)
+SKIP browser_probe: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   no_versioned_writes (0.1s)
+OK   omni_router (0.2s)
+SKIP omni_router_ui (0.3s)
+SKIP omni_router_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   voice_default (0.1s)
+OK   composer_audio_mode (0.1s)
+OK   marketing_ad_formats_route (0.1s)
+OK   canvas_shortcuts_route (0.1s)
+SKIP canvas_shortcuts_ui (0.3s)
+SKIP canvas_shortcuts_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP node_generation_video_ui (0.3s)
+SKIP node_generation_video_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP node_generation_image_ui (0.3s)
+SKIP node_generation_image_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP node_generation_audio_ui (0.3s)
+SKIP node_generation_audio_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP node_generation_text_ui (0.3s)
+SKIP node_generation_text_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   node_generation_route (0.2s)
+OK   local_runs_http (3.2s)
+OK   whisper_local (0.2s)
+OK   watermark_preferences (0.2s)
+OK   provider_smoke (0.3s)
+OK   help_center_route (0.1s)
+OK   prompt_validation_route (0.2s)
+OK   chat_history_route (0.2s)
+SKIP chat_history_idea_ui (0.3s)
+SKIP chat_history_idea_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP marketing_hooks_ui (0.3s)
+SKIP marketing_hooks_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP canvas_toolbar_ui (0.3s)
+SKIP canvas_toolbar_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   export_cover_route (0.5s)
+OK   promotions_route (0.1s)
+OK   inspiration_route (0.1s)
+OK   composer_controls_route (0.1s)
+OK   integrations_route (0.1s)
+OK   generator_tools_route (0.1s)
+OK   avatar_menu_route (0.1s)
+OK   templates_route (0.1s)
+OK   canvas_toolbar_route (0.1s)
+OK   account_unobserved_route (0.1s)
+OK   pricing_faq_route (0.1s)
+SKIP pricing_reviews_ui (0.3s)
+SKIP pricing_reviews_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   notifications_editorial_route (0.2s)
+OK   titlebar_panels_route (0.1s)
+OK   omni_capabilities_route (0.1s)
+OK   cloudflare_router (0.3s)
+OK   cloudflare_routes (0.3s)
+OK   freellmapi_router (3.2s)
+SKIP free_router_stack_ui (0.3s)
+SKIP free_router_stack_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP route_single_render (0.3s)
+SKIP route_single_render: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   novai_router (8.4s)
+SKIP novai_video_ui (0.3s)
+SKIP novai_video_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+novai_video_ui: skip explícito (Chromium indisponível)
+OK   cloudflare_transcribe (4.9s)
+OK   router_llm (3.2s)
+SKIP providers_panel (0.5s)
+SKIP providers_panel: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+providers_panel: rotas ok; UI pulada (sem Chromium)
+OK   flow_e2e_providers (1.7s)
+OK   lipsync_adapters (1.4s)
+OK   watermark_export (6.3s)
+OK   env_file (0.5s)
+OK   passo_a_passo (0.0s)
+OK   auth_structure (0.5s)
+SKIP auth_ui (0.3s)
+SKIP auth_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   supabase_auth (0.2s)
+SKIP auth_google_ui (0.3s)
+SKIP auth_google_ui: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP publish_queue (0.3s)
+SKIP publish_queue: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+SKIP billing_structure (0.3s)
+SKIP billing_structure: nenhum Chromium executável (chromium do Playwright em /home/user/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome: não existe | chromium em /usr/bin/chromium: não existe | chromium-browser em /usr/bin/chromium-browser: não existe | google-chrome em /usr/bin/google-chrome: não existe). Defina PIPERLINE_CHROMIUM_EXECUTABLE com o caminho do navegador. Neste sandbox, downloads de cdn.playwright.dev e apt.debian.org são bloqueados; o browser empacotado também requer libnspr4/libnss3.
+OK   winget_ffmpeg (0.1s)
+79 passaram, 56 skip explícito, 0 falharam (de 135).

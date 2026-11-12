@@ -1,0 +1,9 @@
+== varredura de segredos (r15) ==
+Padrão: api[_-]?key|access[_-]?token|secret[_-]?key|password|BEGIN PRIVATE em atribuições.
+Análise dos achados (todos código, NENHUMA credencial real):
+1. auth.mjs:51 — header 'apikey' do cliente Supabase (valor vem de process.env; não há chave no arquivo).
+2. auth.mjs:211 — documentação de rota do GoTrue (grant_type=password).
+3. app.js:843 — campo de senha do formulário de definir senha local (valor digitado pelo usuário).
+4. app.js:1172 — campo de senha do formulário de login (valor digitado pelo usuário).
+Nenhum .env/.git-credentials/auth-secret versionado (git ls-files conferido).
+(fim da varredura — 0 credenciais reais)
