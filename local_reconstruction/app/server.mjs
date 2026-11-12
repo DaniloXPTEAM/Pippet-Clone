@@ -24,6 +24,7 @@ import { generateImage } from '../src/imagegen.mjs';
 import * as SP from '../src/skillpkg.mjs';
 import * as PV from '../src/providers.mjs';
 import * as PUB from '../src/publishing.mjs';
+import * as OAS from '../src/oauth_social.mjs';
 import * as TP from './lib/talking_photo_contract.mjs';
 import * as TPH from './lib/talkingphoto.mjs';
 import { planChunks, normalizeTranscription, offsetWords, cuesFromWords, cuesFromText, toSrt, keepRangesFromWords, clipSegments, MAX_CHUNK_MS } from './lib/transcribe.mjs';
@@ -1222,7 +1223,7 @@ route('POST', /^\/api\/social\/queue$/, async (q, r) => {
   if (!source) return fail(r, 404, 'rascunho inexistente');
   const n = PUB.normalizeDraft({ assetId: source.assetId, caption: source.caption, platforms: source.platforms, scheduledAt: source.scheduledAt, hashtags: source.hashtags }, { assets: d.assets });
   if (n.error) return fail(r, 400, n.error);
-  const task = PUB.createTask(n.draft); queue().unshift(task); S.save();
+  const task = PUB.createTask(n.draft); task.networks = (Array.isArray(b.networks) ? b.networks : []).map(String).filter((x) => OAS.networkFor(x)); queue().unshift(task); S.save();
   send(r, 200, { ok: true, task, note: task.state === 'agendado' ? 'Agendado na fila LOCAL: nada será enviado até existir conta vinculada.' : 'Na fila local como rascunho: nada é enviado.' });
 });
 route('POST', /^\/api\/social\/queue\/([\w]+)\/attempt$/, async (q, r, m) => {
@@ -1238,6 +1239,76 @@ route('POST', /^\/api\/social\/queue\/([\w]+)\/cancel$/, async (q, r, m) => {
   Object.assign(task, t2.task); S.save(); send(r, 200, { ok: true, task });
 });
 route('DELETE', /^\/api\/social\/queue\/([\w]+)$/, async (q, r, m) => { const i = queue().findIndex((x) => x.id === m[1]); if (i < 0) return fail(r, 404, 'tarefa inexistente'); queue().splice(i, 1); S.save(); send(r, 200, { ok: true }); });
+// ----- OAuth direto das redes (#9) + publicação real contra o servidor configurado (#10) — src/oauth_social.mjs
+// Credenciais SÓ por ambiente (nomes no .env.example); tokens cifrados (AUTH_SECRET); callback em 127.0.0.1.
+const oauthTokens = () => (db().social.oauthTokens ||= {});
+const oauthPending = () => (db().social.oauthPending ||= {});
+const OAUTH_REDIRECT = () => AUTH.publicOrigin() + '/api/oauth/social/callback';
+route('GET', /^\/api\/oauth\/social\/status$/, async (q, r) => send(r, 200, { ok: true, networks: OAS.statusSummary(oauthTokens(), AUTH_SECRET), redirectUri: OAUTH_REDIRECT(), note: 'Tokens cifrados no servidor; a API só informa conexão/expiração, nunca o token.' }));
+route('POST', /^\/api\/oauth\/social\/start$/, async (q, r) => {
+  const b = await readJson(q); const net = OAS.networkFor(b.network); if (!net) return fail(r, 404, 'rede desconhecida');
+  const env = OAS.clientEnv(net); if (!env.configured) return fail(r, 409, `credencial ausente: ${env.problem}`, { blocked: true, network: net.id, env: net.env });
+  const state = OAS.createState(); const pkce = OAS.createPkceLocal(); const redirectUri = OAUTH_REDIRECT();
+  oauthPending()[net.id] = { state, verifier: net.pkce ? pkce.verifier : null, redirectUri, createdAt: new Date().toISOString() }; S.save();
+  send(r, 200, { ok: true, network: net.id, state, redirectUri, authorizeUrl: OAS.authorizationUrl(net, { state, challenge: pkce.challenge, redirectUri }), pkce: net.pkce });
+});
+route('GET', /^\/api\/oauth\/social\/callback$/, async (q, r) => {
+  const sp = new URL(q.url, 'http://x').searchParams; const net = OAS.networkFor(sp.get('network')); if (!net) return fail(r, 404, 'rede desconhecida');
+  const pend = oauthPending()[net.id]; if (!pend) return fail(r, 409, 'nenhuma conexão iniciada para esta rede');
+  const state = String(sp.get('state') || ''); const code = String(sp.get('code') || '');
+  if (!state || state !== pend.state) return fail(r, 400, 'state inválido: a conexão não confere (possível CSRF) — tente de novo');
+  if (!code) return fail(r, 400, 'a rede não devolveu code (autorização negada?)');
+  const res = await OAS.exchangeCode(net, { code, codeVerifier: pend.verifier, redirectUri: pend.redirectUri });
+  delete oauthPending()[net.id];
+  if (!res.ok) { S.save(); return fail(r, 502, `troca de code falhou em ${net.label}: ${res.error}`); }
+  const saved = OAS.saveTokens(oauthTokens(), net, res.tokens, AUTH_SECRET); S.save();
+  send(r, 200, { ok: true, network: net.id, connected: true, expiresAt: saved.expiresAt, note: 'Tokens gravados cifrados no servidor.' });
+});
+route('POST', /^\/api\/oauth\/social\/disconnect$/, async (q, r) => {
+  const b = await readJson(q); const net = OAS.networkFor(b.network); if (!net) return fail(r, 404, 'rede desconhecida');
+  OAS.clearTokens(oauthTokens(), net); S.save(); send(r, 200, { ok: true, network: net.id, connected: false });
+});
+// Publica uma tarefa da fila: usa o token cifrado da rede e o contrato documentado; só marca "publicado"
+// quando a rede aceita (resposta ok) — falha vira "falhou" com o motivo; nunca sucesso inventado.
+const NET_FOR_ADAPTER = Object.freeze({ tiktok: 'tiktok', instagram_reels: 'instagram', facebook_page: 'facebook', youtube: 'youtube' });
+route('POST', /^\/api\/social\/queue\/([\w]+)\/publish$/, async (q, r, m) => {
+  const task = queue().find((x) => x.id === m[1]); if (!task) return fail(r, 404, 'tarefa inexistente');
+  const d = db(); const codes = Array.isArray(task.platforms) ? task.platforms : [];
+  const explicit = (task.networks || []).map((n) => OAS.networkFor(n)).filter(Boolean);
+  if (!codes.length && !explicit.length) return fail(r, 400, 'tarefa sem plataforma');
+  const missing = []; let publishing = PUB.transition(task, 'publicando'); if (publishing.error) return fail(r, 409, publishing.error);
+  Object.assign(task, publishing.task); S.save();
+  const targets = [...codes.map((code) => { const a = PUB.adapterForPlatform(code); return { code, net: a && OAS.networkFor(NET_FOR_ADAPTER[a?.id]) }; }), ...explicit.map((n) => ({ code: n.id, net: n }))];
+  const asset = d.assets.find((x) => x.id === task.assetId);
+  // Fase 1 — pré-checagem: sem TODOS os alvos prontos, nada é enviado (nenhum efeito parcial).
+  for (const { code, net } of targets) {
+    const tok = net && OAS.loadTokens(oauthTokens(), net, AUTH_SECRET);
+    if (!net || !tok || !asset) missing.push({ code, reason: !net ? 'sem adaptador de rede' : !tok ? `conta ${net.id} não vinculada` : 'vídeo (asset) não encontrado' });
+  }
+  if (missing.length) {
+    const motivo = missing.map((x) => `${x.code}: ${x.reason}`).join('; ');
+    const t2 = PUB.transition(task, 'falhou', { reason: motivo }); Object.assign(task, t2.task); S.save();
+    return fail(r, 502, motivo, { task, partial: task.remoteIds || {} });
+  }
+  // Fase 2 — envio real (contrato documentado de cada rede contra o servidor configurado).
+  for (const { code, net } of targets) {
+    const tok = OAS.loadTokens(oauthTokens(), net, AUTH_SECRET);
+    const file = assetPath(asset.id); const videoBytes = fs.existsSync(file) ? fs.readFileSync(file) : null;
+    const videoUrl = `${AUTH.publicOrigin()}/api/assets/${asset.id}/file`;
+    const res = await OAS.publishVideo(net, { accessToken: tok.accessToken, videoUrl, videoBytes, caption: [task.caption, ...(task.hashtags || []).map((h) => (String(h).startsWith('#') ? h : '#' + h))].filter(Boolean).join(' ') });
+    if (!res.ok) missing.push({ code, reason: res.error });
+    else { task.remoteIds = { ...(task.remoteIds || {}), [net.id]: res.remoteId || null }; }
+  }
+  if (missing.length) { const t2 = PUB.transition(task, 'falhou', { reason: missing.map((x) => `${x.code}: ${x.reason}`).join('; ') }); Object.assign(task, t2.task); S.save(); return fail(r, 502, t2.task.reason, { task, partial: task.remoteIds || {} }); }
+  const t3 = PUB.transition(task, 'publicado', { reason: 'envio aceito pela(s) rede(s)' }); Object.assign(task, t3.task); S.save();
+  send(r, 200, { ok: true, task });
+});
+// Bytes do vídeo para as redes que aceitam URL (loopback local; em uso real pode exigir URL pública — ver docs).
+route('GET', /^\/api\/assets\/([\w]+)\/file$/, async (q, r, m) => {
+  const a = db().assets.find((x) => x.id === m[1]); if (!a) return fail(r, 404, 'asset inexistente');
+  const file = assetPath(a.id); if (!fs.existsSync(file)) return fail(r, 404, 'arquivo do asset ausente');
+  r.writeHead(200, { 'content-type': a.kind === 'video' ? 'video/mp4' : a.kind === 'audio' ? 'audio/mpeg' : 'application/octet-stream' }); fs.createReadStream(file).pipe(r);
+});
 // formatos observados do Pippit (somente leitura; contas sempre vazias)
 route('POST', /^\/api\/biz\/v1\/publish\/list_schedule_task$/, async (q, r) => send(r, 200, PUB.listScheduleTask(drafts(), await readJson(q))));
 route('POST', /^\/api\/account\/v1\/get_bind_account_list$/, async (q, r) => send(r, 200, PUB.bindAccountList(db().social.accounts, await readJson(q))));
