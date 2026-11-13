@@ -2169,7 +2169,7 @@ dEnv('/commerce/v1/benefits/user_credit', (d) => d.userCredit());
 // o bloqueio não é reproduzido por decisão do usuário) ===
 // Observado no Pippit real: enviar em modo Audio nao gera; a UI chama `POST /api/biz/v2/videogen/check`
 // com `{'generate_source': 1}` e a resposta traz `data.is_allowed: true`; DEPOIS abre o modal
-// "Subscribe to boost your business". O provedor gratuito local fica atras da configuracao nossa
+// "Subscribe to boost your business" (modal observado no original, NAO reproduzido por decisao do usuario - r20). O provedor gratuito local fica atras da configuracao nossa
 // PIPPIT_FREE_AUDIO_PROVIDER (padrao desligado = comportamento observado).
 route('POST', /^\/api\/biz\/v2\/videogen\/check$/, async (q, r) => {
   const b = await readJson(q);

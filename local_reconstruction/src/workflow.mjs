@@ -8,9 +8,11 @@ export function planSegments(totalSeconds, maxSeg = MAX_SEGMENT_SECONDS) {
   for (let i = 0; i < n; i++) segs.push({ id: `shot_${String(i + 1).padStart(2, '0')}`, seconds: Math.min(maxSeg, totalSeconds - i * maxSeg), continuesFrom: i ? `shot_${String(i).padStart(2, '0')}_lastframe` : null });
   return segs;
 }
-// Gating por plano observado: modelo exige assinatura -> falha "Assine para continuar usando este recurso" (cartao "recurso Starter").
+// r20 (produto gratuito, sem bloqueio): o gating por plano/modelo observado NÃO é reproduzido — todo
+// modelo é livre. A regra observada (modelo exige assinatura -> falha "Assine para continuar usando
+// este recurso", cartão "recurso Starter") fica aqui só como EVIDÊNCIA, sem efeito
+// (observado no original, não reproduzido por decisão do usuário).
 export function checkModelAccess(model, plan) {
-  if (model.requiresPlan && model.requiresPlan !== plan) return { ok: false, error: 'Não foi possível gerar o vídeo', upsell: { heading: 'Você está usando um recurso Starter', cta: 'Assinar agora' } };
   return { ok: true };
 }
 export function estimateCredits(seconds, perSecond = CREDITS_PER_SECOND) { return seconds * perSecond; }
