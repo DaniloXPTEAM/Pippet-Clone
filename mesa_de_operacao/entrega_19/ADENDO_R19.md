@@ -1,5 +1,12 @@
 # Adendo r19 — reprodução das observações Playwright de 13/11/2026
 
+> **CORREÇÃO r20 (decisão do usuário — vale para sempre): NESTE PRODUTO TUDO É GRATUITO E SEM BLOQUEIO.**
+> O item 5 abaixo (paywall de Áudio + preços) **estava ERRADO como direção de reprodução e foi desfeito**:
+> os preços e o paywall observados no Pippit ficam **SÓ neste documento de evidência**, marcados
+> **"observado no original, não reproduzido por decisão do usuário"**. Nenhum paywall, nenhum bloqueio
+> por plano ou modelo, sem valores em R$ e sem "Subscribe" na UI; estrutura de pagamento fica no código,
+> desligada. Ver `mesa_de_operacao/entrega_20/SEM_PAYWALL_R20.md`.
+
 Fonte: observações do Pippit real (Playwright, 13/11/2026), conforme ordem do usuário. Cada item = um commit com teste. Textos observados reproduzidos EXATAMENTE (inglês, verbatim). Nada inventado virou "observado": tudo que não foi capturado está marcado UNOBSERVED.
 
 ## Itens e status
@@ -45,7 +52,7 @@ Implementado no menu `#modeB` (app.js) e na rota `GET /api/composer/controls` (`
 - `GET /api/social` expõe `linkAccountChannels` = os 3; `POST /api/social/connect` recusa canal fora da lista (400) e mantém 501 honesto para OAuth real.
 - Resolve a divergência do `PERGUNTAS_USUARIO.md` (YouTube no código vs menu): **menu = 3 canais**; o adaptador YouTube do catálogo estático não aparece no Link account.
 
-## 5. Paywall de Áudio (plano Free) + modal de planos
+## 5. Paywall de Áudio (plano Free) + modal de planos — *observado no original, não reproduzido por decisão do usuário (r20)*
 
 - Enviar em modo Áudio **não gera**: a UI chama **`POST /api/biz/v2/videogen/check`** com `{"generate_source":1}` → resposta `data.is_allowed: true` → DEPOIS abre o modal **"Subscribe to boost your business"** (sequência observada).
 - Modal (textos e preços ANUAIS observados):
@@ -55,8 +62,8 @@ Implementado no menu `#modeB` (app.js) e na rota `GET /api/composer/controls` (`
   - **Plus** — **R$1,252**/Yearly de ~~R$2,087~~.
   - **Pro** — **R$18,325**/Yearly de ~~R$30,542~~ + **slider** (semântica do slider = UNOBSERVED).
   - Planos pagos: "Auto renews, cancel anytime." + botão **Subscribe**.
-- **Pagamento = só estrutura** (diferença aceita): Subscribe não cobra nada.
-- **Provedor gratuito local** fica atrás da configuração nossa **`PIPPIT_FREE_AUDIO_PROVIDER`** (padrão desligado = paywall observado; ligado = geração local com a voz SAPI — o produto é gratuito por enquanto).
+- **Pagamento = só estrutura** (diferença aceita; r20: estrutura desligada): Subscribe não cobra nada — *não reproduzido por decisão do usuário (r20)*.
+- **Provedor gratuito local** ficava atrás da configuração nossa **`PIPPIT_FREE_AUDIO_PROVIDER`** — na r20 passou a **ligado por padrão** (produto gratuito, sem paywall; `=0` desliga mostrando o motivo). *O comportamento antigo ("padrão desligado = paywall observado") = observado no original, não reproduzido por decisão do usuário (r20).*
 
 ## UNOBSERVED (não inventado)
 
