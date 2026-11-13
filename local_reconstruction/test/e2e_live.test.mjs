@@ -10,6 +10,11 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url)); const phase = process.argv[2] === 'verify' ? 'B' : 'A';
 const dataDir = process.env.E2E_LIVE_DATA || path.join(here, '..', '..', 'captures', 'e2e_live', 'data'); const reportFile = path.join(dataDir, '..', 'e2e_live_report.json');
 process.env.PIPPIT_LOCAL_DATA = dataDir; process.env.PIPPIT_LLM_WARMUP ??= 'on'; if (phase === 'B') process.env.PIPPIT_LLM = 'off'; else delete process.env.PIPPIT_LLM; // fase B não usa LLM
+if (phase === 'A') {
+  // Incluído no run-all (r20): sem Ollama real, SKIP explícito — nunca falha por dependência de rede.
+  try { const r = await fetch('http://127.0.0.1:11434/api/tags', { signal: AbortSignal.timeout(3000) }); if (!r.ok) throw new Error('sem Ollama'); }
+  catch { console.log('SKIP e2e_live: Ollama real indisponível (teste opcional ao vivo; fase A+B com LLM real é lenta)'); process.exit(0); }
+}
 const { server } = await import('../app/server.mjs'); const PORT = phase === 'A' ? 5194 : 5195; await new Promise((r) => server.listen(PORT, '127.0.0.1', r)); const base = `http://127.0.0.1:${PORT}`;
 const j = async (p, o = {}) => { const r = await fetch(base + p, o); return { status: r.status, body: await r.json() }; };
 const post = (p, b) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) });
