@@ -10,11 +10,12 @@ export function validatePhoto({ mime, width, height }) {
 }
 // "Avançar" so habilita com foto valida e consentimento marcado
 export const canAdvance = ({ photo, consent }) => !!photo && validatePhoto(photo).ok && consent === true;
-// Regras observadas de acesso (plano gratuito: 3 usos de foto em avatar; video em avatar exige assinatura)
+// r20 (decisão do usuário — produto gratuito e sem bloqueio): limites por plano/uso NÃO bloqueiam nem
+// debitam. As regras observadas (3 usos de foto no plano free; vídeo de avatar exigindo assinatura no
+// original) ficam como informação em AVATAR_RULES; as funções mantêm o formato do contrato sem negar acesso.
 export function photoAvatarAccess({ plan, usesLeft }) {
-  if (plan !== 'free') return { ok: true };
-  return usesLeft > 0 ? { ok: true, usesLeft: usesLeft - 1 } : { ok: false, paywall: true };
+  return { ok: true, usesLeft }; // sem consumo: nada é debitado nem bloqueado
 }
 export function videoAvatarAccess({ plan }) {
-  return plan === 'free' ? { ok: false, paywall: 'Assine o Starter agora para uso ilimitado de Vídeo em avatar' } : { ok: true, creditsPerUse: 1999 };
+  return { ok: true, creditsPerUse: 1999 }; // custo observado = informação; nunca bloqueia por plano
 }

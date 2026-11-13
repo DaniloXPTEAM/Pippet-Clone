@@ -55,7 +55,7 @@ assert.equal((await post('/api/biz/v1/agent/get_thread', { thread_id: 'canvas_th
 if (media.available()) {
   await post('/api/settings', { provider: 'local-ffmpeg' });
   const { pid, canvasId } = await open(); await submit(pid, canvasId, 'a red apple rotating on a white table', 'run-ok'); await sleep(4000);
-  const th = (await post('/api/biz/v1/agent/get_thread', { thread_id: `canvas_thread_${canvasId}_pippit_video_part_agent`, scopes: ['run_list.entry_list'] })).body.data.thread; assert.equal(th.run_list[0].state, 3);
+  const th = (await post('/api/biz/v1/agent/get_thread', { thread_id: `canvas_thread_${canvasId}_pippit_video_part_agent`, scopes: ['run_list.entry_list'] })).body.data.thread; assert.equal(th.run_list[0].state, 3, JSON.stringify(th.run_list[0].fail_reason || th.run_list[0]).slice(0, 500));
   const files = (await post('/api/biz/v1/agent/list_project_file', { Base: { Client: 'web' }, PageNum: 1, PageSize: 300, project_id: pid })).body.data; assert.equal(files.Total, 1); assert.equal(files.Files[0].IconType, '.mp4');
   const info = (await post('/api/biz/v1/common/mget_asset_info', { asset_ids: [files.Files[0].Raw.AgentAsset.SourceID], need_transcode: true })).body.data; assert.equal(info[0].format, 'video'); assert.ok(info[0].width > 0);
   assert.equal((await post('/commerce/v1/benefits/user_credit', {})).body.data.credit.gift_credit, bal0, 'renderizador local nao-IA nao debita');

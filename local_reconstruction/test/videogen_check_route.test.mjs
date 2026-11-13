@@ -23,13 +23,14 @@ try {
   assert.match(c.body.note, /observado \(13\/11\)/);
 
   const a1 = await api('/api/composer/audio-mode');
-  assert.equal(a1.body.freeLocalProvider.enabled, false, 'padrão desligado = paywall observado');
+  assert.equal(a1.body.freeLocalProvider.enabled, true, 'r20: gerador gratuito LIGADO por padrão (sem paywall)');
   assert.equal(a1.body.freeLocalProvider.config, 'PIPPIT_FREE_AUDIO_PROVIDER');
 
-  process.env.PIPPIT_FREE_AUDIO_PROVIDER = '1';
+  process.env.PIPPIT_FREE_AUDIO_PROVIDER = '0';
   const a2 = await api('/api/composer/audio-mode');
-  assert.equal(a2.body.freeLocalProvider.enabled, true, 'produto gratuito: provedor local atrás da configuração');
+  assert.equal(a2.body.freeLocalProvider.enabled, false, 'desligar é opção nossa, nunca paywall');
+  assert.match(a2.body.freeLocalProvider.reason, /desligada por configuração/, 'sem provedor: o motivo é mostrado, nunca a tela de planos');
   delete process.env.PIPPIT_FREE_AUDIO_PROVIDER;
 
-  console.log('videogen_check_route.test.mjs: ok (check espelha is_allowed:true; PIPPIT_FREE_AUDIO_PROVIDER liga/desliga o provedor gratuito local)');
+  console.log('videogen_check_route.test.mjs: ok (check espelha is_allowed:true e nunca bloqueia; r20: gerador gratuito ligado por padrão; PIPPIT_FREE_AUDIO_PROVIDER=0 desliga mostrando o motivo)');
 } finally { app.close(); fs.rmSync(dataDir, { recursive: true, force: true }); }

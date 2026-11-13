@@ -25,6 +25,7 @@ try {
   assert.equal(st.body.local.voice.defaultEngine, sapi ? 'sapi' : null, 'sem SAPI e sem provedor não há padrão inventado');
   assert.equal(st.body.observed.models.length, 2, 'dois modelos observados (adendo r19)'); assert.ok(st.body.observed.models.some((m) => m.name === 'Seed Audio 1.0')); assert.ok(st.body.observed.models.some((m) => m.name === 'Standard voice generation')); assert.ok(st.body.observed.models.every((m) => /reference audio for voice|crisp delivery/.test(m.description)), 'descricoes observadas'); assert.deepEqual(st.body.observed.sampleRatesHz, [8000, 16000, 24000, 32000, 44100, 48000]); assert.equal(st.body.observed.defaultSampleRateHz, 44100); assert.equal(st.body.observed.cost.credits, 17); assert.equal(st.body.observed.cost.listCredits, 34); assert.ok(st.body.observed.skillsButton.includes('oculto')); assert.deepEqual(st.body.unobserved, ['corpo da requisição de geração', 'SSE ao vivo']);
   assert.equal(st.body.externalCalls, 0); assert.equal(st.body.simulated, false);
+  assert.equal(st.body.freeLocalProvider.enabled, true, 'r20: gerador gratuito LIGADO por padrão'); assert.equal(st.body.freeLocalProvider.reason, null);
   assert.match(st.body.note, /UNOBSERVED|nunca foram capturados/);
 
   const started = await api('/api/local-runs', { prompt: 'Bem-vindo ao teste do modo áudio.', mode: 'audio' });
@@ -45,6 +46,14 @@ try {
     assert.match(done.error, /SAPI/); assert.match(done.error, /PENDING/);
     assert.equal(done.assetId, null, 'nada é salvo quando não há voz');
   }
+  // r20: provedor FALSO (PIPPIT_TTS=fake) gera áudio determinístico em qualquer máquina
+  process.env.PIPPIT_TTS = 'fake';
+  const fake = await api('/api/local-runs', { prompt: 'Locução com provedor falso.', mode: 'audio' });
+  assert.equal(fake.status, 202, JSON.stringify(fake.body));
+  const fakeDone = await waitRun(fake.body.run.id);
+  assert.equal(fakeDone.state, 'succeeded', JSON.stringify(fakeDone));
+  assert.equal(fakeDone.asset.kind, 'audio');
+  delete process.env.PIPPIT_TTS;
   // Vídeo continua PENDING e não cria tarefa.
   const before = (await api('/api/local-runs')).body.length;
   const vid = await api('/api/local-runs', { prompt: 'um vídeo', mode: 'video' });

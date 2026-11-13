@@ -13,7 +13,7 @@ assert.equal(validatePhoto({ mime: 'image/png', width: 512, height: 512 }).ok, t
 assert.equal(validatePhoto({ mime: 'image/gif', width: 200, height: 512 }).ok, false);
 assert.equal(canAdvance({ photo: { mime: 'image/jpeg', width: 400, height: 400 }, consent: false }), false);
 assert.equal(canAdvance({ photo: { mime: 'image/jpeg', width: 400, height: 400 }, consent: true }), true);
-assert.deepEqual(photoAvatarAccess({ plan: 'free', usesLeft: 3 }), { ok: true, usesLeft: 2 }); // 3 -> 2 observado
-assert.equal(photoAvatarAccess({ plan: 'free', usesLeft: 0 }).paywall, true);
-assert.equal(videoAvatarAccess({ plan: 'free' }).ok, false); assert.equal(videoAvatarAccess({ plan: 'starter' }).creditsPerUse, 1999);
-console.log('OK canvas/avatar: nós, ferramentas desabilitadas, custo 370, assistente de foto, consentimento, 3->2 usos, paywall do vídeo em avatar');
+assert.deepEqual(photoAvatarAccess({ plan: 'free', usesLeft: 3 }), { ok: true, usesLeft: 3 }); // r20: sem consumo/bloqueio (3 usos é só informação em AVATAR_RULES)
+assert.equal(photoAvatarAccess({ plan: 'free', usesLeft: 0 }).paywall, undefined); // r20: nunca paywall
+assert.equal(videoAvatarAccess({ plan: 'free' }).ok, true); assert.equal(videoAvatarAccess({ plan: 'starter' }).creditsPerUse, 1999); // custo = informação
+console.log('OK canvas/avatar: nós, ferramentas desabilitadas, custo 370, assistente de foto, consentimento, sem limite de usos e sem paywall (r20)');

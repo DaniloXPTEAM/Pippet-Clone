@@ -59,16 +59,17 @@ assert.ok(last.steps.some((s) => s.label === 'Animatic montado'), JSON.stringify
 const finalAsset = (await j('/api/assets?cat=works')).body.find((a) => a.name === 'animatic.mp4'); assert.ok(Math.abs(finalAsset.duration - 20) < 0.5, 'duracao do animatic ' + finalAsset.duration);
 assert.equal(last.steps.filter((s) => /^Animatic gerado/.test(s.label)).length, 2); assert.ok(!last.steps.some((s) => s.label === 'Vídeo gerado' || s.label === 'Vídeo renderizado'), 'sem rótulos de vídeo gerado para o animatic');
 
-// 4. avatares: validacao real da foto, consentimento, 3 usos gratuitos, paywall do video em avatar
+// 4. avatares: validacao real da foto e consentimento; r20 = sem limite de usos e sem paywall (produto gratuito)
 const png = mk(['-f', 'lavfi', '-i', 'testsrc=size=512x512:rate=1', '-frames:v', '1'], path.join(tmp, 'face.png'));
 const small = mk(['-f', 'lavfi', '-i', 'testsrc=size=200x200:rate=1', '-frames:v', '1'], path.join(tmp, 'small.png'));
 assert.equal((await upload('/api/avatars/photo/verify', png, {})).body.ok, true); assert.equal((await upload('/api/avatars/photo/verify', small, {})).body.ok, false);
 assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'false', 'x-avatar-name': 'Crys' })).status, 400);
-let a1 = await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'Crys' }); assert.equal(a1.status, 200); assert.equal(a1.body.photoFreeUses, 2);
+let a1 = await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'Crys' }); assert.equal(a1.status, 200); const uses0 = a1.body.photoFreeUses;
 await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'B' }); await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'C' });
-assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'D' })).status, 402);
-assert.equal((await post('/api/avatars/video')).status, 402); await post('/api/plan', { plan: 'starter' }); assert.equal((await post('/api/avatars/video')).status, 501);
-assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'E' })).status, 200); await post('/api/plan', { plan: 'free' });
+assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'D' })).status, 200, 'r20: sem bloqueio por usos');
+assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'E' })).status, 200, 'r20: sem limite de usos');
+assert.equal((await upload('/api/avatars/photo', png, { 'x-consent': 'true', 'x-avatar-name': 'E' })).body.photoFreeUses, uses0, 'r20: contador de usos não é debitado (só informação)');
+assert.equal((await post('/api/avatars/video')).status, 501, 'r20: motivo do serviço ausente — nunca paywall');
 
 // 5. editor: timeline com corte, texto e legenda; exportacao real
 const vid = mk(['-f', 'lavfi', '-i', 'testsrc=size=640x360:rate=25:duration=6', '-pix_fmt', 'yuv420p', '-c:v', 'libx264'], path.join(tmp, 'a.mp4'));

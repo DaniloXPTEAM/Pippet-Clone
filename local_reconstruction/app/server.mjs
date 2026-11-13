@@ -847,7 +847,7 @@ route('POST', /^\/api\/assets\/(\d+)\/link-product$/, async (q, r, m) => {
   const a = imageAsset(r, m[1]); if (!a) return; const b = await readJson(q); const p = prods().find((e) => e.id === String(b.productId)); if (!p) return fail(r, 404, 'produto inexistente'); if (p.assetIds.includes(a.id)) return send(r, 200, { ok: true, reused: true, product: entView(p) });
   p.assetIds.push(a.id); S.save(); send(r, 200, { ok: true, reused: false, product: entView(p) });
 });
-// avatares: assistente de foto (validacao real da imagem + consentimento + 3 usos gratuitos), vídeo (paywall), voz (referencia)
+// avatares: assistente de foto (validacao real da imagem + consentimento), vídeo (motivo do serviço ausente — r20: sem paywall), voz (referencia)
 route('GET', /^\/api\/avatars$/, async (q, r) => send(r, 200, { ...db().avatars, costs: { videoAvatar: AVATAR_RULES.videoAvatarCreditsPerUse, customVoice: AVATAR_RULES.customVoiceCreditsPerUse } }));
 route('POST', /^\/api\/avatars\/photo\/verify$/, async (q, r) => {
   const buf = await readBody(q); const tmp = S.pubFile('_v_' + S.newId()); fs.writeFileSync(tmp, buf); let info = null; try { info = media.probe(tmp); } catch {} try { fs.unlinkSync(tmp); } catch {}
@@ -856,15 +856,15 @@ route('POST', /^\/api\/avatars\/photo\/verify$/, async (q, r) => {
 });
 route('POST', /^\/api\/avatars\/photo$/, async (q, r) => {
   const d = db(); const consent = q.headers['x-consent'] === 'true'; const name = decodeURIComponent(q.headers['x-avatar-name'] || 'Avatar'); const buf = await readBody(q);
-  const acc = photoAvatarAccess({ plan: d.user.plan, usesLeft: d.avatars.photoFreeUses }); if (!acc.ok) return fail(r, 402, 'Sem usos gratuitos de foto em avatar. Assine para continuar.', { paywall: true });
+  const acc = photoAvatarAccess({ plan: d.user.plan, usesLeft: d.avatars.photoFreeUses }); // r20: sempre ok — sem limite de usos, sem paywall
   const tmp = S.pubFile('_a_' + S.newId()); fs.writeFileSync(tmp, buf); let info = null; try { info = media.probe(tmp); } catch {}
   const mime = info ? (/png/i.test(info.codec) ? 'image/png' : 'image/jpeg') : '';
   if (!canAdvance({ photo: info && { mime, width: info.width, height: info.height }, consent })) { try { fs.unlinkSync(tmp); } catch {} return fail(r, 400, consent ? 'foto inválida (JPG/PNG, lado > 256 px)' : 'é necessário o consentimento de uso do conteúdo'); }
   const a = addAsset(name + (mime === 'image/png' ? '.png' : '.jpg'), tmp, 'image', 'character'); try { fs.unlinkSync(tmp); } catch {}
-  const av = { id: S.newId(), name, voice: decodeURIComponent(q.headers['x-avatar-voice'] || ''), assetId: a.id, createdAt: new Date().toISOString() }; d.avatars.photo.push(av); if (d.user.plan === 'free') d.avatars.photoFreeUses = acc.usesLeft; S.save();
+  const av = { id: S.newId(), name, voice: decodeURIComponent(q.headers['x-avatar-voice'] || ''), assetId: a.id, createdAt: new Date().toISOString() }; d.avatars.photo.push(av); S.save(); // r20: photoFreeUses não é debitado
   send(r, 200, { ok: true, avatar: av, photoFreeUses: d.avatars.photoFreeUses });
 });
-route('POST', /^\/api\/avatars\/video$/, async (q, r) => { const acc = videoAvatarAccess({ plan: db().user.plan }); if (!acc.ok) return fail(r, 402, acc.paywall, { paywall: true }); fail(r, 501, 'Criação de avatar em vídeo exige o serviço de geração do Pippit (1999 créditos/vez); não disponível localmente.', { blocked: true }); });
+route('POST', /^\/api\/avatars\/video$/, async (q, r) => { videoAvatarAccess({ plan: db().user.plan }); /* r20: sem paywall por plano — só o motivo real do serviço ausente */ fail(r, 501, 'Criação de avatar em vídeo exige o serviço de geração do Pippit (1999 créditos/vez); não disponível localmente.', { blocked: true }); });
 route('POST', /^\/api\/avatars\/voice$/, async (q, r) => { const name = decodeURIComponent(q.headers['x-voice-name'] || 'Voz'); const buf = await readBody(q); const tmp = S.pubFile('_s_' + S.newId()); fs.writeFileSync(tmp, buf); const a = addAsset(name + '.audio', tmp, 'audio', 'upload'); try { fs.unlinkSync(tmp); } catch {} const v = { id: S.newId(), name, assetId: a.id, mode: 'referência de áudio (sem clonagem)' }; db().avatars.voices.push(v); S.save(); send(r, 200, { ok: true, voice: v }); });
 // marca d'agua (estrutura pronta, DESLIGADA por padrao): config unica em app/lib/watermark.mjs, aplicada na exportacao.
 // Nome da marca vem da CONFIGURACAO (settings.brandName); nenhum nome de marca esta escrito no codigo.
@@ -1811,8 +1811,9 @@ route('GET', /^\/api\/composer\/audio-mode$/, async (q, r) => send(r, 200, {
   local: { implemented: true, action: 'POST /api/local-runs { mode: "audio", prompt }', handoff: 'cria projeto no Canvas com um nó de Áudio apontando para o WAV gerado', voice: voiceCard(), cloudOption: 'voz na nuvem só quando pedido (voiceSource:"cloud")' },
   // Voz na nuvem: Cloudflare melotts pela rota gratuita (WAV, ~1 s medido). Nunca assume no lugar do SAPI.
   cloudVoice: (() => { const plan = routerVoicePlan(); return { requestedWith: 'voiceSource:"cloud"', configured: plan.ok, defaultEngine: 'sapi', model: CLOUDFLARE_AUDIO_MODEL, format: 'WAV', measuredMs: 1000, route: plan.ok ? plan.routes[0].providerId : null, reason: plan.ok ? null : plan.reason }; })(),
-  freeLocalProvider: { enabled: process.env.PIPPIT_FREE_AUDIO_PROVIDER === '1', config: 'PIPPIT_FREE_AUDIO_PROVIDER',
-    note: 'produto gratuito: o provedor local de áudio (voz SAPI) fica atrás desta configuração nossa; padrão desligado = paywall observado do plano Free' },
+  freeLocalProvider: { enabled: process.env.PIPPIT_FREE_AUDIO_PROVIDER !== '0', config: 'PIPPIT_FREE_AUDIO_PROVIDER',
+    reason: process.env.PIPPIT_FREE_AUDIO_PROVIDER === '0' ? 'geração local de áudio desligada por configuração (PIPPIT_FREE_AUDIO_PROVIDER=0)' : null,
+    note: 'produto gratuito (r20): geração de áudio LIGADA por padrão — nunca abre tela de planos. Sem provedor disponível o envio mostra o motivo.' },
   unobserved: ['corpo da requisição de geração', 'SSE ao vivo'],
   externalCalls: 0, simulated: false,
   note: 'Modelos (Seed Audio 1.0, Standard voice generation), sample rate (8/16/24/32/44.1 padrão/48 kHz) e custo (17 créditos, 34 riscado) foram observados no adendo r19. Corpo da geração e SSE ao vivo seguem UNOBSERVED. A geração local usa a voz do Windows (SAPI), rotulada como não-IA, e não cobra créditos. A voz na nuvem (Cloudflare melotts) só entra com voiceSource:"cloud".',
@@ -2164,7 +2165,8 @@ const dEnv = (path_, fn) => route('POST', new RegExp('^' + path_ + '$'), async (
 dEnv('/commerce/v3/benefits/batch_check_withhold_deduct', (d, b) => d.checkWithholdDeduct(b));
 dEnv('/commerce/v1/benefits/user_credit', (d) => d.userCredit());
 
-// === Adendo r19 (13/11/2026): POST /api/biz/v2/videogen/check (paywall de Audio, plano Free) ===
+// === POST /api/biz/v2/videogen/check (espelho do fluxo observado no adendo r19; r20: SEM paywall —
+// o bloqueio não é reproduzido por decisão do usuário) ===
 // Observado no Pippit real: enviar em modo Audio nao gera; a UI chama `POST /api/biz/v2/videogen/check`
 // com `{'generate_source': 1}` e a resposta traz `data.is_allowed: true`; DEPOIS abre o modal
 // "Subscribe to boost your business". O provedor gratuito local fica atras da configuracao nossa
@@ -2174,7 +2176,7 @@ route('POST', /^\/api\/biz\/v2\/videogen\/check$/, async (q, r) => {
   send(r, 200, {
     ret: '0', errmsg: '', logId: '', data: { is_allowed: true, generate_source: Number(b?.generate_source) || 0 },
     unobserved: ['demais campos do corpo da requisição', 'demais campos da resposta da API real'],
-    note: 'POST /api/biz/v2/videogen/check observado (13/11) com {"generate_source":1} -> data.is_allowed:true; espelho local sem credenciais. Internos invisíveis por padrão.',
+    note: 'POST /api/biz/v2/videogen/check observado (13/11) com {"generate_source":1} -> data.is_allowed:true; espelho local sem credenciais. r20: nunca bloqueia (paywall observado no original, não reproduzido por decisão do usuário).',
   });
 });
 // === Adendo r19 (13/11/2026): feed "Featured works" da Home e detalhe /home?work_id=N ===

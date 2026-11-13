@@ -172,12 +172,21 @@ let ttsOk;
 // SAPI responde de verdade e a rota devolvia 200 onde o teste esperava 409). Qualquer outro valor
 // mantém a detecção normal; nunca liga a voz à força, para não inventar capacidade inexistente.
 export function ttsForcedOff() { return /^(off|0|false|no)$/i.test(String(process.env.PIPPIT_TTS || '').trim()); }
-export function ttsAvailable() { if (ttsForcedOff()) return false; if (ttsOk === undefined) { ttsOk = process.platform === 'win32' && !spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech'], { encoding: 'utf8' }).status ? true : false; } return ttsOk; }
+export function ttsAvailable() { if (ttsForcedOff()) return false; if (String(process.env.PIPPIT_TTS || '').trim().toLowerCase() === 'fake') return true; if (ttsOk === undefined) { ttsOk = process.platform === 'win32' && !spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech'], { encoding: 'utf8' }).status ? true : false; } return ttsOk; }
 export function ttsVoices() {
   const r = spawnSync('powershell', ['-NoProfile', '-Command', 'Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; $s.GetInstalledVoices() | ForEach-Object { $_.VoiceInfo.Name }; $s.Dispose()'], { encoding: 'utf8' });
   return r.status === 0 ? r.stdout.split(/\r?\n/).map((x) => x.trim()).filter(Boolean) : [];
 }
 export function ttsLocal(text, out, { voice, rate } = {}) {
+  if (String(process.env.PIPPIT_TTS || '').trim().toLowerCase() === 'fake') {
+    // Provedor FALSO de teste (PIPPIT_TTS=fake): escreve um WAV PCM 16-bit mono 8 kHz de 0,4 s em
+    // silêncio, sem voz real — usado pelos testes para provar a geração sem depender de SAPI.
+    const rateHz = 8000, n = 3200; const buf = Buffer.alloc(44 + n * 2);
+    buf.write('RIFF', 0); buf.writeUInt32LE(36 + n * 2, 4); buf.write('WAVE', 8); buf.write('fmt ', 12);
+    buf.writeUInt32LE(16, 16); buf.writeUInt16LE(1, 20); buf.writeUInt16LE(1, 22); buf.writeUInt32LE(rateHz, 24);
+    buf.writeUInt32LE(rateHz * 2, 28); buf.writeUInt16LE(2, 32); buf.writeUInt16LE(16, 34); buf.write('data', 36);
+    buf.writeUInt32LE(n * 2, 40); fs.writeFileSync(out, buf); return;
+  }
   const script = 'Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; if ($env:PIPPIT_TTS_VOICE) { $s.SelectVoice($env:PIPPIT_TTS_VOICE) }; $s.Rate = [int]$env:PIPPIT_TTS_RATE; $s.SetOutputToWaveFile($env:PIPPIT_TTS_OUT); $s.Speak($env:PIPPIT_TTS_TEXT); $s.Dispose()';
   const r = spawnSync('powershell', ['-NoProfile', '-Command', script], { encoding: 'utf8', env: { ...process.env, PIPPIT_TTS_TEXT: String(text).slice(0, 2000), PIPPIT_TTS_VOICE: voice || '', PIPPIT_TTS_RATE: String(Math.max(-10, Math.min(10, Number(rate) || 0))), PIPPIT_TTS_OUT: out } });
   if (r.status !== 0 || !fs.existsSync(out)) throw new Error('voz local falhou: ' + (r.stderr || r.stdout || '').slice(0, 200)); return probe(out);

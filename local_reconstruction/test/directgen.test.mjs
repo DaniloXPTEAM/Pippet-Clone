@@ -18,9 +18,13 @@ const open = (svc) => { const p = svc.createCreativeProject({ user_info: { consu
 // custo observado: 4 s / 768p = 12
 assert.equal(creditsFor(4), 12);
 
-// check de credito: LimitFree, sem paywall (observado)
+// check de credito: LimitFree, sem paywall (observado; r20: nunca bloqueia por plano/tentativas/saldo)
 { const { svc } = mk(); const c = svc.checkWithholdDeduct({ action_type: 1, strict: true, item_list: [{ resource_type: 'aigc', resource_id: AUTO_ROUTE.resourceId, benefit_type: AUTO_ROUTE.benefitType, amount: 1, high_precision_amount: 4, submit_id: '' }], client_check_group: [] });
   assert.equal(c.ret, '0'); assert.equal(c.data.status, 1); assert.equal(c.data.item_list[0].credits_amount, 12); assert.deepEqual(c.data.item_list[0].consume_types, ['LimitFree']); assert.equal(c.data.paywall, null); assert.deepEqual(JSON.parse(c.response), c.data); }
+// r20: mesmo sem tentativas e sem saldo, o check NUNCA bloqueia (produto gratuito, sem paywall)
+{ const { svc } = mk({ credits: 0 }); svc.s.tries.auto = 0;
+  const c = svc.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_type: 'aigc', resource_id: AUTO_ROUTE.resourceId, benefit_type: 'x', amount: 1, high_precision_amount: 4 }] }).data;
+  assert.equal(c.status, 1); assert.equal(c.paywall, null); assert.equal(c.item_list[0].status, 1); assert.equal(c.item_list[0].missing_role, ''); }
 
 // get_thread antes do envio: ret "8", data null (observado)
 { const { svc } = mk(); const t = svc.getThread({ thread_id: 'canvas_thread_x_pippit_video_part_agent', scopes: ['run_list.entry_list'] }); assert.equal(t.ret, '8'); assert.equal(t.data, null); assert.equal(t.errmsg, 'Something went wrong. Try again.'); }
@@ -38,11 +42,11 @@ assert.equal(creditsFor(4), 12);
   const ev = svc.threadEvents(run.thread_id); assert.deepEqual(ev.map((e) => e.event), ['message', 'message', 'ping']); assert.equal(ev[0].data.run, null);
   assert.equal(svc.userCredit().data.credit.gift_credit, 125); assert.ok(MIN_PROMPT === 15); }
 
-// SUCESSO (com renderizador injetado): debito 125 -> 113, tentativas 3 -> 2, no "succeeded", canvas 272x476, arquivo do projeto, SSE por replay
+// SUCESSO (com renderizador injetado): r20 sem débito (estrutura de pagamento desligada), tentativas 3 -> 2, no "succeeded", canvas 272x476, arquivo do projeto, SSE por replay
 { const { svc, credits, state } = mk({ render: async () => ({ assetId: 'asset-77', name: 'clip.mp4', durationMs: 4467, width: 768, height: 1344 }) }); const pid = open(svc);
   const r = submit(svc, pid, 'canvas1', 'a red apple rotating on a white table'); assert.equal(r.data.run.state, 1);
   const run = await svc.process(r.data.run.run_id);
-  assert.equal(run.state, RUN_STATE.completed); assert.equal(credits.balance(), 113); assert.deepEqual(credits.log, [['Geração de vídeo (MiniMax-H3-trial) 4s', -12]]); assert.equal(state.tries.auto, 2);
+  assert.equal(run.state, RUN_STATE.completed); assert.equal(credits.balance(), 125, 'r20: nada é debitado — estrutura de pagamento desligada'); assert.equal(credits.log, undefined, 'sem lançamentos de débito'); assert.equal(state.tries.auto, 2);
   const gen = svc.s.assets.node1.root.content.generation; assert.equal(gen.state.status, 'succeeded'); assert.equal(gen.successfulGenerationCount, 1); assert.equal(gen.lastSuccessfulGenerationRunId, run.run_id); assert.equal(svc.s.assets.node1.root.content.metadata.durationMs, 4467);
   const n = svc.s.assets.canvas1.root.content.nodes.node1; assert.equal(n.w, 272); assert.equal(n.h, 476);
   const f = svc.listProjectFile({ project_id: pid, PageNum: 1, PageSize: 300 }).data; assert.equal(f.Total, 1); assert.equal(f.Files[0].IconType, '.mp4'); assert.match(f.Files[0].Raw.Filepath, /^\/workspace\/assets\/\d+\.1$/);
@@ -52,14 +56,15 @@ assert.equal(creditsFor(4), 12);
 // sem renderizador: falha explicita local, SEM debito (desvio local documentado)
 { const { svc, credits } = mk(); const pid = open(svc); const r = submit(svc, pid, 'canvas1', 'a red apple rotating on a white table'); const run = await svc.process(r.data.run.run_id); assert.equal(run.state, 4); assert.match(run.fail_reason.detail, /No local generation provider/); assert.equal(credits.balance(), 125); }
 
-// tentativas gratuitas esgotadas -> check devolve status 2 + paywall (regra UNOBSERVED, marcada como tal no codigo)
-{ const { svc, state } = mk(); state.tries.auto = 0; const c = svc.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_id: AUTO_ROUTE.resourceId, resource_type: 'aigc', benefit_type: AUTO_ROUTE.benefitType, high_precision_amount: 4 }] }); assert.equal(c.data.status, 2); assert.equal(c.data.paywall, 'subscribe'); }
+// r20: tentativas esgotadas NAO bloqueiam mais (produto gratuito, sem paywall) — o paywall observado
+// no original nao e reproduzido por decisao do usuario; campos de estrutura permanecem.
+{ const { svc, state } = mk(); state.tries.auto = 0; const c = svc.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_id: AUTO_ROUTE.resourceId, resource_type: 'aigc', benefit_type: AUTO_ROUTE.benefitType, high_precision_amount: 4 }] }); assert.equal(c.data.status, 1); assert.equal(c.data.paywall, null); }
 
 // cancel_run (estado/corpo UNOBSERVED): cancela run submetido durante a renderizacao; renderizador nao sobrescreve; run concluido nao muda
 { let release, renderSignal, svc; const gate = new Promise((r) => (release = r)); const events = []; const listeners = new Set([(ev) => { if (ev.type === 'run') events.push(svc.s.runs[ev.run_id].state); }]); const built = mk({ listeners, render: async (_run, { signal }) => { renderSignal = signal; await gate; return { assetId: 'a1', name: 'x.mp4', durationMs: 4000, width: 768, height: 1344 }; } }); svc = built.svc; const credits = built.credits; const pid = open(svc);
   const r = submit(svc, pid, 'canvas1', 'a red apple rotating on a white table'); const p = svc.process(r.data.run.run_id); await new Promise((x) => setTimeout(x, 10)); assert.equal(svc.s.runs[r.data.run.run_id].state, RUN_STATE.generating);
   const c = svc.cancelRun({ run_id: r.data.run.run_id, thread_id: r.data.run.thread_id }); assert.equal(c.data.run.state, RUN_STATE.canceled); assert.equal(renderSignal.aborted, true, 'cancel sinaliza o renderer em voo'); assert.deepEqual(events, [RUN_STATE.working, RUN_STATE.generating, RUN_STATE.canceled], 'SSE listeners veem as transicoes de run em ordem'); assert.equal(svc.s.assets.node1.root.content.generation.state.status, 'cancelled');
-  release(); const run = await p; assert.equal(run.state, RUN_STATE.canceled); assert.equal(svc.s.projects[pid].files.length, 0); assert.equal(credits.balance(), 113, 'sem estorno: regra desconhecida (documentada)');
+  release(); const run = await p; assert.equal(run.state, RUN_STATE.canceled); assert.equal(svc.s.projects[pid].files.length, 0); assert.equal(credits.balance(), 125, 'r20: nada debitado (estrutura desligada) — estorno nem se aplica; regra de estorno segue desconhecida');
   assert.equal(svc.cancelRun({ run_id: r.data.run.run_id }).data.run.state, RUN_STATE.canceled); assert.equal(svc.cancelRun({ run_id: 'inexistente' }).ret, '8');
   const rows = svc.listRuns(); assert.equal(rows.length, 1); assert.equal(rows[0].state, RUN_STATE.canceled); assert.equal(rows[0].prompt, 'a red apple rotating on a white table'); assert.equal(rows[0].canvas_id, 'canvas1');
   const task = svc.listLocalTasks()[0]; assert.equal(task.run_id, run.run_id); assert.equal(task.run_state, RUN_STATE.canceled); assert.equal(task.local_task_id, `local_run_task_${run.run_id}`); }

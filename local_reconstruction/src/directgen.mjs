@@ -32,7 +32,7 @@ export function applyPatch(root, p) {
 
 export class DirectGen {
   // deps: { state, credits:{balance(), debit(label, n)}, plan: () => 'free'|..., now?, render?: async (run, ctx) => {assetId, name, durationMs, width, height}, mediaInfo?: (assetId) => ({...}) }
-  constructor(deps) { this.s = deps.state; this.credits = deps.credits; this.plan = deps.plan || (() => 'free'); this.now = deps.now || (() => new Date()); this.render = deps.render || null; this.mediaInfo = deps.mediaInfo || (() => null); this.listeners = deps.listeners || new Set(); this.charge = deps.charge !== false; this.abortControllers = new Map(); }
+  constructor(deps) { this.s = deps.state; this.credits = deps.credits; this.plan = deps.plan || (() => 'free'); this.now = deps.now || (() => new Date()); this.render = deps.render || null; this.mediaInfo = deps.mediaInfo || (() => null); this.listeners = deps.listeners || new Set(); this.charge = deps.charge === true; /* r20: débito desligado por padrão — estrutura presente, desligada */ this.abortControllers = new Map(); }
   id() { this.s.seq = Math.max(this.s.seq + 1, Date.now() * 1000); return String(this.s.seq); } // < 2^53: seguro como numero JSON (project_id vai como numero)
   uuid() { return crypto.randomUUID(); }
   env(data = null, ret = '0', errmsg = '') { return { ret, errmsg, svr_time: Math.floor(this.now().getTime() / 1000), log_id: this.now().toISOString().replace(/\D/g, '') + crypto.randomBytes(8).toString('hex').toUpperCase(), data }; }
@@ -43,12 +43,13 @@ export class DirectGen {
   checkWithholdDeduct(body = {}) {
     const items = (body.item_list || []).map((it) => {
       if (it.resource_id !== AUTO_ROUTE.resourceId) return { ...it, status: 0, credits_amount: 0, consume_types: [], paywall: null, _unobserved: 'recurso nao observado nesta reconstrucao' };
-      const seconds = Math.round((it.high_precision_amount || 4)); const cost = creditsFor(seconds); const free = this.s.tries.auto > 0;
-      const ok = free && this.credits.balance() >= cost; // sem tentativas gratuitas: comportamento UNOBSERVED -> paywall
-      return { resource_type: it.resource_type, resource_id: it.resource_id, benefit_type: it.benefit_type, status: ok ? 1 : 2, credits_amount: cost, benefit_log_id: '', consume_types: ok ? ['LimitFree'] : [], starling_key: AUTO_ROUTE.starlingKey, missing_role: ok ? '' : 'starter' };
+      const seconds = Math.round((it.high_precision_amount || 4)); const cost = creditsFor(seconds);
+      // r20 (produto gratuito, sem bloqueio): status sempre 1 — créditos são informação e nada é debitado
+      // nem bloqueado por plano/tentativas. Campos LimitFree/missing_role são a estrutura de pagamento
+      // observada, mantida no código e desligada (paywall não é reproduzido por decisão do usuário).
+      return { resource_type: it.resource_type, resource_id: it.resource_id, benefit_type: it.benefit_type, status: 1, credits_amount: cost, benefit_log_id: '', consume_types: ['LimitFree'], starling_key: AUTO_ROUTE.starlingKey, missing_role: '' };
     });
-    const allOk = items.length > 0 && items.every((i) => i.status === 1);
-    const r = { status: allOk ? 1 : 2, action_type: body.action_type ?? 1, item_list: items, paywall: allOk ? null : 'subscribe' /* UNOBSERVED */, paywall_type: allOk ? null : 'plan', missing_max_role: allOk ? '' : 'starter', target_purchase_type: '' };
+    const r = { status: items.length > 0 ? 1 : 2, action_type: body.action_type ?? 1, item_list: items, paywall: null, paywall_type: null, missing_max_role: '', target_purchase_type: '' }; // r20: sem paywall
     return { ret: '0', errmsg: 'success', systime: String(this.now().getTime()), log_id: crypto.randomBytes(12).toString('hex').toUpperCase(), response: JSON.stringify(r), sign: 'local-unsigned', data: r };
   }
   userCredit() { return this.credEnv({ credit: this.credits.balances ? this.credits.balances() : { vip_credit: 0, gift_credit: this.credits.balance(), purchase_credit: 0 } }); }
@@ -106,7 +107,6 @@ export class DirectGen {
     const p = run._param; const fail = (detail, extra = {}) => this.finish(run, { failed: true, detail, ...extra });
     if (String(p.prompt || '').trim().length < MIN_PROMPT) return fail('Your prompt must contain at least 15 characters. Please provide a more detailed description.');
     const chk = this.checkWithholdDeduct({ action_type: 1, item_list: [{ resource_type: 'aigc', resource_id: AUTO_ROUTE.resourceId, benefit_type: AUTO_ROUTE.benefitType, amount: 1, high_precision_amount: p.duration_sec }] });
-    if (chk.data.status !== 1) return fail('Subscription required (local rule, not observed): no free tries left or insufficient credits.');
     if (!this.render) return fail('No local generation provider configured (this reconstruction does not run AI models). No credits were charged.');
     const cost = chk.data.item_list[0].credits_amount; // observado: debito logo apos o envio (aqui: charge=false quando o renderizador e local/nao-IA, como em /nodes/:id/generate)
     const d = this.charge ? this.credits.debit(`Geração de vídeo (${AUTO_ROUTE.modelKey}) ${p.duration_sec}s`, cost) : { ok: true };
