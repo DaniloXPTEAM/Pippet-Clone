@@ -29,5 +29,18 @@ try {
   assert.equal(checks.length, 1, 'uma chamada a /api/biz/v2/videogen/check (espelho do fluxo observado)');
   assert.match(checks[0], /generate_source/, 'corpo {"generate_source":1}');
   const assets = await (await fetch(`${f.base}/api/assets?kind=audio`)).json(); assert.ok(assets.length >= 1, 'ativo de áudio existe');
-  console.log('subscribe_modal_ui.test.mjs: ok (r20: envio em Áudio gera com provedor gratuito — fake nos testes — sem ver tela de planos; check chamado como espelho; paywall do original não reproduzido)');
+  // tela de planos (aberta sob demanda): sem valores em R$, sem "Subscribe", botões desabilitados
+  await page.locator('#credits').click();
+  await page.waitForSelector('.modal #plansB');
+  await page.locator('#plansB').click();
+  await page.waitForSelector('.modal .plans');
+  const pt = await page.locator('.modal').innerText();
+  assert.match(pt, /Planos/);
+  assert.match(pt, /No momento gratuito — em breve/);
+  assert.match(pt, /Plano atual — acesso a tudo/, 'plano atual dá acesso a tudo');
+  for (const name of ['Free', 'Starter', 'Plus', 'Pro']) assert.ok(pt.includes(name), name);
+  assert.ok(!/R\$|Subscribe|Assine|Best value|Auto renews|Yearly|Monthly/.test(pt), 'sem valores/assinatura na tela de planos: ' + pt.slice(0, 200));
+  assert.equal(await page.locator('.modal .plans button:not([disabled])').count(), 0, 'todos os botões de plano desabilitados');
+  assert.equal(await page.locator('.modal #proSlider').count(), 0, 'sem slider de preço');
+  console.log('plans_modal_ui.test.mjs: ok (r20: envio em Áudio gera com provedor gratuito sem ver planos; tela de planos mostra "No momento gratuito — em breve", botões desabilitados, plano atual com acesso a tudo, sem R$/Subscribe — paywall do original não reproduzido)');
 } finally { await browser?.close(); await f.close(); }

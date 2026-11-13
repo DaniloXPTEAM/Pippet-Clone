@@ -54,56 +54,26 @@ function bindCredits() {
   const tasks = $('#exportTasks'); if (tasks) tasks.onclick = () => modal('<h2>Export tasks</h2><p class="muted">TitleBarExportTask — ordem <b>4</b> (evidência estática: bundles).</p><div class="blocked"><b>UNOBSERVED</b>: conteúdo, estados e ações do painel de tarefas de exportação não foram observados nesta instalação. Nenhuma tarefa é presumida.</div>');
 }
 async function creditsModal() {
-  const l = (await api('/api/ledger')).body; const m = modal(`<h2>Detalhes</h2><p>Detalhes de uso — saldo <b>${l.balance}</b></p><div class="row" id="pouches" style="gap:14px;margin:6px 0">${[['vip', 'Assinatura (vip)'], ['gift', 'Gratuitos e bônus (gift)'], ['purchase', 'Comprados (purchase)']].map(([k, t]) => `<div class="card" data-pouch="${k}"><small class="muted">${t}</small><br><b>${l.balances?.[k + '_credit'] ?? 0}</b></div>`).join('')}</div><p class="muted">Bolsas conforme benefits/user_credit. Assinatura e compra estão bloqueadas nesta instalação local; a ordem de consumo entre bolsas não foi observada (usa o lote que vence primeiro).</p><div class="row"><button id="dly">Receber créditos diários</button><button id="plansB">Assine para obter mais créditos</button></div>
+  const l = (await api('/api/ledger')).body; const m = modal(`<h2>Detalhes</h2><p>Detalhes de uso — saldo <b>${l.balance}</b></p><div class="row" id="pouches" style="gap:14px;margin:6px 0">${[['vip', 'Assinatura (vip)'], ['gift', 'Gratuitos e bônus (gift)'], ['purchase', 'Comprados (purchase)']].map(([k, t]) => `<div class="card" data-pouch="${k}"><small class="muted">${t}</small><br><b>${l.balances?.[k + '_credit'] ?? 0}</b></div>`).join('')}</div><p class="muted">Bolsas conforme benefits/user_credit. Assinatura e compra: estrutura presente no código, desligada (produto gratuito — r20); a ordem de consumo entre bolsas não foi observada (usa o lote que vence primeiro).</p><div class="row"><button id="dly">Receber créditos diários</button><button id="plansB">Ver planos</button></div>
     <table><tr><th>Quando</th><th>Origem</th><th>Bolsa</th><th>Δ</th></tr>${l.entries.slice(0, 40).map((e) => `<tr><td>${new Date(e.at).toLocaleString('pt-BR')}</td><td>${esc(e.label)}</td><td>${esc(e.pouch || Object.entries(e.pouches || {}).map(([k, v]) => `${k} ${v}`).join(' + ') || '')}</td><td>${e.delta > 0 ? '+' : ''}${e.delta}</td></tr>`).join('')}</table>`);
   $('#dly', m).onclick = async () => { const r = (await post('/api/daily-claim')).body; toast(r.claimed ? '+80 créditos gratuitos (expiram às 23:59:59)' : 'Os créditos de hoje já foram recebidos.'); await refresh(); m.close(); route_(); };
   $('#plansB', m).onclick = () => { m.close(); plansModal(); };
 }
-async function subscribeModal() {
-  // Modal "Subscribe to boost your business" — textos e preços ANUAIS observados no Pippit real (13/11/2026).
-  // Preços MENSAIS não foram capturados (UNOBSERVED) e não são inventados. Pagamento = só estrutura.
-  const Y = (v) => 'R$' + String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // formato observado: R$1,252 (vírgula)
-  const plans = [
-    { id: 'free', name: 'Free', note: 'Always free — No credit card required', cur: true },
-    { id: 'starter', name: 'Starter', badge: '(Best value)', yearly: 513, yearlyWas: 855 },
-    { id: 'plus', name: 'Plus', yearly: 1252, yearlyWas: 2087 },
-    { id: 'pro', name: 'Pro', yearly: 18325, yearlyWas: 30542, slider: true },
-  ];
-  const m = modal(`<h2>Subscribe to boost your business</h2>
-    <div class="row"><button class="pill" id="sbM">Monthly</button><button class="pill primary" id="sbY">Yearly</button></div>
-    <div id="subPlans">${plans.map((p) => `<div class="card" data-id="${p.id}" style="margin:6px 0">
-      <b>${esc(p.name)}</b> ${p.badge ? `<span class="pill">${esc(p.badge)}</span>` : ''}
-      ${p.cur ? `<div>${esc(p.note)}</div><button disabled>Current plan</button>` : `
-      <div><b>${Y(p.yearly)}</b>/Yearly <s>${Y(p.yearlyWas)}</s></div>
-      <div class="muted" data-monthly>Monthly: <b>UNOBSERVED</b> (preço mensal não capturado)</div>
-      ${p.slider ? `<div><input type="range" min="1" max="10" value="1" id="proSlider"> <span class="muted">slider observado no card Pro; semântica UNOBSERVED</span></div>` : ''}
-      <div class="muted">Auto renews, cancel anytime.</div>
-      <button class="primary" data-sub="${p.id}">Subscribe</button>`}
-    </div>`).join('')}</div>
-    <p class="muted" id="subNote">Anual observado 13/11 (Yearly de R$855/R$2,087/R$30,542). Mensal: UNOBSERVED. Pagamento = só estrutura; nada é cobrado nesta instalação.</p>`, 'sm');
-  m.querySelectorAll('[data-sub]').forEach((b) => (b.onclick = () => toast('Subscribe: pagamento é apenas estrutura nesta instalação; nada é cobrado.')));
-  $('#sbM', m).onclick = () => { m.querySelectorAll('[data-monthly]').forEach((e) => { e.innerHTML = 'Monthly: <b>UNOBSERVED</b> (preço mensal não capturado)'; }); toast('Preços mensais não foram capturados; nada é inventado.'); };
-  $('#sbY', m).onclick = () => { m.querySelectorAll('[data-monthly]').forEach((e) => { e.innerHTML = '<b>Anual observado</b> (Yearly)'; }); };
-}
 async function plansModal(modelName) {
-  const B = (await api('/api/billing')).body;
-  const annual = ST.user.billing === 'annual'; const P = CAT.plans;
-  const m = modal(`<h2>${modelName ? `Assine o Starter agora para uso ilimitado de ${esc(modelName)}` : 'Assine para impulsionar o seu negócio'}</h2><div class="tabs"><button data-b="monthly" class="${annual ? '' : 'on'}">Mensal 90% de DESCONTO</button><button data-b="annual" class="${annual ? 'on' : ''}">Anual 40% de DESCONTO</button></div>
-   <div class="plans">${P.map((p) => { const a = annual && p.annual; const price = a ? p.annual.priceBRL : p.priceBRL; const list = a ? p.annual.listPriceBRL : p.listPriceBRL; const cur = ST.user.plan === p.id;
-     return `<div class="plan ${p.id === 'plus' ? 'hot' : ''}"><h3>${esc(p.name)}</h3><div class="price">${p.priceBRL === 0 ? 'Sempre gratuito' : 'R$ ' + price}</div>${list ? `<s>R$${list}</s> /${annual ? 'Anual' : 'Mensal'}` : '<div class="muted">Só para experimentar</div>'}
-     <ul>${p.dailyCredits ? '<li>Créditos diários gratuitos (80/dia)</li>' : `<li>${p.monthlyCredits} créditos/mês</li>`}${p.videos10s ? `<li>${p.videos10s} vídeos (10 s) por mês</li>` : ''}${p.storageGB ? `<li>${p.storageGB === Infinity ? 'Armazenamento ilimitado' : p.storageGB + ' GB'}</li>` : ''}<li>Avatares de vídeo grátis: ${p.videoAvatars ?? 0}</li>${p.noWatermark ? '<li>Remover marca d’água · Amplificar até 4K</li>' : ''}${p.gptImage25 ? '<li>GPT Image 2.5 (−60% em créditos)</li>' : ''}</ul>
-     <button ${cur ? 'disabled' : ''} data-plan="${p.id}">${cur ? 'Plano atual' : p.priceBRL ? 'Usar plano (teste local)' : 'Voltar ao gratuito'}</button></div>`; }).join('')}</div>
-   <div class="blocked">Não há pagamento nesta reconstrução: o botão apenas troca o plano <b>localmente</b> para exercitar bloqueios por plano (observados no original).</div>
-   <div class="card" id="billingNote"><b>Cobrança (estrutura):</b> adaptador em uso <b>${esc(B.adapterInfo.label)}</b> (${esc(B.adapterInfo.mode)}). Gateway: ${B.adapters.find((a) => a.id === 'gateway').enabled ? 'ligado' : 'desligado — só contrato'}. ${esc(B.note)}
-   <div class="row" style="margin-top:6px"><button id="billCheckout">Fazer checkout (estrutura)</button><span id="billRes" class="muted"></span></div>
-   <p class="muted" style="margin:6px 0 0">Contrato previsto: checkout <code>${esc(B.contract.checkout.endpoint)}</code> · webhook com <code>${esc(B.contract.webhook.headers[0])}</code> · portal <code>${esc(B.contract.portal.endpoint)}</code>. Nada é cobrado.</p></div>`);
-  m.querySelectorAll('.tabs button').forEach((b) => (b.onclick = async () => { await post('/api/plan', { plan: ST.user.plan, billing: b.dataset.b }); await refresh(); m.close(); plansModal(); }));
-  m.querySelectorAll('[data-plan]').forEach((b) => (b.onclick = async () => { await post('/api/plan', { plan: b.dataset.plan, billing: ST.user.billing }); await refresh(); m.close(); route_(); toast('Plano local: ' + b.dataset.plan); }));
-  const bc = $('#billCheckout', m); if (bc) bc.onclick = async () => { const planId = ST.user.plan && ST.user.plan !== 'free' ? ST.user.plan : 'starter';
-    const rr = await post('/api/billing/checkout', { planId, billing: ST.user.billing }); const out = $('#billRes', m); if (!out) return;
-    out.textContent = rr.ok ? `⛔ nada cobrado (estado ${rr.body.state}, cobrança ${rr.body.charged}); ${rr.body.note}` : `⛔ ${rr.body.error}`; toast(rr.ok ? 'Nenhuma cobrança: estrutura apenas.' : rr.body.error, 6000); };
+  // r20 (decisão do usuário — produto gratuito): a tela de planos NÃO mostra valores em R$ nem pede
+  // assinatura. Cada plano traz "No momento gratuito — em breve" e botão desabilitado; o plano atual
+  // dá acesso a tudo. Preços observados no original ficam só nos documentos de evidência
+  // (mesa_de_operacao/entrega_19/ADENDO_R19.md), marcados como não reproduzidos por decisão do usuário.
+  const P = CAT.plans;
+  const m = modal(`<h2>Planos</h2>
+   <div class="plans">${P.map((p) => { const cur = ST.user.plan === p.id;
+     return `<div class="plan ${p.id === 'plus' ? 'hot' : ''}"><h3>${esc(p.name)}</h3>
+     <div class="price">${cur ? 'Plano atual — acesso a tudo' : 'No momento gratuito — em breve'}</div>
+     <ul>${p.dailyCredits ? '<li>Créditos diários gratuitos (80/dia)</li>' : ''}${p.noWatermark ? '<li>Remover marca d’água · Amplificar até 4K</li>' : ''}${p.gptImage25 ? '<li>GPT Image 2.5</li>' : ''}</ul>
+     <button disabled data-plan="${p.id}">${cur ? 'Plano atual' : 'No momento gratuito — em breve'}</button></div>`; }).join('')}</div>
+   <div class="blocked">Produto gratuito e sem bloqueio (decisão do usuário — r20): nenhum recurso é cobrado ou limitado por plano. Estrutura de pagamento presente no código, desligada. Valores observados no original ficam só nos documentos de evidência (ADENDO_R19.md), não reproduzidos por decisão do usuário.</div>`);
 }
-$('#promoBtn').onclick = async () => { const P = (await api('/api/promotions')).body; modal(`<h2>Ofertas observadas</h2><p class="muted">Valores de capturas da home em datas diferentes. Não é cotação atual: nada é cobrado nesta instalação.</p><ul>${(P.snapshots || []).map((x) => `<li>${esc(x.date)} — ${esc(x.text)}</li>`).join('')}</ul><p class="muted">Preços por segundo vistos: ${(P.priceObservations || []).map((p) => `${esc(p.model)} ${p.values.map((v) => 'R$' + v.toFixed(2) + '/s').join(' vs ')}`).join(' · ')}</p><div class="blocked"><b>UNOBSERVED</b>: ${(P.unobserved || []).map((x) => esc(x)).join(' · ')}</div><button class="primary" id="promoPlans">Ver planos locais</button>`).querySelector('#promoPlans').onclick = plansModal; }; $('#promoX').onclick = () => $('#promo').remove();
+$('#promoBtn').onclick = async () => { const P = (await api('/api/promotions')).body; modal(`<h2>Ofertas observadas</h2><p class="muted">Valores de capturas da home em datas diferentes. Não é cotação atual: nada é cobrado nesta instalação.</p><ul>${(P.snapshots || []).map((x) => `<li>${esc(x.date)} — ${esc(String(x.text).replace(/R\$\s?[\d.,]+/g, '[valor omitido]'))}</li>`).join('')}</ul><p class="muted">Valores observados: só nos documentos de evidência (ADENDO_R19.md) — não reproduzidos por decisão do usuário (r20).</p><div class="blocked"><b>UNOBSERVED</b>: ${(P.unobserved || []).map((x) => esc(x)).join(' · ')}</div><button class="primary" id="promoPlans">Ver planos locais</button>`).querySelector('#promoPlans').onclick = plansModal; }; $('#promoX').onclick = () => $('#promo').remove();
 
 // ---------- paginas
 const SKILL_MODELS = (s) => (s.models ? s.models.map((m) => `<span class="pill" style="padding:2px 8px;font-size:11px">${esc(m)}</span>`).join(' ') : '');
