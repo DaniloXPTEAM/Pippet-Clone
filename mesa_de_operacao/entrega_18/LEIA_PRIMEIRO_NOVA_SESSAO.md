@@ -3,6 +3,7 @@
 **Contexto:** "Pippet-Clone" = reconstrução local do Pippit (BytePlus). Regras do projeto: `mesa_de_operacao/entrega_15/LEIA_PRIMEIRO_NOVA_SESSAO.md` (endereços 127.0.0.1; "NÃO provado" quando não medido; nada inventado; UNOBSERVED ≠ verificada; `--force` proibido; respostas curtas).
 
 **Regras vigentes da r18 (ordem substitutiva — SUBSTITUI qualquer ordem r18 anterior):**
+- **REGRA PERMANENTE (r20, vale para sempre): NESTE PRODUTO TUDO É GRATUITO E SEM BLOQUEIO.** "Igual ao Pippit" vale para telas, fluxos e funções, NÃO para cobrança: nenhum paywall, nenhum bloqueio por plano ou por modelo, todos os modelos livres (vídeo, imagem, áudio). Preço só existirá no futuro, em OUTRO produto. A estrutura de pagamento fica no código, desligada. Preços e paywall observados no Pippit ficam SÓ nos documentos de evidência, marcados "observado no original, não reproduzido por decisão do usuário". (O adendo r19 que pediu o paywall de Áudio estava ERRADO e foi desfeito na r20.)
 - NADA sai do escopo sem autorização do usuário. Bloqueio = pendência com CAMINHO de implementação — nunca remoção.
 - Contagens **x/122 (critério antigo)** e **x/423 (catálogo integral)** mantidas, lado a lado; SEM régua de escopo reduzido.
 - A ordem anterior de "decisões" (estados "decidido"/"fora do escopo", `DECISOES_R18.md`) foi REVOGADA e desfeita (`3c20390` reverte `5559abb`) — nunca reimplementar esses estados.
