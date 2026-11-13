@@ -48,9 +48,57 @@ function renderSide(route) {
       { label: 'Renomear', icon: '<svg viewBox="0 0 24 24"><path d="m4 16.5-.8 4.3 4.3-.8L20 7.5 16.5 4 4 16.5ZM14.8 5.7l3.5 3.5"/></svg>', fn: async () => { const t = prompt('Novo nome'); if (t) { await patch('/api/projects/' + id, { title: t }); await refresh(); route_(); } } },
       { label: 'Excluir', cls: 'danger', icon: '<svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"/></svg>', fn: async () => { if (confirm('Excluir este projeto?')) { await api('/api/projects/' + id, { method: 'DELETE' }); await refresh(); location.hash = '/home'; route_(); } } }]); };
   });
-  $('#acc').onclick = (e) => { const r = e.currentTarget.getBoundingClientRect(); menuAt(r.left, r.top - 250, [
-    { label: 'Tarefas concluídas', fn: () => (location.hash = '/tasks') }, { label: 'Gerenciamento da conta', fn: () => (location.hash = '/settings/personal_information') },
-    { label: 'Configurações', fn: () => (location.hash = '/settings/points_prompt_settings') }, { label: 'Sair', fn: signOut }, { label: 'More', fn: () => menuAt(r.left, r.top - 250, [{ label: 'CLI', fn: () => toast('UNOBSERVED: destino de CLI não capturado.') }, { label: 'Feature wishlist', fn: () => toast('UNOBSERVED: destino da lista de desejos não capturado.') }, { label: 'Customer service', fn: () => toast('UNOBSERVED: destino do atendimento não capturado.') }, { label: 'Lacunas da conta', fn: async () => { let linhas = 'CLI, Feature wishlist e Customer service: UNOBSERVED'; try { const a = (await api('/api/account/unobserved')).body; linhas = a.items.map((x) => `${x.label} — ${x.status} (${x.note})`).join(' · '); } catch {} modal(`<h2>Lacunas da conta</h2><p class="muted">${linhas}.</p><p class="blocked">Nenhum desses destinos foi aberto em captura; nada é simulado.</p>`, 'sm'); } }]) }, { label: 'Termos e Políticas', fn: () => toast('Termos do serviço original: não reproduzidos.') }, '-', { label: 'Sair', cls: 'danger', fn: () => toast('Sessão única local: não há logout.') }]); };
+  $('#acc').onclick = (e) => { if (e.target.closest('.bell')) return; e.stopPropagation(); accountMenu(e.currentTarget); };
+}
+// ---------- menu da conta (medido no original em 13/11/2026: capturas_pippit_2026-11-13/pt_conta_*.txt)
+// Painel de 276px (raio 24, itens de 48px com raio 16) acima da linha da conta; cada item com seta abre um
+// SUBMENU ao lado ao passar o mouse; itens com seta diagonal são links diretos.
+const ACC_GO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l6-6M6 5h5v5"/></svg>';
+const ACC_CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
+const ACC_OUT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 2.5h-3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3M10.5 5l3 3-3 3M13.5 8h-7"/></svg>';
+function closeAccountMenu() { document.querySelectorAll('.acc-pop,.acc-sub,.note-pop').forEach((x) => x.remove()); }
+function accountMenu(anchor) {
+  if ($('.acc-pop')) return closeAccountMenu();
+  closeAccountMenu(); document.querySelectorAll('.menu').forEach((m) => m.remove());
+  const go = (hash) => () => { closeAccountMenu(); location.hash = hash; };
+  const unob = (what) => () => { closeAccountMenu(); toast(what + ': destino ainda não disponível nesta instalação.'); };
+  const lang = (ST?.settings?.language || 'pt').slice(0, 2).toUpperCase();
+  const SUBS = {
+    conta: [{ label: 'Informações da conta', fn: go('/settings/personal_information'), go: 1 }, { label: 'Autorização de conta', fn: go('/settings/account_authorization'), go: 1 }],
+    config: [{ label: 'Idioma', tag: lang, fn: go('/settings/language'), small: 1 }, { label: 'Aparência', tag: document.body.classList.contains('dark') ? 'Modo escuro' : 'Modo claro', fn: go('/settings/language'), small: 1 },
+      { label: 'Planos e preços', fn: () => { closeAccountMenu(); plansModal(); }, go: 1 }, { label: "Salvar sem marca d'água", fn: go('/settings/watermark'), go: 1 },
+      { label: 'Estratégia de confirmação de uso de créditos', fn: go('/settings/points_prompt_settings'), go: 1 }, { label: 'Login e gerenciamento', fn: go('/settings/sign_management'), go: 1 }],
+    mais: [{ label: 'CLI', fn: unob('CLI') }, { label: 'Lista de desejos de recursos', fn: unob('Lista de desejos'), go: 1 }, { label: 'Atendimento ao cliente', fn: () => { closeAccountMenu(); location.hash = '/help'; }, go: 1 }],
+    termos: ['Termos de Serviço', 'Política de Privacidade', 'Política de Cookies', 'Contrato de Licenciamento', 'Termos de Serviço do Criador', 'Diretrizes da Comunidade'].map((t) => ({ label: t, fn: unob(t), go: 1 })),
+  };
+  const ITEMS = [{ k: 'tarefas', label: 'Tarefas concluídas' }, { k: 'conta', label: 'Gerenciamento da conta' }, { k: 'config', label: 'Configurações', tag: lang }, { k: 'mais', label: 'Mais' }, { k: 'termos', label: 'Termos e Políticas' }];
+  const row = (i, cls = '') => `<a class="acc-i ${cls} ${i.small ? 'small' : ''}" data-k="${i.k || ''}"><span class="lb">${esc(i.label)}</span>${i.tag ? `<span class="tag">${esc(i.tag)}</span>` : ''}<i class="ar">${i.go ? ACC_GO : ACC_CHEV}</i></a>`;
+  const p = h(`<div class="acc-pop" role="menu"><div class="acc-head"><div class="avatar"></div><div class="who"><b>${esc(ST?.user?.name || 'local')}</b><small>${esc(ST?.user?.email || 'conta local')}</small></div></div>
+    <div class="acc-list">${ITEMS.map((i) => row(i)).join('')}</div><a class="acc-i sair danger" data-k="sair"><span class="lb">Sair</span><i class="ar">${ACC_OUT}</i></a></div>`);
+  document.body.appendChild(p);
+  const r = anchor.getBoundingClientRect(); p.style.left = Math.max(8, r.left + 12) + 'px'; p.style.bottom = (innerHeight - r.top + 4) + 'px';
+  const openSub = async (el) => {
+    document.querySelectorAll('.acc-sub').forEach((x) => x.remove()); p.querySelectorAll('.acc-i.on').forEach((x) => x.classList.remove('on')); el.classList.add('on');
+    const k = el.dataset.k; let sub;
+    if (k === 'tarefas') {
+      sub = h('<div class="acc-sub tasks"><h3>Tarefas concluídas</h3><div class="tk-list"><p class="muted">carregando…</p></div><p class="tk-foot">Apenas os 10 downloads mais recentes são mostrados aqui. Veja todos em <a id="tkAll">Recursos</a></p></div>');
+      document.body.appendChild(sub); $('#tkAll', sub).onclick = go('/tasks');
+      let as = []; try { as = (await api('/api/assets?cat=works&kind=video')).body || []; } catch {}
+      if (!sub.isConnected) return;
+      $('.tk-list', sub).innerHTML = as.slice(0, 10).map((a) => `<div class="tk"><div class="thumb"></div><div class="tx"><b>${esc(a.name || a.title || 'vídeo')}</b><small>${a.createdAt || a.at ? new Date(a.createdAt || a.at).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) : ''}</small><span class="st">Exportado</span></div>${a.url ? `<a class="dl" href="${esc(a.url)}" download>Baixar</a>` : ''}</div>`).join('') || '<p class="muted" style="padding:8px 12px">Nenhuma tarefa concluída ainda.</p>';
+    } else {
+      sub = h(`<div class="acc-sub"><div class="acc-list">${SUBS[k].map((i, n) => row({ ...i, k: String(n) })).join('')}</div></div>`); document.body.appendChild(sub);
+      sub.querySelectorAll('.acc-i').forEach((a) => (a.onclick = (e) => { e.stopPropagation(); SUBS[k][+a.dataset.k].fn(); }));
+    }
+    const pr = p.getBoundingClientRect(), er = el.getBoundingClientRect(); sub.style.left = (pr.right - 9) + 'px';
+    const hh = sub.offsetHeight; sub.style.top = Math.max(8, Math.min(er.top - 9, innerHeight - hh - 12)) + 'px';
+    sub.addEventListener('click', (e) => e.stopPropagation());
+  };
+  p.querySelectorAll('.acc-list .acc-i').forEach((a) => { a.onmouseenter = () => openSub(a); a.onclick = (e) => { e.stopPropagation(); openSub(a); }; });
+  $('.sair', p).onmouseenter = () => { document.querySelectorAll('.acc-sub').forEach((x) => x.remove()); p.querySelectorAll('.acc-i.on').forEach((x) => x.classList.remove('on')); };
+  $('.sair', p).onclick = (e) => { e.stopPropagation(); closeAccountMenu(); signOut(); };
+  p.addEventListener('click', (e) => e.stopPropagation());
+  setTimeout(() => { const off = (e) => { if (e.type === 'keydown' && e.key !== 'Escape') return; closeAccountMenu(); document.removeEventListener('click', off); document.removeEventListener('keydown', off); }; document.addEventListener('click', off); document.addEventListener('keydown', off); }, 0);
 }
 function credits() { return `<div class="titlebar-tools"><button id="agentConnect" aria-label="Agent connection" title="Agent connection">Agent connect</button><button id="exportTasks" aria-label="Export tasks" title="Export tasks">Export tasks</button><div class="top-credits" id="credits"><i class="ic">${IC.credit}</i><b>${ST.balance}</b><span class="div"></span><span class="lbl">Gratuito</span></div></div>`; }
 function bindCredits() {
@@ -1182,13 +1230,19 @@ let NOTE_UNREAD = 0;
 // Conteúdo: eventos do próprio app + os 8 anúncios editoriais observados por tema (REA ev_72d7b4c2…7b20,
 // jan–abr/2026) — títulos, datas e textos individuais dos anúncios são UNOBSERVED e não são inventados.
 async function openNotifications() {
+  // Medido no original (pt_notif.txt): painel 448px, raio 24, fundo branco translúcido, acima do sino; título +
+  // "Todos lidos"; cada item com título (ponto roxo se não lido), uma linha de texto e a data.
+  if ($('.note-pop')) return closeAccountMenu();
+  closeAccountMenu(); document.querySelectorAll('.menu').forEach((m) => m.remove());
   const n = (await api('/api/notifications')).body; const kind = { success: '✔', error: '✖', info: 'ℹ', ad: '📣' };
-  // r16 item 2: eventos reais do app PRIMEIRO (não empurrados/escondidos pelos anúncios); os 8 anúncios
-  // observados ficam na seção própria abaixo.
-  const card = (x) => `<div class="card note ${x.read ? '' : 'unread'}" style="margin:6px 0"><b>${kind[x.kind] || ''} ${esc(x.title)}</b>${x.read ? '' : ' <span class="muted">• novo</span>'}<div class="muted">${esc(x.body)}</div><small class="muted">${x.at ? new Date(x.at).toLocaleString('pt-BR') : 'anúncio observado por tema (jan–abr/2026); título/data/texto originais UNOBSERVED'}</small></div>`;
   const eventos = n.items.filter((x) => x.kind !== 'ad'); const ads = n.items.filter((x) => x.kind === 'ad');
-  const m = modal(`<h2>Notificações</h2><button id="allread">Todas lidas</button>${eventos.length ? eventos.map(card).join('') : '<p class="muted">Sem notificações.</p>'}<h3>Anúncios (Pippit · jan–abr/2026)</h3>${ads.map(card).join('')}<p class="blocked" style="font-size:12px">Anúncios editoriais: 8 temas observados (REA ev_72d7b4c2…7b20). Títulos, datas e textos originais não foram preservados — nada é inventado.</p>`, 'sm');
-  $('#allread', m).onclick = async () => { await post('/api/notifications/read-all'); NOTE_UNREAD = 0; m.close(); renderSide(location.hash.replace(/^#/, '') || '/home'); };
+  const card = (x) => `<div class="note ${x.read ? '' : 'unread'}"><b>${x.read ? '' : '<i class="nd"></i>'}${kind[x.kind] || ''} ${esc(x.title)}</b><p>${esc(/UNOBSERVED/.test(x.body || '') ? '' : x.body)}</p><small>${x.at ? new Date(x.at).toLocaleString('pt-BR') : ''}</small></div>`;
+  const p = h(`<div class="note-pop" role="dialog" aria-label="Notificações"><div class="np-head"><h2>Notificações</h2><button id="allread">Todos lidos</button></div><div class="np-list">${[...eventos, ...ads].map(card).join('') || '<p class="muted">Sem notificações.</p>'}</div></div>`);
+  document.body.appendChild(p);
+  const r = $('#acc').getBoundingClientRect(); p.style.left = '8px'; p.style.bottom = (innerHeight - r.top + 4) + 'px';
+  p.addEventListener('click', (e) => e.stopPropagation());
+  $('#allread', p).onclick = async () => { await post('/api/notifications/read-all'); NOTE_UNREAD = 0; closeAccountMenu(); renderSide(location.hash.replace(/^#/, '') || '/home'); };
+  setTimeout(() => { const off = (e) => { if (e.type === 'keydown' && e.key !== 'Escape') return; closeAccountMenu(); document.removeEventListener('click', off); document.removeEventListener('keydown', off); }; document.addEventListener('click', off); document.addEventListener('keydown', off); }, 0);
 }
 const KNOWN_MARKETING_TEMPLATES = Object.freeze([
   'Shot-and-Drop Reveal', 'Secret Shelf Test', 'Living Garment Swap Reveal', 'Cursor Download Reveal',
