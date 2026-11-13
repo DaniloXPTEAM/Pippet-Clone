@@ -53,7 +53,7 @@ try {
   });
   await etapa('comparação de planos', async () => {
     await page.locator('#faqPlans').click(); await page.locator('.plans').waitFor();
-    assert.match(await page.locator('.modal').innerText(), /Não há pagamento nesta reconstrução/);
+    assert.match(await page.locator('.modal').innerText(), /Produto gratuito e sem bloqueio/);
   });
   const total = Date.now() - inicio;
   if (process.env.PIPERLINE_TEST_TIMING === '1') console.log(`pricing_faq_ui: ${total} ms — ${relatorio()}`);

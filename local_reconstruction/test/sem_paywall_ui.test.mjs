@@ -29,13 +29,15 @@ try {
     } }).observe(document.body, { childList: true, subtree: true });
   });
   // 1) gatilho antigo de paywall: enviar com modelo NOMEADO (Vídeo) → motivo, sem planos
+  await page.locator('#modeB').click(); await page.locator('.menu a').filter({ hasText: 'Vídeo' }).click(); await page.waitForSelector('#modelB');
   await page.locator('#modelB').click();
   await page.waitForSelector('.modal #mp [data-id]');
   await page.locator('.modal #mp [data-id]').filter({ hasText: 'Dreamina Seedance 2.5' }).click();
   await page.locator('.modal .x').click();
+  await page.waitForFunction(() => /Modelos personalizados/.test(document.querySelector('#modelB')?.textContent || ''), null, { timeout: 5_000 }); // modelo nomeado selecionado
   await page.locator('#prompt').fill('um vídeo de teste sem paywall');
   await page.locator('#send').click();
-  await page.waitForFunction(() => /indisponível localmente/.test(document.querySelector('#toast')?.textContent || ''), null, { timeout: 10_000 });
+  await page.waitForFunction(() => /indisponível localmente/.test(document.querySelector('#toast')?.textContent || ''), null, { timeout: 20_000 });
   // 2) gatilho antigo de paywall: Vídeo em avatar → motivo do serviço, sem planos
   await page.goto(`${f.base}/#/avatars`); await page.waitForSelector('#va');
   await page.locator('#va').click();

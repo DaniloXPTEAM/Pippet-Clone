@@ -74,12 +74,13 @@ const browser = await launchChromium(); const errors = [];
 try {
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 1000 } })).newPage(); page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto(base + '/#/home'); await page.waitForSelector('#credits');
-  await page.locator('#credits').click(); await page.getByText('Assine para obter mais créditos').click(); await page.waitForSelector('.plans'); await page.waitForSelector('#billingNote');
-  const txt = await page.locator('#billingNote').innerText();
-  assert.match(txt, /Cobrança \(estrutura\)/); assert.match(txt, /Gateway: desligado/); assert.match(txt, /Nada é cobrado/); assert.match(txt, /checkout/); assert.match(txt, /HMAC-SHA256/);
-  await page.click('#billCheckout'); await page.waitForTimeout(600);
-  assert.match(await page.locator('#billRes').innerText(), /nada cobrado|nenhum valor é debitado/);
-  assert.match(await page.locator('#toast').innerText(), /Nenhuma cobrança/);
+  await page.locator('#credits').click(); await page.getByText('Ver planos').click(); await page.waitForSelector('.plans');
+  const txt = await page.locator('.modal').innerText();
+  assert.match(txt, /Produto gratuito e sem bloqueio/); assert.match(txt, /Estrutura de pagamento presente no código, desligada/);
+  assert.equal(await page.locator('#billingNote').count(), 0, 'estrutura de pagamento fora da UI (desligada — r20)');
+  assert.equal(await page.locator('#billCheckout').count(), 0);
+  assert.equal(await page.locator('.plans button:not([disabled])').count(), 0, 'botões de plano desabilitados (r20)');
+  assert.ok(!/R\$/.test(txt), 'sem valores em R$');
   assert.deepEqual(errors, []);
   console.log('billing_structure: OK');
 } finally { await browser.close(); server.close(); }

@@ -38,7 +38,7 @@ try {
   assert.match(pt, /Planos/);
   assert.match(pt, /No momento gratuito — em breve/);
   assert.match(pt, /Plano atual — acesso a tudo/, 'plano atual dá acesso a tudo');
-  for (const name of ['Free', 'Starter', 'Plus', 'Pro']) assert.ok(pt.includes(name), name);
+  for (const name of ['Gratuito', 'Starter', 'Plus', 'Pro']) assert.ok(pt.includes(name), name);
   assert.ok(!/R\$|Subscribe|Assine|Best value|Auto renews|Yearly|Monthly/.test(pt), 'sem valores/assinatura na tela de planos: ' + pt.slice(0, 200));
   assert.equal(await page.locator('.modal .plans button:not([disabled])').count(), 0, 'todos os botões de plano desabilitados');
   assert.equal(await page.locator('.modal #proSlider').count(), 0, 'sem slider de preço');
