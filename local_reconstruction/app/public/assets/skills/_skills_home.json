@@ -1,0 +1,83 @@
+[
+ {
+  "name": "Drama Ads",
+  "slug": "drama-ads",
+  "file": "drama-ads.webp",
+  "card": {
+   "lines": [
+    "Dreamina Seedance 2.5",
+    "GPT Image 2",
+    "Drops your product inside a high-tension mini-drama so viewers stay for the plot and leave wanting the product.",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ },
+ {
+  "name": "Marketing Video",
+  "slug": "marketing-video",
+  "file": "marketing-video.webp",
+  "card": {
+   "lines": [
+    "GPT Image 2",
+    "The core marketing-video engine that turns your product info plus a Hook/Style /Play brief into a commercial-ready video, from script and storyboard all the way to the final cut",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ },
+ {
+  "name": "Vlog Generator",
+  "slug": "vlog-generator",
+  "file": "vlog-generator.webp",
+  "card": {
+   "lines": [
+    "Turn your photos, clips, and audio into a story-driven vlog - with a real hook, natural pacing, and a satisfying ending, not just a slideshow.",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ },
+ {
+  "name": "Avatar video",
+  "slug": "avatar-video",
+  "file": "avatar-video.webp",
+  "card": {
+   "lines": [
+    "Make any marketing videos with avatars in our library",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ },
+ {
+  "name": "Viral Replication",
+  "slug": "viral-replication",
+  "file": "viral-replication.webp",
+  "card": {
+   "lines": [
+    "Give it one reference video, and it reverse-engineers the hook, then builds a brand-new same-style or remixed video from your request and assets.",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ },
+ {
+  "name": "AI talking photo",
+  "slug": "ai-talking-photo",
+  "file": "ai-talking-photo.webp",
+  "card": {
+   "lines": [
+    "Make a photo talk very naturally with a script or audio clip",
+    "Video"
+   ],
+   "h": 300,
+   "media": "video"
+  }
+ }
+]

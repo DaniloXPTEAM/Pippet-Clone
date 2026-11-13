@@ -76,4 +76,10 @@ export const FEATURED_WORKS = [
   { id: 4, title: 'Workout Mix', author: 'Diego S.', intro: 'Trilha de treino com música e cortes rápidos.' },
   { id: 5, title: 'Travel Diary', author: 'Elisa R.', intro: 'Diário de viagem em vídeo vertical.' },
   { id: 6, title: 'Product Teaser', author: 'Felipe A.', intro: 'Teaser de produto com motion e locução.' },
+  { id: 7, title: 'Noite na Cidade', author: 'Gabi T.', intro: 'Curta urbano com trilha sintetizada.' },
+  { id: 8, title: 'Conto de Inverno', author: 'Heitor V.', intro: 'História animada em quatro cenas.' },
+  { id: 9, title: 'Lançamento Aurora', author: 'Íris N.', intro: 'Anúncio de produto em estilo cinematográfico.' },
+  { id: 10, title: 'Receita Relâmpago', author: 'João C.', intro: 'Vídeo vertical de receita em 30 segundos.' },
+  { id: 11, title: 'Mundo Submerso', author: 'Karen D.', intro: 'Sequência de fantasia gerada por storyboard.' },
+  { id: 12, title: 'Bastidores', author: 'Leo F.', intro: 'Making of com avatar narrador.' },
 ];
