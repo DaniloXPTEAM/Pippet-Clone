@@ -12,13 +12,23 @@ try {
   const res = await fetch(base + '/api/composer/controls'); const c = await res.json();
   assert.equal(res.status, 200); assert.equal(c.ok, true);
   assert.equal(c.captured, true, 'os rótulos foram vistos');
-  assert.equal(c.internalsCaptured, false, 'as opções internas não foram capturadas');
+  assert.equal(c.internalsCaptured, false, 'as opções internas de @, Modelo|Preferência e Tela não foram capturadas');
   assert.deepEqual(c.controls.map((x) => x.id), ['agent', 'mention', 'skills', 'model_preference', 'canvas_toggle']);
   assert.deepEqual(c.controls.map((x) => x.label), ['Agente ▾', '@', 'Habilidades ▾', 'Modelo | Preferência ▾', 'Tela']);
+  // Adendo r19 (13/11/2026): os quatro modos de criação e seus textos exatos foram observados.
+  assert.equal(c.creationModes.length, 4);
+  assert.equal(c.creationModes[0].chip, 'Long-form video');
+  assert.deepEqual(c.creationModes.map((x) => x.description), [
+    'Describe your idea. Agent refines it and chooses the right models.',
+    'Choose a video model and generate directly.',
+    'Choose an image model and generate directly.',
+    'Choose an audio model and generate directly.',
+  ]);
   // Cada controle aponta o seletor local que o implementa, para a UI não mentir sobre o que existe.
   for (const x of c.controls) assert.match(x.local, /^#[a-zA-Z]+$/, `seletor local de #${x.id}`);
   assert.equal(c.controls.find((x) => x.id === 'skills').optionsObserved, true);
-  assert.equal(c.controls.filter((x) => !x.optionsObserved).length, 4, 'quatro controles seguem sem opções internas capturadas');
+  assert.equal(c.controls.find((x) => x.id === 'agent').optionsObserved, true, 'o menu de modos foi observado (adendo r19)');
+  assert.equal(c.controls.filter((x) => !x.optionsObserved).length, 3, 'três controles seguem sem opções internas capturadas');
   assert.equal(c.cost.observed, false, 'custo por geração segue sem observação');
   assert.match(c.cost.note, /créditos/);
   assert.equal(c.externalCalls, false, 'nenhuma chamada ao serviço original');
@@ -30,7 +40,7 @@ try {
   assert.match(ui, /api\/composer\/controls/, 'a home lê a rota local');
   assert.match(ui, /id="costnote"/, 'a tela declara o custo UNOBSERVED');
   assert.match(ui, /opções internas capturadas/, 'a tela conta quantos controles ficaram sem captura');
-  console.log('OK composer_controls_route: 5 rótulos com seletor local, 4 sem opções internas, custo UNOBSERVED');
+  console.log('OK composer_controls_route: 5 rótulos com seletor local, 3 sem opções internas, modos de criação observados (adendo r19), custo UNOBSERVED');
 } finally {
   await new Promise((x) => server.close(x)); fs.rmSync(tmp, { recursive: true, force: true });
 }

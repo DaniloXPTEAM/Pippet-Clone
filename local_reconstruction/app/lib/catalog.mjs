@@ -14,7 +14,10 @@ export const IMAGE_MODELS = [
   { id: 'nano-banana-2.1', name: 'Nano Banana 2.1' }, { id: 'seedream-5.0-pro', name: 'Seedream 5.0 Pro', freeUses: 1 }, { id: 'seedream-5.0-flash', name: 'Seedream 5.0 Flash' },
   { id: 'seedream-5.0-lite', name: 'Seedream 5.0 Lite' }, { id: 'seedream-4.5', name: 'Seedream 4.5' }, { id: 'seedream-4.0', name: 'Seedream 4.0' },
 ];
-export const AUDIO_MODELS = [{ id: 'seed-audio-1.0', name: 'Seed Audio 1.0', tier: 'vip', sampleRates: [44100], creditsPerUse: [17, 34] }];
+export const AUDIO_MODELS = [
+  { id: 'seed-audio-1.0', name: 'Seed Audio 1.0', description: 'Supports reference audio for voice, sound effect, and music design', tier: 'vip', paid: true, sampleRates: [8000, 16000, 24000, 32000, 44100, 48000], defaultSampleRate: 44100, creditsPerUse: [17, 34] },
+  { id: 'standard-voice-generation', name: 'Standard voice generation', description: 'Clear voice style for roles that need crisp delivery', tier: 'vip', paid: true, sampleRates: [8000, 16000, 24000, 32000, 44100, 48000], defaultSampleRate: 44100, creditsPerUse: [17, 34] },
+];
 export const VIDEO_RATIOS = ['Inteligente', '9:16', '3:4', '1:1', '4:3', '16:9', '21:9'];
 export const IMAGE_RATIOS = ['Inteligente', '16:9', '21:9', '9:16', '4:3', '3:4', '1:1'];
 export const VIDEO_RES = ['480p', '720p']; export const IMAGE_RES = ['1K', '1.5K', '2K', '4K'];
@@ -63,3 +66,14 @@ export const MARKETING = {
     { name: 'Youth Trends', items: ['Gen Z Color Pop', 'Expressive 3D Animation', 'Y2K Chrome'] },
     { name: 'Future Technology', items: ['Clean Future Tech'] } ] },
 };
+
+// Feed "Featured works" da Home (adendo r19, 13/11/2026): cards de título + autor OBSERVADOS como estrutura;
+// títulos, autores e intros são conteúdo de EXEMPLO nosso (o feed real é preenchido pelo serviço original).
+export const FEATURED_WORKS = [
+  { id: 1, title: 'Sunset Drive', author: 'Ana P.', intro: 'Videoclipe criado com o compositor do Pippit.' },
+  { id: 2, title: 'Café da Manhã', author: 'Bruno L.', intro: 'Reels de receita com narração e legendas.' },
+  { id: 3, title: 'Tech Talk', author: 'Carla M.', intro: 'Vídeo educacional curto sobre IA.' },
+  { id: 4, title: 'Workout Mix', author: 'Diego S.', intro: 'Trilha de treino com música e cortes rápidos.' },
+  { id: 5, title: 'Travel Diary', author: 'Elisa R.', intro: 'Diário de viagem em vídeo vertical.' },
+  { id: 6, title: 'Product Teaser', author: 'Felipe A.', intro: 'Teaser de produto com motion e locução.' },
+];

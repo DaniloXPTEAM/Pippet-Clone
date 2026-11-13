@@ -12,6 +12,7 @@ try {
   browser = await launchChromium();
   const page = await browser.newPage(); const errors = []; page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto(`${f.base}/#/pricing`);
+  await page.waitForFunction(() => document.querySelectorAll('h2').length >= 3, null, { timeout: 10_000 }); // corrida: render assíncrono do /pricing
   // Seções de recursos observadas (H2 de notes/pages/02_pricing.json).
   for (const h of ['Detalhes do plano', 'Por que escolher o Pippit', 'Perguntas frequentes', 'Crie com asas Criação de conteúdo turbinada', 'O Agente de IA definitivo que facilita o marketing eficaz.']) {
     assert.ok(await page.getByRole('heading', { name: h, exact: true }).count(), `seção observada presente: ${h}`);

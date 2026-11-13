@@ -46,7 +46,7 @@ await page.goto(`${base}/#/project/${cproj.id}`); await page.waitForSelector('#l
 // ---- Home: indicador de custo só com modelo personalizado + tooltip de regras de crédito
 await page.goto(`${base}/#/home`); await page.waitForSelector('#modelB'); assert.equal(await page.locator('#costhint').count(), 0); assert.match(await page.locator('#modelB').innerText(), /^Modelo \| Preferência/); assert.match(await page.locator('#modelB').getAttribute('title'), /Correspondência inteligente · Inteligente · 720p/);
 await page.click('#modelB'); await page.locator('.modal .card', { hasText: 'Dreamina Seedance 2.5' }).click(); await page.locator('.modal .x').click(); assert.match(await page.locator('#modelB').innerText(), /Modelos personalizados/); assert.match(await page.locator('#costhint').innerText(), /37 \/s/); assert.match(await page.locator('#costhint').getAttribute('title'), /créditos são cobrados com base na duração dos vídeos de entrada e de saída/);
-await page.click('#modeB'); t = await page.locator('.menu').innerText(); assert.match(t, /Escolha um modelo de vídeo e gere diretamente/); assert.match(t, /o agente a refina e escolhe os modelos certos/); await page.mouse.click(5, 5);
+await page.click('#modeB'); t = await page.locator('.menu').innerText(); assert.match(t, /Choose a video model and generate directly\./); assert.match(t, /Agent refines it and chooses the right models\./); await page.mouse.click(5, 5);
 
 // ---- Drawer Avatar video (Skills recomendadas)
 await page.goto(`${base}/#/home`); await page.waitForSelector('.skill[data-s=video-de-avatar]'); await page.locator('.skill[data-s=video-de-avatar]').evaluate((el) => el.click()); await page.waitForSelector('#avdrawer .avd'); t = await page.locator('#avdrawer').innerText();
@@ -76,5 +76,5 @@ let rr = await fetch(base + '/api/talking-photo/photo', { method: 'POST', header
 rr = await post('/api/talking-photo/render', { assetId: '0', text: 'x' }); assert.equal(rr.status, 400);
 
 // ---- Link account (menu observado: TikTok, Facebook Page, Instagram Reels)
-await page.goto(`${base}/#/schedule`); await page.waitForSelector('#vc'); await page.click('#vc'); t = await page.locator('.menu').innerText(); for (const x of ['TikTok', 'Página do Facebook', 'Reels do Instagram']) assert.match(t, new RegExp(x));
+await page.goto(`${base}/#/schedule`); await page.waitForSelector('#vc'); await page.click('#vc'); t = await page.locator('.menu').innerText(); for (const x of ['TikTok', 'Facebook Page', 'Instagram Reels']) assert.match(t, new RegExp(x)); // labels observados 13/11 (adendo r19)
 assert.deepEqual(errors, [], 'sem erros de página'); assert.deepEqual(ext, [], 'nenhuma requisição externa'); console.log('OK fidelity2_ui: barra do Canvas/Story (zoom/minimapa/grade/modos/atalhos/ponteiro/Add node/dica/tutorial/nó de vídeo), indicador de custo + tooltip, drawer Avatar video, Foto falante de IA, menu Link account'); await browser.close(); server.closeAllConnections?.(); server.close(); setTimeout(() => process.exit(0), 200);

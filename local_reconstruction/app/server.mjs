@@ -10,7 +10,7 @@ import crypto from 'node:crypto';
 import * as S from './lib/store.mjs';
 import * as media from './lib/media.mjs';
 import { userMessage } from './lib/agent.mjs';
-import { VIDEO_MODELS, IMAGE_MODELS, AUDIO_MODELS, VIDEO_RATIOS, IMAGE_RATIOS, VIDEO_RES, IMAGE_RES, SKILLS, NODE_PANELS, MARKETING, videoCost, NEEDS } from './lib/catalog.mjs';
+import { VIDEO_MODELS, IMAGE_MODELS, AUDIO_MODELS, VIDEO_RATIOS, IMAGE_RATIOS, VIDEO_RES, IMAGE_RES, SKILLS, NODE_PANELS, MARKETING, videoCost, NEEDS, FEATURED_WORKS } from './lib/catalog.mjs';
 import { OFFICIAL, SKILL_DEFS, skillDef, skillSummary } from './lib/skilldefs.mjs';
 import { PLANS, AVATAR_RULES, getPlan } from '../src/plans.mjs';
 import * as WMARK from './lib/watermark.mjs';
@@ -1001,11 +1001,18 @@ route('GET', /^\/api\/promotions$/, (q, r) => send(r, 200, { ok: true, ...PROMO_
 // internas de Preferência, o custo por geração e a lista de @ nunca foram capturados. A rota devolve os
 // cinco controles com o seletor local que os implementa e marca explicitamente o que falta observar.
 const COMPOSER_CONTROLS = Object.freeze({
-  source: 'FEATURE_INVENTORY.md linha 81 (rótulos de captures/audit/home; captura não incluída neste checkout)',
+  source: 'FEATURE_INVENTORY.md linha 81 + adendo r19 (modos observados no Pippit real em 13/11/2026 via Playwright)',
   captured: true,
   internalsCaptured: false,
+  // Adendo r19 (13/11/2026, Playwright): textos EXATOS do seletor de modo de criação.
+  creationModes: [
+    { id: 'agent', label: 'Agent', chip: 'Long-form video', description: 'Describe your idea. Agent refines it and chooses the right models.' },
+    { id: 'video', label: 'Video', description: 'Choose a video model and generate directly.' },
+    { id: 'image', label: 'Image', description: 'Choose an image model and generate directly.' },
+    { id: 'audio', label: 'Audio', description: 'Choose an audio model and generate directly.' },
+  ],
   controls: [
-    { id: 'agent', label: 'Agente ▾', local: '#modeB', optionsObserved: false, note: 'os quatro modos locais (Agente/Vídeo/Imagem/Áudio) vêm de test/composer_dropdowns_ui; a ordem e o texto exatos do menu original não estão no checkout' },
+    { id: 'agent', label: 'Agente ▾', local: '#modeB', optionsObserved: true, note: 'os quatro modos e seus textos foram observados no Pippit real em 13/11/2026 (adendo r19)' },
     { id: 'mention', label: '@', local: '#at', optionsObserved: false, note: 'a menção local responde com aviso; nenhuma captura da lista de menções' },
     { id: 'skills', label: 'Habilidades ▾', local: '#skillB', optionsObserved: true, note: 'lista local de habilidades já coberta por composer_dropdowns_ui' },
     { id: 'model_preference', label: 'Modelo | Preferência ▾', local: '#modelB', optionsObserved: false, note: 'modelos, proporção e resolução locais existem; as preferências (Inteligente/720p/Duração inteligente) aparecem só como title, sem captura do painel' },
@@ -1338,8 +1345,11 @@ const favs = () => (db().avatars.favorites ||= []);
 route('GET', /^\/api\/avatar-favorites$/, async (q, r) => send(r, 200, { ok: true, favorites: favs() }));
 route('POST', /^\/api\/avatar-favorites$/, async (q, r) => { const b = await readJson(q); const n = String(b.name || '').trim().slice(0, 120); if (!n) return fail(r, 400, 'nome do avatar ausente'); const i = favs().indexOf(n); if (b.on === false) { if (i >= 0) favs().splice(i, 1); } else if (i < 0) { if (favs().length >= 500) return fail(r, 409, 'limite de favoritos'); favs().unshift(n); } S.save(); send(r, 200, { ok: true, favorites: favs() }); });
 route('GET', /^\/api\/avatar-drawer$/, async (q, r) => { const d = JSON.parse(fs.readFileSync(new URL('./lib/avatar_drawer_data.json', import.meta.url), 'utf8')); try { d.catalogo = JSON.parse(fs.readFileSync(new URL('./lib/avatar_catalog.json', import.meta.url), 'utf8')); } catch { d.catalogo = null; } send(r, 200, d); });
-route('GET', /^\/api\/social$/, async (q, r) => send(r, 200, { limit: db().social.limit, accounts: db().social.accounts, platforms: ['TikTok', 'YouTube', 'Facebook (Página)', 'Instagram (Reels)', 'TikTok Shop (criador)', 'TikTok Shop (vendedor)', 'Shopify', 'Google Drive', 'Dropbox'], note: 'Vincular exige OAuth real de cada rede (app registrado e revisado); não implementado.' }));
+route('GET', /^\/api\/social$/, async (q, r) => send(r, 200, { limit: db().social.limit, accounts: db().social.accounts, platforms: ['TikTok', 'YouTube', 'Facebook (Página)', 'Instagram (Reels)', 'TikTok Shop (criador)', 'TikTok Shop (vendedor)', 'Shopify', 'Google Drive', 'Dropbox'], linkAccountChannels: ['TikTok', 'Facebook Page', 'Instagram Reels'], note: 'Link account observado (13/11) = apenas TikTok, Facebook Page, Instagram Reels. Vincular exige OAuth real de cada rede (app registrado e revisado); não implementado.' }));
 route('POST', /^\/api\/social\/connect$/, async (q, r) => { const b = await readJson(q); const plat = String(b.platform || '').toLowerCase(); const ad = PUB.PUBLISH_ADAPTERS[plat] || null;
+  // Adendo r19 (13/11): Link account tem APENAS TikTok, Facebook Page e Instagram Reels (confirmado).
+  const LINK_ACCOUNT_CHANNELS = ['tiktok', 'facebook page', 'instagram reels'];
+  if (!LINK_ACCOUNT_CHANNELS.includes(plat)) return fail(r, 400, 'Canal fora do Link account (observado 13/11): use TikTok, Facebook Page ou Instagram Reels.', { allowed: ['TikTok', 'Facebook Page', 'Instagram Reels'] });
   fail(r, 501, 'Vincular conta exige OAuth da rede social com aplicativo registrado; bloqueado nesta instalação local.', { blocked: true, platform: b.platform || null, adapter: ad ? { id: ad.id, oauth: ad.oauth, env: ad.env, missing: ad.missing } : null, status: 'nao_conectado' }); });
 route('POST', /^\/api\/social\/publish$/, async (q, r) => { const b = await readJson(q); const ids = (Array.isArray(b.platforms) ? b.platforms : Object.keys(b.platforms || {})).map(Number);
   fail(r, 409, 'Nenhuma conta vinculada: publicação indisponível.', { blocked: true, adapters: (ids.length ? ids : Object.keys(PUB.PUBLISH_ADAPTERS).flatMap((k) => PUB.PUBLISH_ADAPTERS[k].codes)).map((c) => PUB.adapterForPlatform(c)?.id).filter(Boolean), missing: Object.values(PUB.PUBLISH_ADAPTERS).map((a) => ({ id: a.id, missing: a.missing })) }); });
@@ -1789,13 +1799,23 @@ route('GET', /^\/api\/marketing\/ad-formats$/, async (q, r) => {
 // Linha 132 do inventário — modo Áudio do composer: o que foi observado do menu, o que a instalação faz
 // hoje (voz local SAPI como padrão, provedor como opção) e o que continua UNOBSERVED (presets, corpo, custo, chunk).
 route('GET', /^\/api\/composer\/audio-mode$/, async (q, r) => send(r, 200, {
-  menu: { label: 'Áudio ▾', modeOptions: ['Agente', 'Vídeo', 'Imagem', 'Áudio'], observedText: 'Choose an audio model and generate directly' },
+  menu: { label: 'Áudio ▾', modeOptions: ['Agente', 'Vídeo', 'Imagem', 'Áudio'], observedText: 'Choose an audio model and generate directly.' },
+  // Adendo r19 (13/11/2026, Playwright no Pippit real): modelos, sample rate e custo OBSERVADOS.
+  observed: {
+    source: 'adendo r19 (13/11/2026, Playwright no Pippit real)',
+    skillsButton: 'oculto no modo Áudio',
+    models: AUDIO_MODELS.map((m) => ({ id: m.id, name: m.name, description: m.description, diamond: true })),
+    sampleRatesHz: [8000, 16000, 24000, 32000, 44100, 48000], defaultSampleRateHz: 44100,
+    cost: { credits: 17, listCredits: 34, perGeneration: true },
+  },
   local: { implemented: true, action: 'POST /api/local-runs { mode: "audio", prompt }', handoff: 'cria projeto no Canvas com um nó de Áudio apontando para o WAV gerado', voice: voiceCard(), cloudOption: 'voz na nuvem só quando pedido (voiceSource:"cloud")' },
   // Voz na nuvem: Cloudflare melotts pela rota gratuita (WAV, ~1 s medido). Nunca assume no lugar do SAPI.
   cloudVoice: (() => { const plan = routerVoicePlan(); return { requestedWith: 'voiceSource:"cloud"', configured: plan.ok, defaultEngine: 'sapi', model: CLOUDFLARE_AUDIO_MODEL, format: 'WAV', measuredMs: 1000, route: plan.ok ? plan.routes[0].providerId : null, reason: plan.ok ? null : plan.reason }; })(),
-  unobserved: ['presets de áudio do menu', 'corpo da requisição de geração', 'custo por geração', 'contrato do chunk 565447 (handoff real)'],
+  freeLocalProvider: { enabled: process.env.PIPPIT_FREE_AUDIO_PROVIDER === '1', config: 'PIPPIT_FREE_AUDIO_PROVIDER',
+    note: 'produto gratuito: o provedor local de áudio (voz SAPI) fica atrás desta configuração nossa; padrão desligado = paywall observado do plano Free' },
+  unobserved: ['corpo da requisição de geração', 'SSE ao vivo'],
   externalCalls: 0, simulated: false,
-  note: 'Presets, corpo e custo do modo Áudio nunca foram capturados; a geração local usa a voz do Windows (SAPI), rotulada como não-IA, e não cobra créditos. A voz na nuvem (Cloudflare melotts) só entra com voiceSource:"cloud".',
+  note: 'Modelos (Seed Audio 1.0, Standard voice generation), sample rate (8/16/24/32/44.1 padrão/48 kHz) e custo (17 créditos, 34 riscado) foram observados no adendo r19. Corpo da geração e SSE ao vivo seguem UNOBSERVED. A geração local usa a voz do Windows (SAPI), rotulada como não-IA, e não cobra créditos. A voz na nuvem (Cloudflare melotts) só entra com voiceSource:"cloud".',
 }));
 // `progress`/`phase`/`queuePosition`/`remoteId` são o que a UI mostra enquanto o vídeo está em andamento (fila assíncrona).
 const runPublic = (run) => ({
@@ -2143,6 +2163,40 @@ function direct() {
 const dEnv = (path_, fn) => route('POST', new RegExp('^' + path_ + '$'), async (q, r) => { const b = await readJson(q); const out = fn(direct(), b); S.save(); send(r, 200, out); });
 dEnv('/commerce/v3/benefits/batch_check_withhold_deduct', (d, b) => d.checkWithholdDeduct(b));
 dEnv('/commerce/v1/benefits/user_credit', (d) => d.userCredit());
+
+// === Adendo r19 (13/11/2026): POST /api/biz/v2/videogen/check (paywall de Audio, plano Free) ===
+// Observado no Pippit real: enviar em modo Audio nao gera; a UI chama `POST /api/biz/v2/videogen/check`
+// com `{'generate_source': 1}` e a resposta traz `data.is_allowed: true`; DEPOIS abre o modal
+// "Subscribe to boost your business". O provedor gratuito local fica atras da configuracao nossa
+// PIPPIT_FREE_AUDIO_PROVIDER (padrao desligado = comportamento observado).
+route('POST', /^\/api\/biz\/v2\/videogen\/check$/, async (q, r) => {
+  const b = await readJson(q);
+  send(r, 200, {
+    ret: '0', errmsg: '', logId: '', data: { is_allowed: true, generate_source: Number(b?.generate_source) || 0 },
+    unobserved: ['demais campos do corpo da requisição', 'demais campos da resposta da API real'],
+    note: 'POST /api/biz/v2/videogen/check observado (13/11) com {"generate_source":1} -> data.is_allowed:true; espelho local sem credenciais. Internos invisíveis por padrão.',
+  });
+});
+// === Adendo r19 (13/11/2026): feed "Featured works" da Home e detalhe /home?work_id=N ===
+// Observado no Pippit real: cards de titulo + autor; detalhe com Close, Share, Author e "Work intro";
+// API `POST /api/biz/v1/home/recommend_video`. O CONTEUDO (titulos/autores/intros) nao foi capturado —
+// os itens de FEATURED_WORKS sao exemplo nosso; os campos da resposta da API real tambem sao UNOBSERVED.
+route('GET', /^\/api\/home\/featured-works$/, async (q, r) => send(r, 200, {
+  heading: 'Featured works', cardFields: ['title', 'author'], contentNote: 'titulos, autores e intros sao conteudo de exemplo nosso (o feed real e preenchido pelo servico original)',
+  works: FEATURED_WORKS.map((w) => ({ id: w.id, title: w.title, author: w.author })),
+}));
+route('POST', /^\/api\/biz\/v1\/home\/recommend_video$/, async (q, r) => {
+  const b = await readJson(q); const id = Number(b?.work_id) || 0;
+  const w = FEATURED_WORKS.find((x) => x.id === id) || null;
+  send(r, 200, {
+    ret: '0', errmsg: '', logId: '', data: {
+      work_id: id, title: w?.title || null, author: w?.author || null, work_intro: w?.intro || null,
+      share: { enabled: true }, close: { enabled: true },
+    },
+    unobserved: ['campos exatos da resposta da API real', 'conteudo do feed'],
+    note: 'POST /api/biz/v1/home/recommend_video observado no trafego (13/11); os campos da resposta sao reproduzidos a partir da UI do detalhe (Close, Share, Author, Work intro). Titulo/autor/intro vem de conteudo de exemplo nosso.',
+  });
+});
 dEnv('/api/biz/v1/agent/create_creative_project', (d, b) => { const out = d.createCreativeProject(b); const id = String(out.data.project_id); const now = new Date().toISOString(); db().projects.unshift({ id, type: 'direct', title: 'Untitled', createdAt: now, updatedAt: now, canvas: { nodes: [], edges: [] }, chats: [], ratio: '9:16' }); return out; });
 dEnv('/api/biz/v1/agent/cancel_run', (d, b) => d.cancelRun(b));
 route('GET', /^\/api\/direct\/runs$/, async (q, r) => send(r, 200, direct().listRuns()));

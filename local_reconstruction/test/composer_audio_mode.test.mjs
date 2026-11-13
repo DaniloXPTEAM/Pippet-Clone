@@ -18,12 +18,12 @@ try {
   const sapi = media.ttsAvailable();
   const st = await api('/api/composer/audio-mode');
   assert.equal(st.status, 200);
-  assert.equal(st.body.menu.observedText, 'Choose an audio model and generate directly');
+  assert.equal(st.body.menu.observedText, 'Choose an audio model and generate directly.');
   assert.deepEqual(st.body.menu.modeOptions, ['Agente', 'Vídeo', 'Imagem', 'Áudio']);
   assert.equal(st.body.local.implemented, true);
   assert.match(st.body.local.action, /mode: "audio"/);
   assert.equal(st.body.local.voice.defaultEngine, sapi ? 'sapi' : null, 'sem SAPI e sem provedor não há padrão inventado');
-  assert.ok(st.body.unobserved.some((x) => /presets/i.test(x)) && st.body.unobserved.some((x) => /custo/i.test(x)) && st.body.unobserved.some((x) => /565447/.test(x)));
+  assert.equal(st.body.observed.models.length, 2, 'dois modelos observados (adendo r19)'); assert.ok(st.body.observed.models.some((m) => m.name === 'Seed Audio 1.0')); assert.ok(st.body.observed.models.some((m) => m.name === 'Standard voice generation')); assert.ok(st.body.observed.models.every((m) => /reference audio for voice|crisp delivery/.test(m.description)), 'descricoes observadas'); assert.deepEqual(st.body.observed.sampleRatesHz, [8000, 16000, 24000, 32000, 44100, 48000]); assert.equal(st.body.observed.defaultSampleRateHz, 44100); assert.equal(st.body.observed.cost.credits, 17); assert.equal(st.body.observed.cost.listCredits, 34); assert.ok(st.body.observed.skillsButton.includes('oculto')); assert.deepEqual(st.body.unobserved, ['corpo da requisição de geração', 'SSE ao vivo']);
   assert.equal(st.body.externalCalls, 0); assert.equal(st.body.simulated, false);
   assert.match(st.body.note, /UNOBSERVED|nunca foram capturados/);
 

@@ -91,7 +91,7 @@ assert.equal((await post(`/api/editor/${(await post('/api/editor')).body.id}/exp
 await j(`/api/projects/${proj.id}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Renomeado' }) });
 const sh = (await post(`/api/projects/${proj.id}/share`)).body; assert.match(sh.message, /Link copiado/); const tok = sh.link.split('/').pop(); assert.equal((await j(`/api/share/${tok}`)).body.readOnly, true);
 const tu = (await j('/api/track-url?path=/home')).body.url; assert.match(tu, /event\/report\?is_pwa=0&pwa_from=not_pwa/); await fetch(tu); assert.ok((await j('/api/events')).body.some((e) => e.event_name === 'user_page_view'));
-assert.equal((await post('/api/social/connect')).status, 501); assert.equal((await post('/api/social/publish')).status, 409);
+assert.equal((await post('/api/social/connect')).status, 400, 'sem canal do Link account = 400 (r19: só TikTok/Facebook Page/Instagram Reels)'); assert.equal((await post('/api/social/connect', { platform: 'TikTok' })).status, 501, 'canal do Link account segue bloqueado por OAuth real'); assert.equal((await post('/api/social/publish')).status, 409);
 await post('/api/settings', { creditConfirm: { mode: 'ignore', limit: 450 } }); assert.equal((await j('/api/state')).body.settings.creditConfirm.mode, 'ignore');
 await j(`/api/projects/${proj.id}`, { method: 'DELETE' }); assert.ok(!(await j('/api/projects')).body.some((p) => p.id === proj.id));
 console.log('OK e2e: creditos, canvas, geracao bloqueada sem provedor, agente (pergunta/design/storyboard/confirmacao/segmentos/render real), avatar (validacao/consentimento/3 usos/paywall), editor (corte/texto/legenda/exportacao real), historico/compartilhar, telemetria, social bloqueado');

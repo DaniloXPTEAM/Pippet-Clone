@@ -59,6 +59,32 @@ async function creditsModal() {
   $('#dly', m).onclick = async () => { const r = (await post('/api/daily-claim')).body; toast(r.claimed ? '+80 créditos gratuitos (expiram às 23:59:59)' : 'Os créditos de hoje já foram recebidos.'); await refresh(); m.close(); route_(); };
   $('#plansB', m).onclick = () => { m.close(); plansModal(); };
 }
+async function subscribeModal() {
+  // Modal "Subscribe to boost your business" — textos e preços ANUAIS observados no Pippit real (13/11/2026).
+  // Preços MENSAIS não foram capturados (UNOBSERVED) e não são inventados. Pagamento = só estrutura.
+  const Y = (v) => 'R$' + String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // formato observado: R$1,252 (vírgula)
+  const plans = [
+    { id: 'free', name: 'Free', note: 'Always free — No credit card required', cur: true },
+    { id: 'starter', name: 'Starter', badge: '(Best value)', yearly: 513, yearlyWas: 855 },
+    { id: 'plus', name: 'Plus', yearly: 1252, yearlyWas: 2087 },
+    { id: 'pro', name: 'Pro', yearly: 18325, yearlyWas: 30542, slider: true },
+  ];
+  const m = modal(`<h2>Subscribe to boost your business</h2>
+    <div class="row"><button class="pill" id="sbM">Monthly</button><button class="pill primary" id="sbY">Yearly</button></div>
+    <div id="subPlans">${plans.map((p) => `<div class="card" data-id="${p.id}" style="margin:6px 0">
+      <b>${esc(p.name)}</b> ${p.badge ? `<span class="pill">${esc(p.badge)}</span>` : ''}
+      ${p.cur ? `<div>${esc(p.note)}</div><button disabled>Current plan</button>` : `
+      <div><b>${Y(p.yearly)}</b>/Yearly <s>${Y(p.yearlyWas)}</s></div>
+      <div class="muted" data-monthly>Monthly: <b>UNOBSERVED</b> (preço mensal não capturado)</div>
+      ${p.slider ? `<div><input type="range" min="1" max="10" value="1" id="proSlider"> <span class="muted">slider observado no card Pro; semântica UNOBSERVED</span></div>` : ''}
+      <div class="muted">Auto renews, cancel anytime.</div>
+      <button class="primary" data-sub="${p.id}">Subscribe</button>`}
+    </div>`).join('')}</div>
+    <p class="muted" id="subNote">Anual observado 13/11 (Yearly de R$855/R$2,087/R$30,542). Mensal: UNOBSERVED. Pagamento = só estrutura; nada é cobrado nesta instalação.</p>`, 'sm');
+  m.querySelectorAll('[data-sub]').forEach((b) => (b.onclick = () => toast('Subscribe: pagamento é apenas estrutura nesta instalação; nada é cobrado.')));
+  $('#sbM', m).onclick = () => { m.querySelectorAll('[data-monthly]').forEach((e) => { e.innerHTML = 'Monthly: <b>UNOBSERVED</b> (preço mensal não capturado)'; }); toast('Preços mensais não foram capturados; nada é inventado.'); };
+  $('#sbY', m).onclick = () => { m.querySelectorAll('[data-monthly]').forEach((e) => { e.innerHTML = '<b>Anual observado</b> (Yearly)'; }); };
+}
 async function plansModal(modelName) {
   const B = (await api('/api/billing')).body;
   const annual = ST.user.billing === 'annual'; const P = CAT.plans;
@@ -92,23 +118,43 @@ function pageHome() {
   document.body.dataset.homeRenders = String((Number(document.body.dataset.homeRenders) || 0) + 1);
   const tabs = ['Criativo', 'Marketing', 'Histórias'];
   $('#main').innerHTML = `${credits()}<div class="page"><div class="hero">Com Pippit <div class="seg">${tabs.map((t) => `<button class="${HOME.tab === t ? 'on' : ''}" data-t="${t}">${t}</button>`).join('')}</div> Agent, transforme ideias em vídeos</div>
-  <div class="composer">${HOME.skill?.guideWords || HOME.skill ? `<div class="row" id="skillchipbar"><span class="pill skill-chip" id="skillchip">${esc(HOME.skill.name)} <button id="skillrm" aria-label="Remover habilidade" title="Remover habilidade">×</button></span></div>` : ''}${HOME.skill?.materialGuide ? `<div class="upload-tile" id="uptile" title="Enviar material de referência"><div class="plus">＋</div><small>${esc(HOME.skill.materialGuide)}</small></div>` : ''}<textarea id="prompt" placeholder="${HOME.skill?.guideWords ? esc(HOME.skill.guideWords).split(String.fromCharCode(10)).join('&#10;') : 'Descreva suas ideias e crie com o Pippit.'}">${esc(HOME.text || '')}</textarea>${HOME.mode === 'Áudio' ? '<p id="audioModeNote" class="muted">Modo Áudio observado no composer. Presets, corpo e custo continuam UNOBSERVED. A geração local usa a voz do Windows (SAPI) como padrão; o provedor do usuário é opção.</p>' : ''}<div id="atts" class="row muted">${HOME.attachments.map((a) => '📎 ' + esc(a.name)).join(' · ')}</div>
+  <div class="composer">${HOME.skill?.guideWords || HOME.skill ? `<div class="row" id="skillchipbar"><span class="pill skill-chip" id="skillchip">${esc(HOME.skill.name)} <button id="skillrm" aria-label="Remover habilidade" title="Remover habilidade">×</button></span></div>` : ''}${HOME.skill?.materialGuide ? `<div class="upload-tile" id="uptile" title="Enviar material de referência"><div class="plus">＋</div><small>${esc(HOME.skill.materialGuide)}</small></div>` : ''}<textarea id="prompt" placeholder="${HOME.skill?.guideWords ? esc(HOME.skill.guideWords).split(String.fromCharCode(10)).join('&#10;') : 'Descreva suas ideias e crie com o Pippit.'}">${esc(HOME.text || '')}</textarea>${HOME.mode === 'Áudio' ? '<p id="audioModeNote" class="muted">Modo Áudio (observado 13/11): Seed Audio 1.0 e Standard voice generation (planos pagos, diamante) · Sample rate 8/16/24/32/44.1 (padrão)/48 kHz · 17 créditos por geração (34 riscado). Corpo da geração e SSE ao vivo: UNOBSERVED.</p>' : ''}<div id="atts" class="row muted">${HOME.attachments.map((a) => '📎 ' + esc(a.name)).join(' · ')}</div>
    <div class="crow"><button class="pill" id="plus">＋</button><button class="pill" id="at">@</button><button class="pill" id="modeB">${HOME.mode} ▾</button><span class="sp"></span><button class="pill" id="skillB">${HOME.skill ? esc(HOME.skill.name) : 'Habilidades'} ▾</button><button class="pill" id="modelB" title="${modelCustom() ? '' : 'Vídeo: Correspondência inteligente · Inteligente · 720p · Duração inteligente&#10;Imagem: Correspondência inteligente · Inteligente · 2K'}">Modelo | Preferência ▾</button><label class="canvas-sw">Tela <input type="checkbox" id="canvasT" ${HOME.canvas ? 'checked' : ''}></label>${HOME.mode === 'Agente' && modelCustom() && modelPerSec() ? `<span class="muted" id="costhint" title="Para os modelos Dreamina Seedance 2.0 e posteriores, os créditos são cobrados com base na duração dos vídeos de entrada e de saída">✦ ${modelPerSec()} /s ⓘ</span>` : ''}<button class="pill" id="freeSend" title="Executar texto com um modelo gratuito configurado">Executar grátis</button><button class="primary" id="send" aria-label="Submit">↑</button></div></div>
   <div class="row" style="margin:26px 4px 6px"><b>Skills recomendadas</b><a href="#/skills" class="muted">Todos</a></div>
   <div class="grid g3">${['anuncios-de-drama', 'video-de-marketing', 'gerador-de-vlog', 'video-de-avatar', 'replicacao-viral', 'foto-falante-de-ia'].map((id) => CAT.skills.find((s) => s.id === id)).filter(Boolean).map((s) => `<div class="skill" data-s="${s.id}"><div class="sk-ic"></div><div style="flex:1"><b style="font-weight:500">${esc(s.name)}</b> ${HOME_BADGE[s.id] ? `<span class="pill" style="padding:2px 8px;font-size:11px">${HOME_BADGE[s.id]}</span>` : ''}</div><span class="muted" title="${['video-de-avatar', 'foto-falante-de-ia'].includes(s.id) ? 'abre outro fluxo' : 'usa no compositor'}">${['video-de-avatar', 'foto-falante-de-ia'].includes(s.id) ? '↗' : '↵'}</span></div>`).join('')}</div>
-  <div class="blocked" style="margin-top:24px">“Trabalhos em destaque” (galeria da comunidade do Pippit) não é reproduzido: depende de conteúdo do serviço original.</div></div>`;
+  <div class="row" style="margin:26px 4px 6px"><b>Featured works</b><span class="muted" id="fwnote">estrutura de card observada 13/11 (título + autor); conteúdo de exemplo nosso</span></div><div class="grid g3" id="fwfeed"><div class="muted">carregando…</div></div></div>`;
   bindCredits(); const P = $('#prompt'); P.oninput = () => (HOME.text = P.value);
   $('#modelB').textContent = modelChip();
   document.querySelectorAll('.seg button').forEach((b) => (b.onclick = () => { if (b.dataset.t !== 'Criativo') location.hash = b.dataset.t === 'Marketing' ? '/marketing' : '/story'; }));
   $('#plus').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, [{ label: 'Carregar mídia ou arquivo', fn: () => fileInput('image/*,video/*,audio/*', async (f) => { const a = await uploadAsset(f); HOME.attachments.push(a); pageHome(); }) }, { label: 'Escolher a partir dos Ativos', fn: () => pickAsset((a) => { HOME.attachments.push(a); pageHome(); }) }, { label: 'Adicionar link', fn: () => toast('Importar por link: não implementado.') }, { label: 'Carregar a partir do Dropbox', fn: () => toast('Dropbox exige OAuth: bloqueado.') }, { label: 'Carregar a partir do telefone', fn: () => toast('Upload por telefone (QR): não implementado.') }, '-', { label: 'Vídeo de referência', fn: () => fileInput('video/*', async (f) => { const a = await uploadAsset(f); HOME.attachments.push(a); pageHome(); }) }]); };
   $('#at').onclick = () => pickAsset((a) => { HOME.text = (HOME.text || '') + ' @' + a.name; HOME.attachments.push(a); pageHome(); });
-  $('#modeB').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, ['Agente', 'Vídeo', 'Imagem', 'Áudio'].map((m) => ({ label: m, desc: { Agente: 'Vídeo de formato longo. Descreva sua ideia; o agente a refina e escolhe os modelos certos.', Vídeo: 'Escolha um modelo de vídeo e gere diretamente.', Imagem: 'Escolha um modelo de imagem e gere diretamente.', Áudio: 'Escolha um modelo de áudio e gere diretamente.' }[m], fn: () => { HOME.mode = m; pageHome(); } }))); };
+  $('#modeB').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, [{ m: 'Agente', desc: 'Long-form video — Describe your idea. Agent refines it and chooses the right models.' }, { m: 'Vídeo', desc: 'Choose a video model and generate directly.' }, { m: 'Imagem', desc: 'Choose an image model and generate directly.' }, { m: 'Áudio', desc: 'Choose an audio model and generate directly.' }].map((x) => ({ label: x.m, desc: x.desc, fn: () => { HOME.mode = x.m; pageHome(); } }))); };
   // Ao escolher uma skill (capturas REA/CDP 22/10/2026 do botão Use): chip com "Remover habilidade", o guide_words EXATO como placeholder do campo e, se houver, o bloco de upload com material_guide_words
   $('#skillrm') && ($('#skillrm').onclick = () => { HOME.skill = null; pageHome(); }); $('#uptile') && ($('#uptile').onclick = () => $('#plus').click());
-  $('#skillB').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, CAT.skills.map((s) => ({ label: s.name, fn: () => { HOME.skill = s; pageHome(); } }))); };
-  $('#modelB').onclick = () => HOME.mode === 'Áudio' ? toast('Presets, modelos e custos do modo Áudio não foram capturados; nenhuma geração iniciada.') : modelPrefs(); $('#canvasT').onchange = (e) => (HOME.canvas = e.target.checked);
-  if ($('#audioModeNote')) api('/api/composer/audio-mode').then((r) => { const el = $('#audioModeNote'); if (!el || !r.body?.local) return; const b = r.body.local.voice || {}; el.textContent = `Modo Áudio: geração local com ${b.defaultEngine === 'cloud' ? 'o provedor do usuário (sem SAPI nesta máquina)' : 'a voz do Windows (SAPI)'} — não-IA, sem créditos. Presets, corpo e custo: UNOBSERVED.`; });
+  if (HOME.mode === 'Áudio' && $('#skillB')) $('#skillB').remove(); // observado 13/11: Skills não aparece no modo Áudio
+  if ($('#skillB')) $('#skillB').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, CAT.skills.map((s) => ({ label: s.name, fn: () => { HOME.skill = s; pageHome(); } }))); };
+  $('#modelB').onclick = () => HOME.mode === 'Áudio' ? audioPrefs() : modelPrefs(); $('#canvasT').onchange = (e) => (HOME.canvas = e.target.checked);
+  if ($('#audioModeNote')) api('/api/composer/audio-mode').then((r) => { const el = $('#audioModeNote'); if (!el || !r.body?.local) return; const b = r.body.local.voice || {}; el.textContent = `Modo Áudio (observado 13/11): Seed Audio 1.0 e Standard voice generation · 44.1 kHz padrão · 17 créditos (34 riscado). Geração local: ${b.defaultEngine === 'cloud' ? 'o provedor do usuário (sem SAPI nesta máquina)' : 'a voz do Windows (SAPI)'} — não-IA, sem créditos. Corpo da geração e SSE ao vivo: UNOBSERVED.`; });
   document.querySelectorAll('.skill').forEach((el) => (el.onclick = () => { if (el.dataset.s === 'video-de-avatar') { avatarDrawer(); return; } if (el.dataset.s === 'foto-falante-de-ia') { location.hash = '/ai-talking-photo'; return; } HOME.skill = CAT.skills.find((s) => s.id === el.dataset.s); pageHome(); }));
+  // === Adendo r19 (13/11/2026): feed "Featured works" + detalhe /home?work_id=N ===
+  async function loadFeatured() {
+    const feed = $('#fwfeed'); if (!feed) return;
+    const r = await api('/api/home/featured-works'); const works = r.body?.works || [];
+    feed.innerHTML = works.map((w) => `<div class="skill fw" data-w="${w.id}" style="cursor:pointer"><div class="sk-ic"></div><div style="flex:1"><b style="font-weight:500">${esc(w.title)}</b><div class="muted">${esc(w.author)}</div></div></div>`).join('') || '<div class="muted">sem itens</div>';
+    feed.querySelectorAll('[data-w]').forEach((el) => (el.onclick = () => openWork(Number(el.dataset.w))));
+  }
+  async function openWork(id, fromUrl) {
+    const r = await api('/api/biz/v1/home/recommend_video', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ work_id: id }) }); const d = r.body?.data || {};
+    if (!fromUrl) history.pushState({}, '', `/home?work_id=${id}`);
+    const m = modal(`<h2>Featured works</h2>
+      <div class="row"><button class="pill" id="wclose">Close</button><button class="pill" id="wshare">Share</button></div>
+      <p><b id="wtitle">${esc(d.title || '')}</b></p>
+      <p class="muted">Author</p><p id="wauthor">${esc(d.author || '')}</p>
+      <p class="muted">Work intro</p><p id="wintro">${esc(d.work_intro || '')}</p>`, 'sm');
+    $('#wclose', m).onclick = () => { m.remove(); history.pushState({}, '', '/home'); };
+    $('#wshare', m).onclick = () => toast('Share: link do trabalho copiado (compartilhamento real usa os canais conectados).');
+  }
+  loadFeatured().then(() => { const wid = Number(new URLSearchParams(location.search).get('work_id')); if (wid) openWork(wid, true); });
   $('#freeSend').onclick = () => startFreeRun();
   async function startFreeRun(forced) {
     const text = (HOME.text || '').trim(); if (!text) return toast('Descreva sua ideia primeiro.');
@@ -129,8 +175,15 @@ function pageHome() {
     if (HOME.mode === 'Vídeo' && HOME.model === 'auto-route') return directVideo(text);
     // Imagem em "Correspondência inteligente" (auto) vai pelo adaptador do roteador gratuito (Omni), não pelo agente de texto.
     if (HOME.mode === 'Imagem' && HOME.model === 'auto' && ST.user.plan === 'free') return startFreeRun('image');
-    // Modo Áudio: gera a locução com a voz local (SAPI, padrão). Sem SAPI o servidor responde o motivo; nada é inventado.
-    if (HOME.mode === 'Áudio') return startFreeRun('audio');
+    // Modo Áudio (adendo r19): enviar nao gera no plano Free — chama POST /api/biz/v2/videogen/check
+    // {"generate_source":1} -> data.is_allowed:true e abre o modal "Subscribe to boost your business" (observado 13/11).
+    // Provedor gratuito local atras da configuracao nossa PIPPIT_FREE_AUDIO_PROVIDER (produto gratuito).
+    if (HOME.mode === 'Áudio') {
+      const cfg = (await api('/api/composer/audio-mode')).body?.freeLocalProvider;
+      await api('/api/biz/v2/videogen/check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ generate_source: 1 }) });
+      if (cfg?.enabled) return startFreeRun('audio');
+      return subscribeModal();
+    }
     // Observado no plano Free: enviar com qualquer modelo pago (vídeo ou imagem) abre o modal de assinatura ANTES de qualquer requisição. Em plano pago não há provedor local.
     if ((HOME.mode === 'Vídeo' || HOME.mode === 'Imagem') && HOME.model !== 'auto') {
       const list = HOME.mode === 'Vídeo' ? CAT.videoModels : CAT.imageModels; const mod = list.find((x) => x.id === HOME.model);
@@ -142,6 +195,17 @@ function pageHome() {
     await post(`/api/projects/${p.id}/chats/${c.id}/messages`, { text, skillId: HOME.skill?.id, attachments: HOME.attachments.map((a) => a.id), modelId: HOME.model === 'auto' ? 'seedance-2.5' : HOME.model });
     HOME.text = ''; HOME.attachments = []; await refresh(); location.hash = '/project/' + p.id;
   };
+}
+async function audioPrefs() {
+  // Adendo r19 (13/11/2026): modelos do modo Audio, sample rate e custo observados no Pippit real.
+  const m = modal(`<h2>Modelos de áudio</h2><div id="ap"></div><p class="muted" id="audioCostNote">Custo por geração: <b>✦ 17</b> <s>34</s> · corpo da requisição e SSE ao vivo: <b>UNOBSERVED</b></p>`, 'sm');
+  const draw = () => {
+    $('#ap', m).innerHTML = `${CAT.audioModels.map((x) => `<div class="card" style="margin:6px 0;cursor:pointer;${HOME.audioModel === x.id ? 'outline:2px solid #111' : ''}" data-id="${x.id}"><b>💎 ${esc(x.name)}</b><div class="muted">${esc(x.description || '')}</div></div>`).join('')}
+    <p><b>Sample rate</b> <select id="sr">${(CAT.audioModels[0]?.sampleRates || [44100]).map((hz) => `<option value="${hz}" ${hz === (HOME.sampleRate || 44100) ? 'selected' : ''}>${hz / 1000} kHz${hz === 44100 ? ' (padrão)' : ''}</option>`).join('')}</select></p>`;
+    $('#ap', m).querySelectorAll('[data-id]').forEach((e) => (e.onclick = () => { HOME.audioModel = e.dataset.id; draw(); }));
+    $('#sr', m).onchange = (e) => { HOME.sampleRate = Number(e.target.value); };
+  };
+  draw();
 }
 async function modelPrefs() {
   const m = modal(`<h2>Modelos</h2><div class="tabs"><button class="on" data-k="v">Vídeo</button><button data-k="i">Imagem</button></div><div id="mp"></div><p class="muted" id="costnote">Custo por geração: UNOBSERVED · preferências: rótulo observado, opções não capturadas</p>`, 'sm'); const draw = (k) => {
@@ -914,14 +978,14 @@ async function pageTasks() { const as = (await api('/api/assets?cat=works&kind=v
   const a = as.find((x) => x.id === b.dataset.pub); const d = new Date();
   const m = modal(`<h2>Programar publicação</h2><div class="row"><b>Publicação</b><span style="flex:1"></span><button id="selc">Selecionar conta ▾</button></div><div class="grid" style="grid-template-columns:260px 1fr"><video src="/files/${a.stored}" controls style="width:250px;background:#000;border-radius:10px"></video><div><p><b>Quando publicar</b><br><small class="muted">Fuso horário do sistema</small><br><input type="date" id="pd" value="${d.toISOString().slice(0, 10)}"> <input type="time" id="pt" value="${d.toTimeString().slice(0, 5)}"></p><p><b>Adicionar descrição</b><br><textarea id="pdsc" maxlength="2200" style="width:100%" rows="4" placeholder="Descreva a sua publicação para que ela se destaque"></textarea><small id="pc" class="muted">0/2200</small></p></div></div><div id="chs"></div><div class="row"><button disabled>Salvar como projeto</button><span style="flex:1"></span><a href="/files/${a.stored}" download="${esc(a.name)}"><button>Baixar</button></a><button class="primary" id="prog" disabled>Programar</button></div>`);
   $('#pdsc', m).oninput = (e) => ($('#pc', m).textContent = e.target.value.length + '/2200');
-  $('#selc', m).onclick = () => { $('#chs', m).innerHTML = '<div class="card"><div>Adicione um canal</div><div class="row"><button data-c="TikTok">TikTok</button><button data-c="Facebook">Facebook</button><button data-c="Instagram">Instagram</button></div><div class="blocked">Nenhuma conta vinculada: vincular exige OAuth real (bloqueado). “Programar” permanece desabilitado; nenhuma publicação é simulada.</div></div>'; $('#chs', m).querySelectorAll('[data-c]').forEach((x) => (x.onclick = async () => toast((await post('/api/social/connect', { platform: x.dataset.c })).body.error, 6000))); };
+  $('#selc', m).onclick = () => { $('#chs', m).innerHTML = '<div class="card"><div>Adicione um canal</div><div class="row"><button data-c="TikTok">TikTok</button><button data-c="Facebook Page">Facebook Page</button><button data-c="Instagram Reels">Instagram Reels</button></div><div class="blocked">Nenhuma conta vinculada: vincular exige OAuth real (bloqueado). “Programar” permanece desabilitado; nenhuma publicação é simulada.</div></div>'; $('#chs', m).querySelectorAll('[data-c]').forEach((x) => (x.onclick = async () => toast((await post('/api/social/connect', { platform: x.dataset.c })).body.error, 6000))); };
 })); }
 const PUB_ILLUSTRATION = `<div class="pub-art" aria-hidden="true"><div class="pub-cal"><b>Publishing</b><div class="pub-month">‹ 05/2024 ›</div><div class="pub-grid">${['Dom', 'Seg', 'Ter', 'Qua', 'Qui'].map((d) => `<span class="pub-h">${d}</span>`).join('')}${Array.from({ length: 15 }, (_, k) => `<span class="pub-c">${k + 27 > 31 ? k - 4 : k + 27}</span>`).join('')}</div></div><div class="pub-plat"><small>Plataforma</small><div>TikTok</div><div>Instagram</div><div>Facebook</div></div></div>`;
 function pageSocial(kind) {
   const an = kind === 'analytics';
   const head = an ? 'Um painel único para as suas publicações nas plataformas de mídia social.' : 'Gerencie suas publicações nas plataformas sociais em um só lugar.';
   const pts = an ? [['Por conta', 'Acompanhe as principais métricas de engajamento de cada conta social.'], ['Por publicação', 'Detalhe os dados por stories, publicações e reels individuais.'], ['Agregue e compare', 'Agregue dados e compare o desempenho das publicações com facilidade.']] : [['Publique mais, cresça mais', 'Tudo o que você precisa para criar, editar e publicar publicações para construir a sua marca nas mídias sociais.'], ['Simplifique o seu fluxo de trabalho', 'Gerencie todo o seu conteúdo de mídia social em um só lugar.'], ['Economize tempo', 'Programe para publicar conteúdo automaticamente sempre que desejar.']];
-  $('#main').innerHTML = `${credits()}<div class="page pub-page"><div class="pub-left"><h1>${head}</h1>${pts.map(([t, d]) => `<div class="pub-pt"><b>${t}</b><div class="muted">${d}</div></div>`).join('')}<button id="vc" class="primary-lg">Vincular conta ⌄</button><div class="blocked">Vincular conta exige OAuth real da rede social (aplicativo registrado e aprovado). Bloqueado nesta instalação local; nenhuma publicação é simulada.</div></div><div class="pub-right">${an ? '<div class="pub-art muted">Ilustração do Pippit não capturada</div>' : PUB_ILLUSTRATION}</div></div>`; bindCredits(); $('#vc').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, ['TikTok', 'Página do Facebook', 'Reels do Instagram'].map((l) => ({ label: l, fn: async () => toast((await post('/api/social/connect', { platform: l })).body.error, 6000) }))); }; if (kind === 'schedule') pageDrafts(); }
+  $('#main').innerHTML = `${credits()}<div class="page pub-page"><div class="pub-left"><h1>${head}</h1>${pts.map(([t, d]) => `<div class="pub-pt"><b>${t}</b><div class="muted">${d}</div></div>`).join('')}<button id="vc" class="primary-lg">Vincular conta ⌄</button><div class="blocked">Vincular conta exige OAuth real da rede social (aplicativo registrado e aprovado). Bloqueado nesta instalação local; nenhuma publicação é simulada.</div></div><div class="pub-right">${an ? '<div class="pub-art muted">Ilustração do Pippit não capturada</div>' : PUB_ILLUSTRATION}</div></div>`; bindCredits(); $('#vc').onclick = (e) => { const r = e.target.getBoundingClientRect(); menuAt(r.left, r.bottom + 4, ['TikTok', 'Facebook Page', 'Instagram Reels'].map((l) => ({ label: l, fn: async () => toast((await post('/api/social/connect', { platform: l })).body.error, 6000) }))); }; if (kind === 'schedule') pageDrafts(); }
 async function pageDrafts() {
   const [dr, st, as, qp, adp] = await Promise.all([api('/api/social/drafts'), api('/api/social/structure'), api('/api/assets'), api('/api/social/queue'), api('/api/social/adapters')]);
   const vids = (as.body?.assets || as.body || []).filter((a) => a.kind === 'video'); const drafts = dr.body?.drafts || []; const cod = st.body?.platformCodes || {};
