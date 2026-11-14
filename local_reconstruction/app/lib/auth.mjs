@@ -279,3 +279,17 @@ export function authConfig(settings = {}) {
   const adapter = ADAPTERS[a.adapter] ? a.adapter : 'local';
   return { adapter, required: a.required === true, hasPassword: typeof settings.auth?.passwordHash === 'string' && settings.auth.passwordHash.length > 0 };
 }
+
+// ---------- administrador (14/11/2026): login com credencial do AMBIENTE; créditos ilimitados.
+// PIPPIT_ADMIN_EMAIL + PIPPIT_ADMIN_PASSWORD (mín. 8 caracteres). Nunca no repositório, nunca em resposta de API.
+const sha = (v) => crypto.createHash('sha256').update(String(v ?? '')).digest();
+export function adminConfig(env = process.env) {
+  const email = String(env.PIPPIT_ADMIN_EMAIL || '').trim().toLowerCase(); const pw = String(env.PIPPIT_ADMIN_PASSWORD || '');
+  return { configured: !!email && pw.length >= 8, email: email || null };
+}
+export function verifyAdmin({ email, password } = {}, env = process.env) {
+  const c = adminConfig(env); if (!c.configured) return false;
+  const emailOk = crypto.timingSafeEqual(sha(String(email || '').trim().toLowerCase()), sha(c.email));
+  const passOk = crypto.timingSafeEqual(sha(password), sha(env.PIPPIT_ADMIN_PASSWORD));
+  return emailOk && passOk;
+}

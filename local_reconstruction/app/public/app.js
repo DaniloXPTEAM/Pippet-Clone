@@ -100,7 +100,7 @@ function accountMenu(anchor) {
   p.addEventListener('click', (e) => e.stopPropagation());
   setTimeout(() => { const off = (e) => { if (e.type === 'keydown' && e.key !== 'Escape') return; closeAccountMenu(); document.removeEventListener('click', off); document.removeEventListener('keydown', off); }; document.addEventListener('click', off); document.addEventListener('keydown', off); }, 0);
 }
-function credits() { return `<div class="titlebar-tools"><button id="agentConnect" aria-label="Agent connection" title="Agent connection">Agent connect</button><button id="exportTasks" aria-label="Export tasks" title="Export tasks">Export tasks</button><div class="top-credits" id="credits"><i class="ic">${IC.credit}</i><b>${ST.balance}</b><span class="div"></span><span class="lbl">Gratuito</span></div></div>`; }
+function credits() { return `<div class="titlebar-tools"><button id="agentConnect" aria-label="Agent connection" title="Agent connection">Agent connect</button><button id="exportTasks" aria-label="Export tasks" title="Export tasks">Export tasks</button><div class="top-credits" id="credits"><i class="ic">${IC.credit}</i><b>${ST.unlimited ? '∞' : ST.balance}</b><span class="div"></span><span class="lbl">${ST.admin ? 'Administrador' : 'Gratuito'}</span></div></div>`; }
 function bindCredits() {
   const c = $('#credits'); if (c) c.onclick = creditsModal;
   // Painéis da barra de título: arquitetura estática observada (AgentConnect right/ordem 101/Custom;
@@ -109,9 +109,9 @@ function bindCredits() {
   const tasks = $('#exportTasks'); if (tasks) tasks.onclick = () => modal('<h2>Export tasks</h2><p class="muted">TitleBarExportTask — ordem <b>4</b> (evidência estática: bundles).</p><div class="blocked"><b>UNOBSERVED</b>: conteúdo, estados e ações do painel de tarefas de exportação não foram observados nesta instalação. Nenhuma tarefa é presumida.</div>');
 }
 async function creditsModal() {
-  const l = (await api('/api/ledger')).body; const m = modal(`<h2>Detalhes</h2><p>Detalhes de uso — saldo <b>${l.balance}</b></p><div class="row" id="pouches" style="gap:14px;margin:6px 0">${[['vip', 'Assinatura (vip)'], ['gift', 'Gratuitos e bônus (gift)'], ['purchase', 'Comprados (purchase)']].map(([k, t]) => `<div class="card" data-pouch="${k}"><small class="muted">${t}</small><br><b>${l.balances?.[k + '_credit'] ?? 0}</b></div>`).join('')}</div><p class="muted">Bolsas conforme benefits/user_credit. Assinatura e compra: estrutura presente no código, desligada (produto gratuito — r20); a ordem de consumo entre bolsas não foi observada (usa o lote que vence primeiro).</p><div class="row"><button id="dly">Receber créditos diários</button><button id="plansB">Ver planos</button></div>
+  const l = (await api('/api/ledger')).body; const m = modal(`<h2>Detalhes</h2><p>Detalhes de uso — saldo <b>${ST.unlimited ? '∞ (administrador: sem limite)' : l.balance}</b></p><div class="row" id="pouches" style="gap:14px;margin:6px 0">${[['vip', 'Assinatura (vip)'], ['gift', 'Gratuitos e bônus (gift)'], ['purchase', 'Comprados (purchase)']].map(([k, t]) => `<div class="card" data-pouch="${k}"><small class="muted">${t}</small><br><b>${l.balances?.[k + '_credit'] ?? 0}</b></div>`).join('')}</div><p class="muted">Bolsas conforme benefits/user_credit. Assinatura e compra: estrutura presente no código, desligada (produto gratuito — r20); a ordem de consumo entre bolsas não foi observada (usa o lote que vence primeiro).</p><div class="row"><button id="dly">Receber créditos diários</button><button id="plansB">Ver planos</button></div>
     <table><tr><th>Quando</th><th>Origem</th><th>Bolsa</th><th>Δ</th></tr>${l.entries.slice(0, 40).map((e) => `<tr><td>${new Date(e.at).toLocaleString('pt-BR')}</td><td>${esc(e.label)}</td><td>${esc(e.pouch || Object.entries(e.pouches || {}).map(([k, v]) => `${k} ${v}`).join(' + ') || '')}</td><td>${e.delta > 0 ? '+' : ''}${e.delta}</td></tr>`).join('')}</table>`);
-  $('#dly', m).onclick = async () => { const r = (await post('/api/daily-claim')).body; toast(r.claimed ? '+80 créditos gratuitos (expiram às 23:59:59)' : 'Os créditos de hoje já foram recebidos.'); await refresh(); m.close(); route_(); };
+  $('#dly', m).onclick = async () => { const r = (await post('/api/daily-claim')).body; toast(r.claimed ? `+${Number(r.amount).toLocaleString('pt-BR')} créditos gratuitos (expiram às 23:59:59)` : 'Os créditos de hoje já foram recebidos.'); await refresh(); m.close(); route_(); };
   $('#plansB', m).onclick = () => { m.close(); plansModal(); };
 }
 async function plansModal(modelName) {
@@ -124,7 +124,7 @@ async function plansModal(modelName) {
    <div class="plans">${P.map((p) => { const cur = ST.user.plan === p.id;
      return `<div class="plan ${p.id === 'plus' ? 'hot' : ''}"><h3>${esc(p.name)}</h3>
      <div class="price">${cur ? 'Plano atual — acesso a tudo' : 'No momento gratuito — em breve'}</div>
-     <ul>${p.dailyCredits ? '<li>Créditos diários gratuitos (80/dia)</li>' : ''}${p.noWatermark ? '<li>Remover marca d’água · Amplificar até 4K</li>' : ''}${p.gptImage25 ? '<li>GPT Image 2.5</li>' : ''}</ul>
+     <ul>${p.dailyCredits ? `<li>Créditos diários gratuitos (${Number(p.dailyCredits).toLocaleString('pt-BR')}/dia)</li>` : ''}${p.noWatermark ? '<li>Remover marca d’água · Amplificar até 4K</li>' : ''}${p.gptImage25 ? '<li>GPT Image 2.5</li>' : ''}</ul>
      <button disabled data-plan="${p.id}">${cur ? 'Plano atual' : 'No momento gratuito — em breve'}</button></div>`; }).join('')}</div>
    <div class="blocked">Produto gratuito e sem bloqueio (decisão do usuário — r20): nenhum recurso é cobrado ou limitado por plano. Estrutura de pagamento presente no código, desligada. Valores observados no original ficam só nos documentos de evidência (ADENDO_R19.md), não reproduzidos por decisão do usuário.</div>`);
 }
@@ -1316,7 +1316,7 @@ async function pageLogin(preloaded) {
   ];
   $('#main').innerHTML = `<div class="page" id="loginPage"><h1>Entrar</h1>
     <p class="muted">Autenticação em camada própria, com adaptadores. Hoje: <b>${esc(A.adapterInfo.label)}</b> (${esc(A.adapterInfo.mode || 'funcional')}). ${A.session ? `Sessão ativa desde ${new Date(A.session.createdAt).toLocaleString('pt-BR')}.` : ''}</p>
-    <div class="card" style="max-width:460px"><p><b>E-mail</b><br><input id="loginEmail" style="width:100%" value="${esc(ST?.user?.name || (isSupabase ? '' : 'local'))}${isSupabase ? '' : '@local'}" ${isSupabase ? '' : 'disabled'}></p>
+    <div class="card" style="max-width:460px"><p><b>E-mail</b><br><input id="loginEmail" style="width:100%" value="${esc(ST?.user?.name || (isSupabase ? '' : 'local'))}${isSupabase ? '' : '@local'}" ${isSupabase || A.adminLogin ? '' : 'disabled'}></p>
     <p><b>Senha</b> <span class="muted">${isSupabase ? '(a do projeto Supabase)' : A.hasPassword ? '(definida nesta instalação)' : '(nenhuma senha definida: deixe em branco)'}</span><br><input id="loginPass" type="password" style="width:100%" autocomplete="current-password"></p>
     <div class="row"><button class="primary" id="loginGo">Entrar</button>${isSupabase ? '<button id="loginSignup">Criar conta</button>' : ''}<span id="loginRes" class="muted"></span></div>
     ${isSupabase ? '<p class="muted" style="font-size:12px">O projeto exige confirmação de e-mail: depois de criar a conta, confirme pelo link recebido antes de entrar.</p>' : ''}</div>

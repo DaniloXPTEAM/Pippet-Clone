@@ -10,6 +10,7 @@ import crypto from 'node:crypto';
 import * as S from './lib/store.mjs';
 import * as media from './lib/media.mjs';
 import { userMessage } from './lib/agent.mjs';
+import { AsyncLocalStorage } from 'node:async_hooks';
 import { VIDEO_MODELS, IMAGE_MODELS, AUDIO_MODELS, VIDEO_RATIOS, IMAGE_RATIOS, VIDEO_RES, IMAGE_RES, SKILLS, NODE_PANELS, MARKETING, videoCost, NEEDS, FEATURED_WORKS } from './lib/catalog.mjs';
 import { OFFICIAL, SKILL_DEFS, skillDef, skillSummary } from './lib/skilldefs.mjs';
 import { PLANS, AVATAR_RULES, getPlan } from '../src/plans.mjs';
@@ -107,7 +108,7 @@ const skillGuide = (id) => {
   const b = SKILLS.find((x) => x.id === id); const d = skillDef(id); // skills oficiais com definição local: a instrução de planejamento é TEXTO DO PIPPERLINE (não a instrução privada do Pippit)
   return b ? { id, name: b.name, custom: false, official: !!d, instructions: String((d?.planning) || b.desc || '').slice(0, 1200) } : null;
 };
-const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(providerRuntimeSettings()), jobs: jobsMgr,
+const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(providerRuntimeSettings()), jobs: jobsMgr, unlimited: isAdmin(),
   // Vídeo pelo ROTEADOR GRATUITO (NovAI cogvideox-flash): o agente (skills, Marketing, modo Agente) usa isto quando não há
   // provedor de vídeo "do usuário". Antes só o Canvas e /api/local-runs usavam o roteador (corrigido em 14/11/2026).
   routerVideo: { available: () => routerVideoAvailable(), create: (p, chat, prompt, extra) => createRouterVideoRun(p, chat, prompt, extra), reason: () => (videoPlan().ok ? null : videoPlan().reason) } });
@@ -118,7 +119,7 @@ function createRouterVideoRun(p, chat, prompt, extra = {}) {
 }
 function state() {
   const d = db(); const bal = S.balance(); const plan = getPlan(d.user.plan);
-  return { user: d.user, plan, balance: bal, balances: S.balances(), settings: publicSettings(d.settings), social: { limit: d.social.limit, accounts: d.social.accounts }, ffmpeg: media.available(), provider: d.settings.provider || 'none', avatarRules: AVATAR_RULES, photoFreeUses: d.avatars.photoFreeUses };
+  return { user: isAdmin() ? { ...d.user, name: 'Administrador', email: reqCtx.getStore()?.email || null, role: 'admin' } : d.user, plan, balance: isAdmin() ? UNLIMITED_CREDITS : bal, unlimited: isAdmin(), admin: isAdmin(), balances: isAdmin() ? { vip_credit: 0, gift_credit: UNLIMITED_CREDITS, purchase_credit: 0 } : S.balances(), settings: publicSettings(d.settings), social: { limit: d.social.limit, accounts: d.social.accounts }, ffmpeg: media.available(), provider: d.settings.provider || 'none', avatarRules: AVATAR_RULES, photoFreeUses: d.avatars.photoFreeUses };
 }
 // telemetria: mesmo cliente de page view observado, enviado ao coletor local
 function track(path_, host) { const url = buildPageViewUrl({ reportHost: `http://${host || '127.0.0.1:' + PORT}`, webId: db().user.id, isFirstVisitPage: false, isSessionStartPage: true, referrer: '', userAgent: '', channel: { channel_from: 'ut', session_start_url: path_, channel_level1: 'Direct', channel_level2: 'enter_url', channel_level3: '', channel_level4: '', branch: 'master' } }); return url; }
@@ -129,6 +130,10 @@ const routes = [];
 const route = (method, re, fn) => routes.push({ method, re, fn });
 // ---- autenticação: adaptador `local` (padrão) e `supabase` (GoTrue real, com apikey em todas as chamadas).
 const AUTH_SECRET = AUTH.loadSecret(S.DATA_DIR);
+// Administrador (14/11/2026): a sessão do admin vem de login com credencial do AMBIENTE. O contexto por requisição
+// (AsyncLocalStorage) diz se a chamada é de admin: créditos ilimitados e nenhum débito.
+const reqCtx = new AsyncLocalStorage(); const isAdmin = () => reqCtx.getStore()?.admin === true; const UNLIMITED_CREDITS = 1_000_000_000;
+const adminFails = new Map(); // ip -> { n, until }
 const authState = () => { const d = db(); d.auth ||= { sessions: [] }; return d.auth; };
 const authCfg = () => AUTH.authConfig(db().settings);
 const sessionOf = (req) => { const token = AUTH.parseCookies(req.headers.cookie || '')[AUTH.SESSION_COOKIE]; if (!token) return null; const st = authState(); const s = AUTH.verifySession({ secret: AUTH_SECRET, token, sessions: st.sessions || [] }); if (s) { st.sessions = AUTH.pruneSessions(st.sessions, Date.now()); } return s || null; };
@@ -136,7 +141,7 @@ const sessionOf = (req) => { const token = AUTH.parseCookies(req.headers.cookie 
 const saveSupabaseSession = ({ user, tokens }) => {
   const { token, session } = AUTH.newSession({ secret: AUTH_SECRET, userId: user?.id || 'supabase', adapter: 'supabase', ttlMs: Math.max(300, tokens.expiresIn) * 1000 });
   const rec = { ...session, email: user?.email || '', name: user?.name || '', provider: user?.provider || 'email', accessSealed: AUTH.seal(AUTH_SECRET, tokens.accessToken), refreshSealed: AUTH.seal(AUTH_SECRET, tokens.refreshToken) };
-  const st = authState(); st.sessions = [...AUTH.pruneSessions(st.sessions || []), rec]; S.save();
+  const st = authState(); st.sessions = [...AUTH.pruneSessions(st.sessions || []), rec]; S.claimDaily(); S.save();
   return { token, session: rec };
 };
 const authUser = (s) => (s && s.adapter === 'supabase' ? { id: s.userId, name: s.name || s.email || 'conta', email: s.email || null, provider: s.provider || 'email', adapter: 'supabase' } : null);
@@ -156,8 +161,8 @@ const authSummary = async (req) => {
   const sup = cfg.adapter === 'supabase' ? await supabaseSettings() : null;
   return {
     ...cfg, adapterInfo: adapter.describe(), adapters: Object.values(AUTH.ADAPTERS).map((a) => ({ id: a.id, label: a.label, mode: a.mode, enabled: a.enabled !== false, configured: a.configured === true })),
-    authenticated: !!s || !cfg.required,
-    user: s ? (authUser(s) || { id: d.user.id, name: d.user.name, provider: s.adapter }) : (cfg.required ? null : { id: d.user.id, name: d.user.name, provider: cfg.adapter }),
+    authenticated: !!s || !cfg.required, admin: !!(s && s.admin), adminLogin: AUTH.adminConfig().configured,
+    user: s ? (authUser(s) || (s.admin ? { id: d.user.id, name: 'Administrador', email: s.email || null, role: 'admin', provider: 'admin' } : { id: d.user.id, name: d.user.name, provider: s.adapter })) : (cfg.required ? null : { id: d.user.id, name: d.user.name, provider: cfg.adapter }),
     session: s ? { id: s.id, adapter: s.adapter, mode: s.adapter === 'supabase' ? 'tokens cifrados no servidor' : 'hmac local', createdAt: s.createdAt, expiresAt: s.expiresAt } : null,
     contract: AUTH.ADAPTERS.supabase.describe().endpoints, sessions: (st.sessions || []).length,
     oauth: Object.values(AUTH.OAUTH_PROVIDERS).map((p) => ({ id: p.id, label: p.label, scopes: p.scopes, status: 'implementado com PKCE (S256)' })),
@@ -198,6 +203,16 @@ route('POST', /^\/api\/auth\/signup$/, async (q, r) => {
 const userView = (u) => (u ? { id: u.id, name: u.name, email: u.email, provider: u.provider, emailConfirmed: u.emailConfirmed } : null);
 route('POST', /^\/api\/auth\/login$/, async (q, r) => {
   const b = await readJson(q); const cfg = authCfg(); const adapter = AUTH.adapterFor(cfg.adapter); const d = db();
+  // Administrador: e-mail igual ao do ambiente => só entra com a senha do ambiente (nunca cai no login local sem senha).
+  const adm = AUTH.adminConfig(); const ipKey = q.socket?.remoteAddress || 'local';
+  if (adm.configured && String(b.email || '').trim().toLowerCase() === adm.email) {
+    const f = adminFails.get(ipKey); if (f && f.until > Date.now()) return fail(r, 429, 'muitas tentativas: aguarde um minuto');
+    if (!AUTH.verifyAdmin({ email: b.email, password: b.password })) { const n = (f?.n || 0) + 1; adminFails.set(ipKey, { n, until: n >= 5 ? Date.now() + 60_000 : 0 }); return fail(r, 401, 'credenciais inválidas'); }
+    adminFails.delete(ipKey);
+    const { token, session } = AUTH.newSession({ secret: AUTH_SECRET, userId: d.user.id, adapter: 'local' }); session.admin = true; session.role = 'admin'; session.email = adm.email;
+    const st = authState(); st.sessions = [...AUTH.pruneSessions(st.sessions || []), session]; S.claimDaily(); S.save();
+    return send(r, 200, { ok: true, admin: true, unlimitedCredits: true, user: { id: d.user.id, name: 'Administrador', email: adm.email, role: 'admin', provider: 'admin' }, session: { id: session.id, expiresAt: session.expiresAt } }, { 'set-cookie': AUTH.sessionCookie(token) });
+  }
   if (adapter.id === 'supabase') {
     const email = String(b.email || '').trim(); if (!email || !b.password) return fail(r, 400, 'informe e-mail e senha');
     const res = await adapter.signIn({ email, password: String(b.password) });
@@ -208,7 +223,7 @@ route('POST', /^\/api\/auth\/login$/, async (q, r) => {
   const res = adapter.signIn({ password: b.password, passwordHash: d.settings.auth?.passwordHash });
   if (!res.ok) return fail(r, 401, res.error);
   const { token, session } = AUTH.newSession({ secret: AUTH_SECRET, userId: d.user.id, adapter: adapter.id });
-  const st = authState(); st.sessions = [...AUTH.pruneSessions(st.sessions || []), session]; S.save();
+  const st = authState(); st.sessions = [...AUTH.pruneSessions(st.sessions || []), session]; S.claimDaily(); S.save();
   send(r, 200, { ok: true, user: { id: d.user.id, name: d.user.name, provider: adapter.id }, session: { id: session.id, expiresAt: session.expiresAt } }, { 'set-cookie': AUTH.sessionCookie(token) });
 });
 route('POST', /^\/api\/auth\/logout$/, async (q, r) => {
@@ -2172,7 +2187,7 @@ function direct() {
   const local = (db().settings.provider === 'local-ffmpeg') && media.available();
   return new DirectGen({
     state: (db().direct ||= newDirectState()), listeners: DIRECT_LISTENERS, plan: () => db().user.plan, charge: !local, // renderizador local nao-IA: sem debito (igual a /nodes/:id/generate)
-    credits: { balance: () => S.balance(), balances: () => S.balances(), debit: (l, n) => S.debit(l, n) },
+    credits: { balance: () => (isAdmin() ? UNLIMITED_CREDITS : S.balance()), balances: () => (isAdmin() ? { vip_credit: 0, gift_credit: UNLIMITED_CREDITS, purchase_credit: 0 } : S.balances()), debit: (l, n) => (isAdmin() ? { ok: true, unlimited: true } : S.debit(l, n)) },
     mediaInfo: (id) => { const a = db().assets.find((x) => x.id === id); return a ? { asset_id: a.id, md5: '', format: a.kind, size: fs.existsSync(S.pubFile(a.stored)) ? fs.statSync(S.pubFile(a.stored)).size : 0, width: a.width, height: a.height, download_url: `/files/${a.stored}`, mime: a.kind === 'video' ? 'video/mp4' : '', duration_ms: a.duration ? Math.round(a.duration * 1000) : null, cover_url: null } : null; },
     render: local ? async (run, { param, signal }) => { const out = path.join(S.FILES_DIR, `direct_${run.run_id}.mp4`); try { await media.generateLocalVideoAsync(out, { seconds: Number(param.duration_sec) || 4, ratio: param.ratio, signal }); } catch (e) { try { fs.unlinkSync(out); } catch {} throw e; } const a = addAsset(`direct_${run.run_id.slice(0, 8)}.mp4`, out, 'video', 'works'); return { assetId: a.id, name: a.name, durationMs: Math.round((a.duration || param.duration_sec) * 1000), width: a.width, height: a.height }; } : null,
   });
@@ -2262,6 +2277,7 @@ const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://x'); const p = url.pathname;
     if (req.method === 'OPTIONS') return send(res, 204, '');
+    { const s0 = sessionOf(req); reqCtx.enterWith({ admin: !!(s0 && s0.admin === true), email: s0?.email || null }); }
     // autenticação (estrutura): com "exigir login" ligado (adaptador local), /api/* pede sessão; /api/auth/* sempre acessível.
     if (p.startsWith('/api/') && !p.startsWith('/api/auth/')) {
       const cfg = authCfg();
@@ -2276,5 +2292,5 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'text/plain' }); fs.createReadStream(f).pipe(res);
   } catch (e) { fail(res, 500, String(e.message || e)); }
 });
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) { S.claimDaily(); server.listen(PORT, '127.0.0.1', () => console.log(`Pippit local: http://127.0.0.1:${PORT}  (dados em ${S.DATA_DIR}; ffmpeg: ${media.available() ? 'sim' : 'não'})`)); }
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) { S.claimDaily(); setInterval(() => { try { S.claimDaily(); } catch {} }, 10 * 60_000).unref(); server.listen(PORT, '127.0.0.1', () => console.log(`Pippit local: http://127.0.0.1:${PORT}  (dados em ${S.DATA_DIR}; ffmpeg: ${media.available() ? 'sim' : 'não'})`)); }
 export { server, PORT };

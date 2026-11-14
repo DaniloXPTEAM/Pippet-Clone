@@ -22,7 +22,7 @@ await fetch(`http://127.0.0.1:${PORT}/api/daily-claim`, { method: 'POST' });
 await page.goto(`http://127.0.0.1:${PORT}/`); await page.waitForSelector('#side .nav'); await page.waitForTimeout(500);
 // navegacao lateral e home
 for (const t of ['Criativo', 'Estúdio de marketing', 'Estúdio de histórias', 'Ativos', 'Habilidades', 'Criação inteligente', 'Mais']) assert.ok(await page.getByText(t, { exact: false }).first().isVisible(), t);
-await shot('01_home'); assert.ok((await page.locator('.top-credits').innerText()).includes('280'));
+await shot('01_home'); assert.ok((await page.locator('.top-credits').innerText()).includes('2200'));
 // plano gratuito -> modal de planos (mensal/anual) com precos observados
 await page.locator('#credits').click(); await page.getByText('Ver planos').click(); await page.waitForSelector('.plans');
 assert.ok(await page.getByText('No momento gratuito — em breve').first().isVisible()); assert.ok(await page.getByText('Plano atual — acesso a tudo').isVisible()); assert.equal(await page.locator('.modal').getByText(/R\$/).count(), 0, 'sem valores em R$ na tela de planos (r20)'); await shot('02_planos_gratuito'); await page.keyboard.press('Escape'); await page.locator('.modal-bg .x').click();

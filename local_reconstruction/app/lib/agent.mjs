@@ -97,7 +97,7 @@ export async function userMessage(ctx, project, chat, body) {
     steps.push({ label: 'Planos criados', state: 'completed' }, { label: 'Prompts de geração criados', state: 'completed' }, { label: 'Solicitação executada', state: 'completed' });
     st.docs = { design: design.id, storyboard: sb.id, prompts: pr.id };
   }
-  const cost = ctx.db.settings.provider === 'local-ffmpeg' ? 0 : videoCost(model.id, req.seconds); // provedor local nao cobra creditos
+  const cost = (ctx.db.settings.provider === 'local-ffmpeg' || ctx.unlimited) ? 0 : videoCost(model.id, req.seconds); // provedor local nao cobra creditos
   if (!confirmation && !st.confirmed) {
     st.awaiting = { type: 'confirm_production', options: { mode: ['Gerar os segmentos em paralelo', 'Gerar em sequência usando o último quadro como referência', 'Quero revisar o storyboard'], autoContinue: ['Sim, continuar automaticamente', 'Não, confirmar cada segmento'] }, segments: st.plan.segs.length, estimatedCredits: cost };
     chat.messages.push(msg('agent', { text: `O storyboard está pronto: serão ${st.plan.segs.length} segmento(s) de até ${maxSeg} s, totalizando ${req.seconds} s. (Planejado por: ${st.planner || 'regras locais'})${def?.approval === 'storyboard-e-prompts' ? ' Antes de gerar, revise o storyboard e os prompts exatos em generation_prompts.md: qualquer mudança material pede nova aprovação.' : ''}`, steps, form: st.awaiting })); return chat;
@@ -106,7 +106,7 @@ export async function userMessage(ctx, project, chat, body) {
   const conf = ctx.db.settings.creditConfirm;
   if (cost && conf.mode === 'threshold' && cost > conf.limit && !st.creditOk && !(confirmation && confirmation.creditOk)) {
     st.awaiting = { type: 'credit_confirm', estimatedCredits: cost, limit: conf.limit };
-    chat.messages.push(msg('agent', { text: `Esta tarefa custa cerca de ${cost} créditos, acima do limite de ${conf.limit}. Confirmar?`, steps, form: st.awaiting })); return chat;
+    chat.messages.push(msg('agent', { text: `Esta tarefa usaria cerca de ${cost} créditos do seu saldo diário, acima do limite de confirmação de ${conf.limit}. Nada é cobrado nesta versão gratuita. Confirmar?`, steps, form: st.awaiting })); return chat;
   }
   st.creditOk = true; return runGeneration(ctx, project, chat, st, model, steps);
 }

@@ -20,7 +20,7 @@ const mk = (args, out) => { const r = spawnSync(media.FFMPEG, ['-y', ...args, ou
 // 1. creditos: bonus de criacao +200, diario +80, ledger com lotes
 let st = (await j('/api/state')).body; assert.equal(st.balance, 200); assert.equal(st.plan.id, 'free');
 assert.equal((await post('/api/daily-claim')).body.claimed, true); assert.equal((await post('/api/daily-claim')).body.claimed, false);
-assert.equal((await j('/api/state')).body.balance, 280);
+assert.equal((await j('/api/state')).body.balance, 2200); /* 200 de bônus + 2.000 do dia (decisão de 14/11/2026) */
 
 // 2. canvas: nos, ferramentas desabilitadas, geracao bloqueada sem provedor (sem debito, sem resultado ficticio)
 const proj = (await post('/api/projects', { type: 'canvas' })).body; assert.equal(proj.title, 'PROJECT');
@@ -28,7 +28,7 @@ const vnode = (await post(`/api/projects/${proj.id}/nodes`, { type: 'Vídeo' }))
 assert.equal((await post(`/api/projects/${proj.id}/nodes`, { type: 'Inexistente' })).status, 400);
 let g = await post(`/api/projects/${proj.id}/nodes/${vnode.id}/generate`, { kind: 'video', model: 'seedance-2.5', seconds: 10 });
 assert.equal(g.status, 409); assert.equal(g.body.blocked, true); assert.equal(g.body.wouldCost, 370); assert.equal(g.body.creditsCharged, 0);
-assert.equal((await j('/api/state')).body.balance, 280);
+assert.equal((await j('/api/state')).body.balance, 2200); /* 200 de bônus + 2.000 do dia (decisão de 14/11/2026) */
 // provedor local (nao-IA) ligado: gera arquivo real
 await post('/api/settings', { provider: 'local-ffmpeg' });
 g = await post(`/api/projects/${proj.id}/nodes/${vnode.id}/generate`, { kind: 'video', ratio: '9:16', seconds: 3 });
@@ -48,7 +48,7 @@ const design = m.project.canvas.nodes.find((n) => n.title === 'creative_design.m
 m = (await post(`/api/projects/${proj.id}/chats/${chat.id}/messages`, { confirmation: { mode: 'sequencial' } })).body; assert.equal(m.chat.messages.at(-1).form.type, 'credit_confirm'); assert.equal(m.chat.messages.at(-1).form.estimatedCredits, 740);
 // sem provedor: falha explicita, sem debito
 m = (await post(`/api/projects/${proj.id}/chats/${chat.id}/messages`, { confirmation: { mode: 'sequencial', creditOk: true } })).body;
-last = m.chat.messages.at(-1); assert.equal(last.steps.at(-1).state, 'warning'); assert.match(last.steps.at(-1).reason, /sem provedor de video configurado/); assert.match(last.text, /NÃO foram enviadas.*nada foi gerado nem cobrado/); assert.equal((await j('/api/state')).body.balance, 280);
+last = m.chat.messages.at(-1); assert.equal(last.steps.at(-1).state, 'warning'); assert.match(last.steps.at(-1).reason, /sem provedor de video configurado/); assert.match(last.text, /NÃO foram enviadas.*nada foi gerado nem cobrado/); assert.equal((await j('/api/state')).body.balance, 2200); /* 200 de bônus + 2.000 do dia (decisão de 14/11/2026) */
 { const jobs = (await j('/api/jobs')).body; assert.equal(jobs.length, 2, 'uma tarefa por segmento'); assert.ok(jobs.every((x) => x.state === 'blocked' && /sem provedor/.test(x.error) && x.prompt.length > 30), 'tarefas preparadas com prompts, bloqueadas pelo motivo exato'); assert.ok(!(await j('/api/assets?cat=works')).body.some((a) => /final|animatic/.test(a.name)), 'nenhum vídeo apresentado sem geração real'); }
 // com provedor local: executa de verdade (2 segmentos 15+5, ultimo quadro, concatenacao)
 await post('/api/settings', { provider: 'local-ffmpeg' }); const chat2 = (await post(`/api/projects/${proj.id}/chats`)).body;

@@ -47,12 +47,18 @@ export function load() {
 export function save() { fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 1)); }
 export function reset() { db = fresh(); save(); return db; }
 // concessao diaria observada: +80 creditos, validade ate 23:59:59 do mesmo dia (credit_receive)
+// DECISÃO DO USUÁRIO (14/11/2026): 2.000 créditos por dia para qualquer conta que faça login (validade até 23:59:59).
+export const DAILY_CREDITS = 2000;
+// lastDailyClaim guarda "dia|valor concedido". Se o valor do dia era menor (ex.: os 80 antigos), completa a diferença
+// no mesmo dia, para a mudança para 2.000 valer já hoje e não só amanhã.
 export function claimDaily(now = new Date()) {
   const d = load(); const day = new Date(now).toDateString();
-  if (d.ledger.lastDailyClaim === day) return { claimed: false };
-  const l = hydrateLedger(d.ledger);
-  l.grant('Créditos gratuitos', 80, now, endOfDay(now));
-  d.ledger = serializeLedger(l, day); save(); return { claimed: true, amount: 80 };
+  const [claimDay, claimedAmt] = String(d.ledger.lastDailyClaim || '').split('|');
+  const already = claimDay === day ? Number(claimedAmt || 80) : 0;
+  if (already >= DAILY_CREDITS) return { claimed: false };
+  const l = hydrateLedger(d.ledger); const amount = DAILY_CREDITS - already;
+  l.grant('Créditos gratuitos', amount, now, endOfDay(now));
+  d.ledger = serializeLedger(l, `${day}|${DAILY_CREDITS}`); save(); return { claimed: true, amount };
 }
 export function balance(now = new Date()) {
   const d = load(); const l = hydrateLedger(d.ledger); const b = l.balance(now);
