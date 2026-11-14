@@ -26,13 +26,13 @@ function renderSide(route) {
   // itens de 40px com ícone de 18px, raio 16px, vão de 6px; grupo "Mais" recolhível; histórico; conta no rodapé.
   const ico = (k) => `<i class="ic">${IC[k]}</i>`;
   const nav = (href, label, icon, cls = '') => `<a href="#${href}" class="${cls} ${route.startsWith(href) ? 'on' : ''}">${icon ? ico(icon) : ''}<span class="lb">${label}</span></a>`;
-  const maisOpen = route.match(/^\/(gen|avatars|analytics|schedule|integrations|legacy-chat)/) || window.__maisOpen;
+  const maisOpen = route.match(/^\/(gen|avatars|analytics|schedule|integrations|legacy-chat|world)/) || window.__maisOpen;
   $('#side').innerHTML = `<div class="side-head"><a class="logo" href="#/home" aria-label="Início">CineForma</a><button class="side-toggle" id="sideToggle" aria-label="Ocultar barra lateral" title="Ocultar barra lateral">${IC.sidebarToggle}</button></div>
   <div class="side-scroll"><div class="nav">
     ${nav('/home', 'Criativo', 'creative')}${nav('/marketing', 'Estúdio de marketing', 'marketing')}${nav('/story', 'Estúdio de histórias', 'story')}<a id="navTela">${ico('canvas')}<span class="lb">Tela</span><span class="new">NEW</span></a><hr>
     ${nav('/assets', 'Ativos', 'assets')}${nav('/skills', 'Habilidades', 'skills')}${nav('/smart', 'Criação inteligente', 'smart')}${window.__devPanelEnabled ? nav('/dev', 'Painel dev', 'more') : ''}
     <a id="navMais" class="${maisOpen ? 'open' : ''}">${ico('more')}<span class="lb">Mais</span><i class="chev">${IC.chevron}</i></a>
-    ${maisOpen ? `${nav('/gen', 'Gerador de vídeos', '', 'sub')}${nav('/avatars', 'Avatares e vozes', '', 'sub')}${nav('/analytics', 'Análise', '', 'sub')}${nav('/schedule', 'Publicador', '', 'sub')}${nav('/integrations', 'Integrações', '', 'sub')}${nav('/legacy-chat', 'Chat legado', '', 'sub')}` : ''}
+    ${maisOpen ? `${nav('/gen', 'Gerador de vídeos', '', 'sub')}${nav('/avatars', 'Avatares e vozes', '', 'sub')}${nav('/analytics', 'Análise', '', 'sub')}${nav('/schedule', 'Publicador', '', 'sub')}${nav('/integrations', 'Integrações', '', 'sub')}${nav('/legacy-chat', 'Chat legado', '', 'sub')}${nav('/world', 'World Simulador', '', 'sub')}` : ''}
   </div><hr class="side-sep"><div class="hist-h">Histórico</div>
   ${PROJECTS.map((p) => `<div class="hist-i ${route.includes(p.id) ? 'on' : ''}" data-id="${p.id}"><div class="thumb"></div><div class="t"><b>${esc(p.title)}</b><small>${esc(p.subtitle || p.type)}</small></div><button class="more" aria-label="Mais">…</button></div>`).join('')}</div>
   <div class="account" id="acc"><div class="avatar"></div><b class="uname">${esc(ST?.user?.name || 'local')}</b><span class="bell" id="helpBtn" aria-label="Ajuda" title="Central de ajuda">${IC.help}</span><span class="bell" id="bell" aria-label="Notificações" title="Notificações">${IC.bell}${NOTE_UNREAD ? '<i class="dot"></i>' : ''}</span></div>`;
@@ -146,6 +146,9 @@ const HOME = { tab: 'Criativo', mode: 'Agente', skill: null, model: 'auto', rati
 const modelCustom = () => !!HOME.model && HOME.model !== 'auto';
 const modelPerSec = () => (CAT.videoModels.find((x) => x.id === HOME.model) || {}).perSecond;
 const modelChip = () => (HOME.mode === 'Vídeo' && HOME.model === 'auto-route' ? 'Auto Route · 9:16 · 4s · 768P · ✦ 12 (72) ▾' : modelCustom() ? 'Modelos personalizados | Preferência ▾' : 'Modelo | Preferência ▾');
+// World Simulador (recurso novo, pedido do usuário em 13/11/2026; não vem do Pippit): história interativa com
+// narrador, escolhas, imagem por cena e voz. A página vive em /world-simulador.html e é mostrada aqui dentro.
+function pageWorld() { $('#main').innerHTML = `${credits()}<div class="world-page"><iframe src="/world-simulador.html" title="World Simulador"></iframe></div>`; bindCredits(); }
 function homeHero() { return `<div class="hero"><i class="mark">${IC.creative}</i><h1>Com CineForma</h1><div class="seg" aria-label="Tipo de agente">${['Criativo', 'Marketing', 'Histórias'].map((t) => `<button class="${HOME.tab === t ? 'on' : ''}" data-t="${t}">${t}</button>`).join('')}</div><span class="tagline">Agent, transforme ideias em vídeos</span></div>`; }
 // No original as três abas ficam na MESMA página: só o palco central muda (medido em 13/11/2026).
 function bindHero() { document.querySelectorAll('.hero .seg button').forEach((b) => (b.onclick = () => { if (HOME.tab === b.dataset.t) return; HOME.tab = b.dataset.t; if ((location.hash.replace(/^#/, '') || '/home').startsWith('/home')) pageHome(); else location.hash = '/home'; })); }
@@ -1518,7 +1521,7 @@ function paintRoute(r) {
   if (r.startsWith('/editor')) return pageEditor(r.split('/')[2]); if (r.startsWith('/marketing')) return pageMarketing(); if (r.startsWith('/templates')) return pageTemplates(); if (r.startsWith('/help')) return pageHelp(); if (r.startsWith('/omni')) return pageOmni(); if (r.startsWith('/inspiration')) return pageInspiration(); if (r.startsWith('/pricing')) return pagePricing(); if (r.startsWith('/story')) return pageStory(); if (r.startsWith('/gen')) return pageGen();
   const localRunMatch = r.match(/^\/tasks\/run\/([\w-]+)$/); if (localRunMatch) return pageLocalRun(localRunMatch[1]);
   if (r.startsWith('/settings')) return pageSettings(r.split('/')[2] || 'personal_information'); if (r.startsWith('/tasks')) return pageTasks(); if (r.startsWith('/analytics')) return pageSocial('analytics'); if (r.startsWith('/schedule')) return pageSocial('schedule');
-  if (r.startsWith('/integrations')) return pageIntegrations(); if (r.startsWith('/dev')) return pageDev(); if (r.startsWith('/legacy-chat')) return pageLegacyChat();
+  if (r.startsWith('/integrations')) return pageIntegrations(); if (r.startsWith('/dev')) return pageDev(); if (r.startsWith('/legacy-chat')) return pageLegacyChat(); if (r.startsWith('/world')) return pageWorld();
   if (r.startsWith('/login')) return pageLogin(); if (r.startsWith('/share/')) return pageShare(r.split('/')[2]); return pageHome();
 }
 // Falha ao desenhar uma tela: mostrar o motivo NA TELA (com "tentar de novo"), nunca deixar a tela

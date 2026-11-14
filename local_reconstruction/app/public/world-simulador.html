@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Simulador</title>
+<style>
+  :root { --bg:#0e0f13; --card:#171922; --line:#272a36; --ink:#eceef4; --mut:#8d93a6; --acc:#8b6cff; --acc2:#c9b8ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 "Segoe UI",system-ui,sans-serif; }
+  button, input, textarea, select { font:inherit; color:inherit; }
+  .wrap { max-width:980px; margin:0 auto; padding:28px 16px 60px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:26px; }
+  h1 { margin:0; font:600 22px/1.2 Georgia,serif; letter-spacing:.2px; }
+  .ghost { background:none; border:1px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer; color:var(--mut); }
+  .ghost:hover { color:var(--ink); border-color:#3a3e4f; }
+  .lead { color:var(--mut); margin:0 0 18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; }
+  .sc { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; cursor:pointer; text-align:left; transition:.15s; }
+  .sc:hover { border-color:var(--acc); transform:translateY(-2px); }
+  .sc b { display:block; font-size:15px; margin-bottom:4px; } .sc span { color:var(--mut); font-size:13px; }
+  .sc .em { font-size:26px; display:block; margin-bottom:10px; }
+  .own { display:flex; gap:8px; margin-top:16px; }
+  .own input { flex:1; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:11px 18px; outline:none; }
+  .own input:focus { border-color:var(--acc); }
+  .go { background:var(--acc); border:none; border-radius:999px; padding:0 22px; cursor:pointer; font-weight:600; color:#fff; } .go:disabled { opacity:.4; cursor:default; }
+  .stage { display:none; }
+  .scene { position:relative; aspect-ratio:16/9; border-radius:20px; overflow:hidden; background:linear-gradient(135deg,#1c1f2b,#12131a); border:1px solid var(--line); }
+  .scene img { width:100%; height:100%; object-fit:cover; display:block; }
+  .scene .ph { position:absolute; inset:0; display:grid; place-items:center; color:var(--mut); font-size:13px; text-align:center; padding:20px; }
+  .scene .tag { position:absolute; left:14px; top:14px; background:rgba(0,0,0,.55); border-radius:999px; padding:4px 12px; font-size:12px; }
+  .narr { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:20px 22px; margin-top:14px; font:17px/1.65 Georgia,serif; min-height:96px; white-space:pre-wrap; }
+  .choices { display:grid; gap:8px; margin-top:14px; }
+  .ch { background:none; border:1px solid var(--line); border-radius:14px; padding:13px 16px; text-align:left; cursor:pointer; transition:.12s; }
+  .ch:hover:not(:disabled) { border-color:var(--acc); background:rgba(139,108,255,.08); } .ch:disabled { opacity:.45; cursor:default; }
+  .ch i { color:var(--acc2); font-style:normal; margin-right:8px; }
+  .bar { display:flex; gap:8px; margin-top:12px; } .bar input { flex:1; background:var(--card); border:1px solid var(--line); border-radius:999px; padding:10px 16px; outline:none; }
+  .meta { display:flex; justify-content:space-between; color:var(--mut); font-size:12px; margin-top:12px; }
+  .log { margin-top:22px; border-top:1px solid var(--line); padding-top:14px; color:var(--mut); font-size:13px; } .log div { margin:4px 0; } .log b { color:var(--acc2); font-weight:500; }
+  dialog { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:20px; padding:22px; width:min(520px,94vw); }
+  dialog::backdrop { background:rgba(0,0,0,.6); }
+  dialog h2 { margin:0 0 4px; font-size:17px; } dialog p { color:var(--mut); font-size:13px; margin:0 0 14px; }
+  label { display:block; font-size:12px; color:var(--mut); margin:10px 0 4px; }
+  dialog input[type=text], dialog input[type=password] { width:100%; background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:9px 12px; outline:none; }
+  .row { display:flex; gap:16px; align-items:center; margin-top:14px; font-size:13px; } .row label { display:inline; margin:0; color:var(--ink); }
+  .end { display:flex; justify-content:flex-end; gap:8px; margin-top:18px; }
+  .err { color:#ff8f8f; font-size:13px; margin-top:10px; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🌍 World Simulador</h1>
+    <div><button class="ghost" id="btnNew" hidden>Novo mundo</button> <button class="ghost" id="btnCfg">⚙ IA: <span id="mode">demonstração</span></button></div>
+  </header>
+
+  <section id="start">
+    <p class="lead">Escolha um cenário ou escreva o seu. A cada passo o narrador descreve a cena e você decide o que fazer.</p>
+    <div class="grid" id="cards"></div>
+    <div class="own"><input id="own" placeholder="Ou descreva o seu mundo: “sou um detetive em Belém em 1920”…" maxlength="300"><button class="go" id="ownGo">Simular</button></div>
+  </section>
+
+  <section class="stage" id="stage">
+    <div class="scene"><img id="img" alt="" hidden><div class="ph" id="ph">A cena aparece aqui quando há um gerador de imagem configurado.</div><span class="tag" id="tag"></span></div>
+    <div class="narr" id="narr"></div>
+    <div class="choices" id="choices"></div>
+    <div class="bar"><input id="free" placeholder="Ou escreva o que você faz…" maxlength="240"><button class="go" id="freeGo">Agir</button></div>
+    <div class="err" id="err"></div>
+    <div class="meta"><span id="turn"></span><span id="src"></span></div>
+    <div class="log" id="log"></div>
+  </section>
+</div>
+
+<dialog id="cfg">
+  <h2>Conectar uma IA</h2>
+  <p>Sem nada aqui, o site roda uma história de demonstração embutida. Com um servidor compatível com a API da OpenAI (por exemplo o seu roteador local), o narrador passa a inventar o mundo. A chave fica só neste navegador.</p>
+  <label>Endereço base (termina em /v1)</label><input type="text" id="cBase" placeholder="http://127.0.0.1:20128/v1">
+  <label>Chave</label><input type="password" id="cKey" placeholder="sk-…" autocomplete="off">
+  <label>Modelo de texto</label><input type="text" id="cText" placeholder="auto/best-free">
+  <label>Modelo de imagem (deixe vazio para não gerar imagens)</label><input type="text" id="cImg" placeholder="nvidia/black-forest-labs/flux.2-klein-4b">
+  <div class="row"><input type="checkbox" id="cVoice"><label for="cVoice">Narrar em voz alta (voz do navegador)</label></div>
+  <div class="end"><button class="ghost" id="cClear">Limpar</button><button class="go" id="cSave" style="height:36px">Salvar</button></div>
+</dialog>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const SCENARIOS = [
+  { em: '⚔️', t: 'Ronin no Japão feudal', d: 'Um samurai sem mestre chega a uma vila ameaçada.' },
+  { em: '🕵️', t: 'Detetive noir', d: 'Chuva, neon e um caso que ninguém quer resolver.' },
+  { em: '🚀', t: 'Nave à deriva', d: 'Você acorda sozinho. O alarme não para.' },
+  { em: '🧙', t: 'A última feiticeira', d: 'A magia está morrendo e você é quem restou.' },
+  { em: '🏝️', t: 'Náufrago', d: 'Uma ilha, um baú trancado e pegadas na areia.' },
+  { em: '🏚️', t: 'Fuja da casa', d: 'As portas trancaram sozinhas. Há algo no porão.' },
+];
+// História embutida para o modo demonstração (sem IA): um grafo pequeno, vale para qualquer cenário escolhido.
+const DEMO = {
+  start: { n: 'Você chega ao lugar onde tudo começa. O ar está parado, e três caminhos se oferecem: uma trilha iluminada, uma porta entreaberta e alguém que observa você de longe.\n\n(Modo demonstração: esta história é fixa. Conecte uma IA em ⚙ para o mundo reagir de verdade ao cenário e ao que você escrever.)', c: [['Seguir a trilha iluminada', 'trilha'], ['Empurrar a porta entreaberta', 'porta'], ['Ir falar com quem observa', 'estranho']] },
+  trilha: { n: 'A trilha termina num mirante. Lá embaixo, luzes se movem em fila, como uma procissão. Uma delas para e vira na sua direção.', c: [['Descer até as luzes', 'luzes'], ['Esconder-se e observar', 'observar'], ['Voltar ao início', 'start']] },
+  porta: { n: 'Atrás da porta há uma sala pequena com uma mesa. Sobre ela, um mapa incompleto e uma chave fria ao toque.', c: [['Pegar a chave e o mapa', 'chave'], ['Procurar outra saída', 'observar'], ['Voltar ao início', 'start']] },
+  estranho: { n: '“Demorou”, diz a figura, sem se apresentar. “Eles já sabem que você está aqui. Posso levar você até o outro lado, mas vai custar uma promessa.”', c: [['Aceitar a promessa', 'chave'], ['Recusar e seguir sozinho', 'luzes'], ['Perguntar quem são “eles”', 'observar']] },
+  luzes: { n: 'De perto, as luzes são lanternas carregadas por gente em silêncio. Ninguém impede você de entrar na fila. No fim dela há um portão, e o portão está se fechando.', c: [['Correr para o portão', 'fim1'], ['Perguntar a alguém da fila', 'observar']] },
+  observar: { n: 'Você espera. Aos poucos entende o padrão: a cada sino, alguém passa pelo portão e não volta. O próximo sino é o seu, se quiser.', c: [['Passar no próximo sino', 'fim1'], ['Dar as costas a tudo isso', 'fim2']] },
+  chave: { n: 'A chave esquenta na sua mão e o mapa ganha uma linha nova, traçada sozinha, apontando para o portão no fim do vale.', c: [['Seguir a linha do mapa', 'fim1'], ['Queimar o mapa', 'fim2']] },
+  fim1: { n: 'Você atravessa. Do outro lado o mundo é o mesmo, mas todos sabem o seu nome. A história, enfim, começa.\n\nFIM da demonstração.', c: [] },
+  fim2: { n: 'Você escolhe o próprio caminho e ninguém o segue. Às vezes recusar a aventura também é uma resposta.\n\nFIM da demonstração.', c: [] },
+};
+const CFG = (() => { try { return JSON.parse(localStorage.getItem('mundo_cfg') || '{}'); } catch { return {}; } })();
+const hasAI = () => SITE || !!(CFG.base && CFG.text);
+const S = { scenario: '', history: [], turn: 0, busy: false, demoNode: 'start' };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const SYSTEM = (sc) => `Você é o narrador de um jogo de história interativa em português do Brasil. Cenário: "${sc}".
+A cada turno responda SOMENTE com um JSON válido, sem texto fora dele, no formato:
+{"narracao":"2 a 4 frases em segunda pessoa, no presente, vívidas e concretas","imagem":"descrição visual curta da cena EM INGLÊS, estilo cinematográfico, sem texto na imagem","escolhas":["ação 1","ação 2","ação 3"],"fim":false}
+Regras: mantenha coerência com tudo o que já aconteceu; as 3 escolhas devem ser diferentes entre si e levar a consequências reais; o jogador também pode escrever uma ação livre, aceite-a se for plausível; depois de cerca de 10 turnos conduza a um desfecho e marque "fim":true com "escolhas":[].`;
+
+// Dentro do site (mesma origem), o World Simulador usa o ROTEADOR GRATUITO do próprio site: o servidor escolhe o
+// modelo por tarefa (texto, imagem) e guarda as chaves; nada precisa ser configurado aqui. Fora do site, vale a
+// configuração manual de ⚙ ou a história de demonstração.
+let SITE = false;
+const siteExec = async (task, payload) => { const r = await fetch('/api/free-router/execute', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ task, payload }) }); const j = await r.json().catch(() => ({})); if (!r.ok || !j.ok) throw new Error(j.error || j.message || ('roteador do site respondeu ' + r.status)); return j; };
+function setMode() { $('#mode').textContent = SITE ? 'roteador gratuito do site' : hasAI() ? (CFG.img ? 'texto + imagem' : 'texto') : 'demonstração'; }
+function speak(t) { if (!CFG.voice || !('speechSynthesis' in window)) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = 1.02; speechSynthesis.speak(u); }
+
+async function callText(messages) {
+  let txt = '';
+  if (SITE) { const j = await siteExec('text', { messages }); txt = String(j.text || ''); S.model = (j.providerId || '') + '/' + (j.modelId || ''); }
+  else {
+    const r = await fetch(CFG.base.replace(/\/$/, '') + '/chat/completions', { method: 'POST', headers: { 'content-type': 'application/json', ...(CFG.key ? { authorization: 'Bearer ' + CFG.key } : {}) }, body: JSON.stringify({ model: CFG.text, messages, temperature: 0.9 }) });
+    if (!r.ok) throw new Error('O servidor de IA respondeu ' + r.status + ': ' + (await r.text()).slice(0, 200));
+    txt = (await r.json()).choices?.[0]?.message?.content || ''; S.model = CFG.text;
+  }
+  const m = txt.match(/\{[\s\S]*\}/); if (!m) throw new Error('A IA não devolveu o formato esperado.');
+  const j = JSON.parse(m[0]); if (!j.narracao) throw new Error('A IA devolveu uma resposta sem narração.');
+  return { n: String(j.narracao), img: String(j.imagem || ''), c: Array.isArray(j.escolhas) ? j.escolhas.slice(0, 4).map(String) : [], end: !!j.fim, raw: m[0] };
+}
+async function callImage(prompt, turn) {
+  if ((!SITE && !CFG.img) || !prompt) return;
+  $('#ph').hidden = false; $('#ph').textContent = 'Pintando a cena…';
+  try {
+    if (SITE) { const j = await siteExec('image_generation', { prompt: prompt + ', cinematic still', width: 1024, height: 576 }); if (!j.image?.base64 || turn !== S.turn) return; $('#img').src = 'data:' + (j.mimeType || 'image/jpeg') + ';base64,' + j.image.base64; $('#img').hidden = false; $('#ph').hidden = true; return; }
+    const r = await fetch(CFG.base.replace(/\/$/, '') + '/images/generations', { method: 'POST', headers: { 'content-type': 'application/json', ...(CFG.key ? { authorization: 'Bearer ' + CFG.key } : {}) }, body: JSON.stringify({ model: CFG.img, prompt: prompt + ', cinematic still, 16:9', size: '1024x576', n: 1 }) });
+    if (!r.ok) throw new Error('imagem: ' + r.status);
+    const d = (await r.json()).data?.[0] || {}; const src = d.b64_json ? 'data:image/jpeg;base64,' + d.b64_json : d.url;
+    if (!src || turn !== S.turn) return; // o jogador já avançou
+    $('#img').src = src; $('#img').hidden = false; $('#ph').hidden = true;
+  } catch (e) { $('#ph').hidden = false; $('#ph').textContent = 'Não foi possível gerar a imagem desta cena (' + e.message + ').'; }
+}
+
+function render(step) {
+  $('#narr').textContent = step.n; $('#tag').textContent = S.scenario; $('#turn').textContent = 'Turno ' + S.turn; $('#src').textContent = hasAI() ? 'Narrador: ' + (S.model || CFG.text || '') : 'Narrador: demonstração embutida';
+  const ended = step.end || !step.c.length;
+  $('#choices').innerHTML = ended ? '<button class="ch" id="again"><i>↺</i>Começar outro mundo</button>' : step.c.map((c, i) => `<button class="ch" data-i="${i}"><i>${i + 1}</i>${esc(Array.isArray(c) ? c[0] : c)}</button>`).join('');
+  document.querySelectorAll('.ch[data-i]').forEach((b) => (b.onclick = () => act(step.c[+b.dataset.i])));
+  if ($('#again')) $('#again').onclick = reset;
+  document.querySelector('.bar').style.display = ended || !hasAI() ? 'none' : 'flex';
+  speak(step.n);
+}
+function busy(on) { S.busy = on; document.querySelectorAll('.ch, #freeGo').forEach((b) => (b.disabled = on)); if (on) $('#narr').textContent = 'O mundo reage…'; }
+function logLine(txt) { const d = document.createElement('div'); d.innerHTML = '<b>Você:</b> ' + esc(txt); $('#log').prepend(d); }
+
+async function act(choice) {
+  if (S.busy) return; $('#err').textContent = '';
+  const label = Array.isArray(choice) ? choice[0] : choice; if (S.turn > 0) logLine(label);
+  S.turn++;
+  if (!hasAI()) { S.demoNode = Array.isArray(choice) ? choice[1] : 'start'; return render({ ...DEMO[S.demoNode], end: !DEMO[S.demoNode].c.length }); }
+  busy(true);
+  try {
+    S.history.push({ role: 'user', content: S.turn === 1 ? 'Comece a história.' : 'O jogador faz: ' + label });
+    const step = await callText([{ role: 'system', content: SYSTEM(S.scenario) }, ...S.history.slice(-16)]);
+    S.history.push({ role: 'assistant', content: step.raw });
+    busy(false); render(step); callImage(step.img, S.turn);
+  } catch (e) {
+    S.history.pop(); S.turn--; busy(false); $('#narr').textContent = 'O narrador não respondeu.';
+    $('#err').textContent = e.message + (/Failed to fetch|NetworkError/.test(e.message) ? '\nO navegador não conseguiu falar com o servidor de IA: confira o endereço e se ele aceita chamadas vindas de uma página (CORS).' : '');
+    document.querySelectorAll('.ch, #freeGo').forEach((b) => (b.disabled = false));
+  }
+}
+function begin(scenario) { S.scenario = scenario; S.history = []; S.turn = 0; S.demoNode = 'start'; $('#log').innerHTML = ''; $('#img').hidden = true; $('#ph').hidden = false; $('#ph').textContent = CFG.img && hasAI() ? '' : 'A cena aparece aqui quando há um gerador de imagem configurado.'; $('#start').style.display = 'none'; $('#stage').style.display = 'block'; $('#btnNew').hidden = false; act(['início', 'start']); }
+function reset() { if ('speechSynthesis' in window) speechSynthesis.cancel(); $('#stage').style.display = 'none'; $('#start').style.display = 'block'; $('#btnNew').hidden = true; }
+
+$('#cards').innerHTML = SCENARIOS.map((s, i) => `<button class="sc" data-i="${i}"><span class="em">${s.em}</span><b>${s.t}</b><span>${s.d}</span></button>`).join('');
+document.querySelectorAll('.sc').forEach((b) => (b.onclick = () => { const s = SCENARIOS[+b.dataset.i]; begin(s.t + ' — ' + s.d); }));
+$('#ownGo').onclick = () => { const v = $('#own').value.trim(); if (v) begin(v); };
+$('#own').onkeydown = (e) => { if (e.key === 'Enter') $('#ownGo').click(); };
+$('#freeGo').onclick = () => { const v = $('#free').value.trim(); if (v) { $('#free').value = ''; act(v); } };
+$('#free').onkeydown = (e) => { if (e.key === 'Enter') $('#freeGo').click(); };
+$('#btnNew').onclick = reset;
+$('#btnCfg').onclick = () => { $('#cBase').value = CFG.base || ''; $('#cKey').value = CFG.key || ''; $('#cText').value = CFG.text || ''; $('#cImg').value = CFG.img || ''; $('#cVoice').checked = !!CFG.voice; $('#cfg').showModal(); };
+$('#cSave').onclick = () => { Object.assign(CFG, { base: $('#cBase').value.trim(), key: $('#cKey').value.trim(), text: $('#cText').value.trim(), img: $('#cImg').value.trim(), voice: $('#cVoice').checked }); try { localStorage.setItem('mundo_cfg', JSON.stringify(CFG)); } catch {} setMode(); $('#cfg').close(); };
+$('#cClear').onclick = () => { for (const k of Object.keys(CFG)) delete CFG[k]; try { localStorage.removeItem('mundo_cfg'); } catch {} setMode(); $('#cfg').close(); };
+setMode();
+// No site: pergunta ao servidor se o roteador gratuito tem rota de texto; se tiver, usa-o.
+if (location.protocol.startsWith('http')) fetch('/api/llm/status').then((r) => r.json()).then((s) => { SITE = !!(s.router && Array.isArray(s.router.planned) && s.router.planned.length); setMode(); }).catch(() => {});
+</script>
+</body>
+</html>
