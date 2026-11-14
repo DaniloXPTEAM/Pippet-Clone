@@ -1,98 +1,1178 @@
-[
- {
-  "title": "Revelação com disparo e queda",
-  "desc": "Prenda o público com um produto que cai inesperadamente na cena.",
-  "files": [
-   "t1_1.webp",
-   "t1_2.webp",
-   "t1_3.webp"
-  ]
- },
- {
-  "title": "Teste da prateleira secreta",
-  "desc": "Combine uma joia escondida com provas convincentes que ajudam a vender.",
-  "files": [
-   "t2_1.webp",
-   "t2_2.webp",
-   "t2_3.webp"
-  ]
- },
- {
-  "title": "Revelação com troca de peça viva",
-  "desc": "Chame a atenção enquanto o look ganha vida.",
-  "files": [
-   "t3_1.webp",
-   "t3_2.webp",
-   "t3_3.webp"
-  ]
- },
- {
-  "title": "Revelação de download com o cursor",
-  "desc": "Cliques em pixels transformam prévias desfocadas em produtos nítidos.",
-  "files": [
-   "t4_1.webp",
-   "t4_2.webp",
-   "t4_3.webp"
-  ]
- },
- {
-  "title": "Revelação do produto em rotação",
-  "desc": "Giros de mão enchem as mesas de produtos.",
-  "files": [
-   "t5_1.webp",
-   "t5_2.webp",
-   "t5_3.webp"
-  ]
- },
- {
-  "title": "Demonstração de looks em pastas",
-  "desc": "Monte e compare looks usando pastas.",
-  "files": [
-   "t6_1.webp",
-   "t6_2.webp",
-   "t6_3.webp"
-  ]
- },
- {
-  "title": "Revelação na bolsa do roubo",
-  "desc": "Um roubo falso se transforma em uma revelação heroica do produto.",
-  "files": [
-   "t7_1.webp",
-   "t7_2.webp",
-   "t7_3.webp"
-  ]
- },
- {
-  "title": "Destaque de detalhes com uma só imagem",
-  "desc": "Uma imagem do produto vira uma sequência de detalhes que prende o olhar.",
-  "files": [
-   "t8_1.webp",
-   "t8_2.webp",
-   "t8_3.webp"
-  ]
- },
- {
-  "title": "Demonstração viral com multidão",
-  "desc": "Combine a demanda visível com provas úteis.",
-  "files": [
-   "t9_1.webp",
-   "t9_2.webp",
-   "t9_3.webp"
-  ]
- },
- {
-  "title": "Descoberta sob o véu",
-  "desc": "Um produto escondido se torna indispensável.",
-  "files": []
- },
- {
-  "title": "Revelação com desenhos que florescem",
-  "desc": "Transforme desenhos que florescem em joias desejadas.",
-  "files": []
- },
- {
-  "title": "Revelação de peça viva",
-  "desc": "Prenda o público com uma peça que o segue.",
-  "files": []
- }
-]
+{
+ "filters": [
+  "Tudo",
+  "Anúncios em alta🔥",
+  "Anúncios UGC",
+  "Demonstrações de produtos",
+  "Efeitos visuais",
+  "Anúncios guiados por histórias",
+  "Seedance 2.5",
+  "ASMR"
+ ],
+ "items": [
+  {
+   "title": "Revelação com disparo e queda",
+   "desc": "Prenda o público com um produto que cai inesperadamente na cena.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t1_1.jpg",
+    "t1_2.jpg",
+    "t1_3.jpg"
+   ]
+  },
+  {
+   "title": "Teste da prateleira secreta",
+   "desc": "Combine uma joia escondida com provas convincentes que ajudam a vender.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t2_1.jpg",
+    "t2_2.jpg",
+    "t2_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação com troca de peça viva",
+   "desc": "Chame a atenção enquanto o look ganha vida.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t3_1.jpg",
+    "t3_2.jpg",
+    "t3_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de download com o cursor",
+   "desc": "Cliques em pixels transformam prévias desfocadas em produtos nítidos.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t4_1.jpg",
+    "t4_2.jpg",
+    "t4_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação do produto em rotação",
+   "desc": "Giros de mão enchem as mesas de produtos.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t5_1.jpg",
+    "t5_2.jpg",
+    "t5_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de looks em pastas",
+   "desc": "Monte e compare looks usando pastas.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t6_1.jpg",
+    "t6_2.jpg",
+    "t6_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação na bolsa do roubo",
+   "desc": "Um roubo falso se transforma em uma revelação heroica do produto.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t7_1.jpg",
+    "t7_2.jpg",
+    "t7_3.jpg"
+   ]
+  },
+  {
+   "title": "Destaque de detalhes com uma só imagem",
+   "desc": "Uma imagem do produto vira uma sequência de detalhes que prende o olhar.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t8_1.jpg",
+    "t8_2.jpg",
+    "t8_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração viral com multidão",
+   "desc": "Combine a demanda visível com provas úteis.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t9_1.jpg",
+    "t9_2.jpg",
+    "t9_3.jpg"
+   ]
+  },
+  {
+   "title": "Descoberta sob o véu",
+   "desc": "Um produto escondido se torna indispensável.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t10_1.jpg",
+    "t10_2.jpg",
+    "t10_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação com desenhos que florescem",
+   "desc": "Transforme desenhos que florescem em joias desejadas.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t11_1.jpg",
+    "t11_2.jpg",
+    "t11_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de peça viva",
+   "desc": "Prenda o público com uma peça que o segue.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t12_1.jpg",
+    "t12_2.jpg",
+    "t12_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de look com transição de táxi",
+   "desc": "Mantenha a atenção com transições rápidas de táxi.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t13_1.jpg",
+    "t13_2.jpg",
+    "t13_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova na tela do celular",
+   "desc": "Mostre como o acessório fica em um rosto na tela.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t14_1.jpg",
+    "t14_2.jpg",
+    "t14_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação com transição de pedestre",
+   "desc": "Mantenha a atenção com transições criadas por pedestres.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t15_1.jpg",
+    "t15_2.jpg",
+    "t15_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração com testador fofo",
+   "desc": "Chame a atenção com testadores de produtos fofos.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t16_1.jpg",
+    "t16_2.jpg",
+    "t16_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de escala com equipe minúscula",
+   "desc": "Deixe equipes minúsculas destacarem um produto gigante.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t17_1.jpg",
+    "t17_2.jpg",
+    "t17_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de seletor de looks no desktop",
+   "desc": "Transforme cliques em pastas em opções de looks.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t18_1.jpg",
+    "t18_2.jpg",
+    "t18_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de presente na porta",
+   "desc": "Desperte o desejo com uma revelação mágica de presente.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t19_1.jpg",
+    "t19_2.jpg",
+    "t19_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova de acessório em rosto no celular",
+   "desc": "Use reações ao vivo para mostrar como o acessório fica.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t20_1.jpg",
+    "t20_2.jpg",
+    "t20_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova alinhada à tela",
+   "desc": "Mostre o ajuste com o alinhamento preciso do celular.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t21_1.jpg",
+    "t21_2.jpg",
+    "t21_3.jpg"
+   ]
+  },
+  {
+   "title": "História acolhedora com um abraço",
+   "desc": "Torne o conforto atraente com um abraço de boas-vindas.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t22_1.jpg",
+    "t22_2.jpg",
+    "t22_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de transformação surpresa",
+   "desc": "Desperte a curiosidade com uma transformação na rua.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t23_1.jpg",
+    "t23_2.jpg",
+    "t23_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação do produto com zoom de pinça",
+   "desc": "Aproxime os detalhes com zoom de pinça.",
+   "cats": [
+    "Anúncios em alta🔥"
+   ],
+   "files": [
+    "t24_1.jpg",
+    "t24_2.jpg",
+    "t24_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova real com microfone na rua",
+   "desc": "Demonstrações com microfone na rua provocam reações naturais de surpresa.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t25_1.jpg",
+    "t25_2.jpg",
+    "t25_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação de criador com câmera na mão",
+   "desc": "Conquiste confiança com reações naturais de criadores.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t26_1.jpg",
+    "t26_2.jpg",
+    "t26_3.jpg"
+   ]
+  },
+  {
+   "title": "A verdade rápida sobre o produto com um criador",
+   "desc": "Demonstrações rápidas de criadores comprovam o uso real do produto.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t27_1.jpg",
+    "t27_2.jpg",
+    "t27_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova virtual com um criador",
+   "desc": "Compare looks com trocas virtuais rápidas.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t28_1.jpg",
+    "t28_2.jpg",
+    "t28_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação instantânea em selfie",
+   "desc": "Gere confiança com uma primeira reação genuína.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t29_1.jpg",
+    "t29_2.jpg",
+    "t29_3.jpg"
+   ]
+  },
+  {
+   "title": "Apresentação do produto em close",
+   "desc": "Mostre a textura e a função em detalhes macro.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t30_1.jpg",
+    "t30_2.jpg",
+    "t30_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de uso do produto",
+   "desc": "Ensine o uso correto do produto em etapas simples.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t31_1.jpg",
+    "t31_2.jpg",
+    "t31_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova de look em vários ângulos",
+   "desc": "Mostre o ajuste e o caimento de vários ângulos.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t32_1.jpg",
+    "t32_2.jpg",
+    "t32_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de cidade em escala gigante",
+   "desc": "Faça o produto se destacar em escala urbana.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t33_1.jpg",
+    "t33_2.jpg",
+    "t33_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de movimento em alta velocidade",
+   "desc": "Atraia olhares com efeitos de velocidade e explosão.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t34_1.jpg",
+    "t34_2.jpg",
+    "t34_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de antes e depois",
+   "desc": "Comprove os resultados com imagens equivalentes de antes e depois.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t35_1.jpg",
+    "t35_2.jpg",
+    "t35_3.jpg"
+   ]
+  },
+  {
+   "title": "Mini-história animada com frutas",
+   "desc": "Mantenha a atenção com um drama divertido de frutas.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t36_1.jpg",
+    "t36_2.jpg",
+    "t36_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de troca de cor com um toque",
+   "desc": "Deixe o público explorar as cores com toques rápidos.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t37_1.jpg",
+    "t37_2.jpg",
+    "t37_3.jpg"
+   ]
+  },
+  {
+   "title": "Loop UGC de uso repetido",
+   "desc": "Demonstre um apelo duradouro com o uso repetido.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t38_1.jpg",
+    "t38_2.jpg",
+    "t38_3.jpg"
+   ]
+  },
+  {
+   "title": "Tutorial de uso escondido",
+   "desc": "Insinue um uso escondido para aumentar o tempo de exibição.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t39_1.jpg",
+    "t39_2.jpg",
+    "t39_3.jpg"
+   ]
+  },
+  {
+   "title": "Tutorial de rotina para se arrumar",
+   "desc": "Integre os produtos a uma rotina autêntica.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t40_1.jpg",
+    "t40_2.jpg",
+    "t40_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de look lançado da tela",
+   "desc": "Abra um portal de looks com um arremesso divertido.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t41_1.jpg",
+    "t41_2.jpg",
+    "t41_3.jpg"
+   ]
+  },
+  {
+   "title": "Compras com um criador",
+   "desc": "Desperte o desejo com as compras de um criador.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t42_1.jpg",
+    "t42_2.jpg",
+    "t42_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Demonstração de filme animado",
+   "desc": "Transforme cenas de AI em histórias claras sobre recursos.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t43_1.jpg",
+    "t43_2.jpg",
+    "t43_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de distorção olho de peixe no look",
+   "desc": "Chame a atenção com distorções neon olho de peixe.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t44_1.jpg",
+    "t44_2.jpg",
+    "t44_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração ASMR satisfatória",
+   "desc": "Mantenha a atenção com sons táteis.",
+   "cats": [
+    "ASMR"
+   ],
+   "files": [
+    "t45_1.jpg",
+    "t45_2.jpg",
+    "t45_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de pôster 3D saltando da tela",
+   "desc": "Rompa os limites do quadro para destacar o produto.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t46_1.jpg",
+    "t46_2.jpg",
+    "t46_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação com entrevista na rua",
+   "desc": "Gere confiança no app com reações nas ruas.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t47_1.jpg",
+    "t47_2.jpg",
+    "t47_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Revelação do esboço à realidade",
+   "desc": "Redesenhe a realidade com um gancho visual brilhante.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t48_1.jpg",
+    "t48_2.jpg",
+    "t48_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração que comprova os benefícios",
+   "desc": "Gere confiança com provas diante da câmera.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t49_1.jpg",
+    "t49_2.jpg",
+    "t49_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração do produto em POV",
+   "desc": "Mostre a jornada do produto em primeira pessoa.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t50_1.jpg",
+    "t50_2.jpg",
+    "t50_3.jpg"
+   ]
+  },
+  {
+   "title": "Montagem de produto em pop art",
+   "desc": "Destaque o produto com cortes de pop art.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t51_1.jpg",
+    "t51_2.jpg",
+    "t51_3.jpg"
+   ]
+  },
+  {
+   "title": "Revelação de look no ritmo da música",
+   "desc": "Estimule novas visualizações com trocas de look no ritmo da música.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t52_1.jpg",
+    "t52_2.jpg",
+    "t52_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de pôster em colagem",
+   "desc": "Prenda o público com recortes e adesivos.",
+   "cats": [
+    "Seedance 2.5"
+   ],
+   "files": [
+    "t53_1.jpg",
+    "t53_2.jpg",
+    "t53_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme retrô simétrico",
+   "desc": "Emoldure o produto com um charme retrô sofisticado.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t54_1.jpg",
+    "t54_2.jpg",
+    "t54_3.jpg"
+   ]
+  },
+  {
+   "title": "Unboxing conduzido por um criador",
+   "desc": "Desperte o desejo com o suspense do unboxing.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t55_1.jpg",
+    "t55_2.jpg",
+    "t55_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação comparativa de comprador",
+   "desc": "Compare os principais prós e contras para simplificar a compra.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t56_1.jpg",
+    "t56_2.jpg",
+    "t56_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito CGI em escala gigante",
+   "desc": "Use uma escala impossível para chamar a atenção.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t57_1.jpg",
+    "t57_2.jpg",
+    "t57_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração rápida de uso",
+   "desc": "Compartilhe um atalho rápido que o público possa usar.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t58_1.jpg",
+    "t58_2.jpg",
+    "t58_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Avaliação com tour pelo local",
+   "desc": "Gere confiança com um tour e uma degustação reais.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t59_1.jpg",
+    "t59_2.jpg",
+    "t59_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "História com reviravolta de conto de fadas",
+   "desc": "Guarde a revelação para uma reviravolta de conto de fadas.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t60_1.jpg",
+    "t60_2.jpg",
+    "t60_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de problema e solução",
+   "desc": "Mostre a dor e depois deixe clara a solução.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t61_1.jpg",
+    "t61_2.jpg",
+    "t61_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Avaliação com pet falante de AI",
+   "desc": "Use um pet falante para chamar a atenção.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t62_1.jpg",
+    "t62_2.jpg",
+    "t62_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração da bagunça ao frescor",
+   "desc": "Comprove o poder de limpeza enquanto a sujeira desaparece.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t63_1.jpg",
+    "t63_2.jpg",
+    "t63_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Desafio de game show da marca",
+   "desc": "Use regras cronometradas e prêmios para reter visualizações.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t64_1.jpg",
+    "t64_2.jpg",
+    "t64_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação em vlog de estilo de vida",
+   "desc": "Faça as recomendações de uso diário parecerem reais.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t65_1.jpg",
+    "t65_2.jpg",
+    "t65_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Demonstração de grade de looks no ritmo da música",
+   "desc": "Organize todos os looks em uma grade fácil de visualizar.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t66_1.jpg",
+    "t66_2.jpg",
+    "t66_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação de estilo de vida de um casal",
+   "desc": "Gere confiança com o uso autêntico de um casal.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t67_1.jpg",
+    "t67_2.jpg",
+    "t67_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Avaliação autêntica de comprador",
+   "desc": "Gere confiança com vídeos não editados de clientes.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t68_1.jpg",
+    "t68_2.jpg",
+    "t68_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Demonstração de salvamento no último segundo",
+   "desc": "Transforme o alívio do estresse em intenção de compra.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t69_1.jpg",
+    "t69_2.jpg",
+    "t69_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Demonstração de unboxing e prova",
+   "desc": "Combine o unboxing com uma prova convincente de caimento.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t70_1.jpg",
+    "t70_2.jpg",
+    "t70_3.jpg"
+   ]
+  },
+  {
+   "title": "Unboxing ASMR imersivo",
+   "desc": "Faça cada descascar e toque valer a pena assistir.",
+   "cats": [
+    "ASMR"
+   ],
+   "files": [
+    "t71_1.jpg",
+    "t71_2.jpg",
+    "t71_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova de tênis no pé",
+   "desc": "Mostre o formato e a cor do tênis em movimento.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t72_1.jpg",
+    "t72_2.jpg",
+    "t72_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação de casal em casa",
+   "desc": "Conquiste confiança com um uso aconchegante e espontâneo.",
+   "cats": [
+    "Anúncios UGC"
+   ],
+   "files": [
+    "t73_1.jpg",
+    "t73_2.jpg",
+    "t73_3.jpg"
+   ],
+   "catInferred": true
+  },
+  {
+   "title": "Teste de resistência extrema",
+   "desc": "Comprove a resistência em testes de esmagamento e queda.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t74_1.jpg",
+    "t74_2.jpg",
+    "t74_3.jpg"
+   ]
+  },
+  {
+   "title": "História moderna em estilo vintage",
+   "desc": "Coloque produtos modernos em cenas vintage.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t75_1.jpg",
+    "t75_2.jpg",
+    "t75_3.jpg"
+   ]
+  },
+  {
+   "title": "Unboxing de caixa misteriosa",
+   "desc": "Crie suspense para manter a atenção do público.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t76_1.jpg",
+    "t76_2.jpg",
+    "t76_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração satisfatória de reencaixe na caixa",
+   "desc": "Torne o reencaixe preciso satisfatório de assistir.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t77_1.jpg",
+    "t77_2.jpg",
+    "t77_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme-manifesto cinematográfico da marca",
+   "desc": "Aumente o apelo com elenco, trilha sonora e voz.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t78_1.jpg",
+    "t78_2.jpg",
+    "t78_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme publicitário de luxo cósmico",
+   "desc": "Crie um apelo premium com movimento sob as estrelas.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t79_1.jpg",
+    "t79_2.jpg",
+    "t79_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito CGI de mídia externa simulada",
+   "desc": "Transforme o CGI de um monumento gigante no gancho visual.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t80_1.jpg",
+    "t80_2.jpg",
+    "t80_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme publicitário de moda em camadas",
+   "desc": "Sobreponha quadros de moda para uma visualização mais próxima.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t81_1.jpg",
+    "t81_2.jpg",
+    "t81_3.jpg"
+   ]
+  },
+  {
+   "title": "História marcante da marca",
+   "desc": "Use um ícone conhecido para mostrar o valor da marca.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t82_1.jpg",
+    "t82_2.jpg",
+    "t82_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de transformação de material",
+   "desc": "Revele a textura com transformações fluidas de material.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t83_1.jpg",
+    "t83_2.jpg",
+    "t83_3.jpg"
+   ]
+  },
+  {
+   "title": "História de produto em miniatura",
+   "desc": "Coloque um produto gigante em um mundo minúsculo.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t84_1.jpg",
+    "t84_2.jpg",
+    "t84_3.jpg"
+   ]
+  },
+  {
+   "title": "História inspirada em viagens",
+   "desc": "Desperte o desejo com cenas ousadas de liberdade.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t85_1.jpg",
+    "t85_2.jpg",
+    "t85_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme de luxo dos sonhos",
+   "desc": "Crie um apelo de luxo com cenas de sonho.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t86_1.jpg",
+    "t86_2.jpg",
+    "t86_3.jpg"
+   ]
+  },
+  {
+   "title": "Avaliação de escritório em estilo falso documentário",
+   "desc": "Use humor seco para tornar reais as afirmações sobre o produto.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t87_1.jpg",
+    "t87_2.jpg",
+    "t87_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de transformação no ritmo da música",
+   "desc": "Mantenha a atenção com mudanças no ritmo da música.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t88_1.jpg",
+    "t88_2.jpg",
+    "t88_3.jpg"
+   ]
+  },
+  {
+   "title": "Efeito de transformação de anime",
+   "desc": "Potencialize os produtos com energia de anime.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t89_1.jpg",
+    "t89_2.jpg",
+    "t89_3.jpg"
+   ]
+  },
+  {
+   "title": "História de duelo do Velho Oeste",
+   "desc": "Crie tensão antes da revelação.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t90_1.jpg",
+    "t90_2.jpg",
+    "t90_3.jpg"
+   ]
+  },
+  {
+   "title": "História de romance de K-Drama",
+   "desc": "Use suspense romântico para manter a atenção.",
+   "cats": [
+    "Anúncios guiados por histórias"
+   ],
+   "files": [
+    "t91_1.jpg",
+    "t91_2.jpg",
+    "t91_3.jpg"
+   ]
+  },
+  {
+   "title": "Demonstração de conceito ousado",
+   "desc": "Use uma única surpresa visual para se destacar.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t92_1.jpg",
+    "t92_2.jpg",
+    "t92_3.jpg"
+   ]
+  },
+  {
+   "title": "Filme da marca com cortes rápidos",
+   "desc": "Percorra momentos do produto em alta velocidade para atrair olhares.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t93_1.jpg",
+    "t93_2.jpg",
+    "t93_3.jpg"
+   ]
+  },
+  {
+   "title": "Prova virtual em estilo editorial",
+   "desc": "Dê um acabamento editorial às provas virtuais.",
+   "cats": [
+    "Efeitos visuais"
+   ],
+   "files": [
+    "t94_1.jpg",
+    "t94_2.jpg",
+    "t94_3.jpg"
+   ]
+  },
+  {
+   "title": "Tutorial de desafio de dança",
+   "desc": "Ensine passos fáceis de dança que o público possa rever.",
+   "cats": [
+    "Demonstrações de produtos"
+   ],
+   "files": [
+    "t95_1.jpg",
+    "t95_2.jpg",
+    "t95_3.jpg"
+   ]
+  },
+  {
+   "title": "Interação ASMR com o produto em um mundo em miniatura",
+   "desc": "Produtos gigantes em um mundo minúsculo vendem com o toque ASMR.",
+   "cats": [
+    "ASMR"
+   ],
+   "files": [
+    "t96_1.jpg",
+    "t96_2.jpg",
+    "t96_3.jpg"
+   ]
+  }
+ ],
+ "note": "Títulos, descrições, ordem e categorias observados no Pippit em 13/11/2026 (aba Marketing da Home, pt-BR). catInferred = categoria deduzida por contagem, não casada por título. Imagens: fotos de tela reduzidas, só como exemplo."
+}

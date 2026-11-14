@@ -778,12 +778,15 @@ function pageMarketing(embedded) {
   <div class="home-col"><div class="sk-head"><h2>Skills recomendadas</h2><a href="#/skills">Todos</a></div><div class="sk-grid">${REC.map(([id, bd, img]) => { const k = CAT.skills.find((x) => x.id === id); return k ? `<div class="skill" data-ms="${id}"><img class="sk-ic" src="/assets/skills/${img}.webp" alt=""><span class="sk-meta"><span class="sk-name">${esc(k.name)}</span>${bd ? `<span class="sk-badge">${bd}</span>` : ''}</span><i class="sk-go muted">↵${IC.enter}</i></div>` : ''; }).join('')}</div></div>
   <div class="tpl-wrap"><div class="tabs tpl-tabs">${TPL_TABS.map((t, i) => `<button class="${i ? '' : 'on'}">${t}</button>`).join('')}</div><div class="tpl-grid" id="tplGrid"></div></div></div>`; bindCredits();
   const syncGen = () => $('#gen')?.classList.toggle('ready', !!$('#mp').value.trim()); $('#mp').addEventListener('input', syncGen);
-  document.querySelectorAll('.tpl-tabs button').forEach((b) => (b.onclick = () => { document.querySelectorAll('.tpl-tabs button').forEach((x) => x.classList.toggle('on', x === b)); }));
-  // Cartões de modelo: títulos e descrições observados no original; as imagens são exemplos locais (assets/templates).
-  api('/assets/templates/_templates.json').then((r) => { const g = $('#tplGrid'); if (!g || !Array.isArray(r.body)) return;
-    g.innerHTML = r.body.map((t, i) => `<div class="tpl" data-tpl="${esc(t.title)}"><div class="tpl-imgs">${[0, 1, 2].map((k) => (t.files[k] ? `<img src="/assets/templates/${t.files[k]}" alt="" loading="lazy">` : '<span></span>')).join('')}<button class="tpl-remix">Remixar</button></div><div class="tpl-tx"><b>${esc(t.title)}</b><p>${esc(t.desc)}</p></div></div>`).join('');
-    g.querySelectorAll('.tpl').forEach((c) => (c.onclick = () => { MK.fmt = c.dataset.tpl; chips(); $('#main').scrollTo({ top: 0, behavior: 'smooth' }); $('#mp').focus(); }));
-  }).catch(() => {});
+  // Cartões de modelo: títulos, descrições e categorias observados no original (96 cartões; cada filtro mostra
+  // só os da sua categoria); as imagens são fotos pequenas de exemplo (assets/templates).
+  let TPL = null, tplCat = 0;
+  const drawTpl = () => { const g = $('#tplGrid'); if (!g || !TPL) return; const cat = TPL.filters[tplCat];
+    const items = tplCat === 0 ? TPL.items : TPL.items.filter((t) => (t.cats || []).includes(cat));
+    g.innerHTML = items.map((t) => `<div class="tpl" data-tpl="${esc(t.title)}"><div class="tpl-imgs">${[0, 1, 2].map((k) => (t.files[k] ? `<img src="/assets/templates/${t.files[k]}" alt="" loading="lazy">` : '<span></span>')).join('')}<button class="tpl-remix">Remixar</button></div><div class="tpl-tx"><b>${esc(t.title)}</b><p>${esc(t.desc)}</p></div></div>`).join('') || '<p class="muted">Nenhum modelo nesta categoria.</p>';
+    g.querySelectorAll('.tpl').forEach((c) => (c.onclick = () => { MK.fmt = c.dataset.tpl; chips(); $('#main').scrollTo({ top: 0, behavior: 'smooth' }); $('#mp').focus(); })); };
+  document.querySelectorAll('.tpl-tabs button').forEach((b, n) => (b.onclick = () => { tplCat = n; document.querySelectorAll('.tpl-tabs button').forEach((x) => x.classList.toggle('on', x === b)); drawTpl(); }));
+  api('/assets/templates/_templates.json').then((r) => { if (!r.body || !Array.isArray(r.body.items)) return; TPL = r.body; drawTpl(); }).catch(() => {});
   document.querySelectorAll('[data-ms]').forEach((c) => (c.onclick = () => { HOME.skill = CAT.skills.find((x) => x.id === c.dataset.ms); HOME.tab = 'Criativo'; if (embedded) pageHome(); else location.hash = '/home'; }));
   $('#mkskill').onclick = () => (location.hash = '/skills'); $('#plus').onclick = () => pickAsset((a) => ($('#mp').value += ` [Mídia: ${a.name}]`)); $('#at').onclick = () => toast('Menção de mídia (@): não reproduzida neste estúdio.');
   $('#mkmodel').onclick = () => toast('Modelo | Preferência do Estúdio de marketing: comportamento não observado.');
