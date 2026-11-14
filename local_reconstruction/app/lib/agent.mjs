@@ -17,7 +17,7 @@ const msg = (role, o) => { const m = { id: String(Math.random()).slice(2), t: no
 
 export function parseRequest(text) {
   const sec = /(\d{1,3})\s*(s\b|seg|segundos?)/i.exec(text); const ratio = /(9:16|16:9|1:1|3:4|4:3|21:9)/.exec(text);
-  return { seconds: sec ? Math.min(Number(sec[1]), 300) : 15, ratio: ratio ? ratio[1] : '9:16', lang: /english|inglês/i.test(text) ? 'English' : 'Português (Brasil)', subtitles: /legenda/i.test(text) ? 'Ativadas' : 'Unspecified' };
+  return { seconds: sec ? Math.min(Number(sec[1]), 300) : 15, ratio: ratio ? ratio[1] : '9:16', lang: /english|inglês/i.test(text) ? 'English' : 'Português (Brasil)', subtitles: /legenda/i.test(text) ? 'Ativadas' : 'Não especificado' };
 }
 export function pickSkill(text) {
   const t = text.toLowerCase();
@@ -30,7 +30,7 @@ export function themeOptions(text) {
   return [`A lição da amizade — ${subj} ajuda um novo amigo e aprende a compartilhar.`, `O pequeno milagre — ${subj} encontra uma situação difícil e descobre uma mensagem de esperança.`, `A aventura — ${subj} segue uma luz misteriosa e ajuda alguém.`, 'Outro tema — descreva em uma frase.'];
 }
 export function designDoc(req, theme, model, maxSeg, attachments, story, skill = null) {
-  return `# Design Criativo\n\n## Estilo Geral\nUnspecified\n\n## Restrições Rígidas do Usuário\n- Duração total: ${req.seconds} segundos\n- Idioma: ${req.lang}\n- Legendas: ${req.subtitles}\n- BGM: Unspecified\n- Proporção do vídeo: ${req.ratio}\n- Uso de ativos: ${attachments.length ? 'usar diretamente a referência visual enviada' : 'nenhum ativo enviado'}\n\n## Requisitos Adicionais do Usuário\n- Tema: ${theme}\n- Modelo: ${model.name}\n- Limite por chamada: ${maxSeg} segundos\n\n## Linha da História\n${theme}\n\n## Estilo\n${story?.estilo || 'Unspecified'}\n\n## Elementos do Roteiro\n${story ? story.segmentos.map((g, i) => `- ${i + 1}. ${g.titulo}${g.fala ? ` — fala: "${g.fala}"` : ''}`).join('\n') : '(Personagens, cenas e voz derivados do pedido; veja storyboard.md)'}\n${skill ? `\n## Habilidade\n- ${skill.name}\n- Aprovação: ${skill.approval || 'storyboard'}\n- Etapas: ${skill.stages.join(' → ')}\n` : ''}`;
+  return `# Design Criativo\n\n## Estilo Geral\nNão especificado\n\n## Restrições Rígidas do Usuário\n- Duração total: ${req.seconds} segundos\n- Idioma: ${req.lang}\n- Legendas: ${req.subtitles}\n- BGM: Não especificado\n- Proporção do vídeo: ${req.ratio}\n- Uso de ativos: ${attachments.length ? 'usar diretamente a referência visual enviada' : 'nenhum ativo enviado'}\n\n## Requisitos Adicionais do Usuário\n- Tema: ${theme}\n- Modelo: ${model.name}\n- Limite por chamada: ${maxSeg} segundos\n\n## Linha da História\n${theme}\n\n## Estilo\n${story?.estilo || 'Não especificado'}\n\n## Elementos do Roteiro\n${story ? story.segmentos.map((g, i) => `- ${i + 1}. ${g.titulo}${g.fala ? ` — fala: "${g.fala}"` : ''}`).join('\n') : '(Personagens, cenas e voz derivados do pedido; veja storyboard.md)'}\n${skill ? `\n## Habilidade\n- ${skill.name}\n- Aprovação: ${skill.approval || 'storyboard'}\n- Etapas: ${skill.stages.join(' → ')}\n` : ''}`;
 }
 // Prompt de geracao de cada segmento (vira o `prompt` enviado ao provedor; >= 15 caracteres como exige o Pippit)
 export function segmentPrompt({ story, i, req, theme, segs }) {
