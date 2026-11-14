@@ -85,7 +85,7 @@ function accountMenu(anchor) {
       document.body.appendChild(sub); $('#tkAll', sub).onclick = go('/tasks');
       let as = []; try { as = (await api('/api/assets?cat=works&kind=video')).body || []; } catch {}
       if (!sub.isConnected) return;
-      $('.tk-list', sub).innerHTML = as.slice(0, 10).map((a) => `<div class="tk"><div class="thumb"></div><div class="tx"><b>${esc(a.name || a.title || 'vídeo')}</b><small>${a.createdAt || a.at ? new Date(a.createdAt || a.at).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) : ''}</small><span class="st">Exportado</span></div>${a.url ? `<a class="dl" href="${esc(a.url)}" download>Baixar</a>` : ''}</div>`).join('') || '<p class="muted" style="padding:8px 12px">Nenhuma tarefa concluída ainda.</p>';
+      $('.tk-list', sub).innerHTML = as.slice(0, 10).map((a) => `<div class="tk"><div class="thumb"></div><div class="tx"><b>${esc(a.name || a.title || 'vídeo')}</b><small>${a.createdAt || a.at ? new Date(a.createdAt || a.at).toLocaleString('pt-BR', { dateStyle: 'long', timeStyle: 'short' }) : ''}</small><span class="st">Exportado</span></div>${a.stored ? `<a class="dl" href="/files/${encodeURIComponent(a.stored)}" download="${esc(a.name || 'video.mp4')}">Baixar</a>` : ''}</div>`).join('') || '<p class="muted" style="padding:8px 12px">Nenhuma tarefa concluída ainda.</p>';
     } else {
       sub = h(`<div class="acc-sub"><div class="acc-list">${SUBS[k].map((i, n) => row({ ...i, k: String(n) })).join('')}</div></div>`); document.body.appendChild(sub);
       sub.querySelectorAll('.acc-i').forEach((a) => (a.onclick = (e) => { e.stopPropagation(); SUBS[k][+a.dataset.k].fn(); }));
