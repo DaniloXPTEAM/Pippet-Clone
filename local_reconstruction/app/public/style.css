@@ -345,3 +345,13 @@ i.ic, .ic { display:inline-flex; flex:none; width:18px; height:18px; font-style:
 .home .mk-slots .mk-slot > span:last-child:not(.mk-tag) { position:absolute; inset:0; display:grid; place-items:center; }
 /* World Simulador (recurso novo, 13/11/2026) */
 .world-page { position:absolute; inset:68px 16px 16px; border-radius:24px; overflow:hidden; background:#0e0f13; } .world-page iframe { width:100%; height:100%; border:0; display:block; }
+
+/* ---- diálogo de prévia do cartão de modelo (medido no original em 14/11/2026: 789x607, raio 32) ---- */
+.modal-bg:has(.tpl-dlg) { background:rgba(0,0,0,.4); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
+.modal.tpl-dlg { position:relative; width:min(789px,96vw); padding:24px; border-radius:32px; }
+.modal.tpl-dlg .x { position:absolute; right:18px; top:18px; float:none; width:32px; height:32px; padding:0; border-radius:32px; background:rgba(72,72,73,.06); font-size:18px; line-height:1; display:grid; place-items:center; } .modal.tpl-dlg .x:hover { background:rgba(72,72,73,.12); }
+.tpd-head h2 { margin:10px 44px 0 0; font-size:16px; line-height:24px; font-weight:500; color:#000; } .tpd-head p { margin:6px 44px 0 0; font-size:13px; line-height:19.5px; color:rgba(0,0,0,.4); }
+.tpd-vids { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:28px; }
+.tpd-v { position:relative; aspect-ratio:242/430; border-radius:16px; overflow:hidden; background:#f2f2f2; } .tpd-v img { width:100%; height:100%; object-fit:cover; display:block; }
+.tpd-remix { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); height:36px; padding:0 16px; border:none; border-radius:36px; background:#fff; font-size:12px; font-weight:500; color:#000; opacity:0; transition:opacity .15s; } .tpd-v:hover .tpd-remix { opacity:1; }
+.tpd-foot { display:flex; justify-content:flex-end; margin-top:18px; } .tpd-try { height:36px; padding:0 16px; border:none; border-radius:36px; background:#000; color:#fff; font-size:12px; font-weight:600; } .tpd-try:hover { background:#222; }

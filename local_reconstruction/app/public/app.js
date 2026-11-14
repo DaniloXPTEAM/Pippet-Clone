@@ -787,7 +787,11 @@ function pageMarketing(embedded) {
   const drawTpl = () => { const g = $('#tplGrid'); if (!g || !TPL) return; const cat = TPL.filters[tplCat];
     const items = tplCat === 0 ? TPL.items : TPL.items.filter((t) => (t.cats || []).includes(cat));
     g.innerHTML = items.map((t) => `<div class="tpl" data-tpl="${esc(t.title)}"><div class="tpl-imgs">${[0, 1, 2].map((k) => (t.files[k] ? `<img src="/assets/templates/${t.files[k]}" alt="" loading="lazy">` : '<span></span>')).join('')}<button class="tpl-remix">Remixar</button></div><div class="tpl-tx"><b>${esc(t.title)}</b><p>${esc(t.desc)}</p></div></div>`).join('') || '<p class="muted">Nenhum modelo nesta categoria.</p>';
-    g.querySelectorAll('.tpl').forEach((c) => (c.onclick = () => { MK.fmt = c.dataset.tpl; chips(); $('#main').scrollTo({ top: 0, behavior: 'smooth' }); $('#mp').focus(); })); };
+    const useTpl = (title) => { MK.fmt = title; chips(); $('#main').scrollTo({ top: 0, behavior: 'smooth' }); $('#mp').focus(); };
+    g.querySelectorAll('.tpl').forEach((c) => (c.onclick = () => { const t = TPL.items.find((x) => x.title === c.dataset.tpl); if (!t) return;
+      const m = modal(`<div class="tpd-head"><h2>${esc(t.title)}</h2><p>${esc(t.desc)}</p></div><div class="tpd-vids">${[0, 1, 2].map((k) => `<div class="tpd-v">${t.files[k] ? `<img src="/assets/templates/${t.files[k]}" alt="">` : ''}<button class="tpd-remix" data-remix="${k}">Remixar</button></div>`).join('')}</div><div class="tpd-foot"><button class="tpd-try" id="tpdTry">Experimentar</button></div>`, 'tpl-dlg');
+      $('.x', m).setAttribute('aria-label', 'Fechar prévia do modelo');
+      const pick = () => { m.close(); useTpl(t.title); }; $('#tpdTry', m).onclick = pick; m.querySelectorAll('[data-remix]').forEach((x) => (x.onclick = pick)); })); };
   document.querySelectorAll('.tpl-tabs button').forEach((b, n) => (b.onclick = () => { tplCat = n; document.querySelectorAll('.tpl-tabs button').forEach((x) => x.classList.toggle('on', x === b)); drawTpl(); }));
   api('/assets/templates/_templates.json').then((r) => { if (!r.body || !Array.isArray(r.body.items)) return; TPL = r.body; drawTpl(); }).catch(() => {});
   document.querySelectorAll('[data-ms]').forEach((c) => (c.onclick = () => { HOME.skill = CAT.skills.find((x) => x.id === c.dataset.ms); HOME.tab = 'Criativo'; if (embedded) pageHome(); else location.hash = '/home'; }));
@@ -795,7 +799,7 @@ function pageMarketing(embedded) {
   $('#mkmodel').onclick = () => toast('Modelo | Preferência do Estúdio de marketing: comportamento não observado.');
   // seletores do estúdio (Ad formats / Hook / Visual style): busca, categorias, cartões com Expand/Select. Categoria de cada Ad format e itens de Hook não foram capturados.
   const MK = window.__mk || (window.__mk = { fmt: null, hook: null, sty: null });
-  const chips = () => { $('#mkchips').innerHTML = [['fmt', 'Formato'], ['hook', 'Gancho'], ['sty', 'Estilo']].filter(([k]) => MK[k]).map(([k, l]) => `<span class="pill" data-x="${k}">${l}: ${esc(MK[k])} ×</span>`).join(' '); document.querySelectorAll('#mkchips [data-x]').forEach((c) => (c.onclick = () => { MK[c.dataset.x] = null; chips(); })); };
+  const chips = () => { $('#mkchips').innerHTML = [['fmt', 'Formatos de anúncio'], ['hook', 'Gancho'], ['sty', 'Estilo visual']].filter(([k]) => MK[k]).map(([k, l]) => `<span class="pill" data-x="${k}">${l}：${esc(MK[k])} ×</span>`).join(' '); document.querySelectorAll('#mkchips [data-x]').forEach((c) => (c.onclick = () => { MK[c.dataset.x] = null; chips(); })); };
   const picker = (key, title, spec, cats, all) => () => {
     let cat = 'All', q = ''; const m = modal(`<h2>${title}</h2><input id="mq" placeholder="${esc(spec.search)}" style="width:100%">${spec.capturedDescription ? `<p class="muted" id="mkCaptured">Exemplo de descrição capturado, <b>sem dono</b> (a captura não diz de qual cartão veio): “${esc(spec.capturedDescription.text)}”</p>` : ''}<div class="tabs" id="mcats" style="margin:8px 0"></div><div id="mgrid" class="grid g3"></div>`);
     const draw = () => {
