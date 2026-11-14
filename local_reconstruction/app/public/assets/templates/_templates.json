@@ -1,0 +1,98 @@
+[
+ {
+  "title": "Revelação com disparo e queda",
+  "desc": "Prenda o público com um produto que cai inesperadamente na cena.",
+  "files": [
+   "t1_1.webp",
+   "t1_2.webp",
+   "t1_3.webp"
+  ]
+ },
+ {
+  "title": "Teste da prateleira secreta",
+  "desc": "Combine uma joia escondida com provas convincentes que ajudam a vender.",
+  "files": [
+   "t2_1.webp",
+   "t2_2.webp",
+   "t2_3.webp"
+  ]
+ },
+ {
+  "title": "Revelação com troca de peça viva",
+  "desc": "Chame a atenção enquanto o look ganha vida.",
+  "files": [
+   "t3_1.webp",
+   "t3_2.webp",
+   "t3_3.webp"
+  ]
+ },
+ {
+  "title": "Revelação de download com o cursor",
+  "desc": "Cliques em pixels transformam prévias desfocadas em produtos nítidos.",
+  "files": [
+   "t4_1.webp",
+   "t4_2.webp",
+   "t4_3.webp"
+  ]
+ },
+ {
+  "title": "Revelação do produto em rotação",
+  "desc": "Giros de mão enchem as mesas de produtos.",
+  "files": [
+   "t5_1.webp",
+   "t5_2.webp",
+   "t5_3.webp"
+  ]
+ },
+ {
+  "title": "Demonstração de looks em pastas",
+  "desc": "Monte e compare looks usando pastas.",
+  "files": [
+   "t6_1.webp",
+   "t6_2.webp",
+   "t6_3.webp"
+  ]
+ },
+ {
+  "title": "Revelação na bolsa do roubo",
+  "desc": "Um roubo falso se transforma em uma revelação heroica do produto.",
+  "files": [
+   "t7_1.webp",
+   "t7_2.webp",
+   "t7_3.webp"
+  ]
+ },
+ {
+  "title": "Destaque de detalhes com uma só imagem",
+  "desc": "Uma imagem do produto vira uma sequência de detalhes que prende o olhar.",
+  "files": [
+   "t8_1.webp",
+   "t8_2.webp",
+   "t8_3.webp"
+  ]
+ },
+ {
+  "title": "Demonstração viral com multidão",
+  "desc": "Combine a demanda visível com provas úteis.",
+  "files": [
+   "t9_1.webp",
+   "t9_2.webp",
+   "t9_3.webp"
+  ]
+ },
+ {
+  "title": "Descoberta sob o véu",
+  "desc": "Um produto escondido se torna indispensável.",
+  "files": []
+ },
+ {
+  "title": "Revelação com desenhos que florescem",
+  "desc": "Transforme desenhos que florescem em joias desejadas.",
+  "files": []
+ },
+ {
+  "title": "Revelação de peça viva",
+  "desc": "Prenda o público com uma peça que o segue.",
+  "files": []
+ }
+]
