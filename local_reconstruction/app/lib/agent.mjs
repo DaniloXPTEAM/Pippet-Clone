@@ -114,7 +114,16 @@ async function runGeneration(ctx, project, chat, st, model, steps) {
   const req = st.request; const plan = st.plan; const access = checkModelAccess(model, ctx.db.user.plan);
   const provider = ctx.db.settings.provider || 'none'; const vcfg = ctx.providers?.video; const real = isConfigured(vcfg, 'video');
   if (!access.ok && !real) { steps.push({ label: access.error, state: 'failed', upsell: access.upsell }); chat.messages.push(msg('agent', { text: 'A geração foi bloqueada porque o modelo exige assinatura. Nenhum crédito foi consumido.', steps })); return chat; }
-  if (st.jobIds?.length) { chat.messages.push(msg('agent', { text: 'As tarefas de geração deste projeto já foram criadas. Acompanhe em Tarefas.', steps })); return chat; }
+  if (st.jobIds?.length || st.runIds?.length) { chat.messages.push(msg('agent', { text: 'As tarefas de geração deste projeto já foram criadas. Acompanhe em Tarefas.', steps })); return chat; }
+  // 0) Sem provedor de vídeo "do usuário" e sem o animatic local escolhido: usa o ROTEADOR GRATUITO (NovAI). Um clipe de 5 s
+  // por segmento, um de cada vez (fila do servidor); cada resultado entra no Canvas deste projeto. Se o roteador estiver
+  // bloqueado (cota do provedor), a própria tarefa mostra o motivo exato no chat — nada é simulado.
+  if (!real && provider !== 'local-ffmpeg' && ctx.routerVideo?.available()) {
+    const runs = plan.segs.map((s, si) => ctx.routerVideo.create(project, chat, segmentPrompt({ story: st.story, i: si, req, theme: st.theme, segs: plan.segs }), { segId: s.id, index: si }));
+    st.runIds = runs.map((x) => x.id); st.workflow = { state: 'generating', mode: 'roteador', startedAt: now() };
+    steps.push({ label: 'Vídeos enviados ao roteador gratuito', state: 'completed', count: runs.length });
+    chat.messages.push(msg('agent', { text: `Geração iniciada pelo roteador gratuito: ${runs.length} clipe(s) de 5 s (NovAI · cogvideox-flash), um de cada vez. O progresso aparece em Tarefas e cada vídeo entra no Canvas ao terminar. Obs.: o provedor gratuito limita a poucos vídeos por dia; se a cota acabar, a tarefa mostra o motivo.`, steps, runs: st.runIds })); return chat;
+  }
   // 1) provedor de VIDEO real (ou ainda nao configurado): cria as tarefas; elas ficam bloqueadas com o motivo exato se faltar provedor/autorizacao
   if (real || provider !== 'local-ffmpeg') {
     const sequential = /sequ/i.test(JSON.stringify(st.confirmed || '')); const jobs = []; let prev = null;

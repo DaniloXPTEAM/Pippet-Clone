@@ -53,7 +53,8 @@ assert.equal(JSON.parse(fs.readFileSync(path.join(tmp, 'db.json'), 'utf8')).soci
 const browser = await launchChromium(); const errors = [];
 const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); page.on('pageerror', (e) => errors.push(String(e)));
 await page.goto(base + '/#/schedule'); await page.waitForSelector('#pubdrafts'); assert.match(await page.locator('#main h1').innerText(), /Gerencie suas publicações/); await page.click('#pubdrafts summary');
-const side = await page.locator('.sub').allInnerTexts(); assert.deepEqual(side.map((s) => s.trim()), ['Gerador de vídeos', 'Avatares e vozes', 'Análise', 'Publicador']);
+const side = await page.locator('.sub').allInnerTexts(); /* Mais = os 4 itens OBSERVADOS no original, nessa ordem; depois só as extensões locais (Integrações e Chat legado do Arena; World Simulador, recurso novo pedido em 13/11/2026). */
+assert.deepEqual(side.map((s) => s.trim()), ['Gerador de vídeos', 'Avatares e vozes', 'Análise', 'Publicador', 'Integrações', 'Chat legado', 'World Simulador']);
 const body = await page.locator('#main').innerText(); assert.match(body, /Vincular conta/); assert.match(body, /Publique mais, cresça mais/); assert.match(body, /extensão do PiperLine/); assert.match(body, /Rascunhos locais/); assert.match(body, /Nada é enviado nem agendado/); assert.match(body, /rascunho_local/);
 await page.fill('#pdcap', 'Legenda de teste'); assert.equal((await page.locator('#pdcount').innerText()).trim(), '16/2200');
 await page.click('#pdsave'); await page.waitForTimeout(400); assert.match(await page.locator('#toast').innerText(), /ao menos uma plataforma/);

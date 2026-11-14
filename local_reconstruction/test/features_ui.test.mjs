@@ -45,7 +45,7 @@ await page.goto(base + '/#/marketing'); await page.waitForSelector('#sty');
 await page.click('#sty'); await page.waitForSelector('.mk-card'); assert.equal(await page.locator('.mk-card').count(), 20); assert.equal(await page.locator('#mcats button').count(), 6);
 await page.locator('#mcats [data-c="Premium Aesthetics"]').click(); assert.equal(await page.locator('.mk-card').count(), 6); await page.locator('#mcats [data-c="All"]').click();
 await page.fill('#mq', 'y2k'); assert.equal(await page.locator('.mk-card').count(), 1); await page.locator('.mk-card [data-ex]').click(); assert.ok(await page.locator('.mk-ex').isVisible()); await shot('33_marketing_style');
-await page.locator('.mk-card [data-sel]').click(); await page.waitForSelector('#mkchips [data-x="sty"]'); assert.match(await page.locator('#mkchips').innerText(), /Estilo: Y2K Chrome/);
+await page.locator('.mk-card [data-sel]').click(); await page.waitForSelector('#mkchips [data-x="sty"]'); assert.match(await page.locator('#mkchips').innerText(), /Estilo visual：Y2K Chrome/);
 await page.click('#hook'); await page.waitForSelector('#mcats'); assert.equal(await page.locator('#mcats button').count(), 6);
 const hookNames = {
   'Eye-Catching Visuals': ['Giant Product Crash', 'Tiny Meets Giant', 'Wing Walk Selfie', 'Train-Top Selfie', 'Lava-Side Selfie', 'Edge of the City', 'Desert Ride Selfie', 'Splash Reveal', 'Product Storm'],
@@ -55,7 +55,7 @@ const hookNames = {
   'Standout Styles': ['Words Come to Life', 'Animated Problem Solver', 'Meet the Mascot', 'Ready for Liftoff', 'Red Carpet Moment', 'Anime-Level Reaction', 'Glitch to Smooth', 'Reaction Split-Screen'],
 };
 for (const [category, names] of Object.entries(hookNames)) { await page.locator(`#mcats [data-c="${category}"]`).click(); assert.deepEqual(await page.locator('.mk-card b').allTextContents(), names, category); }
-await page.locator('#mcats [data-c="Catchy Sounds"]').click(); await shot('96_marketing_hooks'); await page.fill('#mq', 'crunch'); assert.equal(await page.locator('.mk-card').count(), 1); assert.match(await page.locator('#mgrid').innerText(), /Hear That Crunch/); await page.locator('.mk-card [data-sel]').click(); assert.match(await page.locator('#mkchips').innerText(), /Gancho: Hear That Crunch/); await page.locator('#mkchips [data-x="hook"]').click();
+await page.locator('#mcats [data-c="Catchy Sounds"]').click(); await shot('96_marketing_hooks'); await page.fill('#mq', 'crunch'); assert.equal(await page.locator('.mk-card').count(), 1); assert.match(await page.locator('#mgrid').innerText(), /Hear That Crunch/); await page.locator('.mk-card [data-sel]').click(); assert.match(await page.locator('#mkchips').innerText(), /Gancho：Hear That Crunch/); await page.locator('#mkchips [data-x="hook"]').click();
 await page.click('#fmt'); await page.waitForSelector('.mk-card'); assert.equal(await page.locator('.mk-card').count(), 8); assert.equal(await page.locator('#mcats button').count(), 5); await page.locator('.mk-card', { hasText: 'Secret Shelf Test' }).locator('[data-sel]').click();
-assert.match(await page.locator('#mkchips').innerText(), /Formato: Secret Shelf Test/); await page.locator('#mkchips [data-x="sty"]').click(); assert.equal(await page.locator('#mkchips [data-x="sty"]').count(), 0);
+assert.match(await page.locator('#mkchips').innerText(), /Formatos de anúncio：Secret Shelf Test/); await page.locator('#mkchips [data-x="sty"]').click(); assert.equal(await page.locator('#mkchips [data-x="sty"]').count(), 0);
 assert.deepEqual(errors, []); await browser.close(); server.close(); console.log('OK features_ui: idioma/modo escuro, skills (manual/favoritos/usar), notificações, seletores de marketing'); process.exit(0);

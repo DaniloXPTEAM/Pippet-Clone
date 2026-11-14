@@ -61,14 +61,14 @@ function accountMenu(anchor) {
   if ($('.acc-pop')) return closeAccountMenu();
   closeAccountMenu(); document.querySelectorAll('.menu').forEach((m) => m.remove());
   const go = (hash) => () => { closeAccountMenu(); location.hash = hash; };
-  const unob = (what) => () => { closeAccountMenu(); toast(what + ': destino ainda não disponível nesta instalação.'); };
+  const unob = (what, key) => async () => { closeAccountMenu(); let nota = 'destino ainda não disponível nesta instalação'; try { const a = (await api('/api/account/unobserved')).body; const it = (a.items || []).find((x) => x.label === key); if (it) nota = `${it.status} — ${it.note}`; } catch {} toast(`${what}: ${nota}`, 6000); };
   const lang = (ST?.settings?.language || 'pt').slice(0, 2).toUpperCase();
   const SUBS = {
     conta: [{ label: 'Informações da conta', fn: go('/settings/personal_information'), go: 1 }, { label: 'Autorização de conta', fn: go('/settings/account_authorization'), go: 1 }],
     config: [{ label: 'Idioma', tag: lang, fn: go('/settings/language'), small: 1 }, { label: 'Aparência', tag: document.body.classList.contains('dark') ? 'Modo escuro' : 'Modo claro', fn: go('/settings/language'), small: 1 },
       { label: 'Planos e preços', fn: () => { closeAccountMenu(); plansModal(); }, go: 1 }, { label: "Salvar sem marca d'água", fn: go('/settings/watermark'), go: 1 },
       { label: 'Estratégia de confirmação de uso de créditos', fn: go('/settings/points_prompt_settings'), go: 1 }, { label: 'Login e gerenciamento', fn: go('/settings/sign_management'), go: 1 }],
-    mais: [{ label: 'CLI', fn: unob('CLI') }, { label: 'Lista de desejos de recursos', fn: unob('Lista de desejos'), go: 1 }, { label: 'Atendimento ao cliente', fn: () => { closeAccountMenu(); location.hash = '/help'; }, go: 1 }],
+    mais: [{ label: 'CLI', fn: unob('CLI', 'CLI') }, { label: 'Lista de desejos de recursos', fn: unob('Lista de desejos', 'Feature wishlist'), go: 1 }, { label: 'Atendimento ao cliente', fn: () => { closeAccountMenu(); location.hash = '/help'; }, go: 1 }],
     termos: ['Termos de Serviço', 'Política de Privacidade', 'Política de Cookies', 'Contrato de Licenciamento', 'Termos de Serviço do Criador', 'Diretrizes da Comunidade'].map((t) => ({ label: t, fn: unob(t), go: 1 })),
   };
   const ITEMS = [{ k: 'tarefas', label: 'Tarefas concluídas' }, { k: 'conta', label: 'Gerenciamento da conta' }, { k: 'config', label: 'Configurações', tag: lang }, { k: 'mais', label: 'Mais' }, { k: 'termos', label: 'Termos e Políticas' }];
@@ -238,7 +238,8 @@ function pageHome() {
     // Sem provedor local de IA para o modelo, o MOTIVO é mostrado (paywall observado não é reproduzido).
     if ((HOME.mode === 'Vídeo' || HOME.mode === 'Imagem') && HOME.model !== 'auto') {
       const list = HOME.mode === 'Vídeo' ? CAT.videoModels : CAT.imageModels; const mod = list.find((x) => x.id === HOME.model);
-      if (mod) return toast(`Geração direta com ${mod.name} indisponível localmente: sem provedor de IA configurado para este modelo.`, 6000);
+      // 14/11/2026: nenhum modelo é bloqueado. Os modelos do original não rodam aqui; o roteador gratuito escolhe o modelo e gera.
+      if (mod) { toast(`${mod.name} não roda localmente: gerando com o modelo gratuito do roteador.`, 5000); return startFreeRun(HOME.mode === 'Vídeo' ? 'video' : 'image'); }
     }
     const p = (await post('/api/projects', { type: HOME.canvas ? 'canvas' : 'chat', title: text.slice(0, 40) })).body; const c = (await post(`/api/projects/${p.id}/chats`)).body;
     toast('Planejando… (com um LLM local pode levar de 1 a 2 minutos)');
@@ -834,10 +835,17 @@ function pageStory(embedded) {
   const mine = PROJECTS.filter((p) => p.type === 'story');
   $('#main').innerHTML = `${credits()}<div class="page home story-page">${head}<div class="st-card"><div class="st-tabs">${T.map(([k, l, ic]) => `<button class="${tab === k ? 'on' : ''}" data-st="${k}" ${k === 'rd' ? 'disabled title="Recurso novo; fluxo não reproduzido"' : ''} id="${k === 'ai' ? 'ai' : k === 'tc' ? 'tc' : 'tab-' + k}"><i class="ic">${ic}</i>${l}${k === 'rd' ? ' <span class="new">NEW</span>' : ''}</button>`).join('')}</div><div class="st-box">${panel}</div></div><div id="pn"></div><p class="st-note"><span>ⓘ Você precisa ter direitos de uso de qualquer roteiro que adicionar · 25 créditos/1000 caracteres</span><i class="div"></i><a id="skip" style="cursor:pointer"><b>Pular para a tela</b></a></p><div class="st-proj"><div class="st-ph"><h3>Meus projetos</h3><a href="#/assets">Tudo ›</a></div><div class="st-grid">${mine.map((p) => `<a class="st-pc" href="#/project/${p.id}"><span class="th"></span><b>${esc(p.title)}</b><small>${esc(p.subtitle || '')}</small></a>`).join('') || '<p class="muted">Sem projetos de histórias.</p>'}</div></div></div>`; bindCredits();
   document.querySelectorAll('[data-st]').forEach((b) => { if (b.dataset.st === 'up') b.onclick = () => { window.__stTab = 'up'; again(); }; if (b.dataset.st === 'ai') b.onclick = () => { window.__stTab = 'ai'; again(); }; });
+  // Cria a história DE VERDADE: projeto de histórias + chat + mensagem ao agente com a skill "Shorts de história" (roteiro,
+  // storyboard e prompts pelo roteador gratuito). Antes só abria um projeto vazio.
+  const startStory = async (text, title) => { text = String(text || '').trim(); if (!text) return toast('Escreva a ideia ou cole o roteiro primeiro.');
+    toast('Criando a história… o narrador planeja em 10–60 s.', 9000);
+    try { const p = (await post('/api/projects', { type: 'story', title: String(title || text).slice(0, 40) })).body; const c = (await post(`/api/projects/${p.id}/chats`)).body;
+      await post(`/api/projects/${p.id}/chats/${c.id}/messages`, { text, skillId: 'shorts-de-historia' }); await refresh(); location.hash = '/project/' + p.id; }
+    catch (e) { toast('Não foi possível criar a história: ' + String(e.message || e).slice(0, 140), 7000); } };
   const mk = async (title, ratio) => { const p = (await post('/api/projects', { type: 'story', title })).body; await refresh(); location.hash = '/project/' + p.id; };
-  if ($('#paste')) $('#paste').onclick = () => { const m = modal(`<h2>Colar roteiro</h2><textarea id="rs" style="width:100%;height:220px" placeholder="Insira o seu roteiro aqui"></textarea><div><span id="cnt">0/100000</span></div><div class="row"><button id="c1">Cancelar</button><button class="primary" id="c2" disabled>Concluído</button></div>`, 'sm'); $('#rs', m).oninput = (e) => { $('#cnt', m).textContent = e.target.value.length + '/100000'; $('#c2', m).disabled = !e.target.value.length || e.target.value.length > 100000; }; $('#c1', m).onclick = () => m.close(); $('#c2', m).onclick = () => { toast(`Roteiro de ${$('#rs', m).value.length} caracteres: o Pippit cobraria ${Math.ceil($('#rs', m).value.length / 1000) * 25} créditos; a análise por IA não está disponível aqui.`, 7000); m.close(); }; };
-  if ($('#up')) $('#up').onclick = () => fileInput('.txt,.docx', (f) => toast(`Roteiro ${f.name}: análise por IA não disponível localmente.`));
-  if ($('#sg')) { $('#sp').oninput = (e) => ($('#sg').disabled = !e.target.value); $('#sg').onclick = () => mk($('#sp').value.slice(0, 40)); }
+  if ($('#paste')) $('#paste').onclick = () => { const m = modal(`<h2>Colar roteiro</h2><textarea id="rs" style="width:100%;height:220px" placeholder="Insira o seu roteiro aqui"></textarea><div><span id="cnt">0/100000</span></div><div class="row"><button id="c1">Cancelar</button><button class="primary" id="c2" disabled>Concluído</button></div>`, 'sm'); $('#rs', m).oninput = (e) => { $('#cnt', m).textContent = e.target.value.length + '/100000'; $('#c2', m).disabled = !e.target.value.length || e.target.value.length > 100000; }; $('#c1', m).onclick = () => m.close(); $('#c2', m).onclick = () => { const t = $('#rs', m).value; m.close(); startStory(t, 'Roteiro colado'); }; };
+  if ($('#up')) $('#up').onclick = () => fileInput('.txt,.docx', async (f) => { if (!/\.txt$/i.test(f.name)) return toast('Por enquanto leio só arquivos .txt (salve o .docx como texto simples e envie de novo).', 6000); const t = await f.text(); if (t.length > 100000) return toast('O roteiro passa de 100 mil caracteres.', 6000); startStory(t, f.name.replace(/\.txt$/i, '')); });
+  if ($('#sg')) { $('#sp').oninput = (e) => ($('#sg').disabled = !e.target.value); $('#sg').onclick = () => startStory($('#sp').value); }
   $('#tc').onclick = () => mk('Untitled'); $('#skip').onclick = () => mk('Untitled');
 }
 const PROV_TITLES = { video: 'Vídeo', audio: 'Áudio (narração)', image: 'Imagem', talkingphoto: 'Foto falante (lip-sync)' };
@@ -1268,7 +1276,7 @@ async function openNotifications() {
   closeAccountMenu(); document.querySelectorAll('.menu').forEach((m) => m.remove());
   const n = (await api('/api/notifications')).body; const kind = { success: '✔', error: '✖', info: 'ℹ', ad: '📣' };
   const eventos = n.items.filter((x) => x.kind !== 'ad'); const ads = n.items.filter((x) => x.kind === 'ad');
-  const card = (x) => `<div class="note ${x.read ? '' : 'unread'}"><b>${x.read ? '' : '<i class="nd"></i>'}${kind[x.kind] || ''} ${esc(x.title)}</b><p>${esc(/UNOBSERVED/.test(x.body || '') ? '' : x.body)}</p><small>${x.at ? new Date(x.at).toLocaleString('pt-BR') : ''}</small></div>`;
+  const card = (x) => `<div class="note ${x.read ? '' : 'unread'}"><b>${x.read ? '' : '<i class="nd"></i>'}${kind[x.kind] || ''} ${esc(x.title)}</b><p>${esc(/UNOBSERVED/.test(x.body || '') ? '' : x.body)}</p><small>${x.dateText || (x.at ? new Date(x.at).toLocaleString('pt-BR') : '')}</small></div>`;
   const p = h(`<div class="note-pop" role="dialog" aria-label="Notificações"><div class="np-head"><h2>Notificações</h2><button id="allread">Todos lidos</button></div><div class="np-list">${[...eventos, ...ads].map(card).join('') || '<p class="muted">Sem notificações.</p>'}</div></div>`);
   document.body.appendChild(p);
   const r = $('#acc').getBoundingClientRect(); p.style.left = '8px'; p.style.bottom = (innerHeight - r.top + 4) + 'px';

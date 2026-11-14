@@ -20,7 +20,7 @@ try {
   assert.equal(await page.locator('.mk-card').count(), 1, 'busca filtra o gancho observado');
   await page.locator('.mk-card').first().locator('[data-sel]').click();
   assert.equal(await page.locator('.modal').count(), 0, 'selecionar fecha o diálogo');
-  assert.match(await page.locator('#mkchips').innerText(), /Gancho: ASMR Unboxing/);
+  assert.match(await page.locator('#mkchips').innerText(), /Gancho：ASMR Unboxing/);
   await page.locator('#mkchips [data-x="hook"]').click();
   assert.equal((await page.locator('#mkchips').innerText()).includes('Gancho:'), false, 'chip é removível');
   console.log('marketing_hooks_ui.test.mjs: ok (5 categorias, 40 ganchos observados, busca, seleção e remoção do chip)');

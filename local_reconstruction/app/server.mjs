@@ -107,7 +107,15 @@ const skillGuide = (id) => {
   const b = SKILLS.find((x) => x.id === id); const d = skillDef(id); // skills oficiais com definição local: a instrução de planejamento é TEXTO DO PIPPERLINE (não a instrução privada do Pippit)
   return b ? { id, name: b.name, custom: false, official: !!d, instructions: String((d?.planning) || b.desc || '').slice(0, 1200) } : null;
 };
-const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(providerRuntimeSettings()), jobs: jobsMgr });
+const agentCtx = async () => ({ skillGuide, db: db(), addDoc, addNode, link, linkId, addAsset, assetPath, mediaDir: S.FILES_DIR, llm: await getLLM(), providers: PV.resolveProviders(providerRuntimeSettings()), jobs: jobsMgr,
+  // Vídeo pelo ROTEADOR GRATUITO (NovAI cogvideox-flash): o agente (skills, Marketing, modo Agente) usa isto quando não há
+  // provedor de vídeo "do usuário". Antes só o Canvas e /api/local-runs usavam o roteador (corrigido em 14/11/2026).
+  routerVideo: { available: () => routerVideoAvailable(), create: (p, chat, prompt, extra) => createRouterVideoRun(p, chat, prompt, extra), reason: () => (videoPlan().ok ? null : videoPlan().reason) } });
+function routerVideoAvailable() { try { return videoPlan().ok || (freeRouterConfig().taskPreferences?.video_generation || []).length > 0; } catch { return false; } }
+function createRouterVideoRun(p, chat, prompt, extra = {}) {
+  const run = { id: S.newId(), task: 'video_generation', state: 'queued', prompt: String(prompt).slice(0, 4000), seconds: NOVAI_VIDEO_DURATION, projectId: p.id, chatId: chat.id, source: { type: 'agent', projectId: p.id, chatId: chat.id, ...extra }, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), events: [] };
+  localRuns().unshift(run); publishLocalRun(run, 'queued'); touch(p); S.save(); startLocalRun(run); return run;
+}
 function state() {
   const d = db(); const bal = S.balance(); const plan = getPlan(d.user.plan);
   return { user: d.user, plan, balance: bal, balances: S.balances(), settings: publicSettings(d.settings), social: { limit: d.social.limit, accounts: d.social.accounts }, ffmpeg: media.available(), provider: d.settings.provider || 'none', avatarRules: AVATAR_RULES, photoFreeUses: d.avatars.photoFreeUses };
@@ -534,18 +542,21 @@ const notify = (title, body, kind = 'info') => { notes().unshift({ id: S.newId()
 // Anúncios editoriais observados (REA ev_72d7b4c2…7b20; FEATURE_INVENTORY linha 147): o relatório
 // registra 8 anúncios de jan–abr/2026 enumerados por TEMA. Títulos, datas e textos individuais não
 // foram preservados — cada cartão traz o tema observado e marca o resto UNOBSERVED (nada é inventado).
-const EDITORIAL_ADS = Object.freeze([
+// 14/11/2026: títulos, textos e datas REAIS lidos do painel de notificações do Pippit (pt-BR) em app/lib/editorial_ads.json.
+// Conteúdo editorial do serviço original, mantido só para o painel ficar igual; sem chamadas externas.
+const REAL_ADS = (() => { try { const j = JSON.parse(fs.readFileSync(path.join(HERE, 'lib', 'editorial_ads.json'), 'utf8')); return Array.isArray(j) && j.length ? j : null; } catch { return null; } })();
+const EDITORIAL_ADS = Object.freeze((REAL_ADS ? REAL_ADS.map((a) => a.title) : [
   'GPT Image 2', '700+ avatares via @', 'Pesquisa de satisfação (pt/es)', 'Descontinuação temporária de Nano Banana Pro/Veo 3.1',
   'Descontinuação temporária de Seedream 4.1', 'Seedream 5.0', 'Geração agendada', 'Mais tarefas de crédito',
-].map((theme, i) => ({ id: `ad-${i + 1}`, theme })));
+]).map((theme, i) => ({ id: `ad-${i + 1}`, theme })));
 const EDITORIAL_ADS_META = Object.freeze({
-  source: 'REA ev_72d7b4c2…7b20 (FEATURE_INVENTORY linha 147)',
+  source: REAL_ADS ? 'REA ev_72d7b4c2…7b20 (temas) + painel de notificações do Pippit em pt-BR lido em 14/11/2026 (títulos, textos e datas)' : 'REA ev_72d7b4c2…7b20 (FEATURE_INVENTORY linha 147)',
   period: 'jan–abr/2026', count: 8,
-  titles: 'UNOBSERVED', dates: 'UNOBSERVED', bodies: 'UNOBSERVED', themeToAdMapping: 'UNOBSERVED',
-  note: 'Os temas vêm da enumeração observada do relatório; título, data e texto de cada anúncio não foram preservados.',
+  titles: REAL_ADS ? 'OBSERVADO' : 'UNOBSERVED', dates: REAL_ADS ? 'OBSERVADO' : 'UNOBSERVED', bodies: REAL_ADS ? 'OBSERVADO' : 'UNOBSERVED', themeToAdMapping: REAL_ADS ? 'OBSERVADO' : 'UNOBSERVED',
+  note: REAL_ADS ? 'Títulos, textos e datas lidos do painel real (app/lib/editorial_ads.json); só o estado de lido/não lido é local.' : 'Os temas vêm da enumeração observada do relatório; título, data e texto de cada anúncio não foram preservados.',
   externalCalls: false,
 });
-const editorialAds = () => { const rd = (db().editorialAdsRead ||= {}); return EDITORIAL_ADS.map((a) => ({ id: a.id, kind: 'ad', title: a.theme, body: 'Conteúdo do anúncio: UNOBSERVED (REA ev_72d7b4c2…7b20) · jan–abr/2026', at: null, read: !!rd[a.id] })); };
+const editorialAds = () => { const rd = (db().editorialAdsRead ||= {}); return EDITORIAL_ADS.map((a, i) => REAL_ADS ? ({ id: a.id, kind: 'ad', title: REAL_ADS[i].title, body: REAL_ADS[i].body, dateText: REAL_ADS[i].date, at: String(REAL_ADS[i].date || '').replace(' ', 'T') || null, read: !!rd[a.id] }) : ({ id: a.id, kind: 'ad', title: a.theme, body: 'Conteúdo do anúncio: UNOBSERVED (REA ev_72d7b4c2…7b20) · jan–abr/2026', at: null, read: !!rd[a.id] })); };
 // ---- provedores de mídia + tarefas de geração (src/providers.mjs, app/lib/jobs.mjs, app/lib/compose.mjs)
 const saveBuffer = (name, bytes, kind, cat) => { const tmp = S.pubFile('_job_' + S.newId() + path.extname(name)); fs.writeFileSync(tmp, bytes); const a = addAsset(name, tmp, kind, cat); try { fs.unlinkSync(tmp); } catch {} return a; };
 const readAssetBytes = (id) => { const a = db().assets.find((x) => x.id === id); if (!a || !fs.existsSync(S.pubFile(a.stored))) return null; return { bytes: fs.readFileSync(S.pubFile(a.stored)), mime: ({ '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.flac': 'audio/flac', '.wma': 'audio/x-ms-wma' })[path.extname(a.stored || a.name || '').toLowerCase()] || (a.kind === 'image' ? 'image/png' : 'application/octet-stream'), name: a.name }; };
@@ -1863,7 +1874,12 @@ function noteRouterFailure(route, error) {
 async function executeVideoRun(run) {
   const controller = localRunControllers.get(run.id);
   const plan = videoPlan();
-  if (!plan.ok) throw Object.assign(new Error(plan.reason), { blocked: true, pending: true });
+  if (!plan.ok) {
+    // Diz a CAUSA real (ex.: HTTP 429 do provedor) em vez da frase genérica do planejador.
+    const un = freeRouterUsage().novai?.unavailable;
+    const why = un ? `o provedor de vídeo gratuito (NovAI) respondeu "${un.reason}"${un.until ? ` e o roteador o pausou até ${new Date(un.until).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}` : ''}. A cota diária do provedor é limitada; tente depois desse horário. Nada foi gerado nem cobrado.` : plan.reason;
+    throw Object.assign(new Error(why), { blocked: true, pending: true });
+  }
   const route = plan.routes[0];
   const adapter = createFreeRouterAdapters()[route.adapter];
   if (typeof adapter?.submitVideo !== 'function') throw Object.assign(new Error(`o provedor ${route.providerName} não expõe fila de vídeo; use o fluxo síncrono`), { blocked: true });

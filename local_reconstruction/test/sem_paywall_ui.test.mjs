@@ -37,7 +37,7 @@ try {
   await page.waitForFunction(() => /Modelos personalizados/.test(document.querySelector('#modelB')?.textContent || ''), null, { timeout: 5_000 }); // modelo nomeado selecionado
   await page.locator('#prompt').fill('um vídeo de teste sem paywall');
   await page.locator('#send').click();
-  await page.waitForFunction(() => /indisponível localmente/.test(document.querySelector('#toast')?.textContent || ''), null, { timeout: 20_000 });
+  await page.waitForFunction(() => /não roda localmente|PENDING|indisponível localmente/.test(document.querySelector('#toast')?.textContent || ''), null, { timeout: 20_000 }); // 14/11/2026: modelo nomeado vai ao roteador gratuito (sem rota de vídeo no teste: motivo)
   // 2) gatilho antigo de paywall: Vídeo em avatar → motivo do serviço, sem planos
   await page.goto(`${f.base}/#/avatars`); await page.waitForSelector('#va');
   await page.locator('#va').click();

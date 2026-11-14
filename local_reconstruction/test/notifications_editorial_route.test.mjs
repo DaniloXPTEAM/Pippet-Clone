@@ -32,11 +32,13 @@ try {
   assert.ok(n.items.indexOf(events.at(-1)) < n.items.indexOf(ads[0]), 'todo evento vem antes de qualquer anúncio');
   assert.ok(n.items.slice(-8).every((i) => i.kind === 'ad'), 'os 8 anúncios (sem data) ficam por último, em ordem editorial');
   const themes = ads.map((a) => a.title);
-  assert.deepEqual(themes, ['GPT Image 2', '700+ avatares via @', 'Pesquisa de satisfação (pt/es)', 'Descontinuação temporária de Nano Banana Pro/Veo 3.1', 'Descontinuação temporária de Seedream 4.1', 'Seedream 5.0', 'Geração agendada', 'Mais tarefas de crédito'], 'temas na ordem observada do relatório');
-  assert.ok(ads.every((a) => /UNOBSERVED/.test(a.body) && a.at === null), 'sem títulos/datas/textos inventados');
+  // 14/11/2026: títulos, textos e datas REAIS (painel do Pippit em pt-BR), na ordem do original (data decrescente)
+  assert.equal(themes.length, 8); const temas = ['GPT Image 2', 'avatares gratuitos', 'Pesquisa de satisfação do Pippit', 'Encuesta de satisfacción', 'Nano Banana Pro e Veo 3.1', 'Seedream 4.1', 'Seedream 5.0', 'vídeos mais baratos'];
+  temas.forEach((t, i) => assert.ok(themes[i].includes(t), `anúncio ${i + 1} deve conter "${t}" (veio "${themes[i]}")`));
+  assert.ok(ads.every((a) => a.body && a.body.length > 20 && a.dateText && !/UNOBSERVED/.test(a.body)), 'anúncios com texto e data reais');
   assert.equal(n.editorial.count, 8); assert.equal(n.editorial.period, 'jan–abr/2026');
-  assert.equal(n.editorial.titles, 'UNOBSERVED'); assert.equal(n.editorial.dates, 'UNOBSERVED');
-  assert.equal(n.editorial.bodies, 'UNOBSERVED'); assert.equal(n.editorial.themeToAdMapping, 'UNOBSERVED');
+  assert.equal(n.editorial.titles, 'OBSERVADO'); assert.equal(n.editorial.dates, 'OBSERVADO');
+  assert.equal(n.editorial.bodies, 'OBSERVADO');
   assert.equal(n.editorial.externalCalls, false);
   assert.match(n.editorial.source, /ev_72d7b4c2/);
   // (os eventos locais agora são semeados acima — a ordem é coberta nas asserções de cima)

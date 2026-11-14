@@ -7,7 +7,8 @@ try { browser=await launchChromium(); const page=await browser.newPage(); await 
   const modal = page.locator('.note-pop');
   assert.equal(await modal.locator('.note').count(), 8, 'os 8 anúncios observados por tema');
   const txt = await modal.innerText();
-  for (const theme of ['GPT Image 2', '700+ avatares via @', 'Pesquisa de satisfação (pt/es)', 'Nano Banana Pro/Veo 3.1', 'Seedream 4.1', 'Seedream 5.0', 'Geração agendada', 'Mais tarefas de crédito']) {
+  // 14/11/2026: títulos REAIS lidos do painel do Pippit em pt-BR (app/lib/editorial_ads.json)
+  for (const theme of ['Confira o GPT Image 2', 'mais de 700 avatares gratuitos', 'Pesquisa de satisfação do Pippit', 'Encuesta de satisfacción', 'Nano Banana Pro e Veo 3.1', 'Seedream 4.1', 'Seedream 5.0', 'vídeos mais baratos']) {
     assert.ok(txt.includes(theme), `tema observado presente: ${theme}`);
   }
   assert.doesNotMatch(txt, /UNOBSERVED|REA ev_/, 'texto técnico não aparece na tela do usuário');
@@ -16,6 +17,6 @@ try { browser=await launchChromium(); const page=await browser.newPage(); await 
   await page.locator('#allread').click(); await page.waitForSelector('.note-pop',{state:'detached'});
   const after = await (await fetch(`${f.base}/api/notifications`)).json();
   assert.equal(after.unread, 0); assert.ok(after.items.every((i) => i.read), 'Todas lidas marca os anúncios');
-  assert.equal(after.editorial.count, 8); assert.equal(after.editorial.bodies, 'UNOBSERVED'); assert.equal(after.editorial.externalCalls, false);
+  assert.equal(after.editorial.count, 8); assert.equal(after.editorial.bodies, 'OBSERVADO'); assert.equal(after.editorial.externalCalls, false);
   console.log('notifications_ui.test.mjs: ok (8 anúncios observados por tema, títulos/datas/textos UNOBSERVED, All read)');
 } finally { await browser?.close(); await f.close(); }

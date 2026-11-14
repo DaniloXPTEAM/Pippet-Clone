@@ -22,7 +22,9 @@ try {
 
   const ui = fs.readFileSync(new URL('../app/public/app.js', import.meta.url), 'utf8');
   assert.match(ui, /api\/account\/unobserved/, 'o menu da conta lê a rota local');
-  assert.match(ui, /Lacunas da conta/, 'o menu tem a entrada que mostra as lacunas');
+  // 14/11/2026: o menu foi refeito como o do original (sem a entrada interna "Lacunas da conta"); os itens CLI e
+  // "Lista de desejos de recursos" consultam a rota e mostram o estado real do destino ao serem clicados.
+  assert.match(ui, /unob\('CLI', 'CLI'\)/, 'CLI lê o estado na rota'); assert.match(ui, /Feature wishlist/, 'Lista de desejos lê o estado na rota');
   console.log('OK account_unobserved_route: 3 destinos UNOBSERVED, nenhum aberto, sem chamada externa');
 } finally {
   await new Promise((x) => server.close(x)); fs.rmSync(tmp, { recursive: true, force: true });
